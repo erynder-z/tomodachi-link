@@ -1,14 +1,11 @@
 import React from 'react';
-
-export type Info = {
-    message: string;
-};
+import { InfoType } from './infoType';
 
 export type InfoOverlayContextProviderProps = {
     children: React.ReactElement;
 };
 
 export type InfoOverlayContextProps = {
-    info: Info | null;
-    setInfo: (info: Info | null) => void;
+    info: InfoType | null;
+    setInfo: (info: InfoType | null) => void;
 };

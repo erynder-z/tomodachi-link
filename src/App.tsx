@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import AuthContext from './contexts/AuthContext';
 import LoginPage from './components/LoginPage/LoginPage';
 import Home from './components/Home/Home';
+import InfoOverlayContext from './contexts/InfoOverlayContext';
+import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 
 type ProtectedRouteProps = {
     user: any;
@@ -14,14 +16,26 @@ const ProtectedRoute = ({ user, redirectPath = '/' }: ProtectedRouteProps) => {
 };
 
 function App() {
-    const { user, isAuth } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+    const { info } = useContext(InfoOverlayContext);
+
+    const [showOverlay, setShowOverlay] = useState(false);
+
+    const isOverlayShown = () => {
+        return !!info?.message;
+    };
+
+    useEffect(() => {
+        setShowOverlay(isOverlayShown());
+    }, [info]);
 
     if (!user) {
-        return <LoginPage />;
-    }
-
-    if (!isAuth) {
-        return <p className="loading">Loading...</p>;
+        return (
+            <>
+                <LoginPage />
+                <InfoOverlay showOverlay={showOverlay} info={info} />
+            </>
+        );
     }
 
     return (
@@ -37,6 +51,7 @@ function App() {
                     </Route>
                 </Routes>
             </main>
+            <InfoOverlay showOverlay={showOverlay} info={info} />
         </div>
     );
 }
