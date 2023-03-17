@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../contexts/AuthContext';
 import InfoOverlayContext from '../../contexts/InfoOverlayContext';
 import LoginForm from './LoginForm';
@@ -9,7 +8,6 @@ import { FaExclamationTriangle } from 'react-icons/fa';
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const { setInfo } = useContext(InfoOverlayContext);
-    const navigate = useNavigate();
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
 
     const login = async (username: string, password: string) => {
@@ -39,7 +37,7 @@ export default function LoginPage() {
             }
 
             const data = await response.json();
-            localStorage.setItem('jwt', data.token);
+            localStorage.setItem('jwtOdinBook', data.token);
             setToken(data.token);
         } catch (error: unknown) {
             console.error(error);
@@ -65,7 +63,10 @@ export default function LoginPage() {
         try {
             await login(username, password);
         } catch (error) {
-            navigate('/odin-book/login');
+            setInfo({
+                message: 'Something went wrong!',
+                icon: <FaExclamationTriangle />,
+            });
         }
     };
 
