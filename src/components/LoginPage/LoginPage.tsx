@@ -4,11 +4,13 @@ import InfoOverlayContext from '../../contexts/InfoOverlayContext';
 import LoginForm from './LoginForm';
 import VerifyingInfoBox from './VerifyingInfoBox';
 import { FaExclamationTriangle } from 'react-icons/fa';
+import SignupPage from './SignupPage/SignupPage';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const { setInfo } = useContext(InfoOverlayContext);
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
+    const [showSignup, setShowSignup] = useState<boolean>(false);
 
     const login = async (username: string, password: string) => {
         setIsVerifying(true);
@@ -70,16 +72,29 @@ export default function LoginPage() {
         }
     };
 
+    const handleRegisterClick = () => {
+        setShowSignup(true);
+    };
+
     return (
-        <div className="h-screen flex items-center justify-center bg-gray-100">
+        <div className="h-screen  bg-gray-100">
             <div className="flex justify-center items-center w-full h-full">
-                <div className="flex justify-center items-center h-1/2 w-4/5 sm:w-1/2 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
+                <div className="h-1/2 w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
                     {isVerifying ? (
                         <VerifyingInfoBox />
                     ) : (
                         <LoginForm handleSubmit={handleSubmit} />
                     )}
+                    <div className="flex w-full">
+                        <button
+                            onClick={handleRegisterClick}
+                            className="w-full bg-green-500 text-white rounded-md px-2 py-1"
+                        >
+                            Register
+                        </button>
+                    </div>
                 </div>
+                {showSignup && <SignupPage setShowSignup={setShowSignup} />}
             </div>
         </div>
     );

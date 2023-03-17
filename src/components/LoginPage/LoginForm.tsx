@@ -25,7 +25,7 @@ export default function LoginForm({ handleSubmit }: Props) {
                             name="username"
                             type="text"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                            placeholder="Email address"
+                            placeholder="Username"
                         />
                         <label
                             htmlFor="username"
@@ -58,11 +58,6 @@ export default function LoginForm({ handleSubmit }: Props) {
                     </div>
                 </div>
             </form>
-            <div className="flex w-full">
-                <button className="w-full bg-green-500 text-white rounded-md px-2 py-1">
-                    Register
-                </button>
-            </div>
         </div>
     );
 }
