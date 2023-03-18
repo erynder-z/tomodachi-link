@@ -2,9 +2,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import AuthContext from './contexts/AuthContext';
 import LoginPage from './components/LoginPage/LoginPage';
-import Home from './components/Home/Home';
+import Home from './components/Main/Home/Home';
 import InfoOverlayContext from './contexts/InfoOverlayContext';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
+import Navbar from './components/Main/Navbar/Navbar';
+import Sidebar from './components/Main/Sidebar/Sidebar';
+import FriendList from './components/Main/FriendList/FriendList';
+import ProfileCard from './components/Main/ProfileCard/ProfileCard';
 
 type ProtectedRouteProps = {
     user: any;
@@ -39,18 +43,29 @@ function App() {
     }
 
     return (
-        <div>
-            <main>
-                <Routes>
-                    <Route element={<ProtectedRoute user={user} />}>
-                        <Route
-                            path="/"
-                            element={<Navigate replace to="/home" />}
-                        />
-                        <Route path="/home" element={<Home />} />
-                    </Route>
-                </Routes>
-            </main>
+        <div className="flex flex-col h-screen">
+            <div className="flex h-[calc(100%_-_3rem)]">
+                <main className="flex flex-1 h-full p-4 bg-green-400">
+                    <div className="hidden lg:flex h-fit w-1/4">
+                        <ProfileCard />
+                    </div>
+                    <Routes>
+                        <Route element={<ProtectedRoute user={user} />}>
+                            <Route
+                                path="/"
+                                element={<Navigate replace to="/home" />}
+                            />
+                            <Route path="/home" element={<Home />} />
+                        </Route>
+                    </Routes>
+                </main>
+                <aside className="hidden lg:flex w-1/4 flex-none ">
+                    <FriendList />
+                </aside>
+            </div>
+            <nav className="flex-none fixed bottom-0 w-full h-12">
+                <Navbar />
+            </nav>
             <InfoOverlay showOverlay={showOverlay} info={info} />
         </div>
     );
