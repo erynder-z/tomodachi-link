@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GrLogout } from 'react-icons/gr';
+import { MdLogout } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../../contexts/AuthContext';
 
@@ -18,9 +18,9 @@ export default function LogoutButton() {
         <button
             type="button"
             onClick={handleLogout}
-            className="ml-auto cursor-pointer"
+            className="flex self-center cursor-pointer"
         >
-            <GrLogout size="1.5em" />
+            <MdLogout size="1.5em" />
         </button>
     );
 }

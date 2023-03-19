@@ -1,5 +1,5 @@
 import React from 'react';
-import { GrHome } from 'react-icons/gr';
+import { TbHome } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
 export default function HomeSectionButton() {
@@ -7,9 +7,9 @@ export default function HomeSectionButton() {
         console.log('test');
     };
     return (
-        <Link to="/home" className="ml-auto cursor-pointer">
+        <Link to="/home" className="flex self-center cursor-pointer">
             <button type="button" onClick={handleHomeSectionButtonClick}>
-                <GrHome size="1.5em" />
+                <TbHome size="1.5em" />
             </button>
         </Link>
     );
