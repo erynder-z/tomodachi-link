@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import AuthContext from './contexts/AuthContext';
 import LoginPage from './components/LoginPage/LoginPage';
-import Home from './components/Main/HomeSection/HomeSection';
 import InfoOverlayContext from './contexts/InfoOverlayContext';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
@@ -11,6 +10,7 @@ import FriendList from './components/Main/FriendList/FriendList';
 import ProfileCard from './components/Main/ProfileCard/ProfileCard';
 import FriendSection from './components/Main/FriendSection/FriendSection';
 import HomeSection from './components/Main/HomeSection/HomeSection';
+import { CurrentViewType } from '../types/currentViewType';
 
 type ProtectedRouteProps = {
     user: any;
@@ -24,7 +24,9 @@ const ProtectedRoute = ({ user, redirectPath = '/' }: ProtectedRouteProps) => {
 function App() {
     const { user } = useContext(AuthContext);
     const { info } = useContext(InfoOverlayContext);
-
+    const [currentView, setCurrentView] = useState<CurrentViewType | null>(
+        (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
+    );
     const [showOverlay, setShowOverlay] = useState(false);
 
     const isOverlayShown = () => {
@@ -57,17 +59,30 @@ function App() {
                                 path="/"
                                 element={<Navigate replace to="/home" />}
                             />
-                            <Route path="/home" element={<HomeSection />} />
+                            <Route
+                                path="/home"
+                                element={
+                                    <HomeSection
+                                        setCurrentView={setCurrentView}
+                                    />
+                                }
+                            />
                             <Route
                                 path="/friends"
-                                element={<FriendSection />}
+                                element={
+                                    <FriendSection
+                                        setCurrentView={setCurrentView}
+                                    />
+                                }
                             />
                         </Route>
                     </Routes>
                 </main>
-                <aside className="hidden lg:flex w-1/4 flex-none ">
-                    <FriendList />
-                </aside>
+                {currentView != 'Friends' && (
+                    <aside className="hidden lg:flex w-1/4 flex-none ">
+                        <FriendList />
+                    </aside>
+                )}
             </div>
             <nav className="flex-none fixed bottom-0 w-full h-12">
                 <Navbar />
