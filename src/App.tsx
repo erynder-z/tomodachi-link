@@ -9,6 +9,8 @@ import Navbar from './components/Main/Navbar/Navbar';
 import Sidebar from './components/Main/Sidebar/Sidebar';
 import FriendList from './components/Main/FriendList/FriendList';
 import ProfileCard from './components/Main/ProfileCard/ProfileCard';
+import FriendSection from './components/Main/FriendSection/FriendSection';
+import HomeSection from './components/Main/HomeSection/HomeSection';
 
 type ProtectedRouteProps = {
     user: any;
@@ -55,7 +57,11 @@ function App() {
                                 path="/"
                                 element={<Navigate replace to="/home" />}
                             />
-                            <Route path="/home" element={<Home />} />
+                            <Route path="/home" element={<HomeSection />} />
+                            <Route
+                                path="/friends"
+                                element={<FriendSection />}
+                            />
                         </Route>
                     </Routes>
                 </main>
