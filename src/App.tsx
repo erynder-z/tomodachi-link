@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import AuthContext from './contexts/AuthContext';
 import LoginPage from './components/LoginPage/LoginPage';
-import Home from './components/Main/Home/Home';
+import Home from './components/Main/HomeSection/HomeSection';
 import InfoOverlayContext from './contexts/InfoOverlayContext';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
