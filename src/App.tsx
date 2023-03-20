@@ -11,13 +11,16 @@ import HomeSection from './components/Main/HomeSection/HomeSection';
 import { CurrentViewType } from './types/currentViewType';
 import { User } from './types/authContextTypes';
 import useAuth from './hooks/useAuth';
-import useInfo from './hooks/useInfo';
+import useInfoOverlay from './hooks/useInfoOverlay';
 import RequireAuth from './components/Main/RequireAuth';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 function App() {
-    const { user, isAuth } = useAuth();
-    const { info } = useInfo();
+    const { token, user, isAuth } = useAuth();
+    const { info, setInfo } = useInfoOverlay();
 
+    const [userData, setUserData] = useState<User | null>(null);
     const [currentView, setCurrentView] = useState<CurrentViewType | null>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
@@ -27,9 +30,44 @@ function App() {
         return !!info?.message;
     };
 
+    const fetchUserData = async (userId: string) => {
+        try {
+            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const res = await fetch(`${serverURL}/api/v1/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setUserData(data.user);
+            } else {
+                const data = await res.json();
+                const errorMessage = data.error.message;
+
+                setInfo({
+                    message: errorMessage,
+                    icon: <FaExclamationTriangle />,
+                });
+            }
+        } catch (err: unknown) {
+            setInfo({
+                message: 'Unable to fetch userdata!',
+                icon: <FaExclamationTriangle />,
+            });
+        }
+    };
+
     useEffect(() => {
         setShowOverlay(isOverlayShown());
     }, [info]);
+
+    useEffect(() => {
+        if (user) {
+            const id = structuredClone(user).user._id;
+            fetchUserData(id);
+        }
+    }, [isAuth]);
 
     if (!isAuth) {
         return (
@@ -49,6 +87,7 @@ function App() {
                     </div>
                     <Routes>
                         <Route element={<RequireAuth />}>
+                            <Route path="*" element={<NotFoundPage />} />
                             <Route
                                 path="/"
                                 element={<Navigate replace to="/home" />}
