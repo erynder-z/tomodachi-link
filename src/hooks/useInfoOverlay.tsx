@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import InfoOverlayContext from '../contexts/InfoOverlayContext';
 
-const useInfo = () => {
+const useInfoOverlay = () => {
     return useContext(InfoOverlayContext);
 };
 
-export default useInfo;
+export default useInfoOverlay;
