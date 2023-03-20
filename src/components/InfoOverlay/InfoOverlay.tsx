@@ -1,4 +1,4 @@
-import { InfoOverlayPropsType } from '../../../types/infoOverlayPropsTypes';
+import { InfoOverlayPropsType } from '../../types/infoOverlayPropsTypes';
 
 const InfoOverlay = ({
     showOverlay = false,

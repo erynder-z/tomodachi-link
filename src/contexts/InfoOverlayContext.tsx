@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from 'react';
 import {
     InfoOverlayContextProps,
     InfoOverlayContextProviderProps,
-} from '../../types/infoOverlayContextTypes';
-import { InfoType } from '../../types/infoType';
+} from '../types/infoOverlayContextTypes';
+import { InfoType } from '../types/infoType';
 
 const InfoOverlayContext = createContext<InfoOverlayContextProps>({
     info: null,

@@ -3,7 +3,7 @@ import {
     AuthContextProps,
     AuthContextProviderProps,
     User,
-} from '../../types/authContextTypes';
+} from '../types/authContextTypes';
 
 const AuthContext = createContext<AuthContextProps>({
     token: null,
@@ -59,7 +59,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                     }
                 }
                 const data = await response.json();
-                setUser(data);
+                setUser(data); // TODO fetch userdata
                 setIsAuth(true);
             } catch (error: unknown) {
                 setUser(null);

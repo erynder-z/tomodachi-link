@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CurrentViewType } from '../../../../types/currentViewType';
+import { CurrentViewType } from '../../../types/currentViewType';
 
 type setCurrentView = {
     setCurrentView: React.Dispatch<
