@@ -1,8 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import AuthContext from './contexts/AuthContext';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
-import InfoOverlayContext from './contexts/InfoOverlayContext';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
 import Sidebar from './components/Main/Sidebar/Sidebar';
@@ -10,20 +8,16 @@ import FriendList from './components/Main/FriendList/FriendList';
 import ProfileCard from './components/Main/ProfileCard/ProfileCard';
 import FriendSection from './components/Main/FriendSection/FriendSection';
 import HomeSection from './components/Main/HomeSection/HomeSection';
-import { CurrentViewType } from '../types/currentViewType';
-
-type ProtectedRouteProps = {
-    user: any;
-    redirectPath?: string;
-};
-
-const ProtectedRoute = ({ user, redirectPath = '/' }: ProtectedRouteProps) => {
-    return user ? <Outlet /> : <Navigate to={redirectPath} replace />;
-};
+import { CurrentViewType } from './types/currentViewType';
+import { User } from './types/authContextTypes';
+import useAuth from './hooks/useAuth';
+import useInfo from './hooks/useInfo';
+import RequireAuth from './components/Main/RequireAuth';
 
 function App() {
-    const { user } = useContext(AuthContext);
-    const { info } = useContext(InfoOverlayContext);
+    const { user, isAuth } = useAuth();
+    const { info } = useInfo();
+
     const [currentView, setCurrentView] = useState<CurrentViewType | null>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
@@ -37,7 +31,7 @@ function App() {
         setShowOverlay(isOverlayShown());
     }, [info]);
 
-    if (!user) {
+    if (!isAuth) {
         return (
             <>
                 <LoginPage />
@@ -54,7 +48,7 @@ function App() {
                         <ProfileCard />
                     </div>
                     <Routes>
-                        <Route element={<ProtectedRoute user={user} />}>
+                        <Route element={<RequireAuth />}>
                             <Route
                                 path="/"
                                 element={<Navigate replace to="/home" />}
