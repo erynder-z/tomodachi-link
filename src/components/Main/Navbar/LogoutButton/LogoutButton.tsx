@@ -1,19 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { MdLogout } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../../../contexts/AuthContext';
+import { HandleLogoutProps } from '../../../../types/handleLogoutTypes';
 
-export default function LogoutButton() {
-    const { setToken, setUser } = useContext(AuthContext);
-
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        window.localStorage.clear();
-        setToken(null);
-        setUser(null);
-        navigate('/');
-    };
-
+export default function LogoutButton({ handleLogout }: HandleLogoutProps) {
     return (
         <button
             type="button"

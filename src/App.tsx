@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
@@ -14,9 +14,10 @@ import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import { fetchUserData } from './utilities/fetchUserData';
 import { UserDataType } from './types/userDataType';
+import { logout } from './utilities/logout';
 
 function App() {
-    const { token, user, isAuth } = useAuth();
+    const { token, user, isAuth, setToken, setUser, setIsAuth } = useAuth();
     const { info, setInfo } = useInfoOverlay();
 
     const [userData, setUserData] = useState<UserDataType | null>(null);
@@ -24,9 +25,16 @@ function App() {
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
     const [showOverlay, setShowOverlay] = useState(false);
+    const navigate = useNavigate();
 
     const isOverlayShown = () => {
         return !!info?.message;
+    };
+
+    const handleLogout = () => {
+        logout({ setToken, setUser, setIsAuth, setUserData });
+        window.localStorage.clear();
+        navigate('/');
     };
 
     useEffect(() => {
@@ -90,7 +98,7 @@ function App() {
                 </main>
             </div>
             <nav className="flex-none fixed bottom-0 w-full h-12">
-                <Navbar />
+                <Navbar handleLogout={handleLogout} />
             </nav>
             <InfoOverlay showOverlay={showOverlay} info={info} />
         </div>
