@@ -4,23 +4,22 @@ import LoginPage from './components/LoginPage/LoginPage';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
 import Sidebar from './components/Main/Sidebar/Sidebar';
-import FriendList from './components/Main/FriendList/FriendList';
 import ProfileCard from './components/Main/ProfileCard/ProfileCard';
 import FriendSection from './components/Main/FriendSection/FriendSection';
 import HomeSection from './components/Main/HomeSection/HomeSection';
 import { CurrentViewType } from './types/currentViewType';
-import { User } from './types/authContextTypes';
 import useAuth from './hooks/useAuth';
 import useInfoOverlay from './hooks/useInfoOverlay';
 import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import { FaExclamationTriangle } from 'react-icons/fa';
+import { fetchUserData } from './utilities/fetchUserData';
+import { UserDataType } from './types/userDataType';
 
 function App() {
     const { token, user, isAuth } = useAuth();
     const { info, setInfo } = useInfoOverlay();
 
-    const [userData, setUserData] = useState<User | null>(null);
+    const [userData, setUserData] = useState<UserDataType | null>(null);
     const [currentView, setCurrentView] = useState<CurrentViewType | null>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
@@ -30,42 +29,13 @@ function App() {
         return !!info?.message;
     };
 
-    const fetchUserData = async (userId: string) => {
-        try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
-            const res = await fetch(`${serverURL}/api/v1/${userId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            if (res.ok) {
-                const data = await res.json();
-                setUserData(data.user);
-            } else {
-                const data = await res.json();
-                const errorMessage = data.error.message;
-
-                setInfo({
-                    message: errorMessage,
-                    icon: <FaExclamationTriangle />,
-                });
-            }
-        } catch (err: unknown) {
-            setInfo({
-                message: 'Unable to fetch userdata!',
-                icon: <FaExclamationTriangle />,
-            });
-        }
-    };
-
     useEffect(() => {
         setShowOverlay(isOverlayShown());
     }, [info]);
 
     useEffect(() => {
-        if (user) {
-            const id = structuredClone(user).user._id;
-            fetchUserData(id);
+        if (user && token) {
+            fetchUserData(token, setUserData, setInfo);
         }
     }, [isAuth]);
 
@@ -81,41 +51,43 @@ function App() {
     return (
         <div className="flex flex-col h-screen">
             <div className="flex h-[calc(100%_-_3rem)]">
-                <main className="flex flex-1 h-full p-4 bg-green-400">
-                    <div className="hidden lg:flex h-fit w-1/4">
-                        <ProfileCard />
+                <main className="flex w-full h-full gap-4 p-4 bg-green-400">
+                    <div className="hidden lg:flex h-fit w-1/6">
+                        <ProfileCard userData={userData} />
                     </div>
-                    <Routes>
-                        <Route element={<RequireAuth />}>
-                            <Route path="*" element={<NotFoundPage />} />
-                            <Route
-                                path="/"
-                                element={<Navigate replace to="/home" />}
-                            />
-                            <Route
-                                path="/home"
-                                element={
-                                    <HomeSection
-                                        setCurrentView={setCurrentView}
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/friends"
-                                element={
-                                    <FriendSection
-                                        setCurrentView={setCurrentView}
-                                    />
-                                }
-                            />
-                        </Route>
-                    </Routes>
+                    <div className="flex-1">
+                        <Routes>
+                            <Route element={<RequireAuth />}>
+                                <Route path="*" element={<NotFoundPage />} />
+                                <Route
+                                    path="/"
+                                    element={<Navigate replace to="/home" />}
+                                />
+                                <Route
+                                    path="/home"
+                                    element={
+                                        <HomeSection
+                                            setCurrentView={setCurrentView}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/friends"
+                                    element={
+                                        <FriendSection
+                                            setCurrentView={setCurrentView}
+                                        />
+                                    }
+                                />
+                            </Route>
+                        </Routes>
+                    </div>
+                    {currentView != 'Friends' && (
+                        <aside className="hidden lg:flex w-1/4 flex-none">
+                            <Sidebar />
+                        </aside>
+                    )}
                 </main>
-                {currentView != 'Friends' && (
-                    <aside className="hidden lg:flex w-1/4 flex-none ">
-                        <FriendList />
-                    </aside>
-                )}
             </div>
             <nav className="flex-none fixed bottom-0 w-full h-12">
                 <Navbar />
