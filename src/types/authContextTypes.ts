@@ -11,10 +11,10 @@ export type AuthContextProviderProps = {
 
 export type AuthContextProps = {
     token: string | null;
-    user: User | null;
+    authUser: User | null;
     isAuth: boolean;
     setToken: (token: string | null) => void;
-    setUser: (user: User | null) => void;
+    setAuthUser: (user: User | null) => void;
     setIsAuth: (isAuth: boolean) => void;
     logout: () => void;
 };

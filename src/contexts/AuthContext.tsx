@@ -7,10 +7,10 @@ import {
 
 const AuthContext = createContext<AuthContextProps>({
     token: null,
-    user: null,
+    authUser: null,
     isAuth: false,
     setToken: () => null,
-    setUser: () => null,
+    setAuthUser: () => null,
     setIsAuth: () => false,
     logout: () => null,
 });
@@ -19,7 +19,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [token, setToken] = useState<string | null>(
         localStorage.getItem('jwtOdinBook') || null
     );
-    const [user, setUser] = useState<User | null>(null);
+    const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
 
     useEffect(() => {
@@ -54,10 +54,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                     }
                 }
                 const data = await response.json();
-                setUser(data);
+                setAuthUser(data);
                 setIsAuth(true);
             } catch (error: unknown) {
-                setUser(null);
+                setAuthUser(null);
                 setIsAuth(false);
                 console.error(error);
             }
@@ -70,7 +70,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     const logout = () => {
         setToken(null);
-        setUser(null);
+        setAuthUser(null);
         setIsAuth(false);
         window.localStorage.clear();
     };
@@ -79,10 +79,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         <AuthContext.Provider
             value={{
                 token,
-                user,
+                authUser,
                 isAuth,
                 setToken,
-                setUser,
+                setAuthUser,
                 setIsAuth,
                 logout,
             }}
