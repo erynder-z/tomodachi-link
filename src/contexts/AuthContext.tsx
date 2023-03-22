@@ -5,6 +5,7 @@ import {
     User,
 } from '../types/authContextTypes';
 
+// Create an empty context object with default values for authentication state
 const AuthContext = createContext<AuthContextProps>({
     token: null,
     authUser: null,
@@ -22,6 +23,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
 
+    // When the token changes, store it in local storage
     useEffect(() => {
         if (token) {
             localStorage.setItem('jwtOdinBook', token);
@@ -30,6 +32,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     }, [token]);
 
+    // When the token changes, check it with the server to verify the user's authentication status
     useEffect(() => {
         const checkToken = async () => {
             try {
