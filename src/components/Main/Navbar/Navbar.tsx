@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { UserDataType } from '../../../types/userDataType';
 import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
 import NavbarUserOptionsMenu from './NavbarUserOptionsMenu/NavbarUserOptionsMenu';
 
-type Props = {
-    userData: UserDataType | null;
-};
-
-export default function Navbar({ userData }: Props) {
+export default function Navbar() {
     const [showOptions, setShowOptions] = useState(false);
 
     const menuRef = useRef<HTMLDivElement>(null);
@@ -42,7 +37,7 @@ export default function Navbar({ userData }: Props) {
                     className="cursor-pointer"
                     onClick={() => setShowOptions(!showOptions)}
                 >
-                    <NavbarUserOptionsButton userData={userData} />
+                    <NavbarUserOptionsButton />
                 </button>
                 {showOptions && (
                     <div

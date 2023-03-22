@@ -1,11 +1,8 @@
 import React from 'react';
-import { UserDataType } from '../../../../types/userDataType';
+import useUserData from '../../../../hooks/useUserData';
 
-type Props = {
-    userData: UserDataType | null;
-};
-
-export default function NavbarUserOptionsButton({ userData }: Props) {
+export default function NavbarUserOptionsButton() {
+    const { userData } = useUserData();
     const { userpic } = userData || {};
     const base64String = btoa(
         String.fromCharCode(...new Uint8Array(userpic?.data?.data))

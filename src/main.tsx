@@ -4,15 +4,18 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { InfoOverlayContextProvider } from './contexts/InfoOverlayContext';
+import { UserDataContextProvider } from './contexts/UserDataContext';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <HashRouter>
             <AuthContextProvider>
-                <InfoOverlayContextProvider>
-                    <App />
-                </InfoOverlayContextProvider>
+                <UserDataContextProvider>
+                    <InfoOverlayContextProvider>
+                        <App />
+                    </InfoOverlayContextProvider>
+                </UserDataContextProvider>
             </AuthContextProvider>
         </HashRouter>
     </React.StrictMode>

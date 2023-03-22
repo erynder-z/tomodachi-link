@@ -1,11 +1,8 @@
 import React from 'react';
-import { UserDataType } from '../../../types/userDataType';
+import useUserData from '../../../hooks/useUserData';
 
-type Props = {
-    userData: UserDataType | null;
-};
-
-export default function ProfileCard({ userData }: Props) {
+export default function ProfileCard() {
+    const { userData } = useUserData();
     const { first_name, last_name, userpic, friends } = userData || {};
     const numberOfFriends = friends?.length;
     const base64String = btoa(

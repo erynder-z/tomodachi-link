@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
@@ -12,16 +12,13 @@ import useAuth from './hooks/useAuth';
 import useInfoOverlay from './hooks/useInfoOverlay';
 import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import { fetchUserData } from './utilities/fetchUserData';
-import { UserDataType } from './types/userDataType';
 
 import OptionsCard from './components/Main/OptionsCard/OptionsCard';
 
 function App() {
-    const { token, user, isAuth } = useAuth();
-    const { info, setInfo } = useInfoOverlay();
+    const { isAuth } = useAuth();
+    const { info } = useInfoOverlay();
 
-    const [userData, setUserData] = useState<UserDataType | null>(null);
     const [currentView, setCurrentView] = useState<CurrentViewType | null>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
@@ -32,18 +29,8 @@ function App() {
     };
 
     useEffect(() => {
-        setUserData(null);
-    }, [!isAuth]);
-
-    useEffect(() => {
         setShowOverlay(isOverlayShown());
     }, [info]);
-
-    useEffect(() => {
-        if (user && token) {
-            fetchUserData(token, setUserData, setInfo);
-        }
-    }, [isAuth]);
 
     if (!isAuth) {
         return (
@@ -59,8 +46,8 @@ function App() {
             <div className="flex h-[calc(100%_-_3rem)]">
                 <main className="flex w-full h-full gap-4 p-4 bg-green-400">
                     <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
-                        <ProfileCard userData={userData} />
-                        <OptionsCard userData={userData} />
+                        <ProfileCard />
+                        <OptionsCard />
                     </div>
                     <div className="flex-1">
                         <Routes>
@@ -97,7 +84,7 @@ function App() {
                 </main>
             </div>
             <nav className="flex-none fixed bottom-0 w-full h-12">
-                <Navbar userData={userData} />
+                <Navbar />
             </nav>
             <InfoOverlay showOverlay={showOverlay} info={info} />
         </div>
