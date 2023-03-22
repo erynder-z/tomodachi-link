@@ -9,15 +9,10 @@ const AuthContext = createContext<AuthContextProps>({
     token: null,
     user: null,
     isAuth: false,
-    setToken: () => {
-        null;
-    },
-    setUser: () => {
-        null;
-    },
-    setIsAuth: () => {
-        false;
-    },
+    setToken: () => null,
+    setUser: () => null,
+    setIsAuth: () => false,
+    logout: () => null,
 });
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
@@ -59,7 +54,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                     }
                 }
                 const data = await response.json();
-                setUser(data); // TODO fetch userdata
+                setUser(data);
                 setIsAuth(true);
             } catch (error: unknown) {
                 setUser(null);
@@ -73,9 +68,24 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     }, [token]);
 
+    const logout = () => {
+        setToken(null);
+        setUser(null);
+        setIsAuth(false);
+        window.localStorage.clear();
+    };
+
     return (
         <AuthContext.Provider
-            value={{ token, user, isAuth, setToken, setUser, setIsAuth }}
+            value={{
+                token,
+                user,
+                isAuth,
+                setToken,
+                setUser,
+                setIsAuth,
+                logout,
+            }}
         >
             {children}
         </AuthContext.Provider>

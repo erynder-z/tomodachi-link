@@ -14,10 +14,11 @@ import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import { fetchUserData } from './utilities/fetchUserData';
 import { UserDataType } from './types/userDataType';
-import { logout } from './utilities/logout';
+
+import OptionsCard from './components/Main/OptionsCard/OptionsCard';
 
 function App() {
-    const { token, user, isAuth, setToken, setUser, setIsAuth } = useAuth();
+    const { token, user, isAuth } = useAuth();
     const { info, setInfo } = useInfoOverlay();
 
     const [userData, setUserData] = useState<UserDataType | null>(null);
@@ -25,17 +26,14 @@ function App() {
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
     const [showOverlay, setShowOverlay] = useState(false);
-    const navigate = useNavigate();
 
     const isOverlayShown = () => {
         return !!info?.message;
     };
 
-    const handleLogout = () => {
-        logout({ setToken, setUser, setIsAuth, setUserData });
-        window.localStorage.clear();
-        navigate('/');
-    };
+    useEffect(() => {
+        setUserData(null);
+    }, [!isAuth]);
 
     useEffect(() => {
         setShowOverlay(isOverlayShown());
@@ -60,8 +58,9 @@ function App() {
         <div className="flex flex-col h-screen">
             <div className="flex h-[calc(100%_-_3rem)]">
                 <main className="flex w-full h-full gap-4 p-4 bg-green-400">
-                    <div className="hidden lg:flex h-fit w-1/6">
+                    <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
                         <ProfileCard userData={userData} />
+                        <OptionsCard userData={userData} />
                     </div>
                     <div className="flex-1">
                         <Routes>
@@ -98,7 +97,7 @@ function App() {
                 </main>
             </div>
             <nav className="flex-none fixed bottom-0 w-full h-12">
-                <Navbar handleLogout={handleLogout} />
+                <Navbar userData={userData} />
             </nav>
             <InfoOverlay showOverlay={showOverlay} info={info} />
         </div>
