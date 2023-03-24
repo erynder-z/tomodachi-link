@@ -1,5 +1,5 @@
 import React from 'react';
-import { TbHome } from 'react-icons/tb';
+import { MdHomeFilled } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 export default function HomeSectionButton() {
@@ -9,7 +9,7 @@ export default function HomeSectionButton() {
     return (
         <Link to="/home" className="flex self-center cursor-pointer">
             <button type="button" onClick={handleHomeSectionButtonClick}>
-                <TbHome size="1.5em" />
+                <MdHomeFilled size="1.5em" />
             </button>
         </Link>
     );

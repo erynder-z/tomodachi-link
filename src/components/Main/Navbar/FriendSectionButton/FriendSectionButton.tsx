@@ -1,5 +1,5 @@
 import React from 'react';
-import { TbFriends } from 'react-icons/tb';
+import { MdEmojiPeople } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 export default function FriendSectionButton() {
@@ -9,7 +9,7 @@ export default function FriendSectionButton() {
     return (
         <Link to="/friends" className="flex self-center cursor-pointer">
             <button type="button" onClick={handleFriendSectionButtonClick}>
-                <TbFriends size="1.5em" />
+                <MdEmojiPeople size="1.5em" />
             </button>
         </Link>
     );

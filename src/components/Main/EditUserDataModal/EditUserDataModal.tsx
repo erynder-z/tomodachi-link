@@ -18,7 +18,7 @@ export default function EditUserDataModal({
                     : 'opacity-0 pointer-events-none backdrop-filter-none'
             }`}
         >
-            <div className="relative w-1/4 flex justify-around rounded-md shadow-lg p-4 bg-white">
+            <div className="relative w-11/12 lg:w-1/4 flex justify-around rounded-md shadow-lg p-4 bg-white">
                 <button
                     onClick={handleCloseButtonClick}
                     className="absolute top-2 right-2"

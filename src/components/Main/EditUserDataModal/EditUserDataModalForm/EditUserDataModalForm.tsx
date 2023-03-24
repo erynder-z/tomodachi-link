@@ -136,7 +136,6 @@ export default function EditUserDataModalForm({
                             id="password"
                             name="password"
                             type="password"
-                            defaultValue="********"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="Password"
                         />
