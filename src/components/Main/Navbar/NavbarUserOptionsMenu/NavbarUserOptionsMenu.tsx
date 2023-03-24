@@ -1,14 +1,15 @@
 import React from 'react';
-import MenuLogoutButton from './MenuLogoutButton/MenuLogoutButton';
-import MenuOptionsButton from './MenuOptionsButton/MenuOptionsButton';
-import MenuProfilePageButton from './MenuProfilePageButton/MenuProfilePageButton';
+
+import LogoutButton from '../../OptionButtons/LogoutButton/LogoutButton';
+import OptionsButton from '../../OptionButtons/OptionsButton/OptionsButton';
+import ProfilePageButton from '../../OptionButtons/ProfilePageButton/ProfilePageButton';
 
 export default function NavbarUserOptionsMenu() {
     return (
         <div className="flex flex-col gap-4 p-4">
-            <MenuProfilePageButton />
-            <MenuOptionsButton />
-            <MenuLogoutButton />
+            <ProfilePageButton />
+            <OptionsButton />
+            <LogoutButton />
         </div>
     );
 }

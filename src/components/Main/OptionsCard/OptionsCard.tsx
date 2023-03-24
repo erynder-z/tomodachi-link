@@ -1,7 +1,7 @@
 import React from 'react';
-import LogoutButton from './LogoutButton/LogoutButton';
-import OptionsButton from './OptionsButton/OptionsButton';
-import ProfilePageButton from './ProfilePageButton/ProfilePageButton';
+import LogoutButton from '../OptionButtons/LogoutButton/LogoutButton';
+import OptionsButton from '../OptionButtons/OptionsButton/OptionsButton';
+import ProfilePageButton from '../OptionButtons/ProfilePageButton/ProfilePageButton';
 
 export default function OptionsCard() {
     return (

@@ -41,7 +41,7 @@ export default function Navbar() {
                 </button>
                 {showOptions && (
                     <div
-                        onClick={() => setShowOptions(!showOptions)}
+                        /*   onClick={() => setShowOptions(!showOptions)} */
                         className="absolute bottom-16 right-0 mt-2 p-2 bg-white rounded-lg shadow-xl z-10"
                     >
                         <NavbarUserOptionsMenu />
