@@ -9,7 +9,7 @@ export default function EditUserDataModalForm({
     setShowOverlay,
 }: EditUserDataPropsType) {
     const { token } = useAuth();
-    const { userData } = useUserData();
+    const { userData, handleFetchUserData } = useUserData();
     const { setInfo } = useInfoOverlay();
     const { first_name, last_name, email } = userData || {};
 
@@ -23,6 +23,7 @@ export default function EditUserDataModalForm({
                 first_name: formData.get('first_name'),
                 last_name: formData.get('last_name'),
                 email: formData.get('email'),
+                password: formData.get('password'),
             };
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -56,6 +57,7 @@ export default function EditUserDataModalForm({
                 message: 'Profile updated successfully!',
                 icon: <FaRegSmile />,
             });
+            handleFetchUserData();
             setShowOverlay(false);
         }
     };
@@ -131,15 +133,15 @@ export default function EditUserDataModalForm({
                         <input
                             required
                             autoComplete="off"
-                            id="old_password"
-                            name="old_password"
+                            id="password"
+                            name="password"
                             type="password"
                             defaultValue="********"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="Password"
                         />
                         <label
-                            htmlFor="old_password"
+                            htmlFor="password"
                             className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                         >
                             Password
