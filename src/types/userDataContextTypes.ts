@@ -7,4 +7,5 @@ export type UserDataContextProviderProps = {
 export type UserDataContextProps = {
     userData: UserDataType | null;
     setUserData: (user: UserDataType | null) => void;
+    handleFetchUserData: () => void;
 };

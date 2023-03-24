@@ -24,6 +24,13 @@ export const UserDataContextProvider = ({
     // Declare userData state with initial value of null
     const [userData, setUserData] = useState<UserDataType | null>(null);
 
+    // Define trigger function
+    const handleFetchUserData = () => {
+        if (authUser && token) {
+            fetchUserData(token, setUserData, setInfo);
+        }
+    };
+
     // Clear userData state if authentication status changes to false
     useEffect(() => {
         setUserData(null);
@@ -32,12 +39,15 @@ export const UserDataContextProvider = ({
     // Fetch user data if the token and authenticated user are both present
     useEffect(() => {
         if (authUser && token) {
-            fetchUserData(token, setUserData, setInfo);
+            /*    fetchUserData(token, setUserData, setInfo); */
+            handleFetchUserData();
         }
     }, [isAuth]);
 
     return (
-        <UserDataContext.Provider value={{ userData, setUserData }}>
+        <UserDataContext.Provider
+            value={{ userData, setUserData, handleFetchUserData }}
+        >
             {children}
         </UserDataContext.Provider>
     );
