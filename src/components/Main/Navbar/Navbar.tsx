@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import OptionsCard from '../OptionsCard/OptionsCard';
 import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
-import NavbarUserOptionsMenu from './NavbarUserOptionsMenu/NavbarUserOptionsMenu';
 
 export default function Navbar() {
     const [showOptions, setShowOptions] = useState(false);
@@ -40,11 +40,8 @@ export default function Navbar() {
                     <NavbarUserOptionsButton />
                 </button>
                 {showOptions && (
-                    <div
-                        /*   onClick={() => setShowOptions(!showOptions)} */
-                        className="absolute bottom-16 right-0 mt-2 p-2 bg-white rounded-lg shadow-xl z-10"
-                    >
-                        <NavbarUserOptionsMenu />
+                    <div className="absolute bottom-16 right-0 mt-2 p-2 bg-white rounded-lg shadow-xl z-10">
+                        <OptionsCard setShowOptions={setShowOptions} />
                     </div>
                 )}
             </div>

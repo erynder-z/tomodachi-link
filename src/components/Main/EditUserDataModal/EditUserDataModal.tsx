@@ -1,14 +1,23 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { EditUserDataPropsType } from '../../../types/editUserDataPropsType';
 import EditUserDataModalForm from './EditUserDataModalForm/EditUserDataModalForm';
+
+type Props = {
+    showOverlay?: boolean;
+    setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export default function EditUserDataModal({
     showOverlay = false,
     setShowOverlay,
-}: EditUserDataPropsType) {
+    setShowOptions,
+}: Props) {
     const handleCloseButtonClick = () => {
         setShowOverlay(false);
+        if (setShowOptions) {
+            setShowOptions(false);
+        }
     };
     return (
         <div
@@ -25,7 +34,10 @@ export default function EditUserDataModal({
                 >
                     <FaTimes />
                 </button>
-                <EditUserDataModalForm setShowOverlay={setShowOverlay} />
+                <EditUserDataModalForm
+                    setShowOverlay={setShowOverlay}
+                    setShowOptions={setShowOptions}
+                />
             </div>
         </div>
     );

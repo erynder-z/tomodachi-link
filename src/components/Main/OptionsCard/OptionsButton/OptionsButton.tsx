@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { MdSettings } from 'react-icons/md';
 import EditUserDataModal from '../../EditUserDataModal/EditUserDataModal';
 
-export default function OptionsButton() {
+type Props = {
+    setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export default function OptionsButton({ setShowOptions }: Props) {
     const [showOverlay, setShowOverlay] = useState(false);
 
     const handleButtonClick = () => {
@@ -21,6 +24,7 @@ export default function OptionsButton() {
             <EditUserDataModal
                 showOverlay={showOverlay}
                 setShowOverlay={setShowOverlay}
+                setShowOptions={setShowOptions}
             />
         </>
     );

@@ -1,13 +1,17 @@
 import React from 'react';
-import LogoutButton from '../OptionButtons/LogoutButton/LogoutButton';
-import OptionsButton from '../OptionButtons/OptionsButton/OptionsButton';
-import ProfilePageButton from '../OptionButtons/ProfilePageButton/ProfilePageButton';
+import LogoutButton from './LogoutButton/LogoutButton';
+import OptionsButton from './OptionsButton/OptionsButton';
+import ProfilePageButton from './ProfilePageButton/ProfilePageButton';
 
-export default function OptionsCard() {
+type Props = {
+    setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function OptionsCard({ setShowOptions }: Props) {
     return (
-        <div className="w-full flex justify-around rounded-md shadow-lg p-4 bg-white">
+        <div className="flex flex-col gap-4 p-4 lg:w-full lg:flex-row lg:justify-around lg:rounded-md lg:shadow-lg  bg-white">
             <ProfilePageButton />
-            <OptionsButton />
+            <OptionsButton setShowOptions={setShowOptions} />
             <LogoutButton />
         </div>
     );

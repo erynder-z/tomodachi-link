@@ -3,11 +3,16 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../hooks/useInfoOverlay';
 import useUserData from '../../../../hooks/useUserData';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
-import { EditUserDataPropsType } from '../../../../types/editUserDataPropsType';
+
+type Props = {
+    setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export default function EditUserDataModalForm({
     setShowOverlay,
-}: EditUserDataPropsType) {
+    setShowOptions,
+}: Props) {
     const { token } = useAuth();
     const { userData, handleFetchUserData } = useUserData();
     const { setInfo } = useInfoOverlay();
@@ -59,6 +64,9 @@ export default function EditUserDataModalForm({
             });
             handleFetchUserData();
             setShowOverlay(false);
+            if (setShowOptions) {
+                setShowOptions(false);
+            }
         }
     };
 
