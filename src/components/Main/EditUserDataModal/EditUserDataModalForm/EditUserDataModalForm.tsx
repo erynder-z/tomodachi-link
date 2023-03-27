@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../hooks/useInfoOverlay';
 import useUserData from '../../../../hooks/useUserData';
-import {
-    FaExclamationTriangle,
-    FaRegSmile,
-    FaFileUpload,
-} from 'react-icons/fa';
+import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
+import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 
 type Props = {
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,20 +43,7 @@ export default function EditUserDataModalForm({
             });
 
             if (!response.ok) {
-                const data = await response.json();
-                const errorMessages = data.errors;
-                const message = errorMessages
-                    .map((error: { msg: string }) => error.msg)
-                    .join(', ');
-
-                setInfo({
-                    message: message,
-                    icon: <FaExclamationTriangle />,
-                });
-
-                throw new Error(
-                    `Error: ${response.status} ${response.statusText}`
-                );
+                await handleFetchErrors(response, setInfo);
             }
 
             setInfo({
