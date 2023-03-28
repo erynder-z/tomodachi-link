@@ -21,11 +21,12 @@ export default function OptionsButton({ setShowOptions }: Props) {
             >
                 <MdSettings size="1.5em" />
             </button>
-            <EditUserDataModal
-                showOverlay={showOverlay}
-                setShowOverlay={setShowOverlay}
-                setShowOptions={setShowOptions}
-            />
+            {showOverlay && (
+                <EditUserDataModal
+                    setShowOverlay={setShowOverlay}
+                    setShowOptions={setShowOptions}
+                />
+            )}
         </>
     );
 }
