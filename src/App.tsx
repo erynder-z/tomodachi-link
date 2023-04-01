@@ -12,8 +12,8 @@ import useAuth from './hooks/useAuth';
 import useInfoOverlay from './hooks/useInfoOverlay';
 import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-
 import OptionsCard from './components/Main/OptionsCard/OptionsCard';
+import MyPage from './components/Main/MyPage/MyPage';
 
 function App() {
     const { isAuth } = useAuth();
@@ -23,6 +23,7 @@ function App() {
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
     );
     const [showOverlay, setShowOverlay] = useState(false);
+    const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
     const isOverlayShown = () => {
         return !!info?.message;
@@ -31,6 +32,14 @@ function App() {
     useEffect(() => {
         setShowOverlay(isOverlayShown());
     }, [info]);
+
+    useEffect(() => {
+        if (currentView === 'Friends' || currentView === 'MyPage') {
+            setShowSidebar(false);
+        } else {
+            setShowSidebar(true);
+        }
+    }, [currentView]);
 
     if (!isAuth) {
         return (
@@ -44,7 +53,7 @@ function App() {
     return (
         <div className="flex flex-col h-screen">
             <div className="flex h-[calc(100%_-_3rem)]">
-                <main className="flex w-full h-full gap-4 p-4 bg-green-400">
+                <main className="flex w-full h-full gap-4 p-4 bg-background">
                     <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
                         <ProfileCard />
                         <OptionsCard />
@@ -66,6 +75,14 @@ function App() {
                                     }
                                 />
                                 <Route
+                                    path="/mypage"
+                                    element={
+                                        <MyPage
+                                            setCurrentView={setCurrentView}
+                                        />
+                                    }
+                                />
+                                <Route
                                     path="/friends"
                                     element={
                                         <FriendSection
@@ -76,7 +93,7 @@ function App() {
                             </Route>
                         </Routes>
                     </div>
-                    {currentView != 'Friends' && (
+                    {showSidebar && (
                         <aside className="hidden lg:flex w-1/4 flex-none">
                             <Sidebar />
                         </aside>
