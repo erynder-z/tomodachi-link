@@ -77,7 +77,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="h-screen  bg-gray-100">
+        <div className="h-screen  bg-card">
             <div className="flex justify-center items-center w-full h-full">
                 <div className="h-1/2 w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
                     {isVerifying ? (

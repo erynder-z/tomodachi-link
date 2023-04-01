@@ -12,5 +12,5 @@ export default function HomeSection({ setCurrentView }: setCurrentView) {
         setCurrentView('Home');
         localStorage.setItem('currentView', 'Home');
     }, []);
-    return <div className="w-full bg-orange-400">Home</div>;
+    return <div className="h-full w-full bg-card">Home</div>;
 }

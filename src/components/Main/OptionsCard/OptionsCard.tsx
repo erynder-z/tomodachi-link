@@ -9,7 +9,7 @@ type Props = {
 
 export default function OptionsCard({ setShowOptions }: Props) {
     return (
-        <div className="flex flex-col gap-4 p-4 lg:w-full lg:flex-row lg:justify-around lg:rounded-md lg:shadow-lg  bg-white">
+        <div className="flex flex-col gap-4 p-4 lg:w-full lg:flex-row lg:justify-around lg:rounded-md lg:shadow-lg  bg-card">
             <ProfilePageButton />
             <OptionsButton setShowOptions={setShowOptions} />
             <LogoutButton />

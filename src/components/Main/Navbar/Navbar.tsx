@@ -26,7 +26,7 @@ export default function Navbar() {
     }, [menuRef]);
 
     return (
-        <div className="h-full w-full flex justify-between items-center px-4 py-1 bg-slate-400">
+        <div className="h-full w-full flex justify-between items-center px-4 py-1 bg-navbar">
             <div className="flex justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />
@@ -40,7 +40,7 @@ export default function Navbar() {
                     <NavbarUserOptionsButton />
                 </button>
                 {showOptions && (
-                    <div className="absolute bottom-16 right-0 mt-2 p-2 bg-white rounded-lg shadow-xl z-10">
+                    <div className="absolute bottom-16 right-0 mt-2 p-2 bg-card rounded-lg shadow-xl z-10">
                         <OptionsCard setShowOptions={setShowOptions} />
                     </div>
                 )}
