@@ -53,7 +53,7 @@ function App() {
     return (
         <div className="flex flex-col h-screen">
             <div className="flex h-[calc(100%_-_3rem)]">
-                <main className="flex w-full h-full gap-4 p-4 bg-background">
+                <main className="flex w-full h-full gap-4 md:p-4 bg-background">
                     <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
                         <ProfileCard />
                         <OptionsCard />

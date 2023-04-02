@@ -21,20 +21,23 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
     }, []);
 
     return (
-        <div className="h-full w-full p-4 bg-card">
-            <h1 className="text-center font-bold m-4">
-                {first_name} {last_name}'s page
-            </h1>
-            <div className="md:grid grid-cols-3 h-full">
+        <div className="flex flex-col h-full w-full p-4 bg-card">
+            <div
+                className="md:grid grid-cols-3 h-full gap-4"
+                style={{ gridTemplateRows: '5% auto' }}
+            >
+                <h1 className="col-span-3 text-center font-bold h-auto">
+                    {first_name} {last_name}'s page
+                </h1>
                 <div className="col-span-1 flex flex-col h-1/2">
-                    <div className="flex h-1/4 md:h-auto">
+                    <div className="flex h-1/4 md:h-auto md:p-4">
                         <MyPictures />
                     </div>
-                    <div className="flex h-1/4 md:h-auto">
+                    <div className="flex h-1/4 md:h-auto md:p-4">
                         <MyFriends />
                     </div>
                 </div>
-                <div className="col-span-2 flex flex-col ">
+                <div className="col-span-2 flex flex-col gap-4 md:p-4 overflow-auto">
                     <NewPostInput />
                     <MyPosts />
                 </div>
