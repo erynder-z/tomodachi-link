@@ -15,13 +15,25 @@ type Props = {
 export default function PostItem({ postContent }: Props) {
     const { owner, timestamp, text, comments, reactions } = postContent;
     const { username, userpic } = owner;
+    const base64String = btoa(
+        String.fromCharCode(...new Uint8Array(userpic?.data?.data))
+    );
 
-    const formattedDate = format(timestamp, 'MMMM dd, yyyy');
+    const time = new Date(timestamp);
+    const formattedDate = format(time, 'MMMM dd, yyyy');
 
     return (
         <div className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around lg:rounded-md lg:shadow-lg bg-card">
             <div className="flex justify-between">
-                <div className="font-bold">{username}</div>
+                <div className="flex gap-4">
+                    <img
+                        className="w-8 h-8 object-cover rounded-full shadow-lg"
+                        src={`data:image/png;base64,${base64String}`}
+                        alt="User avatar"
+                    />
+                    <div className="font-bold"> {username}</div>
+                </div>
+
                 <div className="italic">{formattedDate}</div>
             </div>
 
