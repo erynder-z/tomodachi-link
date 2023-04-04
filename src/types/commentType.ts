@@ -1,4 +1,5 @@
 export type CommentType = {
+    _id: string;
     parentPost: string;
     owner: {
         id: string;
