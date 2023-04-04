@@ -1,27 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PostItem from '../../PostItem/PostItem';
+import { PostType } from '../../../../types/postType';
+import useAuth from '../../../../hooks/useAuth';
+import useInfoOverlay from '../../../../hooks/useInfoOverlay';
+import { fetchUserPosts } from '../../../../utilities/fetchUserPosts';
 
 export default function MyPosts() {
-    /*     const test = {
-        owner: { id: 'abc', username: 'Halald', userpic: '123' },
-        timestamp: new Date(),
-        text: '__Hello__ *World*. This is a test Post! Lets make it a somewhat longer post. Lorem Ipsum Text. Doom WADS never get boring!',
-        comments: [],
-        reactions: { positive: 2, negative: 1 },
-    }; */
+    const { token, authUser } = useAuth();
+    const { setInfo } = useInfoOverlay();
+    const [posts, setPosts] = useState<PostType[] | null>(null);
 
-    return (
-        <div className="flex flex-col gap-4">
-            {/*            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} />
-            <PostItem postContent={test} /> */}
-        </div>
-    );
+    const handleFetchUserPosts = () => {
+        if (authUser && token) {
+            fetchUserPosts(token, setPosts, setInfo);
+        }
+    };
+
+    useEffect(() => {
+        handleFetchUserPosts();
+    }, []);
+
+    const postItemsList = posts?.map((post) => (
+        <PostItem key={post._id} postContent={post} />
+    ));
+
+    return <div className="flex flex-col gap-4">{postItemsList}</div>;
 }
