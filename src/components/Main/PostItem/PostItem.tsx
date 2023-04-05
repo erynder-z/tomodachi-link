@@ -7,20 +7,44 @@ import {
 } from 'react-icons/md';
 import { PostType } from '../../../types/postType';
 import format from 'date-fns/format';
+import { positiveReaction } from '../../../utilities/positiveReaction';
+import useInfoOverlay from '../../../hooks/useInfoOverlay';
+import useAuth from '../../../hooks/useAuth';
+import { negativeReaction } from '../../../utilities/negativeReaction';
 
 type Props = {
     postContent: PostType;
 };
 
 export default function PostItem({ postContent }: Props) {
-    const { owner, timestamp, text, comments, reactions } = postContent;
-    const { username, userpic } = owner;
-    const base64String = btoa(
-        String.fromCharCode(...new Uint8Array(userpic?.data?.data))
-    );
+    const { setInfo } = useInfoOverlay();
+    const { token } = useAuth();
+    const {
+        _id,
+        owner: { username, userpic },
+        timestamp,
+        text,
+        comments,
+        reactions,
+    } = postContent;
+    const base64String = userpic
+        ? btoa(String.fromCharCode(...new Uint8Array(userpic.data.data)))
+        : '';
 
     const time = new Date(timestamp);
     const formattedDate = format(time, 'MMMM dd, yyyy');
+
+    const handlePositiveReactionClick = async () => {
+        if (token) {
+            await positiveReaction(token, setInfo, _id);
+        }
+    };
+
+    const handleNegativeReactionClick = async () => {
+        if (token) {
+            await negativeReaction(token, setInfo, _id);
+        }
+    };
 
     return (
         <div className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around lg:rounded-md lg:shadow-lg bg-card">
@@ -46,10 +70,16 @@ export default function PostItem({ postContent }: Props) {
                 <button className="flex justify-center items-center gap-1">
                     <MdOutlineModeComment /> {comments.length}
                 </button>
-                <button className="flex justify-center items-center gap-1">
+                <button
+                    onClick={handlePositiveReactionClick}
+                    className="flex justify-center items-center gap-1"
+                >
                     <MdThumbUpOffAlt /> {reactions.positive}
                 </button>
-                <button className="flex justify-center items-center gap-1">
+                <button
+                    onClick={handleNegativeReactionClick}
+                    className="flex justify-center items-center gap-1"
+                >
                     <MdThumbDownOffAlt /> {reactions.negative}
                 </button>
             </div>
