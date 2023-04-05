@@ -1,22 +1,25 @@
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
+import { PostType } from '../types/postType';
 
 export const fetchUserPosts = async (
     token: string,
     setPosts: (data: any) => void,
-    setInfo: (info: InfoType | null) => void
+    setInfo: (info: InfoType | null) => void,
+    posts: PostType[],
+    skip: number
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
-        const response = await fetch(`${serverURL}/api/v1/post`, {
+        const response = await fetch(`${serverURL}/api/v1/post?skip=${skip}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
         if (response.ok) {
             const data = await response.json();
-            setPosts(data.userPosts);
+            setPosts([...posts, ...data.userPosts]);
         } else {
             handleFetchErrors(response, setInfo);
         }
