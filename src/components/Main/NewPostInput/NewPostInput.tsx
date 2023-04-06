@@ -4,7 +4,11 @@ import useAuth from '../../../hooks/useAuth';
 import useInfoOverlay from '../../../hooks/useInfoOverlay';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
-export default function NewPostInput() {
+type Props = {
+    onPostSuccess: () => void;
+};
+
+export default function NewPostInput({ onPostSuccess }: Props) {
     const { token } = useAuth();
     const { setInfo } = useInfoOverlay();
     const { userData } = useUserData();
@@ -41,6 +45,7 @@ export default function NewPostInput() {
                     icon: <FaRegSmile />,
                 });
                 setNewPostText('');
+                onPostSuccess();
             } else {
                 const data = await response.json();
                 const errorMessages = data.errors;

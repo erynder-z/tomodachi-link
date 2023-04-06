@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
 import useUserData from '../../../hooks/useUserData';
 import MyPictures from './MyPictures/MyPictures';
@@ -15,6 +15,12 @@ type setCurrentView = {
 export default function MyPage({ setCurrentView }: setCurrentView) {
     const { userData } = useUserData();
     const { first_name, last_name } = userData || {};
+    const [myPostsKey, setMyPostsKey] = useState(0);
+
+    const handleRefreshPosts = () => {
+        setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
+    };
+
     useEffect(() => {
         setCurrentView('MyPage');
         localStorage.setItem('currentView', 'MyPage');
@@ -38,8 +44,8 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
                     </div>
                 </div>
                 <div className="col-span-2 flex flex-col gap-4 md:p-4 overflow-auto">
-                    <NewPostInput />
-                    <MyPosts />
+                    <NewPostInput onPostSuccess={handleRefreshPosts} />
+                    <MyPosts key={myPostsKey} />
                 </div>
             </div>
         </div>
