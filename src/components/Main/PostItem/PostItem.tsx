@@ -54,12 +54,14 @@ export default React.memo(function PostItem({ postID }: Props) {
     const handlePositiveReactionClick = async () => {
         if (token) {
             await positiveReaction(token, setInfo, postID);
+            getPostDetails(postID);
         }
     };
 
     const handleNegativeReactionClick = async () => {
         if (token) {
             await negativeReaction(token, setInfo, postID);
+            getPostDetails(postID);
         }
     };
 
