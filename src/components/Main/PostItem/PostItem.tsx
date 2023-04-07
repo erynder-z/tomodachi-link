@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import {
     MdThumbUpOffAlt,
@@ -11,40 +11,65 @@ import { positiveReaction } from '../../../utilities/positiveReaction';
 import useInfoOverlay from '../../../hooks/useInfoOverlay';
 import useAuth from '../../../hooks/useAuth';
 import { negativeReaction } from '../../../utilities/negativeReaction';
+import { fetchPostContent } from '../../../utilities/fetchPostContent';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 type Props = {
-    postContent: PostType;
+    postID: string;
 };
 
-export default function PostItem({ postContent }: Props) {
+export default React.memo(function PostItem({ postID }: Props) {
     const { setInfo } = useInfoOverlay();
     const { token } = useAuth();
-    const {
-        _id,
-        owner: { username, userpic },
-        timestamp,
-        text,
-        comments,
-        reactions,
-    } = postContent;
-    const base64String = userpic
-        ? btoa(String.fromCharCode(...new Uint8Array(userpic.data.data)))
+    const [loading, setLoading] = useState<boolean>(true);
+    const [postDetails, setPostDetails] = useState<PostType | null>(null);
+
+    const username = postDetails?.owner?.username;
+    const timestamp = postDetails?.timestamp;
+    const text = postDetails?.text;
+    const comments = postDetails?.comments;
+    const reactions = postDetails?.reactions;
+    const userPic = postDetails?.owner?.userpic
+        ? btoa(
+              String.fromCharCode(
+                  ...new Uint8Array(postDetails?.owner?.userpic.data.data)
+              )
+          )
         : '';
 
-    const time = new Date(timestamp);
-    const formattedDate = format(time, 'MMMM dd, yyyy');
+    const time = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
+
+    const getPostDetails = async (postID: string) => {
+        if (token) {
+            fetchPostContent(
+                token,
+                postID,
+                setPostDetails,
+                setLoading,
+                setInfo
+            );
+        }
+    };
 
     const handlePositiveReactionClick = async () => {
         if (token) {
-            await positiveReaction(token, setInfo, _id);
+            await positiveReaction(token, setInfo, postID);
         }
     };
 
     const handleNegativeReactionClick = async () => {
         if (token) {
-            await negativeReaction(token, setInfo, _id);
+            await negativeReaction(token, setInfo, postID);
         }
     };
+
+    useEffect(() => {
+        getPostDetails(postID);
+    }, []);
+
+    if (loading) {
+        return <LoadingSpinner />;
+    }
 
     return (
         <div className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around lg:rounded-md lg:shadow-lg bg-card">
@@ -52,37 +77,39 @@ export default function PostItem({ postContent }: Props) {
                 <div className="flex gap-4">
                     <img
                         className="w-8 h-8 object-cover rounded-full shadow-lg"
-                        src={`data:image/png;base64,${base64String}`}
+                        src={`data:image/png;base64,${userPic}`}
                         alt="User avatar"
                     />
-                    <div className="font-bold"> {username}</div>
+                    <div className="font-bold">{username}</div>
                 </div>
 
-                <div className="italic">{formattedDate}</div>
+                <div className="italic">{time}</div>
             </div>
 
             <div className="text-justify">
-                <ReactMarkdown className="prose break-words p-4">
-                    {text}
-                </ReactMarkdown>
+                {text && (
+                    <ReactMarkdown className="prose break-words p-4">
+                        {text}
+                    </ReactMarkdown>
+                )}
             </div>
             <div className="flex justify-around items-center ">
                 <button className="flex justify-center items-center gap-1">
-                    <MdOutlineModeComment /> {comments.length}
+                    <MdOutlineModeComment /> {comments?.length}
                 </button>
                 <button
                     onClick={handlePositiveReactionClick}
                     className="flex justify-center items-center gap-1"
                 >
-                    <MdThumbUpOffAlt /> {reactions.positive}
+                    <MdThumbUpOffAlt /> {reactions?.positive}
                 </button>
                 <button
                     onClick={handleNegativeReactionClick}
                     className="flex justify-center items-center gap-1"
                 >
-                    <MdThumbDownOffAlt /> {reactions.negative}
+                    <MdThumbDownOffAlt /> {reactions?.negative}
                 </button>
             </div>
         </div>
     );
-}
+});
