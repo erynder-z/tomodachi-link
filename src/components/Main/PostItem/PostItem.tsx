@@ -13,6 +13,7 @@ import useAuth from '../../../hooks/useAuth';
 import { negativeReaction } from '../../../utilities/negativeReaction';
 import { fetchPostContent } from '../../../utilities/fetchPostContent';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import CommentInput from './Comment/CommentInput/CommentInput';
 
 type Props = {
     postID: string;
@@ -23,6 +24,7 @@ export default React.memo(function PostItem({ postID }: Props) {
     const { token } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
+    const [showCommentInput, setShowCommentInput] = useState<boolean>(false);
 
     const username = postDetails?.owner?.username;
     const timestamp = postDetails?.timestamp;
@@ -65,6 +67,10 @@ export default React.memo(function PostItem({ postID }: Props) {
         }
     };
 
+    const handleShowCommentInputClick = () => {
+        setShowCommentInput(!showCommentInput);
+    };
+
     useEffect(() => {
         getPostDetails(postID);
     }, []);
@@ -96,7 +102,10 @@ export default React.memo(function PostItem({ postID }: Props) {
                 )}
             </div>
             <div className="flex justify-around items-center ">
-                <button className="flex justify-center items-center gap-1">
+                <button
+                    onClick={handleShowCommentInputClick}
+                    className="flex justify-center items-center gap-1"
+                >
                     <MdOutlineModeComment /> {comments?.length}
                 </button>
                 <button
@@ -112,6 +121,12 @@ export default React.memo(function PostItem({ postID }: Props) {
                     <MdThumbDownOffAlt /> {reactions?.negative}
                 </button>
             </div>
+            {showCommentInput && (
+                <CommentInput
+                    parentPostID={postID}
+                    getPostDetails={getPostDetails}
+                />
+            )}
         </div>
     );
 });
