@@ -14,6 +14,7 @@ import { negativeReaction } from '../../../utilities/negativeReaction';
 import { fetchPostContent } from '../../../utilities/fetchPostContent';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import CommentInput from './Comment/CommentInput/CommentInput';
+import CommentList from './Comment/CommentList/CommentList';
 
 type Props = {
     postID: string;
@@ -24,7 +25,7 @@ export default React.memo(function PostItem({ postID }: Props) {
     const { token } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
-    const [showCommentInput, setShowCommentInput] = useState<boolean>(false);
+    const [showComments, setShowComments] = useState<boolean>(false);
 
     const username = postDetails?.owner?.username;
     const timestamp = postDetails?.timestamp;
@@ -67,8 +68,8 @@ export default React.memo(function PostItem({ postID }: Props) {
         }
     };
 
-    const handleShowCommentInputClick = () => {
-        setShowCommentInput(!showCommentInput);
+    const handleShowCommentsClick = () => {
+        setShowComments(!showComments);
     };
 
     useEffect(() => {
@@ -103,7 +104,7 @@ export default React.memo(function PostItem({ postID }: Props) {
             </div>
             <div className="flex justify-around items-center ">
                 <button
-                    onClick={handleShowCommentInputClick}
+                    onClick={handleShowCommentsClick}
                     className="flex justify-center items-center gap-1"
                 >
                     <MdOutlineModeComment /> {comments?.length}
@@ -121,11 +122,14 @@ export default React.memo(function PostItem({ postID }: Props) {
                     <MdThumbDownOffAlt /> {reactions?.negative}
                 </button>
             </div>
-            {showCommentInput && (
-                <CommentInput
-                    parentPostID={postID}
-                    getPostDetails={getPostDetails}
-                />
+            {showComments && (
+                <div className="flex flex-col gap-4">
+                    <CommentList comments={postDetails?.comments} />
+                    <CommentInput
+                        parentPostID={postID}
+                        getPostDetails={getPostDetails}
+                    />
+                </div>
             )}
         </div>
     );

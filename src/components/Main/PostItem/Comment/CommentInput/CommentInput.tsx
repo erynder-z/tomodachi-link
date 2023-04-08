@@ -69,7 +69,7 @@ export default function CommentInput({ parentPostID, getPostDetails }: Props) {
     return (
         <form onSubmit={handleSubmit}>
             <textarea
-                className="w-full p-2 mb-2 rounded-md bg-white focus:outline-none focus:shadow-outline"
+                className="w-full p-2 mb-2 rounded-md bg-gray-200 text-sm focus:outline-none focus:shadow-outline"
                 placeholder="Write a comment..."
                 value={commentText}
                 onChange={handleInputChange}
