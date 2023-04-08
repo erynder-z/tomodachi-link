@@ -27,7 +27,7 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
     }, []);
 
     return (
-        <div className="flex flex-col h-full w-full p-4 bg-card">
+        <div className="flex flex-col h-full w-5/6 p-4 bg-card">
             <div
                 className="md:grid grid-cols-3 h-full gap-4"
                 style={{ gridTemplateRows: '5% auto' }}
@@ -43,7 +43,7 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
                         <MyFriends />
                     </div>
                 </div>
-                <div className="col-span-2 flex flex-col gap-4 md:p-4 overflow-auto">
+                <div className="col-span-2 flex flex-col gap-4 md:px-4 overflow-auto">
                     <NewPostInput onPostSuccess={handleRefreshPosts} />
                     <MyPosts key={myPostsKey} />
                 </div>

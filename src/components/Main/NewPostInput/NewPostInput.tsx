@@ -76,19 +76,19 @@ export default function NewPostInput({ onPostSuccess }: Props) {
                 <div className="w-full py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative">
                         <textarea
-                            rows={4}
+                            rows={2}
                             required
                             autoComplete="off"
                             id="newPost"
                             name="newPost"
-                            className="peer placeholder-transparent w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent w-full bg-blue-100 rounded-md border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 p-4"
                             placeholder="message"
                             value={newPostText}
                             onChange={handleNewPostChange}
                         />
                         <label
                             htmlFor="newPost"
-                            className="absolute left-0 -top-5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="absolute left-0 -top-5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm px-2"
                         >
                             what's on your mind, {username}?
                         </label>
