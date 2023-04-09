@@ -10,5 +10,8 @@ export type UserDataType = {
     pending_friend_requests: any[];
     joined: Date;
     last_seen: Date;
-    userpic: any;
+    userpic: {
+        data: Buffer;
+        contentType: string;
+    };
 };
