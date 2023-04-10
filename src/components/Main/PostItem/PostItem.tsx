@@ -32,10 +32,11 @@ export default React.memo(function PostItem({ postID }: Props) {
     const text = postDetails?.text;
     const comments = postDetails?.comments;
     const reactions = postDetails?.reactions;
-    const userPic = postDetails?.owner?.userpic
-        ? btoa(
+
+    const userPic = postDetails?.owner?.userpic.data.data
+        ? window.btoa(
               String.fromCharCode(
-                  ...new Uint8Array(postDetails?.owner?.userpic.data.data)
+                  ...new Uint8Array(postDetails.owner.userpic.data.data)
               )
           )
         : '';

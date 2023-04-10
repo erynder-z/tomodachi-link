@@ -11,7 +11,7 @@ export default function CommentItem({ commentDetails }: Props) {
     const { username, userpic } = owner;
 
     const userPic = userpic?.data?.data
-        ? btoa(String.fromCharCode(...new Uint8Array(userpic.data.data)))
+        ? window.btoa(String.fromCharCode(...new Uint8Array(userpic.data.data)))
         : '';
 
     const time = timestamp
