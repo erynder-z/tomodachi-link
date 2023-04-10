@@ -1,1 +1,1 @@
-export type CurrentViewType = 'Home' | 'Friends' | 'MyPage';
+export type CurrentViewType = 'Home' | 'Friends' | 'MyPage' | 'OtherUserPage';
