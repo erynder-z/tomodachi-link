@@ -65,7 +65,13 @@ export default function MyPosts() {
             onTouchMove={handleTouchMove}
             className="flex flex-col gap-4 overflow-auto"
         >
-            {postItemsList}
+            {postItemsList.length > 0 ? (
+                postItemsList
+            ) : (
+                <span className="text-sm font-medium text-center">
+                    Your posts will appear here
+                </span>
+            )}
             {loading && (
                 <div className="flex justify-center items-center w-full py-4 ">
                     <LoadingSpinner />
