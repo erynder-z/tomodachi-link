@@ -8,6 +8,7 @@ import { fetchUserData } from '../utilities/fetchUserData';
 const UserDataContext = createContext<UserDataContextProps>({
     userData: null,
     setUserData: () => null,
+    handleFetchUserData: () => null,
 });
 
 export const UserDataContextProvider = ({
