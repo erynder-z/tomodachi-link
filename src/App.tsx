@@ -14,6 +14,7 @@ import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import OptionsCard from './components/Main/OptionsCard/OptionsCard';
 import MyPage from './components/Main/MyPage/MyPage';
+import UserPage from './components/Main/UserPage/UserPage';
 
 function App() {
     const { isAuth } = useAuth();
@@ -34,7 +35,11 @@ function App() {
     }, [info]);
 
     useEffect(() => {
-        if (currentView === 'Friends' || currentView === 'MyPage') {
+        if (
+            currentView === 'Friends' ||
+            currentView === 'MyPage' ||
+            currentView === 'OtherUserPage'
+        ) {
             setShowSidebar(false);
         } else {
             setShowSidebar(true);
@@ -86,6 +91,14 @@ function App() {
                                     path="/friends"
                                     element={
                                         <FriendSection
+                                            setCurrentView={setCurrentView}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/users/:id"
+                                    element={
+                                        <UserPage
                                             setCurrentView={setCurrentView}
                                         />
                                     }
