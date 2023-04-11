@@ -1,9 +1,9 @@
 import React from 'react';
-import { UserListUserType } from '../../../../types/userListTypes';
+import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { Link } from 'react-router-dom';
 
 type Props = {
-    listItemData: UserListUserType;
+    listItemData: MinimalUserTypes;
 };
 
 export default function UserListItem({ listItemData }: Props) {

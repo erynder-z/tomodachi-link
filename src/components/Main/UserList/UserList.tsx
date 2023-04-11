@@ -4,7 +4,7 @@ import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../hooks/useAuth';
 import useInfoOverlay from '../../../hooks/useInfoOverlay';
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
-import { UserListUserType } from '../../../types/userListTypes';
+import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 
 export default function UserList() {
     const { token, authUser } = useAuth();
@@ -24,7 +24,7 @@ export default function UserList() {
         handleFetchUsers();
     }, []);
 
-    const userList = users?.map((user: UserListUserType) => (
+    const userList = users?.map((user: MinimalUserTypes) => (
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
