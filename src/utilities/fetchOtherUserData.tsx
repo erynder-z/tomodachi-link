@@ -5,10 +5,6 @@ import { handleFetchErrors } from './handleFetchErrors';
 export const fetchOtherUserData = async (
     id: string | undefined,
     token: string,
-    setUserPageData: (data: any) => void,
-    setIsFriend: React.Dispatch<React.SetStateAction<boolean>>,
-    setIsFriendRequestPending: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
@@ -20,9 +16,11 @@ export const fetchOtherUserData = async (
         });
         if (response.ok) {
             const data = await response.json();
-            setUserPageData(data.user);
-            setIsFriend(data.isFriend);
-            setIsFriendRequestPending(data.isFriendRequestPending);
+            return {
+                pageData: data.user,
+                isFriend: data.isFriend,
+                isFriendRequestPending: data.isFriendRequestPending,
+            };
         } else {
             handleFetchErrors(response, setInfo);
         }
@@ -32,5 +30,4 @@ export const fetchOtherUserData = async (
             icon: <FaExclamationTriangle />,
         });
     }
-    setLoading(false);
 };

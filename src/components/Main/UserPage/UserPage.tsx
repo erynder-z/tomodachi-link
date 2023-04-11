@@ -31,17 +31,28 @@ export default function UserPage({ setCurrentView }: setCurrentView) {
 
     useEffect(() => {
         if (token) {
-            fetchOtherUserData(
-                id,
-                token,
-                setUserPageData,
-                setIsFriend,
-                setIsFriendRequestPending,
-                setLoading,
-                setInfo
-            );
+            fetchOtherUserData(id, token, setInfo);
         }
     }, [id]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (token) {
+                const response = await fetchOtherUserData(
+                    id,
+                    token,
+
+                    setInfo
+                );
+                setUserPageData(response?.pageData);
+                setIsFriend(response?.isFriend);
+                setIsFriendRequestPending(response?.isFriendRequestPending);
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
 
     useEffect(() => {
         setCurrentView('OtherUserPage');
