@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdOutlineLogout } from 'react-icons/md';
+import { TbLogout } from 'react-icons/tb';
 import useAuth from '../../../../hooks/useAuth';
 
 export default function LogoutButton() {
@@ -10,7 +10,7 @@ export default function LogoutButton() {
             onClick={logout}
             className="cursor-pointer hover:drop-shadow-md hover:text-red-500"
         >
-            <MdOutlineLogout size="1.5em" />
+            <TbLogout size="1.5em" />
         </button>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdOutlineCoPresent } from 'react-icons/md';
+import { TbUserCircle } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
 export default function ProfilePageButton() {
@@ -8,7 +8,7 @@ export default function ProfilePageButton() {
             to={'/mypage'}
             className="cursor-pointer hover:drop-shadow-md hover:text-blue-400"
         >
-            <MdOutlineCoPresent size="1.5em" />
+            <TbUserCircle size="1.5em" />
         </Link>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdSettings } from 'react-icons/md';
+import { TbSettings } from 'react-icons/tb';
 import EditUserDataModal from '../../EditUserDataModal/EditUserDataModal';
 
 type Props = {
@@ -19,7 +19,7 @@ export default function OptionsButton({ setShowOptions }: Props) {
                 onClick={handleButtonClick}
                 className="cursor-pointer hover:drop-shadow-md hover:text-blue-400"
             >
-                <MdSettings size="1.5em" />
+                <TbSettings size="1.5em" />
             </button>
             {showOverlay && (
                 <EditUserDataModal
