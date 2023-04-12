@@ -5,6 +5,7 @@ import MyPictures from './MyPictures/MyPictures';
 import MyFriends from './MyFriends/MyFriends';
 import MyPosts from './MyPosts/MyPosts';
 import NewPostInput from '../NewPostInput/NewPostInput';
+import MyFriendRequests from './MyFriendRequests/MyFriendRequests';
 
 type setCurrentView = {
     setCurrentView: React.Dispatch<
@@ -14,8 +15,10 @@ type setCurrentView = {
 
 export default function MyPage({ setCurrentView }: setCurrentView) {
     const { userData } = useUserData();
-    const { first_name, last_name } = userData || {};
+    const { first_name, last_name, pending_friend_requests } = userData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
+
+    const numberOfPendingFriendRequests = pending_friend_requests?.length;
 
     const handleRefreshPosts = () => {
         setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
@@ -27,7 +30,7 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
     }, []);
 
     return (
-        <div className="flex flex-col h-full w-5/6 p-4 bg-card">
+        <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
             <div
                 className="md:grid grid-cols-3 h-full gap-4"
                 style={{ gridTemplateRows: '5% auto' }}
@@ -36,6 +39,11 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
                     {first_name} {last_name}'s page
                 </h1>
                 <div className="col-span-1 flex flex-col h-1/2">
+                    {numberOfPendingFriendRequests ? (
+                        <div className="flex h-1/4 md:h-auto md:p-4">
+                            <MyFriendRequests />
+                        </div>
+                    ) : null}
                     <div className="flex h-1/4 md:h-auto md:p-4">
                         <MyPictures />
                     </div>
