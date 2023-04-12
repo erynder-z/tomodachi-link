@@ -10,12 +10,12 @@ export default function UserList() {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoOverlay();
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const handleFetchUsers = async () => {
         if (authUser && token) {
-            setLoading(true);
-            await fetchSomeUsers(token, setUsers, setInfo);
+            const response = await fetchSomeUsers(token, setInfo);
+            setUsers(response);
             setLoading(false);
         }
     };

@@ -26,9 +26,10 @@ export const UserDataContextProvider = ({
     const [userData, setUserData] = useState<UserDataType | null>(null);
 
     // Define trigger function
-    const handleFetchUserData = () => {
+    const handleFetchUserData = async () => {
         if (authUser && token) {
-            fetchUserData(token, setUserData, setInfo);
+            const response = await fetchUserData(token, setInfo);
+            setUserData(response);
         }
     };
 

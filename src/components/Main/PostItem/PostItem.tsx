@@ -45,13 +45,10 @@ export default React.memo(function PostItem({ postID }: Props) {
 
     const getPostDetails = async (postID: string) => {
         if (token) {
-            fetchPostContent(
-                token,
-                postID,
-                setPostDetails,
-                setLoading,
-                setInfo
-            );
+            const response = await fetchPostContent(token, postID, setInfo);
+
+            setPostDetails(response);
+            setLoading(false);
         }
     };
 

@@ -4,7 +4,6 @@ import { handleFetchErrors } from './handleFetchErrors';
 
 export const fetchUserData = async (
     token: string,
-    setUserData: (data: any) => void,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
@@ -16,7 +15,7 @@ export const fetchUserData = async (
         });
         if (response.ok) {
             const data = await response.json();
-            setUserData(data.user);
+            return data.user;
         } else {
             handleFetchErrors(response, setInfo);
         }

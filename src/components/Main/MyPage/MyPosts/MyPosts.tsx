@@ -11,13 +11,13 @@ export default function MyPosts() {
     const { setInfo } = useInfoOverlay();
     const [posts, setPosts] = useState<PostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [lastTouchY, setLastTouchY] = useState<number | null>(null);
 
     const handleFetchUserPosts = async () => {
         if (authUser && token) {
-            setLoading(true);
-            await fetchUserPosts(token, setPosts, setInfo, posts, skip);
+            const response = await fetchUserPosts(token, setInfo, skip);
+            setPosts([...posts, ...response]);
             setLoading(false);
         }
     };

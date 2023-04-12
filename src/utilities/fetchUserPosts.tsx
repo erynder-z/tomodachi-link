@@ -1,13 +1,10 @@
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
-import { PostType } from '../types/postType';
 
 export const fetchUserPosts = async (
     token: string,
-    setPosts: (data: any) => void,
     setInfo: (info: InfoType | null) => void,
-    posts: PostType[],
     skip: number
 ) => {
     try {
@@ -19,7 +16,7 @@ export const fetchUserPosts = async (
         });
         if (response.ok) {
             const data = await response.json();
-            setPosts([...posts, ...data.userPosts]);
+            return data.userPosts;
         } else {
             handleFetchErrors(response, setInfo);
         }
