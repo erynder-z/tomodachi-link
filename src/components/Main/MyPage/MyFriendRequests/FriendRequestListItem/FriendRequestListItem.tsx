@@ -6,6 +6,7 @@ import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import useUserData from '../../../../../hooks/useUserData';
 import { acceptFriendRequest } from '../../../../../utilities/acceptFriendRequest';
+import { declineFriendRequest } from '../../../../../utilities/declineFriendRequest';
 
 type Props = {
     friendRequestUserId: string;
@@ -40,7 +41,12 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
     };
 
     const handleDeclineFriendRequest = () => {
-        //
+        if (userData && token) {
+            const currentUserId = userData?._id;
+            const requestUserId = friendRequestData._id;
+
+            declineFriendRequest(token, currentUserId, requestUserId, setInfo);
+        }
     };
 
     useEffect(() => {
