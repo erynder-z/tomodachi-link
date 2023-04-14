@@ -8,9 +8,7 @@ import NewPostInput from '../NewPostInput/NewPostInput';
 import MyFriendRequests from './MyFriendRequests/MyFriendRequests';
 
 type setCurrentView = {
-    setCurrentView: React.Dispatch<
-        React.SetStateAction<CurrentViewType | null>
-    >;
+    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
 };
 
 export default function MyPage({ setCurrentView }: setCurrentView) {

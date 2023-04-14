@@ -10,9 +10,7 @@ import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';
 
 type setCurrentView = {
-    setCurrentView: React.Dispatch<
-        React.SetStateAction<CurrentViewType | null>
-    >;
+    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
 };
 
 export default function UserPage({ setCurrentView }: setCurrentView) {

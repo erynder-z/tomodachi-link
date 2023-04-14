@@ -20,8 +20,9 @@ function App() {
     const { isAuth } = useAuth();
     const { info } = useInfoOverlay();
 
-    const [currentView, setCurrentView] = useState<CurrentViewType | null>(
-        (localStorage.getItem('odinbookCurrentView') as CurrentViewType) || null
+    const [currentView, setCurrentView] = useState<CurrentViewType>(
+        (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
+            'Home'
     );
     const [showOverlay, setShowOverlay] = useState(false);
     const [showSidebar, setShowSidebar] = useState<boolean>(false);

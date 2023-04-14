@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
 
 type setCurrentView = {
-    setCurrentView: React.Dispatch<
-        React.SetStateAction<CurrentViewType | null>
-    >;
+    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
 };
 
 export default function HomeSection({ setCurrentView }: setCurrentView) {
