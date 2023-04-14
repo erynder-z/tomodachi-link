@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserPageDataTypes } from '../../../../types/userPageDataTypes';
 import useUserData from '../../../../hooks/useUserData';
 import { sendFriendRequest } from '../../../../utilities/sendFriendRequest';
@@ -17,6 +17,9 @@ export default function NotFriendUserPage({
     const { token } = useAuth();
     const { userData } = useUserData();
     const { setInfo } = useInfoOverlay();
+    const [disableButton, setDisableButton] = useState<boolean>(
+        isFriendRequestPending
+    );
     const { first_name, last_name, userpic } = userPageData || {};
     const base64StringUserPic = window.btoa(
         String.fromCharCode(...new Uint8Array(userpic?.data?.data))
@@ -28,11 +31,12 @@ export default function NotFriendUserPage({
             const requestUserId = userPageData._id;
 
             sendFriendRequest(token, currentUserId, requestUserId, setInfo);
+            setDisableButton(true);
         }
     };
 
     const getButton = () => {
-        if (isFriendRequestPending) {
+        if (disableButton) {
             return (
                 <button
                     disabled
@@ -54,7 +58,7 @@ export default function NotFriendUserPage({
     };
 
     return (
-        <div className="flex flex-col h-full w-5/6 p-4 bg-card">
+        <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
             <div
                 className="md:grid grid-cols-3 h-full gap-4"
                 style={{ gridTemplateRows: '15% auto' }}
