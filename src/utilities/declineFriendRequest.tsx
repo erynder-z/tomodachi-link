@@ -6,6 +6,7 @@ export const declineFriendRequest = async (
     token: string,
     currentUserId: string,
     requestUserId: string,
+    handleFetchUserData: () => void,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
@@ -34,6 +35,7 @@ export const declineFriendRequest = async (
             message: 'Friend request declined!',
             icon: <FaRegMeh />,
         });
+        handleFetchUserData();
     } catch (err: unknown) {
         setInfo({
             message: 'Unable to decline friend request!',

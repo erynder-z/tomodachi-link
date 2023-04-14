@@ -14,7 +14,7 @@ type Props = {
 
 export default function FriendRequestListItem({ friendRequestUserId }: Props) {
     const { token } = useAuth();
-    const { userData } = useUserData();
+    const { userData, handleFetchUserData } = useUserData();
     const { setInfo } = useInfoOverlay();
     const [loading, setLoading] = useState<boolean>(true);
     const [friendRequestData, setFriendRequestData] = useState<
@@ -36,7 +36,13 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
             const currentUserId = userData?._id;
             const requestUserId = friendRequestData._id;
 
-            acceptFriendRequest(token, currentUserId, requestUserId, setInfo);
+            acceptFriendRequest(
+                token,
+                currentUserId,
+                requestUserId,
+                handleFetchUserData,
+                setInfo
+            );
         }
     };
 
@@ -45,7 +51,13 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
             const currentUserId = userData?._id;
             const requestUserId = friendRequestData._id;
 
-            declineFriendRequest(token, currentUserId, requestUserId, setInfo);
+            declineFriendRequest(
+                token,
+                currentUserId,
+                requestUserId,
+                handleFetchUserData,
+                setInfo
+            );
         }
     };
 
