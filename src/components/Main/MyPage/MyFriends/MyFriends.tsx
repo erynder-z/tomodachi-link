@@ -1,5 +1,13 @@
 import React from 'react';
+import useFriendData from '../../../../hooks/useFriendData';
+import FriendListItem from './FriendListItem/FriendListItem';
 
 export default function MyFriends() {
-    return <div>MyFriends</div>;
+    const { friendData } = useFriendData();
+
+    const friendList = friendData?.map((friend) => (
+        <FriendListItem key={friend._id} friendData={friend} />
+    ));
+
+    return <div className="grid grid-cols-3 gap-1">{friendList}</div>;
 }

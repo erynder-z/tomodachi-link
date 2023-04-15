@@ -6,15 +6,18 @@ import { AuthContextProvider } from './contexts/AuthContext';
 import { InfoOverlayContextProvider } from './contexts/InfoOverlayContext';
 import { UserDataContextProvider } from './contexts/UserDataContext';
 import './index.css';
+import { FriendDataContextProvider } from './contexts/FriendDataContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <HashRouter>
             <AuthContextProvider>
                 <UserDataContextProvider>
-                    <InfoOverlayContextProvider>
-                        <App />
-                    </InfoOverlayContextProvider>
+                    <FriendDataContextProvider>
+                        <InfoOverlayContextProvider>
+                            <App />
+                        </InfoOverlayContextProvider>
+                    </FriendDataContextProvider>
                 </UserDataContextProvider>
             </AuthContextProvider>
         </HashRouter>
