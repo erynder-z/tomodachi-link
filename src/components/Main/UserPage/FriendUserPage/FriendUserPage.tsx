@@ -14,7 +14,7 @@ export default function FriendUserPage({ userPageData }: Props) {
         String.fromCharCode(...new Uint8Array(userpic?.data?.data))
     );
     return (
-        <div className="flex flex-col h-full w-5/6 p-4 bg-card">
+        <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
             <div
                 className="md:grid grid-cols-3 h-full gap-4"
                 style={{ gridTemplateRows: '15% auto' }}

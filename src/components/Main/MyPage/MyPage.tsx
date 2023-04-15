@@ -28,15 +28,15 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
     }, []);
 
     return (
-        <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
+        <div className="flex flex-col h-full lg:w-11/12 p-4 bg-card">
             <div
-                className="md:grid grid-cols-3 h-full gap-4"
+                className="md:grid grid-cols-4 h-full gap-4"
                 style={{ gridTemplateRows: '5% auto' }}
             >
-                <h1 className="col-span-3 text-center font-bold h-auto">
+                <h1 className="col-span-4 text-center font-bold h-auto">
                     {first_name} {last_name}'s page
                 </h1>
-                <div className="col-span-1 flex flex-col h-1/2">
+                <div className="col-span-2 flex flex-col h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <MyFriendRequests />
