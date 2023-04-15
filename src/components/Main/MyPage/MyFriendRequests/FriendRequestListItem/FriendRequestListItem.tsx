@@ -7,12 +7,14 @@ import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import useUserData from '../../../../../hooks/useUserData';
 import { acceptFriendRequest } from '../../../../../utilities/acceptFriendRequest';
 import { declineFriendRequest } from '../../../../../utilities/declineFriendRequest';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     friendRequestUserId: string;
 };
 
 export default function FriendRequestListItem({ friendRequestUserId }: Props) {
+    const navigate = useNavigate();
     const { token } = useAuth();
     const { userData, handleFetchUserData } = useUserData();
     const { setInfo } = useInfoOverlay();
@@ -61,6 +63,10 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
         }
     };
 
+    const handleUserClick = () => {
+        navigate(`/users/${friendRequestUserId}`);
+    };
+
     useEffect(() => {
         const fetchUserData = async () => {
             if (token) {
@@ -87,7 +93,10 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
+            <div
+                onClick={handleUserClick}
+                className="flex items-center gap-2 cursor-pointer"
+            >
                 <img
                     className="w-7 h-7 object-cover rounded-full"
                     src={`data:image/png;base64,${userPic}`}
