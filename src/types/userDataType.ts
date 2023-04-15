@@ -4,10 +4,10 @@ export type UserDataType = {
     last_name: string;
     username: string;
     email: string;
-    friends: any[];
-    posts: any[];
-    bookmarks: any[];
-    pending_friend_requests: any[];
+    friends: string[];
+    posts: string[];
+    bookmarks: string[];
+    pending_friend_requests: string[];
     joined: Date;
     last_seen: Date;
     userpic: {
