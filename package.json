@@ -13,8 +13,10 @@
   "dependencies": {
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
+    "react-avatar-editor": "^13.0.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-image-file-resizer": "^0.4.8",
     "react-loader-spinner": "^5.3.4",
     "react-markdown": "^8.0.6",
     "react-router-dom": "^6.9.0"
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.27",
+    "@types/react-avatar-editor": "^13.0.0",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
