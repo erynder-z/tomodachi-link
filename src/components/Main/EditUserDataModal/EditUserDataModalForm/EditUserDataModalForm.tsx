@@ -4,6 +4,8 @@ import useInfoOverlay from '../../../../hooks/useInfoOverlay';
 import useUserData from '../../../../hooks/useUserData';
 import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
+import { convertUserPic } from '../../../../utilities/convertUserPic';
+import AvatarCreator from '../AvatarCreator/AvatarCreator';
 
 type Props = {
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,12 +19,22 @@ export default function EditUserDataModalForm({
     const { token } = useAuth();
     const { userData, handleFetchUserData } = useUserData();
     const { setInfo } = useInfoOverlay();
-    const { first_name, last_name, email, userpic } = userData || {};
-    const base64String = btoa(
-        String.fromCharCode(...new Uint8Array(userpic?.data?.data))
-    );
+    const {
+        first_name = '',
+        last_name = '',
+        email = '',
+        userpic = '',
+    } = userData || {};
 
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [image, setImage] = useState<{
+        selectedFile: File | null;
+        preview: string;
+    }>({
+        selectedFile: null,
+        preview: convertUserPic(userpic),
+    });
+
+    const [showCropper, setShowCropper] = useState<boolean>(false);
 
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
@@ -30,8 +42,13 @@ export default function EditUserDataModalForm({
         event.preventDefault();
 
         if (token) {
-            const form = event.target as HTMLFormElement;
-            const formData = new FormData(form);
+            const formData = new FormData();
+            image.selectedFile &&
+                formData.append('imagePicker', image.selectedFile);
+            formData.append('first_name', event.currentTarget.first_name.value);
+            formData.append('last_name', event.currentTarget.last_name.value);
+            formData.append('email', event.currentTarget.email.value);
+            formData.append('password', event.currentTarget.password.value);
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(`${serverURL}/api/v1/userdata`, {
@@ -56,6 +73,10 @@ export default function EditUserDataModalForm({
         }
     };
 
+    const handleConfirmImage = () => {
+        setShowCropper(false);
+    };
+
     return (
         <div className="max-w-md mx-auto">
             <div>
@@ -72,9 +93,9 @@ export default function EditUserDataModalForm({
                         <img
                             className="w-16 h-16 object-cover rounded-full mx-auto "
                             src={
-                                selectedFile
-                                    ? URL.createObjectURL(selectedFile)
-                                    : `data:image/png;base64,${base64String}`
+                                image.selectedFile
+                                    ? URL.createObjectURL(image.selectedFile)
+                                    : `data:image/png;base64,${image.preview}`
                             }
                             alt="User avatar"
                         />
@@ -84,7 +105,14 @@ export default function EditUserDataModalForm({
                                 name="imagePicker"
                                 onChange={(event) => {
                                     const file = event.target.files?.[0];
-                                    setSelectedFile(file || null);
+                                    setImage((prevState) => ({
+                                        selectedFile: file || null,
+                                        preview: file
+                                            ? URL.createObjectURL(file)
+                                            : prevState.preview,
+                                    }));
+
+                                    setShowCropper(true);
                                 }}
                                 className="hidden"
                             />
@@ -167,6 +195,13 @@ export default function EditUserDataModalForm({
                     </div>
                 </div>
             </form>
+            {showCropper && image.selectedFile && (
+                <AvatarCreator
+                    image={image.selectedFile}
+                    setImage={setImage}
+                    handleConfirmImage={handleConfirmImage}
+                />
+            )}
         </div>
     );
 }
