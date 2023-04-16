@@ -3,6 +3,7 @@ import { UserPageDataTypes } from '../../../../types/userPageDataTypes';
 import UserPictures from '../UserPictures/UserPictures';
 import UserFriends from '../UserFriends/UserFriends';
 import UserPosts from '../UserPosts/UserPosts';
+import { convertUserPic } from '../../../../utilities/convertUserPic';
 
 type Props = {
     userPageData: UserPageDataTypes | Record<string, never>;
@@ -10,9 +11,8 @@ type Props = {
 
 export default function FriendUserPage({ userPageData }: Props) {
     const { first_name, last_name, userpic } = userPageData || {};
-    const base64StringUserPic = window.btoa(
-        String.fromCharCode(...new Uint8Array(userpic?.data?.data))
-    );
+    const userPicture = convertUserPic(userpic);
+
     return (
         <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
             <div
@@ -21,7 +21,7 @@ export default function FriendUserPage({ userPageData }: Props) {
             >
                 <img
                     className="col-span-1 w-20 h-20 object-cover rounded-full mx-auto"
-                    src={`data:image/png;base64,${base64StringUserPic}`}
+                    src={`data:image/png;base64,${userPicture}`}
                     alt="User avatar"
                 />
                 <h1 className="col-span-2 text-center font-bold h-auto">

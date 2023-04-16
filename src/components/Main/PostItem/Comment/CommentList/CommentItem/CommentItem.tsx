@@ -1,6 +1,7 @@
 import React from 'react';
 import { CommentType } from '../../../../../../types/commentType';
 import { formatDistanceToNow } from 'date-fns';
+import { convertUserPic } from '../../../../../../utilities/convertUserPic';
 
 type Props = {
     commentDetails: CommentType;
@@ -10,9 +11,7 @@ export default function CommentItem({ commentDetails }: Props) {
     const { owner, timestamp, text } = commentDetails;
     const { username, userpic } = owner;
 
-    const userPic = userpic?.data?.data
-        ? window.btoa(String.fromCharCode(...new Uint8Array(userpic.data.data)))
-        : '';
+    const userPic = convertUserPic(userpic);
 
     const time = timestamp
         ? `${formatDistanceToNow(new Date(timestamp), { addSuffix: true })} ago`

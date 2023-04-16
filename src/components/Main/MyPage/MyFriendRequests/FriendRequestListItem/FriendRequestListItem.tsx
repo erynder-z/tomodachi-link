@@ -8,6 +8,7 @@ import useUserData from '../../../../../hooks/useUserData';
 import { acceptFriendRequest } from '../../../../../utilities/acceptFriendRequest';
 import { declineFriendRequest } from '../../../../../utilities/declineFriendRequest';
 import { useNavigate } from 'react-router-dom';
+import { convertUserPic } from '../../../../../utilities/convertUserPic';
 
 type Props = {
     friendRequestUserId: string;
@@ -23,15 +24,9 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
         MinimalUserTypes | Record<string, never>
     >({});
 
-    const { _id, first_name, last_name, userpic } = friendRequestData || {};
+    const { _id, first_name, last_name } = friendRequestData || {};
 
-    const userPic = userpic?.data?.data
-        ? window.btoa(
-              String.fromCharCode(
-                  ...new Uint8Array(friendRequestData.userpic.data.data)
-              )
-          )
-        : '';
+    const userPic = convertUserPic(friendRequestData?.userpic) || '';
 
     const handleAcceptFriendRequest = () => {
         if (userData && token) {

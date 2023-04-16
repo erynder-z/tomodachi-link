@@ -4,6 +4,7 @@ import useUserData from '../../../../hooks/useUserData';
 import { sendFriendRequest } from '../../../../utilities/sendFriendRequest';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../hooks/useInfoOverlay';
+import { convertUserPic } from '../../../../utilities/convertUserPic';
 
 type Props = {
     userPageData: UserPageDataTypes | Record<string, never>;
@@ -21,9 +22,7 @@ export default function NotFriendUserPage({
         isFriendRequestPending
     );
     const { first_name, last_name, userpic } = userPageData || {};
-    const base64StringUserPic = window.btoa(
-        String.fromCharCode(...new Uint8Array(userpic?.data?.data))
-    );
+    const userPicture = convertUserPic(userpic);
 
     const handleSendFriendRequest = () => {
         if (userData && token) {
@@ -65,7 +64,7 @@ export default function NotFriendUserPage({
             >
                 <img
                     className="col-span-1 w-20 h-20 object-cover rounded-full mx-auto"
-                    src={`data:image/png;base64,${base64StringUserPic}`}
+                    src={`data:image/png;base64,${userPicture}`}
                     alt="User avatar"
                 />
                 <h1 className="col-span-2 text-center font-bold h-auto">

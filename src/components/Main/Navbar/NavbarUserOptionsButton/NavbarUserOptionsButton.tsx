@@ -1,19 +1,19 @@
 import React from 'react';
 import useUserData from '../../../../hooks/useUserData';
+import { convertUserPic } from '../../../../utilities/convertUserPic';
 
 export default function NavbarUserOptionsButton() {
     const { userData } = useUserData();
     const { userpic, pending_friend_requests } = userData || {};
-    const base64String = window.btoa(
-        String.fromCharCode(...new Uint8Array(userpic?.data?.data))
-    );
+    const userImage = convertUserPic(userpic);
+
     const pendingFriendRequests = pending_friend_requests?.length;
 
     return (
         <div className="relative">
             <img
                 className="w-8 h-8 object-cover rounded-full mx-auto shadow-lg"
-                src={`data:image/png;base64,${base64String}`}
+                src={`data:image/png;base64,${userImage}`}
                 alt="User avatar"
             />
             {pendingFriendRequests ? (
