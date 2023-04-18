@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { FaTimes } from 'react-icons/fa';
 import resizeFile from '../../../../utilities/ImageResizer';
@@ -16,18 +16,7 @@ type Props = {
 
 function AvatarCreator({ image, setImage, handleConfirmImage }: Props) {
     const editor = useRef<AvatarEditor | null>(null);
-    const [avatarDimensions, setAvatarDimensions] = useState({
-        height: 0,
-        width: 0,
-    });
-
-    useEffect(() => {
-        if (window.innerWidth < 768) {
-            setAvatarDimensions({ height: 100, width: 100 });
-        } else {
-            setAvatarDimensions({ height: 250, width: 250 });
-        }
-    }, []);
+    const [scale, setScale] = useState(1);
 
     const handleConfirmButtonClick = async () => {
         if (editor.current != null) {
@@ -60,34 +49,52 @@ function AvatarCreator({ image, setImage, handleConfirmImage }: Props) {
         handleConfirmImage();
     };
 
+    const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setScale(parseFloat(e.target.value));
+    };
+
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center bg-black">
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 bg-black">
             <button
                 onClick={handleCloseButtonClick}
                 className="absolute top-2 right-2 text-white"
             >
                 <FaTimes />
             </button>
-            <h3 className="text-white">position your avatar</h3>
+            <h3 className="text-white">
+                Grab the image to position your avatar
+            </h3>
             <AvatarEditor
                 ref={editor}
                 image={image}
-                width={avatarDimensions.width}
-                height={avatarDimensions.height}
+                width={250}
+                height={250}
                 border={0}
                 borderRadius={125}
                 color={[0, 0, 0, 1.0]}
-                scale={1}
+                scale={scale}
                 rotate={0}
             />
-            <div className="flex w-full">
-                <button
-                    onClick={handleConfirmButtonClick}
-                    className="w-full bg-blue-500 text-white rounded-md px-2 py-1"
-                >
-                    Confirm
-                </button>
+            <div className="flex flex-col">
+                <label htmlFor="scale" className="text-white">
+                    Adjust scale:
+                </label>
+                <input
+                    type="range"
+                    min="1"
+                    max="2"
+                    step="0.1"
+                    value={scale}
+                    onChange={handleScaleChange}
+                    id="scale"
+                />
             </div>
+            <button
+                onClick={handleConfirmButtonClick}
+                className="bg-blue-500 text-white rounded-md px-2 py-1"
+            >
+                Confirm
+            </button>
         </div>
     );
 }
