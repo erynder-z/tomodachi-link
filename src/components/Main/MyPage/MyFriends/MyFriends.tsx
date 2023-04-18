@@ -9,5 +9,10 @@ export default function MyFriends() {
         <FriendListItem key={friend._id} friendData={friend} />
     ));
 
-    return <div className="grid grid-cols-3 gap-1">{friendList}</div>;
+    return (
+        <div>
+            <h1>Friends</h1>
+            <div className="grid grid-cols-3 gap-1">{friendList}</div>
+        </div>
+    );
 }

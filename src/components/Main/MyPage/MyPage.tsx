@@ -36,7 +36,7 @@ export default function MyPage({ setCurrentView }: setCurrentView) {
                 <h1 className="col-span-4 text-center font-bold h-auto">
                     {first_name} {last_name}'s page
                 </h1>
-                <div className="col-span-2 flex flex-col h-1/2">
+                <div className="col-span-2 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <MyFriendRequests />
