@@ -1,13 +1,12 @@
 import React from 'react';
-import useUserData from '../../../../hooks/useUserData';
 import FriendRequestListItem from './FriendRequestListItem/FriendRequestListItem';
 
-export default function MyFriendRequests() {
-    const { userData } = useUserData();
+type Props = {
+    pendingFriendRequests: string[];
+};
 
-    const { pending_friend_requests } = userData || {};
-
-    const friendRequestItemsList = pending_friend_requests?.map(
+export default function MyFriendRequests({ pendingFriendRequests }: Props) {
+    const friendRequestItemsList = pendingFriendRequests?.map(
         (requestingUserId) => (
             <FriendRequestListItem
                 key={requestingUserId}

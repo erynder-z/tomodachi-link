@@ -1,10 +1,12 @@
 import React from 'react';
-import useFriendData from '../../../../hooks/useFriendData';
 import FriendListItem from './FriendListItem/FriendListItem';
+import { FriendDataType } from '../../../../types/friendDataType';
 
-export default function MyFriends() {
-    const { friendData } = useFriendData();
+type Props = {
+    friendData: FriendDataType[] | null;
+};
 
+export default function MyFriends({ friendData }: Props) {
     const friendList = friendData?.map((friend) => (
         <FriendListItem key={friend._id} friendData={friend} />
     ));
