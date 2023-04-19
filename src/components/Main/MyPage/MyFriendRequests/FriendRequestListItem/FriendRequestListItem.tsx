@@ -9,6 +9,7 @@ import { acceptFriendRequest } from '../../../../../utilities/acceptFriendReques
 import { declineFriendRequest } from '../../../../../utilities/declineFriendRequest';
 import { useNavigate } from 'react-router-dom';
 import { convertUserPic } from '../../../../../utilities/convertUserPic';
+import useFriendData from '../../../../../hooks/useFriendData';
 
 type Props = {
     friendRequestUserId: string;
@@ -18,6 +19,7 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
     const navigate = useNavigate();
     const { token } = useAuth();
     const { userData, handleFetchUserData } = useUserData();
+    const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoOverlay();
     const [loading, setLoading] = useState<boolean>(true);
     const [friendRequestData, setFriendRequestData] = useState<
@@ -38,6 +40,7 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
                 currentUserId,
                 requestUserId,
                 handleFetchUserData,
+                handleFetchFriendData,
                 setInfo
             );
         }
@@ -53,6 +56,7 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
                 currentUserId,
                 requestUserId,
                 handleFetchUserData,
+                handleFetchFriendData,
                 setInfo
             );
         }

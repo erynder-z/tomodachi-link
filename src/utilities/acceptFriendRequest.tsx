@@ -7,6 +7,7 @@ export const acceptFriendRequest = async (
     currentUserId: string,
     requestUserId: string,
     handleFetchUserData: () => void,
+    handleFetchFriendData: () => void,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
@@ -36,6 +37,7 @@ export const acceptFriendRequest = async (
             icon: <FaRegSmile />,
         });
         handleFetchUserData();
+        handleFetchFriendData();
     } catch (err: unknown) {
         setInfo({
             message: 'Unable to accept friend request!',
