@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { UserPageDataTypes } from '../../../../types/userPageDataTypes';
-import useUserData from '../../../../hooks/useUserData';
-import { sendFriendRequest } from '../../../../utilities/sendFriendRequest';
-import useAuth from '../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../hooks/useInfoOverlay';
-import { convertUserPic } from '../../../../utilities/convertUserPic';
+import { UserPageDataTypes } from '../../../../../types/userPageDataTypes';
+import useUserData from '../../../../../hooks/useUserData';
+import { sendFriendRequest } from '../../../../../utilities/sendFriendRequest';
+import useAuth from '../../../../../hooks/useAuth';
+import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
+import { convertUserPic } from '../../../../../utilities/convertUserPic';
 
 type Props = {
     userPageData: UserPageDataTypes | Record<string, never>;

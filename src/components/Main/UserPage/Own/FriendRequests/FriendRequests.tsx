@@ -5,7 +5,7 @@ type Props = {
     pendingFriendRequests: string[];
 };
 
-export default function MyFriendRequests({ pendingFriendRequests }: Props) {
+export default function FriendRequests({ pendingFriendRequests }: Props) {
     const friendRequestItemsList = pendingFriendRequests?.map(
         (requestingUserId) => (
             <FriendRequestListItem

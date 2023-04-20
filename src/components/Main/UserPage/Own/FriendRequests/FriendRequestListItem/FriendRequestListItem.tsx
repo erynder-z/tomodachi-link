@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../../../hooks/useAuth';
-import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
-import { fetchMinimalUserData } from '../../../../../utilities/fetchMinimalUserData';
-import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
-import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
-import useUserData from '../../../../../hooks/useUserData';
-import { acceptFriendRequest } from '../../../../../utilities/acceptFriendRequest';
-import { declineFriendRequest } from '../../../../../utilities/declineFriendRequest';
+import useAuth from '../../../../../../hooks/useAuth';
+import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
+import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
+import useInfoOverlay from '../../../../../../hooks/useInfoOverlay';
+import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
+import useUserData from '../../../../../../hooks/useUserData';
+import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
+import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';
 import { useNavigate } from 'react-router-dom';
-import { convertUserPic } from '../../../../../utilities/convertUserPic';
-import useFriendData from '../../../../../hooks/useFriendData';
+import { convertUserPic } from '../../../../../../utilities/convertUserPic';
+import useFriendData from '../../../../../../hooks/useFriendData';
 
 type Props = {
     friendRequestUserId: string;

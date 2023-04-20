@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchOtherUserData } from '../../../utilities/fetchOtherUserData';
-import useAuth from '../../../hooks/useAuth';
-import useInfoOverlay from '../../../hooks/useInfoOverlay';
-import { CurrentViewType } from '../../../types/currentViewType';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import { UserPageDataTypes } from '../../../types/userPageDataTypes';
+import { fetchOtherUserData } from '../../../../utilities/fetchOtherUserData';
+import useAuth from '../../../../hooks/useAuth';
+import useInfoOverlay from '../../../../hooks/useInfoOverlay';
+import { CurrentViewType } from '../../../../types/currentViewType';
+import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import { UserPageDataTypes } from '../../../../types/userPageDataTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';
 

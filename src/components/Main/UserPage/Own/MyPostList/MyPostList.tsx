@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import PostItem from '../../PostItem/PostItem';
-import { PostType } from '../../../../types/postType';
-import useAuth from '../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../hooks/useInfoOverlay';
-import { fetchUserPosts } from '../../../../utilities/fetchUserPosts';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import PostItem from '../../../PostItem/PostItem';
+import { PostType } from '../../../../../types/postType';
+import useAuth from '../../../../../hooks/useAuth';
+import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
+import { fetchUserPosts } from '../../../../../utilities/fetchUserPosts';
+import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 
-export default function MyPosts() {
+export default function MyPostList() {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoOverlay();
     const [posts, setPosts] = useState<PostType[]>([]);

@@ -13,8 +13,8 @@ import useInfoOverlay from './hooks/useInfoOverlay';
 import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import OptionsCard from './components/Main/OptionsCard/OptionsCard';
-import MyPage from './components/Main/MyPage/MyPage';
-import UserPage from './components/Main/UserPage/UserPage';
+import MyPage from './components/Main/UserPage/Own/MyPage';
+import UserPage from './components/Main/UserPage/Other/UserPage';
 
 function App() {
     const { isAuth } = useAuth();
