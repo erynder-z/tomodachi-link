@@ -1,3 +1,5 @@
+import { FriendDataType } from './friendDataType';
+
 export type UserPageDataTypes = {
     _id: string;
     first_name: string;
@@ -7,4 +9,8 @@ export type UserPageDataTypes = {
         data: Buffer;
         contentType: string;
     };
+    joined: Date;
+    last_seen: Date;
+    friends: FriendDataType[];
+    posts: string[];
 };
