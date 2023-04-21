@@ -1,11 +1,11 @@
 export type FriendDataType = {
     _id: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     username: string;
     email: string;
     joined: Date;
-    last_seen: Date;
+    lastSeen: Date;
     userpic: {
         data: Buffer;
         contentType: string;

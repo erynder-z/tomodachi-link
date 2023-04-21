@@ -1,7 +1,7 @@
 export type UserDataType = {
     _id: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     username: string;
     email: string;
     friends: string[];
@@ -9,7 +9,7 @@ export type UserDataType = {
     bookmarks: string[];
     pending_friend_requests: string[];
     joined: Date;
-    last_seen: Date;
+    lastSeen: Date;
     userpic: {
         data: Buffer;
         contentType: string;

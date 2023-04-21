@@ -11,8 +11,8 @@ export default function SignupPage({ setShowSignup }: Props) {
     const { setInfo } = useContext(InfoOverlayContext);
 
     const signup = async (
-        first_name: string,
-        last_name: string,
+        firstName: string,
+        lastName: string,
         email: string,
         username: string,
         password: string,
@@ -26,8 +26,8 @@ export default function SignupPage({ setShowSignup }: Props) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    first_name,
-                    last_name,
+                    firstName,
+                    lastName,
                     username,
                     email,
                     password,
@@ -65,11 +65,11 @@ export default function SignupPage({ setShowSignup }: Props) {
         event.preventDefault();
 
         const firstNameInput = event.currentTarget.querySelector(
-            '[name="first_name"]'
+            '[name="firstName"]'
         ) as HTMLInputElement;
 
         const lastNameInput = event.currentTarget.querySelector(
-            '[name="last_name"]'
+            '[name="lastName"]'
         ) as HTMLInputElement;
 
         const emailInput = event.currentTarget.querySelector(
@@ -88,8 +88,8 @@ export default function SignupPage({ setShowSignup }: Props) {
             '[name="confirm_password"]'
         ) as HTMLInputElement;
 
-        const first_name = firstNameInput.value;
-        const last_name = lastNameInput.value;
+        const firstName = firstNameInput.value;
+        const lastName = lastNameInput.value;
         const email = emailInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
@@ -97,8 +97,8 @@ export default function SignupPage({ setShowSignup }: Props) {
 
         try {
             await signup(
-                first_name,
-                last_name,
+                firstName,
+                lastName,
                 email,
                 username,
                 password,

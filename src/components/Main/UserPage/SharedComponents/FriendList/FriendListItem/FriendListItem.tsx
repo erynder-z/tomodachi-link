@@ -8,7 +8,7 @@ type Props = {
 
 export default function FriendListItem({ friendData }: Props) {
     const navigate = useNavigate();
-    const { _id, first_name, last_name, userpic } = friendData || {};
+    const { _id, firstName, lastName, userpic } = friendData || {};
 
     const handleUserClick = () => {
         navigate(`/users/${_id}`);
@@ -26,7 +26,7 @@ export default function FriendListItem({ friendData }: Props) {
             />
 
             <div className="text-xs p-1">
-                {first_name} {last_name}
+                {firstName} {lastName}
             </div>
         </div>
     );

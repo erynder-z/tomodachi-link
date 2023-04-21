@@ -21,7 +21,7 @@ export default function NotFriendUserPage({
     const [disableButton, setDisableButton] = useState<boolean>(
         isFriendRequestPending
     );
-    const { first_name, last_name, userpic } = userPageData || {};
+    const { firstName, lastName, userpic } = userPageData || {};
     const userPicture = convertUserPic(userpic);
 
     const handleSendFriendRequest = () => {
@@ -68,12 +68,11 @@ export default function NotFriendUserPage({
                     alt="User avatar"
                 />
                 <h1 className="col-span-2 text-center font-bold h-auto">
-                    {first_name} {last_name}'s page
+                    {firstName} {lastName}'s page
                 </h1>
                 <div className="col-span-3 flex flex-col justify-center items-center gap-4">
                     <h2 className="font-bold">
-                        Become friends with {first_name} {last_name} to view
-                        more!
+                        Become friends with {firstName} {lastName} to view more!
                     </h2>
                     {getButton()}
                 </div>

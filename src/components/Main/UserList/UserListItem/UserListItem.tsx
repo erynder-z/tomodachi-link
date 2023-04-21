@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function UserListItem({ listItemData }: Props) {
-    const { _id, first_name, last_name, userpic } = listItemData || {};
+    const { _id, firstName, lastName, userpic } = listItemData || {};
 
     return (
         <Link
@@ -19,7 +19,7 @@ export default function UserListItem({ listItemData }: Props) {
                 src={`data:image/png;base64,${userpic.data}`}
                 alt="User avatar"
             />
-            {first_name} {last_name}
+            {firstName} {lastName}
         </Link>
     );
 }

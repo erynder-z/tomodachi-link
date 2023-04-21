@@ -21,14 +21,14 @@ export default function SignupForm({ handleSubmit }: Props) {
                         <input
                             required
                             autoComplete="off"
-                            id="first_name"
-                            name="first_name"
+                            id="firstName"
+                            name="firstName"
                             type="text"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="First name"
                         />
                         <label
-                            htmlFor="first_name"
+                            htmlFor="firstName"
                             className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                         >
                             First name
@@ -38,14 +38,14 @@ export default function SignupForm({ handleSubmit }: Props) {
                         <input
                             required
                             autoComplete="off"
-                            id="last_name"
-                            name="last_name"
+                            id="lastName"
+                            name="lastName"
                             type="text"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="Last name"
                         />
                         <label
-                            htmlFor="last_name"
+                            htmlFor="lastName"
                             className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                         >
                             Last name

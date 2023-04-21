@@ -20,8 +20,8 @@ export default function EditUserDataModalForm({
     const { userData, handleFetchUserData } = useUserData();
     const { setInfo } = useInfoOverlay();
     const {
-        first_name = '',
-        last_name = '',
+        firstName = '',
+        lastName = '',
         email = '',
         userpic = '',
     } = userData || {};
@@ -45,8 +45,8 @@ export default function EditUserDataModalForm({
             const formData = new FormData();
             image.selectedFile &&
                 formData.append('imagePicker', image.selectedFile);
-            formData.append('first_name', event.currentTarget.first_name.value);
-            formData.append('last_name', event.currentTarget.last_name.value);
+            formData.append('firstName', event.currentTarget.firstName.value);
+            formData.append('lastName', event.currentTarget.lastName.value);
             formData.append('email', event.currentTarget.email.value);
             formData.append('password', event.currentTarget.password.value);
 
@@ -123,15 +123,15 @@ export default function EditUserDataModalForm({
                         <input
                             required
                             autoComplete="off"
-                            id="first_name"
-                            name="first_name"
+                            id="firstName"
+                            name="firstName"
                             type="text"
-                            defaultValue={first_name}
+                            defaultValue={firstName}
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="First name"
                         />
                         <label
-                            htmlFor="first_name"
+                            htmlFor="firstName"
                             className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                         >
                             First name
@@ -141,15 +141,15 @@ export default function EditUserDataModalForm({
                         <input
                             required
                             autoComplete="off"
-                            id="last_name"
-                            name="last_name"
+                            id="lastName"
+                            name="lastName"
                             type="text"
-                            defaultValue={last_name}
+                            defaultValue={lastName}
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="Last name"
                         />
                         <label
-                            htmlFor="last_name"
+                            htmlFor="lastName"
                             className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                         >
                             Last name

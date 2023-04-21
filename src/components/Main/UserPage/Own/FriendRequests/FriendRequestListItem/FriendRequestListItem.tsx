@@ -26,7 +26,7 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
         MinimalUserTypes | Record<string, never>
     >({});
 
-    const { _id, first_name, last_name } = friendRequestData || {};
+    const { _id, firstName, lastName } = friendRequestData || {};
 
     const userPic = convertUserPic(friendRequestData?.userpic) || '';
 
@@ -102,7 +102,7 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
                     alt="User avatar"
                 />
                 <div className="break-all">
-                    {first_name} {last_name}
+                    {firstName} {lastName}
                 </div>
             </div>
             <div className="flex items-center gap-4">

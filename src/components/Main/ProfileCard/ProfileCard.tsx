@@ -4,7 +4,7 @@ import { convertUserPic } from '../../../utilities/convertUserPic';
 
 export default function ProfileCard() {
     const { userData } = useUserData();
-    const { first_name, last_name, userpic, friends } = userData || {};
+    const { firstName, lastName, userpic, friends } = userData || {};
     const numberOfFriends = friends?.length;
     const userImage = convertUserPic(userpic);
 
@@ -17,7 +17,7 @@ export default function ProfileCard() {
                     alt="User avatar"
                 />
                 <p className="font-semibold text-sm my-5 break-all">
-                    {first_name} {last_name}
+                    {firstName} {lastName}
                 </p>
                 <p className="text-sm mb-2">{numberOfFriends} Friends</p>
             </div>
