@@ -50,7 +50,7 @@ export default function UserPage({ setCurrentView }: setCurrentView) {
         };
 
         fetchUserData();
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         setCurrentView('OtherUserPage');

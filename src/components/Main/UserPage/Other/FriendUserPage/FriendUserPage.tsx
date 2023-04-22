@@ -11,32 +11,39 @@ type Props = {
 
 export default function FriendUserPage({ userPageData }: Props) {
     const {
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         username,
         userpic,
         friends,
+        mutual_friends,
         joined,
-        last_seen,
+        lastSeen,
     } = userPageData || {};
 
     const userPicture = convertUserPic(userpic);
+    const numberOfFriends = friends.length;
 
     return (
         <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
-            <div
-                className="md:grid grid-cols-3 h-full gap-4"
-                style={{ gridTemplateRows: '15% auto' }}
-            >
-                <img
-                    className="col-span-1 w-20 h-20 object-cover rounded-full mx-auto"
-                    src={`data:image/png;base64,${userPicture}`}
-                    alt="User avatar"
-                />
-                <h1 className="col-span-2 text-center font-bold h-auto">
-                    {first_name} {last_name}'s page
-                </h1>
-                <div className="col-span-1 flex flex-col h-1/2">
+            <div className="grid grid-cols-5 grid-rows-4 h-full gap-4">
+                <div className="flex col-span-5 p-4 gap-4 bg-amber-400">
+                    <img
+                        className=" w-auto h-full object-cover rounded-full"
+                        src={`data:image/png;base64,${userPicture}`}
+                        alt="User avatar"
+                    />
+                    <div className="flex flex-col">
+                        <h1 className=" text-center font-bold h-auto">
+                            {firstName} {lastName}'s page
+                        </h1>
+                        <p>
+                            {numberOfFriends} friends • {mutual_friends} mutual
+                            friends
+                        </p>
+                    </div>
+                </div>
+                <div className="col-span-2 flex flex-col h-1/2">
                     <div className="flex h-1/4 md:h-auto md:p-4">
                         <PictureList />
                     </div>
@@ -44,7 +51,7 @@ export default function FriendUserPage({ userPageData }: Props) {
                         <FriendList friendData={friends} />
                     </div>
                 </div>
-                <div className="col-span-2 flex flex-col gap-4 md:px-4 overflow-auto">
+                <div className="col-span-3 flex flex-col gap-4 md:px-4 overflow-auto">
                     <UserPosts />
                 </div>
             </div>
