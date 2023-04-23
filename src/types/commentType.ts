@@ -3,7 +3,8 @@ export type CommentType = {
     parentPost: string;
     owner: {
         id: string;
-        username: string;
+        firstName: string;
+        lastName: string;
         userpic: any;
     };
     timestamp: Date;

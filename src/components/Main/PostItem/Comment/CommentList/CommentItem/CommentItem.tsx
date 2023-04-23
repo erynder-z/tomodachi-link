@@ -9,12 +9,13 @@ type Props = {
 
 export default function CommentItem({ commentDetails }: Props) {
     const { owner, timestamp, text } = commentDetails;
-    const { username, userpic } = owner;
+    const { firstName, lastName, userpic } = owner;
 
+    const displayName = `${firstName} ${lastName}`;
     const userPic = convertUserPic(userpic);
 
     const time = timestamp
-        ? `${formatDistanceToNow(new Date(timestamp), { addSuffix: true })} ago`
+        ? `${formatDistanceToNow(new Date(timestamp), { addSuffix: true })}`
         : '';
 
     return (
@@ -26,7 +27,7 @@ export default function CommentItem({ commentDetails }: Props) {
             />
             <div className="relative flex flex-col bg-gray-200 rounded-md py-2 px-4">
                 <div className="text-xs">
-                    <span className="text-sm font-bold">{username}</span> (
+                    <span className="text-sm font-bold">{displayName}</span> (
                     {time})
                 </div>
                 <div className="text-sm">{text}</div>

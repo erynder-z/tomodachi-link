@@ -27,11 +27,9 @@ export default React.memo(function PostItem({ postID }: Props) {
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
     const [showComments, setShowComments] = useState<boolean>(false);
 
-    const username = postDetails?.owner?.username;
-    const timestamp = postDetails?.timestamp;
-    const text = postDetails?.text;
-    const comments = postDetails?.comments;
-    const reactions = postDetails?.reactions;
+    const { timestamp, text, comments, reactions } = postDetails || {};
+    const { firstName, lastName } = postDetails?.owner || {};
+    const displayName = `${firstName} ${lastName} `;
 
     const userPic = postDetails?.owner?.userpic.data.data
         ? window.btoa(
@@ -87,7 +85,7 @@ export default React.memo(function PostItem({ postID }: Props) {
                         src={`data:image/png;base64,${userPic}`}
                         alt="User avatar"
                     />
-                    <div className="font-bold">{username}</div>
+                    <div className="font-bold">{displayName}</div>
                 </div>
 
                 <div className="italic">{time}</div>
