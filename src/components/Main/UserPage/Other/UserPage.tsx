@@ -9,11 +9,15 @@ import { UserPageDataTypes } from '../../../../types/userPageDataTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';
 
-type setCurrentView = {
+type props = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
+    isPaginationTriggered: boolean;
 };
 
-export default function UserPage({ setCurrentView }: setCurrentView) {
+export default function UserPage({
+    setCurrentView,
+    isPaginationTriggered,
+}: props) {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
@@ -75,5 +79,10 @@ export default function UserPage({ setCurrentView }: setCurrentView) {
         );
     }
 
-    return <FriendUserPage userPageData={userPageData} />;
+    return (
+        <FriendUserPage
+            userPageData={userPageData}
+            isPaginationTriggered={isPaginationTriggered}
+        />
+    );
 }

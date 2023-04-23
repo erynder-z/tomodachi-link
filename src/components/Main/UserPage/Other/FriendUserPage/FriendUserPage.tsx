@@ -3,14 +3,19 @@ import { UserPageDataTypes } from '../../../../../types/userPageDataTypes';
 import { convertUserPic } from '../../../../../utilities/convertUserPic';
 import PictureList from '../../SharedComponents/PictureList/PictureList';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
-import UserPosts from '../UserPosts/UserPosts';
 import { formatDistanceToNow } from 'date-fns';
+import PostList from '../../SharedComponents/PostList/PostList';
+import OtherPostList from './OtherPostList/OtherPostList';
 
 type Props = {
     userPageData: UserPageDataTypes | Record<string, never>;
+    isPaginationTriggered: boolean;
 };
 
-export default function FriendUserPage({ userPageData }: Props) {
+export default function FriendUserPage({
+    userPageData,
+    isPaginationTriggered,
+}: Props) {
     const { firstName, lastName, userpic, friends, mutual_friends, lastSeen } =
         userPageData || {};
 
@@ -59,7 +64,9 @@ export default function FriendUserPage({ userPageData }: Props) {
                         </div>
                     </div>
                     <div className="col-span-3 flex flex-col gap-4 md:px-4 overflow-auto">
-                        <UserPosts />
+                        <OtherPostList
+                            isPaginationTriggered={isPaginationTriggered}
+                        />
                     </div>
                 </div>
             </div>

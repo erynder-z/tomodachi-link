@@ -135,6 +135,9 @@ function App() {
                                     element={
                                         <UserPage
                                             setCurrentView={setCurrentView}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
                                         />
                                     }
                                 />
