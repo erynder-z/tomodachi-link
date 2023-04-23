@@ -6,7 +6,7 @@ import useFriendData from '../../../../hooks/useFriendData';
 import FriendList from '../SharedComponents/FriendList/FriendList';
 import FriendRequests from './FriendRequests/FriendRequests';
 import PictureList from '../SharedComponents/PictureList/PictureList';
-import MyPostList from './MyPostList/MyPostList';
+import PostList from '../SharedComponents/PostList/PostList';
 
 type props = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -63,7 +63,7 @@ export default function MyPage({
                 </div>
                 <div className="col-span-3 flex flex-col gap-4 md:px-4">
                     <NewPostInput onPostSuccess={handleRefreshPosts} />
-                    <MyPostList
+                    <PostList
                         key={myPostsKey}
                         isPaginationTriggered={isPaginationTriggered}
                     />
