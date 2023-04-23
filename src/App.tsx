@@ -26,10 +26,37 @@ function App() {
     );
     const [showOverlay, setShowOverlay] = useState(false);
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
+    const [lastTouchY, setLastTouchY] = useState<number | null>(null);
+    const [isPaginationTriggered, setIsPaginationTriggered] =
+        useState<boolean>(false);
 
     const isOverlayShown = () => {
         return !!info?.message;
     };
+
+    // handle infinite scrolling on desktop devices
+    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+        const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
+        if (scrollTop + clientHeight >= scrollHeight - 1) {
+            setIsPaginationTriggered(true);
+        }
+    };
+
+    // handle infinite scrolling on touch devices
+    const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+        const touchY = e.touches[0].clientY;
+        const target = e.currentTarget;
+
+        if (lastTouchY && touchY > lastTouchY && target.scrollTop === 0) {
+            setIsPaginationTriggered(true);
+        }
+
+        setLastTouchY(touchY);
+    };
+
+    useEffect(() => {
+        setIsPaginationTriggered(false);
+    }, [isPaginationTriggered]);
 
     useEffect(() => {
         setShowOverlay(isOverlayShown());
@@ -59,7 +86,11 @@ function App() {
     return (
         <div className="flex flex-col h-screen">
             <div className="flex h-[calc(100%_-_3rem)]">
-                <main className="flex w-full h-full gap-4 md:p-4 bg-background">
+                <main
+                    className="flex w-full h-full gap-4 md:p-4 bg-background overflow-auto"
+                    onScroll={handleScroll}
+                    onTouchMove={handleTouchMove}
+                >
                     <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
                         <ProfileCard />
                         <OptionsCard />
@@ -85,6 +116,9 @@ function App() {
                                     element={
                                         <MyPage
                                             setCurrentView={setCurrentView}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
                                         />
                                     }
                                 />
