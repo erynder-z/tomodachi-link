@@ -3,7 +3,7 @@ import PostItem from '../../../PostItem/PostItem';
 import { PostType } from '../../../../../types/postType';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
-import { fetchUserPosts } from '../../../../../utilities/fetchUserPosts';
+import { fetchOwnPosts } from '../../../../../utilities/fetchOwnPosts';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 
 type props = {
@@ -19,7 +19,7 @@ export default function MyPostList({ isPaginationTriggered }: props) {
 
     const handleFetchUserPosts = async () => {
         if (authUser && token) {
-            const response = await fetchUserPosts(token, setInfo, skip);
+            const response = await fetchOwnPosts(token, setInfo, skip);
             setPosts([...posts, ...response]);
             setLoading(false);
         }

@@ -6,7 +6,6 @@ import useFriendData from '../../../../hooks/useFriendData';
 import FriendList from '../SharedComponents/FriendList/FriendList';
 import FriendRequests from './FriendRequests/FriendRequests';
 import PictureList from '../SharedComponents/PictureList/PictureList';
-import PostList from '../SharedComponents/PostList/PostList';
 import MyPostList from './MyPostList/MyPostList';
 
 type props = {

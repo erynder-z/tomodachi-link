@@ -2,7 +2,7 @@ import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
-export const fetchUserPosts = async (
+export const fetchOwnPosts = async (
     token: string,
     setInfo: (info: InfoType | null) => void,
     skip: number
