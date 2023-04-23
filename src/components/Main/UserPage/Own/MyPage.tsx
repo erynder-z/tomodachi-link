@@ -19,7 +19,7 @@ export default function MyPage({
 }: props) {
     const { userData } = useUserData();
     const { friendData } = useFriendData();
-    const { firstName, lastName, pending_friend_requests } = userData || {};
+    const { pending_friend_requests } = userData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
 
     const numberOfPendingFriendRequests = pending_friend_requests?.length;
@@ -35,13 +35,17 @@ export default function MyPage({
 
     return (
         <div className="flex flex-col lg:w-11/12 p-4 bg-card">
-            <div
-                className="md:grid grid-cols-5 h-full gap-4"
-                style={{ gridTemplateRows: '5% auto' }}
-            >
-                <h1 className="col-span-4 text-center font-bold h-auto">
-                    {firstName} {lastName}'s page
-                </h1>
+            <div className="md:grid grid-cols-5 h-full gap-4">
+                <div className="h-96 col-span-5 grid grid-rows-4">
+                    <div className="row-span-3 flex h-full p-4 gap-4 bg-blue-300"></div>
+                    <div className="relative row-span-1 flex gap-4 px-4 bg-slate-300">
+                        <div className="flex flex-col justify-center w-full">
+                            <h1 className="text-center font-bold h-auto">
+                                My Page
+                            </h1>
+                        </div>
+                    </div>
+                </div>
                 <div className="col-span-2 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
