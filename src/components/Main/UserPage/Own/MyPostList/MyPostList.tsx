@@ -10,7 +10,7 @@ type props = {
     isPaginationTriggered: boolean;
 };
 
-export default function PostList({ isPaginationTriggered }: props) {
+export default function MyPostList({ isPaginationTriggered }: props) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoOverlay();
     const [posts, setPosts] = useState<PostType[]>([]);
@@ -45,7 +45,7 @@ export default function PostList({ isPaginationTriggered }: props) {
                 postItemsList
             ) : (
                 <span className="text-sm font-medium text-center">
-                    Posts will appear here!
+                    Your posts will appear here
                 </span>
             )}
             {loading && (
