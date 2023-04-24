@@ -1,11 +1,11 @@
-import { OwnUserDataType } from './currentUserDataType';
+import { CurrentUserDataType } from './currentUserDataType';
 
 export type CurrentUserDataContextProviderProps = {
     children: React.ReactElement;
 };
 
 export type CurrentUserDataContextProps = {
-    currentUserData: OwnUserDataType | null;
-    setCurrentUserData: (user: OwnUserDataType | null) => void;
+    currentUserData: CurrentUserDataType | null;
+    setCurrentUserData: (user: CurrentUserDataType | null) => void;
     handleFetchUserData: () => void;
 };
