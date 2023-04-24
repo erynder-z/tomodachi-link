@@ -23,7 +23,7 @@ export default function OtherPostList({
     const [loading, setLoading] = useState<boolean>(true);
 
     const handleFetchUserPosts = async () => {
-        if (authUser && token) {
+        if (authUser && token && id) {
             const response = await fetchOtherPosts(id, token, setInfo, skip);
             setPosts([...posts, ...response]);
             setLoading(false);
