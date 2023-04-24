@@ -1,10 +1,10 @@
 import React from 'react';
 
-type Props = {
+type SignupFormProps = {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
-export default function SignupForm({ handleSubmit }: Props) {
+export default function SignupForm({ handleSubmit }: SignupFormProps) {
     return (
         <div className="max-w-md mx-auto">
             <div>

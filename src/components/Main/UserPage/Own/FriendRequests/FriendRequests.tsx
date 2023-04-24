@@ -1,11 +1,13 @@
 import React from 'react';
 import FriendRequestListItem from './FriendRequestListItem/FriendRequestListItem';
 
-type Props = {
+type FriendRequestsProps = {
     pendingFriendRequests: string[];
 };
 
-export default function FriendRequests({ pendingFriendRequests }: Props) {
+export default function FriendRequests({
+    pendingFriendRequests,
+}: FriendRequestsProps) {
     const friendRequestItemsList = pendingFriendRequests?.map(
         (requestingUserId) => (
             <FriendRequestListItem

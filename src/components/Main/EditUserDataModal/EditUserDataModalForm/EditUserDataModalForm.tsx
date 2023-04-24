@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../hooks/useInfoOverlay';
-import useUserData from '../../../../hooks/useUserData';
+import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import { convertUserPic } from '../../../../utilities/convertUserPic';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
 
-type Props = {
+type EditUserDataModalFormProps = {
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -15,16 +15,16 @@ type Props = {
 export default function EditUserDataModalForm({
     setShowOverlay,
     setShowOptions,
-}: Props) {
+}: EditUserDataModalFormProps) {
     const { token } = useAuth();
-    const { userData, handleFetchUserData } = useUserData();
+    const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { setInfo } = useInfoOverlay();
     const {
         firstName = '',
         lastName = '',
         email = '',
         userpic = '',
-    } = userData || {};
+    } = currentUserData || {};
 
     const [image, setImage] = useState<{
         selectedFile: File | null;

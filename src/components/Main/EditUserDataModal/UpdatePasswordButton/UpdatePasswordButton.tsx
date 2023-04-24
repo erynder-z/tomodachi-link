@@ -1,11 +1,13 @@
 import React from 'react';
 import { MdKey } from 'react-icons/md';
 
-type Props = {
+type UpdatePasswordButtonProps = {
     setCurrentMenu: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function UpdatePasswordButton({ setCurrentMenu }: Props) {
+export default function UpdatePasswordButton({
+    setCurrentMenu,
+}: UpdatePasswordButtonProps) {
     const handleUpdatePasswordButtonClick = () => {
         setCurrentMenu('changePassword');
     };

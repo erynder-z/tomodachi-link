@@ -4,7 +4,7 @@ import EditUserDataModalForm from './EditUserDataModalForm/EditUserDataModalForm
 import UpdatePasswordButton from './UpdatePasswordButton/UpdatePasswordButton';
 import UpdatePasswordForm from './UpdatePasswordForm/UpdatePasswordForm';
 
-type Props = {
+type EditUserDataModalProps = {
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -12,7 +12,7 @@ type Props = {
 export default function EditUserDataModal({
     setShowOverlay,
     setShowOptions,
-}: Props): JSX.Element {
+}: EditUserDataModalProps): JSX.Element {
     const [currentMenu, setCurrentMenu] = useState<string>('Profile');
 
     const handleCloseButtonClick = () => {

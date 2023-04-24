@@ -1,7 +1,7 @@
 import React from 'react';
 import { TbLogout } from 'react-icons/tb';
 import useAuth from '../../../../hooks/useAuth';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function LogoutButton() {
     const { logout } = useAuth();

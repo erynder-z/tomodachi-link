@@ -1,10 +1,10 @@
 import React from 'react';
-import useUserData from '../../../../hooks/useUserData';
+import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { convertUserPic } from '../../../../utilities/convertUserPic';
 
 export default function NavbarUserOptionsButton() {
-    const { userData } = useUserData();
-    const { userpic, pending_friend_requests } = userData || {};
+    const { currentUserData } = useCurrentUserData();
+    const { userpic, pending_friend_requests } = currentUserData || {};
     const userImage = convertUserPic(userpic);
 
     const pendingFriendRequests = pending_friend_requests?.length;

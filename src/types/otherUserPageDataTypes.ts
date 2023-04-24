@@ -1,6 +1,6 @@
 import { FriendDataType } from './friendDataType';
 
-export type UserPageDataTypes = {
+export type OtherUserPageDataTypes = {
     _id: string;
     firstName: string;
     lastName: string;

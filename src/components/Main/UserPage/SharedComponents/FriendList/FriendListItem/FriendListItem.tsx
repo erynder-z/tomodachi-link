@@ -1,23 +1,23 @@
 import React from 'react';
 import { FriendDataType } from '../../../../../../types/friendDataType';
 import { useNavigate } from 'react-router-dom';
-import useUserData from '../../../../../../hooks/useUserData';
+import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 
-type Props = {
+type FriendListItemProps = {
     friendData: FriendDataType;
 };
 
-export default function FriendListItem({ friendData }: Props) {
+export default function FriendListItem({ friendData }: FriendListItemProps) {
     const navigate = useNavigate();
-    const { userData } = useUserData();
+    const { currentUserData } = useCurrentUserData();
     const { _id, firstName, lastName, userpic } = friendData ?? {};
 
     const handleUserClick = () => {
-        if (!userData) {
+        if (!currentUserData) {
             return;
         }
 
-        const path = userData?._id === _id ? '/mypage' : `/users/${_id}`;
+        const path = currentUserData?._id === _id ? '/mypage' : `/users/${_id}`;
         navigate(path);
     };
 

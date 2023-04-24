@@ -1,17 +1,17 @@
 import { createContext, useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import useInfoOverlay from '../hooks/useInfoOverlay';
-import { UserDataContextProps } from '../types/userDataContextTypes';
-import { UserDataType } from '../types/userDataType';
+import { CurrentUserDataContextProps } from '../types/currentUserDataContextTypes';
+import { CurrentUserDataType } from '../types/currentUserDataType';
 import { fetchUserData } from '../utilities/fetchUserData';
 
-const UserDataContext = createContext<UserDataContextProps>({
-    userData: null,
-    setUserData: () => null,
+const CurrentUserDataContext = createContext<CurrentUserDataContextProps>({
+    currentUserData: null,
+    setCurrentUserData: () => null,
     handleFetchUserData: () => null,
 });
 
-export const UserDataContextProvider = ({
+export const CurrentUserDataContextProvider = ({
     children,
 }: {
     children: React.ReactNode;
@@ -23,19 +23,20 @@ export const UserDataContextProvider = ({
     const { setInfo } = useInfoOverlay();
 
     // Declare userData state with initial value of null
-    const [userData, setUserData] = useState<UserDataType | null>(null);
+    const [currentUserData, setCurrentUserData] =
+        useState<CurrentUserDataType | null>(null);
 
     // Define trigger function
     const handleFetchUserData = async () => {
         if (authUser && token) {
             const response = await fetchUserData(token, setInfo);
-            setUserData(response);
+            setCurrentUserData(response);
         }
     };
 
     // Clear userData state if authentication status changes to false
     useEffect(() => {
-        setUserData(null);
+        setCurrentUserData(null);
     }, [!isAuth]);
 
     // Fetch user data if the token and authenticated user are both present
@@ -47,12 +48,12 @@ export const UserDataContextProvider = ({
     }, [isAuth]);
 
     return (
-        <UserDataContext.Provider
-            value={{ userData, setUserData, handleFetchUserData }}
+        <CurrentUserDataContext.Provider
+            value={{ currentUserData, setCurrentUserData, handleFetchUserData }}
         >
             {children}
-        </UserDataContext.Provider>
+        </CurrentUserDataContext.Provider>
     );
 };
 
-export default UserDataContext;
+export default CurrentUserDataContext;

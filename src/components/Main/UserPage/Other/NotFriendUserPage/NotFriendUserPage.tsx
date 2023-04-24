@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { UserPageDataTypes } from '../../../../../types/userPageDataTypes';
-import useUserData from '../../../../../hooks/useUserData';
+import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
+import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { sendFriendRequest } from '../../../../../utilities/sendFriendRequest';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
 import { convertUserPic } from '../../../../../utilities/convertUserPic';
 
-type Props = {
-    userPageData: UserPageDataTypes | Record<string, never>;
+type NotFriendUserPageProps = {
+    userPageData: OtherUserPageDataTypes | Record<string, never>;
     isFriendRequestPending: boolean;
 };
 
 export default function NotFriendUserPage({
     userPageData,
     isFriendRequestPending,
-}: Props) {
+}: NotFriendUserPageProps) {
     const { token } = useAuth();
-    const { userData } = useUserData();
+    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoOverlay();
     const [disableButton, setDisableButton] = useState<boolean>(
         isFriendRequestPending
@@ -25,8 +25,8 @@ export default function NotFriendUserPage({
     const userPicture = convertUserPic(userpic);
 
     const handleSendFriendRequest = () => {
-        if (userData && token) {
-            const currentUserId = userData?._id;
+        if (currentUserData && token) {
+            const currentUserId = currentUserData?._id;
             const requestUserId = userPageData._id;
 
             sendFriendRequest(token, currentUserId, requestUserId, setInfo);

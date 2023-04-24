@@ -3,12 +3,15 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
-type Props = {
+type CommentInputProps = {
     parentPostID: string;
     getPostDetails: (postID: string) => Promise<void>;
 };
 
-export default function CommentInput({ parentPostID, getPostDetails }: Props) {
+export default function CommentInput({
+    parentPostID,
+    getPostDetails,
+}: CommentInputProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoOverlay();
     const [commentText, setCommentText] = useState<string>('');

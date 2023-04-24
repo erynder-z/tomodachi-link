@@ -1,5 +1,5 @@
 import { User } from '../types/authContextTypes';
-import { UserDataType } from '../types/userDataType';
+import { UserDataType } from '../types/currentUserDataType';
 
 type Props = {
     setToken: (token: string | null) => void;

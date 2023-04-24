@@ -1,10 +1,10 @@
 import React from 'react';
 
-type Props = {
+type LoginFormProps = {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
-export default function LoginForm({ handleSubmit }: Props) {
+export default function LoginForm({ handleSubmit }: LoginFormProps) {
     return (
         <div className="max-w-md mx-auto">
             <div>

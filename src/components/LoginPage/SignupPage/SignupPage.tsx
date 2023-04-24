@@ -3,11 +3,11 @@ import InfoOverlayContext from '../../../contexts/InfoOverlayContext';
 import { FaExclamationTriangle, FaTimes, FaRegSmile } from 'react-icons/fa';
 import SignupForm from './SignupForm';
 
-type Props = {
+type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SignupPage({ setShowSignup }: Props) {
+export default function SignupPage({ setShowSignup }: SignupPageProps) {
     const { setInfo } = useContext(InfoOverlayContext);
 
     const signup = async (

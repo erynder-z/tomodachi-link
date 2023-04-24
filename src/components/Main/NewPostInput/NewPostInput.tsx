@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import useUserData from '../../../hooks/useUserData';
+import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useAuth from '../../../hooks/useAuth';
 import useInfoOverlay from '../../../hooks/useInfoOverlay';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
-type Props = {
+type NewPostInputProps = {
     onPostSuccess: () => void;
 };
 
-export default function NewPostInput({ onPostSuccess }: Props) {
+export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoOverlay();
-    const { userData } = useUserData();
-    const { username } = userData || {};
+    const { currentUserData } = useCurrentUserData();
+    const { username } = currentUserData || {};
 
     const [newPostText, setNewPostText] = useState<string>('');
 

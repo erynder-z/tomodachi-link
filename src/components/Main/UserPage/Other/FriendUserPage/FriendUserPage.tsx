@@ -1,21 +1,20 @@
 import React from 'react';
-import { UserPageDataTypes } from '../../../../../types/userPageDataTypes';
+import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertUserPic } from '../../../../../utilities/convertUserPic';
 import PictureList from '../../SharedComponents/PictureList/PictureList';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
-import PostList from '../../SharedComponents/PostList/PostList';
 import OtherPostList from './OtherPostList/OtherPostList';
 
-type Props = {
-    userPageData: UserPageDataTypes | Record<string, never>;
+type FriendUserPageProps = {
+    userPageData: OtherUserPageDataTypes | Record<string, never>;
     isPaginationTriggered: boolean;
 };
 
 export default function FriendUserPage({
     userPageData,
     isPaginationTriggered,
-}: Props) {
+}: FriendUserPageProps) {
     const { firstName, lastName, userpic, friends, mutual_friends, lastSeen } =
         userPageData || {};
 
@@ -57,14 +56,18 @@ export default function FriendUserPage({
                 <div className="col-span-5 flex flex-col md:grid grid-cols-5">
                     <div className="col-span-2 flex flex-col h-1/2 ov">
                         <div className="flex h-1/4 md:h-auto md:p-4">
-                            <PictureList />
+                            <PictureList key={userPageData._id} />
                         </div>
                         <div className="flex h-1/4 md:h-auto md:p-4">
-                            <FriendList friendData={friends} />
+                            <FriendList
+                                key={userPageData._id}
+                                friendData={friends}
+                            />
                         </div>
                     </div>
                     <div className="col-span-3 flex flex-col gap-4 md:px-4 overflow-auto">
                         <OtherPostList
+                            key={userPageData._id}
                             isPaginationTriggered={isPaginationTriggered}
                         />
                     </div>

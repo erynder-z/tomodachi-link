@@ -4,21 +4,23 @@ import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
 import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
 import useInfoOverlay from '../../../../../../hooks/useInfoOverlay';
 import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
-import useUserData from '../../../../../../hooks/useUserData';
+import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
 import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';
 import { useNavigate } from 'react-router-dom';
 import { convertUserPic } from '../../../../../../utilities/convertUserPic';
 import useFriendData from '../../../../../../hooks/useFriendData';
 
-type Props = {
+type FriendRequestListItemProps = {
     friendRequestUserId: string;
 };
 
-export default function FriendRequestListItem({ friendRequestUserId }: Props) {
+export default function FriendRequestListItem({
+    friendRequestUserId,
+}: FriendRequestListItemProps) {
     const navigate = useNavigate();
     const { token } = useAuth();
-    const { userData, handleFetchUserData } = useUserData();
+    const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoOverlay();
     const [loading, setLoading] = useState<boolean>(true);
@@ -31,8 +33,8 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
     const userPic = convertUserPic(friendRequestData?.userpic) || '';
 
     const handleAcceptFriendRequest = () => {
-        if (userData && token) {
-            const currentUserId = userData?._id;
+        if (currentUserData && token) {
+            const currentUserId = currentUserData?._id;
             const requestUserId = friendRequestData._id;
 
             acceptFriendRequest(
@@ -47,8 +49,8 @@ export default function FriendRequestListItem({ friendRequestUserId }: Props) {
     };
 
     const handleDeclineFriendRequest = () => {
-        if (userData && token) {
-            const currentUserId = userData?._id;
+        if (currentUserData && token) {
+            const currentUserId = currentUserData?._id;
             const requestUserId = friendRequestData._id;
 
             declineFriendRequest(

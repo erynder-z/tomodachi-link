@@ -5,11 +5,11 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoOverlay from '../../../../hooks/useInfoOverlay';
 import { CurrentViewType } from '../../../../types/currentViewType';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
-import { UserPageDataTypes } from '../../../../types/userPageDataTypes';
+import { OtherUserPageDataTypes } from '../../../../types/otherUserPageDataTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';
 
-type props = {
+type UserPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
@@ -17,14 +17,14 @@ type props = {
 export default function UserPage({
     setCurrentView,
     isPaginationTriggered,
-}: props) {
+}: UserPageProps) {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
     const { setInfo } = useInfoOverlay();
 
     const [userPageData, setUserPageData] = useState<
-        UserPageDataTypes | Record<string, never>
+        OtherUserPageDataTypes | Record<string, never>
     >({});
     const [isFriend, setIsFriend] = useState<boolean>(false);
     const [isFriendRequestPending, setIsFriendRequestPending] =

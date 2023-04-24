@@ -1,5 +1,6 @@
 import React from 'react';
+import UserList from '../UserList/UserList';
 
 export default function Sidebar() {
-    return <div>Sidebar</div>;
+    return <UserList />;
 }

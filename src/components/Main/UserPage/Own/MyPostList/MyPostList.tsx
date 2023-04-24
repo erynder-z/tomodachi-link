@@ -6,11 +6,11 @@ import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
 import { fetchOwnPosts } from '../../../../../utilities/fetchOwnPosts';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 
-type props = {
+type MyPostListProps = {
     isPaginationTriggered: boolean;
 };
 
-export default function MyPostList({ isPaginationTriggered }: props) {
+export default function MyPostList({ isPaginationTriggered }: MyPostListProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoOverlay();
     const [posts, setPosts] = useState<PostType[]>([]);

@@ -1,10 +1,10 @@
 import React from 'react';
-import useUserData from '../../../hooks/useUserData';
+import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { convertUserPic } from '../../../utilities/convertUserPic';
 
 export default function ProfileCard() {
-    const { userData } = useUserData();
-    const { firstName, lastName, userpic, friends } = userData || {};
+    const { currentUserData } = useCurrentUserData();
+    const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
     const userImage = convertUserPic(userpic);
 

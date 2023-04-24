@@ -3,11 +3,11 @@ import { CommentType } from '../../../../../../types/commentType';
 import { formatDistanceToNow } from 'date-fns';
 import { convertUserPic } from '../../../../../../utilities/convertUserPic';
 
-type Props = {
+type CommentItemProps = {
     commentDetails: CommentType;
 };
 
-export default function CommentItem({ commentDetails }: Props) {
+export default function CommentItem({ commentDetails }: CommentItemProps) {
     const { owner, timestamp, text } = commentDetails;
     const { firstName, lastName, userpic } = owner;
 

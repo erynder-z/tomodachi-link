@@ -1,4 +1,4 @@
-export type UserDataType = {
+export type CurrentUserDataType = {
     _id: string;
     firstName: string;
     lastName: string;

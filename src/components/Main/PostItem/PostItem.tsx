@@ -16,11 +16,11 @@ import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import CommentInput from './Comment/CommentInput/CommentInput';
 import CommentList from './Comment/CommentList/CommentList';
 
-type Props = {
+type PostItemProps = {
     postID: string;
 };
 
-export default React.memo(function PostItem({ postID }: Props) {
+export default React.memo(function PostItem({ postID }: PostItemProps) {
     const { setInfo } = useInfoOverlay();
     const { token } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);

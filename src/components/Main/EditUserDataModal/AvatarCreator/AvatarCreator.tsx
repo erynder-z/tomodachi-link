@@ -3,7 +3,7 @@ import AvatarEditor from 'react-avatar-editor';
 import { FaTimes } from 'react-icons/fa';
 import resizeFile from '../../../../utilities/ImageResizer';
 
-type Props = {
+type AvatarCreatorProps = {
     image: File;
     setImage: React.Dispatch<
         React.SetStateAction<{
@@ -14,7 +14,11 @@ type Props = {
     handleConfirmImage: () => void;
 };
 
-function AvatarCreator({ image, setImage, handleConfirmImage }: Props) {
+function AvatarCreator({
+    image,
+    setImage,
+    handleConfirmImage,
+}: AvatarCreatorProps) {
     const editor = useRef<AvatarEditor | null>(null);
     const [scale, setScale] = useState(1);
 

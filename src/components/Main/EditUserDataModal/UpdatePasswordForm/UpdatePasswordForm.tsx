@@ -4,7 +4,7 @@ import useInfoOverlay from '../../../../hooks/useInfoOverlay';
 import { usePasswordComparison } from '../../../../hooks/usePasswordComparison';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
-type Props = {
+type UpdatePasswordFormProps = {
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -12,7 +12,7 @@ type Props = {
 export default function UpdatePasswordForm({
     setShowOverlay,
     setShowOptions,
-}: Props) {
+}: UpdatePasswordFormProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoOverlay();
 

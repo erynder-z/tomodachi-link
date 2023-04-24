@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CurrentViewType } from '../../../../types/currentViewType';
-import useUserData from '../../../../hooks/useUserData';
+import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import NewPostInput from '../../NewPostInput/NewPostInput';
 import useFriendData from '../../../../hooks/useFriendData';
 import FriendList from '../SharedComponents/FriendList/FriendList';
@@ -8,7 +8,7 @@ import FriendRequests from './FriendRequests/FriendRequests';
 import PictureList from '../SharedComponents/PictureList/PictureList';
 import MyPostList from './MyPostList/MyPostList';
 
-type props = {
+type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
@@ -16,10 +16,10 @@ type props = {
 export default function MyPage({
     setCurrentView,
     isPaginationTriggered,
-}: props) {
-    const { userData } = useUserData();
+}: MyPageProps) {
+    const { currentUserData } = useCurrentUserData();
     const { friendData } = useFriendData();
-    const { pending_friend_requests } = userData || {};
+    const { pending_friend_requests } = currentUserData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
 
     const numberOfPendingFriendRequests = pending_friend_requests?.length;

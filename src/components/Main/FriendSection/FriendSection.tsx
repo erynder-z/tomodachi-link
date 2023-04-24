@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
 
-type setCurrentView = {
+type FriendSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
 };
 
-export default function FriendSection({ setCurrentView }: setCurrentView) {
+export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     useEffect(() => {
         setCurrentView('Friends');
         localStorage.setItem('currentView', 'Friends');

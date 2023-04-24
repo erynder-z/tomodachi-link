@@ -7,11 +7,13 @@ import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
 import { fetchOtherPosts } from '../../../../../../utilities/fetchOtherPosts';
 import { useParams } from 'react-router-dom';
 
-type props = {
+type OtherPostListProps = {
     isPaginationTriggered: boolean;
 };
 
-export default function OtherPostList({ isPaginationTriggered }: props) {
+export default function OtherPostList({
+    isPaginationTriggered,
+}: OtherPostListProps) {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token, authUser } = useAuth();
