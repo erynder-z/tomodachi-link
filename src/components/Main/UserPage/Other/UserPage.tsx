@@ -22,7 +22,6 @@ export default function UserPage({
     const id: string | undefined = params.id;
     const { token } = useAuth();
     const { setInfo } = useInfoOverlay();
-
     const [userPageData, setUserPageData] = useState<
         OtherUserPageDataTypes | Record<string, never>
     >({});
@@ -37,22 +36,22 @@ export default function UserPage({
         }
     }, [id]);
 
+    const fetchUserData = async () => {
+        if (token) {
+            const response = await fetchOtherUserData(
+                id,
+                token,
+
+                setInfo
+            );
+            setUserPageData(response?.pageData);
+            setIsFriend(response?.isFriend);
+            setIsFriendRequestPending(response?.isFriendRequestPending);
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchUserData = async () => {
-            if (token) {
-                const response = await fetchOtherUserData(
-                    id,
-                    token,
-
-                    setInfo
-                );
-                setUserPageData(response?.pageData);
-                setIsFriend(response?.isFriend);
-                setIsFriendRequestPending(response?.isFriendRequestPending);
-                setLoading(false);
-            }
-        };
-
         fetchUserData();
     }, [id]);
 

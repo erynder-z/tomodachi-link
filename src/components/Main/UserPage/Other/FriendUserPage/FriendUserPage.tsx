@@ -5,6 +5,7 @@ import PictureList from '../../SharedComponents/PictureList/PictureList';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
 import OtherPostList from './OtherPostList/OtherPostList';
+import UnfriendButton from './UnfriendButton/UnfriendButton';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -15,8 +16,15 @@ export default function FriendUserPage({
     userPageData,
     isPaginationTriggered,
 }: FriendUserPageProps) {
-    const { firstName, lastName, userpic, friends, mutual_friends, lastSeen } =
-        userPageData || {};
+    const {
+        _id,
+        firstName,
+        lastName,
+        userpic,
+        friends,
+        mutual_friends,
+        lastSeen,
+    } = userPageData || {};
 
     const userPicture = convertUserPic(userpic);
     const numberOfFriends = friends.length;
@@ -47,9 +55,11 @@ export default function FriendUserPage({
                                 {mutual_friends > 1 && 's'}
                             </p>
                         </div>
-
-                        <div className="ml-auto text-xs">
-                            last seen: {lastSeenFormatted}
+                        <div className="flex flex-col justify-between ml-auto ">
+                            <div className="text-xs">
+                                last seen: {lastSeenFormatted}
+                            </div>
+                            <UnfriendButton unfriendUserId={_id} />
                         </div>
                     </div>
                 </div>

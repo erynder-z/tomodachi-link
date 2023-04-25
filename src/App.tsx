@@ -15,9 +15,11 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import OptionsCard from './components/Main/OptionsCard/OptionsCard';
 import MyPage from './components/Main/UserPage/Own/MyPage';
 import UserPage from './components/Main/UserPage/Other/UserPage';
+import useCurrentUserData from './hooks/useCurrentUserData';
 
 function App() {
     const { isAuth } = useAuth();
+    const { currentUserData } = useCurrentUserData();
     const { info } = useInfoOverlay();
 
     const [currentView, setCurrentView] = useState<CurrentViewType>(
@@ -134,6 +136,9 @@ function App() {
                                     path="/users/:id"
                                     element={
                                         <UserPage
+                                            key={
+                                                currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
+                                            }
                                             setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
