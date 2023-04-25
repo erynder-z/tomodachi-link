@@ -4,10 +4,10 @@ import { convertUserPic } from '../../../../utilities/convertUserPic';
 
 export default function NavbarUserOptionsButton() {
     const { currentUserData } = useCurrentUserData();
-    const { userpic, pending_friend_requests } = currentUserData || {};
+    const { userpic, pendingFriendRequests } = currentUserData || {};
     const userImage = convertUserPic(userpic);
 
-    const pendingFriendRequests = pending_friend_requests?.length;
+    const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
     return (
         <div className="relative">
@@ -16,7 +16,7 @@ export default function NavbarUserOptionsButton() {
                 src={`data:image/png;base64,${userImage}`}
                 alt="User avatar"
             />
-            {pendingFriendRequests ? (
+            {numberOfPendingFriendRequests ? (
                 <div className="absolute top-5 left-5 flex items-center justify-center h-4 w-4 rounded-full bg-red-500 text-white text-xs pointer-events-none"></div>
             ) : null}
         </div>
