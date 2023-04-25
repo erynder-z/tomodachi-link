@@ -29,9 +29,9 @@ export default function UpdatePasswordForm({
             const formData = new FormData(form);
 
             const body = {
-                current_password: formData.get('current_password'),
-                new_password: formData.get('new_password'),
-                confirm_new_password: formData.get('confirm_new_password'),
+                currentPassword: formData.get('currentPassword'),
+                newPassword: formData.get('newPassword'),
+                confirmNewPassword: formData.get('confirmNewPassword'),
             };
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -88,8 +88,8 @@ export default function UpdatePasswordForm({
                         <input
                             required
                             autoComplete="off"
-                            id="current_password"
-                            name="current_password"
+                            id="currentPassword"
+                            name="currentPassword"
                             type="password"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="Current password"
@@ -105,8 +105,8 @@ export default function UpdatePasswordForm({
                         <input
                             required
                             autoComplete="off"
-                            id="new_password"
-                            name="new_password"
+                            id="newPassword"
+                            name="newPassword"
                             type="password"
                             className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                             placeholder="New password"
@@ -123,8 +123,8 @@ export default function UpdatePasswordForm({
                         <input
                             required
                             autoComplete="off"
-                            id="confirm_new_password"
-                            name="confirm_new_password"
+                            id="confirmNewPassword"
+                            name="confirmNewPassword"
                             type="password"
                             className={`peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 ${
                                 isMatchingPassword
