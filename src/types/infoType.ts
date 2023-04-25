@@ -1,1 +1,5 @@
-export type InfoType = { message: string; icon?: JSX.Element };
+export type InfoType = {
+    typeOfInfo: 'good' | 'bad' | 'neutral';
+    message: string;
+    icon?: JSX.Element;
+};

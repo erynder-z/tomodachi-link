@@ -1,16 +1,17 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import InfoOverlayContext from '../../contexts/InfoOverlayContext';
 import LoginForm from './LoginForm';
 import VerifyingInfoBox from './VerifyingInfoBox';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import SignupPage from './SignupPage/SignupPage';
+import { InfoType } from '../../types/infoType';
+import InfoCard from '../InfoCard/InfoCard';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
-    const { setInfo } = useContext(InfoOverlayContext);
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
+    const [info, setInfo] = useState<InfoType | null>(null);
 
     const login = async (username: string, password: string) => {
         setIsVerifying(true);
@@ -29,6 +30,7 @@ export default function LoginPage() {
                 const errorMessage = data.error.message;
 
                 setInfo({
+                    typeOfInfo: 'bad',
                     message: errorMessage,
                     icon: <FaExclamationTriangle />,
                 });
@@ -66,6 +68,7 @@ export default function LoginPage() {
             await login(username, password);
         } catch (error) {
             setInfo({
+                typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: <FaExclamationTriangle />,
             });
@@ -77,25 +80,28 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="h-screen  bg-card">
-            <div className="flex justify-center items-center w-full h-full">
-                <div className="h-1/2 w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
-                    {isVerifying ? (
-                        <VerifyingInfoBox />
-                    ) : (
-                        <LoginForm handleSubmit={handleSubmit} />
-                    )}
-                    <div className="flex w-full">
-                        <button
-                            onClick={handleRegisterClick}
-                            className="w-full bg-green-500 text-white rounded-md px-2 py-1"
-                        >
-                            Register
-                        </button>
+        <>
+            <div className="h-screen  bg-card">
+                <div className="flex justify-center items-center w-full h-full">
+                    <div className="h-1/2 w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
+                        {isVerifying ? (
+                            <VerifyingInfoBox />
+                        ) : (
+                            <LoginForm handleSubmit={handleSubmit} />
+                        )}
+                        <div className="flex w-full">
+                            <button
+                                onClick={handleRegisterClick}
+                                className="w-full bg-green-500 text-white rounded-md px-2 py-1"
+                            >
+                                Register
+                            </button>
+                        </div>
                     </div>
+                    {showSignup && <SignupPage setShowSignup={setShowSignup} />}
                 </div>
-                {showSignup && <SignupPage setShowSignup={setShowSignup} />}
             </div>
-        </div>
+            {info && <InfoCard info={info} setInfo={setInfo} />}
+        </>
     );
 }

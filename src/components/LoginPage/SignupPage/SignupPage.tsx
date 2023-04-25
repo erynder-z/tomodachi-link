@@ -1,14 +1,15 @@
-import { useContext } from 'react';
-import InfoOverlayContext from '../../../contexts/InfoOverlayContext';
+import { useState } from 'react';
 import { FaExclamationTriangle, FaTimes, FaRegSmile } from 'react-icons/fa';
 import SignupForm from './SignupForm';
+import { InfoType } from '../../../types/infoType';
+import InfoCard from '../../InfoCard/InfoCard';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function SignupPage({ setShowSignup }: SignupPageProps) {
-    const { setInfo } = useContext(InfoOverlayContext);
+    const [info, setInfo] = useState<InfoType | null>(null);
 
     const signup = async (
         firstName: string,
@@ -16,7 +17,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         email: string,
         username: string,
         password: string,
-        confirm_password: string
+        confirmPassword: string
     ) => {
         setInfo(null);
 
@@ -31,7 +32,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                     username,
                     email,
                     password,
-                    confirm_password,
+                    confirmPassword,
                 }),
             });
 
@@ -43,6 +44,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                     .join(', ');
 
                 setInfo({
+                    typeOfInfo: 'bad',
                     message: message,
                     icon: <FaExclamationTriangle />,
                 });
@@ -53,6 +55,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
             }
 
             setInfo({
+                typeOfInfo: 'good',
                 message: 'Registration successful!',
                 icon: <FaRegSmile />,
             });
@@ -85,7 +88,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         ) as HTMLInputElement;
 
         const confirmPasswordInput = event.currentTarget.querySelector(
-            '[name="confirm_password"]'
+            '[name="confirmPassword"]'
         ) as HTMLInputElement;
 
         const firstName = firstNameInput.value;
@@ -93,7 +96,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         const email = emailInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
-        const confirm_password = confirmPasswordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
 
         try {
             await signup(
@@ -102,10 +105,11 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 email,
                 username,
                 password,
-                confirm_password
+                confirmPassword
             );
         } catch (error) {
             setInfo({
+                typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: <FaExclamationTriangle />,
             });
@@ -117,18 +121,21 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-card flex justify-center items-center bg-opacity-80">
-            <div className="flex justify-center items-center w-full h-full">
-                <div className="relative w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
-                    <button
-                        onClick={handleCloseButtonClick}
-                        className="absolute top-4 right-4"
-                    >
-                        <FaTimes />
-                    </button>
-                    <SignupForm handleSubmit={handleSubmit} />
+        <>
+            <div className="fixed inset-0 z-50 bg-card flex justify-center items-center bg-opacity-80">
+                <div className="flex justify-center items-center w-full h-full">
+                    <div className="relative w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
+                        <button
+                            onClick={handleCloseButtonClick}
+                            className="absolute top-4 right-4"
+                        >
+                            <FaTimes />
+                        </button>
+                        <SignupForm handleSubmit={handleSubmit} />
+                    </div>
                 </div>
             </div>
-        </div>
+            {info && <InfoCard info={info} setInfo={setInfo} />}
+        </>
     );
 }
