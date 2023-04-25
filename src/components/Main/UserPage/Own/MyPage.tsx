@@ -19,10 +19,10 @@ export default function MyPage({
 }: MyPageProps) {
     const { currentUserData } = useCurrentUserData();
     const { friendData } = useFriendData();
-    const { pending_friend_requests } = currentUserData || {};
+    const { pendingFriendRequests } = currentUserData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
 
-    const numberOfPendingFriendRequests = pending_friend_requests?.length;
+    const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
     const handleRefreshPosts = () => {
         setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
@@ -50,7 +50,7 @@ export default function MyPage({
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <FriendRequests
-                                pendingFriendRequests={pending_friend_requests}
+                                pendingFriendRequests={pendingFriendRequests}
                             />
                         </div>
                     ) : null}

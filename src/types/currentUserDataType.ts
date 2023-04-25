@@ -7,7 +7,7 @@ export type CurrentUserDataType = {
     friends: string[];
     posts: string[];
     bookmarks: string[];
-    pending_friend_requests: string[];
+    pendingFriendRequests: string[];
     joined: Date;
     lastSeen: Date;
     userpic: {

@@ -6,8 +6,9 @@ import Badge from '../Badge/Badge';
 
 export default function ProfilePageButton() {
     const { currentUserData } = useCurrentUserData();
-    const { pending_friend_requests } = currentUserData || {};
-    const numberOfPendingFriendRequests = pending_friend_requests?.length;
+    const { pendingFriendRequests } = currentUserData || {};
+    const numberOfPendingFriendRequests = pendingFriendRequests?.length;
+
     return (
         <Link
             to={'/mypage'}
