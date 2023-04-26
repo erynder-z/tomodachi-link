@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../hooks/useInfoCard';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
@@ -18,7 +18,7 @@ export default function EditUserDataModalForm({
 }: EditUserDataModalFormProps) {
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const {
         firstName = '',
         lastName = '',
@@ -64,6 +64,7 @@ export default function EditUserDataModalForm({
             }
 
             setInfo({
+                typeOfInfo: 'good',
                 message: 'Profile updated successfully!',
                 icon: <FaRegSmile />,
             });

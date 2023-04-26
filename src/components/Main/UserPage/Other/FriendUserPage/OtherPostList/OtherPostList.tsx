@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PostItem from '../../../../PostItem/PostItem';
 import { PostType } from '../../../../../../types/postType';
 import useAuth from '../../../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
 import { fetchOtherPosts } from '../../../../../../utilities/fetchOtherPosts';
 import { useParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function OtherPostList({
     const params = useParams();
     const id: string | undefined = params.id;
     const { token, authUser } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [posts, setPosts] = useState<PostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);

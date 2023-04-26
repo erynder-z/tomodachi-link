@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PostItem from '../../../PostItem/PostItem';
 import { PostType } from '../../../../../types/postType';
 import useAuth from '../../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../../hooks/useInfoCard';
 import { fetchOwnPosts } from '../../../../../utilities/fetchOwnPosts';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 
@@ -12,7 +12,7 @@ type MyPostListProps = {
 
 export default function MyPostList({ isPaginationTriggered }: MyPostListProps) {
     const { token, authUser } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [posts, setPosts] = useState<PostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);

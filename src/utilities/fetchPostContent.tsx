@@ -22,6 +22,7 @@ export const fetchPostContent = async (
         }
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to fetch posts!',
             icon: <FaExclamationTriangle />,
         });

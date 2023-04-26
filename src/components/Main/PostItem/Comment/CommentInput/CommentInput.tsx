@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../../hooks/useInfoCard';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
 type CommentInputProps = {
@@ -13,7 +13,7 @@ export default function CommentInput({
     getPostDetails,
 }: CommentInputProps) {
     const { token } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [commentText, setCommentText] = useState<string>('');
 
     const handleInputChange = (

@@ -33,6 +33,7 @@ export const acceptFriendRequest = async (
         }
 
         setInfo({
+            typeOfInfo: 'good',
             message: 'Friend request accepted!',
             icon: <FaRegSmile />,
         });
@@ -40,6 +41,7 @@ export const acceptFriendRequest = async (
         handleFetchFriendData();
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to accept friend request!',
             icon: <FaExclamationTriangle />,
         });

@@ -12,6 +12,7 @@ export const handleFetchErrors = async (
         .join(', ');
 
     setInfo({
+        typeOfInfo: 'bad',
         message: message,
         icon: <FaExclamationTriangle />,
     });

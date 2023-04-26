@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { InfoType } from '../../types/infoType';
 import { FaTimes } from 'react-icons/fa';
 
-type InfoCardProps = {
-    setInfo: React.Dispatch<React.SetStateAction<InfoType | null>>;
-    info?: InfoType | null;
+type infoCardPropsType = {
+    info: InfoType | null;
 };
 
-const InfoCard = ({ setInfo, info }: InfoCardProps) => {
+const InfoCard = ({ info }: infoCardPropsType) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     const getBgColorClass = (typeOfInfo: string | undefined) => {
@@ -32,16 +31,13 @@ const InfoCard = ({ setInfo, info }: InfoCardProps) => {
             timer = setTimeout(() => {
                 setIsVisible(true);
                 setTimeout(() => {
-                    setInfo(null);
-                }, 5000);
-                setTimeout(() => {
                     setIsVisible(false);
                 }, 3000);
             }, 50);
         }
 
         return () => clearTimeout(timer);
-    }, [info, setInfo]);
+    }, [info]);
 
     return (
         <div className="fixed bottom-full w-full z-50">
@@ -51,7 +47,7 @@ const InfoCard = ({ setInfo, info }: InfoCardProps) => {
                 }`}
             >
                 <h2 className="text-lg font-medium">{info?.message}</h2>
-                <button onClick={() => setInfo(null)} className="ml-4">
+                <button onClick={() => setIsVisible(false)} className="ml-4">
                     <FaTimes />
                 </button>
             </div>

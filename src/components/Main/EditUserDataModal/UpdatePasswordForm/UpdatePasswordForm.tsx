@@ -1,6 +1,6 @@
 import React from 'react';
 import useAuth from '../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../hooks/useInfoCard';
 import { usePasswordComparison } from '../../../../hooks/usePasswordComparison';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
@@ -14,7 +14,7 @@ export default function UpdatePasswordForm({
     setShowOptions,
 }: UpdatePasswordFormProps) {
     const { token } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
 
     const {
         isMatchingPassword,

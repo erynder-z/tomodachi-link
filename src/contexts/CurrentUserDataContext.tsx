@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
-import useInfoOverlay from '../hooks/useInfoOverlay';
+import useInfoCard from '../hooks/useInfoCard';
 import { CurrentUserDataContextProps } from '../types/currentUserDataContextTypes';
 import { CurrentUserDataType } from '../types/currentUserDataType';
 import { fetchUserData } from '../utilities/fetchUserData';
@@ -19,8 +19,8 @@ export const CurrentUserDataContextProvider = ({
     // Retrieve token, authenticated user and authentication status from the useAuth hook
     const { token, authUser, isAuth } = useAuth();
 
-    // Retrieve setInfo function from the useInfoOverlay hook
-    const { setInfo } = useInfoOverlay();
+    // Retrieve setInfo function from the useInfoCard hook
+    const { setInfo } = useInfoCard();
 
     // Declare userData state with initial value of null
     const [currentUserData, setCurrentUserData] =

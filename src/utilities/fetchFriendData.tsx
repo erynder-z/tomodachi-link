@@ -21,6 +21,7 @@ export const fetchFriendData = async (
         }
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to fetch friend data!',
             icon: <FaExclamationTriangle />,
         });

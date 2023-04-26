@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchOtherUserData } from '../../../../utilities/fetchOtherUserData';
 import useAuth from '../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../hooks/useInfoCard';
 import { CurrentViewType } from '../../../../types/currentViewType';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import { OtherUserPageDataTypes } from '../../../../types/otherUserPageDataTypes';
@@ -21,7 +21,7 @@ export default function UserPage({
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [userPageData, setUserPageData] = useState<
         OtherUserPageDataTypes | Record<string, never>
     >({});

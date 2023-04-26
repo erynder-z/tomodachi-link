@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useAuth from '../../../hooks/useAuth';
-import useInfoOverlay from '../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../hooks/useInfoCard';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
 type NewPostInputProps = {
@@ -10,7 +10,7 @@ type NewPostInputProps = {
 
 export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const { token } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const { currentUserData } = useCurrentUserData();
     const { username } = currentUserData || {};
 
@@ -41,6 +41,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
 
             if (response.ok) {
                 setInfo({
+                    typeOfInfo: 'good',
                     message: 'Post created successfully!',
                     icon: <FaRegSmile />,
                 });
@@ -54,6 +55,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                     .join(', ');
 
                 setInfo({
+                    typeOfInfo: 'bad',
                     message: message,
                     icon: <FaExclamationTriangle />,
                 });

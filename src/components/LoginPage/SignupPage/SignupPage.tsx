@@ -1,15 +1,13 @@
-import { useState } from 'react';
 import { FaExclamationTriangle, FaTimes, FaRegSmile } from 'react-icons/fa';
 import SignupForm from './SignupForm';
-import { InfoType } from '../../../types/infoType';
-import InfoCard from '../../InfoCard/InfoCard';
+import useInfoCard from '../../../hooks/useInfoCard';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function SignupPage({ setShowSignup }: SignupPageProps) {
-    const [info, setInfo] = useState<InfoType | null>(null);
+    const { setInfo } = useInfoCard();
 
     const signup = async (
         firstName: string,
@@ -121,21 +119,18 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
     };
 
     return (
-        <>
-            <div className="fixed inset-0 z-50 bg-card flex justify-center items-center bg-opacity-80">
-                <div className="flex justify-center items-center w-full h-full">
-                    <div className="relative w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
-                        <button
-                            onClick={handleCloseButtonClick}
-                            className="absolute top-4 right-4"
-                        >
-                            <FaTimes />
-                        </button>
-                        <SignupForm handleSubmit={handleSubmit} />
-                    </div>
+        <div className="fixed inset-0 z-50 bg-card flex justify-center items-center bg-opacity-80">
+            <div className="flex justify-center items-center w-full h-full">
+                <div className="relative w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
+                    <button
+                        onClick={handleCloseButtonClick}
+                        className="absolute top-4 right-4"
+                    >
+                        <FaTimes />
+                    </button>
+                    <SignupForm handleSubmit={handleSubmit} />
                 </div>
             </div>
-            {info && <InfoCard info={info} setInfo={setInfo} />}
-        </>
+        </div>
     );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TbUserMinus } from 'react-icons/tb';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
-import useInfoOverlay from '../../../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../../../hooks/useInfoCard';
 import { unfriendUser } from '../../../../../../utilities/unfriendUser';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import ConfirmationOverlay from '../../../../../ConfirmationOverlay/ConfirmationOverlay';
@@ -18,7 +18,7 @@ export default function UnfriendButton({
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
     const handleUnfriendButtonClick = () => {

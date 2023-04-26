@@ -3,7 +3,7 @@ import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTy
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { sendFriendRequest } from '../../../../../utilities/sendFriendRequest';
 import useAuth from '../../../../../hooks/useAuth';
-import useInfoOverlay from '../../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../../hooks/useInfoCard';
 import { convertUserPic } from '../../../../../utilities/convertUserPic';
 
 type NotFriendUserPageProps = {
@@ -17,7 +17,7 @@ export default function NotFriendUserPage({
 }: NotFriendUserPageProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [disableButton, setDisableButton] = useState<boolean>(
         isFriendRequestPending
     );

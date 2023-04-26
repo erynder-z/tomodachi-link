@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { FriendDataContextProps } from '../types/friendDataContextTypes';
 import { FriendDataType } from '../types/friendDataType';
 import useAuth from '../hooks/useAuth';
-import useInfoOverlay from '../hooks/useInfoOverlay';
+import useInfoCard from '../hooks/useInfoCard';
 import { fetchFriendData } from '../utilities/fetchFriendData';
 
 const FriendDataContext = createContext<FriendDataContextProps>({
@@ -17,7 +17,7 @@ export const FriendDataContextProvider = ({
     children: React.ReactNode;
 }) => {
     const { token, authUser, isAuth } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
 
     const [friendData, setFriendData] = useState<FriendDataType[] | null>(null);
 

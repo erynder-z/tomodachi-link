@@ -33,6 +33,7 @@ export const declineFriendRequest = async (
         }
 
         setInfo({
+            typeOfInfo: 'good',
             message: 'Friend request declined!',
             icon: <FaRegMeh />,
         });
@@ -40,6 +41,7 @@ export const declineFriendRequest = async (
         handleFetchFriendData();
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to decline friend request!',
             icon: <FaExclamationTriangle />,
         });

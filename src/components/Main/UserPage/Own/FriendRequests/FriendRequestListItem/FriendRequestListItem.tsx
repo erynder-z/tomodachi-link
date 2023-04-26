@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
 import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
-import useInfoOverlay from '../../../../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
@@ -22,7 +22,7 @@ export default function FriendRequestListItem({
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [loading, setLoading] = useState<boolean>(true);
     const [friendRequestData, setFriendRequestData] = useState<
         MinimalUserTypes | Record<string, never>

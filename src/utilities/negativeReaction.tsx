@@ -25,11 +25,13 @@ export const negativeReaction = async (
         }
 
         setInfo({
+            typeOfInfo: 'good',
             message: 'Reaction successful!',
             icon: <FaRegSmile />,
         });
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to fetch posts!',
             icon: <FaExclamationTriangle />,
         });

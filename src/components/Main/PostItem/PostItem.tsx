@@ -8,7 +8,7 @@ import {
 import { PostType } from '../../../types/postType';
 import format from 'date-fns/format';
 import { positiveReaction } from '../../../utilities/positiveReaction';
-import useInfoOverlay from '../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../hooks/useInfoCard';
 import useAuth from '../../../hooks/useAuth';
 import { negativeReaction } from '../../../utilities/negativeReaction';
 import { fetchPostContent } from '../../../utilities/fetchPostContent';
@@ -21,7 +21,7 @@ type PostItemProps = {
 };
 
 export default React.memo(function PostItem({ postID }: PostItemProps) {
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const { token } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);
     const [postDetails, setPostDetails] = useState<PostType | null>(null);

@@ -22,6 +22,7 @@ export const fetchMinimalUserData = async (
         }
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to fetch userdata!',
             icon: <FaExclamationTriangle />,
         });

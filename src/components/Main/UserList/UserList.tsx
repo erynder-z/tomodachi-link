@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import UserListItem from './UserListItem/UserListItem';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../hooks/useAuth';
-import useInfoOverlay from '../../../hooks/useInfoOverlay';
+import useInfoCard from '../../../hooks/useInfoCard';
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 
 export default function UserList() {
     const { token, authUser } = useAuth();
-    const { setInfo } = useInfoOverlay();
+    const { setInfo } = useInfoCard();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
 

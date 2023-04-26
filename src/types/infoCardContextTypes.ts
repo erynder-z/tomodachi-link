@@ -1,11 +1,11 @@
 import React from 'react';
 import { InfoType } from './infoType';
 
-export type InfoOverlayContextProviderProps = {
+export type InfoCardContextProviderProps = {
     children: React.ReactElement;
 };
 
-export type InfoOverlayContextProps = {
+export type InfoCardContextProps = {
     info: InfoType | null;
     setInfo: (info: InfoType | null) => void;
 };

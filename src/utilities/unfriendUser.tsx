@@ -33,6 +33,7 @@ export const unfriendUser = async (
         }
 
         setInfo({
+            typeOfInfo: 'good',
             message: 'You are no longer friends!',
             icon: <FaRegSmile />,
         });
@@ -40,6 +41,7 @@ export const unfriendUser = async (
         handleFetchFriendData();
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to send request!',
             icon: <FaExclamationTriangle />,
         });

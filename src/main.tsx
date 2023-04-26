@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import App from './App';
 import { AuthContextProvider } from './contexts/AuthContext';
-import { InfoOverlayContextProvider } from './contexts/InfoOverlayContext';
+import { InfoCardContextProvider } from './contexts/InfoCardContext';
 import { CurrentUserDataContextProvider } from './contexts/CurrentUserDataContext';
 import './index.css';
 import { FriendDataContextProvider } from './contexts/FriendDataContext';
@@ -14,9 +14,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <AuthContextProvider>
                 <CurrentUserDataContextProvider>
                     <FriendDataContextProvider>
-                        <InfoOverlayContextProvider>
+                        <InfoCardContextProvider>
                             <App />
-                        </InfoOverlayContextProvider>
+                        </InfoCardContextProvider>
                     </FriendDataContextProvider>
                 </CurrentUserDataContextProvider>
             </AuthContextProvider>

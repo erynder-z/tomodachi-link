@@ -31,11 +31,13 @@ export const sendFriendRequest = async (
         }
 
         setInfo({
+            typeOfInfo: 'good',
             message: 'Friend request sent!',
             icon: <FaRegSmile />,
         });
     } catch (err: unknown) {
         setInfo({
+            typeOfInfo: 'bad',
             message: 'Unable to send friend request!',
             icon: <FaExclamationTriangle />,
         });

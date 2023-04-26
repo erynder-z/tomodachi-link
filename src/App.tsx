@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
-import InfoOverlay from './components/InfoOverlay/InfoOverlay';
 import Navbar from './components/Main/Navbar/Navbar';
 import Sidebar from './components/Main/Sidebar/Sidebar';
 import ProfileCard from './components/Main/ProfileCard/ProfileCard';
@@ -9,32 +8,28 @@ import FriendSection from './components/Main/FriendSection/FriendSection';
 import HomeSection from './components/Main/HomeSection/HomeSection';
 import { CurrentViewType } from './types/currentViewType';
 import useAuth from './hooks/useAuth';
-import useInfoOverlay from './hooks/useInfoOverlay';
+import useInfoCard from './hooks/useInfoCard';
 import RequireAuth from './components/Main/RequireAuth';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import OptionsCard from './components/Main/OptionsCard/OptionsCard';
 import MyPage from './components/Main/UserPage/Own/MyPage';
 import UserPage from './components/Main/UserPage/Other/UserPage';
 import useCurrentUserData from './hooks/useCurrentUserData';
+import InfoCard from './components/InfoCard/InfoCard';
 
 function App() {
     const { isAuth } = useAuth();
     const { currentUserData } = useCurrentUserData();
-    const { info } = useInfoOverlay();
+    const { info } = useInfoCard();
 
     const [currentView, setCurrentView] = useState<CurrentViewType>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
             'Home'
     );
-    const [showOverlay, setShowOverlay] = useState(false);
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [lastTouchY, setLastTouchY] = useState<number | null>(null);
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
-
-    const isOverlayShown = () => {
-        return !!info?.message;
-    };
 
     // handle infinite scrolling on desktop devices
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -61,10 +56,6 @@ function App() {
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        setShowOverlay(isOverlayShown());
-    }, [info]);
-
-    useEffect(() => {
         if (
             currentView === 'Friends' ||
             currentView === 'MyPage' ||
@@ -80,7 +71,7 @@ function App() {
         return (
             <>
                 <LoginPage />
-                <InfoOverlay showOverlay={showOverlay} info={info} />
+                <InfoCard info={info} />
             </>
         );
     }
@@ -159,7 +150,7 @@ function App() {
             <nav className="flex-none fixed bottom-0 w-full h-12">
                 <Navbar />
             </nav>
-            <InfoOverlay showOverlay={showOverlay} info={info} />
+            <InfoCard info={info} />
         </div>
     );
 }
