@@ -86,16 +86,18 @@ export default function LoginPage() {
                     {isVerifying ? (
                         <VerifyingInfoBox />
                     ) : (
-                        <LoginForm handleSubmit={handleSubmit} />
+                        <>
+                            <LoginForm handleSubmit={handleSubmit} />
+                            <div className="flex w-full">
+                                <button
+                                    onClick={handleRegisterClick}
+                                    className="w-full bg-green-500 text-white rounded-md px-2 py-1"
+                                >
+                                    Register
+                                </button>
+                            </div>
+                        </>
                     )}
-                    <div className="flex w-full">
-                        <button
-                            onClick={handleRegisterClick}
-                            className="w-full bg-green-500 text-white rounded-md px-2 py-1"
-                        >
-                            Register
-                        </button>
-                    </div>
                 </div>
                 {showSignup && <SignupPage setShowSignup={setShowSignup} />}
             </div>
