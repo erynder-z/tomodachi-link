@@ -25,25 +25,19 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     const bgColorClass = getBgColorClass(info?.typeOfInfo);
 
     useEffect(() => {
-        let timer: ReturnType<typeof setTimeout>;
-
         if (info) {
-            timer = setTimeout(() => {
-                setIsVisible(true);
-                setTimeout(() => {
-                    setIsVisible(false);
-                }, 3000);
-            }, 50);
+            setIsVisible(true);
+            setTimeout(() => {
+                setIsVisible(false);
+            }, 3000);
         }
-
-        return () => clearTimeout(timer);
     }, [info]);
 
     return (
-        <div className="fixed bottom-full w-full z-50">
+        <div className="fixed top-full w-full z-50">
             <div
-                className={`fixed bottom-0 w-full ${bgColorClass} text-white p-4 flex items-center justify-between transform transition-transform duration-500 ease-in-out ${
-                    isVisible ? 'translate-y-0' : 'translate-y-full'
+                className={`fixed top-0 w-full ${bgColorClass} text-white p-4 flex items-center justify-between transform transition-transform duration-500 ease-in-out ${
+                    isVisible ? '-translate-y-0' : '-translate-y-full'
                 }`}
             >
                 <h2 className="text-lg font-medium">{info?.message}</h2>

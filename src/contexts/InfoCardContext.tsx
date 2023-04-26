@@ -19,7 +19,7 @@ export function InfoCardContextProvider({
     useEffect(() => {
         setTimeout(() => {
             setInfo(null);
-        }, 5000);
+        }, 3500);
     }, [info?.message]);
 
     return (
