@@ -25,12 +25,15 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     const bgColorClass = getBgColorClass(info?.typeOfInfo);
 
     useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>;
+
         if (info) {
             setIsVisible(true);
-            setTimeout(() => {
+            timer = setTimeout(() => {
                 setIsVisible(false);
             }, 3000);
         }
+        return () => clearTimeout(timer);
     }, [info]);
 
     return (
@@ -40,6 +43,7 @@ const InfoCard = ({ info }: infoCardPropsType) => {
                     isVisible ? '-translate-y-0' : '-translate-y-full'
                 }`}
             >
+                {info?.icon}
                 <h2 className="text-lg font-medium">{info?.message}</h2>
                 <button onClick={() => setIsVisible(false)} className="ml-4">
                     <FaTimes />
