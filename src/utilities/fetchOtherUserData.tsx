@@ -19,7 +19,10 @@ export const fetchOtherUserData = async (
             return {
                 pageData: data.user,
                 isFriend: data.isFriend,
-                isFriendRequestPending: data.isFriendRequestPending,
+                isIncomingFriendRequestPending:
+                    data.isIncomingFriendRequestPending,
+                isOutgoingFriendRequestPending:
+                    data.isOutgoingFriendRequestPending,
             };
         } else {
             handleFetchErrors(response, setInfo);

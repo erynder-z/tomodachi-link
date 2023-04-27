@@ -8,7 +8,10 @@ import { convertUserPic } from '../../../../../utilities/convertUserPic';
 
 type NotFriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
-    isFriendRequestPending: boolean;
+    isFriendRequestPending: {
+        incoming: boolean;
+        outgoing: boolean;
+    };
 };
 
 export default function NotFriendUserPage({
@@ -19,7 +22,7 @@ export default function NotFriendUserPage({
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const [disableButton, setDisableButton] = useState<boolean>(
-        isFriendRequestPending
+        isFriendRequestPending.outgoing
     );
     const { firstName, lastName, userpic } = userPageData || {};
     const userPicture = convertUserPic(userpic);

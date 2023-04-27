@@ -26,8 +26,13 @@ export default function UserPage({
         OtherUserPageDataTypes | Record<string, never>
     >({});
     const [isFriend, setIsFriend] = useState<boolean>(false);
-    const [isFriendRequestPending, setIsFriendRequestPending] =
-        useState<boolean>(false);
+    const [isFriendRequestPending, setIsFriendRequestPending] = useState<{
+        incoming: boolean;
+        outgoing: boolean;
+    }>({
+        incoming: false,
+        outgoing: false,
+    });
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -46,7 +51,10 @@ export default function UserPage({
             );
             setUserPageData(response?.pageData);
             setIsFriend(response?.isFriend);
-            setIsFriendRequestPending(response?.isFriendRequestPending);
+            setIsFriendRequestPending({
+                incoming: response?.isIncomingFriendRequestPending,
+                outgoing: response?.isOutgoingFriendRequestPending,
+            });
             setLoading(false);
         }
     };
