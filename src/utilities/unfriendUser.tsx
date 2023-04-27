@@ -5,7 +5,7 @@ import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 export const unfriendUser = async (
     token: string,
     currentUserId: string,
-    requestUserId: string,
+    otherUserId: string,
     handleFetchUserData: () => void,
     handleFetchFriendData: () => void,
     setInfo: (info: InfoType | null) => void
@@ -14,10 +14,10 @@ export const unfriendUser = async (
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const requestBody = {
             currentUserId,
-            requestUserId,
+            otherUserId,
         };
         const response = await fetch(
-            `${serverURL}/api/v1/users/${requestUserId}/unfriend`,
+            `${serverURL}/api/v1/users/${otherUserId}/unfriend`,
             {
                 method: 'PATCH',
                 headers: {

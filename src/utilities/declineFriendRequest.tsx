@@ -5,7 +5,7 @@ import { handleFetchErrors } from './handleFetchErrors';
 export const declineFriendRequest = async (
     token: string,
     currentUserId: string,
-    requestUserId: string,
+    otherUserId: string,
     handleFetchUserData: () => void,
     handleFetchFriendData: () => void,
     setInfo: (info: InfoType | null) => void
@@ -14,10 +14,10 @@ export const declineFriendRequest = async (
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const requestBody = {
             currentUserId,
-            requestUserId,
+            otherUserId,
         };
         const response = await fetch(
-            `${serverURL}/api/v1/users/${requestUserId}/declineFriendRequest`,
+            `${serverURL}/api/v1/users/${otherUserId}/declineFriendRequest`,
             {
                 method: 'PATCH',
                 headers: {

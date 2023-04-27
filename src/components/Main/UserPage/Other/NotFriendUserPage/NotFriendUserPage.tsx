@@ -27,9 +27,9 @@ export default function NotFriendUserPage({
     const handleSendFriendRequest = () => {
         if (currentUserData && token) {
             const currentUserId = currentUserData?._id;
-            const requestUserId = userPageData._id;
+            const otherUserId = userPageData._id;
 
-            sendFriendRequest(token, currentUserId, requestUserId, setInfo);
+            sendFriendRequest(token, currentUserId, otherUserId, setInfo);
             setDisableButton(true);
         }
     };

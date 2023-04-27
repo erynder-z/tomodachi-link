@@ -45,6 +45,7 @@ export default function CommentInput({
 
             if (response.ok) {
                 setInfo({
+                    typeOfInfo: 'good',
                     message: 'Comment created successfully!',
                     icon: <FaRegSmile />,
                 });
@@ -58,6 +59,7 @@ export default function CommentInput({
                     .join(', ');
 
                 setInfo({
+                    typeOfInfo: 'bad',
                     message: message,
                     icon: <FaExclamationTriangle />,
                 });

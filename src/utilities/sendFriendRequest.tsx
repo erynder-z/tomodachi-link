@@ -5,17 +5,17 @@ import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 export const sendFriendRequest = async (
     token: string,
     currentUserId: string,
-    requestUserId: string,
+    otherUserId: string,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const requestBody = {
             currentUserId,
-            requestUserId,
+            otherUserId,
         };
         const response = await fetch(
-            `${serverURL}/api/v1/users/${requestUserId}/friendrequest`,
+            `${serverURL}/api/v1/users/${otherUserId}/friendrequest`,
             {
                 method: 'PATCH',
                 headers: {

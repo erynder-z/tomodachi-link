@@ -28,19 +28,19 @@ export default function FriendRequestListItem({
         MinimalUserTypes | Record<string, never>
     >({});
 
-    const { _id, firstName, lastName } = friendRequestData || {};
+    const { firstName, lastName } = friendRequestData || {};
 
     const userPic = convertUserPic(friendRequestData?.userpic) || '';
 
     const handleAcceptFriendRequest = () => {
         if (currentUserData && token) {
             const currentUserId = currentUserData?._id;
-            const requestUserId = friendRequestData._id;
+            const otherUserId = friendRequestData._id;
 
             acceptFriendRequest(
                 token,
                 currentUserId,
-                requestUserId,
+                otherUserId,
                 handleFetchUserData,
                 handleFetchFriendData,
                 setInfo
@@ -51,12 +51,12 @@ export default function FriendRequestListItem({
     const handleDeclineFriendRequest = () => {
         if (currentUserData && token) {
             const currentUserId = currentUserData?._id;
-            const requestUserId = friendRequestData._id;
+            const otherUserId = friendRequestData._id;
 
             declineFriendRequest(
                 token,
                 currentUserId,
-                requestUserId,
+                otherUserId,
                 handleFetchUserData,
                 handleFetchFriendData,
                 setInfo

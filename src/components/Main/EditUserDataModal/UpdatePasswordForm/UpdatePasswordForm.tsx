@@ -52,6 +52,7 @@ export default function UpdatePasswordForm({
                     .join(', ');
 
                 setInfo({
+                    typeOfInfo: 'bad',
                     message: message,
                     icon: <FaExclamationTriangle />,
                 });
@@ -62,6 +63,7 @@ export default function UpdatePasswordForm({
             }
 
             setInfo({
+                typeOfInfo: 'good',
                 message: 'Password updated successfully!',
                 icon: <FaRegSmile />,
             });
