@@ -18,22 +18,20 @@ const InfoCard = ({ info }: infoCardPropsType) => {
             case 'neutral':
                 return 'bg-yellow-500';
             default:
-                break;
+                return 'bg-gray-500';
         }
     };
 
     const bgColorClass = getBgColorClass(info?.typeOfInfo);
 
     useEffect(() => {
-        let timer: ReturnType<typeof setTimeout>;
-
         if (info) {
             setIsVisible(true);
-            timer = setTimeout(() => {
+            const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
                 setIsVisible(false);
             }, 3000);
+            return () => clearTimeout(timer);
         }
-        return () => clearTimeout(timer);
     }, [info]);
 
     return (

@@ -17,9 +17,11 @@ export function InfoCardContextProvider({
 }: InfoCardContextProviderProps) {
     const [info, setInfo] = useState<InfoType | null>(null);
     useEffect(() => {
-        setTimeout(() => {
+        const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
             setInfo(null);
         }, 3500);
+
+        return () => clearTimeout(timer);
     }, [info?.message]);
 
     return (
