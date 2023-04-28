@@ -4,6 +4,8 @@ import {
     AuthContextProviderProps,
     User,
 } from '../types/authContextTypes';
+import useInfoCard from '../hooks/useInfoCard';
+import useCurrentUserData from '../hooks/useCurrentUserData';
 
 // Create an empty context object with default values for authentication state
 const AuthContext = createContext<AuthContextProps>({
@@ -22,6 +24,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     );
     const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
+    const { setInfo } = useInfoCard();
+    const { setCurrentUserData } = useCurrentUserData();
 
     // When the token changes, store it in local storage
     useEffect(() => {
@@ -75,6 +79,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         setToken(null);
         setAuthUser(null);
         setIsAuth(false);
+        setInfo(null);
+        setCurrentUserData(null);
         window.localStorage.clear();
     };
 
