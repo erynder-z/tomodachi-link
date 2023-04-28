@@ -31,6 +31,8 @@ const InfoCard = ({ info }: infoCardPropsType) => {
                 setIsVisible(false);
             }, 3000);
             return () => clearTimeout(timer);
+        } else {
+            setIsVisible(false);
         }
     }, [info]);
 

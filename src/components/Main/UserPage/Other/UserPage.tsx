@@ -8,6 +8,7 @@ import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import { OtherUserPageDataTypes } from '../../../../types/otherUserPageDataTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';
+import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 
 type UserPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -21,6 +22,7 @@ export default function UserPage({
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
+    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const [userPageData, setUserPageData] = useState<
         OtherUserPageDataTypes | Record<string, never>
@@ -43,17 +45,12 @@ export default function UserPage({
 
     const fetchUserData = async () => {
         if (token) {
-            const response = await fetchOtherUserData(
-                id,
-                token,
-
-                setInfo
-            );
-            setUserPageData(response?.pageData);
-            setIsFriend(response?.isFriend);
+            const response = await fetchOtherUserData(id, token, setInfo);
+            setUserPageData(response?.pageData ?? {});
+            setIsFriend(response?.isFriend ?? false);
             setIsFriendRequestPending({
-                incoming: response?.isIncomingFriendRequestPending,
-                outgoing: response?.isOutgoingFriendRequestPending,
+                incoming: response?.isIncomingFriendRequestPending ?? false,
+                outgoing: response?.isOutgoingFriendRequestPending ?? false,
             });
             setLoading(false);
         }
@@ -61,7 +58,7 @@ export default function UserPage({
 
     useEffect(() => {
         fetchUserData();
-    }, [id]);
+    }, [id, currentUserData?.pendingFriendRequests]);
 
     useEffect(() => {
         setCurrentView('OtherUserPage');
