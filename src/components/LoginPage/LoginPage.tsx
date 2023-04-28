@@ -5,6 +5,7 @@ import VerifyingInfoBox from './VerifyingInfoBox';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import SignupPage from './SignupPage/SignupPage';
 import useInfoCard from '../../hooks/useInfoCard';
+import { getTimeOfDayMessage } from '../../utilities/getTimeOfDayMessage';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -63,9 +64,15 @@ export default function LoginPage() {
 
         const username = usernameInput.value;
         const password = passwordInput.value;
+        const timeOfDayMessage = getTimeOfDayMessage();
 
         try {
             await login(username, password);
+            setInfo({
+                typeOfInfo: timeOfDayMessage.typeOfInfo,
+                message: timeOfDayMessage.message,
+                icon: timeOfDayMessage.icon,
+            });
         } catch (error) {
             setInfo({
                 typeOfInfo: 'bad',

@@ -17,6 +17,8 @@ const InfoCard = ({ info }: infoCardPropsType) => {
                 return 'bg-red-500';
             case 'neutral':
                 return 'bg-yellow-500';
+            case 'greeting':
+                return 'bg-slate-500';
             default:
                 return 'bg-gray-500';
         }
