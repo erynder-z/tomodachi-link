@@ -22,7 +22,7 @@ export default function FriendUserPage({
         lastName,
         userpic,
         friends,
-        mutual_friends,
+        mutualFriends,
         lastSeen,
     } = userPageData || {};
 
@@ -42,7 +42,7 @@ export default function FriendUserPage({
                     userPicture={userPicture}
                     numberOfFriends={numberOfFriends}
                     lastSeenFormatted={lastSeenFormatted}
-                    mutual_friends={mutual_friends}
+                    mutualFriends={mutualFriends}
                 />
                 <div className="col-span-5 flex flex-col md:grid grid-cols-5">
                     <div className="col-span-2 flex flex-col h-1/2 ov">

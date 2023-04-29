@@ -8,7 +8,7 @@ type FriendCoverSectionProps = {
     userPicture: string;
     numberOfFriends: number;
     lastSeenFormatted: string;
-    mutual_friends: number;
+    mutualFriends: number;
 };
 
 export default function FriendCoverSection({
@@ -18,7 +18,7 @@ export default function FriendCoverSection({
     userPicture,
     numberOfFriends,
     lastSeenFormatted,
-    mutual_friends,
+    mutualFriends,
 }: FriendCoverSectionProps) {
     return (
         <div className="h-96 col-span-5 grid grid-rows-4">
@@ -36,9 +36,9 @@ export default function FriendCoverSection({
                     </h1>
                     <p className="text-center text-xs">
                         {numberOfFriends} friend
-                        {numberOfFriends > 1 && 's'} • {mutual_friends} mutual
+                        {numberOfFriends > 1 && 's'} • {mutualFriends} mutual
                         friend
-                        {mutual_friends > 1 && 's'}
+                        {mutualFriends > 1 && 's'}
                     </p>
                 </div>
                 <div className="flex flex-col justify-between ml-auto ">

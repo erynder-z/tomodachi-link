@@ -12,6 +12,6 @@ export type OtherUserPageDataTypes = {
     joined: Date;
     lastSeen: Date;
     friends: FriendDataType[];
-    mutual_friends: number;
+    mutualFriends: number;
     posts: string[];
 };
