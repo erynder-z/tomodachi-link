@@ -3,6 +3,7 @@ import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTy
 import { convertUserPic } from '../../../../../utilities/convertUserPic';
 import NormalContent from './NormalContent/NormalContent';
 import IncomingFriendRequestPendingContent from './IncomingFriendRequestPendingContent/IncomingFriendRequestPendingContent';
+import NotFriendCoverSection from './NotFriendCoverSection/NotFriendCoverSection';
 
 type NotFriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -22,22 +23,11 @@ export default function NotFriendUserPage({
     return (
         <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
             <div className="grid grid-cols-5  h-full gap-4">
-                <div className="h-96 col-span-5 grid grid-rows-4">
-                    <div className="row-span-3 flex h-full p-4 gap-4 bg-blue-300"></div>
-                    <div className="relative row-span-1 flex gap-4 p-4 bg-slate-300">
-                        <img
-                            className="w-20 h-fit object-cover rounded-full relative bottom-10 border-white border-2"
-                            src={`data:image/png;base64,${userPicture}`}
-                            alt="User avatar"
-                        />
-
-                        <div className="flex flex-col">
-                            <h1 className=" text-center font-bold h-auto">
-                                {firstName} {lastName}'s page
-                            </h1>
-                        </div>
-                    </div>
-                </div>
+                <NotFriendCoverSection
+                    firstName={firstName}
+                    lastName={lastName}
+                    userPicture={userPicture}
+                />
                 {isFriendRequestPending.incoming ? (
                     <IncomingFriendRequestPendingContent
                         userPageData={userPageData}

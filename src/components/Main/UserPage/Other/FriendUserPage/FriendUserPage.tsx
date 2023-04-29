@@ -5,7 +5,7 @@ import PictureList from '../../SharedComponents/PictureList/PictureList';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
 import OtherPostList from './OtherPostList/OtherPostList';
-import UnfriendButton from './UnfriendButton/UnfriendButton';
+import FriendCoverSection from './FriendCoverSection/FriendCoverSection';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -35,34 +35,15 @@ export default function FriendUserPage({
     return (
         <div className="flex flex-col lg:w-11/12 p-4 bg-card">
             <div className="md:grid grid-cols-5 h-full gap-4">
-                <div className="h-96 col-span-5 grid grid-rows-4">
-                    <div className="row-span-3 flex h-full p-4 gap-4 bg-blue-300"></div>
-                    <div className="relative row-span-1 flex flex-col md:flex-row gap-4 p-4 bg-slate-300">
-                        <img
-                            className="absolute md:relative w-20 h-fit object-cover rounded-full bottom-20 md:bottom-10 border-white border-2"
-                            src={`data:image/png;base64,${userPicture}`}
-                            alt="User avatar"
-                        />
-
-                        <div className="flex flex-col">
-                            <h1 className=" text-center font-bold h-auto">
-                                {firstName} {lastName}'s page
-                            </h1>
-                            <p className="text-center text-xs">
-                                {numberOfFriends} friend
-                                {numberOfFriends > 1 && 's'} • {mutual_friends}{' '}
-                                mutual friend
-                                {mutual_friends > 1 && 's'}
-                            </p>
-                        </div>
-                        <div className="flex flex-col justify-between ml-auto ">
-                            <div className="text-xs">
-                                last seen: {lastSeenFormatted}
-                            </div>
-                            <UnfriendButton unfriendUserId={_id} />
-                        </div>
-                    </div>
-                </div>
+                <FriendCoverSection
+                    _id={_id}
+                    firstName={firstName}
+                    lastName={lastName}
+                    userPicture={userPicture}
+                    numberOfFriends={numberOfFriends}
+                    lastSeenFormatted={lastSeenFormatted}
+                    mutual_friends={mutual_friends}
+                />
                 <div className="col-span-5 flex flex-col md:grid grid-cols-5">
                     <div className="col-span-2 flex flex-col h-1/2 ov">
                         <div className="flex h-1/4 md:h-auto md:p-4">
