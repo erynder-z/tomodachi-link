@@ -38,7 +38,9 @@ export default function MyCoverSection() {
     );
     const [colorPalette, setColorPalette] = useState<any>([]);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    const [initialCover] = useState<CoverOption | null>(selectedCover);
+    const [initialCover, setInitialCover] = useState<CoverOption | null>(
+        selectedCover
+    );
 
     const backgroundColor = colorPalette[0]?.hex;
     const textColor = tinycolor(backgroundColor).isDark()
@@ -58,6 +60,7 @@ export default function MyCoverSection() {
         const coverImageName = selectedCover?.name;
         if (token && coverImageName) {
             saveCoverImage(token, coverImageName, handleFetchUserData, setInfo);
+            setInitialCover(selectedCover);
         }
     };
 
