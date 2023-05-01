@@ -11,24 +11,34 @@ import cover6 from '../../../../../assets/cover06.jpg';
 import cover7 from '../../../../../assets/cover07.jpg';
 import cover8 from '../../../../../assets/cover08.jpg';
 import cover9 from '../../../../../assets/cover09.jpg';
+import useAuth from '../../../../../hooks/useAuth';
+import useInfoCard from '../../../../../hooks/useInfoCard';
+import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
+import { CoverOption } from '../../../../../types/coverOptionTypes';
+import { saveCoverImage } from '../../../../../utilities/saveCoverImage';
 
-const COVER_OPTIONS = [
-    cover1,
-    cover2,
-    cover3,
-    cover4,
-    cover5,
-    cover6,
-    cover7,
-    cover8,
-    cover9,
+const COVER_OPTIONS: CoverOption[] = [
+    { image: cover1, name: 'cover1' },
+    { image: cover2, name: 'cover2' },
+    { image: cover3, name: 'cover3' },
+    { image: cover4, name: 'cover4' },
+    { image: cover5, name: 'cover5' },
+    { image: cover6, name: 'cover6' },
+    { image: cover7, name: 'cover7' },
+    { image: cover8, name: 'cover8' },
+    { image: cover9, name: 'cover9' },
 ];
 
 export default function MyCoverSection() {
-    const [selectedCover, setSelectedCover] = useState<string | null>(null);
+    const { token } = useAuth();
+    const { currentUserData, handleFetchUserData } = useCurrentUserData();
+    const { setInfo } = useInfoCard();
+    const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
+        null
+    );
     const [colorPalette, setColorPalette] = useState<any>([]);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    const [initialCover] = useState<string | null>(selectedCover);
+    const [initialCover] = useState<CoverOption | null>(selectedCover);
 
     const backgroundColor = colorPalette[0]?.hex;
     const textColor = tinycolor(backgroundColor).isDark()
@@ -39,18 +49,37 @@ export default function MyCoverSection() {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const handleCoverOptionClick = (coverImage: string) => {
+    const handleCoverOptionClick = (coverImage: CoverOption) => {
         setSelectedCover(coverImage);
         setIsMenuOpen(false);
     };
 
     const handleSaveCoverImage = () => {
-        //
+        const coverImageName = selectedCover?.name;
+        if (token && coverImageName) {
+            saveCoverImage(token, coverImageName, handleFetchUserData, setInfo);
+        }
     };
+
+    function getUserCoverImage() {
+        if (currentUserData) {
+            const userCover = currentUserData.cover;
+            const cover = COVER_OPTIONS.find((coverImage) => {
+                return coverImage.name === userCover;
+            });
+            return cover;
+        }
+    }
+
+    useEffect(() => {
+        if (currentUserData) {
+            setSelectedCover(getUserCoverImage() || null);
+        }
+    }, [currentUserData?.cover]);
 
     useEffect(() => {
         if (selectedCover) {
-            extractColors(selectedCover)
+            extractColors(selectedCover.image)
                 .then((colors) => {
                     const newPalette = colors.map((color) => {
                         const { h, s, l } = tinycolor(color.hex).toHsl();
@@ -69,12 +98,12 @@ export default function MyCoverSection() {
 
     return (
         <div className="h-96 col-span-5 grid grid-rows-4">
-            <div className="relative row-span-3 flex">
+            <div className="relative row-span-3 flex rounded-t-lg">
                 {selectedCover ? (
                     <img
-                        src={selectedCover}
+                        src={selectedCover.image}
                         alt="cover image"
-                        className="h-full w-full"
+                        className="h-full w-full rounded-t-lg"
                     />
                 ) : (
                     <div className="row-span-3 flex h-full w-full p-4 gap-4 bg-blue-300"></div>
@@ -96,7 +125,7 @@ export default function MyCoverSection() {
                                 }
                             >
                                 <img
-                                    src={coverImage}
+                                    src={coverImage.image}
                                     alt={`cover option ${index + 1}`}
                                     className="w-12 h-12 rounded-lg mr-2 object-cover"
                                 />

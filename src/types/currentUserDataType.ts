@@ -1,3 +1,5 @@
+import { CoverType } from './coverType';
+
 export type CurrentUserDataType = {
     _id: string;
     firstName: string;
@@ -14,4 +16,5 @@ export type CurrentUserDataType = {
         data: Buffer;
         contentType: string;
     };
+    cover: CoverType;
 };

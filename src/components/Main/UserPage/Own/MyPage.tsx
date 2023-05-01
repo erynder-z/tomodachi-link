@@ -35,7 +35,7 @@ export default function MyPage({
     }, []);
 
     return (
-        <div className="flex flex-col lg:w-11/12 p-4 bg-card">
+        <div className="flex flex-col lg:w-11/12 rounded-lg bg-card">
             <div className="md:grid grid-cols-5 h-full gap-4">
                 <MyCoverSection />
                 <div className="col-span-2 flex flex-col lg:h-1/2">
