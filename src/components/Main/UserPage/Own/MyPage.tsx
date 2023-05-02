@@ -24,11 +24,19 @@ export default function MyPage({
     const { pendingFriendRequests } = currentUserData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
     const [loading, setLoading] = useState<boolean>(true);
+    const [componentLoading, setComponentLoading] = useState({
+        currentUserData: true,
+        coverSection: true,
+    });
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
     const handleRefreshPosts = () => {
         setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
+    };
+
+    const onFetchComplete = (nameOfComponent: string) => {
+        setComponentLoading({ ...componentLoading, [nameOfComponent]: false });
     };
 
     useEffect(() => {
@@ -37,22 +45,31 @@ export default function MyPage({
     }, []);
 
     useEffect(() => {
-        setLoading(false);
+        setComponentLoading({ ...componentLoading, currentUserData: false });
     }, [currentUserData]);
 
-    if (loading) {
-        return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card ">
-                <h1 className="font-bold">getting user data!</h1>
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (Object.values(componentLoading).every((v) => v === false)) {
+            setLoading(false);
+        }
+    }, [componentLoading]);
 
     return (
         <div className="flex flex-col lg:w-11/12 p-4 bg-card">
-            <div className="flex flex-col md:grid grid-cols-5 h-full gap-4">
-                <MyCoverSection />
+            <div
+                className={`${
+                    loading ? 'flex' : 'hidden'
+                } flex-col justify-center items-center w-full h-[calc(100vh_-_7rem)] py-4 bg-card `}
+            >
+                <h1 className="font-bold">getting user data!</h1>
+                <LoadingSpinner />
+            </div>
+            <div
+                className={`${
+                    loading ? 'hidden' : 'md:grid'
+                } flex flex-col  grid-cols-5 h-full gap-4 `}
+            >
+                <MyCoverSection onFetchComplete={onFetchComplete} />
                 <div className="col-span-2 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">

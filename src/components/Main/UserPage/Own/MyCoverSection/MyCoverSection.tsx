@@ -9,7 +9,13 @@ import { saveCoverImage } from '../../../../../utilities/saveCoverImage';
 import { COVER_OPTIONS } from '../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../utilities/getColors';
 
-export default function MyCoverSection() {
+type MyCoverSectionProps = {
+    onFetchComplete: (nameOfComponent: string) => void;
+};
+
+export default function MyCoverSection({
+    onFetchComplete,
+}: MyCoverSectionProps) {
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -69,6 +75,7 @@ export default function MyCoverSection() {
                 })
                 .catch(console.error);
         }
+        onFetchComplete('coverSection');
     }, [selectedCover]);
 
     return (
