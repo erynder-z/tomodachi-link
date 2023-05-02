@@ -1,20 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { CoverOption } from '../../../../../../types/coverOptionTypes';
+import tinycolor from 'tinycolor2';
+import { getColors } from '../../../../../../utilities/getColors';
+import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 
 type NotFriendCoverSectionProps = {
     firstName: string;
     lastName: string;
     userPicture: string;
+    cover?: string;
 };
 
 export default function NotFriendCoverSection({
     firstName,
     lastName,
     userPicture,
+    cover,
 }: NotFriendCoverSectionProps) {
+    const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
+        null
+    );
+    const [colorPalette, setColorPalette] = useState<any>([]);
+
+    const backgroundColor = colorPalette[0]?.hex;
+    const textColor = tinycolor(backgroundColor).isDark()
+        ? '#ffffff'
+        : '#000000';
+
+    function getUserCoverImage() {
+        const userCover = cover;
+        const displayCover = COVER_OPTIONS.find((coverImage) => {
+            return coverImage.name === userCover;
+        });
+        return displayCover;
+    }
+
+    useEffect(() => {
+        setSelectedCover(getUserCoverImage() || null);
+    }, [cover]);
+
+    useEffect(() => {
+        setColorPalette([]);
+        if (selectedCover) {
+            const image = selectedCover?.image;
+            getColors(image)
+                .then((palette) => {
+                    setColorPalette(palette);
+                })
+                .catch(console.error);
+        }
+    }, [selectedCover]);
+
     return (
-        <div className="h-96 col-span-5 grid grid-rows-4">
-            <div className="row-span-3 flex h-full p-4 gap-4 bg-blue-300"></div>
-            <div className="relative row-span-1 flex gap-4 p-4 bg-slate-300">
+        <div className="h-[calc(100vh_-_5rem)] md:h-full col-span-5 grid grid-rows-4">
+            <div className="relative row-span-3 flex rounded-lg">
+                {selectedCover ? (
+                    <img
+                        src={selectedCover.image}
+                        alt="cover image"
+                        className="h-full w-full object-cover rounded-t-lg"
+                    />
+                ) : (
+                    <div className="row-span-3 flex h-full w-full p-4 gap-4 bg-blue-300"></div>
+                )}
+            </div>
+            <div
+                className="relative row-span-1 flex flex-col md:flex-row gap-4 p-4 rounded-b-lg bg-slate-300"
+                style={
+                    colorPalette[0]
+                        ? {
+                              backgroundColor: `${colorPalette[0].hex}`,
+                              color: textColor,
+                          }
+                        : {}
+                }
+            >
                 <img
                     className="w-20 h-fit object-cover rounded-full relative bottom-10 border-white border-2"
                     src={`data:image/png;base64,${userPicture}`}

@@ -49,7 +49,7 @@ export default function UnfriendButton({
                 />
             )}
             <button
-                className="flex justify-center items-center gap-4 bg-red-500 text-white rounded-md px-2 py-1 ml-auto hover:bg-red-600"
+                className="flex justify-center items-center gap-4 bg-red-500 text-white rounded-md px-2 py-1 w-fit m-auto md:ml-auto hover:bg-red-600"
                 onClick={handleUnfriendButtonClick}
             >
                 Unfriend <TbUserMinus />

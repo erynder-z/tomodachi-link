@@ -21,6 +21,7 @@ export default function FriendUserPage({
         firstName,
         lastName,
         userpic,
+        cover,
         friends,
         mutualFriends,
         lastSeen,
@@ -34,12 +35,13 @@ export default function FriendUserPage({
 
     return (
         <div className="flex flex-col lg:w-11/12 p-4 bg-card">
-            <div className="md:grid grid-cols-5 h-full gap-4">
+            <div className="flex flex-col md:grid grid-cols-5 h-full gap-4">
                 <FriendCoverSection
                     _id={_id}
                     firstName={firstName}
                     lastName={lastName}
                     userPicture={userPicture}
+                    cover={cover}
                     numberOfFriends={numberOfFriends}
                     lastSeenFormatted={lastSeenFormatted}
                     mutualFriends={mutualFriends}

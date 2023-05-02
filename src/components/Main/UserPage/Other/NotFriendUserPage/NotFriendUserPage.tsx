@@ -17,7 +17,7 @@ export default function NotFriendUserPage({
     userPageData,
     isFriendRequestPending,
 }: NotFriendUserPageProps) {
-    const { firstName, lastName, userpic } = userPageData || {};
+    const { firstName, lastName, userpic, cover } = userPageData || {};
     const userPicture = convertUserPic(userpic);
 
     return (
@@ -27,6 +27,7 @@ export default function NotFriendUserPage({
                     firstName={firstName}
                     lastName={lastName}
                     userPicture={userPicture}
+                    cover={cover}
                 />
                 {isFriendRequestPending.incoming ? (
                     <IncomingFriendRequestPendingContent

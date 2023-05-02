@@ -10,4 +10,5 @@ export type FriendDataType = {
         data: Buffer;
         contentType: string;
     };
+    cover?: string;
 };

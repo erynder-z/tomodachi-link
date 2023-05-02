@@ -9,6 +9,7 @@ export type OtherUserPageDataTypes = {
         data: Buffer;
         contentType: string;
     };
+    cover?: string;
     joined: Date;
     lastSeen: Date;
     friends: FriendDataType[];
