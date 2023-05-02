@@ -8,6 +8,7 @@ import FriendRequests from './FriendRequests/FriendRequests';
 import PictureList from '../SharedComponents/PictureList/PictureList';
 import MyPostList from './MyPostList/MyPostList';
 import MyCoverSection from './MyCoverSection/MyCoverSection';
+import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -22,6 +23,7 @@ export default function MyPage({
     const { friendData } = useFriendData();
     const { pendingFriendRequests } = currentUserData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
@@ -34,9 +36,22 @@ export default function MyPage({
         localStorage.setItem('currentView', 'MyPage');
     }, []);
 
+    useEffect(() => {
+        setLoading(false);
+    }, [currentUserData]);
+
+    if (loading) {
+        return (
+            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card ">
+                <h1 className="font-bold">getting user data!</h1>
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col lg:w-11/12 rounded-lg bg-card">
-            <div className="md:grid grid-cols-5 h-full gap-4">
+        <div className="flex flex-col lg:w-11/12 p-4 bg-card">
+            <div className="flex flex-col md:grid grid-cols-5 h-full gap-4">
                 <MyCoverSection />
                 <div className="col-span-2 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
