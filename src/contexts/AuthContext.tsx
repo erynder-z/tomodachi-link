@@ -6,6 +6,7 @@ import {
 } from '../types/authContextTypes';
 import useInfoCard from '../hooks/useInfoCard';
 import useCurrentUserData from '../hooks/useCurrentUserData';
+import FullscreenLoading from '../components/LoadingSpinner/FullscreenLoading';
 
 // Create an empty context object with default values for authentication state
 const AuthContext = createContext<AuthContextProps>({
@@ -26,6 +27,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const { setInfo } = useInfoCard();
     const { setCurrentUserData } = useCurrentUserData();
+    const [loading, setLoading] = useState<boolean>(true);
 
     // When the token changes, store it in local storage
     useEffect(() => {
@@ -63,15 +65,19 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 const data = await response.json();
                 setAuthUser(data);
                 setIsAuth(true);
+                setLoading(false);
             } catch (error: unknown) {
                 setAuthUser(null);
                 setIsAuth(false);
+                setLoading(false);
                 console.error(error);
             }
         };
 
         if (token) {
             checkToken();
+        } else {
+            setLoading(false);
         }
     }, [token]);
 
@@ -96,7 +102,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 logout,
             }}
         >
-            {children}
+            {loading ? (
+                <FullscreenLoading message={'Verifying user data'} />
+            ) : (
+                children
+            )}
         </AuthContext.Provider>
     );
 };
