@@ -1,16 +1,18 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
-import VerifyingInfoBox from './VerifyingInfoBox';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import SignupPage from './SignupPage/SignupPage';
 import useInfoCard from '../../hooks/useInfoCard';
 import { getTimeOfDayMessage } from '../../utilities/getTimeOfDayMessage';
+import FullscreenLoading from '../LoadingSpinner/FullscreenLoading';
+import VerifyingInfoBox from './VerifyingInfoBox';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { setInfo } = useInfoCard();
 
@@ -49,6 +51,7 @@ export default function LoginPage() {
         }
 
         setIsVerifying(false);
+        setLoading(true);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -85,6 +88,10 @@ export default function LoginPage() {
     const handleRegisterClick = () => {
         setShowSignup(true);
     };
+
+    if (loading) {
+        return <FullscreenLoading message={'Getting things ready!'} />;
+    }
 
     return (
         <div className="h-screen  bg-card">
