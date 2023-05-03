@@ -1,14 +1,14 @@
 import { CoverOption } from '../../../../types/coverOptionTypes';
 import defaultCover from '../../../../assets/defaultCover.webp';
-import cover1 from '../../../../assets/cover01.jpg';
-import cover2 from '../../../../assets/cover02.jpg';
-import cover3 from '../../../../assets/cover03.jpg';
-import cover4 from '../../../../assets/cover04.jpg';
-import cover5 from '../../../../assets/cover05.jpg';
-import cover6 from '../../../../assets/cover06.jpg';
-import cover7 from '../../../../assets/cover07.jpg';
-import cover8 from '../../../../assets/cover08.jpg';
-import cover9 from '../../../../assets/cover09.jpg';
+import cover1 from '../../../../assets/cover01.webp';
+import cover2 from '../../../../assets/cover02.webp';
+import cover3 from '../../../../assets/cover03.webp';
+import cover4 from '../../../../assets/cover04.webp';
+import cover5 from '../../../../assets/cover05.webp';
+import cover6 from '../../../../assets/cover06.webp';
+import cover7 from '../../../../assets/cover07.webp';
+import cover8 from '../../../../assets/cover08.webp';
+import cover9 from '../../../../assets/cover09.webp';
 
 const NONE_COVER_OPTION: CoverOption = {
     image: defaultCover,
