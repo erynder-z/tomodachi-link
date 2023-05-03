@@ -81,15 +81,12 @@ export default function MyCoverSection({
     return (
         <div className="h-[calc(100vh_-_5rem)] md:h-full col-span-5 grid grid-rows-4">
             <div className="relative row-span-3 flex rounded-lg">
-                {selectedCover ? (
-                    <img
-                        src={selectedCover.image}
-                        alt="cover image"
-                        className="h-full w-full object-cover rounded-t-lg"
-                    />
-                ) : (
-                    <div className="row-span-3 flex h-full w-full p-4 gap-4 rounded-t-lg bg-blue-300"></div>
-                )}
+                <img
+                    src={selectedCover?.image}
+                    alt="cover image"
+                    className="f-full md:h-80 w-full object-cover rounded-t-lg"
+                />
+
                 <button
                     onClick={handleChangeCoverImage}
                     className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-white rounded-lg px-4 py-2 text-xs bg-opacity-75"
@@ -111,14 +108,14 @@ export default function MyCoverSection({
                                     alt={`cover option ${index + 1}`}
                                     className="w-12 h-12 rounded-lg mr-2 object-cover"
                                 />
-                                <span>Cover {index + 1}</span>
+                                <span> {coverImage.name}</span>
                             </div>
                         ))}
                     </div>
                 )}
                 {selectedCover !== initialCover && (
                     <button
-                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-lg py-2 px-4 "
+                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-lg py-2 px-4 border-2 border-white"
                         style={{
                             backgroundColor: `${colorPalette[0]?.hex}`,
                             color: textColor,
