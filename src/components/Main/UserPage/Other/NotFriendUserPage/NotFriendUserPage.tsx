@@ -22,24 +22,22 @@ export default function NotFriendUserPage({
 
     return (
         <div className="flex flex-col h-full lg:w-5/6 p-4 bg-card">
-            <div className="grid grid-cols-5  h-full gap-4">
-                <NotFriendCoverSection
-                    firstName={firstName}
-                    lastName={lastName}
-                    userPicture={userPicture}
-                    cover={cover}
+            <NotFriendCoverSection
+                firstName={firstName}
+                lastName={lastName}
+                userPicture={userPicture}
+                cover={cover}
+            />
+            {isFriendRequestPending.incoming ? (
+                <IncomingFriendRequestPendingContent
+                    userPageData={userPageData}
                 />
-                {isFriendRequestPending.incoming ? (
-                    <IncomingFriendRequestPendingContent
-                        userPageData={userPageData}
-                    />
-                ) : (
-                    <NormalContent
-                        userPageData={userPageData}
-                        isFriendRequestPending={isFriendRequestPending}
-                    />
-                )}
-            </div>
+            ) : (
+                <NormalContent
+                    userPageData={userPageData}
+                    isFriendRequestPending={isFriendRequestPending}
+                />
+            )}
         </div>
     );
 }

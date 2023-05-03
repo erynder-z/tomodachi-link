@@ -95,7 +95,7 @@ export default function MyCoverSection({
     }, [selectedCover]);
 
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-full col-span-5 grid grid-rows-4">
+        <div className="h-[calc(100vh_-_5rem)] md:h-full col-span-10 grid grid-rows-4">
             <div className="relative row-span-3 flex rounded-lg">
                 <img
                     src={selectedCover?.image}

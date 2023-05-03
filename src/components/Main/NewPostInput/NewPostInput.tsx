@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
+import {
+    FaExclamationTriangle,
+    FaRegSmile,
+    FaRegSmileBeam,
+    FaRegImage,
+} from 'react-icons/fa';
+
+import { MdSend } from 'react-icons/md';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -75,7 +82,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 onSubmit={handleSubmit}
                 className="flex w-full divide-gray-200"
             >
-                <div className="w-full py-4 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="w-full text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative">
                         <textarea
                             rows={2}
@@ -96,17 +103,23 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         </label>
                     </div>
 
-                    <div className="flex w-full">
+                    <div className="flex w-full gap-4">
+                        <button>
+                            <FaRegImage />
+                        </button>
+                        <button>
+                            <FaRegSmileBeam />
+                        </button>
                         <button
                             disabled={!newPostText}
-                            className="w-full bg-blue-500 text-white rounded-md px-2 py-1"
+                            className="flex items-center justify-center h-8 w-8 bg-blue-500 hover:bg-blue-600 text-white ml-auto text-sm"
                             title={
                                 newPostText
                                     ? undefined
                                     : 'Please enter a message'
                             }
                         >
-                            Post
+                            <MdSend />
                         </button>
                     </div>
                 </div>

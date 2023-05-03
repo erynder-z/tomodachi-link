@@ -57,7 +57,7 @@ export default function NormalContent({
         }
     };
     return (
-        <div className="col-span-5 flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col justify-center items-center gap-4 p-4">
             <h2 className="font-bold">
                 Become friends with {firstName} {lastName} to view more!
             </h2>

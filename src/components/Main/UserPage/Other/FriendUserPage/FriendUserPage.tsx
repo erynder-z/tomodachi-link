@@ -35,7 +35,7 @@ export default function FriendUserPage({
 
     return (
         <div className="flex flex-col lg:w-11/12 p-4 bg-card">
-            <div className="flex flex-col md:grid grid-cols-5 h-full gap-4">
+            <div className="flex flex-col h-full gap-4">
                 <FriendCoverSection
                     _id={_id}
                     firstName={firstName}
@@ -46,8 +46,8 @@ export default function FriendUserPage({
                     lastSeenFormatted={lastSeenFormatted}
                     mutualFriends={mutualFriends}
                 />
-                <div className="col-span-5 flex flex-col md:grid grid-cols-5">
-                    <div className="col-span-2 flex flex-col h-1/2 ov">
+                <div className="flex flex-col md:grid grid-cols-10">
+                    <div className="col-span-4 flex flex-col h-1/2 ov">
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <PictureList key={userPageData._id} />
                         </div>
@@ -58,7 +58,7 @@ export default function FriendUserPage({
                             />
                         </div>
                     </div>
-                    <div className="col-span-3 flex flex-col gap-4 md:px-4 overflow-auto">
+                    <div className="col-span-6 flex flex-col gap-4 md:px-4 overflow-auto">
                         <OtherPostList
                             key={userPageData._id}
                             isPaginationTriggered={isPaginationTriggered}

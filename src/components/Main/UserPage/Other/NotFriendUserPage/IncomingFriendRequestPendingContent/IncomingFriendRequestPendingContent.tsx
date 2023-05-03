@@ -51,7 +51,7 @@ export default function IncomingFriendRequestPendingContent({
     };
 
     return (
-        <div className="col-span-5 flex flex-col gap-4 text-center">
+        <div className="flex flex-col gap-4 p-4 text-center">
             {firstName} {lastName} already sent you a friend request!
             <div className="col-span-5 place-content-center flex items-center gap-4">
                 <button

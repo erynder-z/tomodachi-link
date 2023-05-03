@@ -67,10 +67,10 @@ export default function MyPage({
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } flex flex-col  grid-cols-5 h-full gap-4 `}
+                } flex flex-col  grid-cols-10 h-full gap-4 `}
             >
                 <MyCoverSection onFetchComplete={onFetchComplete} />
-                <div className="col-span-2 flex flex-col lg:h-1/2">
+                <div className="col-span-4 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <FriendRequests
@@ -85,7 +85,7 @@ export default function MyPage({
                         <FriendList friendData={friendData} />
                     </div>
                 </div>
-                <div className="col-span-3 flex flex-col gap-4 md:px-4">
+                <div className="col-span-6 flex flex-col gap-4 md:px-4">
                     <NewPostInput onPostSuccess={handleRefreshPosts} />
                     <MyPostList
                         key={myPostsKey}
