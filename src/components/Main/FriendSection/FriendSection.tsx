@@ -11,5 +11,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
         localStorage.setItem('currentView', 'Friends');
     }, []);
 
-    return <div className="h-full w-full bg-card">Friends</div>;
+    return (
+        <div className="min-h-[calc(100vh_-_5rem)] w-full bg-card">Friends</div>
+    );
 }

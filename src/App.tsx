@@ -78,7 +78,7 @@ function App() {
 
     return (
         <div className="flex flex-col h-screen">
-            <div className="flex h-[calc(100%_-_3rem)]">
+            <div className="flex pb-12">
                 <main
                     className="flex w-full h-full gap-4 md:p-4 bg-background overflow-auto"
                     onScroll={handleScroll}

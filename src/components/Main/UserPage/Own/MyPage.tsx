@@ -55,7 +55,7 @@ export default function MyPage({
     }, [componentLoading]);
 
     return (
-        <div className="flex flex-col lg:w-11/12 p-4 bg-card">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] p-4 md:p-0 pb-4  lg:w-11/12 bg-card shadow-lg">
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
@@ -67,10 +67,10 @@ export default function MyPage({
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } flex flex-col  grid-cols-10 h-full gap-4 `}
+                } flex flex-col grid-cols-10 h-full gap-8`}
             >
                 <MyCoverSection onFetchComplete={onFetchComplete} />
-                <div className="col-span-4 flex flex-col lg:h-1/2">
+                <div className="col-span-3 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <FriendRequests
@@ -78,14 +78,13 @@ export default function MyPage({
                             />
                         </div>
                     ) : null}
-                    <div className="flex h-1/4 md:h-auto md:p-4">
+                    <div className="flex flex-col h-1/4 md:h-auto md:p-4 gap-8">
                         <PictureList />
-                    </div>
-                    <div className="flex h-1/4 md:h-auto md:p-4">
+
                         <FriendList friendData={friendData} />
                     </div>
                 </div>
-                <div className="col-span-6 flex flex-col gap-4 md:px-4">
+                <div className="col-start-5 col-span-6 flex flex-col gap-8 md:px-4">
                     <NewPostInput onPostSuccess={handleRefreshPosts} />
                     <MyPostList
                         key={myPostsKey}
