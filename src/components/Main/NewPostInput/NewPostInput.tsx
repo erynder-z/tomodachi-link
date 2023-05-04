@@ -8,8 +8,8 @@ import {
     FaRegSmileBeam,
     FaRegImage,
 } from 'react-icons/fa';
-
 import { MdSend } from 'react-icons/md';
+import EmojiPicker from './EmojiPicker/EmojiPicker';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -22,6 +22,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const { username } = currentUserData || {};
 
     const [newPostText, setNewPostText] = useState<string>('');
+    const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -82,10 +83,10 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 onSubmit={handleSubmit}
                 className="flex w-full divide-gray-200"
             >
-                <div className="w-full text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative">
                         <textarea
-                            rows={2}
+                            rows={3}
                             required
                             autoComplete="off"
                             id="newPost"
@@ -107,8 +108,18 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         <button>
                             <FaRegImage />
                         </button>
-                        <button>
-                            <FaRegSmileBeam />
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setShowEmojiPicker(!showEmojiPicker);
+                            }}
+                        >
+                            <FaRegSmileBeam
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                }}
+                            />
                         </button>
                         <button
                             disabled={!newPostText}
@@ -121,6 +132,12 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         >
                             <MdSend />
                         </button>
+                        {showEmojiPicker && (
+                            <EmojiPicker
+                                setNewPostText={setNewPostText}
+                                setShowEmojiPicker={setShowEmojiPicker}
+                            />
+                        )}
                     </div>
                 </div>
             </form>

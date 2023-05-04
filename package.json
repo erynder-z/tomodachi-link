@@ -11,7 +11,10 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "date-fns": "^2.29.3",
+    "emoji-mart": "^5.5.2",
     "extract-colors": "^3.0.0",
     "react": "^18.2.0",
     "react-avatar-editor": "^13.0.0",
