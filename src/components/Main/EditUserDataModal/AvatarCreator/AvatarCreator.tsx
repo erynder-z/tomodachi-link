@@ -95,7 +95,7 @@ function AvatarCreator({
             </div>
             <button
                 onClick={handleConfirmButtonClick}
-                className="bg-blue-500 text-white rounded-md px-2 py-1"
+                className="bg-blue-500 text-white px-2 py-1"
             >
                 Confirm
             </button>

@@ -75,7 +75,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     };
 
     return (
-        <div className="flex gap-4 md:p-4 lg:w-full lg:flex-row lg:justify-around lg:rounded-md lg:shadow-lg bg-card">
+        <div className="flex gap-4 md:p-4 lg:w-full lg:flex-row lg:justify-around lg:shadow-lg bg-card">
             <form
                 action=""
                 method="POST"
@@ -90,7 +90,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             autoComplete="off"
                             id="newPost"
                             name="newPost"
-                            className="peer placeholder-transparent w-full bg-blue-100 rounded-md border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 p-4"
+                            className="peer placeholder-transparent w-full bg-blue-100 border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 p-4"
                             placeholder="message"
                             value={newPostText}
                             onChange={handleNewPostChange}

@@ -74,14 +74,14 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around lg:rounded-md shadow-lg bg-card">
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card">
                 <LoadingSpinner />
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around lg:rounded-md shadow-lg bg-card">
+        <div className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card">
             <div className="flex justify-between">
                 <div className="flex gap-4">
                     <img

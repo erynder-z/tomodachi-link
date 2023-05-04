@@ -53,15 +53,15 @@ export default function NotFriendCoverSection({
 
     return (
         <div className="h-[calc(100vh_-_5rem)] md:h-full grid grid-rows-4">
-            <div className="relative row-span-3 flex rounded-lg">
+            <div className="relative row-span-3 flex ">
                 <img
                     src={selectedCover?.image}
                     alt="cover image"
-                    className="h-full w-full object-cover rounded-t-lg"
+                    className="h-full w-full object-cover"
                 />
             </div>
             <div
-                className="relative row-span-1 flex flex-col md:flex-row gap-4 p-4 rounded-b-lg bg-slate-300"
+                className="relative row-span-1 flex flex-col md:flex-row gap-4 p-4 bg-slate-300"
                 style={
                     colorPalette[0]
                         ? {

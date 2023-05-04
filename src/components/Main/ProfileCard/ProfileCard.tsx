@@ -10,7 +10,7 @@ export default function ProfileCard() {
 
     return (
         <div className="flex w-full">
-            <div className="w-full text-center rounded-md shadow-lg p-4 bg-card">
+            <div className="w-full text-center shadow-lg p-4 bg-card">
                 <img
                     className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
                     src={`data:image/png;base64,${userImage}`}

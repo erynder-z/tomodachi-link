@@ -52,7 +52,7 @@ export default function LoginForm({ handleSubmit }: LoginFormProps) {
                         </label>
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full bg-blue-500 text-white rounded-md px-2 py-1">
+                        <button className="w-full bg-blue-500 text-white px-2 py-1">
                             Login
                         </button>
                     </div>

@@ -15,7 +15,7 @@ export default function UpdatePasswordButton({
         <div className="flex w-full">
             <button
                 onClick={handleUpdatePasswordButtonClick}
-                className="flex justify-center items-center gap-4 w-full bg-orange-500 text-white rounded-md px-2 py-1"
+                className="flex justify-center items-center gap-4 w-full bg-orange-500 text-white px-2 py-1"
             >
                 <MdKey size="1.5em" /> Change Password
             </button>

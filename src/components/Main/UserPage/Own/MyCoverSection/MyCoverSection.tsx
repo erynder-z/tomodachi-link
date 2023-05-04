@@ -96,16 +96,16 @@ export default function MyCoverSection({
 
     return (
         <div className="h-[calc(100vh_-_5rem)] md:h-full col-span-10 grid grid-rows-4">
-            <div className="relative row-span-3 flex rounded-lg">
+            <div className="relative row-span-3 flex">
                 <img
                     src={selectedCover?.image}
                     alt="cover image"
-                    className="f-full md:h-80 w-full object-cover rounded-t-lg"
+                    className="f-full md:h-80 w-full object-cover"
                 />
                 {!isMenuOpen && (
                     <button
                         onClick={handleChangeCoverImage}
-                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-white rounded-lg px-4 py-2 text-xs bg-opacity-75"
+                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-white px-4 py-2 text-xs bg-opacity-75"
                     >
                         Change cover image <FaImages size="1.5em" />
                     </button>
@@ -144,7 +144,7 @@ export default function MyCoverSection({
                 )}
                 {isSaveButtonShown && (
                     <button
-                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-lg py-2 px-4 border-2 border-white"
+                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 border-2 border-white"
                         style={{
                             backgroundColor: `${colorPalette[0]?.hex}`,
                             color: textColor,
@@ -156,7 +156,7 @@ export default function MyCoverSection({
                 )}
             </div>
             <div
-                className="relative row-span-1 flex h-full gap-4 px-4 rounded-b-lg bg-slate-300 "
+                className="relative row-span-1 flex h-full gap-4 px-4 bg-slate-300 "
                 style={
                     colorPalette[0]
                         ? {

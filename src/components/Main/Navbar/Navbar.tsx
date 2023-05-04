@@ -40,7 +40,7 @@ export default function Navbar() {
                     <NavbarUserOptionsButton />
                 </button>
                 {showOptions && (
-                    <div className="absolute bottom-16 right-0 mt-2 p-2 bg-card rounded-lg shadow-xl z-10">
+                    <div className="absolute bottom-16 right-0 mt-2 p-2 bg-card shadow-xl z-10">
                         <OptionsCard setShowOptions={setShowOptions} />
                     </div>
                 )}

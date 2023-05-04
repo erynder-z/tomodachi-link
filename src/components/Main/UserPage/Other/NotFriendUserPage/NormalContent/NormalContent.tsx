@@ -38,10 +38,7 @@ export default function NormalContent({
     const getButton = () => {
         if (disableButton) {
             return (
-                <button
-                    disabled
-                    className="bg-gray-500 text-white rounded-md px-2 py-1"
-                >
+                <button disabled className="bg-gray-500 text-white px-2 py-1">
                     Friend request pending
                 </button>
             );
@@ -49,7 +46,7 @@ export default function NormalContent({
             return (
                 <button
                     onClick={handleSendFriendRequest}
-                    className="bg-blue-500 text-white rounded-md px-2 py-1 hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-2 py-1 hover:bg-blue-600"
                 >
                     Send friend request
                 </button>
