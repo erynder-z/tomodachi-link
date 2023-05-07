@@ -7,7 +7,7 @@ export default function HomeSectionButton() {
         console.log('test');
     };
     return (
-        <Link to="/home" className="flex self-center cursor-pointer">
+        <Link to="/home" className="flex self-center cursor-pointer text-black">
             <button type="button" onClick={handleHomeSectionButtonClick}>
                 <MdHomeFilled size="1.5em" />
             </button>

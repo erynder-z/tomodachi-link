@@ -133,6 +133,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             <input
                                 type="file"
                                 name="imagePicker"
+                                accept="image/jpeg, image/png, image/webp"
                                 className="hidden"
                                 onChange={handleImageSelect}
                             />

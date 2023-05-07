@@ -25,7 +25,7 @@ export default function ProfilePageButton({
         <Link
             to={'/mypage'}
             onClick={handleCloseOptions}
-            className="relative cursor-pointer hover:drop-shadow-md hover:text-blue-400"
+            className="relative cursor-pointer hover:drop-shadow-md text-black hover:text-blue-400"
         >
             <TbUserCircle size="1.5em" />
             {numberOfPendingFriendRequests ? (

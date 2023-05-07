@@ -7,7 +7,10 @@ export default function FriendSectionButton() {
         console.log('test');
     };
     return (
-        <Link to="/friends" className="flex self-center cursor-pointer">
+        <Link
+            to="/friends"
+            className="flex self-center cursor-pointer text-black"
+        >
             <button type="button" onClick={handleFriendSectionButtonClick}>
                 <MdEmojiPeople size="1.5em" />
             </button>
