@@ -7,10 +7,13 @@ import {
     FaRegSmile,
     FaRegSmileBeam,
     FaRegImage,
+    FaYoutube,
 } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import EmojiPicker from './EmojiPicker/EmojiPicker';
 import resizeFile from '../../../utilities/ImageResizer';
+import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
+import { EmbeddedYoutubeVideo } from '../PostItem/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -24,7 +27,9 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
 
     const [newPostText, setNewPostText] = useState<string>('');
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
+    const [showYoutubeEmbed, setShowYoutubeEmbed] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [youtubeID, setYoutubeID] = useState<string | null>(null);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -45,8 +50,10 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
             formData.append('newPost', newPostText);
             if (selectedImage) {
                 const resizedFile = await resizeFile(selectedImage);
-                selectedImage &&
-                    formData.append('imagePicker', resizedFile as File);
+                formData.append('imagePicker', resizedFile as File);
+            }
+            if (youtubeID) {
+                formData.append('embeddedVideoID', youtubeID);
             }
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -65,6 +72,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 });
                 setNewPostText('');
                 setSelectedImage(null);
+                setYoutubeID(null);
                 onPostSuccess();
             } else {
                 const data = await response.json();
@@ -114,6 +122,12 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             what's on your mind, {username}?
                         </label>
                     </div>
+                    {youtubeID && (
+                        <div className="flex flex-col text-xs h-auto w-full">
+                            <span>embedded youtube video preview: </span>
+                            <EmbeddedYoutubeVideo videoID={youtubeID} />
+                        </div>
+                    )}
                     {selectedImage && (
                         <div className="flex flex-col text-xs">
                             <span>image preview: </span>
@@ -143,6 +157,15 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
+                                setShowYoutubeEmbed(!showYoutubeEmbed);
+                            }}
+                        >
+                            <FaYoutube />
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 setShowEmojiPicker(!showEmojiPicker);
                             }}
                         >
@@ -159,15 +182,22 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         >
                             <MdSend />
                         </button>
-                        {showEmojiPicker && (
-                            <EmojiPicker
-                                setNewPostText={setNewPostText}
-                                setShowEmojiPicker={setShowEmojiPicker}
-                            />
-                        )}
                     </div>
                 </div>
             </form>
+            {showEmojiPicker && (
+                <EmojiPicker
+                    setNewPostText={setNewPostText}
+                    setShowEmojiPicker={setShowEmojiPicker}
+                />
+            )}
+
+            {showYoutubeEmbed && (
+                <EmbedYoutubeVideoSelector
+                    setShowYoutubeEmbed={setShowYoutubeEmbed}
+                    setYoutubeID={setYoutubeID}
+                />
+            )}
         </div>
     );
 }
