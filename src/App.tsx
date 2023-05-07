@@ -34,6 +34,7 @@ function App() {
     // handle infinite scrolling on desktop devices
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
+
         if (scrollTop + clientHeight >= scrollHeight - 1) {
             setIsPaginationTriggered(true);
         }
@@ -77,76 +78,76 @@ function App() {
     }
 
     return (
-        <div className="flex flex-col h-screen">
-            <div className="flex pb-12">
-                <main
-                    className="flex w-full h-full gap-4 md:p-4 bg-background overflow-auto"
-                    onScroll={handleScroll}
-                    onTouchMove={handleTouchMove}
-                >
-                    <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
-                        <ProfileCard />
-                        <OptionsCard />
-                    </div>
-                    <div className="flex-1">
-                        <Routes>
-                            <Route element={<RequireAuth />}>
-                                <Route path="*" element={<NotFoundPage />} />
-                                <Route
-                                    path="/"
-                                    element={<Navigate replace to="/home" />}
-                                />
-                                <Route
-                                    path="/home"
-                                    element={
-                                        <HomeSection
-                                            setCurrentView={setCurrentView}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/mypage"
-                                    element={
-                                        <MyPage
-                                            setCurrentView={setCurrentView}
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/friends"
-                                    element={
-                                        <FriendSection
-                                            setCurrentView={setCurrentView}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/users/:id"
-                                    element={
-                                        <UserPage
-                                            key={
-                                                currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
-                                            }
-                                            setCurrentView={setCurrentView}
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                            </Route>
-                        </Routes>
-                    </div>
-                    {showSidebar && (
-                        <aside className="hidden lg:flex w-1/4 flex-none">
-                            <Sidebar />
-                        </aside>
-                    )}
-                </main>
-            </div>
+        <div className="flex flex-col h-full pb-12">
+            <main
+                className="flex w-full h-full gap-4 md:p-4 bg-background overflow-auto"
+                onScroll={handleScroll}
+                onTouchMove={handleTouchMove}
+            >
+                <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
+                    <ProfileCard />
+                    <OptionsCard />
+                </div>
+
+                <div className="flex-1">
+                    <Routes>
+                        <Route element={<RequireAuth />}>
+                            <Route path="*" element={<NotFoundPage />} />
+                            <Route
+                                path="/"
+                                element={<Navigate replace to="/home" />}
+                            />
+                            <Route
+                                path="/home"
+                                element={
+                                    <HomeSection
+                                        setCurrentView={setCurrentView}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/mypage"
+                                element={
+                                    <MyPage
+                                        setCurrentView={setCurrentView}
+                                        isPaginationTriggered={
+                                            isPaginationTriggered
+                                        }
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/friends"
+                                element={
+                                    <FriendSection
+                                        setCurrentView={setCurrentView}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/users/:id"
+                                element={
+                                    <UserPage
+                                        key={
+                                            currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
+                                        }
+                                        setCurrentView={setCurrentView}
+                                        isPaginationTriggered={
+                                            isPaginationTriggered
+                                        }
+                                    />
+                                }
+                            />
+                        </Route>
+                    </Routes>
+                </div>
+                {showSidebar && (
+                    <aside className="hidden lg:flex w-1/4 flex-none">
+                        <Sidebar />
+                    </aside>
+                )}
+            </main>
+
             <nav className="flex-none fixed bottom-0 w-full h-12">
                 <Navbar />
             </nav>

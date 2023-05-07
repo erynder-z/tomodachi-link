@@ -40,7 +40,7 @@ export default function MyPostList({ isPaginationTriggered }: MyPostListProps) {
     ));
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-4">
             {postItemsList.length > 0 ? (
                 postItemsList
             ) : (
