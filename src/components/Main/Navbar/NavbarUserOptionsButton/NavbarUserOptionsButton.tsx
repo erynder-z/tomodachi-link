@@ -1,11 +1,11 @@
 import React from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import { convertUserPic } from '../../../../utilities/convertUserPic';
+import { convertImageToBase64 } from '../../../../utilities/convertImageToBase64';
 
 export default function NavbarUserOptionsButton() {
     const { currentUserData } = useCurrentUserData();
     const { userpic, pendingFriendRequests } = currentUserData || {};
-    const userImage = convertUserPic(userpic);
+    const userImage = convertImageToBase64(userpic);
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 

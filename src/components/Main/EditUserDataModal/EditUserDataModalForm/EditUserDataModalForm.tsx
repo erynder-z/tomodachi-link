@@ -4,7 +4,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
-import { convertUserPic } from '../../../../utilities/convertUserPic';
+import { convertImageToBase64 } from '../../../../utilities/convertImageToBase64';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
 
 type EditUserDataModalFormProps = {
@@ -31,7 +31,7 @@ export default function EditUserDataModalForm({
         preview: string;
     }>({
         selectedFile: null,
-        preview: convertUserPic(userpic),
+        preview: convertImageToBase64(userpic),
     });
 
     const [showCropper, setShowCropper] = useState<boolean>(false);

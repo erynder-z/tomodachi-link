@@ -1,12 +1,12 @@
 import React from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
-import { convertUserPic } from '../../../utilities/convertUserPic';
+import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
 
 export default function ProfileCard() {
     const { currentUserData } = useCurrentUserData();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
-    const userImage = convertUserPic(userpic);
+    const userImage = convertImageToBase64(userpic);
 
     return (
         <div className="flex w-full">

@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import EmojiPicker from './EmojiPicker/EmojiPicker';
+import resizeFile from '../../../utilities/ImageResizer';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -23,6 +24,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
 
     const [newPostText, setNewPostText] = useState<string>('');
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -30,23 +32,31 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
         setNewPostText(event.target.value);
     };
 
+    const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+            setSelectedImage(event.target.files[0]);
+        }
+    };
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (token) {
-            const body = {
-                newPost: newPostText,
-            };
+            const formData = new FormData();
+            formData.append('newPost', newPostText);
+            if (selectedImage) {
+                const resizedFile = await resizeFile(selectedImage);
+                selectedImage &&
+                    formData.append('imagePicker', resizedFile as File);
+            }
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(`${serverURL}/api/v1/post`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(body),
+                body: formData,
             });
-
             if (response.ok) {
                 setInfo({
                     typeOfInfo: 'good',
@@ -54,6 +64,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                     icon: <FaRegSmile />,
                 });
                 setNewPostText('');
+                setSelectedImage(null);
                 onPostSuccess();
             } else {
                 const data = await response.json();
@@ -103,11 +114,30 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             what's on your mind, {username}?
                         </label>
                     </div>
-
+                    {selectedImage && (
+                        <div className="flex flex-col text-xs">
+                            <span>image preview: </span>
+                            <img
+                                className=" object-cover mx-auto "
+                                src={
+                                    selectedImage
+                                        ? URL.createObjectURL(selectedImage)
+                                        : `data:image/png;base64,${selectedImage}`
+                                }
+                                alt="uploaded image"
+                            />
+                        </div>
+                    )}
                     <div className="flex w-full gap-4">
-                        <button>
+                        <label className="flex items-center cursor-pointer">
+                            <input
+                                type="file"
+                                name="imagePicker"
+                                className="hidden"
+                                onChange={handleImageSelect}
+                            />
                             <FaRegImage />
-                        </button>
+                        </label>
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
@@ -115,11 +145,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                                 setShowEmojiPicker(!showEmojiPicker);
                             }}
                         >
-                            <FaRegSmileBeam
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                }}
-                            />
+                            <FaRegSmileBeam />
                         </button>
                         <button
                             disabled={!newPostText}
