@@ -15,6 +15,7 @@ import { fetchPostContent } from '../../../utilities/fetchPostContent';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import CommentInput from './Comment/CommentInput/CommentInput';
 import CommentList from './Comment/CommentList/CommentList';
+import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
 
 type PostItemProps = {
     postID: string;
@@ -31,14 +32,8 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
     const { firstName, lastName } = postDetails?.owner || {};
     const displayName = `${firstName} ${lastName} `;
 
-    const userPic = postDetails?.owner?.userpic.data.data
-        ? window.btoa(
-              String.fromCharCode(
-                  ...new Uint8Array(postDetails.owner.userpic.data.data)
-              )
-          )
-        : '';
-
+    const userPic = convertImageToBase64(postDetails?.owner?.userpic);
+    const postImage = convertImageToBase64(postDetails?.image);
     const time = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
 
     const getPostDetails = async (postID: string) => {
@@ -102,6 +97,15 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
                     </ReactMarkdown>
                 )}
             </div>
+            {postImage && (
+                <div className="flex justify-center">
+                    <img
+                        className="w-full h-auto object-cover shadow-lg"
+                        src={`data:image/png;base64,${postImage}`}
+                        alt="User uploaded image"
+                    />
+                </div>
+            )}
             <div className="flex justify-around items-center ">
                 <button
                     onClick={handleShowCommentsClick}
