@@ -56,6 +56,7 @@ export default function FriendUserPage({
                     </div>
                     <div className="col-start-5 col-span-6 flex flex-col gap-8 md:px-4 overflow-auto">
                         <OtherPostList
+                            key={_id}
                             isPaginationTriggered={isPaginationTriggered}
                         />
                     </div>
