@@ -80,7 +80,7 @@ function App() {
     return (
         <div className="flex flex-col h-full pb-12">
             <main
-                className="flex w-full h-full gap-4 md:p-4 bg-background overflow-auto"
+                className="flex w-full h-[calc(100vh_-_3rem)] gap-4 md:p-4 bg-background overflow-auto"
                 onScroll={handleScroll}
                 onTouchMove={handleTouchMove}
             >
