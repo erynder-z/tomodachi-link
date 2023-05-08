@@ -16,6 +16,7 @@ import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import CommentInput from './Comment/CommentInput/CommentInput';
 import CommentList from './Comment/CommentList/CommentList';
 import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
+import { EmbeddedYoutubeVideo } from './EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 
 type PostItemProps = {
     postID: string;
@@ -34,6 +35,7 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
 
     const userPic = convertImageToBase64(postDetails?.owner?.userpic);
     const postImage = convertImageToBase64(postDetails?.image);
+    const postVideoID = postDetails?.embeddedVideoID;
     const time = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
 
     const getPostDetails = async (postID: string) => {
@@ -104,6 +106,11 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
                         src={`data:image/png;base64,${postImage}`}
                         alt="User uploaded image"
                     />
+                </div>
+            )}
+            {postVideoID && (
+                <div className="flex flex-col text-xs h-auto w-full">
+                    <EmbeddedYoutubeVideo videoID={postVideoID} />
                 </div>
             )}
             <div className="flex justify-around items-center ">
