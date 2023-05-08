@@ -11,6 +11,7 @@ export type PostType = {
     timestamp: Date;
     text: string;
     image?: any;
+    embeddedVideoID?: string;
     comments: CommentType[];
     reactions: { positive: number; negative: number };
 };
