@@ -16,6 +16,7 @@
     "date-fns": "^2.29.3",
     "emoji-mart": "^5.5.2",
     "extract-colors": "^3.0.0",
+    "gif-picker-react": "^1.1.0",
     "react": "^18.2.0",
     "react-avatar-editor": "^13.0.0",
     "react-dom": "^18.2.0",

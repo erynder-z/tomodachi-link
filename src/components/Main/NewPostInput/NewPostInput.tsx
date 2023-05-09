@@ -10,10 +10,13 @@ import {
     FaYoutube,
 } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
+import { TbGif } from 'react-icons/tb';
 import EmojiPicker from './EmojiPicker/EmojiPicker';
 import resizeFile from '../../../utilities/ImageResizer';
 import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
 import { EmbeddedYoutubeVideo } from '../PostItem/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
+import GifSelector from './GifSelector/GifSelector';
+import { TenorImage } from 'gif-picker-react';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -28,8 +31,10 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const [newPostText, setNewPostText] = useState<string>('');
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
     const [showYoutubeEmbed, setShowYoutubeEmbed] = useState<boolean>(false);
+    const [showGifSelector, setShowGifSelector] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [youtubeID, setYoutubeID] = useState<string | null>(null);
+    const [gif, setGif] = useState<TenorImage | null>(null);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -55,6 +60,9 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
             if (youtubeID) {
                 formData.append('embeddedVideoID', youtubeID);
             }
+            if (gif) {
+                formData.append('gifUrl', gif.url);
+            }
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(`${serverURL}/api/v1/post`, {
@@ -73,6 +81,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 setNewPostText('');
                 setSelectedImage(null);
                 setYoutubeID(null);
+                setGif(null);
                 onPostSuccess();
             } else {
                 const data = await response.json();
@@ -166,6 +175,15 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
+                                setShowGifSelector(!showGifSelector);
+                            }}
+                        >
+                            <TbGif />
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 setShowEmojiPicker(!showEmojiPicker);
                             }}
                         >
@@ -189,6 +207,13 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 <EmojiPicker
                     setNewPostText={setNewPostText}
                     setShowEmojiPicker={setShowEmojiPicker}
+                />
+            )}
+
+            {showGifSelector && (
+                <GifSelector
+                    setShowGifSelector={setShowGifSelector}
+                    setGif={setGif}
                 />
             )}
 
