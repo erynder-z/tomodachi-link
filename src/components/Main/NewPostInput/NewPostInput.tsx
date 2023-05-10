@@ -151,6 +151,18 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                             />
                         </div>
                     )}
+                    {gif && (
+                        <div className="flex flex-col text-xs">
+                            <span>Gif preview: </span>
+                            <div className="flex justify-center">
+                                <img
+                                    className="w-full h-auto object-cover shadow-lg"
+                                    src={gif.url}
+                                    alt="User uploaded gif"
+                                />
+                            </div>
+                        </div>
+                    )}
                     <div className="flex w-full gap-4">
                         <label className="flex items-center cursor-pointer">
                             <input
