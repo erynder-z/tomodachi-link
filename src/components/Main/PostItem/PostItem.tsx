@@ -29,7 +29,7 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
     const [showComments, setShowComments] = useState<boolean>(false);
 
-    const { timestamp, text, comments, reactions } = postDetails || {};
+    const { timestamp, text, comments, reactions, gifUrl } = postDetails || {};
     const { firstName, lastName } = postDetails?.owner || {};
     const displayName = `${firstName} ${lastName} `;
 
@@ -105,6 +105,15 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
                         className="w-full h-auto object-cover shadow-lg"
                         src={`data:image/png;base64,${postImage}`}
                         alt="User uploaded image"
+                    />
+                </div>
+            )}
+            {gifUrl && (
+                <div className="flex justify-center">
+                    <img
+                        className="w-full h-auto object-cover shadow-lg"
+                        src={gifUrl}
+                        alt="User uploaded gif"
                     />
                 </div>
             )}
