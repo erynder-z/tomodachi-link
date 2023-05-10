@@ -8,6 +8,7 @@ import {
     FaRegSmileBeam,
     FaRegImage,
     FaYoutube,
+    FaTimes,
 } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';
@@ -132,14 +133,30 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         </label>
                     </div>
                     {youtubeID && (
-                        <div className="flex flex-col text-xs h-auto w-full">
+                        <div className="relative flex flex-col text-xs h-auto w-full">
                             <span>embedded youtube video preview: </span>
+                            <button
+                                onClick={() => {
+                                    setYoutubeID(null);
+                                }}
+                                className="absolute top-5 right-2 text-red-500 z-50"
+                            >
+                                <FaTimes size="1.5em" />
+                            </button>
                             <EmbeddedYoutubeVideo videoID={youtubeID} />
                         </div>
                     )}
                     {selectedImage && (
-                        <div className="flex flex-col text-xs">
+                        <div className="relative flex flex-col text-xs">
                             <span>image preview: </span>
+                            <button
+                                onClick={() => {
+                                    setSelectedImage(null);
+                                }}
+                                className="absolute top-5 right-2 text-red-500 z-50"
+                            >
+                                <FaTimes size="1.5em" />
+                            </button>
                             <img
                                 className=" object-cover mx-auto "
                                 src={
@@ -154,7 +171,15 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                     {gif && (
                         <div className="flex flex-col text-xs">
                             <span>Gif preview: </span>
-                            <div className="flex justify-center">
+                            <div className="relative flex justify-center">
+                                <button
+                                    onClick={() => {
+                                        setGif(null);
+                                    }}
+                                    className="absolute top-2 right-2 text-red-500 z-50"
+                                >
+                                    <FaTimes size="1.5em" />
+                                </button>
                                 <img
                                     className="w-full h-auto object-cover shadow-lg"
                                     src={gif.url}
