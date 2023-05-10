@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';
-import EmojiPicker from './EmojiPicker/EmojiPicker';
+import EmojiPicker from './EmojiSelector/EmojiPicker';
 import resizeFile from '../../../utilities/ImageResizer';
 import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
 import { EmbeddedYoutubeVideo } from '../PostItem/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
