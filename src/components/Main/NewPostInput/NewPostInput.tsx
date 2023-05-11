@@ -2,22 +2,17 @@ import React, { useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
-import {
-    FaExclamationTriangle,
-    FaRegSmile,
-    FaRegSmileBeam,
-    FaRegImage,
-    FaYoutube,
-    FaTimes,
-} from 'react-icons/fa';
-import { MdSend } from 'react-icons/md';
-import { TbGif } from 'react-icons/tb';
+import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 import EmojiPicker from './EmojiSelector/EmojiPicker';
 import resizeFile from '../../../utilities/ImageResizer';
 import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
-import { EmbeddedYoutubeVideo } from '../PostItem/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 import GifSelector from './GifSelector/GifSelector';
 import { TenorImage } from 'gif-picker-react';
+import PostInputTextarea from './PostInputTextarea/PostInputTextarea';
+import EmbeddedYoutubeVideoArea from './EmbeddedYoutubeVideoArea/EmbeddedYoutubeVideoArea';
+import SelectedImageArea from './SelectedImageArea/SelectedImageArea';
+import GifArea from './GifArea/GifArea';
+import ButtonArea from './ButtonArea/ButtonArea';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -113,131 +108,34 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 className="flex w-full divide-gray-200"
             >
                 <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="relative">
-                        <textarea
-                            rows={3}
-                            required
-                            autoComplete="off"
-                            id="newPost"
-                            name="newPost"
-                            className="peer placeholder-transparent w-full bg-blue-100 border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 p-4"
-                            placeholder="message"
-                            value={newPostText}
-                            onChange={handleNewPostChange}
-                        />
-                        <label
-                            htmlFor="newPost"
-                            className="absolute left-0 -top-5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-sm px-2"
-                        >
-                            what's on your mind, {username}?
-                        </label>
-                    </div>
+                    <PostInputTextarea
+                        newPostText={newPostText}
+                        handleNewPostChange={handleNewPostChange}
+                        username={username}
+                    />
                     {youtubeID && (
-                        <div className="relative flex flex-col text-xs h-auto w-full">
-                            <span>embedded youtube video preview: </span>
-                            <button
-                                onClick={() => {
-                                    setYoutubeID(null);
-                                }}
-                                className="absolute top-5 right-2 text-red-500 z-50"
-                            >
-                                <FaTimes size="1.5em" />
-                            </button>
-                            <EmbeddedYoutubeVideo videoID={youtubeID} />
-                        </div>
+                        <EmbeddedYoutubeVideoArea
+                            setYoutubeID={setYoutubeID}
+                            youtubeID={youtubeID}
+                        />
                     )}
                     {selectedImage && (
-                        <div className="relative flex flex-col text-xs">
-                            <span>image preview: </span>
-                            <button
-                                onClick={() => {
-                                    setSelectedImage(null);
-                                }}
-                                className="absolute top-5 right-2 text-red-500 z-50"
-                            >
-                                <FaTimes size="1.5em" />
-                            </button>
-                            <img
-                                className=" object-cover mx-auto "
-                                src={
-                                    selectedImage
-                                        ? URL.createObjectURL(selectedImage)
-                                        : `data:image/png;base64,${selectedImage}`
-                                }
-                                alt="uploaded image"
-                            />
-                        </div>
+                        <SelectedImageArea
+                            setSelectedImage={setSelectedImage}
+                            selectedImage={selectedImage}
+                        />
                     )}
-                    {gif && (
-                        <div className="flex flex-col text-xs">
-                            <span>Gif preview: </span>
-                            <div className="relative flex justify-center">
-                                <button
-                                    onClick={() => {
-                                        setGif(null);
-                                    }}
-                                    className="absolute top-2 right-2 text-red-500 z-50"
-                                >
-                                    <FaTimes size="1.5em" />
-                                </button>
-                                <img
-                                    className="w-full h-auto object-cover shadow-lg"
-                                    src={gif.url}
-                                    alt="User uploaded gif"
-                                />
-                            </div>
-                        </div>
-                    )}
-                    <div className="flex w-full gap-4">
-                        <label className="flex items-center cursor-pointer">
-                            <input
-                                type="file"
-                                name="imagePicker"
-                                accept="image/jpeg, image/png, image/webp"
-                                className="hidden"
-                                onChange={handleImageSelect}
-                            />
-                            <FaRegImage />
-                        </label>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setShowYoutubeEmbed(!showYoutubeEmbed);
-                            }}
-                        >
-                            <FaYoutube />
-                        </button>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setShowGifSelector(!showGifSelector);
-                            }}
-                        >
-                            <TbGif />
-                        </button>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setShowEmojiPicker(!showEmojiPicker);
-                            }}
-                        >
-                            <FaRegSmileBeam />
-                        </button>
-                        <button
-                            disabled={!newPostText}
-                            className="flex items-center justify-center h-8 w-8 bg-blue-500 hover:bg-blue-600 text-white ml-auto text-sm"
-                            title={
-                                newPostText
-                                    ? undefined
-                                    : 'Please enter a message'
-                            }
-                        >
-                            <MdSend />
-                        </button>
-                    </div>
+                    {gif && <GifArea setGif={setGif} gif={gif} />}
+                    <ButtonArea
+                        handleImageSelect={handleImageSelect}
+                        setShowYoutubeEmbed={setShowYoutubeEmbed}
+                        showYoutubeEmbed={showYoutubeEmbed}
+                        setShowGifSelector={setShowGifSelector}
+                        showGifSelector={showGifSelector}
+                        setShowEmojiPicker={setShowEmojiPicker}
+                        showEmojiPicker={showEmojiPicker}
+                        newPostText={newPostText}
+                    />
                 </div>
             </form>
             {showEmojiPicker && (
