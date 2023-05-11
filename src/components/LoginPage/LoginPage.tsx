@@ -105,9 +105,12 @@ export default function LoginPage() {
                             <div className="flex w-full">
                                 <button
                                     onClick={handleRegisterClick}
-                                    className="w-full bg-green-500 text-white px-2 py-1"
+                                    className="w-full relative overflow-hidden bg-green-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group"
                                 >
-                                    Register
+                                    <span className="z-10 relative">
+                                        Register
+                                    </span>
+                                    <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
                                 </button>
                             </div>
                         </>

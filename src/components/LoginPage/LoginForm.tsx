@@ -52,8 +52,9 @@ export default function LoginForm({ handleSubmit }: LoginFormProps) {
                         </label>
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full bg-blue-500 text-white px-2 py-1">
-                            Login
+                        <button className="w-full relative overflow-hidden bg-blue-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group">
+                            <span className="z-10 relative">Login</span>
+                            <span className="absolute top-0 left-0 h-full w-full bg-blue-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
                         </button>
                     </div>
                 </div>
