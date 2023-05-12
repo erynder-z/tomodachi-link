@@ -5,10 +5,10 @@ import NewPostInput from '../../NewPostInput/NewPostInput';
 import useFriendData from '../../../../hooks/useFriendData';
 import FriendList from '../SharedComponents/FriendList/FriendList';
 import FriendRequests from './FriendRequests/FriendRequests';
-import PictureList from '../SharedComponents/PictureList/PictureList';
 import MyPostList from './MyPostList/MyPostList';
 import MyCoverSection from './MyCoverSection/MyCoverSection';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import MyPictureList from './MyPictureList/MyPictureList';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -70,7 +70,7 @@ export default function MyPage({
                 } flex flex-col grid-cols-10 h-full gap-8`}
             >
                 <MyCoverSection onFetchComplete={onFetchComplete} />
-                <div className="col-span-3 flex flex-col lg:h-1/2">
+                <div className="col-span-4 flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <FriendRequests
@@ -79,7 +79,7 @@ export default function MyPage({
                         </div>
                     ) : null}
                     <div className="flex flex-col h-1/4 md:h-auto md:p-4 gap-8">
-                        <PictureList />
+                        <MyPictureList />
 
                         <FriendList friendData={friendData} />
                     </div>
