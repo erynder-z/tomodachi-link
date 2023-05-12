@@ -64,8 +64,11 @@ export default function ButtonArea({
                 <FaRegSmileBeam />
             </button>
             <button
-                disabled={!newPostText}
-                className="flex items-center justify-center h-8 w-8 bg-blue-500 hover:bg-blue-600 text-white ml-auto text-sm"
+                className={`flex items-center justify-center h-8 w-8 text-white ml-auto text-sm ${
+                    !newPostText
+                        ? 'bg-gray-500 hover:bg-gray-600'
+                        : 'bg-blue-500 hover:bg-blue-600'
+                }`}
                 title={newPostText ? undefined : 'Please enter a message'}
             >
                 <MdSend />
