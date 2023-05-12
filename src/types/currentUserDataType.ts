@@ -13,7 +13,7 @@ export type CurrentUserDataType = {
     joined: Date;
     lastSeen: Date;
     userpic: {
-        data: Buffer;
+        data: { data: Buffer };
         contentType: string;
     };
     cover: CoverType;
