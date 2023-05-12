@@ -12,12 +12,14 @@ type AvatarCreatorProps = {
         }>
     >;
     handleConfirmImage: () => void;
+    handleAvatarCreatorClose: () => void;
 };
 
 function AvatarCreator({
     image,
     setImage,
     handleConfirmImage,
+    handleAvatarCreatorClose,
 }: AvatarCreatorProps) {
     const editor = useRef<AvatarEditor | null>(null);
     const [scale, setScale] = useState(1);
@@ -50,7 +52,7 @@ function AvatarCreator({
     }
 
     const handleCloseButtonClick = () => {
-        handleConfirmImage();
+        handleAvatarCreatorClose();
     };
 
     const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

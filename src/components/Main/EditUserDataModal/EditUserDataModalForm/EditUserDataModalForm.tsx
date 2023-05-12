@@ -31,10 +31,20 @@ export default function EditUserDataModalForm({
         preview: string;
     }>({
         selectedFile: null,
-        preview: convertImageToBase64(userpic),
+        preview:
+            typeof userpic !== 'string' ? convertImageToBase64(userpic) : '',
+    });
+
+    const [originalImage] = useState({
+        selectedFile: image.selectedFile,
+        preview: image.preview,
     });
 
     const [showCropper, setShowCropper] = useState<boolean>(false);
+
+    const imageUrl = image.selectedFile
+        ? URL.createObjectURL(image.selectedFile)
+        : `data:image/png;base64,${image.preview}`;
 
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
@@ -78,6 +88,10 @@ export default function EditUserDataModalForm({
         setShowCropper(false);
     };
 
+    const handleAvatarCreatorClose = () => {
+        setImage(originalImage);
+    };
+
     return (
         <div className="max-w-md mx-auto">
             <div>
@@ -93,11 +107,7 @@ export default function EditUserDataModalForm({
                     <div className="flex flex-col ml-auto">
                         <img
                             className="w-16 h-16 object-cover rounded-full mx-auto "
-                            src={
-                                image.selectedFile
-                                    ? URL.createObjectURL(image.selectedFile)
-                                    : `data:image/png;base64,${image.preview}`
-                            }
+                            src={imageUrl}
                             alt="User avatar"
                         />
                         <label className="flex items-end justify-end cursor-pointer">
@@ -201,6 +211,7 @@ export default function EditUserDataModalForm({
                     image={image.selectedFile}
                     setImage={setImage}
                     handleConfirmImage={handleConfirmImage}
+                    handleAvatarCreatorClose={handleAvatarCreatorClose}
                 />
             )}
         </div>
