@@ -1,8 +1,10 @@
 import React from 'react';
 
 export type User = {
-    _id: string;
-    username: string;
+    user: {
+        _id: string;
+        username: string;
+    };
 };
 
 export type AuthContextProviderProps = {

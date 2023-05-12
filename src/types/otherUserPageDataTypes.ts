@@ -6,7 +6,9 @@ export type OtherUserPageDataTypes = {
     lastName: string;
     username: string;
     userpic: {
-        data: Buffer;
+        data: {
+            data: Buffer;
+        };
         contentType: string;
     };
     cover?: string;
