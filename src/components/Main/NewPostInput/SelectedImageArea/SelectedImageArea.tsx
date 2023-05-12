@@ -17,7 +17,7 @@ export default function SelectedImageArea({
                 onClick={() => {
                     setSelectedImage(null);
                 }}
-                className="absolute top-5 right-2 text-red-500 z-50"
+                className="absolute top-5 right-2 text-red-500 z-5"
             >
                 <FaTimes size="1.5em" />
             </button>

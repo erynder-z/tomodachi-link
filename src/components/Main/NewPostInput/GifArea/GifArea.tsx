@@ -16,7 +16,7 @@ export default function GifArea({ setGif, gif }: GifAreaProps) {
                     onClick={() => {
                         setGif(null);
                     }}
-                    className="absolute top-2 right-2 text-red-500 z-50"
+                    className="absolute top-2 right-2 text-red-500 z-5"
                 >
                     <FaTimes size="1.5em" />
                 </button>
