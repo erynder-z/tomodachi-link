@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import PostItem from '../../../../PostItem/PostItem';
-import { PostType } from '../../../../../../types/postType';
-import useAuth from '../../../../../../hooks/useAuth';
-import useInfoCard from '../../../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
-import { fetchOtherPosts } from '../../../../../../utilities/fetchOtherPosts';
-import { useParams } from 'react-router-dom';
+import PostItem from '../../../PostItem/PostItem';
+import { PostType } from '../../../../../types/postType';
+import useAuth from '../../../../../hooks/useAuth';
+import useInfoCard from '../../../../../hooks/useInfoCard';
+import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
+import { fetchPosts } from '../../../../../utilities/fetchPosts';
 
-type OtherPostListProps = {
+type MyPostListProps = {
+    userId: string | undefined;
     isPaginationTriggered: boolean;
 };
 
-export default function OtherPostList({
+export default function PostList({
+    userId,
     isPaginationTriggered,
-}: OtherPostListProps) {
-    const params = useParams();
-    const id: string | undefined = params.id;
+}: MyPostListProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [posts, setPosts] = useState<PostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const handleFetchUserPosts = async () => {
-        if (authUser && token && id) {
-            const response = await fetchOtherPosts(id, token, setInfo, skip);
+    const handleFetchPosts = async () => {
+        if (authUser && token && userId) {
+            const response = await fetchPosts(userId, token, setInfo, skip);
             setPosts([...posts, ...response]);
             setLoading(false);
         }
@@ -37,8 +36,10 @@ export default function OtherPostList({
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        handleFetchUserPosts();
-    }, [skip]);
+        if (userId) {
+            handleFetchPosts();
+        }
+    }, [skip, userId]);
 
     const postItemsList = posts?.map((post) => (
         <PostItem key={post._id} postID={post._id} />

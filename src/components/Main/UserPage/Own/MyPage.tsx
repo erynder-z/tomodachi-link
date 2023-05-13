@@ -5,10 +5,10 @@ import NewPostInput from '../../NewPostInput/NewPostInput';
 import useFriendData from '../../../../hooks/useFriendData';
 import FriendList from '../SharedComponents/FriendList/FriendList';
 import FriendRequests from './FriendRequests/FriendRequests';
-import MyPostList from './MyPostList/MyPostList';
 import MyCoverSection from './MyCoverSection/MyCoverSection';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import PictureList from '../SharedComponents/PictureList/PictureList';
+import PostList from '../SharedComponents/PostList/PostList';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -30,6 +30,7 @@ export default function MyPage({
     });
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
+    const userId = currentUserData?._id;
 
     const handleRefreshPosts = () => {
         setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
@@ -89,8 +90,8 @@ export default function MyPage({
                 </div>
                 <div className="flex flex-col gap-8 md:px-4">
                     <NewPostInput onPostSuccess={handleRefreshPosts} />
-                    <MyPostList
-                        key={myPostsKey}
+                    <PostList
+                        userId={userId}
                         isPaginationTriggered={isPaginationTriggered}
                     />
                 </div>

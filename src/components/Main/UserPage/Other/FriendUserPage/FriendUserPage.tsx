@@ -3,9 +3,9 @@ import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTy
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
-import OtherPostList from './OtherPostList/OtherPostList';
 import FriendCoverSection from './FriendCoverSection/FriendCoverSection';
 import PictureList from '../../SharedComponents/PictureList/PictureList';
+import PostList from '../../SharedComponents/PostList/PostList';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -55,7 +55,8 @@ export default function FriendUserPage({
                         </div>
                     </div>
                     <div className="flex flex-col gap-8 md:px-4 overflow-auto">
-                        <OtherPostList
+                        <PostList
+                            userId={_id}
                             key={_id}
                             isPaginationTriggered={isPaginationTriggered}
                         />
