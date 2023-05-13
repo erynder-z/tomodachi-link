@@ -99,7 +99,7 @@ export default function FriendRequestListItem({
                 className="flex items-center gap-2 cursor-pointer"
             >
                 <img
-                    className="w-7 h-7 object-cover rounded-full"
+                    className="w-7 h-7 aspect-square object-cover rounded-full"
                     src={`data:image/png;base64,${userPic}`}
                     alt="User avatar"
                 />

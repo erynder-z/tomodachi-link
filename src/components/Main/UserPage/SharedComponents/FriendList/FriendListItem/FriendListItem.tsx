@@ -24,15 +24,15 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
     return (
         <div
             onClick={handleUserClick}
-            className="flex flex-col justify-between gap-1 cursor-pointer"
+            className="w-20 flex flex-col gap-1 cursor-pointer"
         >
             <img
-                className="w-24 h-24 object-contain rounded-md"
+                className="w-20 h-20 aspect-square object-contain "
                 src={`data:image/png;base64,${userpic.data}`}
                 alt="User avatar"
             />
 
-            <div className="text-xs p-1">
+            <div className="text-xs p-1 break-all">
                 {firstName} {lastName}
             </div>
         </div>

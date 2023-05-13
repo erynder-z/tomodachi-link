@@ -1,11 +1,11 @@
 import React from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
-import PictureList from '../../SharedComponents/PictureList/PictureList';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
 import OtherPostList from './OtherPostList/OtherPostList';
 import FriendCoverSection from './FriendCoverSection/FriendCoverSection';
+import PictureList from '../../SharedComponents/PictureList/PictureList';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -46,15 +46,15 @@ export default function FriendUserPage({
                     lastSeenFormatted={lastSeenFormatted}
                     mutualFriends={mutualFriends}
                 />
-                <div className="flex flex-col md:grid grid-cols-10 gap-8">
-                    <div className="col-span-3 flex flex-col h-1/2 ov">
-                        <div className="flex flex-col h-1/4 md:h-auto md:p-4 gap-8">
-                            <PictureList />
+                <div className="flex flex-col md:grid grid-cols-[2fr,3fr] gap-8">
+                    <div className="flex flex-col h-1/2">
+                        <div className="flex flex-col h-1/4 md:h-auto md:p-4 gap-8 md:mr-auto">
+                            <PictureList userId={userPageData._id} />
 
                             <FriendList friendData={friends} />
                         </div>
                     </div>
-                    <div className="col-start-5 col-span-6 flex flex-col gap-8 md:px-4 overflow-auto">
+                    <div className="flex flex-col gap-8 md:px-4 overflow-auto">
                         <OtherPostList
                             key={_id}
                             isPaginationTriggered={isPaginationTriggered}

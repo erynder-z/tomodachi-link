@@ -31,12 +31,14 @@ export default function PictureList({ userId }: PictureListProps) {
     }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
-        <img
-            key={uuidv4()}
-            className="w-full h-auto object-contain shadow-lg"
-            src={`data:image/png;base64,${convertImageToBase64(picture)}`}
-            alt="User uploaded image"
-        />
+        <div>
+            <img
+                key={uuidv4()}
+                className="w-20 h-20 aspect-square object-cover shadow-lg"
+                src={`data:image/png;base64,${convertImageToBase64(picture)}`}
+                alt="User uploaded image"
+            />
+        </div>
     ));
 
     return (
