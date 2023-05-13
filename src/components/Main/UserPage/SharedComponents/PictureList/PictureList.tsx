@@ -6,6 +6,7 @@ import { ImageType } from '../../../../../types/imageType';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchRecentPics } from '../../../../../utilities/fetchRecentPics';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
+import LightBox from '../../../Lightbox/LightBox';
 
 type PictureListProps = {
     userId: string | undefined;
@@ -15,6 +16,7 @@ export default function PictureList({ userId }: PictureListProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [pictures, setPictures] = useState<ImageType[]>([]);
+    const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const handleFetchUserPics = async () => {
@@ -26,17 +28,21 @@ export default function PictureList({ userId }: PictureListProps) {
         }
     };
 
+    const handleImageClick = (image: ImageType) => {
+        setSelectedImage(image);
+    };
+
     useEffect(() => {
         handleFetchUserPics();
     }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
-        <div>
+        <div key={uuidv4()}>
             <img
-                key={uuidv4()}
-                className="w-20 h-20 aspect-square object-cover shadow-lg"
+                className="w-20 h-20 aspect-square object-cover shadow-lg cursor-pointer"
                 src={`data:image/png;base64,${convertImageToBase64(picture)}`}
                 alt="User uploaded image"
+                onClick={() => handleImageClick(picture)}
             />
         </div>
     ));
@@ -59,6 +65,12 @@ export default function PictureList({ userId }: PictureListProps) {
                 <div className="flex justify-center items-center w-full py-4 ">
                     <LoadingSpinner />
                 </div>
+            )}
+            {selectedImage && (
+                <LightBox
+                    image={selectedImage}
+                    onClose={() => setSelectedImage(null)}
+                />
             )}
         </div>
     );
