@@ -2,7 +2,7 @@ import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
-export const fetchOwnRecentPics = async (
+export const fetchRecentPics = async (
     token: string,
     id: string,
     setInfo: (info: InfoType | null) => void

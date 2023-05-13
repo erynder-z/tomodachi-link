@@ -4,19 +4,22 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ImageType } from '../../../../../types/imageType';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
-import { fetchOwnRecentPics } from '../../../../../utilities/fetchOwnRecentPics';
+import { fetchRecentPics } from '../../../../../utilities/fetchRecentPics';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
 
-export default function MyPictureList() {
-    const { token, authUser } = useAuth();
+type PictureListProps = {
+    userId: string | undefined;
+};
+
+export default function PictureList({ userId }: PictureListProps) {
+    const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [pictures, setPictures] = useState<ImageType[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     const handleFetchUserPics = async () => {
-        if (authUser && token) {
-            const id = authUser.user._id;
-            const response = await fetchOwnRecentPics(token, id, setInfo);
+        if (token && userId) {
+            const response = await fetchRecentPics(token, userId, setInfo);
 
             setPictures([...response]);
             setLoading(false);
@@ -25,7 +28,7 @@ export default function MyPictureList() {
 
     useEffect(() => {
         handleFetchUserPics();
-    }, []);
+    }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
         <img

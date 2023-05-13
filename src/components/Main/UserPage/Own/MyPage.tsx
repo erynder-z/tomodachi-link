@@ -8,7 +8,7 @@ import FriendRequests from './FriendRequests/FriendRequests';
 import MyPostList from './MyPostList/MyPostList';
 import MyCoverSection from './MyCoverSection/MyCoverSection';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
-import MyPictureList from './MyPictureList/MyPictureList';
+import PictureList from '../SharedComponents/PictureList/PictureList';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -79,7 +79,7 @@ export default function MyPage({
                         </div>
                     ) : null}
                     <div className="flex flex-col h-1/4 md:h-auto md:p-4 gap-8">
-                        <MyPictureList />
+                        <PictureList userId={currentUserData?._id} />
 
                         <FriendList friendData={friendData} />
                     </div>
