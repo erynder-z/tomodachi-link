@@ -3,7 +3,7 @@ import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
 import { FaTimes } from 'react-icons/fa';
 
 type LightBoxProps = {
-    image: ImageType | null;
+    image: ImageType | string | null;
     onClose: () => void;
 };
 
@@ -12,16 +12,26 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
         event.stopPropagation();
     };
 
+    let src = '';
+
+    if (typeof image === 'string') {
+        src = image;
+    } else if (image instanceof ArrayBuffer) {
+        src = URL.createObjectURL(new Blob([image]));
+    } else if (image && image.data && image.contentType) {
+        src = `data:${image.contentType};base64,${convertImageToBase64(image)}`;
+    }
+
     return (
         <div
             onClick={onClose}
             className="fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center"
         >
-            {image && (
+            {src && (
                 <img
                     onClick={handleImageClick}
                     className="max-w-full max-h-full"
-                    src={`data:image/png;base64,${convertImageToBase64(image)}`}
+                    src={src}
                     alt="Selected image"
                 />
             )}

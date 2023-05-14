@@ -5,6 +5,8 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchPosts } from '../../../../../utilities/fetchPosts';
+import LightBox from '../../../LightBox/LightBox';
+import { ImageType } from '../../../../../types/imageType';
 
 type MyPostListProps = {
     userId: string | undefined;
@@ -20,6 +22,8 @@ export default function PostList({
     const [posts, setPosts] = useState<PostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
+    const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
+    const [clickedGif, setClickedGif] = useState<string | null>(null);
 
     const handleFetchPosts = async () => {
         if (authUser && token && userId) {
@@ -42,7 +46,12 @@ export default function PostList({
     }, [skip, userId]);
 
     const postItemsList = posts?.map((post) => (
-        <PostItem key={post._id} postID={post._id} />
+        <PostItem
+            key={post._id}
+            postID={post._id}
+            setClickedImage={setClickedImage}
+            setClickedGif={setClickedGif}
+        />
     ));
 
     return (
@@ -58,6 +67,18 @@ export default function PostList({
                 <div className="flex justify-center items-center w-full py-4 ">
                     <LoadingSpinner />
                 </div>
+            )}
+            {clickedImage && (
+                <LightBox
+                    image={clickedImage}
+                    onClose={() => setClickedImage(null)}
+                />
+            )}
+            {clickedGif && (
+                <LightBox
+                    image={clickedGif}
+                    onClose={() => setClickedGif(null)}
+                />
             )}
         </div>
     );

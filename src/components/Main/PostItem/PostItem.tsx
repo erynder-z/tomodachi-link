@@ -17,18 +17,24 @@ import CommentInput from './Comment/CommentInput/CommentInput';
 import CommentList from './Comment/CommentList/CommentList';
 import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
 import { EmbeddedYoutubeVideo } from './EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
+import { ImageType } from '../../../types/imageType';
 
 type PostItemProps = {
     postID: string;
+    setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
+    setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export default React.memo(function PostItem({ postID }: PostItemProps) {
+export default React.memo(function PostItem({
+    postID,
+    setClickedImage,
+    setClickedGif,
+}: PostItemProps) {
     const { setInfo } = useInfoCard();
     const { token } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
     const [showComments, setShowComments] = useState<boolean>(false);
-
     const { timestamp, text, comments, reactions, gifUrl } = postDetails || {};
     const { firstName, lastName } = postDetails?.owner || {};
     const displayName = `${firstName} ${lastName} `;
@@ -63,6 +69,14 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
 
     const handleShowCommentsClick = () => {
         setShowComments(!showComments);
+    };
+
+    const handleImageClick = (image: ImageType) => {
+        setClickedImage(image);
+    };
+
+    const handleGifClick = (gifURL: string) => {
+        setClickedGif(gifURL);
     };
 
     useEffect(() => {
@@ -102,7 +116,8 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
             {postImage && (
                 <div className="flex justify-center">
                     <img
-                        className="w-full h-auto object-cover shadow-lg"
+                        onClick={() => handleImageClick(postDetails?.image)}
+                        className="w-fit h-auto object-cover shadow-lg cursor-pointer"
                         src={`data:image/png;base64,${postImage}`}
                         alt="User uploaded image"
                     />
@@ -111,7 +126,8 @@ export default React.memo(function PostItem({ postID }: PostItemProps) {
             {gifUrl && (
                 <div className="flex justify-center">
                     <img
-                        className="w-full h-auto object-cover shadow-lg"
+                        onClick={() => handleGifClick(gifUrl)}
+                        className="w-fit h-auto object-cover shadow-lg"
                         src={gifUrl}
                         alt="User uploaded gif"
                     />

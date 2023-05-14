@@ -6,7 +6,7 @@ import { ImageType } from '../../../../../types/imageType';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchRecentPics } from '../../../../../utilities/fetchRecentPics';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
-import LightBox from '../../../Lightbox/LightBox';
+import LightBox from '../../../LightBox/LightBox';
 
 type PictureListProps = {
     userId: string | undefined;
