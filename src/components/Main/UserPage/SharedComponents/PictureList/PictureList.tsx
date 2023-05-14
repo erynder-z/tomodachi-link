@@ -7,6 +7,8 @@ import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchRecentPics } from '../../../../../utilities/fetchRecentPics';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
 import LightBox from '../../../LightBox/LightBox';
+import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 type PictureListProps = {
     userId: string | undefined;
@@ -16,14 +18,24 @@ export default function PictureList({ userId }: PictureListProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [pictures, setPictures] = useState<ImageType[]>([]);
+    const [numberOfPicturess, setNumberOfPictures] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const handleFetchUserPics = async () => {
         if (token && userId) {
-            const response = await fetchRecentPics(token, userId, setInfo);
-
-            setPictures([...response]);
+            const recentPicsResponse = await fetchRecentPics(
+                token,
+                userId,
+                setInfo
+            );
+            const numberOfPicsResponse = await fetchNumberOfPics(
+                token,
+                userId,
+                setInfo
+            );
+            setPictures([...recentPicsResponse]);
+            setNumberOfPictures(numberOfPicsResponse);
             setLoading(false);
         }
     };
@@ -60,7 +72,11 @@ export default function PictureList({ userId }: PictureListProps) {
                     </span>
                 )}
             </div>
-            <span>See all pics</span>
+            {numberOfPicturess > 9 && (
+                <button className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mt-4 text-sm">
+                    See all <MdKeyboardDoubleArrowRight size="1.25em" />
+                </button>
+            )}
             {loading && (
                 <div className="flex justify-center items-center w-full py-4 ">
                     <LoadingSpinner />

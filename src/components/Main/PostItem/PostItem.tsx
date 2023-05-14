@@ -127,7 +127,7 @@ export default React.memo(function PostItem({
                 <div className="flex justify-center">
                     <img
                         onClick={() => handleGifClick(gifUrl)}
-                        className="w-fit h-auto object-cover shadow-lg"
+                        className="w-fit h-auto object-cover shadow-lg cursor-pointer"
                         src={gifUrl}
                         alt="User uploaded gif"
                     />
