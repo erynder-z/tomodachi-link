@@ -39,7 +39,7 @@ export default function PictureList({ userId }: PictureListProps) {
     const pictureList = pictures?.map((picture) => (
         <div key={uuidv4()}>
             <img
-                className="w-20 h-20 aspect-square object-cover shadow-lg cursor-pointer"
+                className="w-20 h-auto aspect-square object-cover shadow-lg cursor-pointer"
                 src={`data:image/png;base64,${convertImageToBase64(picture)}`}
                 alt="User uploaded image"
                 onClick={() => handleImageClick(picture)}
