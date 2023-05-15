@@ -2,15 +2,16 @@ import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
-export const fetchRecentPics = async (
+export const fetchPictureList = async (
     token: string,
     id: string,
+    page: number,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(
-            `${serverURL}/api/v1/users/${id}/picture`,
+            `${serverURL}/api/v1/users/${id}/picture?page=${page}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
