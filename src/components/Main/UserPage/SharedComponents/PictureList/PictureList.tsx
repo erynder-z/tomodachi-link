@@ -6,7 +6,7 @@ import { ImageType } from '../../../../../types/imageType';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchRecentPics } from '../../../../../utilities/fetchRecentPics';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
-import LightBox from '../../../LightBox/LightBox';
+import LightBox from '../../../../LightBox/LightBox';
 import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
@@ -44,6 +44,10 @@ export default function PictureList({ userId }: PictureListProps) {
         setSelectedImage(image);
     };
 
+    const handleShowAllButtonClick = () => {
+        //
+    };
+
     useEffect(() => {
         handleFetchUserPics();
     }, [userId]);
@@ -73,7 +77,10 @@ export default function PictureList({ userId }: PictureListProps) {
                 )}
             </div>
             {numberOfPicturess > 9 && (
-                <button className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mt-4 text-sm">
+                <button
+                    onClick={handleShowAllButtonClick}
+                    className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mt-4 text-sm"
+                >
                     See all <MdKeyboardDoubleArrowRight size="1.25em" />
                 </button>
             )}

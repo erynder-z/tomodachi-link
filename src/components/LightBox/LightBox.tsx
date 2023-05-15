@@ -1,5 +1,5 @@
-import { ImageType } from '../../../types/imageType';
-import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
+import { ImageType } from '../../types/imageType';
+import { convertImageToBase64 } from '../../utilities/convertImageToBase64';
 import { FaTimes } from 'react-icons/fa';
 
 type LightBoxProps = {

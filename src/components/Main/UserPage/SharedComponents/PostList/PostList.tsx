@@ -5,7 +5,7 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchPosts } from '../../../../../utilities/fetchPosts';
-import LightBox from '../../../LightBox/LightBox';
+import LightBox from '../../../../LightBox/LightBox';
 import { ImageType } from '../../../../../types/imageType';
 
 type MyPostListProps = {
