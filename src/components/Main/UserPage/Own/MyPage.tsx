@@ -68,7 +68,7 @@ export default function MyPage({
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } flex flex-col grid-cols-[2fr,3fr] h-full gap-8`}
+                } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
             >
                 <MyCoverSection onFetchComplete={onFetchComplete} />
                 <div className="flex flex-col lg:h-1/2">

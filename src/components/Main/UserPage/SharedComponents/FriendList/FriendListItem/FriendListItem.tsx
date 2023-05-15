@@ -22,12 +22,9 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
     };
 
     return (
-        <div
-            onClick={handleUserClick}
-            className="w-20 flex flex-col gap-1 cursor-pointer"
-        >
+        <div onClick={handleUserClick} className="cursor-pointer">
             <img
-                className="w-20 h-20 aspect-square object-contain "
+                className="w-20 h-auto aspect-square object-cover shadow-lg"
                 src={`data:image/png;base64,${userpic.data}`}
                 alt="User avatar"
             />

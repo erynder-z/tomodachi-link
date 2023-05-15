@@ -46,14 +46,13 @@ export default function FriendUserPage({
                     lastSeenFormatted={lastSeenFormatted}
                     mutualFriends={mutualFriends}
                 />
-                <div className="flex flex-col md:grid grid-cols-[2fr,3fr] gap-8">
-                    <div className="flex flex-col h-1/2">
-                        <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
-                            <PictureList userId={userPageData._id} />
+                <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8">
+                    <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
+                        <PictureList userId={userPageData._id} />
 
-                            <FriendList friendData={friends} />
-                        </div>
+                        <FriendList friendData={friends} />
                     </div>
+
                     <div className="flex flex-col gap-8 md:px-4 overflow-auto">
                         <PostList
                             userId={_id}

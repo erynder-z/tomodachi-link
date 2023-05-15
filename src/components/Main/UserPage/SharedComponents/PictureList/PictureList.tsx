@@ -81,7 +81,6 @@ export default function PictureList({ userId }: PictureListProps) {
     return (
         <div>
             <h1>Pictures</h1>
-
             <div className="grid grid-cols-3 gap-2">
                 {pictureList.length > 0 ? (
                     loading ? (
