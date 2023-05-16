@@ -16,6 +16,7 @@ import MyPage from './components/Main/UserPage/Own/MyPage';
 import UserPage from './components/Main/UserPage/Other/UserPage';
 import useCurrentUserData from './hooks/useCurrentUserData';
 import InfoCard from './components/InfoCard/InfoCard';
+import Gallery from './components/Main/Gallery/Gallery';
 
 function App() {
     const { isAuth } = useAuth();
@@ -60,7 +61,8 @@ function App() {
         if (
             currentView === 'Friends' ||
             currentView === 'MyPage' ||
-            currentView === 'OtherUserPage'
+            currentView === 'OtherUserPage' ||
+            currentView === 'Gallery'
         ) {
             setShowSidebar(false);
         } else {
@@ -131,6 +133,17 @@ function App() {
                                         key={
                                             currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
                                         }
+                                        setCurrentView={setCurrentView}
+                                        isPaginationTriggered={
+                                            isPaginationTriggered
+                                        }
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/users/:id/gallery"
+                                element={
+                                    <Gallery
                                         setCurrentView={setCurrentView}
                                         isPaginationTriggered={
                                             isPaginationTriggered
