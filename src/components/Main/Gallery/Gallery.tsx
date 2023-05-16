@@ -27,7 +27,7 @@ export default function Gallery({
     const { setInfo } = useInfoCard();
     const [skip, setSkip] = useState<number>(0);
     const [pictures, setPictures] = useState<ImageType[]>([]);
-    const [numberOfPicturess, setNumberOfPictures] = useState<number>(0);
+    const [numberOfPictures, setNumberOfPictures] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -97,7 +97,7 @@ export default function Gallery({
                 </div>
             ) : (
                 <>
-                    <h1 className="font-bold">{numberOfPicturess} Pictures</h1>
+                    <h1 className="font-bold">{numberOfPictures} Pictures</h1>
                     <div className="flex flex-col md:grid grid-cols-3 gap-4">
                         {pictureList}
                     </div>

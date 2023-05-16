@@ -19,7 +19,7 @@ export default function PictureList({ userId }: PictureListProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [pictures, setPictures] = useState<ImageType[]>([]);
-    const [numberOfPicturess, setNumberOfPictures] = useState<number>(0);
+    const [numberOfPictures, setNumberOfPictures] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -74,7 +74,7 @@ export default function PictureList({ userId }: PictureListProps) {
                     </span>
                 )}
             </div>
-            {numberOfPicturess > 9 && (
+            {numberOfPictures > 9 && (
                 <Link
                     to={`/users/${userId}/gallery`}
                     className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mt-4 text-sm"
