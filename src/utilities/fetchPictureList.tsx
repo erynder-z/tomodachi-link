@@ -3,15 +3,15 @@ import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const fetchPictureList = async (
-    token: string,
     id: string,
-    page: number,
-    setInfo: (info: InfoType | null) => void
+    token: string,
+    setInfo: (info: InfoType | null) => void,
+    skip: number
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(
-            `${serverURL}/api/v1/users/${id}/picture?page=${page}`,
+            `${serverURL}/api/v1/users/${id}/picture?skip=${skip}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
