@@ -3,4 +3,5 @@ export type CurrentViewType =
     | 'Friends'
     | 'MyPage'
     | 'OtherUserPage'
-    | 'Gallery';
+    | 'Gallery'
+    | 'AllFriendsPage';

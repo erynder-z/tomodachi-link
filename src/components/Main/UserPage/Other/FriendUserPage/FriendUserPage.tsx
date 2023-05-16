@@ -50,7 +50,7 @@ export default function FriendUserPage({
                     <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
                         <PictureList userId={userPageData._id} />
 
-                        <FriendList friendData={friends} />
+                        <FriendList friendData={friends} userId={_id} />
                     </div>
 
                     <div className="flex flex-col gap-8 md:px-4 overflow-auto">

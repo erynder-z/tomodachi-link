@@ -80,12 +80,9 @@ export default function MyPage({
                         </div>
                     ) : null}
                     <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
-                        <PictureList
-                            key={myPostsKey}
-                            userId={currentUserData?._id}
-                        />
+                        <PictureList key={myPostsKey} userId={userId} />
 
-                        <FriendList friendData={friendData} />
+                        <FriendList friendData={friendData} userId={userId} />
                     </div>
                 </div>
                 <div className="flex flex-col gap-8 md:px-4">

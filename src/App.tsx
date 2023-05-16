@@ -17,6 +17,7 @@ import UserPage from './components/Main/UserPage/Other/UserPage';
 import useCurrentUserData from './hooks/useCurrentUserData';
 import InfoCard from './components/InfoCard/InfoCard';
 import Gallery from './components/Main/Gallery/Gallery';
+import AllFriendsPage from './components/Main/AllFriendsPage/AllFriendsPage';
 
 function App() {
     const { isAuth } = useAuth();
@@ -62,7 +63,8 @@ function App() {
             currentView === 'Friends' ||
             currentView === 'MyPage' ||
             currentView === 'OtherUserPage' ||
-            currentView === 'Gallery'
+            currentView === 'Gallery' ||
+            currentView === 'AllFriendsPage'
         ) {
             setShowSidebar(false);
         } else {
@@ -144,6 +146,17 @@ function App() {
                                 path="/users/:id/gallery"
                                 element={
                                     <Gallery
+                                        setCurrentView={setCurrentView}
+                                        isPaginationTriggered={
+                                            isPaginationTriggered
+                                        }
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/users/:id/friends/list"
+                                element={
+                                    <AllFriendsPage
                                         setCurrentView={setCurrentView}
                                         isPaginationTriggered={
                                             isPaginationTriggered
