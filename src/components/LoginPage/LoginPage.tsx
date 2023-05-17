@@ -42,6 +42,13 @@ export default function LoginPage() {
                     `Error: ${response.status} ${response.statusText}`
                 );
             }
+            const timeOfDayMessage = getTimeOfDayMessage();
+
+            setInfo({
+                typeOfInfo: timeOfDayMessage.typeOfInfo,
+                message: timeOfDayMessage.message,
+                icon: timeOfDayMessage.icon,
+            });
 
             const data = await response.json();
             localStorage.setItem('jwtOdinBook', data.token);
@@ -67,15 +74,9 @@ export default function LoginPage() {
 
         const username = usernameInput.value;
         const password = passwordInput.value;
-        const timeOfDayMessage = getTimeOfDayMessage();
 
         try {
             await login(username, password);
-            setInfo({
-                typeOfInfo: timeOfDayMessage.typeOfInfo,
-                message: timeOfDayMessage.message,
-                icon: timeOfDayMessage.icon,
-            });
         } catch (error) {
             setInfo({
                 typeOfInfo: 'bad',
@@ -83,6 +84,7 @@ export default function LoginPage() {
                 icon: <FaExclamationTriangle />,
             });
         }
+        setLoading(false);
     };
 
     const handleRegisterClick = () => {
