@@ -18,6 +18,7 @@ import useCurrentUserData from './hooks/useCurrentUserData';
 import InfoCard from './components/InfoCard/InfoCard';
 import Gallery from './components/Main/Gallery/Gallery';
 import AllFriendsPage from './components/Main/AllFriendsPage/AllFriendsPage';
+import ScrollToTop from './utilities/ScrollToTop';
 
 function App() {
     const { isAuth } = useAuth();
@@ -84,10 +85,12 @@ function App() {
     return (
         <div className="flex flex-col h-full pb-12">
             <main
+                id="container-main"
                 className="flex w-full h-[calc(100vh_-_3rem)] gap-4 md:p-4 bg-background overflow-auto"
                 onScroll={handleScroll}
                 onTouchMove={handleTouchMove}
             >
+                <ScrollToTop />
                 <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
                     <ProfileCard />
                     <OptionsCard />
