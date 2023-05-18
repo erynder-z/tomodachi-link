@@ -1,5 +1,5 @@
 import React from 'react';
-import { EmbeddedYoutubeVideo } from '../../PostItem/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
+import { EmbeddedYoutubeVideo } from '../../PostItem/PostEmbeddedYoutubeVideoSection/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 import { FaTimes } from 'react-icons/fa';
 
 type EmbeddedYoutubeVideoAreaProps = {
