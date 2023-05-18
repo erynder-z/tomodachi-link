@@ -3,7 +3,7 @@ import { CommentType } from './commentType';
 export type PostType = {
     _id: string;
     owner: {
-        id: string;
+        _id: string;
         firstName: string;
         lastName: string;
         userpic: any;
