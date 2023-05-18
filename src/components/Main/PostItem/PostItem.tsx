@@ -4,6 +4,9 @@ import {
     MdThumbUpOffAlt,
     MdThumbDownOffAlt,
     MdOutlineModeComment,
+    MdMoreVert,
+    MdEdit,
+    MdOutlineDeleteForever,
 } from 'react-icons/md';
 import { PostType } from '../../../types/postType';
 import format from 'date-fns/format';
@@ -31,14 +34,16 @@ export default React.memo(function PostItem({
     setClickedGif,
 }: PostItemProps) {
     const { setInfo } = useInfoCard();
-    const { token } = useAuth();
+    const { token, authUser } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
     const [showComments, setShowComments] = useState<boolean>(false);
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const { timestamp, text, comments, reactions, gifUrl } = postDetails || {};
-    const { firstName, lastName } = postDetails?.owner || {};
-    const displayName = `${firstName} ${lastName} `;
+    const { _id, firstName, lastName } = postDetails?.owner || {};
 
+    const isPostFromCurrentUser = authUser?.user._id === _id;
+    const displayName = `${firstName} ${lastName} `;
     const userPic = convertImageToBase64(postDetails?.owner?.userpic);
     const postImage = convertImageToBase64(postDetails?.image);
     const postVideoID = postDetails?.embeddedVideoID;
@@ -79,6 +84,10 @@ export default React.memo(function PostItem({
         setClickedGif(gifURL);
     };
 
+    const handleShowPostMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     useEffect(() => {
         getPostDetails(postID);
     }, []);
@@ -104,6 +113,29 @@ export default React.memo(function PostItem({
                 </div>
 
                 <div className="italic">{time}</div>
+                {isPostFromCurrentUser && (
+                    <div className="relative inline-block">
+                        <button onClick={handleShowPostMenu}>
+                            <MdMoreVert size="1.25em" />
+                        </button>
+                        {isMenuOpen && (
+                            <div className="absolute top-8 right-0 z-10 bg-popupMenu border shadow-lg">
+                                <ul className="flex flex-col gap-4 ">
+                                    <li>
+                                        <button className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300">
+                                            <MdEdit size="1.25em" />
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button className="flex justify-center items-center gap-2 w-full p-4 hover:bg-red-300">
+                                            <MdOutlineDeleteForever size="1.25em" />
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
 
             <div className="text-justify">
