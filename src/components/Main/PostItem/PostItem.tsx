@@ -23,12 +23,14 @@ type PostItemProps = {
     postID: string;
     setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
     setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
+    onPostChange: () => void;
 };
 
 export default React.memo(function PostItem({
     postID,
     setClickedImage,
     setClickedGif,
+    onPostChange,
 }: PostItemProps) {
     const { setInfo } = useInfoCard();
     const { token, authUser } = useAuth();
@@ -109,6 +111,8 @@ export default React.memo(function PostItem({
                     <PostOptionsSection
                         handleShowPostMenu={handleShowPostMenu}
                         isMenuOpen={isMenuOpen}
+                        postID={postID}
+                        onPostChange={onPostChange}
                     />
                 )}
             </div>

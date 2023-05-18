@@ -11,11 +11,13 @@ import { ImageType } from '../../../../../types/imageType';
 type MyPostListProps = {
     userId: string | undefined;
     isPaginationTriggered: boolean;
+    onPostChange: () => void;
 };
 
 export default function PostList({
     userId,
     isPaginationTriggered,
+    onPostChange,
 }: MyPostListProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
@@ -51,6 +53,7 @@ export default function PostList({
             postID={post._id}
             setClickedImage={setClickedImage}
             setClickedGif={setClickedGif}
+            onPostChange={onPostChange}
         />
     ));
 

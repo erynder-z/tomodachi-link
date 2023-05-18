@@ -88,8 +88,10 @@ export default function MyPage({
                 <div className="flex flex-col gap-8 md:px-4">
                     <NewPostInput onPostSuccess={handleRefreshPosts} />
                     <PostList
+                        key={myPostsKey}
                         userId={userId}
                         isPaginationTriggered={isPaginationTriggered}
+                        onPostChange={handleRefreshPosts}
                     />
                 </div>
             </div>
