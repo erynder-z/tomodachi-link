@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-
 import { PostType } from '../../../types/postType';
 import format from 'date-fns/format';
 import { positiveReaction } from '../../../utilities/positiveReaction';
