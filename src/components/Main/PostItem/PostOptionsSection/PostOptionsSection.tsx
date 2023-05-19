@@ -20,7 +20,6 @@ export default function PostOptionsSection({
     onPostChange,
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
-    const { handleFetchUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
 
     const handleDeleteClick = async () => {
