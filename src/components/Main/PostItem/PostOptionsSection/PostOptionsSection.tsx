@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdMoreVert, MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
 import { FaRegSmile, FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import useCurrentUserData from '../../../../hooks/useCurrentUserData';
+import ConfirmationOverlay from '../../../ConfirmationOverlay/ConfirmationOverlay';
+import { TbQuestionCircle } from 'react-icons/tb';
 
 type PostOptionsSectionProps = {
     handleShowPostMenu: () => void;
@@ -21,8 +22,9 @@ export default function PostOptionsSection({
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-    const handleDeleteClick = async () => {
+    const handleDelete = async () => {
         try {
             const serverURL = import.meta.env.VITE_SERVER_URL;
 
@@ -57,30 +59,48 @@ export default function PostOptionsSection({
         }
     };
 
+    const handleDeleteButtonClick = () => {
+        setShowConfirmDialog(true);
+    };
+
     return (
-        <div className="relative inline-block">
-            <button onClick={handleShowPostMenu}>
-                <MdMoreVert size="1.25em" />
-            </button>
-            {isMenuOpen && (
-                <div className="absolute top-8 right-0 z-10 bg-popupMenu border shadow-lg">
-                    <ul className="flex flex-col gap-4 ">
-                        <li>
-                            <button className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300">
-                                <MdEdit size="1.25em" />
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                onClick={handleDeleteClick}
-                                className="flex justify-center items-center gap-2 w-full p-4 hover:bg-red-300"
-                            >
-                                <MdOutlineDeleteForever size="1.25em" />
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+        <>
+            {showConfirmDialog && (
+                <ConfirmationOverlay
+                    setShowConfirmDialog={setShowConfirmDialog}
+                    onConfirm={() => {
+                        handleDelete();
+                    }}
+                    dialogInfo={{
+                        message: 'Do you really want to delete this post?',
+                        icon: <TbQuestionCircle size="2em" />,
+                    }}
+                />
             )}
-        </div>
+            <div className="relative inline-block">
+                <button onClick={handleShowPostMenu}>
+                    <MdMoreVert size="1.25em" />
+                </button>
+                {isMenuOpen && (
+                    <div className="absolute top-8 right-0 z-10 bg-popupMenu border shadow-lg">
+                        <ul className="flex flex-col gap-4 ">
+                            <li>
+                                <button className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300">
+                                    <MdEdit size="1.25em" />
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={handleDeleteButtonClick}
+                                    className="flex justify-center items-center gap-2 w-full p-4 hover:bg-red-300"
+                                >
+                                    <MdOutlineDeleteForever size="1.25em" />
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }
