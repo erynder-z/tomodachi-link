@@ -22,7 +22,7 @@ export default function FriendList({ friendData, userId }: FriendListProps) {
 
     return (
         <div>
-            <h1>Friends</h1>
+            <h1 className="font-bold">Friends</h1>
             <div className="grid grid-cols-3 gap-2">
                 {friendData && numberOfFriends > 0 ? (
                     randomFriendList

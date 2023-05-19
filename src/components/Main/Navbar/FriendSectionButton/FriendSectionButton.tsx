@@ -1,19 +1,19 @@
 import React from 'react';
 import { MdEmojiPeople } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function FriendSectionButton() {
     const handleFriendSectionButtonClick = () => {
         console.log('test');
     };
     return (
-        <Link
+        <NavLink
             to="/friends"
             className="flex self-center cursor-pointer text-black"
         >
             <button type="button" onClick={handleFriendSectionButtonClick}>
                 <MdEmojiPeople size="1.5em" />
             </button>
-        </Link>
+        </NavLink>
     );
 }

@@ -8,7 +8,7 @@ import { fetchPictureList } from '../../../../../utilities/fetchPictureList';
 import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
 import LightBox from '../../../../LightBox/LightBox';
 import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { MdKeyboardDoubleArrowRight, MdOutlineZoomIn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 type PictureListProps = {
@@ -51,25 +51,32 @@ export default function PictureList({ userId }: PictureListProps) {
     }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
-        <div key={uuidv4()}>
+        <div key={uuidv4()} className="relative">
             <img
-                className="w-20 h-auto aspect-square object-cover shadow-lg cursor-pointer"
+                className="w-20 h-auto aspect-square object-cover shadow-lg cursor-pointer "
                 src={`data:image/png;base64,${convertImageToBase64(picture)}`}
                 alt="User uploaded image"
-                onClick={() => handleImageClick(picture)}
             />
+            <div
+                onClick={() => handleImageClick(picture)}
+                className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+            >
+                <span className="text-white text-lg font-bold">
+                    <MdOutlineZoomIn size="1.5em" />
+                </span>
+            </div>
         </div>
     ));
 
     return (
         <div>
-            <h1>Pictures</h1>
+            <h1 className="font-bold">Pictures</h1>
 
             <div className="grid grid-cols-3 gap-2">
                 {pictureList.length > 0 ? (
                     pictureList
                 ) : (
-                    <span className="text-sm font-medium text-center">
+                    <span className="col-span-3 text-sm font-medium">
                         Nothing here yet
                     </span>
                 )}

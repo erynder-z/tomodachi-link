@@ -2,6 +2,7 @@ import React from 'react';
 import { FriendDataType } from '../../../../../../types/friendDataType';
 import { useNavigate } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
+import { MdOutlineContactEmergency } from 'react-icons/md';
 
 type FriendListItemProps = {
     friendData: FriendDataType;
@@ -23,12 +24,18 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
 
     return (
         <div onClick={handleUserClick} className="cursor-pointer">
-            <img
-                className="w-20 h-auto aspect-square object-cover shadow-lg"
-                src={`data:image/png;base64,${userpic.data}`}
-                alt="User avatar"
-            />
-
+            <div className="relative">
+                <img
+                    className="w-20 h-auto aspect-square object-cover shadow-lg"
+                    src={`data:image/png;base64,${userpic.data}`}
+                    alt="User avatar"
+                />
+                <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+                    <span className="text-white text-lg font-bold">
+                        <MdOutlineContactEmergency size="1.5em" />
+                    </span>
+                </div>
+            </div>
             <div className="text-xs p-1 break-all">
                 {firstName} {lastName}
             </div>

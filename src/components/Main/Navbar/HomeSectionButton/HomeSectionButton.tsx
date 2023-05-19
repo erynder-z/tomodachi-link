@@ -1,16 +1,19 @@
 import React from 'react';
 import { MdHomeFilled } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function HomeSectionButton() {
     const handleHomeSectionButtonClick = () => {
         console.log('test');
     };
     return (
-        <Link to="/home" className="flex self-center cursor-pointer text-black">
+        <NavLink
+            to="/home"
+            className="flex self-center cursor-pointer text-black"
+        >
             <button type="button" onClick={handleHomeSectionButtonClick}>
                 <MdHomeFilled size="1.5em" />
             </button>
-        </Link>
+        </NavLink>
     );
 }

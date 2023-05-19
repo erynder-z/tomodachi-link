@@ -8,6 +8,7 @@ module.exports = {
                 card: '#f8fafc',
                 background: '#e0e7ff',
                 navbar: '#a5b4fc',
+                popupMenu: '#ebc2f3',
             },
         },
     },

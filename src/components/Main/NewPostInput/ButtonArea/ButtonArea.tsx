@@ -34,7 +34,7 @@ export default function ButtonArea({
                     className="hidden"
                     onChange={handleImageSelect}
                 />
-                <FaRegImage />
+                <FaRegImage className="text-back hover:text-blue-500" />
             </label>
             <button
                 onClick={(e) => {
@@ -42,6 +42,7 @@ export default function ButtonArea({
                     e.stopPropagation();
                     setShowYoutubeEmbed(!showYoutubeEmbed);
                 }}
+                className="text-back hover:text-blue-500"
             >
                 <FaYoutube />
             </button>
@@ -51,6 +52,7 @@ export default function ButtonArea({
                     e.stopPropagation();
                     setShowGifSelector(!showGifSelector);
                 }}
+                className="text-back hover:text-blue-500"
             >
                 <TbGif />
             </button>
@@ -60,6 +62,7 @@ export default function ButtonArea({
                     e.stopPropagation();
                     setShowEmojiPicker(!showEmojiPicker);
                 }}
+                className="text-back hover:text-blue-500"
             >
                 <FaRegSmileBeam />
             </button>
