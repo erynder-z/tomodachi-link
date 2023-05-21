@@ -10,6 +10,7 @@ import { TbQuestionCircle } from 'react-icons/tb';
 type PostOptionsSectionProps = {
     handleShowPostMenu: () => void;
     isMenuOpen: boolean;
+    setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
     postID: string | undefined;
     onPostChange: () => void;
 };
@@ -17,6 +18,7 @@ type PostOptionsSectionProps = {
 export default function PostOptionsSection({
     handleShowPostMenu,
     isMenuOpen,
+    setIsMenuOpen,
     postID,
     onPostChange,
 }: PostOptionsSectionProps) {
@@ -61,6 +63,7 @@ export default function PostOptionsSection({
 
     const handleDeleteButtonClick = () => {
         setShowConfirmDialog(true);
+        setIsMenuOpen(false);
     };
 
     return (

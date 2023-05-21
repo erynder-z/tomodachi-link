@@ -111,6 +111,7 @@ export default React.memo(function PostItem({
                     <PostOptionsSection
                         handleShowPostMenu={handleShowPostMenu}
                         isMenuOpen={isMenuOpen}
+                        setIsMenuOpen={setIsMenuOpen}
                         postID={postID}
                         onPostChange={onPostChange}
                     />
