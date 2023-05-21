@@ -11,7 +11,7 @@ type ButtonAreaProps = {
     showGifSelector: boolean;
     setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>;
     showEmojiPicker: boolean;
-    newPostText: string;
+    postText: string;
 };
 
 export default function ButtonArea({
@@ -22,7 +22,7 @@ export default function ButtonArea({
     showGifSelector,
     setShowEmojiPicker,
     showEmojiPicker,
-    newPostText,
+    postText,
 }: ButtonAreaProps) {
     return (
         <div className="flex w-full gap-4">
@@ -68,11 +68,11 @@ export default function ButtonArea({
             </button>
             <button
                 className={`flex items-center justify-center h-8 w-8 text-white ml-auto text-sm ${
-                    !newPostText
+                    !postText
                         ? 'bg-gray-500 hover:bg-gray-600'
                         : 'bg-blue-500 hover:bg-blue-600'
                 }`}
-                title={newPostText ? undefined : 'Please enter a message'}
+                title={postText ? undefined : 'Please enter a message'}
             >
                 <MdSend />
             </button>

@@ -6,6 +6,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import ConfirmationOverlay from '../../../ConfirmationOverlay/ConfirmationOverlay';
 import { TbQuestionCircle } from 'react-icons/tb';
+import EditPostInput from '../../EditPostInput/EditPostInput';
 
 type PostOptionsSectionProps = {
     handleShowPostMenu: () => void;
@@ -24,6 +25,7 @@ export default function PostOptionsSection({
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const [showPostEdit, setShowPostEdit] = useState(false);
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
     const handleDelete = async () => {
@@ -61,6 +63,11 @@ export default function PostOptionsSection({
         }
     };
 
+    const handleEditButtonClick = () => {
+        setShowPostEdit(true);
+        setIsMenuOpen(false);
+    };
+
     const handleDeleteButtonClick = () => {
         setShowConfirmDialog(true);
         setIsMenuOpen(false);
@@ -88,7 +95,10 @@ export default function PostOptionsSection({
                     <div className="absolute top-8 right-0 z-10 bg-popupMenu border shadow-lg">
                         <ul className="flex flex-col gap-4 ">
                             <li>
-                                <button className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300">
+                                <button
+                                    onClick={handleEditButtonClick}
+                                    className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300"
+                                >
                                     <MdEdit size="1.25em" />
                                 </button>
                             </li>
@@ -102,6 +112,9 @@ export default function PostOptionsSection({
                             </li>
                         </ul>
                     </div>
+                )}
+                {showPostEdit && (
+                    <EditPostInput setShowPostEdit={setShowPostEdit} />
                 )}
             </div>
         </>

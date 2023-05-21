@@ -24,7 +24,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const { currentUserData } = useCurrentUserData();
     const { username } = currentUserData || {};
 
-    const [newPostText, setNewPostText] = useState<string>('');
+    const [postText, setPostText] = useState<string>('');
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
     const [showYoutubeEmbed, setShowYoutubeEmbed] = useState<boolean>(false);
     const [showGifSelector, setShowGifSelector] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
-        setNewPostText(event.target.value);
+        setPostText(event.target.value);
     };
 
     const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
         event.preventDefault();
         if (token) {
             const formData = new FormData();
-            formData.append('newPost', newPostText);
+            formData.append('newPost', postText);
             if (selectedImage) {
                 const resizedFile = await resizeFile(selectedImage);
                 formData.append('imagePicker', resizedFile as File);
@@ -74,7 +74,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                     message: 'Post created successfully!',
                     icon: <FaRegSmile />,
                 });
-                setNewPostText('');
+                setPostText('');
                 setSelectedImage(null);
                 setYoutubeID(null);
                 setGif(null);
@@ -109,7 +109,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
             >
                 <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <PostInputTextarea
-                        newPostText={newPostText}
+                        postText={postText}
                         handleNewPostChange={handleNewPostChange}
                         username={username}
                     />
@@ -134,13 +134,13 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         showGifSelector={showGifSelector}
                         setShowEmojiPicker={setShowEmojiPicker}
                         showEmojiPicker={showEmojiPicker}
-                        newPostText={newPostText}
+                        postText={postText}
                     />
                 </div>
             </form>
             {showEmojiPicker && (
                 <EmojiPicker
-                    setNewPostText={setNewPostText}
+                    setPostText={setPostText}
                     setShowEmojiPicker={setShowEmojiPicker}
                 />
             )}

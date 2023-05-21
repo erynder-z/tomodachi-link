@@ -1,7 +1,7 @@
 import React from 'react';
 
 type PostInputTextareaProps = {
-    newPostText: string;
+    postText: string;
     handleNewPostChange: (
         event: React.ChangeEvent<HTMLTextAreaElement>
     ) => void;
@@ -9,7 +9,7 @@ type PostInputTextareaProps = {
 };
 
 export default function PostInputTextarea({
-    newPostText,
+    postText,
     handleNewPostChange,
     username,
 }: PostInputTextareaProps) {
@@ -23,7 +23,7 @@ export default function PostInputTextarea({
                 name="newPost"
                 className="peer placeholder-transparent w-full bg-blue-100 border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 p-4"
                 placeholder="message"
-                value={newPostText}
+                value={postText}
                 onChange={handleNewPostChange}
             />
             <label
