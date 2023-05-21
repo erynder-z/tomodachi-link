@@ -3,7 +3,6 @@ import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
-import EmojiPicker from './EmojiSelector/EmojiPicker';
 import resizeFile from '../../../utilities/ImageResizer';
 import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
 import GifSelector from './GifSelector/GifSelector';
@@ -13,6 +12,7 @@ import EmbeddedYoutubeVideoArea from './EmbeddedYoutubeVideoArea/EmbeddedYoutube
 import SelectedImageArea from './SelectedImageArea/SelectedImageArea';
 import GifArea from './GifArea/GifArea';
 import ButtonArea from './ButtonArea/ButtonArea';
+import EmojiSelector from './EmojiSelector/EmojiPicker';
 
 type NewPostInputProps = {
     onPostSuccess: () => void;
@@ -139,7 +139,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 </div>
             </form>
             {showEmojiPicker && (
-                <EmojiPicker
+                <EmojiSelector
                     setPostText={setPostText}
                     setShowEmojiPicker={setShowEmojiPicker}
                 />
