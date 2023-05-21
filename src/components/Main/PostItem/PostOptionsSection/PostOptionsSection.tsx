@@ -7,12 +7,13 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import ConfirmationOverlay from '../../../ConfirmationOverlay/ConfirmationOverlay';
 import { TbQuestionCircle } from 'react-icons/tb';
 import EditPostInput from '../../EditPostInput/EditPostInput';
+import { PostType } from '../../../../types/postType';
 
 type PostOptionsSectionProps = {
     handleShowPostMenu: () => void;
     isMenuOpen: boolean;
     setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    postID: string | undefined;
+    postDetails: PostType | null;
     onPostChange: () => void;
 };
 
@@ -20,7 +21,7 @@ export default function PostOptionsSection({
     handleShowPostMenu,
     isMenuOpen,
     setIsMenuOpen,
-    postID,
+    postDetails,
     onPostChange,
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
@@ -31,6 +32,7 @@ export default function PostOptionsSection({
     const handleDelete = async () => {
         try {
             const serverURL = import.meta.env.VITE_SERVER_URL;
+            const postID = postDetails?._id;
 
             const response = await fetch(
                 `${serverURL}/api/v1/post/${postID}/delete`,
@@ -114,7 +116,10 @@ export default function PostOptionsSection({
                     </div>
                 )}
                 {showPostEdit && (
-                    <EditPostInput setShowPostEdit={setShowPostEdit} />
+                    <EditPostInput
+                        postDetails={postDetails}
+                        setShowPostEdit={setShowPostEdit}
+                    />
                 )}
             </div>
         </>
