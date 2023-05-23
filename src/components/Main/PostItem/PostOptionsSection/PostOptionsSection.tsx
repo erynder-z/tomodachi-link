@@ -119,6 +119,7 @@ export default function PostOptionsSection({
                     <EditPostInput
                         postDetails={postDetails}
                         setShowPostEdit={setShowPostEdit}
+                        onPostChange={onPostChange}
                     />
                 )}
             </div>
