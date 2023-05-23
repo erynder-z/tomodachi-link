@@ -59,7 +59,7 @@ export default function PictureList({ userId }: PictureListProps) {
             />
             <div
                 onClick={() => handleImageClick(picture)}
-                className="absolute inset-0 flex justify-center items-center w-20 h-auto aspect-square bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+                className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
             >
                 <span className="text-white text-lg font-bold">
                     <MdOutlineZoomIn size="1.5em" />
