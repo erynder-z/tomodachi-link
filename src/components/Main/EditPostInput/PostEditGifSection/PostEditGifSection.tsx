@@ -2,12 +2,12 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 type PostEditGifSectionProps = {
-    gifUrl: string;
+    dbGif: string;
     handleGifDelete: () => void;
 };
 
 export default function PostEditGifSection({
-    gifUrl,
+    dbGif,
     handleGifDelete,
 }: PostEditGifSectionProps) {
     const handleRemoveButtonClick = (
@@ -20,7 +20,7 @@ export default function PostEditGifSection({
         <div className="relative flex justify-center">
             <img
                 className="max-h-20 md:max-h-none object-contain shadow-lg cursor-pointer"
-                src={gifUrl}
+                src={dbGif}
                 alt="User uploaded gif"
             />
             <button

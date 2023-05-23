@@ -3,12 +3,12 @@ import { FaTimes } from 'react-icons/fa';
 import { EmbeddedYoutubeVideo } from '../../PostItem/PostEmbeddedYoutubeVideoSection/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 
 type PostEditEmbeddedYoutubeVideoProps = {
-    postVideoID: string;
+    dbEmbeddedVideoID: string;
     handleVideoDelete: () => void;
 };
 
 export default function PostEditEmbeddedYoutubeVideo({
-    postVideoID,
+    dbEmbeddedVideoID,
     handleVideoDelete,
 }: PostEditEmbeddedYoutubeVideoProps) {
     const handleRemoveButtonClick = (
@@ -19,7 +19,7 @@ export default function PostEditEmbeddedYoutubeVideo({
     };
     return (
         <div className="relative flex flex-col justify-center items-center text-xs h-auto w-full">
-            <EmbeddedYoutubeVideo videoID={postVideoID} />
+            <EmbeddedYoutubeVideo videoID={dbEmbeddedVideoID} />
 
             <button
                 onClick={(e) => {
