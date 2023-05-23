@@ -3,7 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 
 type EmbedYoutubeVideoSelectorProps = {
     setShowYoutubeEmbed: React.Dispatch<React.SetStateAction<boolean>>;
-    setYoutubeID: React.Dispatch<React.SetStateAction<string | null>>;
+    setYoutubeID: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 export default function EmbedYoutubeVideoSelector({

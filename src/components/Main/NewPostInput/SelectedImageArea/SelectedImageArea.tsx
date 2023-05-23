@@ -2,7 +2,7 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 type SelectedImageAreaProps = {
-    setSelectedImage: React.Dispatch<React.SetStateAction<File | null>>;
+    setSelectedImage: React.Dispatch<React.SetStateAction<File | undefined>>;
     selectedImage: File;
 };
 
@@ -15,7 +15,7 @@ export default function SelectedImageArea({
             <span>image preview: </span>
             <button
                 onClick={() => {
-                    setSelectedImage(null);
+                    setSelectedImage(undefined);
                 }}
                 className="absolute top-5 right-2 text-red-500 z-5"
             >

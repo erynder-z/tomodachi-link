@@ -3,7 +3,7 @@ import { EmbeddedYoutubeVideo } from '../../PostItem/PostEmbeddedYoutubeVideoSec
 import { FaTimes } from 'react-icons/fa';
 
 type EmbeddedYoutubeVideoAreaProps = {
-    setYoutubeID: React.Dispatch<React.SetStateAction<string | null>>;
+    setYoutubeID: React.Dispatch<React.SetStateAction<string | undefined>>;
     youtubeID: string;
 };
 
@@ -16,7 +16,7 @@ export default function EmbeddedYoutubeVideoArea({
             <span>embedded youtube video preview: </span>
             <button
                 onClick={() => {
-                    setYoutubeID(null);
+                    setYoutubeID(undefined);
                 }}
                 className="absolute top-5 right-2 text-red-500 z-5"
             >

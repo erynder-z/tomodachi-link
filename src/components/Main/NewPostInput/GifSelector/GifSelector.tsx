@@ -6,7 +6,7 @@ import { fetchTenorApiKey } from '../../../../utilities/fetchTenorApiKEy';
 
 type GifSelectorProps = {
     setShowGifSelector: React.Dispatch<React.SetStateAction<boolean>>;
-    setGif: React.Dispatch<React.SetStateAction<TenorImage | null>>;
+    setGif: React.Dispatch<React.SetStateAction<TenorImage | undefined>>;
 };
 
 export default function GifSelector({

@@ -28,9 +28,11 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
     const [showYoutubeEmbed, setShowYoutubeEmbed] = useState<boolean>(false);
     const [showGifSelector, setShowGifSelector] = useState<boolean>(false);
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const [youtubeID, setYoutubeID] = useState<string | null>(null);
-    const [gif, setGif] = useState<TenorImage | null>(null);
+    const [selectedImage, setSelectedImage] = useState<File | undefined>(
+        undefined
+    );
+    const [youtubeID, setYoutubeID] = useState<string | undefined>(undefined);
+    const [gif, setGif] = useState<TenorImage | undefined>(undefined);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -75,9 +77,9 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                     icon: <FaRegSmile />,
                 });
                 setPostText('');
-                setSelectedImage(null);
-                setYoutubeID(null);
-                setGif(null);
+                setSelectedImage(undefined);
+                setYoutubeID(undefined);
+                setGif(undefined);
                 onPostSuccess();
             } else {
                 const data = await response.json();
