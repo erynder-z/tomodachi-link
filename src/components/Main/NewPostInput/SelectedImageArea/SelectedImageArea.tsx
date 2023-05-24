@@ -11,25 +11,27 @@ export default function SelectedImageArea({
     selectedImage,
 }: SelectedImageAreaProps) {
     return (
-        <div className="relative flex flex-col text-xs">
+        <div className="flex flex-col justify-center items-center text-xs">
             <span>image preview: </span>
-            <button
-                onClick={() => {
-                    setSelectedImage(undefined);
-                }}
-                className="absolute top-5 right-2 text-red-500 z-5"
-            >
-                <FaTimes size="1.5em" />
-            </button>
-            <img
-                className=" object-cover mx-auto "
-                src={
-                    selectedImage
-                        ? URL.createObjectURL(selectedImage)
-                        : `data:image/png;base64,${selectedImage}`
-                }
-                alt="uploaded image"
-            />
+            <div className="relative flex justify-center items-center w-full">
+                <img
+                    className="max-h-20 md:max-h-60 max-w-3/4 object-cover "
+                    src={
+                        selectedImage
+                            ? URL.createObjectURL(selectedImage)
+                            : `data:image/png;base64,${selectedImage}`
+                    }
+                    alt="uploaded image"
+                />
+                <button
+                    onClick={() => {
+                        setSelectedImage(undefined);
+                    }}
+                    className="absolute top-0 right-0 text-red-500 z-5"
+                >
+                    <FaTimes size="1.5em" />
+                </button>
+            </div>
         </div>
     );
 }

@@ -20,7 +20,6 @@ export default function PostEditEmbeddedYoutubeVideo({
     return (
         <div className="relative flex flex-col justify-center items-center text-xs h-auto w-full">
             <EmbeddedYoutubeVideo videoID={dbEmbeddedVideoID} />
-
             <button
                 onClick={(e) => {
                     handleRemoveButtonClick(e);

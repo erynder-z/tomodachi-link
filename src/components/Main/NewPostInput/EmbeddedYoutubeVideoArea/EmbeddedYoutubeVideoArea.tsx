@@ -12,17 +12,19 @@ export default function EmbeddedYoutubeVideoArea({
     youtubeID,
 }: EmbeddedYoutubeVideoAreaProps) {
     return (
-        <div className="relative flex flex-col text-xs h-auto w-full">
+        <div className="relative flex flex-col justify-center items-center text-xs h-auto w-full">
             <span>embedded youtube video preview: </span>
-            <button
-                onClick={() => {
-                    setYoutubeID(undefined);
-                }}
-                className="absolute top-5 right-2 text-red-500 z-5"
-            >
-                <FaTimes size="1.5em" />
-            </button>
-            <EmbeddedYoutubeVideo videoID={youtubeID} />
+            <div className="w-full">
+                <EmbeddedYoutubeVideo videoID={youtubeID} />
+                <button
+                    onClick={() => {
+                        setYoutubeID(undefined);
+                    }}
+                    className="absolute top-0 right-0 z-50 text-red-500 z-5"
+                >
+                    <FaTimes size="1.5em" />
+                </button>
+            </div>
         </div>
     );
 }

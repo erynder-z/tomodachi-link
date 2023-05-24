@@ -17,9 +17,9 @@ export default function PostEditGifSection({
         handleGifDelete();
     };
     return (
-        <div className="relative flex justify-center">
+        <div className="relative flex justify-center w-full">
             <img
-                className="max-h-20 md:max-h-none object-contain shadow-lg cursor-pointer"
+                className="max-h-20 md:max-h-none max-w-3/4 object-contain shadow-lg cursor-pointer"
                 src={dbGif}
                 alt="User uploaded gif"
             />

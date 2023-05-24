@@ -16,12 +16,12 @@ export default function GifArea({ setGif, gif }: GifAreaProps) {
                     onClick={() => {
                         setGif(undefined);
                     }}
-                    className="absolute top-2 right-2 text-red-500 z-5"
+                    className="absolute top-0 right-0 text-red-500 z-5"
                 >
                     <FaTimes size="1.5em" />
                 </button>
                 <img
-                    className="w-full h-auto object-cover shadow-lg"
+                    className="max-h-20 md:max-h-60 object-cover shadow-lg"
                     src={gif.url}
                     alt="User uploaded gif"
                 />

@@ -115,19 +115,21 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                         handleNewPostChange={handleNewPostChange}
                         username={username}
                     />
-                    {youtubeID && (
-                        <EmbeddedYoutubeVideoArea
-                            setYoutubeID={setYoutubeID}
-                            youtubeID={youtubeID}
-                        />
-                    )}
-                    {selectedImage && (
-                        <SelectedImageArea
-                            setSelectedImage={setSelectedImage}
-                            selectedImage={selectedImage}
-                        />
-                    )}
-                    {gif && <GifArea setGif={setGif} gif={gif} />}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {youtubeID && (
+                            <EmbeddedYoutubeVideoArea
+                                setYoutubeID={setYoutubeID}
+                                youtubeID={youtubeID}
+                            />
+                        )}
+                        {selectedImage && (
+                            <SelectedImageArea
+                                setSelectedImage={setSelectedImage}
+                                selectedImage={selectedImage}
+                            />
+                        )}
+                        {gif && <GifArea setGif={setGif} gif={gif} />}
+                    </div>
                     <ButtonArea
                         handleImageSelect={handleImageSelect}
                         setShowYoutubeEmbed={setShowYoutubeEmbed}
