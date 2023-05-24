@@ -17,6 +17,8 @@ import PostEditEmbeddedYoutubeVideo from './PostEditEmbeddedYoutubeVideo/PostEdi
 import { ImageType } from '../../../types/imageType';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
+import resizeFile from '../../../utilities/ImageResizer';
+import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/EmbeddedYoutubeVideoArea';
 
 type EditPostInputProps = {
     postDetails: PostType | null;
@@ -39,9 +41,7 @@ export default function EditPostInput({
     const [selectedImage, setSelectedImage] = useState<File | undefined>(
         undefined
     );
-    const [youtubeID, setYoutubeID] = useState<string | undefined>(
-        postDetails?.embeddedVideoID || undefined
-    );
+    const [youtubeID, setYoutubeID] = useState<string | undefined>(undefined);
     const [gif, setGif] = useState<TenorImage | undefined>(undefined);
     const [dbImage, setDbImage] = useState<ImageType | undefined>(
         postDetails?.image
@@ -77,9 +77,16 @@ export default function EditPostInput({
                 'shouldVideoBeDeleted',
                 shouldVideoBeDeleted.toString()
             );
-            formData.append('embeddedVideoID', youtubeID || '');
-            formData.append('gifUrl', gif ? gif.url : '');
-            formData.append('imagePicker', selectedImage || '');
+            if (selectedImage) {
+                const resizedFile = await resizeFile(selectedImage);
+                formData.append('imagePicker', resizedFile as File);
+            }
+            if (youtubeID) {
+                formData.append('embeddedVideoID', youtubeID);
+            }
+            if (gif) {
+                formData.append('gifUrl', gif.url);
+            }
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const id = postDetails?._id;
@@ -211,7 +218,12 @@ export default function EditPostInput({
                                 </div>
                             )}
                         </div>
-
+                        {youtubeID && (
+                            <EmbeddedYoutubeVideoArea
+                                setYoutubeID={setYoutubeID}
+                                youtubeID={youtubeID}
+                            />
+                        )}
                         {selectedImage && (
                             <SelectedImageArea
                                 setSelectedImage={setSelectedImage}
@@ -219,6 +231,7 @@ export default function EditPostInput({
                             />
                         )}
                         {gif && <GifArea setGif={setGif} gif={gif} />}
+
                         <ButtonArea
                             handleImageSelect={handleImageSelect}
                             setShowYoutubeEmbed={setShowYoutubeEmbed}
