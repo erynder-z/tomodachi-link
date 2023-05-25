@@ -53,7 +53,7 @@ export default function PictureList({ userId }: PictureListProps) {
     const pictureList = pictures?.map((picture) => (
         <div key={uuidv4()} className="relative">
             <img
-                className="w-20 h-auto aspect-square object-cover shadow-lg cursor-pointer "
+                className="h-auto aspect-square object-cover shadow-lg cursor-pointer "
                 src={`data:image/png;base64,${convertImageToBase64(picture)}`}
                 alt="User uploaded image"
             />
@@ -72,7 +72,7 @@ export default function PictureList({ userId }: PictureListProps) {
         <div>
             <h1 className="font-bold">Pictures</h1>
 
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-4">
                 {pictureList.length > 0 ? (
                     pictureList
                 ) : (

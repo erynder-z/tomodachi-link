@@ -26,7 +26,7 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
         <div onClick={handleUserClick} className="cursor-pointer">
             <div className="relative">
                 <img
-                    className="w-20 h-auto aspect-square object-cover shadow-lg"
+                    className="h-auto aspect-square object-cover shadow-lg"
                     src={`data:image/png;base64,${userpic.data}`}
                     alt="User avatar"
                 />
