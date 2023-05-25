@@ -1,16 +1,16 @@
 import React from 'react';
 import { CommentType } from '../../../../../types/commentType';
 import CommentItem from './CommentItem/CommentItem';
-import CollapseListButton from '../../../UiElements/CollapseListButton/CollapseListButton';
+import ToggleListButton from '../../../UiElements/ToggleListButton/ToggleListButton';
 
 type CommentListProps = {
     comments?: CommentType[];
-    onCollapseListButtonClick: () => void;
+    onToggleListButtonClick: () => void;
 };
 
 export default function CommentList({
     comments = [],
-    onCollapseListButtonClick,
+    onToggleListButtonClick,
 }: CommentListProps) {
     const commentItems = comments.map((comment) => (
         <CommentItem key={comment._id} commentDetails={comment} />
@@ -18,8 +18,9 @@ export default function CommentList({
 
     return (
         <div className="flex flex-col gap-4">
-            <CollapseListButton
-                onCollapseListButtonClick={onCollapseListButtonClick}
+            <ToggleListButton
+                onToggleListButtonClick={onToggleListButtonClick}
+                isMenuOpen={true}
             />
             {commentItems.length > 0 ? (
                 commentItems

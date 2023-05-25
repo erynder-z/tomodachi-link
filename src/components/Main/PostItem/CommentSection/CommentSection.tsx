@@ -16,14 +16,14 @@ export default function CommentSection({
     getPostDetails,
     handleShowCommentsClick,
 }: CommentSectionProps) {
-    const onCollapseListButtonClick = () => {
+    const onToggleListButtonClick = () => {
         handleShowCommentsClick();
     };
     return (
         <div className="flex flex-col gap-4">
             <CommentList
                 comments={comments}
-                onCollapseListButtonClick={onCollapseListButtonClick}
+                onToggleListButtonClick={onToggleListButtonClick}
             />
             <CommentInput
                 parentPostID={parentPostID}
