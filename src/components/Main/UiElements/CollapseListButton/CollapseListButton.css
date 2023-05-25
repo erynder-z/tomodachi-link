@@ -1,0 +1,9 @@
+.rotate-on-hover:hover {
+    animation: spin 250ms forwards;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
