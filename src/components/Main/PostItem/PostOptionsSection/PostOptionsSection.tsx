@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdMoreVert, MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
+import { MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
 import { FaRegSmile, FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import useAuth from '../../../../hooks/useAuth';
@@ -8,6 +8,7 @@ import ConfirmationOverlay from '../../../ConfirmationOverlay/ConfirmationOverla
 import { TbQuestionCircle } from 'react-icons/tb';
 import EditPostInput from '../../EditPostInput/EditPostInput';
 import { PostType } from '../../../../types/postType';
+import ToggleListButton from '../../UiElements/ToggleListButton/ToggleListButton';
 
 type PostOptionsSectionProps = {
     handleShowPostMenu: () => void;
@@ -90,9 +91,11 @@ export default function PostOptionsSection({
                 />
             )}
             <div className="relative inline-block">
-                <button onClick={handleShowPostMenu}>
-                    <MdMoreVert size="1.25em" />
-                </button>
+                <ToggleListButton
+                    onToggleListButtonClick={handleShowPostMenu}
+                    isMenuOpen={isMenuOpen}
+                />
+
                 {isMenuOpen && (
                     <div className="absolute top-8 right-0 z-10 bg-popupMenu border shadow-lg">
                         <ul className="flex flex-col gap-4 ">
