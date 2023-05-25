@@ -147,6 +147,7 @@ export default React.memo(function PostItem({
                     comments={postDetails?.comments}
                     parentPostID={postID}
                     getPostDetails={getPostDetails}
+                    handleShowCommentsClick={handleShowCommentsClick}
                 />
             )}
         </div>

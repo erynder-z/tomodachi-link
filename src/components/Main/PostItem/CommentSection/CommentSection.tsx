@@ -7,16 +7,24 @@ type CommentSectionProps = {
     comments: CommentType[] | undefined;
     parentPostID: string;
     getPostDetails: (postID: string) => Promise<void>;
+    handleShowCommentsClick: () => void;
 };
 
 export default function CommentSection({
     comments,
     parentPostID,
     getPostDetails,
+    handleShowCommentsClick,
 }: CommentSectionProps) {
+    const onCollapseListButtonClick = () => {
+        handleShowCommentsClick();
+    };
     return (
         <div className="flex flex-col gap-4">
-            <CommentList comments={comments} />
+            <CommentList
+                comments={comments}
+                onCollapseListButtonClick={onCollapseListButtonClick}
+            />
             <CommentInput
                 parentPostID={parentPostID}
                 getPostDetails={getPostDetails}
