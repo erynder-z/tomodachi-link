@@ -83,10 +83,13 @@ function App() {
     }
 
     return (
-        <div className="flex flex-col h-full pb-12">
+        <div className="flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
+            <nav className="flex-none fixed bottom-0 w-full h-12 lg:static lg:bottom-auto lg:w-auto lg:h-auto">
+                <Navbar />
+            </nav>
             <main
                 id="container-main"
-                className="flex w-full h-[calc(100vh_-_3rem)] gap-4 md:p-4 bg-background overflow-auto"
+                className="flex w-full h-[calc(100vh_-_3rem)] lg:h-screen gap-4 md:p-4 bg-background overflow-auto"
                 onScroll={handleScroll}
                 onTouchMove={handleTouchMove}
             >
@@ -177,9 +180,6 @@ function App() {
                 )}
             </main>
 
-            <nav className="flex-none fixed bottom-0 w-full h-12">
-                <Navbar />
-            </nav>
             <InfoCard info={info} />
         </div>
     );

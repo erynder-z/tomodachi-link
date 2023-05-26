@@ -26,8 +26,8 @@ export default function Navbar() {
     }, [menuRef]);
 
     return (
-        <div className="h-full w-full flex justify-between items-center px-4 py-1 bg-navbar">
-            <div className="flex justify-center items-center gap-4">
+        <div className="h-full w-full flex justify-between items-center lg:items-start px-2 py-1 lg:py-2 bg-navbar">
+            <div className="flex lg:flex-col justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />
             </div>
