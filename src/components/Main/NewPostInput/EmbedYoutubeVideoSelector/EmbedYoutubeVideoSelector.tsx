@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaRegFrown } from 'react-icons/fa';
+import useInfoCard from '../../../../hooks/useInfoCard';
 
 type EmbedYoutubeVideoSelectorProps = {
     setShowYoutubeEmbed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,6 +11,7 @@ export default function EmbedYoutubeVideoSelector({
     setShowYoutubeEmbed,
     setYoutubeID,
 }: EmbedYoutubeVideoSelectorProps) {
+    const { setInfo } = useInfoCard();
     const [selectedURL, setSelectedURL] = useState<string>('');
     const [videoID, setVideoID] = useState<string | null>(null);
 
@@ -32,8 +34,14 @@ export default function EmbedYoutubeVideoSelector({
         event.preventDefault();
         if (videoID) {
             setYoutubeID(videoID);
+            setShowYoutubeEmbed(false);
+        } else {
+            setInfo({
+                typeOfInfo: 'bad',
+                message: 'This is no YouTube URL!',
+                icon: <FaRegFrown />,
+            });
         }
-        setShowYoutubeEmbed(false);
     };
 
     useEffect(() => {
@@ -41,10 +49,7 @@ export default function EmbedYoutubeVideoSelector({
     }, [selectedURL]);
 
     return (
-        <div
-            onClick={handleComponentClose}
-            className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80"
-        >
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
             <button
                 onClick={handleComponentClose}
                 className="absolute top-2 right-2 text-white"
