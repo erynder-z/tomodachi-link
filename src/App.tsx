@@ -19,6 +19,7 @@ import InfoCard from './components/InfoCard/InfoCard';
 import Gallery from './components/Main/Gallery/Gallery';
 import AllFriendsPage from './components/Main/AllFriendsPage/AllFriendsPage';
 import ScrollToTop from './utilities/ScrollToTop';
+import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopButton';
 
 function App() {
     const { isAuth } = useAuth();
@@ -178,6 +179,7 @@ function App() {
                         <Sidebar />
                     </aside>
                 )}
+                <ScrollToTopButton />
             </main>
 
             <InfoCard info={info} />
