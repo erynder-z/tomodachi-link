@@ -39,9 +39,9 @@ function App() {
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
-        if (scrollTop + clientHeight >= scrollHeight - 1) {
-            setIsPaginationTriggered(true);
-        }
+        setIsPaginationTriggered(
+            scrollTop + clientHeight >= scrollHeight - 1 ? true : false
+        );
     };
 
     // handle infinite scrolling on touch devices
@@ -49,9 +49,11 @@ function App() {
         const touchY = e.touches[0].clientY;
         const target = e.currentTarget;
 
-        if (lastTouchY && touchY > lastTouchY && target.scrollTop === 0) {
-            setIsPaginationTriggered(true);
-        }
+        setIsPaginationTriggered(
+            lastTouchY && touchY > lastTouchY && target.scrollTop === 0
+                ? true
+                : false
+        );
 
         setLastTouchY(touchY);
     };
