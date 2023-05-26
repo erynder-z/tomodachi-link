@@ -20,27 +20,20 @@ export default function GifSelector({
         setShowGifSelector(false);
     };
 
-    const handlePickerClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.stopPropagation();
-    };
-
     useEffect(() => {
         fetchTenorApiKey(token, setApiKey);
     }, []);
 
     return (
-        <div
-            onClick={handleComponentClose}
-            className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80"
-        >
-            <button
-                onClick={handleComponentClose}
-                className="absolute top-2 right-2 text-white"
-            >
-                <FaTimes />
-            </button>
-            {apiKey && (
-                <div onClick={handlePickerClick}>
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
+            <div className="relative">
+                <button
+                    onClick={handleComponentClose}
+                    className="absolute -top-8 -right-0 md:-right-10 bg-card hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+                >
+                    <FaTimes size="1.5em" />
+                </button>
+                {apiKey && (
                     <GifPicker
                         tenorApiKey={`${apiKey}`}
                         onGifClick={(gif: TenorImage) => {
@@ -48,8 +41,8 @@ export default function GifSelector({
                             setShowGifSelector(false);
                         }}
                     />
-                </div>
-            )}
+                )}
+            </div>
             ;
         </div>
     );

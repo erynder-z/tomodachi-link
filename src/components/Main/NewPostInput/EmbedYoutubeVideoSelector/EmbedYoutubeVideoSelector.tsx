@@ -19,10 +19,6 @@ export default function EmbedYoutubeVideoSelector({
         setShowYoutubeEmbed(false);
     };
 
-    const handleFormClick = (event: React.MouseEvent<HTMLFormElement>) => {
-        event.stopPropagation();
-    };
-
     const getYoutubeID = (url: string) => {
         const URLcopy = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/);
         return URLcopy[2] !== undefined
@@ -50,20 +46,19 @@ export default function EmbedYoutubeVideoSelector({
 
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
-            <button
-                onClick={handleComponentClose}
-                className="absolute top-2 right-2 text-white"
-            >
-                <FaTimes />
-            </button>
             <form
                 action=""
                 method="POST"
-                onClick={handleFormClick}
                 onSubmit={handleSubmit}
                 className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-card rounded-md text-gray-700 sm:text-lg sm:leading-7 p-4"
             >
                 <div className="relative">
+                    <button
+                        onClick={handleComponentClose}
+                        className="absolute -top-16 -right-10 bg-card hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+                    >
+                        <FaTimes size="1.25em" />
+                    </button>
                     <input
                         required
                         autoComplete="off"
