@@ -1,12 +1,21 @@
 import React from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 export default function ProfileCard() {
     const { currentUserData } = useCurrentUserData();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
-    const userImage = convertImageToBase64(userpic);
+    const userImage = userpic ? convertImageToBase64(userpic) : undefined;
+
+    if (!userImage) {
+        return (
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card">
+                <LoadingSpinner />
+            </div>
+        );
+    }
 
     return (
         <div className="flex w-full">
