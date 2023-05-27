@@ -87,7 +87,7 @@ function App() {
 
     return (
         <div className="flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
-            <nav className="flex-none fixed bottom-0 w-full h-12 lg:static lg:bottom-auto lg:w-auto lg:h-auto">
+            <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen z-10">
                 <Navbar />
             </nav>
             <main
@@ -97,12 +97,12 @@ function App() {
                 onTouchMove={handleTouchMove}
             >
                 <ScrollToTop />
-                <div className="hidden lg:flex flex-col gap-4 h-fit w-1/6">
+                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1 z-50">
                     <ProfileCard />
                     <OptionsCard />
                 </div>
 
-                <div className="flex-1">
+                <div className="flex-1 max-w-3xl">
                     <Routes>
                         <Route element={<RequireAuth />}>
                             <Route path="*" element={<NotFoundPage />} />
@@ -177,7 +177,7 @@ function App() {
                     </Routes>
                 </div>
                 {showSidebar && (
-                    <aside className="hidden lg:flex w-1/4 flex-none">
+                    <aside className="hidden lg:flex flex-none">
                         <Sidebar />
                     </aside>
                 )}

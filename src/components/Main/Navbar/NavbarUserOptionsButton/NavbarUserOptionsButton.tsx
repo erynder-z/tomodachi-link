@@ -1,13 +1,22 @@
 import React from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { convertImageToBase64 } from '../../../../utilities/convertImageToBase64';
+import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 
 export default function NavbarUserOptionsButton() {
     const { currentUserData } = useCurrentUserData();
     const { userpic, pendingFriendRequests } = currentUserData || {};
-    const userImage = convertImageToBase64(userpic);
+    const userImage = userpic ? convertImageToBase64(userpic) : undefined;
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
+
+    if (!userImage) {
+        return (
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg">
+                <LoadingSpinner />
+            </div>
+        );
+    }
 
     return (
         <div className="relative">
