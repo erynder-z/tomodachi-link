@@ -52,7 +52,7 @@ export default function NotFriendCoverSection({
     }, [selectedCover]);
 
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-full grid grid-rows-4">
+        <div className="h-[calc(100vh_-_5rem)] md:h-96 grid grid-rows-4">
             <div className="relative row-span-3 flex ">
                 <img
                     src={selectedCover?.image}

@@ -21,23 +21,25 @@ export default function NotFriendUserPage({
     const userPicture = convertImageToBase64(userpic);
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] p-4 md:p-0 pb-4 bg-card">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card">
             <NotFriendCoverSection
                 firstName={firstName}
                 lastName={lastName}
                 userPicture={userPicture}
                 cover={cover}
             />
-            {isFriendRequestPending.incoming ? (
-                <IncomingFriendRequestPendingContent
-                    userPageData={userPageData}
-                />
-            ) : (
-                <NormalContent
-                    userPageData={userPageData}
-                    isFriendRequestPending={isFriendRequestPending}
-                />
-            )}
+            <div className="my-auto">
+                {isFriendRequestPending.incoming ? (
+                    <IncomingFriendRequestPendingContent
+                        userPageData={userPageData}
+                    />
+                ) : (
+                    <NormalContent
+                        userPageData={userPageData}
+                        isFriendRequestPending={isFriendRequestPending}
+                    />
+                )}
+            </div>
         </div>
     );
 }
