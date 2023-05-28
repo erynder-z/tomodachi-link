@@ -15,7 +15,7 @@ type PostOptionsSectionProps = {
     isMenuOpen: boolean;
     setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
     postDetails: PostType | null;
-    onPostChange: () => void;
+    onPostChange?: () => void;
 };
 
 export default function PostOptionsSection({
@@ -56,7 +56,9 @@ export default function PostOptionsSection({
                 message: 'Post deleted!',
                 icon: <FaRegSmile />,
             });
-            onPostChange();
+            if (onPostChange) {
+                onPostChange();
+            }
         } catch (err: unknown) {
             setInfo({
                 typeOfInfo: 'bad',

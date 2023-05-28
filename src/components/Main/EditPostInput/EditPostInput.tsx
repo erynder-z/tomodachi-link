@@ -23,7 +23,7 @@ import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/E
 type EditPostInputProps = {
     postDetails: PostType | null;
     setShowPostEdit: React.Dispatch<React.SetStateAction<boolean>>;
-    onPostChange: () => void;
+    onPostChange?: () => void;
 };
 
 export default function EditPostInput({
@@ -110,7 +110,9 @@ export default function EditPostInput({
                 setSelectedImage(undefined);
                 setYoutubeID(undefined);
                 setGif(undefined);
-                onPostChange();
+                if (onPostChange) {
+                    onPostChange();
+                }
             } else {
                 const data = await response.json();
                 const errorMessages = data.errors;

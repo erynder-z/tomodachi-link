@@ -23,7 +23,7 @@ type PostItemProps = {
     postID: string;
     setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
     setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
-    onPostChange: () => void;
+    onPostChange?: () => void;
 };
 
 export default React.memo(function PostItem({
