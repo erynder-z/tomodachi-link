@@ -11,7 +11,7 @@ import { ImageType } from '../../../../../types/imageType';
 type MyPostListProps = {
     userId: string | undefined;
     isPaginationTriggered: boolean;
-    onPostChange: () => void;
+    onPostChange?: () => void;
 };
 
 export default function PostList({
