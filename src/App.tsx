@@ -115,6 +115,9 @@ function App() {
                                 element={
                                     <HomeSection
                                         setCurrentView={setCurrentView}
+                                        isPaginationTriggered={
+                                            isPaginationTriggered
+                                        }
                                     />
                                 }
                             />

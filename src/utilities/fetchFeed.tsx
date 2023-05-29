@@ -26,7 +26,7 @@ export const fetchFeed = async (
 
         if (response.ok) {
             const data = await response.json();
-            return data.userFeed;
+            return data.feed;
         } else {
             handleFetchErrors(response, setInfo);
         }
