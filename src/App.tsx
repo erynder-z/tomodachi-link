@@ -180,7 +180,7 @@ function App() {
                     </Routes>
                 </div>
                 {showSidebar && (
-                    <aside className="hidden lg:flex flex-none">
+                    <aside className="hidden lg:flex lg:h-fit flex-none">
                         <Sidebar />
                     </aside>
                 )}
