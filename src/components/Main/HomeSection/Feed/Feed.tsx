@@ -65,11 +65,12 @@ export default function Feed({
 
     return (
         <div className="flex flex-col gap-4 pb-4">
+            <h1 className="text-center font-bold">Your feed</h1>
             {postItemsList.length > 0 ? (
                 postItemsList
             ) : (
                 <span className="text-sm font-medium text-center">
-                    Your posts will appear here
+                    Your feed is empty. Try adding some friends!
                 </span>
             )}
             {loading && (

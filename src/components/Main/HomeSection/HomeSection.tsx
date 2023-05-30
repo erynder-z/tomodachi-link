@@ -4,6 +4,7 @@ import useFriendData from '../../../hooks/useFriendData';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import Feed from './Feed/Feed';
 import { FriendDataType } from '../../../types/friendDataType';
+import ShowPeopleInThisFeed from './ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 
 type HomeSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -49,11 +50,18 @@ export default function HomeSection({
     }
 
     return (
-        <div className="h-full w-full p-4 bg-card">
-            <Feed
-                friendList={friendList}
-                isPaginationTriggered={isPaginationTriggered}
-            />
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card shadow-lg">
+            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 bg-card">
+                <div className="flex flex-col h-1/4 md:h-auto w-full gap-8 ">
+                    <ShowPeopleInThisFeed />
+                </div>
+                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 bg-card shadow-lg">
+                    <Feed
+                        friendList={friendList}
+                        isPaginationTriggered={isPaginationTriggered}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
