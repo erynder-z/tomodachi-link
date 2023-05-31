@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { PostType } from '../../../../types/postType';
 import { fetchFeed } from '../../../../utilities/fetchFeed';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import PostItem from '../../PostItem/PostItem';
 import LightBox from '../../../LightBox/LightBox';
 import { ImageType } from '../../../../types/imageType';
+import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
+import { MinimalPostType } from '../../../../types/minimalPostType';
 
 type FreedProps = {
     friendList: string[];
@@ -19,7 +20,7 @@ export default function Feed({
 }: FreedProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
-    const [posts, setPosts] = useState<PostType[]>([]);
+    const [minimalPosts, setMinimalPosts] = useState<MinimalPostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
@@ -28,14 +29,14 @@ export default function Feed({
     const handleGetFeed = async () => {
         if (authUser && token) {
             const response = await fetchFeed(token, setInfo, skip, friendList);
-            setPosts([...posts, ...response]);
+            setMinimalPosts([...minimalPosts, ...response]);
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        if (posts) {
-            setSkip(posts.length);
+        if (minimalPosts) {
+            setSkip(minimalPosts.length);
         }
     }, [isPaginationTriggered]);
 
@@ -45,7 +46,7 @@ export default function Feed({
         }
     }, [skip]);
 
-    const postItemsList = posts?.map((post) => (
+    const postItemsList = minimalPosts?.map((post) => (
         <PostItem
             key={post._id}
             postID={post._id}
@@ -64,32 +65,39 @@ export default function Feed({
     }
 
     return (
-        <div className="flex flex-col gap-4 pb-4">
-            <h1 className="text-center font-bold">Your feed</h1>
-            {postItemsList.length > 0 ? (
-                postItemsList
-            ) : (
-                <span className="text-sm font-medium text-center">
-                    Your feed is empty. Try adding some friends!
-                </span>
-            )}
-            {loading && (
-                <div className="flex justify-center items-center w-full py-4 ">
-                    <LoadingSpinner />
+        <div className="flex flex-col h-1/4 md:h-auto w-full gap-8 ">
+            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 bg-card">
+                <ShowPeopleInThisFeed
+                    friendList={friendList}
+                    minimalPosts={minimalPosts}
+                />
+                <div className="flex flex-col gap-4 pb-4">
+                    {postItemsList.length > 0 ? (
+                        postItemsList
+                    ) : (
+                        <span className="text-sm font-medium text-center">
+                            Your feed is empty. Try adding some friends!
+                        </span>
+                    )}
+                    {loading && (
+                        <div className="flex justify-center items-center w-full py-4 ">
+                            <LoadingSpinner />
+                        </div>
+                    )}
+                    {clickedImage && (
+                        <LightBox
+                            image={clickedImage}
+                            onClose={() => setClickedImage(null)}
+                        />
+                    )}
+                    {clickedGif && (
+                        <LightBox
+                            image={clickedGif}
+                            onClose={() => setClickedGif(null)}
+                        />
+                    )}
                 </div>
-            )}
-            {clickedImage && (
-                <LightBox
-                    image={clickedImage}
-                    onClose={() => setClickedImage(null)}
-                />
-            )}
-            {clickedGif && (
-                <LightBox
-                    image={clickedGif}
-                    onClose={() => setClickedGif(null)}
-                />
-            )}
+            </div>
         </div>
     );
 }
