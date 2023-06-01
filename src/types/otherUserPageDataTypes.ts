@@ -1,16 +1,12 @@
 import { FriendDataType } from './friendDataType';
+import { ImageType } from './imageType';
 
 export type OtherUserPageDataTypes = {
     _id: string;
     firstName: string;
     lastName: string;
     username: string;
-    userpic: {
-        data: {
-            data: Buffer;
-        };
-        contentType: string;
-    };
+    userpic: ImageType;
     cover?: string;
     joined: Date;
     lastSeen: Date;

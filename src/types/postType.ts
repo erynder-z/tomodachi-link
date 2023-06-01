@@ -1,4 +1,5 @@
 import { CommentType } from './commentType';
+import { ImageType } from './imageType';
 
 export type PostType = {
     _id: string;
@@ -6,7 +7,7 @@ export type PostType = {
         _id: string;
         firstName: string;
         lastName: string;
-        userpic: any;
+        userpic: ImageType;
     };
     timestamp: Date;
     text: string;

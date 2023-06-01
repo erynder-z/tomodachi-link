@@ -1,3 +1,5 @@
+import { ImageType } from './imageType';
+
 export type CommentType = {
     _id: string;
     parentPost: string;
@@ -5,7 +7,7 @@ export type CommentType = {
         id: string;
         firstName: string;
         lastName: string;
-        userpic: any;
+        userpic: ImageType;
     };
     timestamp: Date;
     text: string;

@@ -1,3 +1,5 @@
+import { ImageType } from './imageType';
+
 export type FriendDataType = {
     _id: string;
     firstName: string;
@@ -6,9 +8,6 @@ export type FriendDataType = {
     email: string;
     joined: Date;
     lastSeen: Date;
-    userpic: {
-        data: Buffer;
-        contentType: string;
-    };
+    userpic: ImageType;
     cover?: string;
 };

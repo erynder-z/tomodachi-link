@@ -1,4 +1,5 @@
 import { CoverType } from './coverType';
+import { ImageType } from './imageType';
 
 export type CurrentUserDataType = {
     _id: string;
@@ -12,9 +13,6 @@ export type CurrentUserDataType = {
     pendingFriendRequests: string[];
     joined: Date;
     lastSeen: Date;
-    userpic: {
-        data: { data: Buffer };
-        contentType: string;
-    };
+    userpic: ImageType;
     cover: CoverType;
 };
