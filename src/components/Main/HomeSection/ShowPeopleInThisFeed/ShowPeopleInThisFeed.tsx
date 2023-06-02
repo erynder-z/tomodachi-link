@@ -4,6 +4,7 @@ import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import UserListItem from '../../UserList/UserListItem/UserListItem';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];
@@ -16,8 +17,8 @@ export default function ShowPeopleInThisFeed({
 }: ShowPeopleInThisFeedProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
-    const [peopleInFeed, setPeopleInFeed] = useState<string[]>([]);
-    const [users, setUsers] = useState<MinimalUserTypes[]>([]);
+    const [IdsOfPeopleInFeed, setIdsOfPeopleInFeed] = useState<string[]>([]);
+    const [feedUsers, setFeedUsers] = useState<MinimalUserTypes[]>([]);
 
     const getIdsOfPeopleInFeed = () => {
         const newPeopleInFeed: Set<string> = new Set();
@@ -30,16 +31,16 @@ export default function ShowPeopleInThisFeed({
                 }
             }
         });
-        setPeopleInFeed(Array.from(newPeopleInFeed));
+        setIdsOfPeopleInFeed(Array.from(newPeopleInFeed));
     };
 
     const handleGetUserDetails = async () => {
         if (token) {
-            const requests = Array.from(new Set(peopleInFeed)).map((p) =>
+            const requests = Array.from(new Set(IdsOfPeopleInFeed)).map((p) =>
                 fetchMinimalUserData(token, p, setInfo)
             );
             const responses = await Promise.all(requests);
-            setUsers((prevUsers) => {
+            setFeedUsers((prevUsers) => {
                 const existingUserIds = prevUsers.map((user) => user._id);
                 const newUsers = responses.filter(
                     (user) => !existingUserIds.includes(user._id)
@@ -55,7 +56,11 @@ export default function ShowPeopleInThisFeed({
 
     useEffect(() => {
         handleGetUserDetails();
-    }, [peopleInFeed]);
+    }, [IdsOfPeopleInFeed]);
 
-    return <div>ShowPeopleInThisFeed</div>;
+    const feedUserList = feedUsers?.map((feedUser: MinimalUserTypes) => (
+        <UserListItem key={feedUser._id} listItemData={feedUser} />
+    ));
+
+    return <div className="sticky top-10 h-fit">{feedUserList}</div>;
 }
