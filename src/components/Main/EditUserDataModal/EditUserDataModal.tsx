@@ -5,11 +5,13 @@ import UpdatePasswordButton from './UpdatePasswordButton/UpdatePasswordButton';
 import UpdatePasswordForm from './UpdatePasswordForm/UpdatePasswordForm';
 
 type EditUserDataModalProps = {
+    showOverlay: boolean;
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function EditUserDataModal({
+    showOverlay,
     setShowOverlay,
     setShowOptions,
 }: EditUserDataModalProps): JSX.Element {
@@ -47,7 +49,11 @@ export default function EditUserDataModal({
     };
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center bg-black/80 opacity">
+        <div
+            className={`${
+                showOverlay ? 'animate-inAnimation' : 'animate-outAnimation'
+            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center bg-black/80 opacity`}
+        >
             <div className="relative w-11/12 lg:w-1/4 flex flex-col justify-around shadow-lg p-4 bg-card">
                 <button
                     onClick={handleCloseButtonClick}

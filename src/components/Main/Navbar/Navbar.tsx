@@ -3,9 +3,12 @@ import OptionsCard from '../OptionsCard/OptionsCard';
 import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
+import useDelayUnmount from '../../../hooks/useDelayUnmount';
 
 export default function Navbar() {
     const [showOptions, setShowOptions] = useState(false);
+    const isMounted = showOptions;
+    const showModal = useDelayUnmount(isMounted, 150);
 
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -39,8 +42,14 @@ export default function Navbar() {
                 >
                     <NavbarUserOptionsButton />
                 </button>
-                {showOptions && (
-                    <div className="absolute bottom-10 right-0 mt-2 p-2 bg-card shadow-xl z-10">
+                {showModal && (
+                    <div
+                        className={`${
+                            showOptions
+                                ? 'animate-inAnimation'
+                                : 'animate-outAnimation'
+                        } absolute bottom-10 right-0 mt-2 p-2 bg-card shadow-xl z-10`}
+                    >
                         <OptionsCard setShowOptions={setShowOptions} />
                     </div>
                 )}
