@@ -9,6 +9,18 @@ type UserListItemProps = {
 export default function UserListItem({ listItemData }: UserListItemProps) {
     const { _id, firstName, lastName, userpic } = listItemData || {};
 
+    const getCorrectUserpicFormat = (pic: any) => {
+        if (typeof pic.data !== 'string') {
+            return window.btoa(
+                new Uint8Array(pic.data).reduce(function (data, byte) {
+                    return data + String.fromCharCode(byte);
+                }, '')
+            );
+        } else {
+            return pic.data;
+        }
+    };
+
     return (
         <Link
             to={`/users/${_id}`}
@@ -16,7 +28,9 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
         >
             <img
                 className="w-8 h-8 object-cover rounded-full"
-                src={`data:image/png;base64,${userpic.data}`}
+                src={`data:image/png;base64,${getCorrectUserpicFormat(
+                    userpic
+                )}`}
                 alt="User avatar"
             />
             {firstName} {lastName}
