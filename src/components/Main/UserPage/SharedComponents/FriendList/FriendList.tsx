@@ -21,7 +21,7 @@ export default function FriendList({ friendData, userId }: FriendListProps) {
         ));
 
     return (
-        <div>
+        <div className="animate-popInAnimation">
             <h1 className="font-bold">Friends</h1>
             <div className="grid grid-cols-3 gap-4">
                 {friendData && numberOfFriends > 0 ? (

@@ -29,10 +29,25 @@ module.exports = {
                         opacity: '0',
                     },
                 },
+                popInAnimation: {
+                    '0%': {
+                        transform: 'scale(0)',
+                        opacity: '0',
+                    },
+                    '70%': {
+                        transform: 'scale(1.1)',
+                        opacity: '1',
+                    },
+                    '100%': {
+                        transform: 'scale(1)',
+                        opacity: '1',
+                    },
+                },
             },
             animation: {
                 inAnimation: 'inAnimation 150ms ease-in',
                 outAnimation: 'outAnimation 170ms ease-out',
+                popInAnimation: 'popInAnimation 200ms ease-in-out',
             },
         },
     },

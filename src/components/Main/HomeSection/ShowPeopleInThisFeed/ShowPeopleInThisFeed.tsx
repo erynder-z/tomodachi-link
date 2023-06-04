@@ -59,7 +59,9 @@ export default function ShowPeopleInThisFeed({
     }, [IdsOfPeopleInFeed]);
 
     const feedUserList = feedUsers?.map((feedUser: MinimalUserTypes) => (
-        <UserListItem key={feedUser._id} listItemData={feedUser} />
+        <div className="animate-popInAnimation">
+            <UserListItem key={feedUser._id} listItemData={feedUser} />
+        </div>
     ));
 
     return <div className="sticky top-10 h-fit">{feedUserList}</div>;

@@ -69,7 +69,7 @@ export default function PictureList({ userId }: PictureListProps) {
     ));
 
     return (
-        <div>
+        <div className="animate-popInAnimation">
             <h1 className="font-bold">Pictures</h1>
 
             <div className="grid grid-cols-3 gap-4">

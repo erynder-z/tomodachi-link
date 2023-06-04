@@ -100,7 +100,7 @@ export default React.memo(function PostItem({
     }
 
     return (
-        <div className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card">
+        <div className="animate-popInAnimation flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card">
             <div className="flex justify-between">
                 <PostUserInfoSection
                     userPic={userPic}
