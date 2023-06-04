@@ -9,6 +9,7 @@ import { TbQuestionCircle } from 'react-icons/tb';
 import EditPostInput from '../../EditPostInput/EditPostInput';
 import { PostType } from '../../../../types/postType';
 import ToggleListButton from '../../UiElements/ToggleListButton/ToggleListButton';
+import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 
 type PostOptionsSectionProps = {
     handleShowPostMenu: () => void;
@@ -27,8 +28,13 @@ export default function PostOptionsSection({
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
-    const [showPostEdit, setShowPostEdit] = useState(false);
-    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [shouldPostEditShow, setShouldPostEditShow] = useState(false);
+    const [shouldConfirmDialogShow, setShouldConfirmDialogShow] =
+        useState(false);
+    const isPostEditMounted = shouldPostEditShow;
+    const isConfirmDialogMounted = shouldConfirmDialogShow;
+    const showPostEdit = useDelayUnmount(isPostEditMounted, 150);
+    const showConfirmDialog = useDelayUnmount(isConfirmDialogMounted, 150);
 
     const handleDelete = async () => {
         try {
@@ -69,12 +75,12 @@ export default function PostOptionsSection({
     };
 
     const handleEditButtonClick = () => {
-        setShowPostEdit(true);
+        setShouldPostEditShow(true);
         setIsMenuOpen(false);
     };
 
     const handleDeleteButtonClick = () => {
-        setShowConfirmDialog(true);
+        setShouldConfirmDialogShow(true);
         setIsMenuOpen(false);
     };
 
@@ -82,7 +88,8 @@ export default function PostOptionsSection({
         <>
             {showConfirmDialog && (
                 <ConfirmationOverlay
-                    setShowConfirmDialog={setShowConfirmDialog}
+                    shouldConfirmDialogShow={shouldConfirmDialogShow}
+                    setShouldConfirmDialogShow={setShouldConfirmDialogShow}
                     onConfirm={() => {
                         handleDelete();
                     }}
@@ -123,7 +130,8 @@ export default function PostOptionsSection({
                 {showPostEdit && (
                     <EditPostInput
                         postDetails={postDetails}
-                        setShowPostEdit={setShowPostEdit}
+                        shouldPostEditShow={shouldPostEditShow}
+                        setShouldPostEditShow={setShouldPostEditShow}
                         onPostChange={onPostChange}
                     />
                 )}

@@ -8,6 +8,7 @@ import LightBox from '../../../LightBox/LightBox';
 import { ImageType } from '../../../../types/imageType';
 import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 import { MinimalPostType } from '../../../../types/minimalPostType';
+import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 
 type FreedProps = {
     friendList: string[];
@@ -25,6 +26,12 @@ export default function Feed({
     const [loading, setLoading] = useState<boolean>(true);
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
     const [clickedGif, setClickedGif] = useState<string | null>(null);
+
+    const isImageLightboxMounted = clickedImage ? true : false;
+    const showImageLightbox = useDelayUnmount(isImageLightboxMounted, 150);
+
+    const isGifLightboxMounted = clickedGif ? true : false;
+    const showGifLightbox = useDelayUnmount(isGifLightboxMounted, 150);
 
     const handleGetFeed = async () => {
         if (authUser && token) {
@@ -84,13 +91,13 @@ export default function Feed({
                             <LoadingSpinner />
                         </div>
                     )}
-                    {clickedImage && (
+                    {showImageLightbox && (
                         <LightBox
                             image={clickedImage}
                             onClose={() => setClickedImage(null)}
                         />
                     )}
-                    {clickedGif && (
+                    {showGifLightbox && (
                         <LightBox
                             image={clickedGif}
                             onClose={() => setClickedGif(null)}

@@ -25,7 +25,9 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
     return (
         <div
             onClick={onClose}
-            className="fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center"
+            className={`${
+                image ? 'animate-inAnimation' : 'animate-outAnimation'
+            } fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center`}
         >
             {src && (
                 <img

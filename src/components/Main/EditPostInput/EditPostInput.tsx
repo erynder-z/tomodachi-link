@@ -22,13 +22,15 @@ import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/E
 
 type EditPostInputProps = {
     postDetails: PostType | null;
-    setShowPostEdit: React.Dispatch<React.SetStateAction<boolean>>;
+    shouldPostEditShow: boolean;
+    setShouldPostEditShow: React.Dispatch<React.SetStateAction<boolean>>;
     onPostChange?: () => void;
 };
 
 export default function EditPostInput({
     postDetails,
-    setShowPostEdit,
+    shouldPostEditShow,
+    setShouldPostEditShow,
     onPostChange,
 }: EditPostInputProps) {
     const { token } = useAuth();
@@ -134,7 +136,7 @@ export default function EditPostInput({
     };
 
     const handleComponentClose = () => {
-        setShowPostEdit(false);
+        setShouldPostEditShow(false);
     };
 
     const handleNewPostChange = (
@@ -165,7 +167,13 @@ export default function EditPostInput({
     };
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80 px-4 py-8">
+        <div
+            className={`${
+                shouldPostEditShow
+                    ? 'animate-inAnimation'
+                    : 'animate-outAnimation'
+            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80 px-4 py-8`}
+        >
             <div className="relative flex gap-4 px-4 py-8 w-full lg:w-2/6 lg:flex-row lg:justify-around lg:shadow-lg bg-card">
                 <button
                     onClick={handleComponentClose}

@@ -7,6 +7,7 @@ import { unfriendUser } from '../../../../../../utilities/unfriendUser';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import ConfirmationOverlay from '../../../../../ConfirmationOverlay/ConfirmationOverlay';
 import { TbQuestionCircle } from 'react-icons/tb';
+import useDelayUnmount from '../../../../../../hooks/useDelayUnmount';
 
 type UnfriendButtonProps = {
     unfriendUserId: string;
@@ -19,17 +20,21 @@ export default function UnfriendButton({
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoCard();
-    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [shouldConfirmDialogShow, setShouldConfirmDialogShow] =
+        useState(false);
+    const isConfirmDialogMounted = shouldConfirmDialogShow;
+    const showConfirmDialog = useDelayUnmount(isConfirmDialogMounted, 150);
 
     const handleUnfriendButtonClick = () => {
-        setShowConfirmDialog(true);
+        setShouldConfirmDialogShow(true);
     };
 
     return (
         <>
             {showConfirmDialog && (
                 <ConfirmationOverlay
-                    setShowConfirmDialog={setShowConfirmDialog}
+                    shouldConfirmDialogShow={shouldConfirmDialogShow}
+                    setShouldConfirmDialogShow={setShouldConfirmDialogShow}
                     onConfirm={() => {
                         if (token && currentUserData) {
                             unfriendUser(

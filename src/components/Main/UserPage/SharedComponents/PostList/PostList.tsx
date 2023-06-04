@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchPosts } from '../../../../../utilities/fetchPosts';
 import LightBox from '../../../../LightBox/LightBox';
 import { ImageType } from '../../../../../types/imageType';
+import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 
 type MyPostListProps = {
     userId: string | undefined;
@@ -26,6 +27,12 @@ export default function PostList({
     const [loading, setLoading] = useState<boolean>(true);
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
     const [clickedGif, setClickedGif] = useState<string | null>(null);
+
+    const isImageLightboxMounted = clickedImage ? true : false;
+    const showImageLightbox = useDelayUnmount(isImageLightboxMounted, 150);
+
+    const isGifLightboxMounted = clickedGif ? true : false;
+    const showGifLightbox = useDelayUnmount(isGifLightboxMounted, 150);
 
     const handleFetchPosts = async () => {
         if (authUser && token && userId) {
@@ -71,13 +78,13 @@ export default function PostList({
                     <LoadingSpinner />
                 </div>
             )}
-            {clickedImage && (
+            {showImageLightbox && (
                 <LightBox
                     image={clickedImage}
                     onClose={() => setClickedImage(null)}
                 />
             )}
-            {clickedGif && (
+            {showGifLightbox && (
                 <LightBox
                     image={clickedGif}
                     onClose={() => setClickedGif(null)}
