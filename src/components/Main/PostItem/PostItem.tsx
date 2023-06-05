@@ -18,6 +18,7 @@ import PostGifSection from './PostGifSection/PostGifSection';
 import PostEmbeddedYoutubeVideoSection from './PostEmbeddedYoutubeVideoSection/PostEmbeddedYoutubeVideoSection';
 import PostReactionSection from './PostReactionSection/PostReactionSection';
 import CommentSection from './CommentSection/CommentSection';
+import useDelayUnmount from '../../../hooks/useDelayUnmount';
 
 type PostItemProps = {
     postID: string;
@@ -36,10 +37,14 @@ export default React.memo(function PostItem({
     const { token, authUser } = useAuth();
     const [loading, setLoading] = useState<boolean>(true);
     const [postDetails, setPostDetails] = useState<PostType | null>(null);
-    const [showComments, setShowComments] = useState<boolean>(false);
-    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const [shouldCommentSectionShow, setShouldCommentSectionShow] =
+        useState<boolean>(false);
+
     const { timestamp, text, comments, reactions, gifUrl } = postDetails || {};
     const { _id, firstName, lastName } = postDetails?.owner || {};
+
+    const isCommentSectionMounted = shouldCommentSectionShow;
+    const showCommentSection = useDelayUnmount(isCommentSectionMounted, 150);
 
     const isPostFromCurrentUser = authUser?.user._id === _id;
     const displayName = `${firstName} ${lastName} `;
@@ -72,7 +77,7 @@ export default React.memo(function PostItem({
     };
 
     const handleShowCommentsClick = () => {
-        setShowComments(!showComments);
+        setShouldCommentSectionShow(!shouldCommentSectionShow);
     };
 
     const handleImageClick = (image: ImageType) => {
@@ -81,10 +86,6 @@ export default React.memo(function PostItem({
 
     const handleGifClick = (gifURL: string) => {
         setClickedGif(gifURL);
-    };
-
-    const handleShowPostMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
     };
 
     useEffect(() => {
@@ -109,9 +110,6 @@ export default React.memo(function PostItem({
                 <DateSection date={date} />
                 {isPostFromCurrentUser && (
                     <PostOptionsSection
-                        handleShowPostMenu={handleShowPostMenu}
-                        isMenuOpen={isMenuOpen}
-                        setIsMenuOpen={setIsMenuOpen}
                         postDetails={postDetails}
                         onPostChange={onPostChange}
                     />
@@ -142,12 +140,13 @@ export default React.memo(function PostItem({
                 handleNegativeReactionClick={handleNegativeReactionClick}
                 numberOfNegativeReactions={reactions?.negative}
             />
-            {showComments && (
+            {showCommentSection && (
                 <CommentSection
                     comments={postDetails?.comments}
                     parentPostID={postID}
                     getPostDetails={getPostDetails}
                     handleShowCommentsClick={handleShowCommentsClick}
+                    shouldCommentSectionShow={shouldCommentSectionShow}
                 />
             )}
         </div>

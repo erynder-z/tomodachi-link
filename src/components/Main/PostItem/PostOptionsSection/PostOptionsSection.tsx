@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
 import { FaRegSmile, FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import useAuth from '../../../../hooks/useAuth';
@@ -10,29 +9,27 @@ import EditPostInput from '../../EditPostInput/EditPostInput';
 import { PostType } from '../../../../types/postType';
 import ToggleListButton from '../../UiElements/ToggleListButton/ToggleListButton';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
+import PostMenu from './PostMenu/PostMenu';
 
 type PostOptionsSectionProps = {
-    handleShowPostMenu: () => void;
-    isMenuOpen: boolean;
-    setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
     postDetails: PostType | null;
     onPostChange?: () => void;
 };
 
 export default function PostOptionsSection({
-    handleShowPostMenu,
-    isMenuOpen,
-    setIsMenuOpen,
     postDetails,
     onPostChange,
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const [shouldMenuShow, setShouldMenuShow] = useState(false);
     const [shouldPostEditShow, setShouldPostEditShow] = useState(false);
     const [shouldConfirmDialogShow, setShouldConfirmDialogShow] =
         useState(false);
+    const isMenuMounted = shouldMenuShow;
     const isPostEditMounted = shouldPostEditShow;
     const isConfirmDialogMounted = shouldConfirmDialogShow;
+    const showMenu = useDelayUnmount(isMenuMounted, 150);
     const showPostEdit = useDelayUnmount(isPostEditMounted, 150);
     const showConfirmDialog = useDelayUnmount(isConfirmDialogMounted, 150);
 
@@ -74,14 +71,18 @@ export default function PostOptionsSection({
         }
     };
 
+    const handleShowPostMenu = () => {
+        setShouldMenuShow(!shouldMenuShow);
+    };
+
     const handleEditButtonClick = () => {
         setShouldPostEditShow(true);
-        setIsMenuOpen(false);
+        setShouldMenuShow(false);
     };
 
     const handleDeleteButtonClick = () => {
         setShouldConfirmDialogShow(true);
-        setIsMenuOpen(false);
+        setShouldMenuShow(false);
     };
 
     return (
@@ -102,30 +103,15 @@ export default function PostOptionsSection({
             <div className="relative inline-block">
                 <ToggleListButton
                     onToggleListButtonClick={handleShowPostMenu}
-                    isMenuOpen={isMenuOpen}
+                    showMenu={showMenu}
                 />
 
-                {isMenuOpen && (
-                    <div className="absolute top-8 right-0 z-10 bg-popupMenu border shadow-lg">
-                        <ul className="flex flex-col gap-4 ">
-                            <li>
-                                <button
-                                    onClick={handleEditButtonClick}
-                                    className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300"
-                                >
-                                    <MdEdit size="1.25em" />
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    onClick={handleDeleteButtonClick}
-                                    className="flex justify-center items-center gap-2 w-full p-4 hover:bg-red-300"
-                                >
-                                    <MdOutlineDeleteForever size="1.25em" />
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+                {showMenu && (
+                    <PostMenu
+                        handleEditButtonClick={handleEditButtonClick}
+                        handleDeleteButtonClick={handleDeleteButtonClick}
+                        shouldMenuShow={shouldMenuShow}
+                    />
                 )}
                 {showPostEdit && (
                     <EditPostInput
