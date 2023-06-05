@@ -20,7 +20,7 @@ export default function CommentList({
         <div className="flex flex-col gap-4">
             <ToggleListButton
                 onToggleListButtonClick={onToggleListButtonClick}
-                isMenuOpen={true}
+                showMenu={true}
             />
             {commentItems.length > 0 ? (
                 commentItems

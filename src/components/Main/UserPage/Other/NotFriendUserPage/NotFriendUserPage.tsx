@@ -28,7 +28,7 @@ export default function NotFriendUserPage({
                 userPicture={userPicture}
                 cover={cover}
             />
-            <div className="my-auto">
+            <div className="animate-popInAnimation my-auto">
                 {isFriendRequestPending.incoming ? (
                     <IncomingFriendRequestPendingContent
                         userPageData={userPageData}

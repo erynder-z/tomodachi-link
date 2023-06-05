@@ -46,8 +46,8 @@ export default function Navbar() {
                     <div
                         className={`${
                             showOptions
-                                ? 'animate-inAnimation'
-                                : 'animate-outAnimation'
+                                ? 'animate-popInAnimation'
+                                : 'animate-popOutAnimation'
                         } absolute bottom-10 right-0 mt-2 p-2 bg-card shadow-xl z-10`}
                     >
                         <OptionsCard setShowOptions={setShowOptions} />

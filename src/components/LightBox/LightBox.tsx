@@ -8,10 +8,6 @@ type LightBoxProps = {
 };
 
 export default function LightBox({ image, onClose }: LightBoxProps) {
-    const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
-        event.stopPropagation();
-    };
-
     let src = '';
 
     if (typeof image === 'string') {
@@ -24,14 +20,12 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
 
     return (
         <div
-            onClick={onClose}
             className={`${
                 image ? 'animate-inAnimation' : 'animate-outAnimation'
             } fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center`}
         >
             {src && (
                 <img
-                    onClick={handleImageClick}
                     className="max-w-full max-h-full"
                     src={src}
                     alt="Selected image"

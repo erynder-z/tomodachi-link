@@ -11,6 +11,7 @@ import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import LightBox from '../../LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
+import useDelayUnmount from '../../../hooks/useDelayUnmount';
 
 type GalleryProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -30,6 +31,8 @@ export default function Gallery({
     const [numberOfPictures, setNumberOfPictures] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const isLightboxMounted = selectedImage ? true : false;
+    const showLightbox = useDelayUnmount(isLightboxMounted, 150);
 
     const handleFetchUserPics = async () => {
         if (token && id) {
@@ -89,22 +92,22 @@ export default function Gallery({
         </div>
     ));
     return (
-        <div className="flex flex-col justify-center items-center w-full p-4 ">
+        <div className="flex flex-col justify-center items-center w-full">
             {loading ? (
                 <div className="flex flex-col justify-center items-center h-screen w-full py-4 ">
                     <span>Getting pictures</span>
                     <LoadingSpinner />
                 </div>
             ) : (
-                <>
+                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card shadow-lg">
                     <h1 className="font-bold">{numberOfPictures} Pictures</h1>
                     <div className="flex flex-col md:grid grid-cols-3 gap-4">
                         {pictureList}
                     </div>
-                </>
+                </div>
             )}
 
-            {selectedImage && (
+            {showLightbox && (
                 <LightBox
                     image={selectedImage}
                     onClose={() => setSelectedImage(null)}

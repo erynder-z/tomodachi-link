@@ -43,11 +43,25 @@ module.exports = {
                         opacity: '1',
                     },
                 },
+                popOutAnimation: {
+                    '0%': {
+                        transform: 'scale(1)',
+                        opacity: '1',
+                    },
+                    '70%': {
+                        opacity: '1',
+                    },
+                    '100%': {
+                        transform: 'scale(0)',
+                        opacity: '0',
+                    },
+                },
             },
             animation: {
                 inAnimation: 'inAnimation 150ms ease-in',
                 outAnimation: 'outAnimation 170ms ease-out',
                 popInAnimation: 'popInAnimation 200ms ease-in-out',
+                popOutAnimation: 'popOutAnimation 220ms ease-in-out',
             },
         },
     },

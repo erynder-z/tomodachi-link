@@ -4,17 +4,17 @@ import './ToggleListButton.css';
 
 type ToggleListButtonProps = {
     onToggleListButtonClick: () => void;
-    isMenuOpen?: boolean;
+    showMenu?: boolean;
 };
 
 export default function ToggleListButton({
     onToggleListButtonClick,
-    isMenuOpen,
+    showMenu,
 }: ToggleListButtonProps) {
     return (
         <div
             className={`ml-auto rotate-on-hover ${
-                isMenuOpen ? 'rotate-up' : 'rotate-down'
+                showMenu ? 'rotate-up' : 'rotate-down'
             }`}
             onClick={onToggleListButtonClick}
         >

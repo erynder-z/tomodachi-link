@@ -8,6 +8,7 @@ type CommentSectionProps = {
     parentPostID: string;
     getPostDetails: (postID: string) => Promise<void>;
     handleShowCommentsClick: () => void;
+    shouldCommentSectionShow: boolean;
 };
 
 export default function CommentSection({
@@ -15,12 +16,19 @@ export default function CommentSection({
     parentPostID,
     getPostDetails,
     handleShowCommentsClick,
+    shouldCommentSectionShow,
 }: CommentSectionProps) {
     const onToggleListButtonClick = () => {
         handleShowCommentsClick();
     };
     return (
-        <div className="flex flex-col gap-4">
+        <div
+            className={`${
+                shouldCommentSectionShow
+                    ? 'animate-popInAnimation'
+                    : 'animate-popOutAnimation'
+            } flex flex-col gap-4`}
+        >
             <CommentList
                 comments={comments}
                 onToggleListButtonClick={onToggleListButtonClick}

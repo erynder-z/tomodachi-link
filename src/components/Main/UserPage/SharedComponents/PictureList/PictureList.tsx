@@ -69,18 +69,25 @@ export default function PictureList({ userId }: PictureListProps) {
     ));
 
     return (
-        <div className="animate-popInAnimation">
+        <div>
             <h1 className="font-bold">Pictures</h1>
 
-            <div className="grid grid-cols-3 gap-4">
-                {pictureList.length > 0 ? (
-                    pictureList
-                ) : (
-                    <span className="col-span-3 text-sm font-medium">
-                        Nothing here yet
-                    </span>
-                )}
-            </div>
+            {loading ? (
+                <div className="flex justify-center items-center w-full py-4">
+                    <LoadingSpinner />
+                </div>
+            ) : (
+                <div className="animate-inAnimation grid grid-cols-3 gap-4">
+                    {pictureList.length > 0 ? (
+                        pictureList
+                    ) : (
+                        <span className="col-span-3 text-sm font-medium">
+                            Nothing here yet
+                        </span>
+                    )}
+                </div>
+            )}
+
             {numberOfPictures > 9 && (
                 <Link
                     to={`/users/${userId}/gallery`}
@@ -89,11 +96,7 @@ export default function PictureList({ userId }: PictureListProps) {
                     See all <MdKeyboardDoubleArrowRight size="1.25em" />
                 </Link>
             )}
-            {loading && (
-                <div className="flex justify-center items-center w-full py-4 ">
-                    <LoadingSpinner />
-                </div>
-            )}
+
             {selectedImage && (
                 <LightBox
                     image={selectedImage}
