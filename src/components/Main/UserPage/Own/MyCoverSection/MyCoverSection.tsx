@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import tinycolor from 'tinycolor2';
-import { FaImages, FaTimes } from 'react-icons/fa';
+import { FaImages } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
@@ -8,6 +8,8 @@ import { CoverOption } from '../../../../../types/coverOptionTypes';
 import { saveCoverImage } from '../../../../../utilities/saveCoverImage';
 import { COVER_OPTIONS } from '../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../utilities/getColors';
+import ChangeCoverMenu from './ChangeCoverMenu/ChangeCoverMenu';
+import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 
 type MyCoverSectionProps = {
     onFetchComplete: (nameOfComponent: string) => void;
@@ -23,8 +25,10 @@ export default function MyCoverSection({
         null
     );
     const [colorPalette, setColorPalette] = useState<any>([]);
-    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const [shouldMenuShow, setShouldMenuShow] = useState<boolean>(false);
     const [isSaveButtonShown, setIsSaveButtonShown] = useState<boolean>(false);
+    const isMenuMounted = shouldMenuShow;
+    const showMenu = useDelayUnmount(isMenuMounted, 150);
     const [initialCover, setInitialCover] = useState<CoverOption | null>(null);
 
     const backgroundColor = colorPalette[0]?.hex;
@@ -33,12 +37,12 @@ export default function MyCoverSection({
         : '#000000';
 
     const handleChangeCoverImage = () => {
-        setIsMenuOpen(!isMenuOpen);
+        setShouldMenuShow(!shouldMenuShow);
     };
 
     const handleCoverOptionClick = (coverImage: CoverOption) => {
         setSelectedCover(coverImage);
-        setIsMenuOpen(false);
+        setShouldMenuShow(false);
     };
 
     const handleSaveCoverImage = () => {
@@ -78,7 +82,7 @@ export default function MyCoverSection({
     };
 
     const handleCloseButtonCLick = () => {
-        setIsMenuOpen(false);
+        setShouldMenuShow(false);
     };
 
     useEffect(() => {
@@ -102,7 +106,7 @@ export default function MyCoverSection({
                     alt="cover image"
                     className="f-full md:h-80 w-full object-cover"
                 />
-                {!isMenuOpen && (
+                {!showMenu && (
                     <button
                         onClick={handleChangeCoverImage}
                         className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-white px-4 py-2 text-xs bg-opacity-75"
@@ -110,37 +114,12 @@ export default function MyCoverSection({
                         Change cover image <FaImages size="1.5em" />
                     </button>
                 )}
-                {isMenuOpen && (
-                    <div className="absolute right-4 top-4 z-10 flex flex-col bg-white border border-gray-200 text-xs">
-                        <div className="flex">
-                            <span className="flex justify-center items-center p-2">
-                                Choose a cover:
-                            </span>
-                            <button
-                                onClick={handleCloseButtonCLick}
-                                className="ml-auto p-2 text-red-500 hover:text-red-700 cursor-pointer"
-                            >
-                                <FaTimes />
-                            </button>
-                        </div>
-
-                        {COVER_OPTIONS.map((coverImage, index) => (
-                            <div
-                                key={index}
-                                className="flex items-center p-2  cursor-pointer hover:bg-red-300"
-                                onClick={() =>
-                                    handleCoverOptionClick(coverImage)
-                                }
-                            >
-                                <img
-                                    src={coverImage.image}
-                                    alt={`cover option ${index + 1}`}
-                                    className="w-20 h-12 mr-2 object-cover"
-                                />
-                                <span> {coverImage.name}</span>
-                            </div>
-                        ))}
-                    </div>
+                {showMenu && (
+                    <ChangeCoverMenu
+                        handleCloseButtonCLick={handleCloseButtonCLick}
+                        handleCoverOptionClick={handleCoverOptionClick}
+                        shouldMenuShow={shouldMenuShow}
+                    />
                 )}
                 {isSaveButtonShown && (
                     <button
