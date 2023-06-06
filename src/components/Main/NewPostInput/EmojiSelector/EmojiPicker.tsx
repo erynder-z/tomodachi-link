@@ -3,12 +3,12 @@ import { FaTimes } from 'react-icons/fa';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 
 type EmojiSelectorProps = {
-    setPostText: React.Dispatch<React.SetStateAction<string>>;
+    setText: React.Dispatch<React.SetStateAction<string>>;
     setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function EmojiSelector({
-    setPostText,
+    setText,
     setShowEmojiPicker,
 }: EmojiSelectorProps) {
     const handleComponentClose = () => {
@@ -27,7 +27,7 @@ export default function EmojiSelector({
 
                 <EmojiPicker
                     onEmojiClick={(emojiData: EmojiClickData) => {
-                        setPostText((prev) => prev + emojiData.emoji);
+                        setText((prev) => prev + emojiData.emoji);
                         setShowEmojiPicker(false);
                     }}
                 />

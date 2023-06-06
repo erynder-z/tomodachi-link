@@ -102,7 +102,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     };
 
     return (
-        <div className="flex gap-4 md:p-4 lg:w-full lg:flex-row lg:justify-around lg:shadow-lg bg-card">
+        <div className="flex gap-4 md:p-4 lg:w-full lg:flex-row lg:justify-around  lg:shadow-lg bg-card">
             <form
                 action=""
                 method="POST"
@@ -144,7 +144,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
             </form>
             {showEmojiPicker && (
                 <EmojiSelector
-                    setPostText={setPostText}
+                    setText={setPostText}
                     setShowEmojiPicker={setShowEmojiPicker}
                 />
             )}

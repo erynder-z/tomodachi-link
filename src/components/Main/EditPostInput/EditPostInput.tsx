@@ -249,7 +249,7 @@ export default function EditPostInput({
                 </form>
                 {showEmojiPicker && (
                     <EmojiSelector
-                        setPostText={setPostText}
+                        setText={setPostText}
                         setShowEmojiPicker={setShowEmojiPicker}
                     />
                 )}
