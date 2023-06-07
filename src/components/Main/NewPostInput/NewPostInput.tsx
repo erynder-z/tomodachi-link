@@ -15,7 +15,7 @@ import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
 
 type NewPostInputProps = {
-    onPostSuccess: () => void;
+    onPostSuccess?: () => void;
 };
 
 export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
@@ -80,7 +80,9 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 setSelectedImage(undefined);
                 setYoutubeID(undefined);
                 setGif(undefined);
-                onPostSuccess();
+                if (onPostSuccess) {
+                    onPostSuccess();
+                }
             } else {
                 const data = await response.json();
                 const errorMessages = data.errors;
