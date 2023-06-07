@@ -39,7 +39,7 @@ export default function PostInputTextarea({
                 id="newPost"
                 name="newPost"
                 className={
-                    'peer placeholder-transparent w-full border-b-2 border-gray-300 text-gray-900 leading-tight focus:outline-none bg-blue-100 focus:bg-blue-200 p-2 h-full overflow-hidden resize-none'
+                    'peer placeholder-transparent w-full border-b-2 border-gray-300 text-gray-900 leading-tight focus:outline-none bg-blue-100 focus:bg-blue-200 p-2 h-full overflow-hidden resize-none rounded-md'
                 }
                 placeholder="message"
                 value={postText}
@@ -51,7 +51,7 @@ export default function PostInputTextarea({
             />
             <label
                 htmlFor="newPost"
-                className={`absolute left-0 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-3 transition-all ${
+                className={`absolute left-0 text-gray-600 text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2.5 transition-all ${
                     isTextareaEmpty ? 'peer-focus:-top-5' : 'top-[-1.5rem]'
                 } peer-focus:text-gray-600 peer-focus:text-xs px-2`}
             >
