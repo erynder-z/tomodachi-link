@@ -9,6 +9,7 @@ import { ImageType } from '../../../../types/imageType';
 import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 import { MinimalPostType } from '../../../../types/minimalPostType';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
+import NewPostInput from '../../NewPostInput/NewPostInput';
 
 type FreedProps = {
     friendList: string[];
@@ -73,6 +74,7 @@ export default function Feed({
 
     return (
         <div className="flex flex-col h-1/4 md:h-auto w-full gap-8 ">
+            <NewPostInput />
             <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 bg-card">
                 <ShowPeopleInThisFeed
                     friendList={friendList}
