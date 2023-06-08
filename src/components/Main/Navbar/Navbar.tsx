@@ -4,13 +4,27 @@ import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
 import useDelayUnmount from '../../../hooks/useDelayUnmount';
+import SearchButton from './SearchButton/SearchButton';
+import SearchOverlay from '../SearchOverlay/SearchOverlay';
 
 export default function Navbar() {
-    const [showOptions, setShowOptions] = useState(false);
-    const isMounted = showOptions;
-    const showModal = useDelayUnmount(isMounted, 150);
+    const [shouldOptionsShow, setShouldOptionsShow] = useState(false);
+    const [shouldSearchOverlayShow, setShouldSearchOverlayShow] =
+        useState(false);
+    const isOptionsMenuMounted = shouldOptionsShow;
+    const isSearchOverlayMounted = shouldSearchOverlayShow;
+    const showOptions = useDelayUnmount(isOptionsMenuMounted, 150);
+    const showSearchOverlay = useDelayUnmount(isSearchOverlayMounted, 150);
 
     const menuRef = useRef<HTMLDivElement>(null);
+
+    const handleSearchButtonClick = () => {
+        setShouldSearchOverlayShow(true);
+    };
+
+    const onClose = () => {
+        setShouldSearchOverlayShow(false);
+    };
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -18,7 +32,7 @@ export default function Navbar() {
                 menuRef.current &&
                 !menuRef.current.contains(event.target as Node)
             ) {
-                setShowOptions(false);
+                setShouldOptionsShow(false);
             }
         }
 
@@ -33,27 +47,36 @@ export default function Navbar() {
             <div className="flex lg:flex-col justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />
+                <SearchButton
+                    handleSearchButtonClick={handleSearchButtonClick}
+                />
             </div>
             <div className="relative lg:hidden flex" ref={menuRef}>
                 <button
                     type="button"
                     className="cursor-pointer"
-                    onClick={() => setShowOptions(!showOptions)}
+                    onClick={() => setShouldOptionsShow(!shouldOptionsShow)}
                 >
                     <NavbarUserOptionsButton />
                 </button>
-                {showModal && (
+                {showOptions && (
                     <div
                         className={`${
-                            showOptions
+                            shouldOptionsShow
                                 ? 'animate-popInAnimation'
                                 : 'animate-popOutAnimation'
                         } absolute bottom-10 right-0 mt-2 p-2 bg-card shadow-xl z-10`}
                     >
-                        <OptionsCard setShowOptions={setShowOptions} />
+                        <OptionsCard setShowOptions={setShouldOptionsShow} />
                     </div>
                 )}
             </div>
+            {showSearchOverlay && (
+                <SearchOverlay
+                    shouldSearchOverlayShow={shouldSearchOverlayShow}
+                    onClose={onClose}
+                />
+            )}
         </div>
     );
 }
