@@ -97,7 +97,7 @@ function App() {
                 onTouchMove={handleTouchMove}
             >
                 <ScrollToTop />
-                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1 z-5">
+                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1 z-10">
                     <ProfileCard />
                     <OptionsCard />
                 </div>
