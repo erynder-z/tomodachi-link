@@ -14,7 +14,7 @@ export default function PostGifSection({
             <img
                 loading="lazy"
                 onClick={() => handleGifClick(gifUrl)}
-                className="w-fit h-auto object-cover shadow-lg cursor-pointer"
+                className="w-fit h-auto object-cover cursor-pointer"
                 src={gifUrl}
                 alt="User uploaded gif"
             />

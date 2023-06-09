@@ -17,7 +17,7 @@ export default function PostImageSection({
             <img
                 loading="lazy"
                 onClick={() => handleImageClick(databaseImage)}
-                className="w-fit h-auto object-cover shadow-lg cursor-pointer"
+                className="w-fit h-auto object-cover cursor-pointer"
                 src={`data:image/png;base64,${convertedImage}`}
                 alt="User uploaded image"
             />
