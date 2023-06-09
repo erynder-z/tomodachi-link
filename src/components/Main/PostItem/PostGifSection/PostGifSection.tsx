@@ -12,6 +12,7 @@ export default function PostGifSection({
     return (
         <div className="flex justify-center">
             <img
+                loading="lazy"
                 onClick={() => handleGifClick(gifUrl)}
                 className="w-fit h-auto object-cover shadow-lg cursor-pointer"
                 src={gifUrl}

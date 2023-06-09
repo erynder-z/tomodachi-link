@@ -77,6 +77,7 @@ export default function Gallery({
     const pictureList = pictures?.map((picture) => (
         <div key={uuidv4()} className="relative">
             <img
+                loading="lazy"
                 className="w-full h-auto aspect-square object-cover shadow-lg cursor-pointer"
                 src={`data:image/png;base64,${convertImageToBase64(picture)}`}
                 alt="User uploaded image"

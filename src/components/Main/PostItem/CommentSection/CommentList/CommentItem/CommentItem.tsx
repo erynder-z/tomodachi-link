@@ -21,6 +21,7 @@ export default function CommentItem({ commentDetails }: CommentItemProps) {
     return (
         <div className="flex gap-4">
             <img
+                loading="lazy"
                 className="w-6 h-6 object-cover rounded-full shadow-lg"
                 src={`data:image/png;base64,${userPic}`}
                 alt="User avatar"

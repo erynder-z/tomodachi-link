@@ -11,6 +11,7 @@ export const EmbeddedYoutubeVideo = ({
     return (
         <div className="relative h-0 overflow-hidden w-3/4 pb-youtube mx-auto">
             <iframe
+                loading="lazy"
                 className="absolute inset-0 w-full h-full"
                 title={`YouTube Video ${videoID}`}
                 src={`https://www.youtube.com/embed/${videoID}`}

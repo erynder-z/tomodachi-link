@@ -27,6 +27,7 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
             className="flex items-center w-full gap-4 py-2"
         >
             <img
+                loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
                 src={`data:image/png;base64,${getCorrectUserpicFormat(
                     userpic

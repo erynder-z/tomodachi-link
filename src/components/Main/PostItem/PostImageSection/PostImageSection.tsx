@@ -15,6 +15,7 @@ export default function PostImageSection({
     return (
         <div className="flex justify-center">
             <img
+                loading="lazy"
                 onClick={() => handleImageClick(databaseImage)}
                 className="w-fit h-auto object-cover shadow-lg cursor-pointer"
                 src={`data:image/png;base64,${convertedImage}`}
