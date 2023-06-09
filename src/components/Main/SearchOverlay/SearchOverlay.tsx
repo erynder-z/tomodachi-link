@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import {MdPersonSearch} from "react-icons/md"
+import { MdPersonSearch } from 'react-icons/md';
 import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 import useAuth from '../../../hooks/useAuth';
 import UserListItem from '../UserList/UserListItem/UserListItem';
@@ -91,30 +91,29 @@ export default function SearchOverlay({
                         <div className="w-full sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-indigo-800/50">
                             <LoadingSpinner />
                         </div>
+                    ) : searchResults.length > 0 &&
+                      Array.isArray(searchResults) ? (
+                        <ul
+                            className="w-95vw sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-indigo-800/50"
+                            style={{
+                                maxHeight: shouldSearchOverlayShow
+                                    ? '50vh'
+                                    : '0',
+                            }}
+                        >
+                            {searchResults?.map((user: MinimalUserTypes) => (
+                                <div onClick={onClose}>
+                                    <UserListItem
+                                        key={user._id}
+                                        listItemData={user}
+                                    />
+                                </div>
+                            ))}
+                        </ul>
                     ) : (
-                        searchResults.length > 0 &&
-                        Array.isArray(searchResults) ? (
-                            <ul
-                                className="w-95vw sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-indigo-800/50"
-                                style={{
-                                    maxHeight: shouldSearchOverlayShow
-                                        ? '50vh'
-                                        : '0',
-                                }}
-                            >
-                                {searchResults?.map(
-                                    (user: MinimalUserTypes) => (
-                                        <UserListItem
-                                            key={user._id}
-                                            listItemData={user}
-                                        />
-                                    )
-                                )}
-                            </ul>
-                            
-                        ) : <div className='flex justify-center items-center'>
-                            <MdPersonSearch className='text-gray-200 text-6xl mt-10' />
-                            </div>
+                        <div className="flex justify-center items-center">
+                            <MdPersonSearch className="text-gray-200 text-6xl mt-10" />
+                        </div>
                     )}
                     {searchText && (
                         <button
