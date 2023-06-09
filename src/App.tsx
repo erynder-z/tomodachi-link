@@ -32,7 +32,7 @@ function App() {
     );
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [lastTouchY, setLastTouchY] = useState<number | null>(null);
-    const [isPaginationTriggered, setIsPaginationTriggered] =
+    const [isPaginationTriggered, setIsPaginationTriggered] = 
         useState<boolean>(false);
 
     // handle infinite scrolling on desktop devices
@@ -97,7 +97,7 @@ function App() {
                 onTouchMove={handleTouchMove}
             >
                 <ScrollToTop />
-                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1 z-10">
+                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1 z-5">
                     <ProfileCard />
                     <OptionsCard />
                 </div>
