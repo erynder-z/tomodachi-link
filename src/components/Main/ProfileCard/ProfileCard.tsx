@@ -25,7 +25,7 @@ export default function ProfileCard() {
                     src={`data:image/png;base64,${userImage}`}
                     alt="User avatar"
                 />
-                <p className="font-semibold text-sm my-5 break-all">
+                <p className="font-semibold text-xl my-5 break-all">
                     {firstName} {lastName}
                 </p>
                 <p className="text-sm mb-2">{numberOfFriends} Friends</p>

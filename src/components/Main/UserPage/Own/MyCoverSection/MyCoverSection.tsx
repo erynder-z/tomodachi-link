@@ -146,7 +146,9 @@ export default function MyCoverSection({
                 }
             >
                 <div className="flex flex-col justify-center w-full">
-                    <h1 className="text-center font-bold h-auto">My Page</h1>
+                    <h1 className="text-2xl text-center font-bold h-auto">
+                        My Page
+                    </h1>
                 </div>
             </div>
         </div>

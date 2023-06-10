@@ -32,7 +32,7 @@ function App() {
     );
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [lastTouchY, setLastTouchY] = useState<number | null>(null);
-    const [isPaginationTriggered, setIsPaginationTriggered] = 
+    const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
 
     // handle infinite scrolling on desktop devices
@@ -86,7 +86,7 @@ function App() {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
+        <div className="font-regularFont flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
             <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen z-10">
                 <Navbar />
             </nav>

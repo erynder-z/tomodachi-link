@@ -29,7 +29,7 @@ export default function UserList() {
     ));
     return (
         <div className="flex flex-col w-full p-4 bg-card">
-            <h1 className="text-center font-bold">People you may know</h1>
+            <h1 className="text-center font-bold">People you may know:</h1>
             {userList}
             {loading && (
                 <div className="flex justify-center items-center w-full py-4 ">

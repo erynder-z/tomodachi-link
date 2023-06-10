@@ -87,7 +87,7 @@ export default function FriendCoverSection({
                 />
 
                 <div className="flex flex-col">
-                    <h1 className=" text-center font-bold h-auto">
+                    <h1 className="text-2xl text-center font-bold h-auto">
                         {firstName} {lastName}'s page
                     </h1>
                     <p className="text-center text-xs">
