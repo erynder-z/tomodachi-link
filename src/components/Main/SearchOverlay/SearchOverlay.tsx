@@ -122,11 +122,11 @@ export default function SearchOverlay({
                             }}
                         >
                             {searchResults?.map((user: MinimalUserTypes) => (
-                                <div onClick={handleCloseButtonClick}>
-                                    <UserListItem
-                                        key={user._id}
-                                        listItemData={user}
-                                    />
+                                <div
+                                    key={user._id}
+                                    onClick={handleCloseButtonClick}
+                                >
+                                    <UserListItem listItemData={user} />
                                 </div>
                             ))}
                         </ul>
