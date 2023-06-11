@@ -23,16 +23,14 @@ export default function OverlayHandler({
     shouldOverlaysShow,
     setShouldOverlaysShow,
 }: OverlayHandlerProps) {
-    const [shouldSearchOverlayShow, setShouldSearchOverlayShow] = useState(
+    const [isSearchOverlayMounted, setIsSearchOverlayMounted] = useState(
         shouldOverlaysShow.searchOverlay
     );
-    const [shouldEditUserDataModalShow, setShouldEditUserDataModalShow] =
+    const [isEditUserDataModalMounted, setIsEditUserDataModalMounted] =
         useState(shouldOverlaysShow.editUserDataModal);
-    const [shouldMobileOptionsModalShow, setShouldMobileOptionsModalShow] =
+    const [isMobileOptionsModalMounted, setIsMobileOptionsModalMounted] =
         useState(shouldOverlaysShow.mobileOptionsModal);
-    const isSearchOverlayMounted = shouldSearchOverlayShow;
-    const isEditUserDataModalMounted = shouldEditUserDataModalShow;
-    const isMobileOptionsModalMounted = shouldMobileOptionsModalShow;
+
     const showSearchOverlay = useDelayUnmount(isSearchOverlayMounted, 150);
     const showEditUserDataModal = useDelayUnmount(
         isEditUserDataModalMounted,
@@ -44,29 +42,31 @@ export default function OverlayHandler({
     );
 
     useEffect(() => {
-        setShouldSearchOverlayShow(shouldOverlaysShow.searchOverlay);
-        setShouldEditUserDataModalShow(shouldOverlaysShow.editUserDataModal);
-        setShouldMobileOptionsModalShow(shouldOverlaysShow.mobileOptionsModal);
+        setIsSearchOverlayMounted(shouldOverlaysShow.searchOverlay);
+        setIsEditUserDataModalMounted(shouldOverlaysShow.editUserDataModal);
+        setIsMobileOptionsModalMounted(shouldOverlaysShow.mobileOptionsModal);
     }, [shouldOverlaysShow]);
 
     return (
         <div className="relative z-50">
             {showSearchOverlay && (
                 <SearchOverlay
-                    shouldSearchOverlayShow={shouldSearchOverlayShow}
+                    shouldSearchOverlayShow={shouldOverlaysShow.searchOverlay}
                     setShouldOverlaysShow={setShouldOverlaysShow}
                 />
             )}
             {showEditUserDataModal && (
                 <EditUserDataModal
-                    shouldEditUserDataModalShow={shouldEditUserDataModalShow}
+                    shouldEditUserDataModalShow={
+                        shouldOverlaysShow.editUserDataModal
+                    }
                     setShouldOverlaysShow={setShouldOverlaysShow}
                 />
             )}
             {showMobileOptionsModal && (
                 <div
                     className={`${
-                        shouldMobileOptionsModalShow
+                        shouldOverlaysShow.mobileOptionsModal
                             ? 'animate-popInAnimation'
                             : 'animate-popOutAnimation'
                     } lg:hidden absolute bottom-10 right-0 mt-2 p-2 bg-card shadow-xl z-10`}
