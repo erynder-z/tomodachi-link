@@ -5,20 +5,28 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import Badge from '../Badge/Badge';
 
 type ProfilePageButtonProps = {
-    setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+        }>
+    >;
 };
 
 export default function ProfilePageButton({
-    setShowOptions,
+    setShouldOverlaysShow,
 }: ProfilePageButtonProps) {
     const { currentUserData } = useCurrentUserData();
     const { pendingFriendRequests } = currentUserData || {};
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
     const handleCloseOptions = () => {
-        if (setShowOptions) {
-            setShowOptions(false);
-        }
+        setShouldOverlaysShow({
+            searchOverlay: false,
+            editUserDataModal: false,
+            mobileOptionsModal: false,
+        });
     };
 
     return (

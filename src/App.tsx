@@ -20,6 +20,7 @@ import Gallery from './components/Main/Gallery/Gallery';
 import AllFriendsPage from './components/Main/AllFriendsPage/AllFriendsPage';
 import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopButton';
+import OverlayHandler from './components/Overlays/OverlayHandler';
 
 function App() {
     const { isAuth } = useAuth();
@@ -31,6 +32,11 @@ function App() {
             'Home'
     );
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
+    const [shouldOverlaysShow, setShouldOverlaysShow] = useState({
+        searchOverlay: false,
+        editUserDataModal: false,
+        mobileOptionsModal: false,
+    });
     const [lastTouchY, setLastTouchY] = useState<number | null>(null);
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
@@ -87,22 +93,30 @@ function App() {
 
     return (
         <div className="font-regularFont flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
-            <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen z-10">
-                <Navbar />
-            </nav>
+            <div className="relative">
+                <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen">
+                    <Navbar
+                        shouldOverlaysShow={shouldOverlaysShow}
+                        setShouldOverlaysShow={setShouldOverlaysShow}
+                    />
+                </nav>
+            </div>
             <main
                 id="container-main"
-                className="flex w-full h-[calc(100vh_-_3rem)] lg:h-screen gap-4 md:p-4 bg-background overflow-auto"
+                className="relative flex w-full h-[calc(100vh_-_3rem)] lg:h-screen gap-4 md:p-4 bg-background overflow-auto"
                 onScroll={handleScroll}
                 onTouchMove={handleTouchMove}
             >
                 <ScrollToTop />
-                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1 z-5">
+                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1">
                     <ProfileCard />
-                    <OptionsCard />
+                    <OptionsCard
+                        shouldOverlaysShow={shouldOverlaysShow}
+                        setShouldOverlaysShow={setShouldOverlaysShow}
+                    />
                 </div>
 
-                <div className="flex-1 max-w-3xl">
+                <div className="relative flex-1 max-w-3xl z-10">
                     <Routes>
                         <Route element={<RequireAuth />}>
                             <Route path="*" element={<NotFoundPage />} />
@@ -186,6 +200,11 @@ function App() {
                 )}
                 <ScrollToTopButton />
             </main>
+
+            <OverlayHandler
+                shouldOverlaysShow={shouldOverlaysShow}
+                setShouldOverlaysShow={setShouldOverlaysShow}
+            />
 
             <InfoCard info={info} />
         </div>

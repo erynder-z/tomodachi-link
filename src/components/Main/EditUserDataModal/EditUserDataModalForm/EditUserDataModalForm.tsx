@@ -8,12 +8,18 @@ import { convertImageToBase64 } from '../../../../utilities/convertImageToBase64
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
 
 type EditUserDataModalFormProps = {
-    setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+        }>
+    >;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function EditUserDataModalForm({
-    setShowOverlay,
+    setShouldOverlaysShow,
     setShowOptions,
 }: EditUserDataModalFormProps) {
     const { token } = useAuth();
@@ -79,7 +85,11 @@ export default function EditUserDataModalForm({
                 icon: <FaRegSmile />,
             });
             handleFetchUserData();
-            setShowOverlay(false);
+            setShouldOverlaysShow({
+                searchOverlay: false,
+                editUserDataModal: false,
+                mobileOptionsModal: false,
+            });
             setShowOptions && setShowOptions(false);
         }
     };

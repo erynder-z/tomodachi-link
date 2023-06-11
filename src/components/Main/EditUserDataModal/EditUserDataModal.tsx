@@ -5,20 +5,30 @@ import UpdatePasswordButton from './UpdatePasswordButton/UpdatePasswordButton';
 import UpdatePasswordForm from './UpdatePasswordForm/UpdatePasswordForm';
 
 type EditUserDataModalProps = {
-    showOverlay: boolean;
-    setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+    shouldEditUserDataModalShow: boolean;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+        }>
+    >;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function EditUserDataModal({
-    showOverlay,
-    setShowOverlay,
+    shouldEditUserDataModalShow,
+    setShouldOverlaysShow,
     setShowOptions,
 }: EditUserDataModalProps): JSX.Element {
     const [currentMenu, setCurrentMenu] = useState<string>('Profile');
 
     const handleCloseButtonClick = () => {
-        setShowOverlay(false);
+        setShouldOverlaysShow({
+            searchOverlay: false,
+            editUserDataModal: false,
+            mobileOptionsModal: false,
+        });
         setShowOptions?.(false);
     };
 
@@ -26,7 +36,7 @@ export default function EditUserDataModal({
         const changeProfileMenu = (
             <>
                 <EditUserDataModalForm
-                    setShowOverlay={setShowOverlay}
+                    setShouldOverlaysShow={setShouldOverlaysShow}
                     setShowOptions={setShowOptions}
                 />
                 <UpdatePasswordButton setCurrentMenu={setCurrentMenu} />
@@ -35,7 +45,7 @@ export default function EditUserDataModal({
 
         const changePasswordMenu = (
             <UpdatePasswordForm
-                setShowOverlay={setShowOverlay}
+                setShouldOverlaysShow={setShouldOverlaysShow}
                 setShowOptions={setShowOptions}
             />
         );
@@ -51,8 +61,10 @@ export default function EditUserDataModal({
     return (
         <div
             className={`${
-                showOverlay ? 'animate-inAnimation' : 'animate-outAnimation'
-            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center bg-black/80 opacity`}
+                shouldEditUserDataModalShow
+                    ? 'animate-inAnimation'
+                    : 'animate-outAnimation'
+            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black/80 opacity`}
         >
             <div className="relative w-11/12 lg:w-1/4 flex flex-col justify-around shadow-lg p-4 bg-card">
                 <button

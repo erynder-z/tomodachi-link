@@ -5,12 +5,18 @@ import { usePasswordComparison } from '../../../../hooks/usePasswordComparison';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
 type UpdatePasswordFormProps = {
-    setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+        }>
+    >;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function UpdatePasswordForm({
-    setShowOverlay,
+    setShouldOverlaysShow,
     setShowOptions,
 }: UpdatePasswordFormProps) {
     const { token } = useAuth();
@@ -67,7 +73,11 @@ export default function UpdatePasswordForm({
                 message: 'Password updated successfully!',
                 icon: <FaRegSmile />,
             });
-            setShowOverlay(false);
+            setShouldOverlaysShow({
+                searchOverlay: false,
+                editUserDataModal: false,
+                mobileOptionsModal: false,
+            });
             if (setShowOptions) {
                 setShowOptions(false);
             }

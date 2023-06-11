@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TbSettings } from 'react-icons/tb';
-import EditUserDataModal from '../../EditUserDataModal/EditUserDataModal';
-import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 
 type OptionsButtonProps = {
-    setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
+    shouldOverlaysShow: {
+        searchOverlay: boolean;
+        editUserDataModal: boolean;
+        mobileOptionsModal: boolean;
+    };
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+        }>
+    >;
 };
-export default function OptionsButton({ setShowOptions }: OptionsButtonProps) {
-    const [showOverlay, setShowOverlay] = useState(false);
-    const isMounted = showOverlay;
-    const showModal = useDelayUnmount(isMounted, 150);
-
+export default function OptionsButton({
+    shouldOverlaysShow,
+    setShouldOverlaysShow,
+}: OptionsButtonProps) {
     const handleButtonClick = () => {
-        setShowOverlay(!showOverlay);
+        setShouldOverlaysShow({
+            searchOverlay: false,
+            editUserDataModal: !shouldOverlaysShow.editUserDataModal,
+            mobileOptionsModal: false,
+        });
     };
 
     return (
-        <>
-            <button
-                type="button"
-                onClick={handleButtonClick}
-                className="cursor-pointer hover:drop-shadow-md hover:text-blue-400"
-            >
-                <TbSettings size="1.5em" />
-            </button>
-            {showModal && (
-                <EditUserDataModal
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    setShowOptions={setShowOptions}
-                />
-            )}
-        </>
+        <button
+            type="button"
+            onClick={handleButtonClick}
+            className="cursor-pointer hover:drop-shadow-md hover:text-blue-400"
+        >
+            <TbSettings size="1.5em" />
+        </button>
     );
 }

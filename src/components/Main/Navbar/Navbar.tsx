@@ -1,46 +1,63 @@
-import React, { useEffect, useRef, useState } from 'react';
-import OptionsCard from '../OptionsCard/OptionsCard';
+import React, { useEffect, useRef } from 'react';
 import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
-import useDelayUnmount from '../../../hooks/useDelayUnmount';
 import SearchButton from './SearchButton/SearchButton';
-import SearchOverlay from '../SearchOverlay/SearchOverlay';
 
-export default function Navbar() {
-    const [shouldOptionsShow, setShouldOptionsShow] = useState(false);
-    const [shouldSearchOverlayShow, setShouldSearchOverlayShow] =
-        useState(false);
-    const isOptionsMenuMounted = shouldOptionsShow;
-    const isSearchOverlayMounted = shouldSearchOverlayShow;
-    const showOptions = useDelayUnmount(isOptionsMenuMounted, 150);
-    const showSearchOverlay = useDelayUnmount(isSearchOverlayMounted, 150);
+type NavbarProps = {
+    shouldOverlaysShow: {
+        searchOverlay: boolean;
+        editUserDataModal: boolean;
+        mobileOptionsModal: boolean;
+    };
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+        }>
+    >;
+};
 
+export default function Navbar({
+    shouldOverlaysShow,
+    setShouldOverlaysShow,
+}: NavbarProps) {
     const menuRef = useRef<HTMLDivElement>(null);
 
     const handleSearchButtonClick = () => {
-        setShouldSearchOverlayShow(true);
+        setShouldOverlaysShow({
+            searchOverlay: true,
+            editUserDataModal: false,
+            mobileOptionsModal: false,
+        });
     };
 
-    const onClose = () => {
-        setShouldSearchOverlayShow(false);
+    const closeAllOverlays = () => {
+        setShouldOverlaysShow({
+            searchOverlay: false,
+            editUserDataModal: false,
+            mobileOptionsModal: false,
+        });
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            menuRef.current &&
+            !menuRef.current.contains(event.target as Node)
+        ) {
+            closeAllOverlays();
+        }
     };
 
     useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (
-                menuRef.current &&
-                !menuRef.current.contains(event.target as Node)
-            ) {
-                setShouldOptionsShow(false);
-            }
+        if (shouldOverlaysShow.mobileOptionsModal) {
+            document.addEventListener('mousedown', handleClickOutside);
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
         }
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [menuRef]);
+    }, [menuRef, shouldOverlaysShow.mobileOptionsModal]);
 
     return (
         <div className="h-full w-full flex justify-between items-center lg:items-start px-2 py-1 lg:py-2 bg-navbar">
@@ -55,28 +72,18 @@ export default function Navbar() {
                 <button
                     type="button"
                     className="cursor-pointer"
-                    onClick={() => setShouldOptionsShow(!shouldOptionsShow)}
+                    onClick={() => {
+                        setShouldOverlaysShow({
+                            searchOverlay: false,
+                            editUserDataModal: false,
+                            mobileOptionsModal:
+                                !shouldOverlaysShow.mobileOptionsModal,
+                        });
+                    }}
                 >
                     <NavbarUserOptionsButton />
                 </button>
-                {showOptions && (
-                    <div
-                        className={`${
-                            shouldOptionsShow
-                                ? 'animate-popInAnimation'
-                                : 'animate-popOutAnimation'
-                        } absolute bottom-10 right-0 mt-2 p-2 bg-card shadow-xl z-10`}
-                    >
-                        <OptionsCard setShowOptions={setShouldOptionsShow} />
-                    </div>
-                )}
             </div>
-            {showSearchOverlay && (
-                <SearchOverlay
-                    shouldSearchOverlayShow={shouldSearchOverlayShow}
-                    onClose={onClose}
-                />
-            )}
         </div>
     );
 }
