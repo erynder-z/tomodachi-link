@@ -98,27 +98,30 @@ export default function LoginPage() {
     return (
         <div className="h-screen  bg-card">
             <div className="flex justify-center items-center w-full h-full">
-                <div className="h-1/2 w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:p-10">
-                    {isVerifying ? (
-                        <VerifyingInfoBox />
-                    ) : (
-                        <>
-                            <LoginForm handleSubmit={handleSubmit} />
-                            <div className="flex w-full">
-                                <button
-                                    onClick={handleRegisterClick}
-                                    className="w-full relative overflow-hidden bg-green-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group"
-                                >
-                                    <span className="z-10 relative">
-                                        Register
-                                    </span>
-                                    <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </div>
-                {showSignup && <SignupPage setShowSignup={setShowSignup} />}
+                {showSignup ? (
+                    <SignupPage setShowSignup={setShowSignup} />
+                ) : (
+                    <div className="animate-inAnimation h-1/2 w-5/6 sm:w-2/3 lg:w-1/4 px-4 lg:py-10 bg-white shadow-lg sm:p-10">
+                        {isVerifying ? (
+                            <VerifyingInfoBox />
+                        ) : (
+                            <>
+                                <LoginForm handleSubmit={handleSubmit} />
+                                <div className="flex w-full">
+                                    <button
+                                        onClick={handleRegisterClick}
+                                        className="w-full relative overflow-hidden bg-green-500 text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group"
+                                    >
+                                        <span className="z-10 relative">
+                                            Create account
+                                        </span>
+                                        <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

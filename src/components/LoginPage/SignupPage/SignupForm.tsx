@@ -8,7 +8,7 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
     return (
         <div className="max-w-md mx-auto">
             <div>
-                <h1 className="text-2xl font-semibold">Register</h1>
+                <h1 className="text-2xl font-semibold">Set up your account</h1>
             </div>
             <form
                 action=""
@@ -120,8 +120,9 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                         </label>
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full bg-blue-500 text-white px-2 py-1">
-                            Register
+                        <button className="w-full relative overflow-hidden bg-blue-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group">
+                            <span className="z-10 relative">Register</span>
+                            <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
                         </button>
                     </div>
                 </div>
