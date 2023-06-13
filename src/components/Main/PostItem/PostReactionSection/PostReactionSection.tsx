@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     MdThumbUpOffAlt,
     MdThumbDownOffAlt,
@@ -22,23 +22,58 @@ export default function PostReactionSection({
     handleNegativeReactionClick,
     numberOfNegativeReactions,
 }: PostReactionSectionProps) {
+    const [animateReaction, setAnimateReaction] = useState('');
+
+    const handleReactionClick = (
+        reactionType: string,
+        callback: () => void
+    ) => {
+        setAnimateReaction(reactionType);
+        callback();
+    };
+
+    const handleAnimationEnd = () => {
+        setAnimateReaction('');
+    };
+
     return (
-        <div className="flex justify-around items-center ">
+        <div className="flex justify-around items-center">
             <button
-                onClick={handleShowCommentsClick}
-                className="flex justify-center items-center gap-1"
+                onClick={() =>
+                    handleReactionClick('comments', handleShowCommentsClick)
+                }
+                className={`flex justify-center items-center gap-1 ${
+                    animateReaction === 'comments'
+                        ? 'animate-popInAnimation'
+                        : ''
+                }`}
+                onAnimationEnd={handleAnimationEnd}
             >
                 <MdOutlineModeComment /> {numberOfComments}
             </button>
             <button
-                onClick={handlePositiveReactionClick}
-                className="flex justify-center items-center gap-1"
+                onClick={() =>
+                    handleReactionClick('positive', handlePositiveReactionClick)
+                }
+                className={`flex justify-center items-center gap-1 ${
+                    animateReaction === 'positive'
+                        ? 'animate-popInAnimation'
+                        : ''
+                }`}
+                onAnimationEnd={handleAnimationEnd}
             >
                 <MdThumbUpOffAlt /> {numberOfPositiveReactions}
             </button>
             <button
-                onClick={handleNegativeReactionClick}
-                className="flex justify-center items-center gap-1"
+                onClick={() =>
+                    handleReactionClick('negative', handleNegativeReactionClick)
+                }
+                className={`flex justify-center items-center gap-1 ${
+                    animateReaction === 'negative'
+                        ? 'animate-popInAnimation'
+                        : ''
+                }`}
+                onAnimationEnd={handleAnimationEnd}
             >
                 <MdThumbDownOffAlt /> {numberOfNegativeReactions}
             </button>
