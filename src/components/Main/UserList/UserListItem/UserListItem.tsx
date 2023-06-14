@@ -1,6 +1,7 @@
 import React from 'react';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { Link } from 'react-router-dom';
+import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
 
 type UserListItemProps = {
     listItemData: MinimalUserTypes;
@@ -8,18 +9,6 @@ type UserListItemProps = {
 
 export default function UserListItem({ listItemData }: UserListItemProps) {
     const { _id, firstName, lastName, userpic } = listItemData || {};
-
-    const getCorrectUserpicFormat = (pic: any) => {
-        if (typeof pic.data !== 'string') {
-            return window.btoa(
-                new Uint8Array(pic.data).reduce(function (data, byte) {
-                    return data + String.fromCharCode(byte);
-                }, '')
-            );
-        } else {
-            return pic.data;
-        }
-    };
 
     return (
         <Link
