@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { TbUserMinus } from 'react-icons/tb';
+import { TbQuestionCircle, TbUserMinus } from 'react-icons/tb';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import { unfriendUser } from '../../../../../../utilities/unfriendUser';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import ConfirmationOverlay from '../../../../../ConfirmationOverlay/ConfirmationOverlay';
-import { TbQuestionCircle } from 'react-icons/tb';
 import useDelayUnmount from '../../../../../../hooks/useDelayUnmount';
 
 type UnfriendButtonProps = {
