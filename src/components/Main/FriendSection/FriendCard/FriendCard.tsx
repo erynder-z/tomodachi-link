@@ -63,7 +63,7 @@ export default function FriendCard({ friendData }: FriendCardProps) {
             <div className="w-full lg:w-44 h-60">
                 <div className="w-full text-center p-4 bg-card shadow-lg">
                     <img
-                        className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
+                        className="w-20 h-20 object-cover rounded-full mx-auto"
                         src={`data:image/png;base64,${getCorrectUserpicFormat(
                             userpic
                         )}`}
