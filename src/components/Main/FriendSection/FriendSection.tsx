@@ -8,6 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
 import SuggestionCard from './SuggestionCard/SuggestionCard';
+import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
 
 type FriendSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -18,7 +19,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const { setInfo } = useInfoCard();
     const { friendData } = useFriendData();
     const [friendsOfFriends, setFriendsOfFriends] = useState<
-        MinimalUserTypes[]
+        FriendsOfFriendsType[]
     >([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -49,7 +50,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     );
 
     const friendsOfFriendsCardList = friendsOfFriends?.map(
-        (friendObject: MinimalUserTypes) => (
+        (friendObject: FriendsOfFriendsType) => (
             <SuggestionCard key={friendObject._id} friendData={friendObject} />
         )
     );
@@ -66,13 +67,13 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     return (
         <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card shadow-lg">
             <h1 className="text-center text-xl font-bold">Friends</h1>
-            <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4">
+            <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4">
                 {friendProfileCardList}
             </div>
             <h1 className="text-center text-xl font-bold">
                 Maybe you know these people?
             </h1>
-            <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4">
+            <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4">
                 {friendsOfFriendsCardList}
             </div>
         </div>
