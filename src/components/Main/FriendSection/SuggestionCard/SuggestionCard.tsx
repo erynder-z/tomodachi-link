@@ -6,6 +6,7 @@ import {
     CommonFriendType,
     FriendsOfFriendsType,
 } from '../../../../types/friendsOfFriendsType';
+import { shuffleArray } from '../../../../utilities/shuffleArray';
 
 type SuggestionCardProps = {
     friendData: FriendsOfFriendsType;
@@ -14,7 +15,18 @@ type SuggestionCardProps = {
 export default function SuggestionCard({ friendData }: SuggestionCardProps) {
     const { userpic, firstName, lastName, _id, commonFriends } = friendData;
 
-    const commonFriendsList = commonFriends?.map(
+    const MAX_DISPLAY_ITEMS = 3;
+    const shuffledCommonFriends = shuffleArray(commonFriends);
+    const displayedCommonFriends = shuffledCommonFriends?.slice(
+        0,
+        MAX_DISPLAY_ITEMS
+    );
+    const additionalItemsCount =
+        commonFriends && commonFriends.length > MAX_DISPLAY_ITEMS
+            ? commonFriends.length - MAX_DISPLAY_ITEMS
+            : 0;
+
+    const commonFriendsList = displayedCommonFriends?.map(
         (commonFriendObject: CommonFriendType) => (
             <p key={commonFriendObject._id} className="text-xs break-all">
                 {commonFriendObject.firstName} {commonFriendObject.lastName}
@@ -44,10 +56,13 @@ export default function SuggestionCard({ friendData }: SuggestionCardProps) {
                                 }`}
                             </h1>
                             {commonFriendsList}
+                            {additionalItemsCount > 0 && (
+                                <p className="text-xs">{`and ${additionalItemsCount} more`}</p>
+                            )}
                         </>
                     )}
                 </section>
-                <div className="flex justify-around items-center">
+                <div className="flex justify-around items-center mt-auto">
                     <Link
                         to={`/users/${_id}`}
                         className="flex items-center w-max gap-4 py-2"
