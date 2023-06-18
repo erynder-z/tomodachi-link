@@ -100,7 +100,7 @@ export default function Gallery({
                     <LoadingSpinner />
                 </div>
             ) : (
-                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card shadow-lg">
+                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-canvas shadow-lg">
                     <h1 className="font-bold">{numberOfPictures} Pictures</h1>
                     <div className="flex flex-col md:grid grid-cols-3 gap-4">
                         {pictureList}

@@ -65,9 +65,9 @@ export default function ShowPeopleInThisFeed({
     ));
 
     return (
-        <div className="sticky top-0 lg:top-10 h-fit bg-card">
+        <div className="sticky top-0 lg:top-10 h-fit bg-background2">
             <h1 className="text-center">People in this feed:</h1>
-            <div className="flex md:flex-col overflow-y-auto gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
+            <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
                 {feedUserList}
             </div>
         </div>

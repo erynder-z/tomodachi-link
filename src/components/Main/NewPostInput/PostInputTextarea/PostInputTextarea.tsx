@@ -36,7 +36,7 @@ export default function PostInputTextarea({
                 autoComplete="off"
                 id="newPost"
                 name="newPost"
-                className="peer placeholder-transparent w-full border-b-2 border-gray-300 text-gray-900 leading-tight focus:outline-none bg-blue-100 focus:bg-blue-200 p-2 h-full overflow-hidden resize-none rounded-md"
+                className="peer placeholder-transparent w-full border-b-2 border-gray-300 text-gray-900 leading-tight focus:outline-none bg-card focus:bg-blue-300 p-2 h-full overflow-hidden resize-none rounded-md"
                 placeholder="message"
                 value={postText}
                 onChange={handleTextareaChange}

@@ -9,10 +9,21 @@ module.exports = {
 
             colors: {
                 transparent: 'transparent',
-                card: '#f8fafc',
-                background: '#e0e7ff',
-                navbar: '#a5b4fc',
+                card: '#cddcee',
+                background1: '#e8e8e8',
+                background2: '#f4f4f4',
+                canvas: '#eff1f5',
+                navbar: '#cddcee',
                 popupMenu: '#ebc2f3',
+                regularText: '#020202',
+                cBlack: '#020202',
+                cRed: '#CD3232',
+                cGreen: '#00BC00',
+                cYellow: '#A5A900',
+                cBlue: '#0752A8',
+                cPink: '#BC05BC',
+                cCyan: '#0598BC ',
+                cWhite: '#343434',
             },
             keyframes: {
                 inAnimation: {

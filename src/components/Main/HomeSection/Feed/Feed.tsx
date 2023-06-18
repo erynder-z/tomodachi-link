@@ -65,7 +65,7 @@ export default function Feed({
 
     if (loading) {
         return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card ">
+            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-canvas ">
                 <h1 className="font-bold">Getting feed...</h1>
                 <LoadingSpinner />
             </div>
@@ -75,7 +75,7 @@ export default function Feed({
     return (
         <div className="flex flex-col h-1/4 md:h-auto w-full gap-8 ">
             <NewPostInput />
-            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 bg-card">
+            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 bg-background2">
                 <ShowPeopleInThisFeed
                     friendList={friendList}
                     minimalPosts={minimalPosts}

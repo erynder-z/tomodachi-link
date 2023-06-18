@@ -28,7 +28,7 @@ export default function UserList() {
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
-        <div className="flex flex-col w-full p-4 bg-card">
+        <div className="flex flex-col w-full p-4 bg-canvas">
             <h1 className="text-center font-bold">People you may know:</h1>
             {userList}
             {loading && (

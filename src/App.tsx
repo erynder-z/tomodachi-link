@@ -92,7 +92,7 @@ function App() {
     }
 
     return (
-        <div className="font-regularFont flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
+        <div className="font-regularFont text-regularText flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
             <div className="relative">
                 <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen">
                     <Navbar
@@ -103,7 +103,7 @@ function App() {
             </div>
             <main
                 id="container-main"
-                className="relative flex w-full h-[calc(100vh_-_3rem)] lg:h-screen gap-4 md:p-4 bg-background overflow-auto"
+                className="relative flex w-full h-[calc(100vh_-_3rem)] lg:h-screen gap-4 md:p-4 bg-background1 overflow-auto"
                 onScroll={handleScroll}
                 onTouchMove={handleTouchMove}
             >
