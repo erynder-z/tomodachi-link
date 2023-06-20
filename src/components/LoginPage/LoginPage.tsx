@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
 import { FaExclamationTriangle } from 'react-icons/fa';
@@ -7,6 +7,7 @@ import useInfoCard from '../../hooks/useInfoCard';
 import { getTimeOfDayMessage } from '../../utilities/getTimeOfDayMessage';
 import FullscreenLoading from '../LoadingSpinner/FullscreenLoading';
 import VerifyingInfoBox from './VerifyingInfoBox';
+import { generateAsciiImage } from '../../utilities/generateAsciiImage';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -91,13 +92,23 @@ export default function LoginPage() {
         setShowSignup(true);
     };
 
+    useEffect(() => {
+        generateAsciiImage('asciiArtCanvas', 10);
+    }, []);
+
     if (loading) {
         return <FullscreenLoading message={'Getting things ready!'} />;
     }
 
     return (
-        <div className="h-screen  bg-card">
-            <div className="flex justify-center items-center w-full h-full">
+        <div className="h-screen bg-cBlack">
+            <div className="absolute inset-0 z-0">
+                <canvas
+                    id="asciiArtCanvas"
+                    className="h-full w-full object-cover"
+                ></canvas>
+            </div>
+            <div className="flex justify-center items-center w-full h-full relative z-10">
                 {showSignup ? (
                     <SignupPage setShowSignup={setShowSignup} />
                 ) : (
