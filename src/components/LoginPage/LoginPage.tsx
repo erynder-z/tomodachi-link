@@ -93,7 +93,7 @@ export default function LoginPage() {
     };
 
     useEffect(() => {
-        generateAsciiImage('asciiArtCanvas', 10);
+        generateAsciiImage('asciiArtCanvas', 15);
     }, []);
 
     if (loading) {
