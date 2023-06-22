@@ -8,6 +8,7 @@ import { getTimeOfDayMessage } from '../../utilities/getTimeOfDayMessage';
 import FullscreenLoading from '../LoadingSpinner/FullscreenLoading';
 import VerifyingInfoBox from './VerifyingInfoBox';
 import { generateAsciiImage } from '../../utilities/generateAsciiImage';
+import { introBackground } from '../../assets/intro';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -93,7 +94,7 @@ export default function LoginPage() {
     };
 
     useEffect(() => {
-        generateAsciiImage('asciiArtCanvas', 15);
+        generateAsciiImage(introBackground, 'asciiArtCanvas', 10);
     }, []);
 
     if (loading) {

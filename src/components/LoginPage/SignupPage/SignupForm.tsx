@@ -24,12 +24,12 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                             id="firstName"
                             name="firstName"
                             type="text"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
                             placeholder="First name"
                         />
                         <label
                             htmlFor="firstName"
-                            className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
                         >
                             First name
                         </label>
@@ -41,12 +41,12 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                             id="lastName"
                             name="lastName"
                             type="text"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
                             placeholder="Last name"
                         />
                         <label
                             htmlFor="lastName"
-                            className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
                         >
                             Last name
                         </label>
@@ -58,12 +58,12 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                             id="email"
                             name="email"
                             type="email"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
                             placeholder="Email"
                         />
                         <label
                             htmlFor="email"
-                            className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
                         >
                             Email
                         </label>
@@ -75,12 +75,12 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                             id="username"
                             name="username"
                             type="text"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
                             placeholder="Username"
                         />
                         <label
                             htmlFor="username"
-                            className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
                         >
                             Username
                         </label>
@@ -92,12 +92,12 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                             id="password"
                             name="password"
                             type="password"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
                             placeholder="Password"
                         />
                         <label
                             htmlFor="password"
-                            className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
                         >
                             Password
                         </label>
@@ -109,12 +109,12 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                             id="confirmPassword"
                             name="confirmPassword"
                             type="password"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
                             placeholder="Confirm password"
                         />
                         <label
                             htmlFor="confirmPassword"
-                            className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
                         >
                             Confirm password
                         </label>
