@@ -94,7 +94,7 @@ export default function LoginPage() {
     };
 
     useEffect(() => {
-        generateAsciiImage(introBackground, 'asciiArtCanvas', 10);
+        generateAsciiImage(introBackground, 'asciiArtCanvas', 15);
     }, []);
 
     if (loading) {
@@ -113,7 +113,7 @@ export default function LoginPage() {
                 {showSignup ? (
                     <SignupPage setShowSignup={setShowSignup} />
                 ) : (
-                    <div className="animate-inAnimation h-1/2 w-5/6 sm:w-2/3 lg:w-1/4 px-4 lg:py-10 bg-white shadow-lg sm:p-10">
+                    <div className="animate-inAnimation h-3/5 w-5/6 sm:w-2/3 lg:w-1/4 px-4 lg:py-10 bg-white shadow-lg sm:p-10">
                         {isVerifying ? (
                             <VerifyingInfoBox />
                         ) : (
