@@ -25,34 +25,48 @@ class AsciiEffect {
     #ctx: CanvasRenderingContext2D;
     #width: number;
     #height: number;
+    #symbols: string[];
 
     constructor(
         ctx: CanvasRenderingContext2D,
         width: number,
         height: number,
-        image: HTMLImageElement
+        image: HTMLImageElement,
+        symbols: string[]
     ) {
         this.#ctx = ctx;
         this.#width = width;
         this.#height = height;
         this.#ctx.drawImage(image, 0, 0, this.#width, this.#height);
         this.#pixels = this.#ctx.getImageData(0, 0, this.#width, this.#height);
+        this.#symbols = symbols.slice(); // Create a copy of the symbols array
+        this.#shuffleSymbols();
+    }
+
+    #shuffleSymbols() {
+        for (let i = this.#symbols.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.#symbols[i], this.#symbols[j]] = [
+                this.#symbols[j],
+                this.#symbols[i],
+            ];
+        }
     }
 
     #convertToSymbol(g: number): string {
-        if (g > 250) return '@';
-        else if (g > 240) return '*';
-        else if (g > 220) return '+';
-        else if (g > 200) return '#';
-        else if (g > 180) return '&';
-        else if (g > 160) return '%';
-        else if (g > 140) return '!';
-        else if (g > 120) return ':';
-        else if (g > 100) return '%';
-        else if (g > 80) return '/';
-        else if (g > 60) return '-';
-        else if (g > 40) return 'X';
-        else if (g > 20) return 'Y';
+        if (g > 250) return this.#symbols[0];
+        else if (g > 240) return this.#symbols[1];
+        else if (g > 220) return this.#symbols[2];
+        else if (g > 200) return this.#symbols[3];
+        else if (g > 180) return this.#symbols[4];
+        else if (g > 160) return this.#symbols[5];
+        else if (g > 140) return this.#symbols[6];
+        else if (g > 120) return this.#symbols[7];
+        else if (g > 100) return this.#symbols[8];
+        else if (g > 80) return this.#symbols[9];
+        else if (g > 60) return this.#symbols[10];
+        else if (g > 40) return this.#symbols[11];
+        else if (g > 20) return this.#symbols[12];
         else return '';
     }
 
@@ -109,11 +123,27 @@ export function generateAsciiImage(
     image1.onload = function initialize() {
         canvas.width = image1.width;
         canvas.height = image1.height;
+        const symbols = [
+            '@',
+            '*',
+            '+',
+            '#',
+            '&',
+            '%',
+            '!',
+            ':',
+            '%',
+            '/',
+            '-',
+            'X',
+            'Y',
+        ];
         const effect = new AsciiEffect(
             ctx,
             image1.width,
             image1.height,
-            image1
+            image1,
+            symbols
         );
         ctx.font = cellSize * 1.25 + 'px monospace';
         effect.draw(cellSize);
