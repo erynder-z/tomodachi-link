@@ -7,7 +7,7 @@ import useInfoCard from '../../../hooks/useInfoCard';
 import { useParams } from 'react-router-dom';
 import { fetchPictureList } from '../../../utilities/fetchPictureList';
 import { fetchNumberOfPics } from '../../../utilities/fetchNumberOfPics';
-import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import LightBox from '../../LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
@@ -79,7 +79,9 @@ export default function Gallery({
             <img
                 loading="lazy"
                 className="w-full h-auto aspect-square object-cover shadow-lg cursor-pointer"
-                src={`data:image/png;base64,${convertImageToBase64(picture)}`}
+                src={`data:image/png;base64,${convertDatabaseImageToBase64(
+                    picture
+                )}`}
                 alt="User uploaded image"
             />
             <div

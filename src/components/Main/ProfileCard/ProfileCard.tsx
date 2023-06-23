@@ -1,13 +1,15 @@
 import React from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
-import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 export default function ProfileCard() {
     const { currentUserData } = useCurrentUserData();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
-    const userImage = userpic ? convertImageToBase64(userpic) : undefined;
+    const userImage = userpic
+        ? convertDatabaseImageToBase64(userpic)
+        : undefined;
 
     if (!userImage) {
         return (

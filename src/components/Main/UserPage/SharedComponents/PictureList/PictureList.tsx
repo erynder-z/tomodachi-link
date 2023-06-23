@@ -5,7 +5,7 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ImageType } from '../../../../../types/imageType';
 import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { fetchPictureList } from '../../../../../utilities/fetchPictureList';
-import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import LightBox from '../../../../LightBox/LightBox';
 import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
 import { MdKeyboardDoubleArrowRight, MdOutlineZoomIn } from 'react-icons/md';
@@ -54,7 +54,9 @@ export default function PictureList({ userId }: PictureListProps) {
         <div key={uuidv4()} className="relative">
             <img
                 className="h-auto aspect-square object-cover shadow-lg cursor-pointer "
-                src={`data:image/png;base64,${convertImageToBase64(picture)}`}
+                src={`data:image/png;base64,${convertDatabaseImageToBase64(
+                    picture
+                )}`}
                 alt="User uploaded image"
             />
             <div

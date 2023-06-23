@@ -1,4 +1,4 @@
-export function convertImageToBase64(imageObject: any) {
+export function convertDatabaseImageToBase64(imageObject: any) {
     const bufferData = imageObject?.data?.data
         ? imageObject?.data?.data
         : imageObject?.data;

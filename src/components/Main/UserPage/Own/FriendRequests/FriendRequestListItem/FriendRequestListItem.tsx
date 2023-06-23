@@ -8,7 +8,7 @@ import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
 import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';
 import { useNavigate } from 'react-router-dom';
-import { convertImageToBase64 } from '../../../../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../../../../utilities/convertDatabaseImageToBase64';
 import useFriendData from '../../../../../../hooks/useFriendData';
 
 type FriendRequestListItemProps = {
@@ -30,7 +30,8 @@ export default function FriendRequestListItem({
 
     const { firstName, lastName } = friendRequestData || {};
 
-    const userPic = convertImageToBase64(friendRequestData?.userpic) || '';
+    const userPic =
+        convertDatabaseImageToBase64(friendRequestData?.userpic) || '';
 
     const handleAcceptFriendRequest = () => {
         if (currentUserData && token) {

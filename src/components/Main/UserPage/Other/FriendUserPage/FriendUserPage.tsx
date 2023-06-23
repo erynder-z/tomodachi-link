@@ -1,6 +1,6 @@
 import React from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
-import { convertImageToBase64 } from '../../../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
 import FriendCoverSection from './FriendCoverSection/FriendCoverSection';
@@ -27,7 +27,7 @@ export default function FriendUserPage({
         lastSeen,
     } = userPageData || {};
 
-    const userPicture = convertImageToBase64(userpic);
+    const userPicture = convertDatabaseImageToBase64(userpic);
     const numberOfFriends = friends.length;
     const lastSeenFormatted = lastSeen
         ? `${formatDistanceToNow(new Date(lastSeen), { addSuffix: true })} `

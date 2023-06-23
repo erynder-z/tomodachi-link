@@ -7,7 +7,7 @@ import useAuth from '../../../hooks/useAuth';
 import { negativeReaction } from '../../../utilities/negativeReaction';
 import { fetchPostContent } from '../../../utilities/fetchPostContent';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import { convertImageToBase64 } from '../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import { ImageType } from '../../../types/imageType';
 import PostUserInfoSection from './PostUserInfoSection/PostUserInfoSection';
 import DateSection from './DateSection/DateSection';
@@ -48,8 +48,8 @@ export default React.memo(function PostItem({
 
     const isPostFromCurrentUser = authUser?.user._id === _id;
     const displayName = `${firstName} ${lastName} `;
-    const userPic = convertImageToBase64(postDetails?.owner?.userpic);
-    const postImage = convertImageToBase64(postDetails?.image);
+    const userPic = convertDatabaseImageToBase64(postDetails?.owner?.userpic);
+    const postImage = convertDatabaseImageToBase64(postDetails?.image);
     const postVideoID = postDetails?.embeddedVideoID;
     const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
 

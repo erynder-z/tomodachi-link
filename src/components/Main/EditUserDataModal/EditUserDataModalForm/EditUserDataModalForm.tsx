@@ -4,7 +4,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
-import { convertImageToBase64 } from '../../../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
 
 type EditUserDataModalFormProps = {
@@ -38,7 +38,9 @@ export default function EditUserDataModalForm({
     }>({
         selectedFile: null,
         preview:
-            typeof userpic !== 'string' ? convertImageToBase64(userpic) : '',
+            typeof userpic !== 'string'
+                ? convertDatabaseImageToBase64(userpic)
+                : '',
     });
 
     const [originalImage] = useState({

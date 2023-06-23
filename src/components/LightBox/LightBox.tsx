@@ -1,5 +1,5 @@
 import { ImageType } from '../../types/imageType';
-import { convertImageToBase64 } from '../../utilities/convertImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../utilities/convertDatabaseImageToBase64';
 import { FaTimes } from 'react-icons/fa';
 
 type LightBoxProps = {
@@ -15,7 +15,9 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
     } else if (image instanceof ArrayBuffer) {
         src = URL.createObjectURL(new Blob([image]));
     } else if (image && image.data && image.contentType) {
-        src = `data:${image.contentType};base64,${convertImageToBase64(image)}`;
+        src = `data:${image.contentType};base64,${convertDatabaseImageToBase64(
+            image
+        )}`;
     }
 
     return (
