@@ -4,17 +4,17 @@ import LoginForm from './LoginForm';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import SignupPage from './SignupPage/SignupPage';
 import useInfoCard from '../../hooks/useInfoCard';
-import { getTimeOfDayMessage } from '../../utilities/getTimeOfDayMessage';
-import FullscreenLoading from '../LoadingSpinner/FullscreenLoading';
 import VerifyingInfoBox from './VerifyingInfoBox';
 import { generateAsciiImage } from '../../utilities/generateAsciiImage';
 import { introBackground } from '../../assets/intro';
+import useAuth from '../../hooks/useAuth';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
+    const { isAuth } = useAuth();
+
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
 
     const { setInfo } = useInfoCard();
 
@@ -44,23 +44,14 @@ export default function LoginPage() {
                     `Error: ${response.status} ${response.statusText}`
                 );
             }
-            const timeOfDayMessage = getTimeOfDayMessage();
-
-            setInfo({
-                typeOfInfo: timeOfDayMessage.typeOfInfo,
-                message: timeOfDayMessage.message,
-                icon: timeOfDayMessage.icon,
-            });
 
             const data = await response.json();
             localStorage.setItem('jwtOdinBook', data.token);
             setToken(data.token);
         } catch (error: unknown) {
             console.error(error);
+            setIsVerifying(false);
         }
-
-        setIsVerifying(false);
-        setLoading(true);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -86,7 +77,6 @@ export default function LoginPage() {
                 icon: <FaExclamationTriangle />,
             });
         }
-        setLoading(false);
     };
 
     const handleRegisterClick = () => {
@@ -94,12 +84,14 @@ export default function LoginPage() {
     };
 
     useEffect(() => {
+        if (isAuth) {
+            setIsVerifying(false);
+        }
+    }, [isAuth]);
+
+    useEffect(() => {
         generateAsciiImage(introBackground, 'asciiArtCanvas', 15);
     }, []);
-
-    if (loading) {
-        return <FullscreenLoading message={'Getting things ready!'} />;
-    }
 
     return (
         <div className="h-screen bg-cBlack">

@@ -21,11 +21,12 @@ import AllFriendsPage from './components/Main/AllFriendsPage/AllFriendsPage';
 import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopButton';
 import OverlayHandler from './components/Overlays/OverlayHandler';
+import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 
 function App() {
     const { isAuth } = useAuth();
     const { currentUserData } = useCurrentUserData();
-    const { info } = useInfoCard();
+    const { info, setInfo } = useInfoCard();
 
     const [currentView, setCurrentView] = useState<CurrentViewType>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
@@ -81,6 +82,18 @@ function App() {
             setShowSidebar(true);
         }
     }, [currentView]);
+
+    useEffect(() => {
+        if (isAuth) {
+            const timeOfDayMessage = getTimeOfDayMessage();
+
+            setInfo({
+                typeOfInfo: timeOfDayMessage.typeOfInfo,
+                message: timeOfDayMessage.message,
+                icon: timeOfDayMessage.icon,
+            });
+        }
+    }, [isAuth]);
 
     if (!isAuth) {
         return (
