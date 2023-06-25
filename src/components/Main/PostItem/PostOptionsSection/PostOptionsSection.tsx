@@ -39,14 +39,14 @@ export default function PostOptionsSection({
             const postID = postDetails?._id;
 
             const response = await fetch(
-                `${serverURL}/api/v1/post/${postID}/delete`,
+                `${serverURL}/api/v1/post/${postID}`,
                 {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
                     },
-                    body: JSON.stringify({ postID }),
+                 
                 }
             );
 
