@@ -92,16 +92,13 @@ export default function EditPostInput({
 
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const id = postDetails?._id;
-            const response = await fetch(
-                `${serverURL}/api/v1/post/${id}/edit`,
-                {
-                    method: 'PATCH',
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: formData,
-                }
-            );
+            const response = await fetch(`${serverURL}/api/v1/post/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            });
             if (response.ok) {
                 setInfo({
                     typeOfInfo: 'good',
