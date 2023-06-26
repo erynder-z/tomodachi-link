@@ -13,6 +13,7 @@ import SelectedImageArea from './SelectedImageArea/SelectedImageArea';
 import GifArea from './GifArea/GifArea';
 import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
+import { ViewMode } from '../../../types/postInputSelectors';
 
 type NewPostInputProps = {
     handleRefreshPosts?: () => void;
@@ -29,9 +30,7 @@ export default function NewPostInput({
     const { username } = currentUserData || {};
 
     const [postText, setPostText] = useState<string>('');
-    const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
-    const [showYoutubeEmbed, setShowYoutubeEmbed] = useState<boolean>(false);
-    const [showGifSelector, setShowGifSelector] = useState<boolean>(false);
+    const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.None);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(
         undefined
     );
@@ -146,33 +145,30 @@ export default function NewPostInput({
                     </div>
                     <ButtonArea
                         handleImageSelect={handleImageSelect}
-                        setShowYoutubeEmbed={setShowYoutubeEmbed}
-                        showYoutubeEmbed={showYoutubeEmbed}
-                        setShowGifSelector={setShowGifSelector}
-                        showGifSelector={showGifSelector}
-                        setShowEmojiPicker={setShowEmojiPicker}
-                        showEmojiPicker={showEmojiPicker}
+                        viewMode={viewMode}
+                        setViewMode={setViewMode}
                         postText={postText}
                     />
                 </div>
             </form>
-            {showEmojiPicker && (
+
+            {viewMode === ViewMode.EmojiPicker && (
                 <EmojiSelector
                     setText={setPostText}
-                    setShowEmojiPicker={setShowEmojiPicker}
+                    setShowEmojiPicker={() => setViewMode(ViewMode.None)}
                 />
             )}
 
-            {showGifSelector && (
+            {viewMode === ViewMode.GifSelector && (
                 <GifSelector
-                    setShowGifSelector={setShowGifSelector}
+                    setShowGifSelector={() => setViewMode(ViewMode.None)}
                     setGif={setGif}
                 />
             )}
 
-            {showYoutubeEmbed && (
+            {viewMode === ViewMode.YoutubeEmbed && (
                 <EmbedYoutubeVideoSelector
-                    setShowYoutubeEmbed={setShowYoutubeEmbed}
+                    setShowYoutubeEmbed={() => setViewMode(ViewMode.None)}
                     setYoutubeID={setYoutubeID}
                 />
             )}

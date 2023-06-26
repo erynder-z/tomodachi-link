@@ -2,26 +2,19 @@ import React from 'react';
 import { FaRegSmileBeam, FaRegImage, FaYoutube } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';
+import { ViewMode } from '../../../../types/postInputSelectors';
 
 type ButtonAreaProps = {
     handleImageSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    setShowYoutubeEmbed: React.Dispatch<React.SetStateAction<boolean>>;
-    showYoutubeEmbed: boolean;
-    setShowGifSelector: React.Dispatch<React.SetStateAction<boolean>>;
-    showGifSelector: boolean;
-    setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>;
-    showEmojiPicker: boolean;
+    viewMode: ViewMode;
+    setViewMode: (mode: ViewMode) => void;
     postText: string;
 };
 
 export default function ButtonArea({
     handleImageSelect,
-    setShowYoutubeEmbed,
-    showYoutubeEmbed,
-    setShowGifSelector,
-    showGifSelector,
-    setShowEmojiPicker,
-    showEmojiPicker,
+    viewMode,
+    setViewMode,
     postText,
 }: ButtonAreaProps) {
     return (
@@ -40,7 +33,11 @@ export default function ButtonArea({
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    setShowYoutubeEmbed(!showYoutubeEmbed);
+                    setViewMode(
+                        viewMode === ViewMode.YoutubeEmbed
+                            ? ViewMode.None
+                            : ViewMode.YoutubeEmbed
+                    );
                 }}
                 className="text-back hover:text-blue-500"
             >
@@ -50,7 +47,11 @@ export default function ButtonArea({
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    setShowGifSelector(!showGifSelector);
+                    setViewMode(
+                        viewMode === ViewMode.GifSelector
+                            ? ViewMode.None
+                            : ViewMode.GifSelector
+                    );
                 }}
                 className="text-back hover:text-blue-500"
             >
@@ -60,7 +61,11 @@ export default function ButtonArea({
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    setShowEmojiPicker(!showEmojiPicker);
+                    setViewMode(
+                        viewMode === ViewMode.EmojiPicker
+                            ? ViewMode.None
+                            : ViewMode.EmojiPicker
+                    );
                 }}
                 className="text-back hover:text-blue-500"
             >
