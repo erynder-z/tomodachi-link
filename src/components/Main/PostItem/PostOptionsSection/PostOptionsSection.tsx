@@ -38,17 +38,13 @@ export default function PostOptionsSection({
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const postID = postDetails?._id;
 
-            const response = await fetch(
-                `${serverURL}/api/v1/post/${postID}`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                 
-                }
-            );
+            const response = await fetch(`${serverURL}/api/v1/post/${postID}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
             if (!response.ok) {
                 handleFetchErrors(response, setInfo);
@@ -100,7 +96,7 @@ export default function PostOptionsSection({
                     }}
                 />
             )}
-            <div className="relative inline-block">
+            <div className="relative inline-block cursor-pointer">
                 <ToggleListButton
                     onToggleListButtonClick={handleShowPostMenu}
                     showMenu={showMenu}
