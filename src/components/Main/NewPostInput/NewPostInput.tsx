@@ -15,10 +15,14 @@ import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
 
 type NewPostInputProps = {
-    onPostSuccess?: () => void;
+    handleRefreshPosts?: () => void;
+    handleRefreshPics?: () => void;
 };
 
-export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
+export default function NewPostInput({
+    handleRefreshPosts,
+    handleRefreshPics,
+}: NewPostInputProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const { currentUserData } = useCurrentUserData();
@@ -33,6 +37,7 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     );
     const [youtubeID, setYoutubeID] = useState<string | undefined>(undefined);
     const [gif, setGif] = useState<TenorImage | undefined>(undefined);
+    const [hasImage, setHasImage] = useState(false);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -43,6 +48,10 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
     const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             setSelectedImage(event.target.files[0]);
+            setHasImage(true);
+        } else {
+            setSelectedImage(undefined);
+            setHasImage(false);
         }
     };
 
@@ -80,8 +89,11 @@ export default function NewPostInput({ onPostSuccess }: NewPostInputProps) {
                 setSelectedImage(undefined);
                 setYoutubeID(undefined);
                 setGif(undefined);
-                if (onPostSuccess) {
-                    onPostSuccess();
+                if (handleRefreshPosts) {
+                    handleRefreshPosts();
+                    if (handleRefreshPics && hasImage) {
+                        handleRefreshPics();
+                    }
                 }
             } else {
                 const data = await response.json();

@@ -23,6 +23,7 @@ export default function MyPage({
     const { friendData } = useFriendData();
     const { pendingFriendRequests } = currentUserData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
+    const [myPicsKey, setMyPicsKey] = useState(0);
     const [loading, setLoading] = useState<boolean>(true);
     const [componentLoading, setComponentLoading] = useState({
         currentUserData: true,
@@ -34,6 +35,10 @@ export default function MyPage({
 
     const handleRefreshPosts = () => {
         setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
+    };
+
+    const handleRefreshPics = () => {
+        setMyPicsKey((prevKey) => prevKey + 1); // update state variable to force remount
     };
 
     const onFetchComplete = (nameOfComponent: string) => {
@@ -80,13 +85,17 @@ export default function MyPage({
                         </div>
                     ) : null}
                     <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
-                        <PictureList key={myPostsKey} userId={userId} />
+                        <PictureList key={myPicsKey} userId={userId} />
 
                         <FriendList friendData={friendData} userId={userId} />
                     </div>
                 </div>
                 <div className="flex flex-col gap-8 md:px-4">
-                    <NewPostInput onPostSuccess={handleRefreshPosts} />
+                    <NewPostInput
+                        handleRefreshPosts={handleRefreshPosts}
+                        handleRefreshPics={handleRefreshPics}
+                    />
+
                     <PostList
                         key={myPostsKey}
                         userId={userId}
