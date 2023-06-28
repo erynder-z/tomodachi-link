@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import UserListItem from './UserListItem/UserListItem';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import useAuth from '../../../hooks/useAuth';
-import useInfoCard from '../../../hooks/useInfoCard';
-import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
-import { MinimalUserTypes } from '../../../types/minimalUserTypes';
+import UserListItem from '../UserListItem/UserListItem';
+import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import useAuth from '../../../../hooks/useAuth';
+import useInfoCard from '../../../../hooks/useInfoCard';
+import { fetchSomeUsers } from '../../../../utilities/fetchSomeUsers';
+import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 
-export default function UserList() {
+export default function UserListSome() {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [users, setUsers] = useState([]);
