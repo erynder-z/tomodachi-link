@@ -70,13 +70,7 @@ function App() {
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        if (
-            currentView === 'Friends' ||
-            currentView === 'MyPage' ||
-            currentView === 'OtherUserPage' ||
-            currentView === 'Gallery' ||
-            currentView === 'AllFriendsPage'
-        ) {
+        if (currentView != 'Home' && currentView != 'Friends') {
             setShowSidebar(false);
         } else {
             setShowSidebar(true);
@@ -207,8 +201,8 @@ function App() {
                     </Routes>
                 </div>
                 {showSidebar && (
-                    <aside className="hidden lg:flex lg:h-fit flex-none">
-                        <Sidebar />
+                    <aside className="hidden lg:flex lg:h-fit flex-none w-60">
+                        <Sidebar currentView={currentView} />
                     </aside>
                 )}
                 <ScrollToTopButton />
