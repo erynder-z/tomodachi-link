@@ -1,6 +1,12 @@
 import React from 'react';
-import UserList from '../UserList/UserList';
+import UserListSome from '../UserList/UserListSome/UserListSome';
+import { CurrentViewType } from '../../../types/currentViewType';
+import UserListAll from '../UserList/UserListAll/UserListAll';
 
-export default function Sidebar() {
-    return <UserList />;
+type SidebarProps = {
+    currentView: CurrentViewType;
+};
+
+export default function Sidebar({ currentView }: SidebarProps) {
+    return currentView === 'Friends' ? <UserListAll /> : <UserListSome />;
 }
