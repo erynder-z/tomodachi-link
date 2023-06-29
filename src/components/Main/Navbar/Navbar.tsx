@@ -3,6 +3,7 @@ import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
 import SearchButton from './SearchButton/SearchButton';
+import MobileFriendSuggestionsButton from './MobileFriendSuggestionsButton/MobileFriendSuggestionsButton';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -67,6 +68,9 @@ export default function Navbar({
                 <SearchButton
                     handleSearchButtonClick={handleSearchButtonClick}
                 />
+                <div className="md:hidden">
+                    <MobileFriendSuggestionsButton />
+                </div>
             </div>
             <div className="relative lg:hidden flex" ref={menuRef}>
                 <button

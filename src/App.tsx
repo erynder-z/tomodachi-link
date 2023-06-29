@@ -22,6 +22,7 @@ import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopButton';
 import OverlayHandler from './components/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
+import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 
 function App() {
     const { isAuth } = useAuth();
@@ -196,6 +197,10 @@ function App() {
                                         }
                                     />
                                 }
+                            />
+                            <Route
+                                path="/users/list"
+                                element={<MobileUserList />}
                             />
                         </Route>
                     </Routes>
