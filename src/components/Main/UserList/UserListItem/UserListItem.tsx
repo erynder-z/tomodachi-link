@@ -23,7 +23,9 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
                 )}`}
                 alt="User avatar"
             />
-            {firstName} {lastName}
+            <div className="overflow-hidden whitespace-nowrap text-ellipsis">
+                {firstName} {lastName}
+            </div>
         </Link>
     );
 }
