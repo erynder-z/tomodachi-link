@@ -51,9 +51,9 @@ export default function PictureList({ userId }: PictureListProps) {
     }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
-        <div key={uuidv4()} className="relative">
+        <div key={uuidv4()} className="relative flex">
             <img
-                className="h-auto aspect-square object-cover shadow-lg cursor-pointer "
+                className="h-auto aspect-square object-cover shadow-lg"
                 src={`data:image/png;base64,${convertDatabaseImageToBase64(
                     picture
                 )}`}
