@@ -50,6 +50,7 @@ export default function MyCoverSection({
         if (token && coverImageName) {
             saveCoverImage(token, coverImageName, handleFetchUserData, setInfo);
             setInitialCover(selectedCover);
+            setIsSaveButtonShown(false);
         }
     };
 
@@ -96,7 +97,7 @@ export default function MyCoverSection({
         getColorPalette();
         checkSaveButton();
         onFetchComplete('coverSection');
-    }, [selectedCover]);
+    }, [selectedCover, initialCover]);
 
     return (
         <div className="h-[calc(100vh_-_5rem)] md:h-96 col-span-2 grid grid-rows-4">
