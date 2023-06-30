@@ -39,31 +39,15 @@ function App() {
         editUserDataModal: false,
         mobileOptionsModal: false,
     });
-    const [lastTouchY, setLastTouchY] = useState<number | null>(null);
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
 
-    // handle infinite scrolling on desktop devices
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
         setIsPaginationTriggered(
             scrollTop + clientHeight >= scrollHeight - 1 ? true : false
         );
-    };
-
-    // handle infinite scrolling on touch devices
-    const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-        const touchY = e.touches[0].clientY;
-        const target = e.currentTarget;
-
-        setIsPaginationTriggered(
-            lastTouchY && touchY > lastTouchY && target.scrollTop === 0
-                ? true
-                : false
-        );
-
-        setLastTouchY(touchY);
     };
 
     useEffect(() => {
@@ -113,7 +97,6 @@ function App() {
                 id="container-main"
                 className="relative flex w-full h-[calc(100vh_-_3rem)] lg:h-screen gap-4 md:p-4 bg-background1 overflow-auto"
                 onScroll={handleScroll}
-                onTouchMove={handleTouchMove}
             >
                 <ScrollToTop />
                 <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1">
