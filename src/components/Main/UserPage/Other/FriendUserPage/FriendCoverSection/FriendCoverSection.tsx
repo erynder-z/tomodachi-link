@@ -70,7 +70,7 @@ export default function FriendCoverSection({
                 />
             </div>
             <div
-                className="relative row-span-1 flex flex-col md:flex-row gap-4 h-full p-4 bg-slate-300"
+                className="relative row-span-1 flex flex-col md:flex-row gap-4 h-full lg:p-4 bg-slate-300"
                 style={
                     colorPalette[0]
                         ? {

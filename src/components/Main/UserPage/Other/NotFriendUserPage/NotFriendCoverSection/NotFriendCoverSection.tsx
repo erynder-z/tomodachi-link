@@ -61,7 +61,7 @@ export default function NotFriendCoverSection({
                 />
             </div>
             <div
-                className="relative row-span-1 flex flex-col md:flex-row gap-4 p-4 bg-slate-300"
+                className="relative row-span-1 flex flex-col md:flex-row gap-4 lg:p-4 bg-slate-300"
                 style={
                     colorPalette[0]
                         ? {
