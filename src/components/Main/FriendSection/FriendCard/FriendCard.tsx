@@ -82,7 +82,13 @@ export default function FriendCard({ friendData }: FriendCardProps) {
                         >
                             <TbLink className="text-xl hover:scale-125 hover:text-cRed transition-all" />
                         </Link>
-                        <TbMessages className="text-xl cursor-pointer hover:scale-125 hover:text-cRed transition-all" />
+                        <Link
+                            to={`/users/${_id}/chat`}
+                            className="flex items-center w-max gap-4 py-2 text-regularText "
+                        >
+                            <TbMessages className="text-xl cursor-pointer hover:scale-125 hover:text-cRed transition-all" />
+                        </Link>
+
                         <TbUserMinus
                             onClick={handleUnfriendButtonClick}
                             className="text-xl cursor-pointer hover:scale-125 hover:text-cRed transition-all"

@@ -23,6 +23,7 @@ import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopBut
 import OverlayHandler from './components/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import MobileUserList from './components/Main/MobileUserList/MobileUserList';
+import Chatroom from './components/Main/Chat/Chatroom/Chatroom';
 
 function App() {
     const { isAuth } = useAuth();
@@ -169,6 +170,10 @@ function App() {
                                         }
                                     />
                                 }
+                            />
+                            <Route
+                                path="/users/:id/chat"
+                                element={<Chatroom />}
                             />
                             <Route
                                 path="/users/:id/friends/list"
