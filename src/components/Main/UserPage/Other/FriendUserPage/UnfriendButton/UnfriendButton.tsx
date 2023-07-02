@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TbQuestionCircle, TbUserMinus } from 'react-icons/tb';
+import { TbAlertCircle, TbUserMinus } from 'react-icons/tb';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
@@ -48,7 +48,7 @@ export default function UnfriendButton({
                     }}
                     dialogInfo={{
                         message: 'Do you really want to stop being friends?',
-                        icon: <TbQuestionCircle size="2em" />,
+                        icon: <TbAlertCircle size="2em" />,
                     }}
                 />
             )}

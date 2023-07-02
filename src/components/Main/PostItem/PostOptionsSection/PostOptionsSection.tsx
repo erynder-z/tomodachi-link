@@ -4,7 +4,7 @@ import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import ConfirmationOverlay from '../../../ConfirmationOverlay/ConfirmationOverlay';
-import { TbQuestionCircle } from 'react-icons/tb';
+import { TbAlertCircle } from 'react-icons/tb';
 import EditPostInput from '../../EditPostInput/EditPostInput';
 import { PostType } from '../../../../types/postType';
 import ToggleListButton from '../../UiElements/ToggleListButton/ToggleListButton';
@@ -92,7 +92,7 @@ export default function PostOptionsSection({
                     }}
                     dialogInfo={{
                         message: 'Do you really want to delete this post?',
-                        icon: <TbQuestionCircle size="2em" />,
+                        icon: <TbAlertCircle size="2em" />,
                     }}
                 />
             )}
