@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
@@ -25,6 +25,7 @@ export default function Chatroom() {
     const [inputMessage, setInputMessage] = useState<any>('');
     const [chatroomId, setChatroomId] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const dummy = useRef<HTMLSpanElement>(null);
 
     const handleFetchPartnerData = async () => {
         if (authUser && token) {
@@ -52,16 +53,18 @@ export default function Chatroom() {
     };
 
     const sendMessage = () => {
-        if (inputMessage.trim() !== '') {
+        const authorId = currentUserData?._id;
+        if (authorId && inputMessage.trim() !== '') {
             const timestamp = Date.now();
             emitMessage({
                 text: inputMessage,
+                authorId,
                 chatroomId,
                 timestamp,
             });
             setMessages((prevMessages) => [
                 ...prevMessages,
-                { text: inputMessage, timestamp },
+                { text: inputMessage, authorId, timestamp },
             ]);
             setInputMessage('');
         }
@@ -77,6 +80,10 @@ export default function Chatroom() {
         });
     };
 
+    const scrollToBottom = () => {
+        dummy?.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     useEffect(() => {
         handleFetchPartnerData();
         handleFetchChatroomId();
@@ -84,7 +91,6 @@ export default function Chatroom() {
 
     useEffect(() => {
         joinChatroom();
-        console.log(chatroomId);
     }, [chatroomId]);
 
     useEffect(() => {
@@ -95,6 +101,10 @@ export default function Chatroom() {
         };
     }, [socket]);
 
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
     if (loading) {
         return (
             <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas">
@@ -104,15 +114,16 @@ export default function Chatroom() {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 shadow-lg max-h-full overflow-y-auto ">
             <ChatroomHeader
                 currentUserData={currentUserData}
                 partnerData={partnerData}
             />
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto px-2">
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}
+                <span ref={dummy} />
             </div>
             <ChatroomInput
                 inputMessage={inputMessage}
