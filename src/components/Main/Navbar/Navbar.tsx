@@ -4,6 +4,7 @@ import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
 import SearchButton from './SearchButton/SearchButton';
 import MobileFriendSuggestionsButton from './MobileFriendSuggestionsButton/MobileFriendSuggestionsButton';
+import ChatSectionButton from './ChatSectionButton/ChatSectionButton';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -65,6 +66,7 @@ export default function Navbar({
             <div className="flex lg:flex-col justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />
+                <ChatSectionButton />
                 <SearchButton
                     handleSearchButtonClick={handleSearchButtonClick}
                 />
