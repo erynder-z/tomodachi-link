@@ -1,6 +1,6 @@
 export type ChatMessageType = {
+    senderId: string;
+    receiverId: string;
     text: string;
-    authorId: string;
-    chatroomId: string;
     timestamp: number;
 };
