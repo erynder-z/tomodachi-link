@@ -10,7 +10,7 @@ import ChatroomMessage from './ChatroomMessage/ChatroomMessage';
 import ChatroomInput from './ChatroomInput/ChatroomInput';
 import { io } from 'socket.io-client';
 import { ChatMessageType } from '../../../../types/chatMessageType';
-import { fetchChatroomId } from '../../../../utilities/fechtChatroomId';
+import { fetchChatroomId } from '../../../../utilities/fetchChatroomId';
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 const socket = io(serverURL);
