@@ -1,6 +1,7 @@
 export type ChatMessageType = {
-    senderId: string;
-    receiverId: string;
-    text: string;
-    timestamp: number;
+    conversationId: string | undefined;
+    senderId: string | undefined;
+    text: string | undefined;
+    createdAt?: Date;
+    updatedAt?: Date;
 };

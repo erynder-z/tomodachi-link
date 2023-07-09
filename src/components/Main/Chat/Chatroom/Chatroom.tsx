@@ -1,32 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
-import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
+import { FaExclamationTriangle } from 'react-icons/fa';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import ChatroomHeader from './ChatroomHeader/ChatroomHeader';
 import ChatroomMessage from './ChatroomMessage/ChatroomMessage';
 import ChatroomInput from './ChatroomInput/ChatroomInput';
-import { io } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 import { ChatMessageType } from '../../../../types/chatMessageType';
+import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
+import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
+import { postMessage } from '../../../../utilities/postMessage';
+import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
 
-export default function Chatroom() {
-    const { authUser, token } = useAuth();
+type ChatroomProps = {
+    chatId: string | undefined;
+    partnerId: string | undefined;
+    socket: Socket;
+};
+
+export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
+    const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
-    const partnerId = useParams().id;
-    const [partnerData, setPartnerData] = useState<any>(null);
+
+    const [partnerData, setPartnerData] = useState<MinimalUserTypes | null>(
+        null
+    );
     const [messages, setMessages] = useState<any[]>([]);
-    const [inputMessage, setInputMessage] = useState<any>('');
+    const [inputMessage, setInputMessage] = useState<string>('');
+    const [receivedMessage, setReceivedMessage] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const socket = useRef<any>();
     const dummy = useRef<HTMLSpanElement>(null);
     const userId = currentUserData?._id;
 
     const handleFetchPartnerData = async () => {
-        if (authUser && token) {
+        if (token && partnerId) {
             const response = await fetchMinimalUserData(
                 token,
                 partnerId,
@@ -37,35 +49,62 @@ export default function Chatroom() {
         }
     };
 
+    const handleFetchChatMessages = async () => {
+        if (token && chatId) {
+            const response = await fetchChatMessages(token, chatId, setInfo);
+            setMessages(response);
+            setLoading(false);
+        }
+    };
+
+    const handlePostMessage = async (message: ChatMessageType) => {
+        if (token && inputMessage) {
+            const response = await postMessage(token, message, setInfo);
+            if (response && response.ok) {
+                const savedMessage = await response.json();
+                setMessages([...messages, savedMessage.savedMessage]);
+            } else {
+                setInfo({
+                    typeOfInfo: 'bad',
+                    message: 'Message not saved!',
+                    icon: <FaExclamationTriangle />,
+                });
+            }
+        }
+    };
+
     const sendMessage = () => {
         if (userId && partnerId && inputMessage.trim() !== '') {
-            const timestamp = Date.now();
+            handlePostMessage({
+                senderId: userId,
+                text: inputMessage,
+                conversationId: chatId,
+            });
             emitMessage({
                 senderId: userId,
                 receiverId: partnerId,
                 text: inputMessage,
-                timestamp: timestamp,
             });
+
             setMessages((prevMessages) => [
                 ...prevMessages,
-                {
-                    senderId: userId,
-                    receiverId: partnerId,
-                    text: inputMessage,
-                    timestamp: timestamp,
-                },
+                { senderId: userId, receiverId: partnerId, text: inputMessage },
             ]);
             setInputMessage('');
         }
     };
 
-    const emitMessage = (messageObject: ChatMessageType) => {
-        socket.current.emit('sendMessage', messageObject);
+    const emitMessage = (messageObject: SocketChatMessageType) => {
+        socket?.emit('sendMessage', messageObject);
     };
 
     const listenForMessage = () => {
-        socket.current.on('receiveMessage', (data: ChatMessageType) => {
-            setMessages((prevMessages) => [...prevMessages, data]);
+        socket?.on('receiveMessage', (data: SocketChatMessageType) => {
+            setReceivedMessage({
+                senderId: data.senderId,
+                text: data.text,
+                createdAt: new Date(),
+            });
         });
     };
 
@@ -74,21 +113,9 @@ export default function Chatroom() {
     };
 
     useEffect(() => {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
-        socket.current = io(serverURL);
-        return () => {
-            socket.current.disconnect();
-        };
-    }, []);
-
-    useEffect(() => {
-        handleFetchPartnerData();
-    }, [partnerId]);
-
-    useEffect(() => {
         if (currentUserData) {
             const userId = currentUserData?._id;
-            socket.current.emit('addUser', userId);
+            socket?.emit('addUser', userId);
         }
     }, [currentUserData]);
 
@@ -96,9 +123,20 @@ export default function Chatroom() {
         listenForMessage();
 
         return () => {
-            socket.current.off('receiveMessage');
+            socket?.off('receiveMessage');
         };
     }, [socket]);
+
+    useEffect(() => {
+        handleFetchPartnerData();
+        handleFetchChatMessages();
+    }, [partnerId]);
+
+    useEffect(() => {
+        if (receivedMessage && partnerId === receivedMessage.senderId) {
+            setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        }
+    }, [receivedMessage]);
 
     useEffect(() => {
         scrollToBottom();
