@@ -1,6 +1,6 @@
 import React from 'react';
 import { FriendDataType } from '../../../../types/friendDataType';
-import ChatUserListItem from './ChatUserListItem/ChatUserListItem';
+import ChatUserListItem from '../ChatUserListItem/ChatUserListItem';
 
 type ChatUserListProps = {
     friendData: FriendDataType[] | null;
