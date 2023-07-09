@@ -9,11 +9,13 @@ type ChatroomMessageProps = {
 
 export default function ChatroomMessage({ message }: ChatroomMessageProps) {
     const { currentUserData } = useCurrentUserData();
-    const { senderId, text, timestamp } = message;
+    const { senderId, text, createdAt } = message;
 
     const isMessageFromCurrentUser = senderId === currentUserData?._id;
 
-    const date = timestamp ? format(timestamp, 'HH:mm, dd.MMM.yyyy') : '';
+    const date = createdAt
+        ? format(new Date(createdAt), 'HH:mm, dd.MMM.yyyy')
+        : '';
 
     return (
         <div
