@@ -23,7 +23,6 @@ import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopBut
 import OverlayHandler from './components/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import MobileUserList from './components/Main/MobileUserList/MobileUserList';
-import Chatroom from './components/Main/Chat/Chatroom/Chatroom';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
 
 function App() {
@@ -179,10 +178,6 @@ function App() {
                                         }
                                     />
                                 }
-                            />
-                            <Route
-                                path="/users/:id/chat"
-                                element={<Chatroom />}
                             />
                             <Route
                                 path="/users/:id/friends/list"
