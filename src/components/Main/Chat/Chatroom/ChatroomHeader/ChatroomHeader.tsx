@@ -6,7 +6,7 @@ import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUser
 
 type ChatroomHeaderProps = {
     currentUserData: CurrentUserDataType | null;
-    partnerData: MinimalUserTypes;
+    partnerData: MinimalUserTypes | null;
 };
 
 export default function ChatroomHeader({
