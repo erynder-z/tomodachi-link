@@ -102,7 +102,7 @@ export default function ChatLobby({ setCurrentView }: ChatLobbyProps) {
                     loading ? 'hidden' : 'md:grid'
                 } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
             >
-                <div className="flex lg:h-fit sticky top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
+                <div className="flex md:h-fit sticky top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
                     {chatConversationList}
                 </div>
                 <div className="flex flex-col gap-8 md:px-4">
