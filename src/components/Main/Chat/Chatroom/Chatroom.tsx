@@ -113,13 +113,6 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     };
 
     useEffect(() => {
-        if (currentUserData) {
-            const userId = currentUserData?._id;
-            socket?.emit('addUser', userId);
-        }
-    }, [currentUserData]);
-
-    useEffect(() => {
         listenForMessage();
 
         return () => {
