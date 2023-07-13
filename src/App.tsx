@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import Navbar from './components/Main/Navbar/Navbar';
@@ -54,14 +54,10 @@ function App() {
     useEffect(() => {
         setIsPaginationTriggered(false);
     }, [isPaginationTriggered]);
-
     useEffect(() => {
-        if (currentView != 'Home' && currentView != 'Friends') {
-            setShowSidebar(false);
-        } else {
-            setShowSidebar(true);
-        }
-    }, [currentView]);
+        setShowSidebar(currentView === 'Home' || currentView === 'Friends' || currentView === 'Chat');
+      }, [currentView]);
+      
 
     useEffect(() => {
         if (isAuth) {
