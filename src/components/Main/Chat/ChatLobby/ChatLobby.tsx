@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CurrentViewType } from '../../../../types/currentViewType';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { fetchChatConversation } from '../../../../utilities/fetchChatConversation';
@@ -8,13 +8,14 @@ import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import ChatConversation from '../ChatConversation/ChatConversation';
 import { ChatConversationType } from '../../../../types/chatConversationType';
 import Chatroom from '../Chatroom/Chatroom';
-import { io } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 
 type ChatLobbyProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
+    socket: Socket | undefined;
 };
 
-export default function ChatLobby({ setCurrentView }: ChatLobbyProps) {
+export default function ChatLobby({ setCurrentView, socket }: ChatLobbyProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -25,17 +26,11 @@ export default function ChatLobby({ setCurrentView }: ChatLobbyProps) {
     );
     const [loading, setLoading] = useState<boolean>(true);
 
-    const socket = useRef<any>();
     const currentUserId = currentUserData?._id;
     const activeChatId = activeChat?._id;
     const chatPartnerId = activeChat?.members.find(
         (member) => member !== currentUserId
     );
-
-    const connectToSocket = () => {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
-        socket.current = io(serverURL);
-    };
 
     const getConversations = async () => {
         if (currentUserId && token) {
@@ -50,27 +45,20 @@ export default function ChatLobby({ setCurrentView }: ChatLobbyProps) {
     };
 
     const addCurrentUserToChat = () => {
-        if (currentUserData) {
+        if (currentUserData && socket) {
             const userId = currentUserData?._id;
-            socket?.current?.emit('addUser', userId);
+            socket.emit('addUser', userId);
         }
-    }
+    };
 
     useEffect(() => {
-        addCurrentUserToChat()
+        addCurrentUserToChat();
         getConversations();
-       
     }, [currentUserId]);
 
     useEffect(() => {
         setCurrentView('Chat');
         localStorage.setItem('currentView', 'Chat');
-
-        connectToSocket();
-
-        return () => {
-            socket.current.disconnect();
-        };
     }, []);
 
     const chatConversationList = conversations.map((conv, index) => (
@@ -119,7 +107,7 @@ export default function ChatLobby({ setCurrentView }: ChatLobbyProps) {
                         <Chatroom
                             chatId={activeChatId}
                             partnerId={chatPartnerId}
-                            socket={socket.current}
+                            socket={socket}
                         />
                     ) : (
                         'No conversation selected!'

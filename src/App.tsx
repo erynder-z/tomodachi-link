@@ -24,6 +24,7 @@ import OverlayHandler from './components/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
+import { Socket, io } from 'socket.io-client';
 
 function App() {
     const { isAuth } = useAuth();
@@ -43,6 +44,13 @@ function App() {
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
 
+    const socket = useRef<Socket | undefined>(undefined);
+
+    const connectToSocket = () => {
+        const serverURL = import.meta.env.VITE_SERVER_URL;
+        socket.current = io(serverURL);
+    };
+
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -54,10 +62,14 @@ function App() {
     useEffect(() => {
         setIsPaginationTriggered(false);
     }, [isPaginationTriggered]);
+
     useEffect(() => {
-        setShowSidebar(currentView === 'Home' || currentView === 'Friends' || currentView === 'Chat');
-      }, [currentView]);
-      
+        setShowSidebar(
+            currentView === 'Home' ||
+                currentView === 'Friends' ||
+                currentView === 'Chat'
+        );
+    }, [currentView]);
 
     useEffect(() => {
         if (isAuth) {
@@ -68,6 +80,12 @@ function App() {
                 message: timeOfDayMessage.message,
                 icon: timeOfDayMessage.icon,
             });
+
+            connectToSocket();
+
+            return () => {
+                socket.current?.disconnect();
+            };
         }
     }, [isAuth]);
 
@@ -147,6 +165,7 @@ function App() {
                                 element={
                                     <ChatLobby
                                         setCurrentView={setCurrentView}
+                                        socket={socket.current}
                                     />
                                 }
                             />
@@ -195,7 +214,10 @@ function App() {
                 </div>
                 {showSidebar && (
                     <aside className="hidden lg:flex lg:h-fit flex-none w-60">
-                        <Sidebar currentView={currentView} />
+                        <Sidebar
+                            currentView={currentView}
+                            socket={socket.current}
+                        />
                     </aside>
                 )}
                 <ScrollToTopButton />

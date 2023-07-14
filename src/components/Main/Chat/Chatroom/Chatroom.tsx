@@ -18,7 +18,7 @@ import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
 type ChatroomProps = {
     chatId: string | undefined;
     partnerId: string | undefined;
-    socket: Socket;
+    socket: Socket | undefined;
 };
 
 export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
