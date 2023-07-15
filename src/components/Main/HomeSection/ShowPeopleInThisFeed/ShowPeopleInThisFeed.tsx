@@ -41,9 +41,9 @@ export default function ShowPeopleInThisFeed({
             );
             const responses = await Promise.all(requests);
             setFeedUsers((prevUsers) => {
-                const existingUserIds = prevUsers.map((user) => user._id);
+                const existingUserIds = prevUsers.map((user) => user?._id);
                 const newUsers = responses.filter(
-                    (user) => !existingUserIds.includes(user._id)
+                    (user) => !existingUserIds.includes(user?._id)
                 );
                 return [...prevUsers, ...newUsers];
             });
