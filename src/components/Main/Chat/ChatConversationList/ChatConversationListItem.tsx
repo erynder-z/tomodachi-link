@@ -1,12 +1,14 @@
 import React from 'react';
 import { FriendDataType } from '../../../../types/friendDataType';
-import ChatUserListItem from '../ChatUserListItem/ChatUserListItem';
+import ChatUserListItem from '../ChatConversationListItem/ChatConversationListItem';
 
-type ChatUserListProps = {
+type ChatConversationListProps = {
     friendData: FriendDataType[] | null;
 };
 
-export default function ChatUserList({ friendData }: ChatUserListProps) {
+export default function ChatConversationList({
+    friendData,
+}: ChatConversationListProps) {
     const userList = friendData?.map((friend) => (
         <ChatUserListItem key={friend._id} listItemData={friend} />
     ));

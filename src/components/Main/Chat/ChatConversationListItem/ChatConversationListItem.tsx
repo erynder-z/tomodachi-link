@@ -2,13 +2,13 @@ import React from 'react';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
 
-type ChatUserListItemProps = {
+type ChatConversationListItemProps = {
     listItemData: MinimalUserTypes;
 };
 
-export default function ChatUserListItem({
+export default function ChatConversationListItem({
     listItemData,
-}: ChatUserListItemProps) {
+}: ChatConversationListItemProps) {
     const { firstName, lastName, userpic } = listItemData || {};
 
     return (

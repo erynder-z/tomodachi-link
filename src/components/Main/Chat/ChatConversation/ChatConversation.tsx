@@ -4,7 +4,7 @@ import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
-import ChatUserListItem from '../ChatUserListItem/ChatUserListItem';
+import ChatUserListItem from '../ChatConversationListItem/ChatConversationListItem';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;

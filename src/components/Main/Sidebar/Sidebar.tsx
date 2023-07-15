@@ -2,7 +2,7 @@ import React from 'react';
 import UserListSome from '../UserList/UserListSome/UserListSome';
 import { CurrentViewType } from '../../../types/currentViewType';
 import UserListAll from '../UserList/UserListAll/UserListAll';
-import OnlineUsersList from '../UserList/ChatOnlineUsersList/ChatOnlineUsersList';
+import OnlineUsersList from '../Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
 
 type SidebarProps = {
