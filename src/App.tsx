@@ -25,6 +25,7 @@ import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
 import { Socket, io } from 'socket.io-client';
+import { PiArrowLineLeftBold, PiArrowLineRightBold } from 'react-icons/pi';
 
 function App() {
     const { isAuth } = useAuth();
@@ -59,17 +60,21 @@ function App() {
         );
     };
 
+    const toggleSidebar = () => {
+        setShowSidebar((prevShowSidebar) => !prevShowSidebar);
+    };
+
     useEffect(() => {
         setIsPaginationTriggered(false);
     }, [isPaginationTriggered]);
 
-    useEffect(() => {
+    /*     useEffect(() => {
         setShowSidebar(
             currentView === 'Home' ||
                 currentView === 'Friends' ||
                 currentView === 'Chat'
         );
-    }, [currentView]);
+    }, [currentView]); */
 
     useEffect(() => {
         if (isAuth) {
@@ -212,14 +217,32 @@ function App() {
                         </Route>
                     </Routes>
                 </div>
-                {showSidebar && (
-                    <aside className="hidden lg:flex lg:h-fit flex-none w-60">
-                        <Sidebar
-                            currentView={currentView}
-                            socket={socket.current}
-                        />
-                    </aside>
-                )}
+
+                <aside
+                    className={`flex flex-none w-60 h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 z-50 ${
+                        !showSidebar
+                            ? 'transform translate-x-full lg:translate-x-0'
+                            : ''
+                    }`}
+                >
+                    <Sidebar
+                        currentView={currentView}
+                        socket={socket.current}
+                    />
+                    <button
+                        className={`fixed bottom-1/2 p-2 rounded-l-md z-50 lg:hidden ${
+                            showSidebar ? '' : '-left-8'
+                        }`}
+                        onClick={toggleSidebar}
+                    >
+                        {showSidebar ? (
+                            <PiArrowLineRightBold className="text-cRed text-3xl" />
+                        ) : (
+                            <PiArrowLineLeftBold className="text-cRed text-3xl" />
+                        )}
+                    </button>
+                </aside>
+
                 <ScrollToTopButton />
             </main>
 
