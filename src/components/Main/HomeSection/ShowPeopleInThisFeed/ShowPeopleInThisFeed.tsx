@@ -59,7 +59,7 @@ export default function ShowPeopleInThisFeed({
     }, [IdsOfPeopleInFeed]);
 
     const feedUserList = feedUsers?.map((feedUser: MinimalUserTypes) => (
-        <div key={feedUser._id} className="animate-popInAnimation">
+        <div key={feedUser?._id} className="animate-popInAnimation">
             <UserListItem listItemData={feedUser} />
         </div>
     ));
