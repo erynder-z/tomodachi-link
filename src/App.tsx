@@ -25,7 +25,7 @@ import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
 import { Socket, io } from 'socket.io-client';
-import { PiArrowLineLeftBold, PiArrowLineRightBold } from 'react-icons/pi';
+import { useLocation } from 'react-router-dom';
 
 function App() {
     const { isAuth } = useAuth();
@@ -46,6 +46,7 @@ function App() {
         useState<boolean>(false);
 
     const socket = useRef<Socket | undefined>(undefined);
+    const location = useLocation();
 
     const connectToSocket = () => {
         const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -68,13 +69,9 @@ function App() {
         setIsPaginationTriggered(false);
     }, [isPaginationTriggered]);
 
-    /*     useEffect(() => {
-        setShowSidebar(
-            currentView === 'Home' ||
-                currentView === 'Friends' ||
-                currentView === 'Chat'
-        );
-    }, [currentView]); */
+    useEffect(() => {
+        setShowSidebar(false);
+    }, [location]);
 
     useEffect(() => {
         if (isAuth) {
@@ -217,38 +214,18 @@ function App() {
                         </Route>
                     </Routes>
                 </div>
-
-                <aside
-                    className={`flex flex-none w-60 h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 z-50 ${
-                        !showSidebar
-                            ? 'transform translate-x-full lg:translate-x-0'
-                            : ''
-                    }`}
-                >
-                    <Sidebar
-                        currentView={currentView}
-                        socket={socket.current}
-                    />
-                    <button
-                        className={`fixed bottom-1/2 p-2 rounded-l-md z-50 lg:hidden ${
-                            showSidebar ? '' : '-left-8'
-                        }`}
-                        onClick={toggleSidebar}
-                    >
-                        {showSidebar ? (
-                            <PiArrowLineRightBold className="text-cRed text-3xl" />
-                        ) : (
-                            <PiArrowLineLeftBold className="text-cRed text-3xl" />
-                        )}
-                    </button>
-                </aside>
-
+                <Sidebar
+                    currentView={currentView}
+                    showSidebar={showSidebar}
+                    socket={socket.current}
+                />
                 <ScrollToTopButton />
             </main>
 
             <OverlayHandler
                 shouldOverlaysShow={shouldOverlaysShow}
                 setShouldOverlaysShow={setShouldOverlaysShow}
+                toggleSidebar={toggleSidebar}
             />
 
             <InfoCard info={info} />
