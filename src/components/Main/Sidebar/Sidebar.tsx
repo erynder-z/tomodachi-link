@@ -4,16 +4,19 @@ import { CurrentViewType } from '../../../types/currentViewType';
 import UserListAll from '../UserList/UserListAll/UserListAll';
 import OnlineUsersList from '../Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
+import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 
 type SidebarProps = {
     currentView: CurrentViewType;
     showSidebar: boolean;
+    toggleSidebar?: () => void;
     socket: Socket | undefined;
 };
 
 export default function Sidebar({
     currentView,
     showSidebar,
+    toggleSidebar,
     socket,
 }: SidebarProps) {
     const sidebarContent = () => {
@@ -28,13 +31,19 @@ export default function Sidebar({
 
     return (
         <aside
-            className={`flex flex-none w-60  h-[calc(100vh_-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 z-50 ${
+            className={`flex flex-col flex-none w-60  h-[calc(100vh_-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 z-40 bg-canvas ${
                 !showSidebar
                     ? 'transform translate-x-full lg:translate-x-0'
                     : ''
             }`}
         >
             {sidebarContent()}
+            <div
+                onClick={toggleSidebar}
+                className="mt-auto flex justify-center items-center lg:hidden"
+            >
+                <TbLayoutSidebarLeftExpand className="text-2xl" />
+            </div>
         </aside>
     );
 }

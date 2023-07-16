@@ -17,11 +17,15 @@ type OverlayHandlerProps = {
             mobileOptionsModal: boolean;
         }>
     >;
+    showSidebar?: boolean;
+    toggleSidebar?: () => void;
 };
 
 export default function OverlayHandler({
     shouldOverlaysShow,
     setShouldOverlaysShow,
+    showSidebar,
+    toggleSidebar,
 }: OverlayHandlerProps) {
     const [isSearchOverlayMounted, setIsSearchOverlayMounted] = useState(
         shouldOverlaysShow.searchOverlay
@@ -74,6 +78,8 @@ export default function OverlayHandler({
                     <OptionsCard
                         shouldOverlaysShow={shouldOverlaysShow}
                         setShouldOverlaysShow={setShouldOverlaysShow}
+                        showSidebar={showSidebar}
+                        toggleSidebar={toggleSidebar}
                     />
                 </div>
             )}

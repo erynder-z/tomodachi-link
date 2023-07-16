@@ -71,7 +71,7 @@ function App() {
 
     useEffect(() => {
         setShowSidebar(false);
-    }, [location]);
+    }, [location.pathname]);
 
     useEffect(() => {
         if (isAuth) {
@@ -217,6 +217,7 @@ function App() {
                 <Sidebar
                     currentView={currentView}
                     showSidebar={showSidebar}
+                    toggleSidebar={toggleSidebar}
                     socket={socket.current}
                 />
                 <ScrollToTopButton />
@@ -225,6 +226,7 @@ function App() {
             <OverlayHandler
                 shouldOverlaysShow={shouldOverlaysShow}
                 setShouldOverlaysShow={setShouldOverlaysShow}
+                showSidebar={showSidebar}
                 toggleSidebar={toggleSidebar}
             />
 
