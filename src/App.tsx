@@ -26,6 +26,7 @@ import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
 import { Socket, io } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
+import { ChatConversationType } from './types/chatConversationType';
 
 function App() {
     const { isAuth } = useAuth();
@@ -44,6 +45,9 @@ function App() {
     });
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
+    const [activeChat, setActiveChat] = useState<ChatConversationType | null>(
+        null
+    );
 
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
@@ -168,6 +172,8 @@ function App() {
                                     <ChatLobby
                                         setCurrentView={setCurrentView}
                                         socket={socket.current}
+                                        activeChat={activeChat}
+                                        setActiveChat={setActiveChat}
                                     />
                                 }
                             />
@@ -219,6 +225,7 @@ function App() {
                     showSidebar={showSidebar}
                     toggleSidebar={toggleSidebar}
                     socket={socket.current}
+                    setActiveChat={setActiveChat}
                 />
                 <ScrollToTopButton />
             </main>

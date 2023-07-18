@@ -13,17 +13,23 @@ import { Socket } from 'socket.io-client';
 type ChatLobbyProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     socket: Socket | undefined;
+    activeChat: ChatConversationType | null;
+    setActiveChat: React.Dispatch<
+        React.SetStateAction<ChatConversationType | null>
+    >;
 };
 
-export default function ChatLobby({ setCurrentView, socket }: ChatLobbyProps) {
+export default function ChatLobby({
+    setCurrentView,
+    socket,
+    activeChat,
+    setActiveChat,
+}: ChatLobbyProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
 
     const [conversations, setConversations] = useState<any[]>([]);
-    const [activeChat, setActiveChat] = useState<ChatConversationType | null>(
-        null
-    );
     const [loading, setLoading] = useState<boolean>(true);
 
     const currentUserId = currentUserData?._id;
@@ -55,6 +61,12 @@ export default function ChatLobby({ setCurrentView, socket }: ChatLobbyProps) {
         addCurrentUserToChat();
         getConversations();
     }, [currentUserId]);
+
+    useEffect(() => {
+        if (activeChat) {
+            setActiveChat(activeChat);
+        }
+    }, [activeChat]);
 
     useEffect(() => {
         setCurrentView('Chat');
