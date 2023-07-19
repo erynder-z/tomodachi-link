@@ -20,6 +20,10 @@ export const initializeChat = async (
             body: JSON.stringify(chatMemberIds),
         });
 
+        if (response.status === 304) {
+            return null;
+        }
+
         if (!response.ok) {
             handleFetchErrors(response, setInfo);
         }

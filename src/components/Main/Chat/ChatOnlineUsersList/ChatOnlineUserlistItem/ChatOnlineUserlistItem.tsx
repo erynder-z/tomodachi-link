@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
@@ -46,7 +46,8 @@ export default function ChatOnlineUserlistItem({
                 const data = await response.json();
                 setActiveChat(data.savedConversation);
             }
-            if (!response || !response.ok) {
+
+            if (response && !response.ok) {
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'Could not initialize chat!',
