@@ -5,12 +5,19 @@ import { Socket } from 'socket.io-client';
 import useFriendData from '../../../../hooks/useFriendData';
 import ChatOnlineUserlistItem from './ChatOnlineUserlistItem/ChatOnlineUserlistItem';
 import { FriendDataType } from '../../../../types/friendDataType';
+import { ChatConversationType } from '../../../../types/chatConversationType';
 
 type ChatOnlineUsersListProps = {
     socket: Socket | undefined;
+    setActiveChat: React.Dispatch<
+        React.SetStateAction<ChatConversationType | null>
+    >;
 };
 
-export default function OnlineUsersList({ socket }: ChatOnlineUsersListProps) {
+export default function OnlineUsersList({
+    socket,
+    setActiveChat,
+}: ChatOnlineUsersListProps) {
     const { friendData } = useFriendData();
     const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -33,6 +40,7 @@ export default function OnlineUsersList({ socket }: ChatOnlineUsersListProps) {
             key={friend._id}
             listItemData={friend}
             isOnline={isOnline(friend)}
+            setActiveChat={setActiveChat}
         />
     ));
 

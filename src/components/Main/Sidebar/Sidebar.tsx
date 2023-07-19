@@ -5,12 +5,16 @@ import UserListAll from '../UserList/UserListAll/UserListAll';
 import OnlineUsersList from '../Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
+import { ChatConversationType } from '../../../types/chatConversationType';
 
 type SidebarProps = {
     currentView: CurrentViewType;
     showSidebar: boolean;
     toggleSidebar?: () => void;
     socket: Socket | undefined;
+    setActiveChat: React.Dispatch<
+        React.SetStateAction<ChatConversationType | null>
+    >;
 };
 
 export default function Sidebar({
@@ -18,12 +22,18 @@ export default function Sidebar({
     showSidebar,
     toggleSidebar,
     socket,
+    setActiveChat,
 }: SidebarProps) {
     const sidebarContent = () => {
         if (currentView === 'Friends') {
             return <UserListAll />;
         } else if (currentView === 'Chat') {
-            return <OnlineUsersList socket={socket} />;
+            return (
+                <OnlineUsersList
+                    socket={socket}
+                    setActiveChat={setActiveChat}
+                />
+            );
         } else {
             return <UserListSome />;
         }

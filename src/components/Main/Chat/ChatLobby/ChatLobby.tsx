@@ -65,6 +65,7 @@ export default function ChatLobby({
     useEffect(() => {
         if (activeChat) {
             setActiveChat(activeChat);
+            getConversations();
         }
     }, [activeChat]);
 

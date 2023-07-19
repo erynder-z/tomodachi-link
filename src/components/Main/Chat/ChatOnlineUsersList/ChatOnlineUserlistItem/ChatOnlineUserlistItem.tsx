@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
@@ -6,15 +6,20 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { initializeChat } from '../../../../../utilities/initializeChat';
+import { ChatConversationType } from '../../../../../types/chatConversationType';
 
 type ChatOnlineUserlistItemProps = {
     listItemData: MinimalUserTypes;
     isOnline: boolean;
+    setActiveChat: React.Dispatch<
+        React.SetStateAction<ChatConversationType | null>
+    >;
 };
 
 export default function ChatOnlineUserlistItem({
     listItemData,
     isOnline,
+    setActiveChat,
 }: ChatOnlineUserlistItemProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
@@ -36,6 +41,11 @@ export default function ChatOnlineUserlistItem({
                 chatMemberIds,
                 setInfo
             );
+
+            if (response && response.ok) {
+                const data = await response.json();
+                setActiveChat(data.savedConversation);
+            }
             if (!response || !response.ok) {
                 setInfo({
                     typeOfInfo: 'bad',
