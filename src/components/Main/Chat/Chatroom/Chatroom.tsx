@@ -14,6 +14,7 @@ import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
 import { postMessage } from '../../../../utilities/postMessage';
 import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
+import { DisplayChatMessageType } from '../../../../types/displayChatMessageType';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -29,9 +30,10 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const [partnerData, setPartnerData] = useState<MinimalUserTypes | null>(
         null
     );
-    const [messages, setMessages] = useState<any[]>([]);
+    const [messages, setMessages] = useState<DisplayChatMessageType[]>([]);
     const [inputMessage, setInputMessage] = useState<string>('');
-    const [receivedMessage, setReceivedMessage] = useState<any>(null);
+    const [receivedMessage, setReceivedMessage] =
+        useState<DisplayChatMessageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const dummy = useRef<HTMLSpanElement>(null);

@@ -29,7 +29,9 @@ export default function ChatLobby({
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
 
-    const [conversations, setConversations] = useState<any[]>([]);
+    const [conversations, setConversations] = useState<ChatConversationType[]>(
+        []
+    );
     const [loading, setLoading] = useState<boolean>(true);
 
     const currentUserId = currentUserData?._id;

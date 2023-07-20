@@ -2,8 +2,8 @@ import React from 'react';
 import { MdSend } from 'react-icons/md';
 
 type ChatroomInputProps = {
-    inputMessage: any;
-    setInputMessage: React.Dispatch<any>;
+    inputMessage: string;
+    setInputMessage: React.Dispatch<React.SetStateAction<string>>;
     sendMessage: () => void;
 };
 

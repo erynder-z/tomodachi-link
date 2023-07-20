@@ -1,10 +1,10 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { DatabaseChatMessageType } from '../../../../../types/databaseChatMessageType';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
+import { DisplayChatMessageType } from '../../../../../types/displayChatMessageType';
 
 type ChatroomMessageProps = {
-    message: DatabaseChatMessageType;
+    message: DisplayChatMessageType;
 };
 
 export default function ChatroomMessage({ message }: ChatroomMessageProps) {
