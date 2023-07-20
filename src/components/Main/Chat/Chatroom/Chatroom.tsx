@@ -8,7 +8,7 @@ import ChatroomHeader from './ChatroomHeader/ChatroomHeader';
 import ChatroomMessage from './ChatroomMessage/ChatroomMessage';
 import ChatroomInput from './ChatroomInput/ChatroomInput';
 import { Socket } from 'socket.io-client';
-import { ChatMessageType } from '../../../../types/chatMessageType';
+import { DatabaseChatMessageType } from '../../../../types/databaseChatMessageType';
 import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
@@ -57,7 +57,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const handlePostMessage = async (message: ChatMessageType) => {
+    const handlePostMessage = async (message: DatabaseChatMessageType) => {
         if (token && inputMessage) {
             const response = await postMessage(token, message, setInfo);
             if (response && response.ok) {

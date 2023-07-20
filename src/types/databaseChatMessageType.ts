@@ -1,4 +1,4 @@
-export type ChatMessageType = {
+export type DatabaseChatMessageType = {
     conversationId: string | undefined;
     senderId: string | undefined;
     text: string | undefined;

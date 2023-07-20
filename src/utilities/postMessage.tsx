@@ -1,11 +1,11 @@
 import { InfoType } from '../types/infoType';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
-import { ChatMessageType } from '../types/chatMessageType';
+import { DatabaseChatMessageType } from '../types/databaseChatMessageType';
 
 export const postMessage = async (
     token: string,
-    message: ChatMessageType,
+    message: DatabaseChatMessageType,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
