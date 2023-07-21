@@ -44,7 +44,9 @@ export default function ChatOnlineUserlistItem({
 
             if (response && response.ok) {
                 const data = await response.json();
-                setActiveChat(data.savedConversation);
+                data.existingConversation
+                    ? setActiveChat(data.existingConversation)
+                    : setActiveChat(data.savedConversation);
             }
 
             if (response && !response.ok) {
