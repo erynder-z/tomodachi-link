@@ -1,7 +1,6 @@
 import React from 'react';
 import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
-import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { FaExclamationTriangle } from 'react-icons/fa';
@@ -22,23 +21,17 @@ export default function ChatOnlineUserlistItem({
     setActiveChat,
 }: ChatOnlineUserlistItemProps) {
     const { token } = useAuth();
-    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const { _id, firstName, lastName, userpic } = listItemData || {};
 
     const indicatorColor = isOnline ? 'green' : 'gray';
-    const currentUserId = currentUserData?._id;
     const chatPartnerId = _id;
 
     const handleInitializeChat = async () => {
-        if (token && currentUserId && chatPartnerId) {
-            const chatMemberIds = {
-                senderId: currentUserId,
-                receiverId: chatPartnerId,
-            };
+        if (token && chatPartnerId) {
             const response = await initializeChat(
                 token,
-                chatMemberIds,
+                chatPartnerId,
                 setInfo
             );
 

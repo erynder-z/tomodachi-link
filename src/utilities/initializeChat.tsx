@@ -1,11 +1,10 @@
 import { InfoType } from '../types/infoType';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
-import { ChatMemberIdsType } from '../types/chatMemberIds';
 
 export const initializeChat = async (
     token: string,
-    chatMemberIds: ChatMemberIdsType,
+    chatPartnerId: string,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
@@ -17,7 +16,7 @@ export const initializeChat = async (
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(chatMemberIds),
+            body: JSON.stringify({ chatPartnerId }),
         });
 
         if (!response.ok) {
