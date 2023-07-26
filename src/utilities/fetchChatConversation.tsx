@@ -3,13 +3,12 @@ import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const fetchChatConversation = async (
-    id: string | undefined,
     token: string,
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
-        const response = await fetch(`${serverURL}/api/v1/chat/${id}`, {
+        const response = await fetch(`${serverURL}/api/v1/chat/`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

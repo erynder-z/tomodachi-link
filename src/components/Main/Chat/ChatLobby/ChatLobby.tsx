@@ -42,11 +42,7 @@ export default function ChatLobby({
 
     const getConversations = async () => {
         if (currentUserId && token) {
-            const response = await fetchChatConversation(
-                currentUserId,
-                token,
-                setInfo
-            );
+            const response = await fetchChatConversation(token, setInfo);
             setConversations(response);
             setLoading(false);
         }
