@@ -5,6 +5,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import ChatUserListItem from '../ChatConversationListItem/ChatConversationListItem';
+import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;
@@ -17,7 +18,9 @@ export default function ChatConversation({
 }: ChatConversationProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
-    const [chatPartner, setChatPartner] = useState<any>(null);
+    const [chatPartner, setChatPartner] = useState<MinimalUserTypes | null>(
+        null
+    );
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleFetchPartnerData = async (partnerId: string) => {
