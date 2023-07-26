@@ -3,7 +3,7 @@ import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
 
 type ChatConversationListItemProps = {
-    listItemData: MinimalUserTypes;
+    listItemData: MinimalUserTypes | null;
 };
 
 export default function ChatConversationListItem({
