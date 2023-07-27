@@ -5,19 +5,26 @@ type ChatroomInputProps = {
     inputMessage: string;
     setInputMessage: React.Dispatch<React.SetStateAction<string>>;
     sendMessage: () => void;
+    onTyping: () => void;
 };
 
 export default function ChatroomInput({
     inputMessage,
     setInputMessage,
     sendMessage,
+    onTyping,
 }: ChatroomInputProps) {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputMessage(e.target.value);
+        onTyping();
+    };
+
     return (
         <div className="flex mt-4">
             <input
                 type="text"
                 value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Type a message..."
                 className="flex-1 p-2 bg-canvas text-cBlack border border-gray-300 rounded-l"
             />

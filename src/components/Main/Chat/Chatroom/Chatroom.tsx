@@ -15,6 +15,8 @@ import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
 import { postMessage } from '../../../../utilities/postMessage';
 import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
 import { DisplayChatMessageType } from '../../../../types/displayChatMessageType';
+import { SocketTypingIndicatorType } from '../../../../types/sockeTypingIndicatorType';
+import TypingIndicator from './TypingIndicator/TypingIndicator';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -34,6 +36,8 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const [inputMessage, setInputMessage] = useState<string>('');
     const [receivedMessage, setReceivedMessage] =
         useState<DisplayChatMessageType | null>(null);
+    const [isTyping, setIsTyping] = useState<boolean>(false);
+    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const dummy = useRef<HTMLSpanElement>(null);
@@ -57,6 +61,16 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
             setMessages(response);
             setLoading(false);
         }
+    };
+
+    const handleTyping = () => {
+        setIsTyping(true);
+        if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+        }
+        typingTimeoutRef.current = setTimeout(() => {
+            setIsTyping(false);
+        }, 1500);
     };
 
     const handlePostMessage = async (message: DatabaseChatMessageType) => {
@@ -100,6 +114,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         socket?.emit('sendMessage', messageObject);
     };
 
+    const sendTypingIndicator = () => {
+        socket?.emit('typing', {
+            senderId: userId,
+            receiverId: partnerId,
+        });
+    };
+
     const listenForMessage = () => {
         socket?.on('receiveMessage', (data: SocketChatMessageType) => {
             setReceivedMessage({
@@ -110,12 +131,24 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         });
     };
 
+    const listenForTyping = () => {
+        socket?.on('typing', (data: SocketTypingIndicatorType) => {
+            if (data.senderId === partnerId && data.receiverId === userId) {
+                handleTyping();
+            }
+        });
+        return () => {
+            socket?.off('typing', handleTyping);
+        };
+    };
+
     const scrollToBottom = () => {
         dummy?.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
     useEffect(() => {
         listenForMessage();
+        listenForTyping();
 
         return () => {
             socket?.off('receiveMessage');
@@ -151,16 +184,18 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 currentUserData={currentUserData}
                 partnerData={partnerData}
             />
-            <div className="flex-1 overflow-y-auto px-2">
+            <div className="flex-1 overflow-y-auto pb-4">
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}
+                <TypingIndicator isTyping={isTyping} />
                 <span ref={dummy} />
             </div>
             <ChatroomInput
                 inputMessage={inputMessage}
                 setInputMessage={setInputMessage}
                 sendMessage={sendMessage}
+                onTyping={sendTypingIndicator}
             />
         </div>
     );
