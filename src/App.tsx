@@ -57,6 +57,11 @@ function App() {
         socket.current = io(serverURL);
     };
 
+    const addCurrentUserToChat = () => {
+        const userId = currentUserData?._id;
+        socket?.current?.emit('addUser', userId);
+    };
+
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -94,6 +99,12 @@ function App() {
             };
         }
     }, [isAuth]);
+
+    useEffect(() => {
+        if (socket.current && currentUserData) {
+            addCurrentUserToChat();
+        }
+    }, [socket.current, currentUserData]);
 
     if (!isAuth) {
         return (

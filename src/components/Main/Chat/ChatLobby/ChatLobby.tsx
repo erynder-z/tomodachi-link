@@ -48,15 +48,7 @@ export default function ChatLobby({
         }
     };
 
-    const addCurrentUserToChat = () => {
-        if (currentUserData && socket) {
-            const userId = currentUserData?._id;
-            socket.emit('addUser', userId);
-        }
-    };
-
     useEffect(() => {
-        addCurrentUserToChat();
         getConversations();
     }, [currentUserId]);
 
