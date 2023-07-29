@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserListSome from '../UserList/UserListSome/UserListSome';
 import { CurrentViewType } from '../../../types/currentViewType';
 import UserListAll from '../UserList/UserListAll/UserListAll';
@@ -6,6 +6,8 @@ import OnlineUsersList from '../Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 import { ChatConversationType } from '../../../types/chatConversationType';
+import { ChatMemberType } from '../../../types/chatMemberType';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 type SidebarProps = {
     currentView: CurrentViewType;
@@ -24,20 +26,40 @@ export default function Sidebar({
     socket,
     setActiveChat,
 }: SidebarProps) {
+    const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
     const sidebarContent = () => {
         if (currentView === 'Friends') {
             return <UserListAll />;
         } else if (currentView === 'Chat') {
-            return (
+            return loading ? (
+                <div className="flex justify-center items-center w-full py-4">
+                    <LoadingSpinner />
+                </div>
+            ) : (
                 <OnlineUsersList
-                    socket={socket}
                     setActiveChat={setActiveChat}
+                    onlineUsers={onlineUsers}
                 />
             );
         } else {
             return <UserListSome />;
         }
     };
+
+    useEffect(() => {
+        if (socket) {
+            socket.on('getUsers', (users: ChatMemberType[]) => {
+                setOnlineUsers(users);
+                setLoading(false);
+            });
+
+            return () => {
+                socket.off('getUsers');
+            };
+        }
+    }, [socket]);
 
     return (
         <aside
