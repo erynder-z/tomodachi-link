@@ -24,9 +24,10 @@ import OverlayHandler from './components/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
-import { Socket, io } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
 import { ChatConversationType } from './types/chatConversationType';
+import { handleChatSetup } from './utilities/handleChatSetup';
 
 function App() {
     const { isAuth } = useAuth();
@@ -52,16 +53,6 @@ function App() {
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
 
-    const connectToSocket = () => {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
-        socket.current = io(serverURL);
-    };
-
-    const addCurrentUserToChat = () => {
-        const userId = currentUserData?._id;
-        socket?.current?.emit('addUser', userId);
-    };
-
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -83,7 +74,7 @@ function App() {
     }, [location.pathname]);
 
     useEffect(() => {
-        if (isAuth) {
+        if (isAuth && currentUserData) {
             const timeOfDayMessage = getTimeOfDayMessage();
 
             setInfo({
@@ -92,19 +83,13 @@ function App() {
                 icon: timeOfDayMessage.icon,
             });
 
-            connectToSocket();
+            const cleanupSocket = handleChatSetup(socket, currentUserData);
 
             return () => {
-                socket.current?.disconnect();
+                cleanupSocket();
             };
         }
-    }, [isAuth]);
-
-    useEffect(() => {
-        if (socket.current && currentUserData) {
-            addCurrentUserToChat();
-        }
-    }, [socket.current, currentUserData]);
+    }, [isAuth && currentUserData]);
 
     if (!isAuth) {
         return (
