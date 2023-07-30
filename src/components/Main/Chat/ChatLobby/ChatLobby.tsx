@@ -17,6 +17,10 @@ type ChatLobbyProps = {
     setActiveChat: React.Dispatch<
         React.SetStateAction<ChatConversationType | null>
     >;
+    conversationsWithUnreadMessages: string[];
+    setConversationsWithUnreadMessages: React.Dispatch<
+        React.SetStateAction<string[]>
+    >;
 };
 
 export default function ChatLobby({
@@ -24,6 +28,8 @@ export default function ChatLobby({
     socket,
     activeChat,
     setActiveChat,
+    conversationsWithUnreadMessages,
+    setConversationsWithUnreadMessages,
 }: ChatLobbyProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
@@ -48,6 +54,20 @@ export default function ChatLobby({
         }
     };
 
+    const handleChatConversationClick = (conv: ChatConversationType) => {
+        setActiveChat(conv);
+
+        const hasUnreadMessage = conversationsWithUnreadMessages.includes(
+            conv._id
+        );
+
+        if (hasUnreadMessage) {
+            setConversationsWithUnreadMessages((prevUnreadMessages) =>
+                prevUnreadMessages.filter((id) => id !== conv._id)
+            );
+        }
+    };
+
     useEffect(() => {
         getConversations();
     }, [currentUserId]);
@@ -62,22 +82,34 @@ export default function ChatLobby({
     useEffect(() => {
         setCurrentView('Chat');
         localStorage.setItem('currentView', 'Chat');
+
+        return () => {
+            setActiveChat(null);
+        };
     }, []);
 
-    const chatConversationList = conversations.map((conv, index) => (
-        <div
-            onClick={() => {
-                setActiveChat(conv);
-            }}
-            key={index}
-            className="cursor-pointer animate-popInAnimation"
-        >
-            <ChatConversation
-                conversation={conv}
-                currentUserId={currentUserId}
-            />
-        </div>
-    ));
+    const chatConversationList = conversations.map((conv, index) => {
+        const hasUnreadMessage = conversationsWithUnreadMessages.includes(
+            conv._id
+        );
+        return (
+            <div
+                onClick={() => handleChatConversationClick(conv)}
+                key={index}
+                className="relative cursor-pointer animate-popInAnimation"
+            >
+                <ChatConversation
+                    conversation={conv}
+                    currentUserId={currentUserId}
+                />
+                {hasUnreadMessage && (
+                    <div className="absolute bottom-4 right-8">
+                        <div className="w-2 h-2 bg-red-600 rounded-full" />
+                    </div>
+                )}
+            </div>
+        );
+    });
 
     if (loading) {
         return (

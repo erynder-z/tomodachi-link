@@ -50,6 +50,11 @@ function App() {
         null
     );
 
+    const [
+        conversationsWithUnreadMessages,
+        setConversationsWithUnreadMessages,
+    ] = useState<string[]>([]);
+
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
 
@@ -83,13 +88,24 @@ function App() {
                 icon: timeOfDayMessage.icon,
             });
 
-            const cleanupSocket = handleChatSetup(socket, currentUserData);
+            const cleanupSocket = handleChatSetup(
+                socket,
+                currentUserData,
+                setConversationsWithUnreadMessages
+            );
 
             return () => {
+                setActiveChat(null);
                 cleanupSocket();
             };
         }
     }, [isAuth && currentUserData]);
+
+    useEffect(() => {
+        setConversationsWithUnreadMessages((prevUnreadMessages) =>
+            prevUnreadMessages.filter((id) => id !== activeChat?._id)
+        );
+    }, [conversationsWithUnreadMessages.length]);
 
     if (!isAuth) {
         return (
@@ -107,6 +123,9 @@ function App() {
                     <Navbar
                         shouldOverlaysShow={shouldOverlaysShow}
                         setShouldOverlaysShow={setShouldOverlaysShow}
+                        conversationsWithUnreadMessages={
+                            conversationsWithUnreadMessages
+                        }
                     />
                 </nav>
             </div>
@@ -170,6 +189,12 @@ function App() {
                                         socket={socket.current}
                                         activeChat={activeChat}
                                         setActiveChat={setActiveChat}
+                                        conversationsWithUnreadMessages={
+                                            conversationsWithUnreadMessages
+                                        }
+                                        setConversationsWithUnreadMessages={
+                                            setConversationsWithUnreadMessages
+                                        }
                                     />
                                 }
                             />

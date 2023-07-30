@@ -6,7 +6,8 @@ export const handleChatSetup = (
     socket: React.MutableRefObject<
         Socket<DefaultEventsMap, DefaultEventsMap> | undefined
     >,
-    currentUserData: CurrentUserDataType
+    currentUserData: CurrentUserDataType,
+    setUnreadMessages: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
     const connectToSocket = () => {
         const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -18,7 +19,21 @@ export const handleChatSetup = (
         socket?.current?.emit('addUser', userId);
     };
 
+    const listenForUnreadMessages = () => {
+        socket?.current?.on(
+            'notifyUnreadMessage',
+            (data: { conversationId: string }) => {
+                setUnreadMessages((prevUnreadMessages) => {
+                    const uniqueUnreadMessages = new Set(prevUnreadMessages);
+                    uniqueUnreadMessages.add(data.conversationId);
+                    return Array.from(uniqueUnreadMessages);
+                });
+            }
+        );
+    };
+
     connectToSocket();
+    listenForUnreadMessages();
 
     if (socket.current && currentUserData) {
         addCurrentUserToChat();

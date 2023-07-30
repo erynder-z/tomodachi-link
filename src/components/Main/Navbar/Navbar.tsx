@@ -18,11 +18,13 @@ type NavbarProps = {
             mobileOptionsModal: boolean;
         }>
     >;
+    conversationsWithUnreadMessages: string[];
 };
 
 export default function Navbar({
     shouldOverlaysShow,
     setShouldOverlaysShow,
+    conversationsWithUnreadMessages,
 }: NavbarProps) {
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +67,14 @@ export default function Navbar({
             <div className="flex lg:flex-col justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />
-                <ChatSectionButton />
+                <div className="relative">
+                    <ChatSectionButton />
+                    {conversationsWithUnreadMessages.length > 0 && (
+                        <div className="absolute -bottom-1 -right-1">
+                            <div className="w-2 h-2 bg-red-600 rounded-full" />
+                        </div>
+                    )}
+                </div>
                 <SearchButton
                     handleSearchButtonClick={handleSearchButtonClick}
                 />

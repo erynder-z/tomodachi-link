@@ -99,6 +99,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
             emitMessage({
                 senderId: userId,
                 receiverId: partnerId,
+                conversationId: chatId,
                 text: inputMessage,
             });
 
