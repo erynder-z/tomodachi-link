@@ -30,7 +30,7 @@ import { ChatConversationType } from './types/chatConversationType';
 import { handleChatSetup } from './utilities/handleChatSetup';
 
 function App() {
-    const { isAuth } = useAuth();
+    const { isAuth, token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
 
@@ -90,8 +90,10 @@ function App() {
 
             const cleanupSocket = handleChatSetup(
                 socket,
+                token,
                 currentUserData,
-                setConversationsWithUnreadMessages
+                setConversationsWithUnreadMessages,
+                setInfo
             );
 
             return () => {

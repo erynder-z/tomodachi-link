@@ -17,6 +17,8 @@ import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
 import { DisplayChatMessageType } from '../../../../types/displayChatMessageType';
 import { SocketTypingIndicatorType } from '../../../../types/sockeTypingIndicatorType';
 import TypingIndicator from './TypingIndicator/TypingIndicator';
+import { markMessageUnreadInDB } from '../../../../utilities/markMessageUnreadInDB';
+import { markMessageReadInDB } from '../../../../utilities/markMessageReadInDB';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -60,6 +62,12 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
             const response = await fetchChatMessages(token, chatId, setInfo);
             setMessages(response);
             setLoading(false);
+        }
+    };
+
+    const handleMarkMessageUnreadInDB = async () => {
+        if (token && chatId) {
+            await markMessageUnreadInDB(token, chatId, setInfo);
         }
     };
 
@@ -107,6 +115,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 ...prevMessages,
                 { senderId: userId, receiverId: partnerId, text: inputMessage },
             ]);
+            handleMarkMessageUnreadInDB();
             setInputMessage('');
         }
     };
@@ -164,6 +173,9 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     useEffect(() => {
         if (receivedMessage && partnerId === receivedMessage.senderId) {
             setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        }
+        if (token && chatId) {
+            markMessageReadInDB(token, chatId, setInfo);
         }
     }, [receivedMessage]);
 
