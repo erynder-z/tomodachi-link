@@ -97,7 +97,7 @@ export default function ChatLobby({
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:h-full md:p-4 pb-4  bg-canvas shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4  bg-canvas shadow-lg">
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
@@ -111,18 +111,15 @@ export default function ChatLobby({
                     loading ? 'hidden' : 'md:grid'
                 } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
             >
-                <div className="flex md:h-fit sticky top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
-                    <ChatConversationList
-                        conversations={conversations}
-                        conversationsWithUnreadMessages={
-                            conversationsWithUnreadMessages
-                        }
-                        handleChatConversationClick={
-                            handleChatConversationClick
-                        }
-                        currentUserId={currentUserId}
-                    />
-                </div>
+                <ChatConversationList
+                    conversations={conversations}
+                    conversationsWithUnreadMessages={
+                        conversationsWithUnreadMessages
+                    }
+                    handleChatConversationClick={handleChatConversationClick}
+                    currentUserId={currentUserId}
+                />
+
                 <div className="flex flex-col gap-8 md:px-4">
                     {activeChat ? (
                         <Chatroom
@@ -131,7 +128,7 @@ export default function ChatLobby({
                             socket={socket}
                         />
                     ) : (
-                        <div className="text-3xl font-bold text-gray-400 text-center my-auto">
+                        <div className="flex justify-center items-center text-3xl font-bold text-gray-400 text-center h-[calc(100vh_-_10rem)]  lg:h-[calc(100vh_-_5rem)]">
                             No conversation selected
                         </div>
                     )}

@@ -16,7 +16,7 @@ export default function ChatConversationList({
     currentUserId,
 }: ChatConversationListProps) {
     return (
-        <div>
+        <div className="flex md:h-fit sticky top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-screen md:w-full p-2 lg:p-0">
             {conversations.map((conv, index) => {
                 const hasUnreadMessage =
                     conversationsWithUnreadMessages.includes(conv._id);
