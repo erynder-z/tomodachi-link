@@ -5,10 +5,10 @@ import { fetchChatConversation } from '../../../../utilities/fetchChatConversati
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
-import ChatConversation from '../ChatConversation/ChatConversation';
 import { ChatConversationType } from '../../../../types/chatConversationType';
 import Chatroom from '../Chatroom/Chatroom';
 import { Socket } from 'socket.io-client';
+import ChatConversationList from '../ChatConversationList/ChatConversationList';
 
 type ChatLobbyProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -88,29 +88,6 @@ export default function ChatLobby({
         };
     }, []);
 
-    const chatConversationList = conversations.map((conv, index) => {
-        const hasUnreadMessage = conversationsWithUnreadMessages.includes(
-            conv._id
-        );
-        return (
-            <div
-                onClick={() => handleChatConversationClick(conv)}
-                key={index}
-                className="relative cursor-pointer animate-popInAnimation"
-            >
-                <ChatConversation
-                    conversation={conv}
-                    currentUserId={currentUserId}
-                />
-                {hasUnreadMessage && (
-                    <div className="absolute bottom-4 right-8">
-                        <div className="w-2 h-2 bg-red-600 rounded-full" />
-                    </div>
-                )}
-            </div>
-        );
-    });
-
     if (loading) {
         return (
             <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas">
@@ -120,7 +97,7 @@ export default function ChatLobby({
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4  bg-canvas shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:h-full md:p-4 pb-4  bg-canvas shadow-lg">
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
@@ -135,7 +112,16 @@ export default function ChatLobby({
                 } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
             >
                 <div className="flex md:h-fit sticky top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
-                    {chatConversationList}
+                    <ChatConversationList
+                        conversations={conversations}
+                        conversationsWithUnreadMessages={
+                            conversationsWithUnreadMessages
+                        }
+                        handleChatConversationClick={
+                            handleChatConversationClick
+                        }
+                        currentUserId={currentUserId}
+                    />
                 </div>
                 <div className="flex flex-col gap-8 md:px-4">
                     {activeChat ? (
@@ -145,7 +131,9 @@ export default function ChatLobby({
                             socket={socket}
                         />
                     ) : (
-                        'No conversation selected!'
+                        <div className="text-3xl font-bold text-gray-400 text-center my-auto">
+                            No conversation selected
+                        </div>
                     )}
                 </div>
             </div>
