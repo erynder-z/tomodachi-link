@@ -20,7 +20,7 @@ export default function ChatroomInput({
     };
 
     return (
-        <div className="flex mt-4">
+        <div className="flex mt-4 px-4">
             <input
                 type="text"
                 value={inputMessage}

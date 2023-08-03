@@ -33,5 +33,10 @@ export default function OnlineUsersList({
         />
     ));
 
-    return <div className="flex flex-col w-full p-4 bg-canvas">{userList}</div>;
+    return (
+        <div className="flex flex-col w-full p-4 bg-canvas">
+            <h1 className="text-center font-bold">Friends</h1>
+            {userList}
+        </div>
+    );
 }

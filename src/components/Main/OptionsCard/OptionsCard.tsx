@@ -31,7 +31,7 @@ export default function OptionsCard({
     toggleSidebar,
 }: OptionsCardProps) {
     return (
-        <div className="flex flex-col gap-4 p-4 lg:w-full lg:flex-row lg:justify-around lg:shadow-lg bg-canvas">
+        <div className="flex flex-col gap-4 p-4 lg:w-full lg:flex-row lg:justify-around lg:shadow-md bg-canvas">
             {toggleSidebar && (
                 <div onClick={toggleSidebar}>
                     {showSidebar ? (

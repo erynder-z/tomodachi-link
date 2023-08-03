@@ -71,7 +71,7 @@ export default function Navbar({
                     <ChatSectionButton />
                     {conversationsWithUnreadMessages.length > 0 && (
                         <div className="absolute -bottom-1 -right-1">
-                            <div className="w-2 h-2 bg-red-600 rounded-full" />
+                            <div className="w-3 h-3 bg-cPink rounded-full animate-pulse   " />
                         </div>
                     )}
                 </div>

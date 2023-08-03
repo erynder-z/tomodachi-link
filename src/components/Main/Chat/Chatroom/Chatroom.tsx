@@ -192,12 +192,12 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 shadow-lg max-h-full overflow-y-auto ">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full pb-4 bg-background2 shadow-lg max-h-full ">
             <ChatroomHeader
                 currentUserData={currentUserData}
                 partnerData={partnerData}
             />
-            <div className="flex-1 overflow-y-auto pb-4">
+            <div className="flex-1 overflow-y-auto p-4 ">
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}

@@ -20,7 +20,7 @@ export default function ProfileCard() {
     }
 
     return (
-        <div className="flex w-full">
+        <div className="flex w-full md:shadow-md">
             <div className="w-full text-center p-4 bg-canvas">
                 <img
                     className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
