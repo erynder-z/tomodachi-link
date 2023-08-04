@@ -8,6 +8,7 @@ import VerifyingInfoBox from './VerifyingInfoBox';
 import { generateAsciiImage } from '../../utilities/generateAsciiImage';
 import { introBackground } from '../../assets/intro';
 import useAuth from '../../hooks/useAuth';
+import GreetingSection from './GreetingSection/GreetingSection';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -101,30 +102,33 @@ export default function LoginPage() {
                     className="h-full w-full object-cover"
                 ></canvas>
             </div>
-            <div className="flex justify-center items-center w-full h-full relative z-10">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full h-full gap-4 relative z-10">
                 {showSignup ? (
                     <SignupPage setShowSignup={setShowSignup} />
                 ) : (
-                    <div className="animate-inAnimation h-3/5 w-5/6 sm:w-2/3 lg:w-1/4 px-4 lg:py-10 bg-white shadow-lg sm:p-10">
-                        {isVerifying ? (
-                            <VerifyingInfoBox />
-                        ) : (
-                            <>
-                                <LoginForm handleSubmit={handleSubmit} />
-                                <div className="flex w-full">
-                                    <button
-                                        onClick={handleRegisterClick}
-                                        className="w-full relative overflow-hidden bg-green-500 text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group"
-                                    >
-                                        <span className="z-10 relative">
-                                            Create account
-                                        </span>
-                                        <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
-                                    </button>
-                                </div>
-                            </>
-                        )}
-                    </div>
+                    <>
+                        <GreetingSection />
+                        <div className="animate-inAnimation h-3/5 w-5/6 md:w-1/2 mx-auto px-4 lg:py-10 bg-white shadow-lg sm:p-10">
+                            {isVerifying ? (
+                                <VerifyingInfoBox />
+                            ) : (
+                                <>
+                                    <LoginForm handleSubmit={handleSubmit} />
+                                    <div className="flex w-full">
+                                        <button
+                                            onClick={handleRegisterClick}
+                                            className="w-full relative overflow-hidden bg-green-500 text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group"
+                                        >
+                                            <span className="z-10 relative">
+                                                Create account
+                                            </span>
+                                            <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </>
                 )}
             </div>
         </div>
