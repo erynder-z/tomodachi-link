@@ -1,10 +1,12 @@
 import React from 'react';
 
 type LoginFormProps = {
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+    handleLoginSubmit: (
+        event: React.FormEvent<HTMLFormElement>
+    ) => Promise<void>;
 };
 
-export default function LoginForm({ handleSubmit }: LoginFormProps) {
+export default function LoginForm({ handleLoginSubmit }: LoginFormProps) {
     return (
         <div className="max-w-md mx-auto">
             <div>
@@ -13,7 +15,7 @@ export default function LoginForm({ handleSubmit }: LoginFormProps) {
             <form
                 action=""
                 method="POST"
-                onSubmit={handleSubmit}
+                onSubmit={handleLoginSubmit}
                 className="divide-y divide-gray-200"
             >
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
