@@ -88,6 +88,25 @@ export default function LoginPage() {
         setShowSignup(true);
     };
 
+    const handleGuestLogin = async () => {
+        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const response = await fetch(`${serverURL}/api/v1/guest`);
+        const data = await response.json();
+
+        const guestUsername = data.guestLoginData.username;
+        const guestPassword = data.guestLoginData.password;
+
+        try {
+            await login(guestUsername, guestPassword);
+        } catch (error) {
+            setInfo({
+                typeOfInfo: 'bad',
+                message: 'Something went wrong!',
+                icon: <FaExclamationTriangle />,
+            });
+        }
+    };
+
     useEffect(() => {
         if (isAuth) {
             setIsVerifying(false);
@@ -126,7 +145,9 @@ export default function LoginPage() {
                                                 handleRegisterClick
                                             }
                                         />
-                                        <GuestLoginButton />
+                                        <GuestLoginButton
+                                            handleGuestLogin={handleGuestLogin}
+                                        />
                                     </div>
                                 </>
                             )}
