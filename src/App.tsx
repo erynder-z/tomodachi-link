@@ -90,10 +90,11 @@ function App() {
                 });
             }
             const timeOfDayMessage = getTimeOfDayMessage();
+            const username = currentUserData.firstName;
 
             setInfo({
                 typeOfInfo: timeOfDayMessage.typeOfInfo,
-                message: timeOfDayMessage.message,
+                message: `${timeOfDayMessage.message}  ${username} !`,
                 icon: timeOfDayMessage.icon,
             });
 

@@ -8,19 +8,19 @@ export const getTimeOfDayMessage = (): InfoType => {
     if (hour < 12) {
         return {
             typeOfInfo: 'greeting',
-            message: 'Good morning!',
+            message: 'Good morning, ',
             icon: <FaSun />,
         };
     } else if (hour < 18) {
         return {
             typeOfInfo: 'greeting',
-            message: 'Good afternoon!',
+            message: 'Good afternoon, ',
             icon: <FaSun />,
         };
     } else {
         return {
             typeOfInfo: 'greeting',
-            message: 'Good evening!',
+            message: 'Good evening, ',
             icon: <FaMoon />,
         };
     }
