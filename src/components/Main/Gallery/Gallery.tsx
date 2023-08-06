@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { CurrentViewType } from '../../../types/currentViewType';
 import { ImageType } from '../../../types/imageType';
@@ -33,6 +33,8 @@ export default function Gallery({
     const [loading, setLoading] = useState<boolean>(true);
     const isLightboxMounted = selectedImage ? true : false;
     const showLightbox = useDelayUnmount(isLightboxMounted, 150);
+
+    const shouldSetCurrentView = useRef(true);
 
     const handleFetchUserPics = async () => {
         if (token && id) {
@@ -70,8 +72,13 @@ export default function Gallery({
     }, [skip, id]);
 
     useEffect(() => {
-        setCurrentView('Gallery');
-        localStorage.setItem('currentView', 'Gallery');
+        if (shouldSetCurrentView.current === true) {
+            setCurrentView('Gallery');
+            localStorage.setItem('currentView', 'Gallery');
+        }
+        return () => {
+            shouldSetCurrentView.current = false;
+        };
     }, []);
 
     const pictureList = pictures?.map((picture) => (

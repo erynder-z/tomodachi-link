@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
 import { FaExclamationTriangle } from 'react-icons/fa';
@@ -15,11 +15,12 @@ import GuestLoginButton from './GuestLoginButton/GuestLoginButton';
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const { isAuth } = useAuth();
+    const { setInfo } = useInfoCard();
 
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
 
-    const { setInfo } = useInfoCard();
+    const shouldRenderAscii = useRef(true);
 
     const login = async (username: string, password: string) => {
         setIsVerifying(true);
@@ -114,7 +115,12 @@ export default function LoginPage() {
     }, [isAuth]);
 
     useEffect(() => {
-        generateAsciiImage(introBackground, 'asciiArtCanvas', 15);
+        if (shouldRenderAscii.current === true) {
+            generateAsciiImage(introBackground, 'asciiArtCanvas', 15);
+        }
+        return () => {
+            shouldRenderAscii.current = false;
+        };
     }, []);
 
     return (

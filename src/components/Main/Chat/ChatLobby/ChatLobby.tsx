@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CurrentViewType } from '../../../../types/currentViewType';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { fetchChatConversation } from '../../../../utilities/fetchChatConversation';
@@ -40,6 +40,8 @@ export default function ChatLobby({
     );
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldSetCurrentView = useRef(true);
+
     const currentUserId = currentUserData?._id;
     const activeChatId = activeChat?._id;
     const chatPartnerId = activeChat?.members.find(
@@ -80,11 +82,16 @@ export default function ChatLobby({
     }, [activeChat]);
 
     useEffect(() => {
-        setCurrentView('Chat');
-        localStorage.setItem('currentView', 'Chat');
+        if (shouldSetCurrentView.current === true) {
+            setCurrentView('Chat');
+            localStorage.setItem('currentView', 'Chat');
 
+            return () => {
+                setActiveChat(null);
+            };
+        }
         return () => {
-            setActiveChat(null);
+            shouldSetCurrentView.current = false;
         };
     }, []);
 

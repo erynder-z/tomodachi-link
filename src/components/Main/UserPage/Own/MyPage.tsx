@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CurrentViewType } from '../../../../types/currentViewType';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import NewPostInput from '../../NewPostInput/NewPostInput';
@@ -30,6 +30,8 @@ export default function MyPage({
         coverSection: true,
     });
 
+    const shouldSetCurrentView = useRef(true);
+
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
     const userId = currentUserData?._id;
 
@@ -46,8 +48,13 @@ export default function MyPage({
     };
 
     useEffect(() => {
-        setCurrentView('MyPage');
-        localStorage.setItem('currentView', 'MyPage');
+        if (shouldSetCurrentView.current) {
+            setCurrentView('MyPage');
+            localStorage.setItem('currentView', 'MyPage');
+        }
+        return () => {
+            shouldSetCurrentView.current = false;
+        };
     }, []);
 
     useEffect(() => {

@@ -26,7 +26,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const [randomUsers, setRandomUsers] = useState<MinimalUserTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const fetchEffectRan = useRef(false);
+    const shouldFetch = useRef(true);
 
     const handleFetchFriendsOfFriends = async () => {
         if (authUser && token) {
@@ -57,13 +57,13 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     }, []);
 
     useEffect(() => {
-        if (fetchEffectRan.current === false) {
+        if (shouldFetch.current === true) {
             if (friendsOfFriends.length === 0) {
                 handleFetchRandomUsers();
             }
         }
         return () => {
-            fetchEffectRan.current = true;
+            shouldFetch.current = false;
         };
     }, [friendsOfFriends]);
 

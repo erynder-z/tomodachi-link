@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
 import useFriendData from '../../../hooks/useFriendData';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
@@ -18,6 +18,8 @@ export default function HomeSection({
     const [friendList, setFriendList] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldSetCurrentView = useRef(true);
+
     const extractFriendIdFromFriendData = (friendData: FriendDataType[]) => {
         const idArray: string[] = [];
         friendData?.map((friend) => {
@@ -35,8 +37,13 @@ export default function HomeSection({
     }, [friendData]);
 
     useEffect(() => {
-        setCurrentView('Home');
-        localStorage.setItem('currentView', 'Home');
+        if (shouldSetCurrentView.current === true) {
+            setCurrentView('Home');
+            localStorage.setItem('currentView', 'Home');
+        }
+        return () => {
+            shouldSetCurrentView.current = false;
+        };
     }, []);
 
     if (loading) {

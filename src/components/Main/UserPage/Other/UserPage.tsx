@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchOtherUserData } from '../../../../utilities/fetchOtherUserData';
 import useAuth from '../../../../hooks/useAuth';
@@ -37,6 +37,8 @@ export default function UserPage({
     });
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldSetCurrentView = useRef(true);
+
     useEffect(() => {
         if (token) {
             fetchOtherUserData(id, token, setInfo);
@@ -61,8 +63,13 @@ export default function UserPage({
     }, [id, currentUserData?.pendingFriendRequests]);
 
     useEffect(() => {
-        setCurrentView('OtherUserPage');
-        localStorage.setItem('currentView', 'OtherUserPage');
+        if (shouldSetCurrentView.current === true) {
+            setCurrentView('OtherUserPage');
+            localStorage.setItem('currentView', 'OtherUserPage');
+        }
+        return () => {
+            shouldSetCurrentView.current = false;
+        };
     }, []);
 
     if (loading) {

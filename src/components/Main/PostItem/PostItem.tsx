@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PostType } from '../../../types/postType';
 import format from 'date-fns/format';
 import { positiveReaction } from '../../../utilities/positiveReaction';
@@ -53,6 +53,8 @@ export default React.memo(function PostItem({
     const postVideoID = postDetails?.embeddedVideoID;
     const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
 
+    const shouldGetPostDetails = useRef(true);
+
     const getPostDetails = async (postID: string) => {
         if (token) {
             const response = await fetchPostContent(token, postID, setInfo);
@@ -89,7 +91,12 @@ export default React.memo(function PostItem({
     };
 
     useEffect(() => {
-        getPostDetails(postID);
+        if (shouldGetPostDetails.current === true) {
+            getPostDetails(postID);
+        }
+        return () => {
+            shouldGetPostDetails.current = false;
+        };
     }, []);
 
     if (loading) {

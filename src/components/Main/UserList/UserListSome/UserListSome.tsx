@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import UserListItem from '../UserListItem/UserListItem';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
@@ -12,6 +12,8 @@ export default function UserListSome() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldFetchUsers = useRef(true);
+
     const handleFetchUsers = async () => {
         if (authUser && token) {
             const response = await fetchSomeUsers(token, setInfo);
@@ -21,7 +23,12 @@ export default function UserListSome() {
     };
 
     useEffect(() => {
-        handleFetchUsers();
+        if (shouldFetchUsers.current === true) {
+            handleFetchUsers();
+        }
+        return () => {
+            shouldFetchUsers.current = false;
+        };
     }, []);
 
     const userList = users?.map((user: MinimalUserTypes) => (

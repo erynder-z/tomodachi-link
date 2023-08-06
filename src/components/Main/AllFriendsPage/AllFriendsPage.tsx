@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
 import { useLocation } from 'react-router-dom';
 import { FriendDataType } from '../../../types/friendDataType';
@@ -12,6 +12,8 @@ type AllFriendsPageProps = {
 export default function AllFriendsPage({
     setCurrentView,
 }: AllFriendsPageProps) {
+    const shouldSetCurrentView = useRef(true);
+
     const location = useLocation();
     const friendData = location.state?.friendData; // receive FriendData from Router-Link in "FriendList" component.
     // type: friendData: FriendDataType[] | null;
@@ -21,8 +23,13 @@ export default function AllFriendsPage({
     ));
 
     useEffect(() => {
-        setCurrentView('AllFriendsPage');
-        localStorage.setItem('currentView', 'AllFriendsPage');
+        if (shouldSetCurrentView.current === true) {
+            setCurrentView('AllFriendsPage');
+            localStorage.setItem('currentView', 'AllFriendsPage');
+        }
+        return () => {
+            shouldSetCurrentView.current = false;
+        };
     }, []);
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import UserListItem from '../UserListItem/UserListItem';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
@@ -14,6 +14,8 @@ export default function UserListAll() {
     const [users, setUsers] = useState<MinimalUserTypes[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const shouldFetchNumberOfUsers = useRef(true);
 
     const handleFetchAllUsers = async () => {
         if (authUser && token) {
@@ -41,7 +43,12 @@ export default function UserListAll() {
     }, [skip]);
 
     useEffect(() => {
-        handleFetchNumberOfUsers();
+        if (shouldFetchNumberOfUsers.current === true) {
+            handleFetchNumberOfUsers();
+        }
+        return () => {
+            shouldFetchNumberOfUsers.current = false;
+        };
     }, []);
 
     const userList = users?.map((user: MinimalUserTypes) => (
