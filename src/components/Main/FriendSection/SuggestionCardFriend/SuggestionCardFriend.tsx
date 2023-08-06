@@ -8,11 +8,13 @@ import {
 } from '../../../../types/friendsOfFriendsType';
 import { shuffleArray } from '../../../../utilities/shuffleArray';
 
-type SuggestionCardProps = {
+type SuggestionCardFriendProps = {
     friendData: FriendsOfFriendsType;
 };
 
-export default function SuggestionCard({ friendData }: SuggestionCardProps) {
+export default function SuggestionCardFriend({
+    friendData,
+}: SuggestionCardFriendProps) {
     const { userpic, firstName, lastName, _id, commonFriends } = friendData;
 
     const MAX_DISPLAY_ITEMS = 3;
