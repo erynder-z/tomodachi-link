@@ -15,4 +15,5 @@ export type CurrentUserDataType = {
     lastSeen: Date;
     userpic: ImageType;
     cover: CoverType;
+    accountType: 'regularUser' | 'guest';
 };
