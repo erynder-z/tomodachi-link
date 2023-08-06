@@ -3,18 +3,21 @@ import SearchOverlay from '../Main/SearchOverlay/SearchOverlay';
 import useDelayUnmount from '../../hooks/useDelayUnmount';
 import EditUserDataModal from '../Main/EditUserDataModal/EditUserDataModal';
 import OptionsCard from '../Main/OptionsCard/OptionsCard';
+import GuestAccountOverlay from './GuestAccountOverlay/GuestAccountOverlay';
 
 type OverlayHandlerProps = {
     shouldOverlaysShow: {
         searchOverlay: boolean;
         editUserDataModal: boolean;
         mobileOptionsModal: boolean;
+        guestAccountOverlay: boolean;
     };
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
     showSidebar?: boolean;
@@ -34,6 +37,8 @@ export default function OverlayHandler({
         useState(shouldOverlaysShow.editUserDataModal);
     const [isMobileOptionsModalMounted, setIsMobileOptionsModalMounted] =
         useState(shouldOverlaysShow.mobileOptionsModal);
+    const [isGuestAccountOverlayMounted, setIsGuestAccountOverlayMounted] =
+        useState(shouldOverlaysShow.guestAccountOverlay);
 
     const showSearchOverlay = useDelayUnmount(isSearchOverlayMounted, 150);
     const showEditUserDataModal = useDelayUnmount(
@@ -44,15 +49,28 @@ export default function OverlayHandler({
         isMobileOptionsModalMounted,
         150
     );
+    const showGuestAccountOverlay = useDelayUnmount(
+        isGuestAccountOverlayMounted,
+        150
+    );
 
     useEffect(() => {
         setIsSearchOverlayMounted(shouldOverlaysShow.searchOverlay);
         setIsEditUserDataModalMounted(shouldOverlaysShow.editUserDataModal);
         setIsMobileOptionsModalMounted(shouldOverlaysShow.mobileOptionsModal);
+        setIsGuestAccountOverlayMounted(shouldOverlaysShow.guestAccountOverlay);
     }, [shouldOverlaysShow]);
 
     return (
         <div className="relative z-50">
+            {showGuestAccountOverlay && (
+                <GuestAccountOverlay
+                    shouldGuestAccountOverlayShow={
+                        shouldOverlaysShow.guestAccountOverlay
+                    }
+                    setShouldOverlaysShow={setShouldOverlaysShow}
+                />
+            )}
             {showSearchOverlay && (
                 <SearchOverlay
                     shouldSearchOverlayShow={shouldOverlaysShow.searchOverlay}

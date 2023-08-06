@@ -6,12 +6,14 @@ type OptionsButtonProps = {
         searchOverlay: boolean;
         editUserDataModal: boolean;
         mobileOptionsModal: boolean;
+        guestAccountOverlay: boolean;
     };
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
 };
@@ -24,6 +26,7 @@ export default function OptionsButton({
             searchOverlay: false,
             editUserDataModal: !shouldOverlaysShow.editUserDataModal,
             mobileOptionsModal: false,
+            guestAccountOverlay: false,
         });
     };
 

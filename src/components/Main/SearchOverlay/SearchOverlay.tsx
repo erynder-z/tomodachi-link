@@ -13,6 +13,7 @@ type SearchOverlayProps = {
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
 };
@@ -67,6 +68,7 @@ export default function SearchOverlay({
             searchOverlay: false,
             editUserDataModal: false,
             mobileOptionsModal: false,
+            guestAccountOverlay: false,
         });
     };
 

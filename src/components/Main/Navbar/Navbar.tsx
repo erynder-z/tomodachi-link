@@ -10,12 +10,14 @@ type NavbarProps = {
         searchOverlay: boolean;
         editUserDataModal: boolean;
         mobileOptionsModal: boolean;
+        guestAccountOverlay: boolean;
     };
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
     conversationsWithUnreadMessages: string[];
@@ -33,6 +35,7 @@ export default function Navbar({
             searchOverlay: true,
             editUserDataModal: false,
             mobileOptionsModal: false,
+            guestAccountOverlay: false,
         });
     };
 
@@ -41,6 +44,7 @@ export default function Navbar({
             searchOverlay: false,
             editUserDataModal: false,
             mobileOptionsModal: false,
+            guestAccountOverlay: false,
         });
     };
 
@@ -89,6 +93,7 @@ export default function Navbar({
                             editUserDataModal: false,
                             mobileOptionsModal:
                                 !shouldOverlaysShow.mobileOptionsModal,
+                            guestAccountOverlay: false,
                         });
                     }}
                 >

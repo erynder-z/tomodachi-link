@@ -12,12 +12,14 @@ type OptionsCardProps = {
         searchOverlay: boolean;
         editUserDataModal: boolean;
         mobileOptionsModal: boolean;
+        guestAccountOverlay: boolean;
     };
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
     showSidebar?: boolean;

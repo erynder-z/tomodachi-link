@@ -10,6 +10,7 @@ type ProfilePageButtonProps = {
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
 };
@@ -26,6 +27,7 @@ export default function ProfilePageButton({
             searchOverlay: false,
             editUserDataModal: false,
             mobileOptionsModal: false,
+            guestAccountOverlay: false,
         });
     };
 

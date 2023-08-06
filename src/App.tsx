@@ -43,6 +43,7 @@ function App() {
         searchOverlay: false,
         editUserDataModal: false,
         mobileOptionsModal: false,
+        guestAccountOverlay: false,
     });
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
@@ -80,6 +81,14 @@ function App() {
 
     useEffect(() => {
         if (isAuth && currentUserData) {
+            if (currentUserData.accountType === 'guest') {
+                setShouldOverlaysShow({
+                    searchOverlay: false,
+                    editUserDataModal: false,
+                    mobileOptionsModal: false,
+                    guestAccountOverlay: true,
+                });
+            }
             const timeOfDayMessage = getTimeOfDayMessage();
 
             setInfo({

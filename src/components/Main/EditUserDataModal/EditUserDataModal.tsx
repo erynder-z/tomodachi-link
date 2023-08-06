@@ -11,6 +11,7 @@ type EditUserDataModalProps = {
             searchOverlay: boolean;
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
         }>
     >;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,6 +29,7 @@ export default function EditUserDataModal({
             searchOverlay: false,
             editUserDataModal: false,
             mobileOptionsModal: false,
+            guestAccountOverlay: false,
         });
         setShowOptions?.(false);
     };
