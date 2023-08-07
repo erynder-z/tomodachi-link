@@ -21,14 +21,18 @@ type NavbarProps = {
         }>
     >;
     conversationsWithUnreadMessages: string[];
+    accountType: string | undefined;
 };
 
 export default function Navbar({
     shouldOverlaysShow,
     setShouldOverlaysShow,
     conversationsWithUnreadMessages,
+    accountType,
 }: NavbarProps) {
     const menuRef = useRef<HTMLDivElement>(null);
+
+    const isChatDisabled = accountType === 'guest';
 
     const handleSearchButtonClick = () => {
         setShouldOverlaysShow({
@@ -72,7 +76,7 @@ export default function Navbar({
                 <HomeSectionButton />
                 <FriendSectionButton />
                 <div className="relative">
-                    <ChatSectionButton />
+                    <ChatSectionButton isChatDisabled={isChatDisabled} />
                     {conversationsWithUnreadMessages.length > 0 && (
                         <div className="absolute -bottom-1 -right-1">
                             <div className="w-3 h-3 bg-cPink rounded-full animate-pulse   " />

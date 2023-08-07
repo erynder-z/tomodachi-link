@@ -59,6 +59,8 @@ function App() {
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
 
+    const accountType = currentUserData?.accountType;
+
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -138,6 +140,7 @@ function App() {
                         conversationsWithUnreadMessages={
                             conversationsWithUnreadMessages
                         }
+                        accountType={accountType}
                     />
                 </nav>
             </div>
@@ -196,18 +199,22 @@ function App() {
                             <Route
                                 path="/chat"
                                 element={
-                                    <ChatLobby
-                                        setCurrentView={setCurrentView}
-                                        socket={socket.current}
-                                        activeChat={activeChat}
-                                        setActiveChat={setActiveChat}
-                                        conversationsWithUnreadMessages={
-                                            conversationsWithUnreadMessages
-                                        }
-                                        setConversationsWithUnreadMessages={
-                                            setConversationsWithUnreadMessages
-                                        }
-                                    />
+                                    accountType === 'guest' ? (
+                                        <Navigate replace to="/home" />
+                                    ) : (
+                                        <ChatLobby
+                                            setCurrentView={setCurrentView}
+                                            socket={socket.current}
+                                            activeChat={activeChat}
+                                            setActiveChat={setActiveChat}
+                                            conversationsWithUnreadMessages={
+                                                conversationsWithUnreadMessages
+                                            }
+                                            setConversationsWithUnreadMessages={
+                                                setConversationsWithUnreadMessages
+                                            }
+                                        />
+                                    )
                                 }
                             />
                             <Route
