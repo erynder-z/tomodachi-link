@@ -4,6 +4,7 @@ import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
 import SearchButton from './SearchButton/SearchButton';
 import ChatSectionButton from './ChatSectionButton/ChatSectionButton';
+import useCurrentUserData from '../../../hooks/useCurrentUserData';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -21,18 +22,17 @@ type NavbarProps = {
         }>
     >;
     conversationsWithUnreadMessages: string[];
-    accountType: string | undefined;
 };
 
 export default function Navbar({
     shouldOverlaysShow,
     setShouldOverlaysShow,
     conversationsWithUnreadMessages,
-    accountType,
 }: NavbarProps) {
+    const { currentUserData } = useCurrentUserData();
     const menuRef = useRef<HTMLDivElement>(null);
 
-    const isChatDisabled = accountType === 'guest';
+    const isChatDisabled = currentUserData?.accountType === 'guest';
 
     const handleSearchButtonClick = () => {
         setShouldOverlaysShow({

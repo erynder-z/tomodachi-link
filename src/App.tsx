@@ -140,7 +140,6 @@ function App() {
                         conversationsWithUnreadMessages={
                             conversationsWithUnreadMessages
                         }
-                        accountType={accountType}
                     />
                 </nav>
             </div>
