@@ -113,7 +113,7 @@ function App() {
                 cleanupSocket();
             };
         }
-    }, [isAuth && currentUserData]);
+    }, [isAuth && currentUserData?._id]);
 
     useEffect(() => {
         setConversationsWithUnreadMessages((prevUnreadMessages) =>
