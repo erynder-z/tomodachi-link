@@ -51,6 +51,8 @@ export default function EditUserDataModalForm({
 
     const [showCropper, setShowCropper] = useState<boolean>(false);
 
+    const isGuest = currentUserData?.accountType === 'guest';
+
     const imageUrl = image.selectedFile
         ? URL.createObjectURL(image.selectedFile)
         : `data:image/png;base64,${image.preview}`;
@@ -214,9 +216,18 @@ export default function EditUserDataModalForm({
                         />
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full bg-blue-500 text-white px-2 py-1">
-                            Update
-                        </button>
+                        {isGuest ? (
+                            <button
+                                disabled
+                                className="w-full bg-gray-500 text-white px-2 py-1"
+                            >
+                                Cannot update guest account!
+                            </button>
+                        ) : (
+                            <button className="w-full bg-blue-500 text-white px-2 py-1">
+                                Update
+                            </button>
+                        )}
                     </div>
                 </div>
             </form>

@@ -3,6 +3,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { usePasswordComparison } from '../../../../hooks/usePasswordComparison';
 import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
+import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 
 type UpdatePasswordFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -21,7 +22,10 @@ export default function UpdatePasswordForm({
     setShowOptions,
 }: UpdatePasswordFormProps) {
     const { token } = useAuth();
+    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
+
+    const isGuest = currentUserData?.accountType === 'guest';
 
     const {
         isMatchingPassword,
@@ -156,9 +160,18 @@ export default function UpdatePasswordForm({
                         </label>
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full bg-blue-500 text-white px-2 py-1">
-                            Update
-                        </button>
+                        {isGuest ? (
+                            <button
+                                disabled
+                                className="w-full bg-gray-500 text-white px-2 py-1"
+                            >
+                                Cannot change guest password!
+                            </button>
+                        ) : (
+                            <button className="w-full bg-blue-500 text-white px-2 py-1">
+                                Update
+                            </button>
+                        )}
                     </div>
                 </div>
             </form>
