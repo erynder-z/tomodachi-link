@@ -71,12 +71,24 @@ module.exports = {
                         opacity: '0',
                     },
                 },
+                gradientBorderAnimation: {
+                    '0%, 100%': {
+                        'background-size': '200% 200%',
+                        'background-position': 'left center',
+                    },
+                    '50%': {
+                        'background-size': '200% 200%',
+                        'background-position': 'right center',
+                    },
+                },
             },
             animation: {
                 inAnimation: 'inAnimation 150ms ease-in',
                 outAnimation: 'outAnimation 170ms ease-out',
                 popInAnimation: 'popInAnimation 200ms ease-in-out',
                 popOutAnimation: 'popOutAnimation 220ms ease-in-out',
+                gradientBorderAnimation:
+                    'gradientBorderAnimation 5s ease infinite',
             },
         },
     },
