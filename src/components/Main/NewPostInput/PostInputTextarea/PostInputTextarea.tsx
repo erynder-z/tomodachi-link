@@ -14,6 +14,7 @@ export default function PostInputTextarea({
     username,
 }: PostInputTextareaProps) {
     const [textareaRows, setTextareaRows] = useState(1);
+    const [isTextareaFocused, setIsTextareaFocused] = useState(false);
 
     const handleTextareaChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -29,29 +30,35 @@ export default function PostInputTextarea({
     };
 
     return (
-        <div className="relative">
+        <div className="relative z-0">
             <textarea
                 rows={textareaRows}
                 required
                 autoComplete="off"
                 id="newPost"
                 name="newPost"
-                className="peer placeholder-transparent w-full border-b-2 border-gray-300 text-gray-900 leading-tight focus:outline-none bg-card focus:bg-blue-300 p-2 h-full overflow-hidden resize-none rounded-md"
-                placeholder="message"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0  peer overflow-hidden resize-none"
+                placeholder=" "
                 value={postText}
                 onChange={handleTextareaChange}
-                style={{
-                    transition: 'background-color 0.5s ease-in-out',
-                }}
+                onFocus={() => setIsTextareaFocused(true)}
+                onBlur={() => setIsTextareaFocused(false)}
             />
             <label
                 htmlFor="newPost"
-                className={`${
-                    postText ? 'text-xs' : 'text-sm'
-                }  absolute left-0 top-[-1.5rem] peer-focus:-top-5 text-gray-600 peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2.5 transition-all peer-focus:text-gray-600 peer-focus:text-xs px-2 pointer-events-none leading-6`}
+                className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
                 What's on your mind, {username}?
             </label>
+            <div className="absolute left-0 bottom-0 w-full h-0.5 overflow-hidden">
+                <div
+                    className={`h-full w-full  ${
+                        isTextareaFocused
+                            ? 'bg-cPink'
+                            : 'bg-gradient-to-r from-cGreen via-yellow-300 to-cBlue animate-gradientBorderAnimation'
+                    } `}
+                />
+            </div>
         </div>
     );
 }

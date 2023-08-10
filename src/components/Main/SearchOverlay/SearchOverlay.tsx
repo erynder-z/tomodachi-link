@@ -83,7 +83,7 @@ export default function SearchOverlay({
                 shouldSearchOverlayShow
                     ? 'animate-inAnimation'
                     : 'animate-outAnimation'
-            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80`}
+            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/90`}
         >
             <button
                 className="absolute top-0 right-0 m-4 text-white font-bold text-lg"
@@ -92,20 +92,19 @@ export default function SearchOverlay({
                 <FaTimes />
             </button>
             <div className="h-screen lg:flex mt-40 justify-center">
-                <div className="relative px-4" ref={dropdownRef}>
+                <div className="relative z-0 px-4" ref={dropdownRef}>
                     <input
                         name="searchInput"
                         required
                         autoComplete="off"
-                        className="peer w-full sm:w-96 p-2 text-gray-200 leading-tight outline-none bg-slate-800/80 focus:bg-indigo-800/50 h-8 overflow-hidden resize-none rounded-sm transition-colors duration-300"
+                        className="block py-2.5 px-0 w-full sm:w-96 text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                        placeholder=" "
                         value={searchText}
                         onChange={handleTextareaChange}
                     />
                     <label
                         htmlFor="searchInput"
-                        className={`${
-                            searchText ? '-top-5' : 'top-1'
-                        } absolute left-7 text-gray-400 text-sm transition-all peer-focus:-top-5 peer-focus:text-xs pointer-events-none`}
+                        className="absolute text-sm text-gray-100 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                         Search for user...
                     </label>
@@ -116,7 +115,7 @@ export default function SearchOverlay({
                     ) : searchResults.length > 0 &&
                       Array.isArray(searchResults) ? (
                         <ul
-                            className="w-95vw sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-indigo-800/50"
+                            className="w-95vw sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-white/50"
                             style={{
                                 maxHeight: shouldSearchOverlayShow
                                     ? '50vh'
@@ -139,7 +138,7 @@ export default function SearchOverlay({
                     )}
                     {searchText && (
                         <button
-                            className="absolute -top-5 right-2 text-gray-400 hover:text-gray-200 text-xs"
+                            className="absolute -top-5 right-2 text-gray-100 hover:text-gray-200 text-xs"
                             onClick={handleClear}
                         >
                             Clear

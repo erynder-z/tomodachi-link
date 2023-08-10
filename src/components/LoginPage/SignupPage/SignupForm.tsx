@@ -17,104 +17,104 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                 className="divide-y divide-gray-200"
             >
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="relative">
+                    <div className="relative z-0">
                         <input
                             required
                             autoComplete="off"
                             id="firstName"
                             name="firstName"
                             type="text"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
-                            placeholder="First name"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            placeholder=" "
                         />
                         <label
                             htmlFor="firstName"
-                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
+                            className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             First name
                         </label>
                     </div>
-                    <div className="relative">
+                    <div className="relative z-0">
                         <input
                             required
                             autoComplete="off"
                             id="lastName"
                             name="lastName"
                             type="text"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
-                            placeholder="Last name"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            placeholder=" "
                         />
                         <label
                             htmlFor="lastName"
-                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
+                            className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Last name
                         </label>
                     </div>
-                    <div className="relative">
+                    <div className="relative z-0">
                         <input
                             required
                             autoComplete="off"
                             id="email"
                             name="email"
                             type="email"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
-                            placeholder="Email"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            placeholder=" "
                         />
                         <label
                             htmlFor="email"
-                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
+                            className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Email
                         </label>
                     </div>
-                    <div className="relative">
+                    <div className="relative z-0">
                         <input
                             required
                             autoComplete="off"
                             id="username"
                             name="username"
                             type="text"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
-                            placeholder="Username"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            placeholder=" "
                         />
                         <label
                             htmlFor="username"
-                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
+                            className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Username
                         </label>
                     </div>
-                    <div className="relative">
+                    <div className="relative z-0">
                         <input
                             required
                             autoComplete="off"
                             id="password"
                             name="password"
                             type="password"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
-                            placeholder="Password"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            placeholder=" "
                         />
                         <label
                             htmlFor="password"
-                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
+                            className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Password
                         </label>
                     </div>
-                    <div className="relative">
+                    <div className="relative z-0">
                         <input
                             required
                             autoComplete="off"
                             id="confirmPassword"
                             name="confirmPassword"
                             type="password"
-                            className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-cPink transition-colors"
-                            placeholder="Confirm password"
+                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            placeholder=" "
                         />
                         <label
                             htmlFor="confirmPassword"
-                            className="left-0 -top-3.5 text-gray-600 text-sm peer-focus:text-cPink peer-focus:font-bold transition-all"
+                            className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Confirm password
                         </label>

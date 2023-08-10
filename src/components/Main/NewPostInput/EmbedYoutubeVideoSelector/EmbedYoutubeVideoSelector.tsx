@@ -52,7 +52,7 @@ export default function EmbedYoutubeVideoSelector({
                 onSubmit={handleSubmit}
                 className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-canvas rounded-md text-gray-700 sm:text-lg sm:leading-7 p-4"
             >
-                <div className="relative">
+                <div className="relative z-0">
                     <button
                         onClick={handleComponentClose}
                         className="absolute -top-16 -right-10 bg-canvas hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
@@ -68,11 +68,12 @@ export default function EmbedYoutubeVideoSelector({
                         onChange={(event) => {
                             setSelectedURL(event.target.value);
                         }}
-                        className="h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 p-2"
+                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                        placeholder=" "
                     />
                     <label
                         htmlFor="embedVideoURL"
-                        className="absolute -top-5 left-0 text-gray-500 text-sm "
+                        className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                         Enter URL
                     </label>
