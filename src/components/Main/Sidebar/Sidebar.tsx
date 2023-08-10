@@ -63,7 +63,7 @@ export default function Sidebar({
 
     return (
         <aside
-            className={`flex flex-col flex-none w-60  h-[calc(100vh_-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 z-40 bg-canvas ${
+            className={`flex flex-col flex-none w-60  h-[calc(100vh_-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 bg-canvas z-40 md:z-0 ${
                 !showSidebar
                     ? 'transform translate-x-full lg:translate-x-0'
                     : ''
