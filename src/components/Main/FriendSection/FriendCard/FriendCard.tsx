@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
-import { TbLink, TbMessages, TbUserMinus, TbAlertCircle } from 'react-icons/tb';
+import { TbLink, TbUserMinus, TbAlertCircle } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
@@ -76,12 +76,6 @@ export default function FriendCard({ friendData }: FriendCardProps) {
                             className="flex items-center w-max gap-4 py-2 text-regularText "
                         >
                             <TbLink className="text-xl hover:scale-125 hover:text-cRed transition-all" />
-                        </Link>
-                        <Link
-                            to={`/users/${_id}/chat`}
-                            className="flex items-center w-max gap-4 py-2 text-regularText "
-                        >
-                            <TbMessages className="text-xl cursor-pointer hover:scale-125 hover:text-cRed transition-all" />
                         </Link>
 
                         <TbUserMinus
