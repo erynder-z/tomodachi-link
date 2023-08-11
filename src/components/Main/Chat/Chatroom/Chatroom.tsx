@@ -41,6 +41,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const [isTyping, setIsTyping] = useState<boolean>(false);
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const dummy = useRef<HTMLSpanElement>(null);
     const userId = currentUserData?._id;
@@ -97,26 +98,44 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if (userId && partnerId && inputMessage.trim() !== '') {
-            handlePostMessage({
-                senderId: userId,
-                text: inputMessage,
-                conversationId: chatId,
-            });
-            emitMessage({
-                senderId: userId,
-                receiverId: partnerId,
-                conversationId: chatId,
-                text: inputMessage,
-            });
+            setIsSubmitting(true);
 
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                { senderId: userId, receiverId: partnerId, text: inputMessage },
-            ]);
-            handleMarkMessageUnreadInDB();
-            setInputMessage('');
+            try {
+                await handlePostMessage({
+                    senderId: userId,
+                    text: inputMessage,
+                    conversationId: chatId,
+                });
+
+                emitMessage({
+                    senderId: userId,
+                    receiverId: partnerId,
+                    conversationId: chatId,
+                    text: inputMessage,
+                });
+
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    {
+                        senderId: userId,
+                        receiverId: partnerId,
+                        text: inputMessage,
+                    },
+                ]);
+
+                handleMarkMessageUnreadInDB();
+                setInputMessage('');
+            } catch (error) {
+                setInfo({
+                    typeOfInfo: 'bad',
+                    message: 'Something went wrong when sending your message!',
+                    icon: <FaExclamationTriangle />,
+                });
+            }
+
+            setIsSubmitting(false);
         }
     };
 
@@ -209,6 +228,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 setInputMessage={setInputMessage}
                 sendMessage={sendMessage}
                 onTyping={sendTypingIndicator}
+                isSubmitting={isSubmitting}
             />
         </div>
     );

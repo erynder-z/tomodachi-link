@@ -3,12 +3,14 @@ import { FaRegSmileBeam, FaRegImage, FaYoutube } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';
 import { ViewMode } from '../../../../types/postInputSelectors';
+import ButtonBusy from '../../../LoadingSpinner/ButtonBusy';
 
 type ButtonAreaProps = {
     handleImageSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
     viewMode: ViewMode;
     setViewMode: (mode: ViewMode) => void;
     postText: string;
+    isSubmitting: boolean;
 };
 
 export default function ButtonArea({
@@ -16,6 +18,7 @@ export default function ButtonArea({
     viewMode,
     setViewMode,
     postText,
+    isSubmitting,
 }: ButtonAreaProps) {
     return (
         <div className="flex w-full gap-4">
@@ -72,14 +75,15 @@ export default function ButtonArea({
                 <FaRegSmileBeam />
             </button>
             <button
+                disabled={isSubmitting}
                 className={`flex items-center justify-center h-8 w-8 text-white ml-auto text-sm ${
-                    !postText
+                    !postText || isSubmitting
                         ? 'bg-gray-500 hover:bg-gray-600'
                         : 'bg-blue-500 hover:bg-blue-600'
                 }`}
                 title={postText ? undefined : 'Please enter a message'}
             >
-                <MdSend />
+                {isSubmitting ? <ButtonBusy /> : <MdSend />}
             </button>
         </div>
     );

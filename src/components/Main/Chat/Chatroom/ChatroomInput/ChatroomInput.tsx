@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { MdSend } from 'react-icons/md';
+import ButtonBusy from '../../../../LoadingSpinner/ButtonBusy';
 
 type ChatroomInputProps = {
     inputMessage: string;
     setInputMessage: React.Dispatch<React.SetStateAction<string>>;
     sendMessage: () => void;
     onTyping: () => void;
+    isSubmitting: boolean;
 };
 
 export default function ChatroomInput({
@@ -13,6 +15,7 @@ export default function ChatroomInput({
     setInputMessage,
     sendMessage,
     onTyping,
+    isSubmitting,
 }: ChatroomInputProps) {
     const [isInputFocused, setIsInputFocused] = useState(false);
 
@@ -49,6 +52,7 @@ export default function ChatroomInput({
                 />
             </div>
             <button
+                disabled={isSubmitting}
                 onClick={sendMessage}
                 className={`flex items-center justify-center  w-12 text-white ml-auto text-sm ${
                     !inputMessage
@@ -57,7 +61,7 @@ export default function ChatroomInput({
                 }`}
                 title={inputMessage ? undefined : 'Please enter a message'}
             >
-                <MdSend />
+                {isSubmitting ? <ButtonBusy /> : <MdSend />}
             </button>
         </div>
     );
