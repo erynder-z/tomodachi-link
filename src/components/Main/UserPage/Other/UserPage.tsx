@@ -4,7 +4,7 @@ import { fetchOtherUserData } from '../../../../utilities/fetchOtherUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { CurrentViewType } from '../../../../types/currentViewType';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { OtherUserPageDataTypes } from '../../../../types/otherUserPageDataTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';

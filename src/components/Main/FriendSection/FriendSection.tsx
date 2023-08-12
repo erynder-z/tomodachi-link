@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import useFriendData from '../../../hooks/useFriendData';
 import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 import FriendCard from './FriendCard/FriendCard';

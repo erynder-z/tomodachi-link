@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CurrentViewType } from '../../../types/currentViewType';
 import useFriendData from '../../../hooks/useFriendData';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import Feed from './Feed/Feed';
 import { FriendDataType } from '../../../types/friendDataType';
 

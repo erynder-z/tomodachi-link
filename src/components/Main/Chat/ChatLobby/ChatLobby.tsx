@@ -4,7 +4,7 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { fetchChatConversation } from '../../../../utilities/fetchChatConversation';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { ChatConversationType } from '../../../../types/chatConversationType';
 import Chatroom from '../Chatroom/Chatroom';
 import { Socket } from 'socket.io-client';

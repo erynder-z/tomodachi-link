@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchFeed } from '../../../../utilities/fetchFeed';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
-import PostItem from '../../PostItem/PostItem';
-import LightBox from '../../../LightBox/LightBox';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
+import PostItem from '../../Post/PostItem/PostItem';
+import LightBox from '../../../UiElements/LightBox/LightBox';
 import { ImageType } from '../../../../types/imageType';
 import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 import { MinimalPostType } from '../../../../types/minimalPostType';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
-import NewPostInput from '../../NewPostInput/NewPostInput';
+import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 
 type FreedProps = {
     friendList: string[];

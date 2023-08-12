@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import PostItem from '../../../PostItem/PostItem';
+import PostItem from '../../../Post/PostItem/PostItem';
 import { PostType } from '../../../../../types/postType';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { fetchPosts } from '../../../../../utilities/fetchPosts';
-import LightBox from '../../../../LightBox/LightBox';
+import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { ImageType } from '../../../../../types/imageType';
 import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 

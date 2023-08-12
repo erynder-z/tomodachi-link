@@ -3,7 +3,7 @@ import useAuth from '../../../../../../hooks/useAuth';
 import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
 import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
 import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';

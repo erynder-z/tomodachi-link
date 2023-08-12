@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CurrentViewType } from '../../../../types/currentViewType';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import NewPostInput from '../../NewPostInput/NewPostInput';
+import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import useFriendData from '../../../../hooks/useFriendData';
 import FriendList from '../SharedComponents/FriendList/FriendList';
 import FriendRequests from './FriendRequests/FriendRequests';
 import MyCoverSection from './MyCoverSection/MyCoverSection';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import PictureList from '../SharedComponents/PictureList/PictureList';
 import PostList from '../SharedComponents/PostList/PostList';
 

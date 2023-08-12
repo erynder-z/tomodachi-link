@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import UserListItem from '../UserListItem/UserListItem';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchSomeUsers } from '../../../../utilities/fetchSomeUsers';

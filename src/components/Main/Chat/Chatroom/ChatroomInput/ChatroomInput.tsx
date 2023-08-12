@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdSend } from 'react-icons/md';
-import ButtonBusy from '../../../../LoadingSpinner/ButtonBusy';
+import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 
 type ChatroomInputProps = {
     inputMessage: string;

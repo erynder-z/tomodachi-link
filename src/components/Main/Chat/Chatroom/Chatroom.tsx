@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import useInfoCard from '../../../../hooks/useInfoCard';

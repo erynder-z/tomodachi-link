@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 import { fetchPictureList } from '../../../utilities/fetchPictureList';
 import { fetchNumberOfPics } from '../../../utilities/fetchNumberOfPics';
 import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
-import LightBox from '../../LightBox/LightBox';
+import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
+import LightBox from '../../UiElements/LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
 import useDelayUnmount from '../../../hooks/useDelayUnmount';
 

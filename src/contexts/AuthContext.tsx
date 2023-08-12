@@ -6,7 +6,7 @@ import {
 } from '../types/authContextTypes';
 import useInfoCard from '../hooks/useInfoCard';
 import useCurrentUserData from '../hooks/useCurrentUserData';
-import FullscreenLoading from '../components/LoadingSpinner/FullscreenLoading';
+import FullscreenLoading from '../components/UiElements/LoadingSpinner/FullscreenLoading';
 
 // Create an empty context object with default values for authentication state
 const AuthContext = createContext<AuthContextProps>({

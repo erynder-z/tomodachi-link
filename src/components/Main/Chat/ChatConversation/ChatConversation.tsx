@@ -3,7 +3,7 @@ import { ChatConversationType } from '../../../../types/chatConversationType';
 import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import ChatUserListItem from '../ChatConversationListItem/ChatConversationListItem';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 

@@ -7,7 +7,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
-import ConfirmationOverlay from '../../../ConfirmationOverlay/ConfirmationOverlay';
+import ConfirmationOverlay from '../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
 import { unfriendUser } from '../../../../utilities/unfriendUser';
 import useFriendData from '../../../../hooks/useFriendData';
 
