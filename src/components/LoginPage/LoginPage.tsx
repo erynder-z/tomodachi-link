@@ -19,6 +19,7 @@ export default function LoginPage() {
 
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const shouldRenderAscii = useRef(true);
 
@@ -63,6 +64,8 @@ export default function LoginPage() {
     ) => {
         event.preventDefault();
 
+        setIsSubmitting(true);
+
         const usernameInput = event.currentTarget.querySelector(
             '[name="username"]'
         ) as HTMLInputElement;
@@ -83,6 +86,7 @@ export default function LoginPage() {
                 icon: <FaExclamationTriangle />,
             });
         }
+        setIsSubmitting(false);
     };
 
     const handleRegisterClick = () => {
@@ -90,6 +94,8 @@ export default function LoginPage() {
     };
 
     const handleGuestLogin = async () => {
+        setIsSubmitting(true);
+
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(`${serverURL}/api/v1/guest`);
         const data = await response.json();
@@ -106,6 +112,7 @@ export default function LoginPage() {
                 icon: <FaExclamationTriangle />,
             });
         }
+        setIsSubmitting(false);
     };
 
     useEffect(() => {
@@ -144,6 +151,7 @@ export default function LoginPage() {
                                 <>
                                     <LoginForm
                                         handleLoginSubmit={handleLoginSubmit}
+                                        isSubmitting={isSubmitting}
                                     />
                                     <div className="flex flex-col gap-8 w-full">
                                         <RegisterButton
@@ -153,6 +161,7 @@ export default function LoginPage() {
                                         />
                                         <GuestLoginButton
                                             handleGuestLogin={handleGuestLogin}
+                                            isSubmitting={isSubmitting}
                                         />
                                     </div>
                                 </>

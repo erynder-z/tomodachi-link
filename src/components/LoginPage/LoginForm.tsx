@@ -1,12 +1,17 @@
 import React from 'react';
+import ButtonBusy from '../LoadingSpinner/ButtonBusy';
 
 type LoginFormProps = {
     handleLoginSubmit: (
         event: React.FormEvent<HTMLFormElement>
     ) => Promise<void>;
+    isSubmitting: boolean;
 };
 
-export default function LoginForm({ handleLoginSubmit }: LoginFormProps) {
+export default function LoginForm({
+    handleLoginSubmit,
+    isSubmitting,
+}: LoginFormProps) {
     return (
         <div className="max-w-md mx-auto">
             <div>
@@ -54,9 +59,18 @@ export default function LoginForm({ handleLoginSubmit }: LoginFormProps) {
                         </label>
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full relative overflow-hidden bg-blue-500 text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group">
-                            <span className="z-10 relative">Login</span>
+                        <button
+                            disabled={isSubmitting}
+                            className={`w-full relative overflow-hidden  text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group ${
+                                isSubmitting ? 'bg-gray-500' : 'bg-blue-500'
+                            }`}
+                        >
                             <span className="absolute top-0 left-0 h-full w-full bg-blue-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
+                            {isSubmitting ? (
+                                <ButtonBusy />
+                            ) : (
+                                <span className="z-10 relative">Login</span>
+                            )}
                         </button>
                     </div>
                 </div>

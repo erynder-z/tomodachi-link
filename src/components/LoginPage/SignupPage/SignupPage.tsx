@@ -1,6 +1,7 @@
 import { FaExclamationTriangle, FaTimes, FaRegSmile } from 'react-icons/fa';
 import SignupForm from './SignupForm';
 import useInfoCard from '../../../hooks/useInfoCard';
+import { useState } from 'react';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,6 +9,8 @@ type SignupPageProps = {
 
 export default function SignupPage({ setShowSignup }: SignupPageProps) {
     const { setInfo } = useInfoCard();
+
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const signup = async (
         firstName: string,
@@ -65,6 +68,8 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        setIsSubmitting(true);
+
         const firstNameInput = event.currentTarget.querySelector(
             '[name="firstName"]'
         ) as HTMLInputElement;
@@ -112,6 +117,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 icon: <FaExclamationTriangle />,
             });
         }
+        setIsSubmitting(false);
     };
 
     const handleCloseButtonClick = () => {
@@ -128,7 +134,10 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                     >
                         <FaTimes />
                     </button>
-                    <SignupForm handleSubmit={handleSubmit} />
+                    <SignupForm
+                        handleSubmit={handleSubmit}
+                        isSubmitting={isSubmitting}
+                    />
                 </div>
             </div>
         </div>

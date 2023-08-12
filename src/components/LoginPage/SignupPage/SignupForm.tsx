@@ -1,10 +1,15 @@
 import React from 'react';
+import ButtonBusy from '../../LoadingSpinner/ButtonBusy';
 
 type SignupFormProps = {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+    isSubmitting: boolean;
 };
 
-export default function SignupForm({ handleSubmit }: SignupFormProps) {
+export default function SignupForm({
+    handleSubmit,
+    isSubmitting,
+}: SignupFormProps) {
     return (
         <div className="max-w-md mx-auto">
             <div>
@@ -120,9 +125,24 @@ export default function SignupForm({ handleSubmit }: SignupFormProps) {
                         </label>
                     </div>
                     <div className="flex w-full">
-                        <button className="w-full relative overflow-hidden bg-blue-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group">
-                            <span className="z-10 relative">Register</span>
-                            <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
+                        <button
+                            disabled={isSubmitting}
+                            className={`w-full relative overflow-hidden text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group ${
+                                isSubmitting ? 'bg-gray-500' : 'bg-green-500'
+                            }`}
+                        >
+                            <span
+                                className={`absolute top-0 left-0 h-full w-full transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0 ${
+                                    isSubmitting
+                                        ? 'bg-gray-500'
+                                        : 'bg-green-600'
+                                }`}
+                            ></span>
+                            {isSubmitting ? (
+                                <ButtonBusy />
+                            ) : (
+                                <span className="z-10 relative">Register</span>
+                            )}
                         </button>
                     </div>
                 </div>
