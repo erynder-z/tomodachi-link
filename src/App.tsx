@@ -22,7 +22,6 @@ import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/ScrollToTopButton/ScrollToTopButton';
 import OverlayHandler from './components/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
-import MobileUserList from './components/Main/MobileUserList/MobileUserList';
 import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
 import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
@@ -251,10 +250,6 @@ function App() {
                                         }
                                     />
                                 }
-                            />
-                            <Route
-                                path="/users/list"
-                                element={<MobileUserList />}
                             />
                         </Route>
                     </Routes>
