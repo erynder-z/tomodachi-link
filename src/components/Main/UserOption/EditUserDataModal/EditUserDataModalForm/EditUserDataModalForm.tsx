@@ -109,7 +109,7 @@ export default function EditUserDataModalForm({
     };
 
     return (
-        <div className="max-w-md mx-auto">
+        <>
             <div>
                 <h1 className="text-2xl font-semibold">Edit Profile</h1>
             </div>
@@ -242,6 +242,6 @@ export default function EditUserDataModalForm({
                     handleAvatarCreatorClose={handleAvatarCreatorClose}
                 />
             )}
-        </div>
+        </>
     );
 }

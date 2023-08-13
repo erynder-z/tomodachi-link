@@ -6,6 +6,7 @@ import {
     TbLayoutSidebarRightExpand,
     TbLayoutSidebarLeftExpand,
 } from 'react-icons/tb';
+import ThemeToggle from './ThemeToggle/ThemeToggle';
 
 type OptionsCardProps = {
     shouldOverlaysShow: {
@@ -48,6 +49,7 @@ export default function OptionsCard({
                 shouldOverlaysShow={shouldOverlaysShow}
                 setShouldOverlaysShow={setShouldOverlaysShow}
             />
+            <ThemeToggle />
             <LogoutButton />
         </div>
     );
