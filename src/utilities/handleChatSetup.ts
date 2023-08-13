@@ -43,22 +43,26 @@ export const handleChatSetup = (
         const getConversations = async () => {
             const userId = currentUserData._id;
             if (userId && token) {
-                const conversations: ChatConversationType[] =
-                    await fetchChatConversation(token, setInfo);
+                try {
+                    const conversations: ChatConversationType[] =
+                        await fetchChatConversation(token, setInfo);
 
-                const conversationsWithUnreadMessages = conversations
-                    .filter((conversation) =>
-                        conversation.messageStatus.some(
-                            (status) =>
-                                status.member === userId &&
-                                status.hasUnreadMessage
+                    const conversationsWithUnreadMessages = conversations
+                        .filter((conversation) =>
+                            conversation.messageStatus.some(
+                                (status) =>
+                                    status.member === userId &&
+                                    status.hasUnreadMessage
+                            )
                         )
-                    )
-                    .map((conversation) => conversation._id);
+                        .map((conversation) => conversation._id);
 
-                setConversationsWithUnreadMessages(
-                    conversationsWithUnreadMessages
-                );
+                    setConversationsWithUnreadMessages(
+                        conversationsWithUnreadMessages
+                    );
+                } catch (error) {
+                    return;
+                }
             }
         };
         getConversations();

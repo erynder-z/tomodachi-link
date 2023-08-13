@@ -17,6 +17,9 @@ export const fetchChatConversation = async (
             const data = await response.json();
             return data.conversation;
         } else {
+            if (response.status === 403) {
+                return null;
+            }
             handleFetchErrors(response, setInfo);
         }
     } catch (err: unknown) {
