@@ -56,14 +56,9 @@ export const handleChatSetup = (
                     )
                     .map((conversation) => conversation._id);
 
-                if (conversationsWithUnreadMessages.length > 0) {
-                    setConversationsWithUnreadMessages((prevUnreadMessages) => [
-                        ...new Set([
-                            ...prevUnreadMessages,
-                            ...conversationsWithUnreadMessages,
-                        ]),
-                    ]);
-                }
+                setConversationsWithUnreadMessages(
+                    conversationsWithUnreadMessages
+                );
             }
         };
         getConversations();
