@@ -27,11 +27,13 @@ import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
 import { ChatConversationType } from './types/chatConversationType';
 import { handleChatSetup } from './utilities/handleChatSetup';
+import useTheme from './hooks/useTheme';
 
 function App() {
     const { isAuth, token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
+    const { theme } = useTheme();
 
     const [currentView, setCurrentView] = useState<CurrentViewType>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
@@ -130,7 +132,9 @@ function App() {
     }
 
     return (
-        <div className="font-regularFont text-regularText flex flex-col lg:flex-row h-full pb-12 lg:pb-0">
+        <div
+            className={`font-regularFont text-regularText flex flex-col lg:flex-row h-full pb-12 lg:pb-0 ${theme}`}
+        >
             <div className="relative">
                 <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen">
                     <Navbar
