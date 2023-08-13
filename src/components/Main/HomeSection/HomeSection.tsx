@@ -39,7 +39,7 @@ export default function HomeSection({
     useEffect(() => {
         if (shouldSetCurrentView.current === true) {
             setCurrentView('Home');
-            localStorage.setItem('currentView', 'Home');
+            localStorage.setItem('currentViewOdinBook', 'Home');
         }
         return () => {
             shouldSetCurrentView.current = false;

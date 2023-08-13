@@ -65,7 +65,7 @@ export default function UserPage({
     useEffect(() => {
         if (shouldSetCurrentView.current === true) {
             setCurrentView('OtherUserPage');
-            localStorage.setItem('currentView', 'OtherUserPage');
+            localStorage.setItem('currentViewOdinBook', 'OtherUserPage');
         }
         return () => {
             shouldSetCurrentView.current = false;

@@ -53,7 +53,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     useEffect(() => {
         handleFetchFriendsOfFriends();
         setCurrentView('Friends');
-        localStorage.setItem('currentView', 'Friends');
+        localStorage.setItem('currentViewOdinBook', 'Friends');
     }, []);
 
     useEffect(() => {

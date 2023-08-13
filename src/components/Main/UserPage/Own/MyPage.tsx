@@ -50,7 +50,7 @@ export default function MyPage({
     useEffect(() => {
         if (shouldSetCurrentView.current) {
             setCurrentView('MyPage');
-            localStorage.setItem('currentView', 'MyPage');
+            localStorage.setItem('currentViewOdinBook', 'MyPage');
         }
         return () => {
             shouldSetCurrentView.current = false;

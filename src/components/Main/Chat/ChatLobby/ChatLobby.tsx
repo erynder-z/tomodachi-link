@@ -84,7 +84,7 @@ export default function ChatLobby({
     useEffect(() => {
         if (shouldSetCurrentView.current === true) {
             setCurrentView('Chat');
-            localStorage.setItem('currentView', 'Chat');
+            localStorage.setItem('currentViewOdinBook', 'Chat');
 
             return () => {
                 setActiveChat(null);

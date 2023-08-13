@@ -25,7 +25,7 @@ export default function AllFriendsPage({
     useEffect(() => {
         if (shouldSetCurrentView.current === true) {
             setCurrentView('AllFriendsPage');
-            localStorage.setItem('currentView', 'AllFriendsPage');
+            localStorage.setItem('currentViewOdinBook', 'AllFriendsPage');
         }
         return () => {
             shouldSetCurrentView.current = false;

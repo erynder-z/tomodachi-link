@@ -74,7 +74,7 @@ export default function Gallery({
     useEffect(() => {
         if (shouldSetCurrentView.current === true) {
             setCurrentView('Gallery');
-            localStorage.setItem('currentView', 'Gallery');
+            localStorage.setItem('currentViewOdinBook', 'Gallery');
         }
         return () => {
             shouldSetCurrentView.current = false;
