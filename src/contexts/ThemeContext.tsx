@@ -18,7 +18,7 @@ const ThemeContext = createContext<ThemeContextProps>({
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
     const [theme, setTheme] = useState<ThemeType>(
-        (localStorage.getItem('theme') as ThemeType) || 'bright'
+        (localStorage.getItem('themeOdinBook') as ThemeType) || 'bright'
     );
 
     return (

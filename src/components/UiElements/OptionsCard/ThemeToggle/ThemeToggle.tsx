@@ -8,6 +8,7 @@ export default function ThemeToggle() {
     const toggleTheme = () => {
         const newTheme = theme === 'bright' ? 'dark' : 'bright';
         setTheme(newTheme);
+        localStorage.setItem('themeOdinBook', newTheme);
     };
 
     const icon =
