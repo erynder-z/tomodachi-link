@@ -32,7 +32,7 @@ export function ScrollToTopButton() {
 
     return (
         <button
-            className={`fixed bottom-14 right-2 lg:bottom-4 lg:right-4 p-2 z-50 rounded-full bg-gray-800/50 text-white transition-transform duration-300 ${
+            className={`fixed bottom-14 right-2 lg:bottom-4 lg:right-4 p-2 z-50 rounded-full bg-gray-800/50 dark:bg-gray-300/50 text-regularTextDark transition-transform duration-300 ${
                 showButton ? 'scale-100' : 'scale-0'
             }`}
             onClick={handleClick}

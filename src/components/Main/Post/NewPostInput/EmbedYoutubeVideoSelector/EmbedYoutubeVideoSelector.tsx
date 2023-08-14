@@ -50,12 +50,12 @@ export default function EmbedYoutubeVideoSelector({
                 action=""
                 method="POST"
                 onSubmit={handleSubmit}
-                className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-canvas rounded-md text-gray-700 sm:text-lg sm:leading-7 p-4"
+                className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-canvas dark:bg-cardDark rounded-md text-gray-700 dark:text-gray-400 sm:text-lg sm:leading-7 p-4"
             >
                 <div className="relative z-0">
                     <button
                         onClick={handleComponentClose}
-                        className="absolute -top-16 -right-10 bg-canvas hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+                        className="absolute -top-16 -right-10 bg-canvas dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
                     >
                         <FaTimes size="1.25em" />
                     </button>
@@ -68,12 +68,12 @@ export default function EmbedYoutubeVideoSelector({
                         onChange={(event) => {
                             setSelectedURL(event.target.value);
                         }}
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                        className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                         placeholder=" "
                     />
                     <label
                         htmlFor="embedVideoURL"
-                        className="absolute text-sm text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                         Enter URL
                     </label>

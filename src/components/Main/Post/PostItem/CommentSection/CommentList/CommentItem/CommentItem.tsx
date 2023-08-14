@@ -26,7 +26,7 @@ export default function CommentItem({ commentDetails }: CommentItemProps) {
                 src={`data:image/png;base64,${userPic}`}
                 alt="User avatar"
             />
-            <div className="relative flex flex-col bg-gray-200 py-2 px-4">
+            <div className="relative flex flex-col bg-gray-200 dark:bg-gray-700 py-2 px-4">
                 <div className="text-xs">
                     <span className="text-sm font-bold">{displayName}</span> (
                     {time})

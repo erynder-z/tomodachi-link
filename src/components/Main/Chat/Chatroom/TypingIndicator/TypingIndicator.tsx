@@ -7,7 +7,7 @@ type TypingIndicatorProps = {
 
 export default function TypingIndicator({ isTyping }: TypingIndicatorProps) {
     return (
-        <div className="flex justify-end h-4 w-full mt-8 px-4 text-gray-500">
+        <div className="flex justify-end h-4 w-full mt-8 px-4 text-gray-400">
             {isTyping && (
                 <Comment
                     visible={true}

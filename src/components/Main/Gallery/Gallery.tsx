@@ -95,7 +95,7 @@ export default function Gallery({
                 onClick={() => handleImageClick(picture)}
                 className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
             >
-                <span className="text-white text-lg font-bold">
+                <span className="text-regularTextDark text-lg font-bold">
                     <MdOutlineZoomIn size="1.5em" />
                 </span>
             </div>
@@ -109,7 +109,7 @@ export default function Gallery({
                     <LoadingSpinner />
                 </div>
             ) : (
-                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-canvas shadow-lg">
+                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark shadow-lg">
                     <h1 className="font-bold">{numberOfPictures} Pictures</h1>
                     <div className="flex flex-col md:grid grid-cols-3 gap-4">
                         {pictureList}

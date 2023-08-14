@@ -36,7 +36,7 @@ function FriendList({ friendData, userId }: FriendListProps) {
                 <Link
                     to={`/users/${userId}/friends/list`}
                     state={{ friendData: friendData }}
-                    className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mt-4 text-sm"
+                    className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit bg-blue-500 hover:bg-blue-600 text-regularTextDark px-2 py-1 mt-4 text-sm"
                 >
                     See all <MdKeyboardDoubleArrowRight size="1.25em" />
                 </Link>

@@ -21,7 +21,7 @@ export default function NotFriendUserPage({
     const userPicture = convertDatabaseImageToBase64(userpic);
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-canvas">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
             <NotFriendCoverSection
                 firstName={firstName}
                 lastName={lastName}

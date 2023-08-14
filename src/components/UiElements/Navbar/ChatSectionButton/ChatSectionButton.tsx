@@ -11,7 +11,7 @@ export default function ChatSectionButton({
 }: ChatSectionButtonProps) {
     return (
         <div
-            className={`flex self-center cursor-pointer text-cBlack h-full w-full ${
+            className={`flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-full w-full ${
                 isChatDisabled ? 'disabled' : ''
             }`}
         >
@@ -20,7 +20,10 @@ export default function ChatSectionButton({
                     <MdOutlineChatBubbleOutline size="1.5em" />
                 </button>
             ) : (
-                <NavLink to="/chat" className="h-full w-full text-black">
+                <NavLink
+                    to="/chat"
+                    className="h-full w-full text-regularText dark:text-regularTextDark"
+                >
                     <MdOutlineChatBubbleOutline size="1.5em" />
                 </NavLink>
             )}

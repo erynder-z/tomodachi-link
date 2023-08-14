@@ -130,14 +130,14 @@ export default function NewPostInput({
     };
 
     return (
-        <div className="font-roboto flex gap-4 md:p-4 lg:w-full lg:flex-row lg:justify-around  lg:shadow-lg bg-canvas">
+        <div className="font-roboto flex gap-4 md:p-4 lg:w-full lg:flex-row lg:justify-around  lg:shadow-lg bg-canvas dark:bg-canvasDark">
             <form
                 action=""
                 method="POST"
                 onSubmit={handleSubmit}
                 className="flex w-full divide-gray-200"
             >
-                <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 dark:text-gray-300 sm:text-lg sm:leading-7">
                     <PostInputTextarea
                         postText={postText}
                         handleNewPostChange={handleNewPostChange}

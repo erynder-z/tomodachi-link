@@ -6,7 +6,7 @@ export default function FriendSectionButton() {
     return (
         <NavLink
             to="/friends"
-            className="flex self-center cursor-pointer text-cBlack h-full w-full"
+            className="flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-full w-full"
         >
             <button type="button">
                 <MdEmojiPeople size="1.5em" />

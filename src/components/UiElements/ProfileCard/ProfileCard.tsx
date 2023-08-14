@@ -13,7 +13,7 @@ export default function ProfileCard() {
 
     if (!userImage) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card">
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
                 <LoadingSpinner />
             </div>
         );
@@ -21,7 +21,7 @@ export default function ProfileCard() {
 
     return (
         <div className="flex w-full md:shadow-md">
-            <div className="w-full text-center p-4 bg-canvas">
+            <div className="w-full text-center p-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
                 <img
                     className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
                     src={`data:image/png;base64,${userImage}`}

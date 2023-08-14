@@ -19,12 +19,12 @@ export default function ChatroomMessage({ message }: ChatroomMessageProps) {
 
     return (
         <div
-            className={`flex flex-col w-fit max-w-1/2 bg-card px-8 py-4 mb-2 ${
+            className={`flex flex-col w-fit max-w-1/2 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark px-8 py-4 mb-2 ${
                 isMessageFromCurrentUser ? 'mr-auto' : 'ml-auto'
             } ${
                 isMessageFromCurrentUser
-                    ? 'border-l-8 border-cBlue'
-                    : 'border-r-8 border-cRed'
+                    ? 'border-l-8 border-cCyan'
+                    : 'border-r-8 border-cPink'
             }`}
         >
             <span className="text-xs">{date}</span>

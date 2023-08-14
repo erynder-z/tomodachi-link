@@ -6,7 +6,7 @@ export default function HomeSectionButton() {
     return (
         <NavLink
             to="/home"
-            className="flex self-center cursor-pointer text-cBlack h-full w-full"
+            className="flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-full w-full"
         >
             <button type="button">
                 <MdHomeFilled size="1.5em" />

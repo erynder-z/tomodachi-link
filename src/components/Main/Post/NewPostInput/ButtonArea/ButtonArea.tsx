@@ -76,7 +76,7 @@ export default function ButtonArea({
             </button>
             <button
                 disabled={isSubmitting}
-                className={`flex items-center justify-center h-8 w-8 text-white ml-auto text-sm ${
+                className={`flex items-center justify-center h-8 w-8 text-regularTextDark ml-auto text-sm ${
                     !postText || isSubmitting
                         ? 'bg-gray-500 hover:bg-gray-600'
                         : 'bg-blue-500 hover:bg-blue-600'

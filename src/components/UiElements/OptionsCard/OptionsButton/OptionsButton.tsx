@@ -34,7 +34,7 @@ export default function OptionsButton({
         <button
             type="button"
             onClick={handleButtonClick}
-            className="cursor-pointer hover:drop-shadow-md hover:text-blue-400"
+            className="cursor-pointer hover:drop-shadow-md "
         >
             <TbSettings size="1.5em" />
         </button>

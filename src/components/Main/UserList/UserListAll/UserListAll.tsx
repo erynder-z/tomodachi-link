@@ -55,7 +55,7 @@ export default function UserListAll() {
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
-        <div className="flex flex-col w-full p-4 bg-canvas">
+        <div className="flex flex-col w-full p-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
             <h1 className="text-center font-bold">All users:</h1>
             {loading ? (
                 <div className="flex justify-center items-center w-full py-4">
@@ -68,7 +68,7 @@ export default function UserListAll() {
                         users.length < numberOfUsers - 1 && (
                             <button
                                 onClick={handleButtonClick}
-                                className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mt-4 text-sm"
+                                className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-regularTextDark px-2 py-1 mt-4 text-sm"
                             >
                                 Get more
                             </button>

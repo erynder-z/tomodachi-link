@@ -55,7 +55,7 @@ export default function ChatOnlineUserlistItem({
     return (
         <div
             onClick={handleInitializeChat}
-            className="flex items-center w-full gap-4 py-2 text-regularText cursor-pointer"
+            className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark cursor-pointer"
         >
             <div
                 className={`w-3 h-3 rounded-full bg-${indicatorColor}-500`}

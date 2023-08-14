@@ -98,7 +98,7 @@ export default function CommentInput({
             <form onSubmit={handleSubmit}>
                 <div className="flex gap-4">
                     <textarea
-                        className="w-full p-2 mb-2 bg-gray-200 text-sm focus:outline-none focus:shadow-outline"
+                        className="w-full p-2 mb-2 bg-gray-200 dark:bg-gray-600 text-sm focus:outline-none focus:shadow-outline"
                         placeholder="Write a comment..."
                         value={commentText}
                         onChange={handleInputChange}
@@ -116,7 +116,7 @@ export default function CommentInput({
                 </div>
                 <button
                     disabled={isSubmitting || !commentText}
-                    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold h-8 w-12 py-2 px-4 ${
+                    className={`bg-blue-500 hover:bg-blue-700 text-regularTextDark font-bold h-8 w-12 py-2 px-4 ${
                         !commentText || isSubmitting
                             ? 'bg-gray-500 hover:bg-gray-600'
                             : 'bg-blue-500 hover:bg-blue-600'

@@ -12,7 +12,7 @@ export default function SearchButton({
         <button
             type="button"
             onClick={handleSearchButtonClick}
-            className="flex self-center cursor-pointer text-cBlack h-full w-full"
+            className="flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-full w-full"
         >
             <MdSearch size="1.5em" />
         </button>
