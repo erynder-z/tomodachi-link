@@ -34,7 +34,7 @@ export default function OnlineUsersList({
     ));
 
     return (
-        <div className="flex flex-col w-full p-4 bg-canvas dark:bg-canvasDark">
+        <div className="flex flex-col w-full p-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
             <h1 className="text-center font-bold">Friends</h1>
             {userList}
         </div>
