@@ -20,7 +20,7 @@ export default function ChangeCoverMenu({
                 shouldMenuShow
                     ? 'animate-popInAnimation'
                     : 'animate-popOutAnimation'
-            } absolute right-4 top-4 z-10 flex flex-col bg-white border border-gray-200 text-xs`}
+            } absolute right-4 top-4 z-10 flex flex-col bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark border border-gray-200 text-xs`}
         >
             <div className="flex">
                 <span className="flex justify-center items-center p-2">

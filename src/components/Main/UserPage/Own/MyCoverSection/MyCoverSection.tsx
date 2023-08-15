@@ -110,7 +110,7 @@ export default function MyCoverSection({
                 {!showMenu && (
                     <button
                         onClick={handleChangeCoverImage}
-                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-white px-4 py-2 text-xs bg-opacity-75"
+                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark px-4 py-2 text-xs "
                     >
                         Change cover image <FaImages size="1.5em" />
                     </button>
