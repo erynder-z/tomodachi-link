@@ -12,19 +12,20 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     const getBgColorClass = (typeOfInfo: string | undefined) => {
         switch (typeOfInfo) {
             case 'good':
-                return 'bg-green-500';
+                return 'bg-green-700/90';
             case 'bad':
-                return 'bg-red-500';
+                return 'bg-rose-900/90';
             case 'neutral':
-                return 'bg-yellow-500';
+                return 'bg-fuchsia-900/90';
             case 'greeting':
-                return 'bg-slate-500';
+                return 'bg-slate-600/90';
             default:
-                return 'bg-gray-500';
+                return 'bg-slate-600/90';
         }
     };
 
-    const bgColorClass = getBgColorClass(info?.typeOfInfo);
+    const typeOfInfo = info?.typeOfInfo;
+    const bgColorClass = getBgColorClass(typeOfInfo);
 
     useEffect(() => {
         if (info) {
@@ -41,13 +42,24 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     return (
         <div className="fixed top-full w-full z-50">
             <div
-                className={`fixed top-0 w-full ${bgColorClass} text-white p-4 flex items-center justify-between transform transition-transform duration-500 ease-in-out ${
+                className={`fixed top-0 w-full ${bgColorClass} text-regularTextDark text-md md:text-3xl p-4 md:py-8 md:px-16 flex items-center justify-between transform transition-transform duration-250 ease-in-out ${
                     isVisible ? '-translate-y-0' : '-translate-y-full'
                 }`}
             >
-                {info?.icon}
-                <h2 className="text-lg font-medium">{info?.message}</h2>
-                <button onClick={() => setIsVisible(false)} className="ml-4">
+                <span
+                    className={`${
+                        typeOfInfo === 'greeting' ? 'text-amber-400' : ' '
+                    }`}
+                >
+                    {info?.icon}
+                </span>
+                <h2 className="text-sm md:text-2xl font-semibold text-center">
+                    {info?.message}
+                </h2>
+                <button
+                    onClick={() => setIsVisible(false)}
+                    className="text-red-400 hover:text-red-500 ml-4"
+                >
                     <FaTimes />
                 </button>
             </div>
