@@ -100,7 +100,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
 
     if (loading) {
         return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-canvas dark:bg-cardDark">
+            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-canvas dark:bg-canvasDark">
                 <h1 className="font-bold">Getting friend data...</h1>
                 <LoadingSpinner />
             </div>
@@ -108,7 +108,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark shadow-lg">
             <h1 className="text-center text-xl font-bold">Friends</h1>
             <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-20 md:gap-0 lg:gap-8 mt-12 mb-8">
                 {friendProfileCardList}

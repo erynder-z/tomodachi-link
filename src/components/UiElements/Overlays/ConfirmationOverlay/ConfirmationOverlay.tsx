@@ -28,7 +28,7 @@ const ConfirmationOverlay = ({
                 shouldConfirmDialogShow
                     ? 'animate-inAnimation'
                     : 'animate-outAnimation'
-            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80`}
+            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-700/90`}
         >
             <h2 className="flex flex-col items-center gap-4 text-white text-xl font-semibold">
                 {dialogInfo?.icon && dialogInfo?.icon}
