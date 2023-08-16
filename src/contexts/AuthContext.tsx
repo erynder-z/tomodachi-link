@@ -87,7 +87,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         setIsAuth(false);
         setInfo(null);
         setCurrentUserData(null);
-        window.localStorage.clear();
+        localStorage.removeItem('currentViewOdinBook');
+        localStorage.removeItem('jwtOdinBook');
     };
 
     return (
