@@ -21,7 +21,7 @@ export default function ProfileCard() {
 
     return (
         <div className="flex w-full md:shadow-md">
-            <div className="w-full text-center p-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
+            <div className="w-full text-center p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
                 <img
                     className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
                     src={`data:image/png;base64,${userImage}`}

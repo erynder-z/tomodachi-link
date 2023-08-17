@@ -16,7 +16,7 @@ export default function ChatConversationList({
     currentUserId,
 }: ChatConversationListProps) {
     return (
-        <div className="flex md:h-fit sticky top-0 md:top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-screen md:w-full p-2 lg:p-0 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
+        <div className="flex md:h-fit sticky top-0 md:top-2 md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-screen md:w-full p-2 lg:p-0 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
             <h1 className="text-center font-bold">Conversations</h1>
             {conversations.map((conv, index) => {
                 const hasUnreadMessage =

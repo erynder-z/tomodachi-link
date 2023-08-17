@@ -18,7 +18,7 @@ export default function PostMenu({
                 shouldMenuShow
                     ? 'animate-popInAnimation'
                     : 'animate-popOutAnimation'
-            } absolute top-8 right-0 z-10 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark border shadow-lg`}
+            } absolute top-8 right-0 z-10 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark border shadow-lg`}
         >
             <ul className="flex flex-col gap-4 ">
                 <li>

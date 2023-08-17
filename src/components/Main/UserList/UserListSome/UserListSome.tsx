@@ -35,7 +35,7 @@ export default function UserListSome() {
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
-        <div className="flex flex-col w-full p-4 bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark">
+        <div className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
             <h1 className="text-center font-bold">People you may know:</h1>
             {userList}
             {loading && (

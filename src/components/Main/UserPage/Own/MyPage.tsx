@@ -68,11 +68,11 @@ export default function MyPage({
     }, [componentLoading]);
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4  bg-canvas dark:bg-canvasDark text-regularText dark:text-regularTextDark shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4  bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg">
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
-                } flex-col justify-center items-center w-full h-[calc(100vh_-_7rem)] py-4 bg-canvas dark:bg-canvasDark `}
+                } flex-col justify-center items-center w-full h-[calc(100vh_-_7rem)] py-4 bg-card dark:bg-cardDark `}
             >
                 <h1 className="font-bold">getting user data!</h1>
                 <LoadingSpinner />

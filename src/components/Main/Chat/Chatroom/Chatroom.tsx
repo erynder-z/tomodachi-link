@@ -204,14 +204,14 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas dark:bg-canvasDark">
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
                 <LoadingSpinner />
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full pb-4 bg-background2 dark:bg-canvasDark shadow-lg max-h-full ">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full pb-4 bg-background2 dark:bg-cardDark shadow-lg max-h-full ">
             <ChatroomHeader
                 currentUserData={currentUserData}
                 partnerData={partnerData}

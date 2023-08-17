@@ -170,7 +170,7 @@ export default function EditPostInput({
                     : 'animate-outAnimation'
             } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-700/90 px-4 py-8`}
         >
-            <div className="relative flex gap-4 px-4 py-8 w-full lg:w-2/6 lg:flex-row lg:justify-around lg:shadow-lg bg-canvas dark:bg-canvasDark">
+            <div className="relative flex gap-4 px-4 py-8 w-full lg:w-2/6 lg:flex-row lg:justify-around lg:shadow-lg bg-card dark:bg-cardDark">
                 <button
                     onClick={handleComponentClose}
                     className="absolute -top-8 -right-0 md:-right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
@@ -191,7 +191,7 @@ export default function EditPostInput({
                         />
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {dbImage && (
-                                <div className="bg-canvas dark:bg-canvasDark py-2 md:py-4">
+                                <div className="bg-card dark:bg-cardDark py-2 md:py-4">
                                     <PostEditImageSection
                                         handleImageDelete={handleImageDelete}
                                         convertedImage={convertDatabaseImageToBase64(
@@ -201,7 +201,7 @@ export default function EditPostInput({
                                 </div>
                             )}
                             {dbGif && (
-                                <div className="bg-canvas dark:bg-canvasDark py-2 md:py-4">
+                                <div className="bg-card dark:bg-cardDark py-2 md:py-4">
                                     <PostEditGifSection
                                         handleGifDelete={handleGifDelete}
                                         dbGif={dbGif}
@@ -209,7 +209,7 @@ export default function EditPostInput({
                                 </div>
                             )}
                             {dbEmbeddedVideoID && (
-                                <div className="bg-canvas dark:bg-canvasDark py-2 md:py-4">
+                                <div className="bg-card dark:bg-cardDark py-2 md:py-4">
                                     <PostEditEmbeddedYoutubeVideo
                                         handleVideoDelete={handleVideoDelete}
                                         dbEmbeddedVideoID={dbEmbeddedVideoID}

@@ -97,18 +97,18 @@ export default function ChatLobby({
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas dark:bg-canvasDark">
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
                 <LoadingSpinner />
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-canvas dark:bg-canvasDark shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-card dark:bg-cardDark shadow-lg">
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
-                } flex-col justify-center items-center w-full h-[calc(100vh_-_7rem)] py-4 bg-canvas dark:bg-canvasDark`}
+                } flex-col justify-center items-center w-full h-[calc(100vh_-_7rem)] py-4 bg-card dark:bg-cardDark`}
             >
                 <h1 className="font-bold">getting chat data!</h1>
                 <LoadingSpinner />
@@ -116,7 +116,7 @@ export default function ChatLobby({
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } flex flex-col grid-cols-[1fr,2fr] h-full gap-8 bg-canvas dark:bg-canvasDark`}
+                } flex flex-col grid-cols-[1fr,2fr] h-full gap-8 bg-card dark:bg-cardDark`}
             >
                 <ChatConversationList
                     conversations={conversations}

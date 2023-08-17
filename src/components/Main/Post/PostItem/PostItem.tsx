@@ -101,14 +101,14 @@ export default React.memo(function PostItem({
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas dark:bg-canvasDark">
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
                 <LoadingSpinner />
             </div>
         );
     }
 
     return (
-        <div className="font-roboto animate-popInAnimation flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas dark:bg-canvasDark">
+        <div className="font-roboto animate-popInAnimation flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
             <div className="flex justify-between">
                 <PostUserInfoSection
                     userPic={userPic}

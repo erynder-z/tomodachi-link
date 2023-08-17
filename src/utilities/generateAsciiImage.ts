@@ -113,16 +113,16 @@ export function generateAsciiImage(
     canvasId: string,
     cellSize: number
 ) {
-    const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d', {
+    const card = document.getElementById(canvasId) as HTMLCanvasElement;
+    const ctx = card.getContext('2d', {
         willReadFrequently: true,
     }) as CanvasRenderingContext2D;
 
     const image1 = new Image();
     image1.src = baseImage;
     image1.onload = function initialize() {
-        canvas.width = image1.width;
-        canvas.height = image1.height;
+        card.width = image1.width;
+        card.height = image1.height;
         const symbols = [
             '@',
             '*',

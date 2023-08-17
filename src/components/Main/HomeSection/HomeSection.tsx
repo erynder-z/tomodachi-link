@@ -48,7 +48,7 @@ export default function HomeSection({
 
     if (loading) {
         return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-canvas dark:bg-cardDark text-regularText dark:text-regularTextDark">
+            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
                 <h1 className="font-bold">Getting feed...</h1>
                 <LoadingSpinner />
             </div>

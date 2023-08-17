@@ -14,7 +14,7 @@ export default function ChatroomHeader({
     partnerData,
 }: ChatroomHeaderProps) {
     return (
-        <header className="flex justify-around py-4 sticky -top-4 bg-background2 dark:bg-canvasDark text-regularText dark:text-regularTextDark shadow-md">
+        <header className="flex justify-around py-4 sticky -top-4 bg-background2 dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-md">
             <div className="flex flex-col justify-center items-center">
                 <img
                     loading="lazy"

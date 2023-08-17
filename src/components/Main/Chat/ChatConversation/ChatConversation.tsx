@@ -46,7 +46,7 @@ export default function ChatConversation({
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-canvas dark:bg-cardDark">
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
                 <LoadingSpinner />
             </div>
         );

@@ -50,12 +50,12 @@ export default function EmbedYoutubeVideoSelector({
                 action=""
                 method="POST"
                 onSubmit={handleSubmit}
-                className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-canvas dark:bg-cardDark rounded-md text-gray-700 dark:text-gray-400 sm:text-lg sm:leading-7 p-4"
+                className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-card dark:bg-cardDark rounded-md text-gray-700 dark:text-gray-400 sm:text-lg sm:leading-7 p-4"
             >
                 <div className="relative z-0">
                     <button
                         onClick={handleComponentClose}
-                        className="absolute -top-16 -right-10 bg-canvas dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+                        className="absolute -top-16 -right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
                     >
                         <FaTimes size="1.25em" />
                     </button>
