@@ -59,75 +59,88 @@ export default function EditPostInput({
     const [shouldVideoBeDeleted, setShouldVideoBeDeleted] =
         useState<boolean>(false);
 
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
     const { username } = currentUserData || {};
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (token) {
-            const formData = new FormData();
-            formData.append('newPost', postText);
-            formData.append(
-                'shouldImageBeDeleted',
-                shouldImageBeDeleted.toString()
-            );
-            formData.append(
-                'shouldGifBeDeleted',
-                shouldGifBeDeleted.toString()
-            );
-            formData.append(
-                'shouldVideoBeDeleted',
-                shouldVideoBeDeleted.toString()
-            );
-            if (selectedImage) {
-                const resizedFile = await resizeFile(selectedImage);
-                formData.append('imagePicker', resizedFile as File);
-            }
-            if (youtubeID) {
-                formData.append('embeddedVideoID', youtubeID);
-            }
-            if (gif) {
-                formData.append('gifUrl', gif.url);
-            }
+            setIsSubmitting(true);
 
-            const serverURL = import.meta.env.VITE_SERVER_URL;
-            const id = postDetails?._id;
-            const response = await fetch(`${serverURL}/api/v1/post/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                body: formData,
-            });
-            if (response.ok) {
-                setInfo({
-                    typeOfInfo: 'good',
-                    message: 'Post updated successfully!',
-                    icon: <FaRegSmile />,
-                });
-                setPostText('');
-                setSelectedImage(undefined);
-                setYoutubeID(undefined);
-                setGif(undefined);
-                if (onPostChange) {
-                    onPostChange();
+            try {
+                const formData = new FormData();
+                formData.append('newPost', postText);
+                formData.append(
+                    'shouldImageBeDeleted',
+                    shouldImageBeDeleted.toString()
+                );
+                formData.append(
+                    'shouldGifBeDeleted',
+                    shouldGifBeDeleted.toString()
+                );
+                formData.append(
+                    'shouldVideoBeDeleted',
+                    shouldVideoBeDeleted.toString()
+                );
+                if (selectedImage) {
+                    const resizedFile = await resizeFile(selectedImage);
+                    formData.append('imagePicker', resizedFile as File);
                 }
-            } else {
-                const data = await response.json();
-                const errorMessages = data.errors;
-                const message = errorMessages
-                    .map((error: { msg: string }) => error.msg)
-                    .join(', ');
+                if (youtubeID) {
+                    formData.append('embeddedVideoID', youtubeID);
+                }
+                if (gif) {
+                    formData.append('gifUrl', gif.url);
+                }
 
+                const serverURL = import.meta.env.VITE_SERVER_URL;
+                const id = postDetails?._id;
+                const response = await fetch(`${serverURL}/api/v1/post/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: formData,
+                });
+                if (response.ok) {
+                    setInfo({
+                        typeOfInfo: 'good',
+                        message: 'Post updated successfully!',
+                        icon: <FaRegSmile />,
+                    });
+                    setPostText('');
+                    setSelectedImage(undefined);
+                    setYoutubeID(undefined);
+                    setGif(undefined);
+                    if (onPostChange) {
+                        onPostChange();
+                    }
+                } else {
+                    const data = await response.json();
+                    const errorMessages = data.errors;
+                    const message = errorMessages
+                        .map((error: { msg: string }) => error.msg)
+                        .join(', ');
+
+                    setInfo({
+                        typeOfInfo: 'bad',
+                        message: message,
+                        icon: <FaExclamationTriangle />,
+                    });
+
+                    throw new Error(
+                        `Error: ${response.status} ${response.statusText}`
+                    );
+                }
+            } catch (error) {
                 setInfo({
                     typeOfInfo: 'bad',
-                    message: message,
+                    message: 'An error occurred',
                     icon: <FaExclamationTriangle />,
                 });
-
-                throw new Error(
-                    `Error: ${response.status} ${response.statusText}`
-                );
             }
+            setIsSubmitting(false);
         }
     };
 
@@ -236,6 +249,7 @@ export default function EditPostInput({
                             viewMode={viewMode}
                             setViewMode={setViewMode}
                             postText={postText}
+                            isSubmitting={isSubmitting}
                         />
                     </div>
                 </form>
