@@ -56,11 +56,10 @@ export default function FriendCard({ friendData }: FriendCardProps) {
                 />
             )}
             <div className="w-5/6 lg:w-44 mx-auto">
-                <div className="w-full flex flex-col text-center p-4 bg-card dark:bg-cardDark shadow-lg">
-                    {' '}
+                <div className="w-full flex flex-col text-center p-4 bg-card dark:bg-cardDark shadow-lg rounded md:rounded-lg">
                     <section>
                         <img
-                            className="w-20 h-20 object-cover mx-auto relative -top-12 border-4 border-cCyan"
+                            className="w-20 h-20 object-cover mx-auto relative -top-12 border-4 border-cCyan rounded"
                             src={`data:image/png;base64,${getCorrectUserpicFormat(
                                 userpic
                             )}`}

@@ -127,7 +127,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
     return (
         <div className="animate-inAnimation fixed inset-0 z-50 flex justify-center items-center bg-opacity-80">
             <div className="flex justify-center items-center w-full h-full">
-                <div className="relative w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:p-10">
+                <div className="relative w-5/6 sm:w-2/3 lg:w-1/3 px-4 lg:py-10 bg-white shadow-lg sm:p-10 rounded lg:rounded-lg">
                     <button
                         onClick={handleCloseButtonClick}
                         className="absolute top-4 right-4"

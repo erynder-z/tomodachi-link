@@ -104,7 +104,7 @@ export default function ChatLobby({
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-card dark:bg-cardDark shadow-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg">
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
@@ -116,7 +116,7 @@ export default function ChatLobby({
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } flex flex-col grid-cols-[1fr,2fr] h-full gap-8 bg-card dark:bg-cardDark`}
+                } flex flex-col grid-cols-[1fr,2fr] h-full gap-8 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
             >
                 <ChatConversationList
                     conversations={conversations}

@@ -33,7 +33,7 @@ export default function AllFriendsPage({
     }, []);
 
     return (
-        <div className="flex flex-col justify-center items-center w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
+        <div className="flex flex-col justify-center items-center w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">
             <h1 className="font-bold mb-4">All friends</h1>
             <div className="flex flex-col md:grid grid-cols-4 gap-4">
                 {completeFriendList}

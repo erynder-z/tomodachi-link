@@ -91,7 +91,7 @@ export default function OverlayHandler({
                         shouldOverlaysShow.mobileOptionsModal
                             ? 'animate-popInAnimation'
                             : 'animate-popOutAnimation'
-                    } lg:hidden absolute bottom-0 right-0 mt-2 p-2 bg-card dark:bg-cardDark shadow-xl z-10`}
+                    } lg:hidden absolute bottom-0 right-0 mt-2 p-2 bg-card dark:bg-cardDark shadow-xl z-10 rounded lg:rounded-lg`}
                 >
                     <OptionsCard
                         shouldOverlaysShow={shouldOverlaysShow}

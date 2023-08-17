@@ -110,7 +110,7 @@ export default function MyCoverSection({
                 {!showMenu && (
                     <button
                         onClick={handleChangeCoverImage}
-                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark px-4 py-2 text-xs "
+                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
                     >
                         Change cover image <FaImages size="1.5em" />
                     </button>
@@ -124,7 +124,7 @@ export default function MyCoverSection({
                 )}
                 {isSaveButtonShown && (
                     <button
-                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 border-2 border-white"
+                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 border-2 border-white rounded lg:rounded-lg"
                         style={{
                             backgroundColor: `${colorPalette[0]?.hex}`,
                             color: textColor,

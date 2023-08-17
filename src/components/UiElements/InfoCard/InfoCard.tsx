@@ -42,7 +42,7 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     return (
         <div className="fixed top-full w-full z-50">
             <div
-                className={`fixed top-0 w-full ${bgColorClass} text-regularTextDark text-md md:text-3xl p-4 md:py-8 md:px-16 flex items-center justify-between transform transition-transform duration-250 ease-in-out ${
+                className={`fixed top-0 w-full ${bgColorClass} text-regularTextDark rounded-b lg:rounded-b-lg text-md md:text-3xl p-4 md:py-8 md:px-16 flex items-center justify-between transform transition-transform duration-250 ease-in-out ${
                     isVisible ? '-translate-y-0' : '-translate-y-full'
                 }`}
             >

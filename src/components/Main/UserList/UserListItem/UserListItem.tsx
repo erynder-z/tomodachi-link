@@ -13,7 +13,7 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
     return (
         <Link
             to={`/users/${_id}`}
-            className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark"
+            className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <img
                 loading="lazy"

@@ -211,7 +211,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full pb-4 bg-background2 dark:bg-cardDark shadow-lg max-h-full ">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full pb-4 bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
             <ChatroomHeader
                 currentUserData={currentUserData}
                 partnerData={partnerData}

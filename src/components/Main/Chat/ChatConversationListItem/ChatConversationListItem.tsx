@@ -12,7 +12,7 @@ export default function ChatConversationListItem({
     const { firstName, lastName, userpic } = listItemData || {};
 
     return (
-        <div className="flex items-center w-full gap-4 p-2 text-regularText dark:text-regularTextDark bg-card/50 dark:bg-cardDark/60 hover:bg-cBlue/50 rounded-3xl">
+        <div className="flex items-center w-full gap-4 p-2 text-regularText dark:text-regularTextDark bg-card dark:bg-cardDark hover:bg-cBlue dark:hover:bg-cBlue rounded-3xl">
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"

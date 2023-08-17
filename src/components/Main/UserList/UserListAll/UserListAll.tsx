@@ -55,7 +55,7 @@ export default function UserListAll() {
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
-        <div className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
+        <div className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">
             <h1 className="text-center font-bold">All users:</h1>
             {loading ? (
                 <div className="flex justify-center items-center w-full py-4">

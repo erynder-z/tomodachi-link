@@ -24,9 +24,12 @@ export default function AllFiendsPageItem({
     };
 
     return (
-        <div onClick={handleUserClick} className="cursor-pointer">
+        <div
+            onClick={handleUserClick}
+            className="cursor-pointer rounded lg:rounded-lg"
+        >
             <img
-                className="w-40 h-auto aspect-square object-cover shadow-lg"
+                className="w-40 h-auto aspect-square object-cover shadow-lg rounded"
                 src={`data:image/png;base64,${userpic.data}`}
                 alt="User avatar"
             />

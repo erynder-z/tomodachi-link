@@ -53,7 +53,7 @@ export default function PictureList({ userId }: PictureListProps) {
     const pictureList = pictures?.map((picture) => (
         <div key={uuidv4()} className="relative flex">
             <img
-                className="h-auto aspect-square object-cover shadow-lg"
+                className="h-auto aspect-square object-cover shadow-lg rounded"
                 src={`data:image/png;base64,${convertDatabaseImageToBase64(
                     picture
                 )}`}
@@ -61,7 +61,7 @@ export default function PictureList({ userId }: PictureListProps) {
             />
             <div
                 onClick={() => handleImageClick(picture)}
-                className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+                className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer rounded"
             >
                 <span className="text-white text-lg font-bold">
                     <MdOutlineZoomIn size="1.5em" />

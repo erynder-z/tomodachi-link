@@ -144,7 +144,7 @@ export default function LoginPage() {
                 ) : (
                     <>
                         <GreetingSection />
-                        <div className="animate-inAnimation h-3/5 w-5/6 md:w-1/2 mx-auto px-4 lg:py-10 bg-white shadow-lg sm:p-10">
+                        <div className="animate-inAnimation h-3/5 w-5/6 md:w-1/2 mx-auto px-4 lg:py-10 bg-white shadow-lg sm:p-10 rounded lg:rounded-lg">
                             {isVerifying ? (
                                 <VerifyingInfoBox />
                             ) : (
