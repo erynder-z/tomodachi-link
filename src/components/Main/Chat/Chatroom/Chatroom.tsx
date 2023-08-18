@@ -116,15 +116,6 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                     text: inputMessage,
                 });
 
-                setMessages((prevMessages) => [
-                    ...prevMessages,
-                    {
-                        senderId: userId,
-                        receiverId: partnerId,
-                        text: inputMessage,
-                    },
-                ]);
-
                 handleMarkMessageUnreadInDB();
                 setInputMessage('');
             } catch (error) {
