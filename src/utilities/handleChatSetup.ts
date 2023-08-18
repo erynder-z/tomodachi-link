@@ -40,13 +40,13 @@ export const handleChatSetup = (
     };
 
     const checkForUnreadOfflineMessages = () => {
+        setConversationsWithUnreadMessages([]);
         const getConversations = async () => {
             const userId = currentUserData._id;
             if (userId && token) {
                 try {
                     const conversations: ChatConversationType[] =
                         await fetchChatConversation(token, setInfo);
-
                     const conversationsWithUnreadMessages = conversations
                         .filter((conversation) =>
                             conversation.messageStatus.some(
