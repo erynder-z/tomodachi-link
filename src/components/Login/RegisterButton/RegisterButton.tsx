@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdPersonAddAlt1 } from 'react-icons/md';
 
 type RegisterButtonProps = {
     handleRegisterClick: () => void;
@@ -10,10 +11,16 @@ export default function RegisterButton({
     return (
         <button
             onClick={handleRegisterClick}
-            className="w-full relative overflow-hidden bg-green-500 text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group"
+            className="relative overflow-hidden w-full bg-green-600 hover:bg-green-500 text-white text-xl font-bold rounded transition duration-500 ease-in-out"
         >
-            <span className="absolute top-0 left-0 h-full w-full bg-green-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0"></span>
-            <span className="z-10 relative">Create account</span>{' '}
+            <span className="z-10 relative w-full flex justify-center items-center group p-4">
+                <span className="transition-all duration-300 group-hover:pr-4">
+                    Create account
+                    <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
+                        <MdPersonAddAlt1 size="1.5em" />
+                    </span>
+                </span>
+            </span>
         </button>
     );
 }

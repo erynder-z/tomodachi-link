@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 type GuestLoginButtonProps = {
     handleGuestLogin: () => void;
@@ -14,19 +15,23 @@ export default function GuestLoginButton({
         <button
             disabled={isSubmitting}
             onClick={handleGuestLogin}
-            className={`w-full relative overflow-hidden  text-white text-xl font-bold py-2 px-4 rounded transition duration-300 ease-in-out group ${
-                isSubmitting ? 'bg-gray-500' : 'bg-amber-500'
+            className={`relative overflow-hidden w-full bg-indigo-900 text-white text-xl font-bold rounded transition duration-500 ease-in-out ${
+                isSubmitting
+                    ? 'bg-gray-500 cursor-not-allowed'
+                    : 'hover:bg-indigo-700'
             }`}
         >
-            <span
-                className={`absolute top-0 left-0 h-full w-full bg-amber-600 transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0 ${
-                    isSubmitting ? 'bg-gray-600' : 'bg-amber-600'
-                }`}
-            ></span>
             {isSubmitting ? (
                 <ButtonBusy />
             ) : (
-                <span className="z-10 relative">Login as guest</span>
+                <span className="z-10 relative w-full flex justify-center items-center group p-4">
+                    <span className="transition-all duration-300 group-hover:pr-4">
+                        Login as guest
+                        <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
+                            <MdKeyboardDoubleArrowRight size="1.5em" />
+                        </span>
+                    </span>
+                </span>
             )}
         </button>
     );

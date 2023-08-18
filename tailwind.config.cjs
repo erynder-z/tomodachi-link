@@ -19,6 +19,9 @@ module.exports = {
                 navbarDark: '#23303c',
                 regularText: '#020202',
                 regularTextDark: '#e4e6ea',
+                highlight: '#0598BC',
+                highlightDark: '#BC05BC',
+                button: '#0598BC',
                 cBlack: '#020202',
                 cRed: '#CD3232',
                 cGreen: '#00BC00',
@@ -32,7 +35,6 @@ module.exports = {
                 inAnimation: {
                     '0%': {
                         opacity: '0',
-                        backgroundColor: 'red',
                     },
                     '100%': {
                         opacity: '1',
@@ -41,7 +43,6 @@ module.exports = {
                 outAnimation: {
                     '0%': {
                         opacity: '1',
-                        backgroundColor: 'red',
                     },
                     '100%': {
                         opacity: '0',

@@ -24,7 +24,7 @@ export default function LogoutButton() {
         <button
             type="button"
             onClick={handleLogoutClick}
-            className="cursor-pointer hover:drop-shadow-md hover:text-red-500"
+            className="cursor-pointer hover:drop-shadow-md hover:text-red-500 duration-300"
         >
             <TbLogout size="1.5em" />
         </button>

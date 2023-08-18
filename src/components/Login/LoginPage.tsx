@@ -144,7 +144,7 @@ export default function LoginPage() {
                 ) : (
                     <>
                         <GreetingSection />
-                        <div className="animate-inAnimation h-3/5 w-5/6 md:w-1/2 mx-auto px-4 lg:py-10 bg-white shadow-lg sm:p-10 rounded lg:rounded-lg">
+                        <div className="animate-inAnimation  w-5/6 md:w-1/2 mx-auto  bg-white shadow-lg p-4 lg:p-8 rounded lg:rounded-lg">
                             {isVerifying ? (
                                 <VerifyingInfoBox />
                             ) : (
@@ -153,15 +153,18 @@ export default function LoginPage() {
                                         handleLoginSubmit={handleLoginSubmit}
                                         isSubmitting={isSubmitting}
                                     />
-                                    <div className="flex flex-col gap-8 w-full">
+                                    <div className="flex flex-col w-full">
+                                        <GuestLoginButton
+                                            handleGuestLogin={handleGuestLogin}
+                                            isSubmitting={isSubmitting}
+                                        />
+                                        <span className="mt-8">
+                                            Don't have an account?
+                                        </span>
                                         <RegisterButton
                                             handleRegisterClick={
                                                 handleRegisterClick
                                             }
-                                        />
-                                        <GuestLoginButton
-                                            handleGuestLogin={handleGuestLogin}
-                                            isSubmitting={isSubmitting}
                                         />
                                     </div>
                                 </>

@@ -79,7 +79,7 @@ export default function Navbar({
                     <ChatSectionButton isChatDisabled={isChatDisabled} />
                     {conversationsWithUnreadMessages.length > 0 && (
                         <div className="absolute -bottom-1 -right-1">
-                            <div className="w-3 h-3 bg-fuchsia-500 rounded-full animate-pulse   " />
+                            <div className="w-3 h-3 bg-highlight dark:bg-highlightDark rounded-full animate-pulse   " />
                         </div>
                     )}
                 </div>
