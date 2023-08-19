@@ -76,14 +76,14 @@ export default function ButtonArea({
             </button>
             <button
                 disabled={isSubmitting}
-                className={`flex items-center justify-center h-8 w-8 text-regularTextDark ml-auto text-sm ${
+                className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm ${
                     !postText || isSubmitting
                         ? 'bg-gray-500 hover:bg-gray-600'
-                        : 'bg-blue-500 hover:bg-blue-600'
+                        : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover'
                 }`}
                 title={postText ? undefined : 'Please enter a message'}
             >
-                {isSubmitting ? <ButtonBusy /> : <MdSend />}
+                {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
             </button>
         </div>
     );

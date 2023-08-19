@@ -21,6 +21,8 @@ module.exports = {
                 regularTextDark: '#e4e6ea',
                 highlight: '#0598BC',
                 highlightDark: '#BC05BC',
+                highlightHover: '#04758F',
+                highlightDarkHover: '#9D049D',
                 button: '#0598BC',
                 cBlack: '#020202',
                 cRed: '#CD3232',

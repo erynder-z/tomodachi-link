@@ -73,7 +73,7 @@ export default function LoginForm({
                             ) : (
                                 <span className="z-10 relative w-full flex justify-center items-center group p-4">
                                     <span className="transition-all duration-300 group-hover:pr-4">
-                                        Login as guest
+                                        Login
                                         <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
                                             <MdKeyboardDoubleArrowRight size="1.5em" />
                                         </span>
