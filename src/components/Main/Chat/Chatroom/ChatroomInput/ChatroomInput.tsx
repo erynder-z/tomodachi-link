@@ -25,7 +25,7 @@ export default function ChatroomInput({
     };
 
     return (
-        <div className="flex mt-4 mx-4 gap-4 relative z-0">
+        <div className="flex mt-4 mx-4 gap-4 sticky bottom-4 right-40 z-0">
             <input
                 type="text"
                 name="chatInput"
@@ -43,7 +43,7 @@ export default function ChatroomInput({
             >
                 Enter a message...
             </label>
-            <div className="absolute left-0 bottom-0 w-full h-0.5 overflow-hidden">
+            <div className="absolute left-0 bottom-0 w-11/12 h-0.5 overflow-hidden">
                 <div
                     className={`h-full mr-12 ${
                         isInputFocused
@@ -55,14 +55,14 @@ export default function ChatroomInput({
             <button
                 disabled={isSubmitting}
                 onClick={sendMessage}
-                className={`flex items-center justify-center  w-12 text-regularTextDark ml-auto text-sm ${
+                className={`flex items-center justify-center w-24 rounded-full text-regularTextDark ml-auto text-sm ${
                     !inputMessage
                         ? 'bg-gray-500 hover:bg-gray-600'
-                        : 'bg-blue-500 hover:bg-blue-600'
+                        : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover'
                 }`}
                 title={inputMessage ? undefined : 'Please enter a message'}
             >
-                {isSubmitting ? <ButtonBusy /> : <MdSend />}
+                {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
             </button>
         </div>
     );
