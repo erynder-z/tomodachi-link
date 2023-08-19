@@ -1,7 +1,5 @@
-import React from 'react';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
-import { FaExclamationTriangle } from 'react-icons/fa';
 
 export const fetchFeed = async (
     token: string,
@@ -34,7 +32,7 @@ export const fetchFeed = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch feed!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

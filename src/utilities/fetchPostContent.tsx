@@ -1,6 +1,5 @@
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
-import { FaExclamationTriangle } from 'react-icons/fa';
 
 export const fetchPostContent = async (
     token: string,
@@ -24,7 +23,7 @@ export const fetchPostContent = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch posts!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

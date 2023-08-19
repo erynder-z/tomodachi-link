@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 import resizeFile from '../../../../utilities/ImageResizer';
 import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
 import GifSelector from './GifSelector/GifSelector';
@@ -88,7 +87,7 @@ export default function NewPostInput({
                     setInfo({
                         typeOfInfo: 'good',
                         message: 'Post created successfully!',
-                        icon: <FaRegSmile />,
+                        icon: '👍   ',
                     });
                     setPostText('');
                     setSelectedImage(undefined);
@@ -110,7 +109,7 @@ export default function NewPostInput({
                     setInfo({
                         typeOfInfo: 'bad',
                         message: message,
-                        icon: <FaExclamationTriangle />,
+                        icon: '👻',
                     });
 
                     throw new Error(
@@ -121,7 +120,7 @@ export default function NewPostInput({
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
             }
 

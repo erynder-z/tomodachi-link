@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { FaRegSmile, FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import ConfirmationOverlay from '../../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
-import { TbAlertCircle } from 'react-icons/tb';
 import EditPostInput from '../../EditPostInput/EditPostInput';
 import { PostType } from '../../../../../types/postType';
 import ToggleListButton from '../../../../UiElements/ToggleListButton/ToggleListButton';
@@ -53,7 +51,7 @@ export default function PostOptionsSection({
             setInfo({
                 typeOfInfo: 'good',
                 message: 'Post deleted!',
-                icon: <FaRegSmile />,
+                icon: '🗑️',
             });
             if (onPostChange) {
                 onPostChange();
@@ -62,7 +60,7 @@ export default function PostOptionsSection({
             setInfo({
                 typeOfInfo: 'bad',
                 message: 'Unable to delete post!',
-                icon: <FaExclamationTriangle />,
+                icon: '👻',
             });
         }
     };
@@ -92,7 +90,7 @@ export default function PostOptionsSection({
                     }}
                     dialogInfo={{
                         message: 'Do you really want to delete this post?',
-                        icon: <TbAlertCircle size="2em" />,
+                        icon: '✋',
                     }}
                 />
             )}

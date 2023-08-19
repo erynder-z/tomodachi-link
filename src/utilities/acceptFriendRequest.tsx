@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const acceptFriendRequest = async (
@@ -35,7 +34,7 @@ export const acceptFriendRequest = async (
         setInfo({
             typeOfInfo: 'good',
             message: 'Friend request accepted!',
-            icon: <FaRegSmile />,
+            icon: '🤝',
         });
         handleFetchUserData();
         handleFetchFriendData();
@@ -43,7 +42,7 @@ export const acceptFriendRequest = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to accept friend request!',
-            icon: <FaExclamationTriangle />,
+            icon: '🥳',
         });
     }
 };

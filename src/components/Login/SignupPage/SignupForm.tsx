@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
+import { MdSentimentVerySatisfied } from 'react-icons/md';
 
 type SignupFormProps = {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
@@ -127,21 +128,23 @@ export default function SignupForm({
                     <div className="flex w-full">
                         <button
                             disabled={isSubmitting}
-                            className={`w-full relative overflow-hidden text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out group ${
-                                isSubmitting ? 'bg-gray-500' : 'bg-green-500'
+                            className={`relative overflow-hidden w-full bg-green-600 text-white text-xl font-bold rounded transition duration-500 ease-in-out ${
+                                isSubmitting
+                                    ? 'bg-gray-500 cursor-not-allowed'
+                                    : 'hover:bg-green-500'
                             }`}
                         >
-                            <span
-                                className={`absolute top-0 left-0 h-full w-full transform -translate-x-full transition duration-300 ease-in-out group-hover:translate-x-0 ${
-                                    isSubmitting
-                                        ? 'bg-gray-500'
-                                        : 'bg-green-600'
-                                }`}
-                            ></span>
                             {isSubmitting ? (
                                 <ButtonBusy />
                             ) : (
-                                <span className="z-10 relative">Register</span>
+                                <span className="z-10 relative w-full flex justify-center items-center group p-4">
+                                    <span className="transition-all duration-300 group-hover:pr-4">
+                                        Register
+                                        <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
+                                            <MdSentimentVerySatisfied size="1.5em" />
+                                        </span>
+                                    </span>
+                                </span>
                             )}
                         </button>
                     </div>

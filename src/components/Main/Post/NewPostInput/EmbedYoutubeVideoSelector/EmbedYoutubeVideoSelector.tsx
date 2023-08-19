@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaTimes, FaRegFrown } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 
 type EmbedYoutubeVideoSelectorProps = {
@@ -35,7 +35,7 @@ export default function EmbedYoutubeVideoSelector({
             setInfo({
                 typeOfInfo: 'bad',
                 message: 'This is no YouTube URL!',
-                icon: <FaRegFrown />,
+                icon: '😼',
             });
         }
     };

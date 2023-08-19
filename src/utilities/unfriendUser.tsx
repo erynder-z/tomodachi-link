@@ -1,6 +1,5 @@
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
 export const unfriendUser = async (
     token: string,
@@ -35,7 +34,7 @@ export const unfriendUser = async (
         setInfo({
             typeOfInfo: 'good',
             message: 'You are no longer friends!',
-            icon: <FaRegSmile />,
+            icon: '😕',
         });
         handleFetchUserData();
         handleFetchFriendData();
@@ -43,7 +42,7 @@ export const unfriendUser = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to send request!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

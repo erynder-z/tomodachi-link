@@ -1,6 +1,5 @@
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 
 export const sendFriendRequest = async (
     token: string,
@@ -33,13 +32,13 @@ export const sendFriendRequest = async (
         setInfo({
             typeOfInfo: 'good',
             message: 'Friend request sent!',
-            icon: <FaRegSmile />,
+            icon: '🍵',
         });
     } catch (err: unknown) {
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to send friend request!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

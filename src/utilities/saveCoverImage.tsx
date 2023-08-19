@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle, FaRegMeh } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const saveCoverImage = async (
@@ -29,14 +28,14 @@ export const saveCoverImage = async (
         setInfo({
             typeOfInfo: 'good',
             message: 'Saved!',
-            icon: <FaRegMeh />,
+            icon: '👍',
         });
         handleFetchUserData();
     } catch (err: unknown) {
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to save!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

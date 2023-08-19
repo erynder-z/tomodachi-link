@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 import { DatabaseChatMessageType } from '../types/databaseChatMessageType';
 
@@ -28,7 +27,7 @@ export const postMessage = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Message not saved!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

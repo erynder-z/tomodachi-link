@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle, FaRegMeh } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const declineFriendRequest = async (
@@ -35,7 +34,7 @@ export const declineFriendRequest = async (
         setInfo({
             typeOfInfo: 'good',
             message: 'Friend request declined!',
-            icon: <FaRegMeh />,
+            icon: '😎',
         });
         handleFetchUserData();
         handleFetchFriendData();
@@ -43,7 +42,7 @@ export const declineFriendRequest = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to decline friend request!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

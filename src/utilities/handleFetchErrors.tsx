@@ -1,4 +1,3 @@
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 
 export const handleFetchErrors = async (
@@ -14,7 +13,7 @@ export const handleFetchErrors = async (
     setInfo({
         typeOfInfo: 'bad',
         message: message,
-        icon: <FaExclamationTriangle />,
+        icon: '👻',
     });
 
     throw new Error(`Error: ${response.status} ${response.statusText}`);

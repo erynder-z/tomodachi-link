@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
-import { FaExclamationTriangle } from 'react-icons/fa';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import ChatroomHeader from './ChatroomHeader/ChatroomHeader';
 import ChatroomMessage from './ChatroomMessage/ChatroomMessage';
@@ -92,7 +91,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'Message not saved!',
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
             }
         }
@@ -122,7 +121,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'Something went wrong when sending your message!',
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
             }
 

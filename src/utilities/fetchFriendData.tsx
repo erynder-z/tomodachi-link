@@ -1,4 +1,3 @@
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
@@ -23,7 +22,7 @@ export const fetchFriendData = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch friend data!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

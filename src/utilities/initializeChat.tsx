@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const initializeChat = async (
@@ -28,7 +27,7 @@ export const initializeChat = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Could not initialize chat!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

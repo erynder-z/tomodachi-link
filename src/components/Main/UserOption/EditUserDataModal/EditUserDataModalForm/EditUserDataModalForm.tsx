@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
-import { FaRegSmile, FaFileUpload } from 'react-icons/fa';
+import { FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
@@ -87,7 +87,7 @@ export default function EditUserDataModalForm({
             setInfo({
                 typeOfInfo: 'good',
                 message: 'Profile updated successfully!',
-                icon: <FaRegSmile />,
+                icon: '👍',
             });
             handleFetchUserData();
             setShouldOverlaysShow({

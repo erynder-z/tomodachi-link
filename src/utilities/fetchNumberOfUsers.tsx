@@ -1,7 +1,5 @@
-import React from 'react';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
-import { FaExclamationTriangle } from 'react-icons/fa';
 
 export const fetchNumberOfUsers = async (
     setInfo: (info: InfoType | null) => void
@@ -19,7 +17,7 @@ export const fetchNumberOfUsers = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch users!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

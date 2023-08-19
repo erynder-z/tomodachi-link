@@ -2,7 +2,6 @@ import React from 'react';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { usePasswordComparison } from '../../../../../hooks/usePasswordComparison';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 
 type UpdatePasswordFormProps = {
@@ -65,7 +64,7 @@ export default function UpdatePasswordForm({
                 setInfo({
                     typeOfInfo: 'bad',
                     message: message,
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
 
                 throw new Error(
@@ -76,7 +75,7 @@ export default function UpdatePasswordForm({
             setInfo({
                 typeOfInfo: 'good',
                 message: 'Password updated successfully!',
-                icon: <FaRegSmile />,
+                icon: '👍',
             });
             setShouldOverlaysShow({
                 searchOverlay: false,

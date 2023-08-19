@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const markMessageReadInDB = async (
@@ -27,7 +26,7 @@ export const markMessageReadInDB = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to mark message as read!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

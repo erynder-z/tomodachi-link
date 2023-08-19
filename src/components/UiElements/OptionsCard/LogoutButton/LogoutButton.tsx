@@ -2,7 +2,6 @@ import React from 'react';
 import { TbLogout } from 'react-icons/tb';
 import useAuth from '../../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { MdOutlineWavingHand } from 'react-icons/md';
 import useInfoCard from '../../../../hooks/useInfoCard';
 
 export default function LogoutButton() {
@@ -15,7 +14,7 @@ export default function LogoutButton() {
         setInfo({
             typeOfInfo: 'good',
             message: 'Logged out!',
-            icon: <MdOutlineWavingHand />,
+            icon: '😺',
         });
         logout();
     };

@@ -3,7 +3,6 @@ import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { initializeChat } from '../../../../../utilities/initializeChat';
 import { ChatConversationType } from '../../../../../types/chatConversationType';
 
@@ -46,7 +45,7 @@ export default function ChatOnlineUserlistItem({
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'Could not initialize chat!',
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
             }
         }

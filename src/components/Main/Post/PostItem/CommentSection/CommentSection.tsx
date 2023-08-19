@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommentType } from '../../../../types/commentType';
+import { CommentType } from '../../../../../types/commentType';
 import CommentList from './CommentList/CommentList';
 import CommentInput from './CommentInput/CommentInput';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimes, FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import PostInputTextarea from '../NewPostInput/PostInputTextarea/PostInputTextarea';
 import SelectedImageArea from '../NewPostInput/SelectedImageArea/SelectedImageArea';
 import ButtonArea from '../NewPostInput/ButtonArea/ButtonArea';
@@ -107,7 +107,7 @@ export default function EditPostInput({
                     setInfo({
                         typeOfInfo: 'good',
                         message: 'Post updated successfully!',
-                        icon: <FaRegSmile />,
+                        icon: '👍',
                     });
                     setPostText('');
                     setSelectedImage(undefined);
@@ -126,7 +126,7 @@ export default function EditPostInput({
                     setInfo({
                         typeOfInfo: 'bad',
                         message: message,
-                        icon: <FaExclamationTriangle />,
+                        icon: '👻',
                     });
 
                     throw new Error(
@@ -137,7 +137,7 @@ export default function EditPostInput({
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
             }
             setIsSubmitting(false);

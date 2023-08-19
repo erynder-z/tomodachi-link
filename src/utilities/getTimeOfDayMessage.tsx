@@ -1,4 +1,3 @@
-import { FaSun, FaMoon } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 
 export const getTimeOfDayMessage = (): InfoType => {
@@ -9,19 +8,19 @@ export const getTimeOfDayMessage = (): InfoType => {
         return {
             typeOfInfo: 'greeting',
             message: 'Good morning, ',
-            icon: <FaSun />,
+            icon: '🌞',
         };
     } else if (hour < 18) {
         return {
             typeOfInfo: 'greeting',
             message: 'Good afternoon, ',
-            icon: <FaSun />,
+            icon: '🌞',
         };
     } else {
         return {
             typeOfInfo: 'greeting',
             message: 'Good evening, ',
-            icon: <FaMoon />,
+            icon: '🌛',
         };
     }
 };

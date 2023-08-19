@@ -1,5 +1,4 @@
 import { InfoType } from '../types/infoType';
-import { FaExclamationTriangle, FaRegSmile } from 'react-icons/fa';
 import { handleFetchErrors } from './handleFetchErrors';
 
 export const negativeReaction = async (
@@ -27,13 +26,13 @@ export const negativeReaction = async (
         setInfo({
             typeOfInfo: 'good',
             message: 'Reaction successful!',
-            icon: <FaRegSmile />,
+            icon: '😎',
         });
     } catch (err: unknown) {
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch posts!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

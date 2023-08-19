@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
-import {
-    FaExclamationTriangle,
-    FaRegSmile,
-    FaRegSmileBeam,
-} from 'react-icons/fa';
+import { FaRegSmileBeam } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import EmojiSelector from '../../../NewPostInput/EmojiSelector/EmojiPicker';
 import ButtonBusy from '../../../../../UiElements/LoadingSpinner/ButtonBusy';
@@ -60,7 +56,7 @@ export default function CommentInput({
                     setInfo({
                         typeOfInfo: 'good',
                         message: 'Comment created successfully!',
-                        icon: <FaRegSmile />,
+                        icon: '👍',
                     });
                     setCommentText('');
                     getPostDetails(parentPostID);
@@ -74,7 +70,7 @@ export default function CommentInput({
                     setInfo({
                         typeOfInfo: 'bad',
                         message: message,
-                        icon: <FaExclamationTriangle />,
+                        icon: '👻',
                     });
 
                     throw new Error(
@@ -85,7 +81,7 @@ export default function CommentInput({
                 setInfo({
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
             }
 

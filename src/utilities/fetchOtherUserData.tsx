@@ -1,4 +1,3 @@
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
@@ -31,7 +30,7 @@ export const fetchOtherUserData = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch userdata!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
-import { TbLink, TbUserMinus, TbAlertCircle } from 'react-icons/tb';
+import { TbLink, TbUserMinus } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
@@ -51,7 +51,7 @@ export default function FriendCard({ friendData }: FriendCardProps) {
                     }}
                     dialogInfo={{
                         message: 'Do you really want to stop being friends?',
-                        icon: <TbAlertCircle size="2em" />,
+                        icon: '✋',
                     }}
                 />
             )}

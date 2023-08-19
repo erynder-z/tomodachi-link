@@ -1,4 +1,3 @@
-import { FaExclamationTriangle } from 'react-icons/fa';
 import { InfoType } from '../types/infoType';
 import { handleFetchErrors } from './handleFetchErrors';
 
@@ -24,7 +23,7 @@ export const fetchChatMessages = async (
         setInfo({
             typeOfInfo: 'bad',
             message: 'Unable to fetch conversation!',
-            icon: <FaExclamationTriangle />,
+            icon: '👻',
         });
     }
 };
