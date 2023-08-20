@@ -2,6 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { DisplayChatMessageType } from '../../../../../types/displayChatMessageType';
+import { motion } from 'framer-motion';
 
 type ChatroomMessageProps = {
     message: DisplayChatMessageType;
@@ -18,7 +19,10 @@ export default function ChatroomMessage({ message }: ChatroomMessageProps) {
         : '';
 
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             className={`flex flex-col w-fit max-w-1/2 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded px-8 py-4 mb-2 ${
                 isMessageFromCurrentUser ? 'mr-auto' : 'ml-auto'
             } ${
@@ -29,6 +33,6 @@ export default function ChatroomMessage({ message }: ChatroomMessageProps) {
         >
             <span className="text-xs">{date}</span>
             <span>{text}</span>
-        </div>
+        </motion.div>
     );
 }

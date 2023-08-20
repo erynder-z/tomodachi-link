@@ -19,6 +19,7 @@ import PostEmbeddedYoutubeVideoSection from './PostEmbeddedYoutubeVideoSection/P
 import PostReactionSection from './PostReactionSection/PostReactionSection';
 import CommentSection from './CommentSection/CommentSection';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
+import { motion } from 'framer-motion';
 
 type PostItemProps = {
     postID: string;
@@ -108,7 +109,12 @@ export default React.memo(function PostItem({
     }
 
     return (
-        <div className="font-roboto animate-popInAnimation flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-roboto flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
+        >
             <div className="flex justify-between">
                 <PostUserInfoSection
                     userPic={userPic}
@@ -156,6 +162,6 @@ export default React.memo(function PostItem({
                     shouldCommentSectionShow={shouldCommentSectionShow}
                 />
             )}
-        </div>
+        </motion.div>
     );
 });
