@@ -90,7 +90,7 @@ export default function UpdatePasswordForm({
     };
 
     return (
-        <div className="max-w-md mx-auto">
+        <div className="flex flex-col justify-center items-center">
             <div>
                 <h1 className="text-2xl font-semibold">Change Password</h1>
             </div>
@@ -98,9 +98,9 @@ export default function UpdatePasswordForm({
                 action=""
                 method="POST"
                 onSubmit={handleSubmit}
-                className="divide-y divide-gray-200"
+                className="divide-y divide-gray-200 w-full"
             >
-                <div className="py-8 text-base flex flex-col gap-4 text-regularText dark:text-regularTextDark sm:text-lg sm:leading-7">
+                <div className="pt-8 text-base flex flex-col gap-4 text-regularText dark:text-regularTextDark sm:text-lg sm:leading-7">
                     <div className="relative z-0">
                         <input
                             required
@@ -108,12 +108,12 @@ export default function UpdatePasswordForm({
                             id="currentPassword"
                             name="currentPassword"
                             type="password"
-                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
                             placeholder=" "
                         />
                         <label
                             htmlFor="current_password"
-                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Current password
                         </label>
@@ -126,13 +126,13 @@ export default function UpdatePasswordForm({
                             id="newPassword"
                             name="newPassword"
                             type="password"
-                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
                             placeholder=" "
                             onChange={handlePasswordChange}
                         />
                         <label
                             htmlFor="current_password"
-                            className="absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             New password
                         </label>
@@ -144,7 +144,7 @@ export default function UpdatePasswordForm({
                             id="confirmNewPassword"
                             name="confirmNewPassword"
                             type="password"
-                            className={`block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer ${
+                            className={`block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer ${
                                 isMatchingPassword
                                     ? 'border-green-500'
                                     : 'border-red-500'
@@ -154,7 +154,7 @@ export default function UpdatePasswordForm({
                         />
                         <label
                             htmlFor="confirm_new_password"
-                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Confirm new password
                         </label>
@@ -163,12 +163,12 @@ export default function UpdatePasswordForm({
                         {isGuest ? (
                             <button
                                 disabled
-                                className="w-full bg-gray-500 text-white px-2 py-1"
+                                className="w-full bg-gray-500 text-regularTextDark px-2 py-1 rounded"
                             >
                                 Cannot change guest password!
                             </button>
                         ) : (
-                            <button className="w-full bg-blue-500 text-white px-2 py-1">
+                            <button className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded">
                                 Update
                             </button>
                         )}

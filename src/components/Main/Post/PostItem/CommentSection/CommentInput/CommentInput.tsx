@@ -112,10 +112,10 @@ export default function CommentInput({
                 </div>
                 <button
                     disabled={isSubmitting || !commentText}
-                    className={`bg-blue-500 hover:bg-blue-700 text-regularTextDark font-bold h-8 w-12 py-2 px-4 ${
+                    className={`flex justify-center items-center text-regularTextDark font-bold h-8 w-16 py-2 px-4 rounded ${
                         !commentText || isSubmitting
                             ? 'bg-gray-500 hover:bg-gray-600'
-                            : 'bg-blue-500 hover:bg-blue-600'
+                            : 'bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover'
                     }`}
                     type="submit"
                 >

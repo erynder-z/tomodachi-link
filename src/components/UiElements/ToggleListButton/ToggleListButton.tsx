@@ -13,7 +13,7 @@ export default function ToggleListButton({
 }: ToggleListButtonProps) {
     return (
         <div
-            className={`ml-auto rotate-on-hover ${
+            className={`ml-auto rotate-on-hover cursor-pointer hover:text-highlight dark:hover:text-highlightDark transition-all ${
                 showMenu ? 'rotate-up' : 'rotate-down'
             }`}
             onClick={onToggleListButtonClick}
