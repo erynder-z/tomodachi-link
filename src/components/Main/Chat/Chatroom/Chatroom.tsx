@@ -206,7 +206,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 currentUserData={currentUserData}
                 partnerData={partnerData}
             />
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto">
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}

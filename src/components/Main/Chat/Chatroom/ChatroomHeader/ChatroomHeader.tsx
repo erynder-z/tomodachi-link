@@ -14,38 +14,40 @@ export default function ChatroomHeader({
     partnerData,
 }: ChatroomHeaderProps) {
     return (
-        <header className="flex justify-around py-4 sticky -top-4 bg-background2 dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg  rounded md:rounded-lg">
-            <div className="flex flex-col justify-center items-center">
-                <img
-                    loading="lazy"
-                    className="w-12 h-12 object-cover"
-                    src={`data:image/png;base64,${getCorrectUserpicFormat(
-                        currentUserData?.userpic.data
-                    )}`}
-                    alt="User avatar"
-                />
-                <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
-                    You
+        <div className="w-full sticky -top-4 bg-background2 dark:bg-background2Dark">
+            <header className="flex justify-around py-4  bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg  rounded md:rounded-lg">
+                <div className="flex flex-col justify-center items-center">
+                    <img
+                        loading="lazy"
+                        className="w-12 h-12 object-cover"
+                        src={`data:image/png;base64,${getCorrectUserpicFormat(
+                            currentUserData?.userpic.data
+                        )}`}
+                        alt="User avatar"
+                    />
+                    <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+                        You
+                    </div>
                 </div>
-            </div>
-            <div className="flex flex-col justify-center items-center font-bold text-xl">
-                <TbMessages className="text-7xl" />
-                Chat
-            </div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">
+                    <TbMessages className="text-7xl" />
+                    Chat
+                </div>
 
-            <div className="flex flex-col justify-center items-center">
-                <img
-                    loading="lazy"
-                    className="w-12 h-12 object-cover"
-                    src={`data:image/png;base64,${getCorrectUserpicFormat(
-                        partnerData?.userpic
-                    )}`}
-                    alt="User avatar"
-                />
-                <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
-                    {partnerData?.firstName} {partnerData?.lastName}
+                <div className="flex flex-col justify-center items-center">
+                    <img
+                        loading="lazy"
+                        className="w-12 h-12 object-cover"
+                        src={`data:image/png;base64,${getCorrectUserpicFormat(
+                            partnerData?.userpic
+                        )}`}
+                        alt="User avatar"
+                    />
+                    <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+                        {partnerData?.firstName} {partnerData?.lastName}
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </div>
     );
 }

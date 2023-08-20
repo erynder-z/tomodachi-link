@@ -127,7 +127,7 @@ export default function ChatLobby({
                     currentUserId={currentUserId}
                 />
 
-                <div className="flex flex-col gap-8 md:px-4">
+                <div className="flex flex-col gap-8">
                     {activeChat ? (
                         <Chatroom
                             chatId={activeChatId}
