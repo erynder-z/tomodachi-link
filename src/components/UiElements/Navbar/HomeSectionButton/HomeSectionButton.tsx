@@ -6,7 +6,11 @@ export default function HomeSectionButton() {
     return (
         <NavLink
             to="/home"
-            className="flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-full w-full"
+            className={({ isActive }) =>
+                isActive
+                    ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
+                    : 'text-regularText dark:text-regularTextDark flex self-center cursor-pointer h-6 w-full'
+            }
         >
             <button type="button">
                 <MdHomeFilled size="1.5em" />

@@ -22,7 +22,11 @@ export default function ChatSectionButton({
             ) : (
                 <NavLink
                     to="/chat"
-                    className="h-full w-full text-regularText dark:text-regularTextDark"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
+                            : 'text-regularText dark:text-regularTextDark flex self-center cursor-pointer h-6 w-full'
+                    }
                 >
                     <MdOutlineChatBubbleOutline size="1.5em" />
                 </NavLink>
