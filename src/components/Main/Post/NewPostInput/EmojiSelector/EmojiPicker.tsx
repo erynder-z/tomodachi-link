@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import EmojiPicker, { EmojiClickData, Theme } from 'emoji-picker-react';
+import useTheme from '../../../../../hooks/useTheme';
 
 type EmojiSelectorProps = {
     setText: React.Dispatch<React.SetStateAction<string>>;
@@ -11,9 +12,13 @@ export default function EmojiSelector({
     setText,
     setShowEmojiPicker,
 }: EmojiSelectorProps) {
+    const { theme } = useTheme();
     const handleComponentClose = () => {
         setShowEmojiPicker(false);
     };
+
+    const getThemeVariable = () =>
+        theme === 'dark' ? Theme.DARK : Theme.LIGHT;
 
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
@@ -26,6 +31,7 @@ export default function EmojiSelector({
                 </button>
 
                 <EmojiPicker
+                    theme={getThemeVariable()}
                     onEmojiClick={(emojiData: EmojiClickData) => {
                         setText((prev) => prev + emojiData.emoji);
                         setShowEmojiPicker(false);

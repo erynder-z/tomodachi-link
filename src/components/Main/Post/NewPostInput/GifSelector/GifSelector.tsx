@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import GifPicker, { TenorImage } from 'gif-picker-react';
+import GifPicker, { TenorImage, Theme } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
 import { fetchTenorApiKey } from '../../../../../utilities/fetchTenorApiKEy';
+import useTheme from '../../../../../hooks/useTheme';
 
 type GifSelectorProps = {
     setShowGifSelector: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,11 +15,15 @@ export default function GifSelector({
     setGif,
 }: GifSelectorProps) {
     const { token } = useAuth();
+    const { theme } = useTheme();
     const [apiKey, setApiKey] = useState<string | undefined>(undefined);
 
     const handleComponentClose = () => {
         setShowGifSelector(false);
     };
+
+    const getThemeVariable = () =>
+        theme === 'dark' ? Theme.DARK : Theme.LIGHT;
 
     useEffect(() => {
         fetchTenorApiKey(token, setApiKey);
@@ -36,6 +41,7 @@ export default function GifSelector({
                 {apiKey && (
                     <GifPicker
                         tenorApiKey={`${apiKey}`}
+                        theme={getThemeVariable()}
                         onGifClick={(gif: TenorImage) => {
                             setGif(gif);
                             setShowGifSelector(false);
