@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
-import { FaExclamationTriangle } from 'react-icons/fa';
 import SignupPage from './SignupPage/SignupPage';
 import useInfoCard from '../../hooks/useInfoCard';
 import VerifyingInfoBox from './VerifyingInfoBox';
@@ -42,7 +41,7 @@ export default function LoginPage() {
                 setInfo({
                     typeOfInfo: 'bad',
                     message: errorMessage,
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
 
                 throw new Error(
@@ -83,7 +82,7 @@ export default function LoginPage() {
             setInfo({
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
-                icon: <FaExclamationTriangle />,
+                icon: '👻',
             });
         }
         setIsSubmitting(false);
@@ -109,7 +108,7 @@ export default function LoginPage() {
             setInfo({
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
-                icon: <FaExclamationTriangle />,
+                icon: '👻',
             });
         }
         setIsSubmitting(false);

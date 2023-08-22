@@ -1,4 +1,4 @@
-import { FaExclamationTriangle, FaTimes, FaRegSmile } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import SignupForm from './SignupForm';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { useState } from 'react';
@@ -47,7 +47,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 setInfo({
                     typeOfInfo: 'bad',
                     message: message,
-                    icon: <FaExclamationTriangle />,
+                    icon: '👻',
                 });
 
                 throw new Error(
@@ -58,7 +58,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
             setInfo({
                 typeOfInfo: 'good',
                 message: 'Registration successful!',
-                icon: <FaRegSmile />,
+                icon: '🥳',
             });
         } catch (error: unknown) {
             console.error(error);
@@ -114,7 +114,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
             setInfo({
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
-                icon: <FaExclamationTriangle />,
+                icon: '👻',
             });
         }
         setIsSubmitting(false);

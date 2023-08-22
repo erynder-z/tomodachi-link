@@ -87,7 +87,7 @@ export default function NewPostInput({
                     setInfo({
                         typeOfInfo: 'good',
                         message: 'Post created successfully!',
-                        icon: '👍   ',
+                        icon: '👍',
                     });
                     setPostText('');
                     setSelectedImage(undefined);
