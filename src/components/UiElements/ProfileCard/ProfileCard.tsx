@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import { Socket } from 'socket.io-client';
+import { ChatMemberType } from '../../../types/chatMemberType';
+import { Link } from 'react-router-dom';
 
-export default function ProfileCard() {
+type ProfileCardProps = {
+    socket: Socket | undefined;
+};
+
+export default function ProfileCard({ socket }: ProfileCardProps) {
     const { currentUserData } = useCurrentUserData();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
     const userImage = userpic
         ? convertDatabaseImageToBase64(userpic)
         : undefined;
+
+    const [matchedFriendsCount, setMatchedFriendsCount] = useState<number>(0);
+
+    useEffect(() => {
+        if (socket) {
+            socket.on('getUsers', (users: ChatMemberType[]) => {
+                const matchedCount = friends?.filter((friend) =>
+                    users.some((user) => user.userId === friend)
+                ).length;
+
+                setMatchedFriendsCount(matchedCount || 0);
+            });
+
+            return () => {
+                socket.off('getUsers');
+            };
+        }
+    }, [socket, friends]);
 
     if (!userImage) {
         return (
@@ -30,7 +55,16 @@ export default function ProfileCard() {
                 <p className="font-semibold text-xl my-5 break-all">
                     {firstName} {lastName}
                 </p>
-                <p className="text-sm mb-2">{numberOfFriends} Friends</p>
+                <p className="flex flex-col text-sm mb-2">
+                    <span> {numberOfFriends} Friends</span>
+                    <Link
+                        to="/chat"
+                        className="text-regularText dark:text-regularTextDark text-xs"
+                    >
+                        {' '}
+                        ( {matchedFriendsCount} Online )
+                    </Link>
+                </p>
             </div>
         </div>
     );
