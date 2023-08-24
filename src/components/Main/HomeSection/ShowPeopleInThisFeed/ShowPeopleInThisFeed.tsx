@@ -5,6 +5,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import UserListItem from '../../UserList/UserListItem/UserListItem';
+import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];
@@ -16,6 +17,7 @@ export default function ShowPeopleInThisFeed({
     minimalPosts,
 }: ShowPeopleInThisFeedProps) {
     const { token } = useAuth();
+    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const [IdsOfPeopleInFeed, setIdsOfPeopleInFeed] = useState<string[]>([]);
     const [feedUsers, setFeedUsers] = useState<MinimalUserTypes[]>([]);
@@ -23,7 +25,10 @@ export default function ShowPeopleInThisFeed({
     const getIdsOfPeopleInFeed = () => {
         const newPeopleInFeed: Set<string> = new Set();
         minimalPosts.forEach((post) => {
-            if (friendList.includes(post?.owner?._id)) {
+            if (
+                friendList.includes(post?.owner?._id) ||
+                currentUserData?._id === post?.owner?._id
+            ) {
                 newPeopleInFeed.add(post?.owner?._id);
             } else {
                 if (newPeopleInFeed.has(post?.owner?._id)) {
