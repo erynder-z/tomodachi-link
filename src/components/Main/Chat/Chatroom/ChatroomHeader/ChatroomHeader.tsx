@@ -14,12 +14,12 @@ export default function ChatroomHeader({
     partnerData,
 }: ChatroomHeaderProps) {
     return (
-        <div className="w-full sticky -top-4 bg-background2 dark:bg-background2Dark">
-            <header className="flex justify-around py-4  bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg  rounded md:rounded-lg">
+        <div className="w-full sticky top-20 md:-top-4 bg-background2 dark:bg-background2Dark">
+            <header className="flex justify-around py-2 md:py-4  bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg  rounded md:rounded-lg">
                 <div className="flex flex-col justify-center items-center">
                     <img
                         loading="lazy"
-                        className="w-12 h-12 object-cover"
+                        className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"
                         src={`data:image/png;base64,${getCorrectUserpicFormat(
                             currentUserData?.userpic.data
                         )}`}
@@ -30,14 +30,14 @@ export default function ChatroomHeader({
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-center font-bold text-xl">
-                    <TbMessages className="text-7xl" />
+                    <TbMessages className="text-3xl md:text-7xl" />
                     Chat
                 </div>
 
                 <div className="flex flex-col justify-center items-center">
                     <img
                         loading="lazy"
-                        className="w-12 h-12 object-cover"
+                        className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"
                         src={`data:image/png;base64,${getCorrectUserpicFormat(
                             partnerData?.userpic
                         )}`}

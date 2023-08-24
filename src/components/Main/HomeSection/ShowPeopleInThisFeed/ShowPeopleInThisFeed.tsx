@@ -70,8 +70,8 @@ export default function ShowPeopleInThisFeed({
     ));
 
     return (
-        <div className="block sticky -top-1 lg:top-10 h-fit w-screen md:w-full bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
-            <h1 className="text-center">People in this feed:</h1>
+        <div className="block sticky -top-1 lg:top-10 h-fit md:w-full  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
+            <h1 className="text-center flex">People in this feed:</h1>
             <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-4 lg:gap-0 w-full md:w-full p-2 lg:p-0">
                 {feedUserList}
             </div>

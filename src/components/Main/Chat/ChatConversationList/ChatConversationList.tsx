@@ -16,7 +16,7 @@ export default function ChatConversationList({
     currentUserId,
 }: ChatConversationListProps) {
     return (
-        <div className="md:flex md:h-fit sticky top-0 md:top-2 flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-screen md:w-full p-2 lg:p-0 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
+        <div className="md:flex md:h-fit sticky top-0 md:top-2 flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-full md:w-full p-2 lg:p-0 bg-card dark:bg-cardDark md:bg-background2 md:dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
             <h1 className="text-center font-bold">Conversations</h1>
             <div className="flex md:flex-col gap-2 lg:gap-4">
                 {conversations.map((conv, index) => {
