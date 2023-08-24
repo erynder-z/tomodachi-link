@@ -21,7 +21,7 @@ export default function ChatConversationListItem({
                 )}`}
                 alt="User avatar"
             />
-            <div className="overflow-hidden whitespace-nowrap text-ellipsis">
+            <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis">
                 {firstName} {lastName}
             </div>
         </div>
