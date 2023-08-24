@@ -71,7 +71,7 @@ export default function Navbar({
     }, [menuRef, shouldOverlaysShow.mobileOptionsModal]);
 
     return (
-        <div className="h-full w-full flex justify-between items-center lg:items-start px-2 py-1 lg:py-2 bg-navbar dark:bg-navbarDark text-regularText dark:text-regularTextDark">
+        <div className="h-full w-screen md:w-full flex justify-between items-center lg:items-start px-2 py-1 lg:py-2 bg-navbar dark:bg-navbarDark text-regularText dark:text-regularTextDark">
             <div className="flex lg:flex-col justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />

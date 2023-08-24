@@ -4,8 +4,8 @@ import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
-import UserListItem from '../../UserList/UserListItem/UserListItem';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
+import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];
@@ -65,14 +65,14 @@ export default function ShowPeopleInThisFeed({
 
     const feedUserList = feedUsers?.map((feedUser: MinimalUserTypes) => (
         <div key={feedUser?._id} className="animate-popInAnimation">
-            <UserListItem listItemData={feedUser} />
+            <FeedUserListItem listItemData={feedUser} />
         </div>
     ));
 
     return (
-        <div className="hidden md:block sticky top-0 lg:top-10 h-fit bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
+        <div className="block sticky -top-1 lg:top-10 h-fit w-screen md:w-full bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
             <h1 className="text-center">People in this feed:</h1>
-            <div className=":flex md:flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-0 w-screen md:w-full p-2 lg:p-0">
+            <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-4 lg:gap-0 w-full md:w-full p-2 lg:p-0">
                 {feedUserList}
             </div>
         </div>
