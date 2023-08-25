@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { MdPersonSearch } from 'react-icons/md';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import useAuth from '../../../../hooks/useAuth';
 import UserListItem from '../../../Main/UserList/UserListItem/UserListItem';
@@ -83,44 +82,41 @@ export default function SearchOverlay({
                 shouldSearchOverlayShow
                     ? 'animate-inAnimation'
                     : 'animate-outAnimation'
-            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-700/90`}
+            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-black/80`}
         >
             <button
-                className="absolute top-0 right-0 m-4 text-white font-bold text-lg"
+                className="absolute top-0 right-0 m-4 text-regularTextDark font-bold text-lg"
                 onClick={handleCloseButtonClick}
             >
                 <FaTimes />
             </button>
-            <div className="h-screen lg:flex mt-40 justify-center">
-                <div className="relative z-0 px-4" ref={dropdownRef}>
+            <div className="h-screen w-full md:w-1/3 lg:flex mt-40 justify-center">
+                <div className="relative z-0 px-4 w-full" ref={dropdownRef}>
                     <input
                         name="searchInput"
                         required
                         autoComplete="off"
-                        className="block py-2.5 px-0 w-full sm:w-96 text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                        className="block py-2.5 px-0 w-full text-sm text-regularTextDark bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0 focus:border-highlight dark:focus:border-highlightDark peer"
                         placeholder=" "
                         value={searchText}
                         onChange={handleTextareaChange}
                     />
                     <label
                         htmlFor="searchInput"
-                        className="absolute text-sm text-gray-100 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                        className="absolute text-sm text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-highlight dark:peer-focus:text-highlightDark peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                         Search for user...
                     </label>
                     {isLoading ? (
-                        <div className="w-full sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-indigo-800/50">
+                        <div className=" fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                             <LoadingSpinner />
                         </div>
                     ) : searchResults.length > 0 &&
                       Array.isArray(searchResults) ? (
                         <ul
-                            className="w-95vw sm:w-96 h p-2 bg-slate-800/80 text-gray-200 peer-focus:bg-white/50"
-                            style={{
-                                maxHeight: shouldSearchOverlayShow
-                                    ? '50vh'
-                                    : '0',
-                            }}
+                            className={`w-full p-2 bg-slate-800/80 peer-focus:bg-white/70 dark:peer-focus:bg-white/20 overflow-auto ${
+                                shouldSearchOverlayShow ? 'max-h-[50vh]' : ''
+                            }`}
                         >
                             {searchResults?.map((user: MinimalUserTypes) => (
                                 <div
@@ -133,12 +129,14 @@ export default function SearchOverlay({
                         </ul>
                     ) : (
                         <div className="flex justify-center items-center">
-                            <MdPersonSearch className="text-gray-200 text-6xl mt-10" />
+                            <span className="text-6xl fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                🔍
+                            </span>
                         </div>
                     )}
                     {searchText && (
                         <button
-                            className="absolute -top-5 right-2 text-gray-100 hover:text-gray-200 text-xs"
+                            className="absolute -top-5 right-2 text-regularTextDark hover:text-highlight dark:hover:text-highlightDark text-xs"
                             onClick={handleClear}
                         >
                             Clear
