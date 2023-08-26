@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ChatConversationType } from '../../../../types/chatConversationType';
-import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import ChatUserListItem from '../ChatConversationListItem/ChatConversationListItem';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { fetchChatPartnerData } from '../../../../utilities/fetchChatPartnerData';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;
@@ -25,7 +25,7 @@ export default function ChatConversation({
 
     const handleFetchPartnerData = async (partnerId: string) => {
         if (token) {
-            const response = await fetchMinimalUserData(
+            const response = await fetchChatPartnerData(
                 token,
                 partnerId,
                 setInfo
