@@ -56,16 +56,18 @@ export default function Chat({
         }
     };
 
-    const handleChatConversationClick = (conv: ChatConversationType) => {
-        setActiveChat(conv);
+    const handleChatConversationClick = (
+        conversation: ChatConversationType
+    ) => {
+        setActiveChat(conversation);
 
         const hasUnreadMessage = conversationsWithUnreadMessages.includes(
-            conv._id
+            conversation._id
         );
 
         if (hasUnreadMessage) {
             setConversationsWithUnreadMessages((prevUnreadMessages) =>
-                prevUnreadMessages.filter((id) => id !== conv._id)
+                prevUnreadMessages.filter((id) => id !== conversation._id)
             );
         }
     };
