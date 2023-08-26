@@ -22,7 +22,7 @@ import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/UiElements/ScrollToTopButton/ScrollToTopButton';
 import OverlayHandler from './components/UiElements/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
-import ChatLobby from './components/Main/Chat/ChatLobby/ChatLobby';
+import Chat from './components/Main/Chat/Chat';
 import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
 import { ChatConversationType } from './types/chatConversationType';
@@ -204,7 +204,7 @@ function App() {
                                     accountType === 'guest' ? (
                                         <Navigate replace to="/home" />
                                     ) : (
-                                        <ChatLobby
+                                        <Chat
                                             setCurrentView={setCurrentView}
                                             socket={socket.current}
                                             activeChat={activeChat}

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CurrentViewType } from '../../../../types/currentViewType';
-import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import { fetchChatConversation } from '../../../../utilities/fetchChatConversation';
-import useAuth from '../../../../hooks/useAuth';
-import useInfoCard from '../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import { ChatConversationType } from '../../../../types/chatConversationType';
-import Chatroom from '../Chatroom/Chatroom';
+import { CurrentViewType } from '../../../types/currentViewType';
+import useCurrentUserData from '../../../hooks/useCurrentUserData';
+import { fetchChatConversation } from '../../../utilities/fetchChatConversation';
+import useAuth from '../../../hooks/useAuth';
+import useInfoCard from '../../../hooks/useInfoCard';
+import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
+import { ChatConversationType } from '../../../types/chatConversationType';
+import Chatroom from './Chatroom/Chatroom';
 import { Socket } from 'socket.io-client';
-import ChatConversationList from '../ChatConversationList/ChatConversationList';
+import ChatConversationList from './ChatConversationList/ChatConversationList';
 
-type ChatLobbyProps = {
+type ChatProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     socket: Socket | undefined;
     activeChat: ChatConversationType | null;
@@ -23,14 +23,14 @@ type ChatLobbyProps = {
     >;
 };
 
-export default function ChatLobby({
+export default function Chat({
     setCurrentView,
     socket,
     activeChat,
     setActiveChat,
     conversationsWithUnreadMessages,
     setConversationsWithUnreadMessages,
-}: ChatLobbyProps) {
+}: ChatProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
