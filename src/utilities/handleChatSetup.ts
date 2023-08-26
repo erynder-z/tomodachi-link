@@ -49,7 +49,7 @@ export const handleChatSetup = (
                         await fetchChatConversation(token, setInfo);
                     const conversationsWithUnreadMessages = conversations
                         .filter((conversation) =>
-                            conversation.messageStatus.some(
+                            conversation.conversationStatus.some(
                                 (status) =>
                                     status.member === userId &&
                                     status.hasUnreadMessage

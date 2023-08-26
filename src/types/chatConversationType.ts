@@ -1,7 +1,7 @@
 export type ChatConversationType = {
     _id: string;
     members: string[];
-    messageStatus: {
+    conversationStatus: {
         member: string;
         hasUnreadMessage: boolean;
     }[];
