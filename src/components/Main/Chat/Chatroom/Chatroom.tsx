@@ -18,6 +18,7 @@ import { SocketTypingIndicatorType } from '../../../../types/sockeTypingIndicato
 import TypingIndicator from './TypingIndicator/TypingIndicator';
 import { markMessageUnreadInDB } from '../../../../utilities/markMessageUnreadInDB';
 import { markMessageReadInDB } from '../../../../utilities/markMessageReadInDB';
+import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -41,6 +42,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     const dummy = useRef<HTMLSpanElement>(null);
     const userId = currentUserData?._id;
@@ -219,7 +221,14 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 sendMessage={sendMessage}
                 onTyping={sendTypingIndicator}
                 isSubmitting={isSubmitting}
+                setShowEmojiPicker={setShowEmojiPicker}
             />
+            {showEmojiPicker && (
+                <EmojiSelector
+                    setText={setInputMessage}
+                    setShowEmojiPicker={() => setShowEmojiPicker(false)}
+                />
+            )}
         </div>
     );
 }

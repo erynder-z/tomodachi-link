@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MdSend } from 'react-icons/md';
+import { FaRegSmileBeam } from 'react-icons/fa';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 
 type ChatroomInputProps = {
@@ -8,6 +9,7 @@ type ChatroomInputProps = {
     sendMessage: () => void;
     onTyping: () => void;
     isSubmitting: boolean;
+    setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function ChatroomInput({
@@ -16,6 +18,7 @@ export default function ChatroomInput({
     sendMessage,
     onTyping,
     isSubmitting,
+    setShowEmojiPicker,
 }: ChatroomInputProps) {
     const [isInputFocused, setIsInputFocused] = useState(false);
 
@@ -26,14 +29,14 @@ export default function ChatroomInput({
 
     return (
         <div className="flex sticky bottom-4 right-40 z-0 bg-card dark:bg-cardDark h-12">
-            <div className="flex justify-end flex-col w-full ">
+            <div className="relative flex justify-end flex-col w-full ">
                 <input
                     type="text"
                     name="chatInput"
                     value={inputMessage}
                     autoComplete="off"
                     onChange={handleInputChange}
-                    className="py-2.5 px-4 text-sm  text-regularText dark:text-regularTextDark bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
+                    className="py-2.5 px-4 pr-12 text-sm  text-regularText dark:text-regularTextDark bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
                     placeholder=" "
                     onFocus={() => setIsInputFocused(true)}
                     onBlur={() => setIsInputFocused(false)}
@@ -44,6 +47,16 @@ export default function ChatroomInput({
                 >
                     Enter a message...
                 </label>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setShowEmojiPicker(true);
+                    }}
+                    className="absolute bottom-4 right-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark"
+                >
+                    <FaRegSmileBeam />
+                </button>
                 <div className="w-full h-0.5 overflow-hidden">
                     <div
                         className={`h-full w-full  ${
@@ -54,6 +67,7 @@ export default function ChatroomInput({
                     />
                 </div>
             </div>
+
             <button
                 disabled={isSubmitting}
                 onClick={sendMessage}
