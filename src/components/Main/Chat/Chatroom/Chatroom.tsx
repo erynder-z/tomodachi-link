@@ -203,12 +203,12 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full pb-4 bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
             <ChatroomHeader
                 currentUserData={currentUserData}
                 partnerData={partnerData}
             />
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto pb-12">
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}
