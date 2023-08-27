@@ -21,7 +21,6 @@ export const initializeChat = async (
         if (!response.ok) {
             handleFetchErrors(response, setInfo);
         }
-
         return response;
     } catch (err: unknown) {
         setInfo({

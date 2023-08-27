@@ -13,7 +13,6 @@ export const handleInitializeChat = async (
 ) => {
     if (token && chatPartnerId) {
         const response = await initializeChat(token, chatPartnerId, setInfo);
-
         if (response && response.ok) {
             const data = await response.json();
             data.existingConversation

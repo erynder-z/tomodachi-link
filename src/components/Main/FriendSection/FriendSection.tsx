@@ -11,12 +11,19 @@ import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 import SuggestionCardRandom from './SuggestionCardRandom/SuggestionCardRandom';
 import SuggestionCardFriend from './SuggestionCardFriend/SuggestionCardFriend';
+import { ChatConversationType } from '../../../types/chatConversationType';
 
 type FriendSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
+    setActiveChat: React.Dispatch<
+        React.SetStateAction<ChatConversationType | null>
+    >;
 };
 
-export default function FriendSection({ setCurrentView }: FriendSectionProps) {
+export default function FriendSection({
+    setCurrentView,
+    setActiveChat,
+}: FriendSectionProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const { friendData } = useFriendData();
@@ -69,7 +76,11 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
 
     const friendProfileCardList = friendData?.map(
         (friendObject: MinimalUserTypes) => (
-            <FriendCard key={friendObject._id} friendData={friendObject} />
+            <FriendCard
+                key={friendObject._id}
+                friendData={friendObject}
+                setActiveChat={setActiveChat}
+            />
         )
     );
 

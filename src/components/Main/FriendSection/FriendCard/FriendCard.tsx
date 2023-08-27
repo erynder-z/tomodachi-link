@@ -11,12 +11,19 @@ import FriendInfoCard from './FriendInfoCard/FriendInfoCard';
 import FriendCardMenu from './FriendCardMenu/FriendCardMenu';
 import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';
+import { ChatConversationType } from '../../../../types/chatConversationType';
 
 type FriendCardProps = {
     friendData: MinimalUserTypes;
+    setActiveChat: React.Dispatch<
+        React.SetStateAction<ChatConversationType | null>
+    >;
 };
 
-export default function FriendCard({ friendData }: FriendCardProps) {
+export default function FriendCard({
+    friendData,
+    setActiveChat,
+}: FriendCardProps) {
     const { userpic, firstName, lastName, _id } = friendData;
 
     const { token } = useAuth();
@@ -108,6 +115,7 @@ export default function FriendCard({ friendData }: FriendCardProps) {
                         <FriendCardMenu
                             id={_id}
                             firstName={firstName}
+                            setActiveChat={setActiveChat}
                             handleUnfriendButtonClick={
                                 handleUnfriendButtonClick
                             }

@@ -195,6 +195,7 @@ function App() {
                                 element={
                                     <FriendSection
                                         setCurrentView={setCurrentView}
+                                        setActiveChat={setActiveChat}
                                     />
                                 }
                             />
