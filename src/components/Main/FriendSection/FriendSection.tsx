@@ -108,12 +108,12 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg">
-            <h1 className="text-center text-xl font-bold mb-4">Friends</h1>
-            <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-20 md:gap-0 lg:gap-8 mt-12 mb-8">
+        <div className="flex flex-col gap-4 min-h-[calc(100vh_-_5rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg">
+            <h1 className="text-center text-xl font-bold">Friends</h1>
+            <div className="animate-popInAnimation flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {friendProfileCardList}
                 {friendProfileCardList?.length === 0 && (
-                    <span className="col-span-4 text-center">
+                    <span className="text-center">
                         You have not added any friends yet!
                     </span>
                 )}
@@ -121,7 +121,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
             <h1 className="text-center text-xl font-bold">
                 Maybe you know these people?
             </h1>
-            <div className="animate-popInAnimation grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-20 md:gap-0 lg:gap-8 mt-12">
+            <div className="animate-popInAnimation flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {getSuggestionList()}
             </div>
         </div>

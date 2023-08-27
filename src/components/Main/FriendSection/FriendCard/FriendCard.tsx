@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
-import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
-import { TbLink, TbUserMinus } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../hooks/useInfoCard';
@@ -10,6 +7,10 @@ import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import ConfirmationOverlay from '../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
 import { unfriendUser } from '../../../../utilities/unfriendUser';
 import useFriendData from '../../../../hooks/useFriendData';
+import FriendInfoCard from './FriendInfoCard/FriendInfoCard';
+import FriendCardMenu from './FriendCardMenu/FriendCardMenu';
+import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
+import { motion } from 'framer-motion';
 
 type FriendCardProps = {
     friendData: MinimalUserTypes;
@@ -27,8 +28,15 @@ export default function FriendCard({ friendData }: FriendCardProps) {
     const isConfirmDialogMounted = shouldConfirmDialogShow;
     const showConfirmDialog = useDelayUnmount(isConfirmDialogMounted, 150);
 
+    const [showMenu, setShowMenu] = useState(false);
+
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
+
     const handleUnfriendButtonClick = () => {
         setShouldConfirmDialogShow(true);
+        setShowMenu(false);
     };
 
     return (
@@ -55,33 +63,62 @@ export default function FriendCard({ friendData }: FriendCardProps) {
                     }}
                 />
             )}
-            <div className="w-5/6 lg:w-44 mx-auto">
-                <div className="w-full flex flex-col text-center p-4 bg-card dark:bg-cardDark shadow-lg rounded md:rounded-lg">
-                    <section>
-                        <img
-                            className="w-20 h-20 object-cover mx-auto relative -top-12 border-4 border-cCyan rounded"
-                            src={`data:image/png;base64,${getCorrectUserpicFormat(
-                                userpic
-                            )}`}
-                            alt="User avatar"
-                        />
-                        <p className="font-semibold text-md my-5 break-all relative -top-5 text-regularText dark:text-regularTextDark">
-                            {firstName} {lastName}
-                        </p>
-                    </section>
-                    <div className="flex justify-around items-center">
-                        <Link
-                            to={`/users/${_id}`}
-                            className="flex items-center w-max gap-4 py-2 text-regularText dark:text-regularTextDark "
-                        >
-                            <TbLink className="text-xl hover:scale-125 hover:text-cCyan transition-all" />
-                        </Link>
 
-                        <TbUserMinus
-                            onClick={handleUnfriendButtonClick}
-                            className="text-regularText dark:text-regularTextDark text-xl cursor-pointer hover:scale-125 hover:text-cRed hover:dark:text-cRed transition-all"
+            <div
+                className={`relative w-48 md:w-40 h-60 flex flex-col justify-between text-center p-4 gap-4 bg-card dark:bg-cardDark shadow-lg rounded md:rounded-lg overflow-hidden ${
+                    showMenu
+                        ? 'bg-friendCardHighlight dark:bg-friendCardHighlight'
+                        : ''
+                } `}
+            >
+                <div className="group">
+                    <button
+                        onClick={toggleMenu}
+                        className="cursor-pointer absolute top-0 right-0 h-12 w-12 rounded bg-friendCardHighlight dark:bg-friendCardHighlight rounded-es-full transform transition-all duration-300 hover:w-72 hover:h-72 group-hover:w-72 group-hover:h-72"
+                    >
+                        <div className="absolute top-3 right-3 z-10 group-hover:scale-110 transform transition-all duration-300">
+                            {showMenu ? (
+                                <motion.div
+                                    initial={{
+                                        opacity: 0,
+                                        rotate: 0,
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        rotate: 45,
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <TbFoldUp />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <TbDotsDiagonal />
+                                </motion.div>
+                            )}
+                        </div>
+                    </button>
+                </div>
+                <div className="z-10 h-full w-full flex flex-col justify-center">
+                    {showMenu ? (
+                        <FriendCardMenu
+                            id={_id}
+                            firstName={firstName}
+                            handleUnfriendButtonClick={
+                                handleUnfriendButtonClick
+                            }
                         />
-                    </div>
+                    ) : (
+                        <FriendInfoCard
+                            userpic={userpic}
+                            firstName={firstName}
+                            lastName={lastName}
+                        />
+                    )}
                 </div>
             </div>
         </>
