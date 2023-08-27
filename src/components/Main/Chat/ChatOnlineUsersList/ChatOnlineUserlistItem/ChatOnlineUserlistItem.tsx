@@ -3,8 +3,8 @@ import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import { initializeChat } from '../../../../../utilities/initializeChat';
 import { ChatConversationType } from '../../../../../types/chatConversationType';
+import { handleInitializeChat } from '../../../../../utilities/handleInitializeChat';
 
 type ChatOnlineUserlistItemProps = {
     listItemData: MinimalUserTypes;
@@ -26,34 +26,16 @@ export default function ChatOnlineUserlistItem({
     const indicatorColor = isOnline ? 'green' : 'gray';
     const chatPartnerId = _id;
 
-    const handleInitializeChat = async () => {
-        if (token && chatPartnerId) {
-            const response = await initializeChat(
-                token,
-                chatPartnerId,
-                setInfo
-            );
-
-            if (response && response.ok) {
-                const data = await response.json();
-                data.existingConversation
-                    ? setActiveChat(data.existingConversation)
-                    : setActiveChat(data.savedConversation);
-            }
-
-            if (response && !response.ok) {
-                setInfo({
-                    typeOfInfo: 'bad',
-                    message: 'Could not initialize chat!',
-                    icon: '👻',
-                });
-            }
-        }
-    };
-
     return (
         <div
-            onClick={handleInitializeChat}
+            onClick={() => {
+                handleInitializeChat(
+                    token,
+                    setInfo,
+                    chatPartnerId,
+                    setActiveChat
+                );
+            }}
             className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark cursor-pointer"
         >
             <div
