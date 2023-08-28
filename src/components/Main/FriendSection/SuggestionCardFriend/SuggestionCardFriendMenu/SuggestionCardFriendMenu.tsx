@@ -1,15 +1,60 @@
-import React from 'react';
-import { TbLink, TbUserPlus } from 'react-icons/tb';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { handleSendFriendRequest } from '../../../../../utilities/handleSendFriendRequest';
+import useAuth from '../../../../../hooks/useAuth';
+import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
+import useInfoCard from '../../../../../hooks/useInfoCard';
+import { fetchOtherUserData } from '../../../../../utilities/fetchOtherUserData';
+import { TbLink, TbUserPlus } from 'react-icons/tb';
 
 type SuggestionCardFriendMenuProps = {
     id: string;
 };
 
-export default function SuggestionCardFriendMenu({
+const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     id,
-}: SuggestionCardFriendMenuProps) {
+}: SuggestionCardFriendMenuProps) => {
+    const { token } = useAuth();
+    const { currentUserData } = useCurrentUserData();
+    const { setInfo } = useInfoCard();
+    const [isFriendRequestPending, setIsFriendRequestPending] = useState({
+        incoming: false,
+        outgoing: false,
+    });
+    const [disableFriendRequestButton, setDisableFriendRequestButton] =
+        useState(false);
+    const shouldFetchFriendData = useRef(true);
+
+    const { _id: currentUserId } = currentUserData || {};
+    const otherUserId = id;
+
+    const fetchUserData = async () => {
+        if (token) {
+            const response = await fetchOtherUserData(id, token, setInfo);
+
+            setIsFriendRequestPending({
+                incoming: response?.isIncomingFriendRequestPending || false,
+                outgoing: response?.isOutgoingFriendRequestPending || false,
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (shouldFetchFriendData.current) {
+            fetchUserData();
+        }
+        return () => {
+            shouldFetchFriendData.current = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        setDisableFriendRequestButton(
+            isFriendRequestPending.outgoing || isFriendRequestPending.incoming
+        );
+    }, [isFriendRequestPending]);
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -23,18 +68,39 @@ export default function SuggestionCardFriendMenu({
                 <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                     Visit page
                 </span>
-                <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                     <TbLink />
                 </div>
             </Link>
-            <button className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight">
-                <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                    Send friend request
-                </span>
-                <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                    <TbUserPlus />
+            {disableFriendRequestButton ? (
+                <div className="flex justify-between items-center w-full text-left text-gray-400 group leading-tight">
+                    <span>Friend request pending</span>
+
+                    <TbUserPlus size="1.75em" />
                 </div>
-            </button>
+            ) : (
+                <button
+                    onClick={() => {
+                        handleSendFriendRequest(
+                            token,
+                            currentUserId,
+                            otherUserId,
+                            setInfo,
+                            setDisableFriendRequestButton
+                        );
+                    }}
+                    className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight"
+                >
+                    <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                        Send friend request
+                    </span>
+                    <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                        <TbUserPlus />
+                    </div>
+                </button>
+            )}
         </motion.div>
     );
-}
+};
+
+export default SuggestionCardFriendMenu;
