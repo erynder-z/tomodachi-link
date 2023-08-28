@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
-import { sendFriendRequest } from '../../../../../../utilities/sendFriendRequest';
 import { OtherUserPageDataTypes } from '../../../../../../types/otherUserPageDataTypes';
+import { handleSendFriendRequest } from '../../../../../../utilities/handleSendFriendRequest';
 
 type NormalContentProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -24,16 +24,8 @@ export default function NormalContent({
         isFriendRequestPending.outgoing
     );
     const { firstName, lastName } = userPageData || {};
-
-    const handleSendFriendRequest = () => {
-        if (currentUserData && token) {
-            const currentUserId = currentUserData?._id;
-            const otherUserId = userPageData._id;
-
-            sendFriendRequest(token, currentUserId, otherUserId, setInfo);
-            setDisableButton(true);
-        }
-    };
+    const currentUserId = currentUserData?._id;
+    const otherUserId = userPageData._id;
 
     const getButton = () => {
         if (disableButton) {
@@ -45,7 +37,15 @@ export default function NormalContent({
         } else {
             return (
                 <button
-                    onClick={handleSendFriendRequest}
+                    onClick={() => {
+                        handleSendFriendRequest(
+                            token,
+                            currentUserId,
+                            otherUserId,
+                            setInfo,
+                            setDisableButton
+                        );
+                    }}
                     className="bg-blue-500 text-white px-2 py-1 hover:bg-blue-600"
                 >
                     Send friend request

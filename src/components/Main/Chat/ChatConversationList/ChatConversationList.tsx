@@ -15,32 +15,42 @@ export default function ChatConversationList({
     handleChatConversationClick,
     currentUserId,
 }: ChatConversationListProps) {
+    const hasConversations = conversations.length > 0;
     return (
-        <div className="md:flex md:h-fit sticky top-0 md:top-2 flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-full md:w-full p-2 lg:p-0 bg-card dark:bg-cardDark md:bg-background2 md:dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
+        <div className="md:flex md:h-fit sticky top-0 md:top-2 flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-full md:w-full  lg:p-0 bg-card dark:bg-cardDark md:bg-background2 md:dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
             <h1 className="text-center font-bold">Conversations</h1>
-            <div className="flex md:flex-col gap-2 lg:gap-4">
-                {conversations.map((conv, index) => {
-                    const hasUnreadMessage =
-                        conversationsWithUnreadMessages.includes(conv._id);
-                    return (
-                        <div
-                            onClick={() => handleChatConversationClick(conv)}
-                            key={index}
-                            className="relative cursor-pointer animate-popInAnimation"
-                        >
-                            <ChatConversation
-                                conversation={conv}
-                                currentUserId={currentUserId}
-                            />
-                            {hasUnreadMessage && (
-                                <div className="absolute bottom-2 md:inset-y-0 right-8 md:right-0 flex justify-center items-center mr-4">
-                                    <div className="w-3 h-3 bg-fuchsia-500 rounded-full animate-pulse   " />
-                                </div>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
+            {hasConversations ? (
+                <div className="flex md:flex-col gap-2 lg:gap-4 p-2">
+                    {conversations.map((conv, index) => {
+                        const hasUnreadMessage =
+                            conversationsWithUnreadMessages.includes(conv._id);
+                        return (
+                            <div
+                                onClick={() =>
+                                    handleChatConversationClick(conv)
+                                }
+                                key={index}
+                                className="relative cursor-pointer animate-popInAnimation"
+                            >
+                                <ChatConversation
+                                    conversation={conv}
+                                    currentUserId={currentUserId}
+                                />
+                                {hasUnreadMessage && (
+                                    <div className="absolute bottom-2 md:inset-y-0 right-8 md:right-0 flex justify-center items-center mr-4">
+                                        <div className="w-3 h-3 bg-fuchsia-500 rounded-full animate-pulse   " />
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            ) : (
+                <span className="text-xs leading-tight p-2 flex text-center">
+                    Select a friend from the sidebar to initialize a
+                    conversation!
+                </span>
+            )}
         </div>
     );
 }
