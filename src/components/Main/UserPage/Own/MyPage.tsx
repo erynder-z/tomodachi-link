@@ -9,6 +9,8 @@ import MyCoverSection from './MyCoverSection/MyCoverSection';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import PictureList from '../SharedComponents/PictureList/PictureList';
 import PostList from '../SharedComponents/PostList/PostList';
+import tinycolor from 'tinycolor2';
+import { FinalColor } from 'extract-colors';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -29,6 +31,11 @@ export default function MyPage({
         currentUserData: true,
         coverSection: true,
     });
+    const [colorPalette, setColorPalette] = useState<FinalColor[]>([]);
+    const backgroundColor = colorPalette[0]?.hex;
+    const textColor = tinycolor(backgroundColor).isDark()
+        ? '#e4e6ea'
+        : '#020202';
 
     const shouldSetCurrentView = useRef(true);
 
@@ -82,7 +89,12 @@ export default function MyPage({
                     loading ? 'hidden' : 'md:grid'
                 } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
             >
-                <MyCoverSection onFetchComplete={onFetchComplete} />
+                <MyCoverSection
+                    onFetchComplete={onFetchComplete}
+                    backgroundColor={backgroundColor}
+                    textColor={textColor}
+                    setColorPalette={setColorPalette}
+                />
                 <div className="flex flex-col lg:h-1/2">
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">

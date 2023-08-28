@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import tinycolor from 'tinycolor2';
 import UnfriendButton from '../UnfriendButton/UnfriendButton';
 import { CoverOption } from '../../../../../../types/coverOptionTypes';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../../utilities/getColors';
+import { FinalColor } from 'extract-colors';
 
 type FriendCoverSectionProps = {
     _id: string;
@@ -11,6 +11,9 @@ type FriendCoverSectionProps = {
     lastName: string;
     userPicture: string;
     cover?: string;
+    backgroundColor: string;
+    textColor: string;
+    setColorPalette: React.Dispatch<React.SetStateAction<FinalColor[]>>;
     numberOfFriends: number;
     lastSeenFormatted: string;
     mutualFriends: number;
@@ -22,6 +25,9 @@ export default function FriendCoverSection({
     lastName,
     userPicture,
     cover,
+    backgroundColor,
+    textColor,
+    setColorPalette,
     numberOfFriends,
     lastSeenFormatted,
     mutualFriends,
@@ -29,12 +35,6 @@ export default function FriendCoverSection({
     const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
         null
     );
-    const [colorPalette, setColorPalette] = useState<any>([]);
-
-    const backgroundColor = colorPalette[0]?.hex;
-    const textColor = tinycolor(backgroundColor).isDark()
-        ? '#ffffff'
-        : '#000000';
 
     function getUserCoverImage() {
         const userCover = cover;
@@ -54,15 +54,17 @@ export default function FriendCoverSection({
             const image = selectedCover?.image;
             getColors(image)
                 .then((palette) => {
-                    setColorPalette(palette);
+                    if (palette) {
+                        setColorPalette(palette as FinalColor[]);
+                    }
                 })
                 .catch(console.error);
         }
     }, [selectedCover]);
 
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-96 grid grid-rows-4">
-            <div className="relative row-span-3 flex">
+        <div className="h-[calc(100vh_-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
+            <div className="relative row-span-3 flex rounded-t">
                 <img
                     src={selectedCover?.image}
                     alt="cover image"
@@ -70,11 +72,11 @@ export default function FriendCoverSection({
                 />
             </div>
             <div
-                className="relative row-span-1 flex flex-col md:flex-row gap-4 h-full lg:p-4 bg-slate-300"
+                className="relative row-span-1 flex flex-col md:flex-row gap-4 h-full lg:p-4 bg-slate-300 rounded-b"
                 style={
-                    colorPalette[0]
+                    backgroundColor && textColor
                         ? {
-                              backgroundColor: `${colorPalette[0].hex}`,
+                              backgroundColor: backgroundColor,
                               color: textColor,
                           }
                         : {}

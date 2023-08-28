@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import NormalContent from './NormalContent/NormalContent';
 import IncomingFriendRequestPendingContent from './IncomingFriendRequestPendingContent/IncomingFriendRequestPendingContent';
 import NotFriendCoverSection from './NotFriendCoverSection/NotFriendCoverSection';
+import { FinalColor } from 'extract-colors';
+import tinycolor from 'tinycolor2';
 
 type NotFriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -18,6 +20,13 @@ export default function NotFriendUserPage({
     isFriendRequestPending,
 }: NotFriendUserPageProps) {
     const { firstName, lastName, userpic, cover } = userPageData || {};
+
+    const [colorPalette, setColorPalette] = useState<FinalColor[]>([]);
+    const backgroundColor = colorPalette[0]?.hex;
+    const textColor = tinycolor(backgroundColor).isDark()
+        ? '#e4e6ea'
+        : '#020202';
+
     const userPicture = convertDatabaseImageToBase64(userpic);
 
     return (
@@ -27,6 +36,9 @@ export default function NotFriendUserPage({
                 lastName={lastName}
                 userPicture={userPicture}
                 cover={cover}
+                backgroundColor={backgroundColor}
+                textColor={textColor}
+                setColorPalette={setColorPalette}
             />
             <div className="animate-popInAnimation my-auto">
                 {isFriendRequestPending.incoming ? (

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import tinycolor from 'tinycolor2';
 import { FaImages } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
@@ -10,13 +9,20 @@ import { COVER_OPTIONS } from '../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../utilities/getColors';
 import ChangeCoverMenu from './ChangeCoverMenu/ChangeCoverMenu';
 import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
+import { FinalColor } from 'extract-colors';
 
 type MyCoverSectionProps = {
     onFetchComplete: (nameOfComponent: string) => void;
+    backgroundColor: string;
+    textColor: string;
+    setColorPalette: React.Dispatch<React.SetStateAction<FinalColor[]>>;
 };
 
 export default function MyCoverSection({
     onFetchComplete,
+    backgroundColor,
+    textColor,
+    setColorPalette,
 }: MyCoverSectionProps) {
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
@@ -24,17 +30,12 @@ export default function MyCoverSection({
     const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
         null
     );
-    const [colorPalette, setColorPalette] = useState<any>([]);
+
     const [shouldMenuShow, setShouldMenuShow] = useState<boolean>(false);
     const [isSaveButtonShown, setIsSaveButtonShown] = useState<boolean>(false);
     const isMenuMounted = shouldMenuShow;
     const showMenu = useDelayUnmount(isMenuMounted, 150);
     const [initialCover, setInitialCover] = useState<CoverOption | null>(null);
-
-    const backgroundColor = colorPalette[0]?.hex;
-    const textColor = tinycolor(backgroundColor).isDark()
-        ? '#ffffff'
-        : '#000000';
 
     const handleChangeCoverImage = () => {
         setShouldMenuShow(!shouldMenuShow);
@@ -70,7 +71,9 @@ export default function MyCoverSection({
             const image = selectedCover?.image;
             getColors(image)
                 .then((palette) => {
-                    setColorPalette(palette);
+                    if (palette) {
+                        setColorPalette(palette as FinalColor[]);
+                    }
                 })
                 .catch(console.error);
         }
@@ -100,12 +103,12 @@ export default function MyCoverSection({
     }, [selectedCover, initialCover]);
 
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-96 col-span-2 grid grid-rows-4">
+        <div className="h-[calc(100vh_-_5rem)] md:h-96 col-span-2 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex">
                 <img
                     src={selectedCover?.image}
                     alt="cover image"
-                    className="f-full md:h-80 w-full object-cover"
+                    className="h-full w-full object-cover rounded-t"
                 />
                 {!showMenu && (
                     <button
@@ -124,9 +127,9 @@ export default function MyCoverSection({
                 )}
                 {isSaveButtonShown && (
                     <button
-                        className="absolute bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 border-2 border-white rounded lg:rounded-lg"
+                        className="absolute bottom-4 right-4  py-2 px-4 border-2  rounded lg:rounded-lg"
                         style={{
-                            backgroundColor: `${colorPalette[0]?.hex}`,
+                            backgroundColor: backgroundColor,
                             color: textColor,
                         }}
                         onClick={handleSaveCoverImage}
@@ -136,11 +139,11 @@ export default function MyCoverSection({
                 )}
             </div>
             <div
-                className="relative row-span-1 flex h-full gap-4 px-4 bg-slate-300 "
+                className="relative row-span-1 flex h-full gap-4 px-4 bg-card dark:bg-cardDark rounded-b"
                 style={
-                    colorPalette[0]
+                    backgroundColor && textColor
                         ? {
-                              backgroundColor: `${colorPalette[0].hex}`,
+                              backgroundColor: backgroundColor,
                               color: textColor,
                           }
                         : {}

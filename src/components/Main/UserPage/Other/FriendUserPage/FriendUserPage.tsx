@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
@@ -6,6 +6,8 @@ import { formatDistanceToNow } from 'date-fns';
 import FriendCoverSection from './FriendCoverSection/FriendCoverSection';
 import PictureList from '../../SharedComponents/PictureList/PictureList';
 import PostList from '../../SharedComponents/PostList/PostList';
+import { FinalColor } from 'extract-colors';
+import tinycolor from 'tinycolor2';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -27,6 +29,12 @@ export default function FriendUserPage({
         lastSeen,
     } = userPageData || {};
 
+    const [colorPalette, setColorPalette] = useState<FinalColor[]>([]);
+    const backgroundColor = colorPalette[0]?.hex;
+    const textColor = tinycolor(backgroundColor).isDark()
+        ? '#e4e6ea'
+        : '#020202';
+
     const userPicture = convertDatabaseImageToBase64(userpic);
     const numberOfFriends = friends.length;
     const lastSeenFormatted = lastSeen
@@ -42,6 +50,9 @@ export default function FriendUserPage({
                     lastName={lastName}
                     userPicture={userPicture}
                     cover={cover}
+                    backgroundColor={backgroundColor}
+                    textColor={textColor}
+                    setColorPalette={setColorPalette}
                     numberOfFriends={numberOfFriends}
                     lastSeenFormatted={lastSeenFormatted}
                     mutualFriends={mutualFriends}
