@@ -1,20 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CurrentViewType } from '../../../types/currentViewType';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import useFriendData from '../../../hooks/useFriendData';
-import { MinimalUserTypes } from '../../../types/minimalUserTypes';
-import FriendCard from './FriendCard/FriendCard';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
-import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
-import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
-import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
+import FriendCard from './FriendCard/FriendCard';
 import SuggestionCardRandom from './SuggestionCardRandom/SuggestionCardRandom';
 import SuggestionCardFriend from './SuggestionCardFriend/SuggestionCardFriend';
 import { ChatConversationType } from '../../../types/chatConversationType';
+import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
+import { MinimalUserTypes } from '../../../types/minimalUserTypes';
+import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
+import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 
 type FriendSectionProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
+    setCurrentView: React.Dispatch<React.SetStateAction<string>>;
     setActiveChat: React.Dispatch<
         React.SetStateAction<ChatConversationType | null>
     >;
@@ -33,13 +32,30 @@ export default function FriendSection({
     const [randomUsers, setRandomUsers] = useState<MinimalUserTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const shouldFetch = useRef(true);
+    const shouldFetchFriendsOfFriends = useRef(true);
+
+    useEffect(() => {
+        if (shouldFetchFriendsOfFriends.current) {
+            handleFetchFriendsOfFriends();
+        }
+        return () => {
+            shouldFetchFriendsOfFriends.current = false;
+        };
+    }, [friendData]);
+
+    useEffect(() => {
+        setCurrentView('Friends');
+        localStorage.setItem('currentViewOdinBook', 'Friends');
+    }, []);
 
     const handleFetchFriendsOfFriends = async () => {
         if (authUser && token) {
             const response = await fetchSomeFriendsOfFriends(token, setInfo);
             setFriendsOfFriends(response);
-            setLoading(false);
+            setLoading(response.length <= 0);
+            if (response.length <= 0) {
+                handleFetchRandomUsers();
+            }
         }
     };
 
@@ -51,28 +67,25 @@ export default function FriendSection({
         }
     };
 
-    useEffect(() => {
-        if (friendData) {
-            setLoading(false);
-        }
-    }, [friendData]);
+    const getSuggestionList = () => {
+        const suggestionList =
+            friendsOfFriends.length === 0 ? randomUsers : friendsOfFriends;
 
-    useEffect(() => {
-        handleFetchFriendsOfFriends();
-        setCurrentView('Friends');
-        localStorage.setItem('currentViewOdinBook', 'Friends');
-    }, []);
-
-    useEffect(() => {
-        if (shouldFetch.current === true) {
-            if (friendsOfFriends.length === 0) {
-                handleFetchRandomUsers();
-            }
-        }
-        return () => {
-            shouldFetch.current = false;
-        };
-    }, [friendsOfFriends]);
+        return suggestionList.map(
+            (suggestion: MinimalUserTypes | FriendsOfFriendsType) =>
+                suggestionList === randomUsers ? (
+                    <SuggestionCardRandom
+                        key={suggestion._id}
+                        userData={suggestion as MinimalUserTypes}
+                    />
+                ) : (
+                    <SuggestionCardFriend
+                        key={suggestion._id}
+                        friendData={suggestion as FriendsOfFriendsType}
+                    />
+                )
+        );
+    };
 
     const friendProfileCardList = friendData?.map(
         (friendObject: MinimalUserTypes) => (
@@ -83,40 +96,6 @@ export default function FriendSection({
             />
         )
     );
-
-    const getSuggestionList = () => {
-        if (!friendsOfFriends || friendsOfFriends.length === 0) {
-            const randomUsersCardList = randomUsers?.map(
-                (userObject: MinimalUserTypes) => (
-                    <SuggestionCardRandom
-                        key={userObject._id}
-                        userData={userObject}
-                    />
-                )
-            );
-            return randomUsersCardList;
-        }
-
-        const friendsOfFriendsCardList = friendsOfFriends?.map(
-            (friendObject: FriendsOfFriendsType) => (
-                <SuggestionCardFriend
-                    key={friendObject._id}
-                    friendData={friendObject}
-                />
-            )
-        );
-
-        return friendsOfFriendsCardList;
-    };
-
-    if (loading) {
-        return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark">
-                <h1 className="font-bold">Getting friend data...</h1>
-                <LoadingSpinner />
-            </div>
-        );
-    }
 
     return (
         <div className="flex flex-col gap-4 min-h-[calc(100vh_-_5rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg">
@@ -134,6 +113,7 @@ export default function FriendSection({
             </h1>
             <div className="animate-popInAnimation flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {getSuggestionList()}
+                {loading && <LoadingSpinner />}
             </div>
         </div>
     );
