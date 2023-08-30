@@ -35,12 +35,8 @@ export default function ChatConversationList({
                                 <ChatConversation
                                     conversation={conv}
                                     currentUserId={currentUserId}
+                                    hasUnreadMessage={hasUnreadMessage}
                                 />
-                                {hasUnreadMessage && (
-                                    <div className="absolute bottom-2 md:inset-y-0 right-8 md:right-0 flex justify-center items-center mr-4">
-                                        <div className="w-3 h-3 bg-fuchsia-500 rounded-full animate-pulse   " />
-                                    </div>
-                                )}
                             </div>
                         );
                     })}

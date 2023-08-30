@@ -3,18 +3,20 @@ import { ChatConversationType } from '../../../../types/chatConversationType';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import ChatUserListItem from '../ChatConversationListItem/ChatConversationListItem';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { fetchChatPartnerData } from '../../../../utilities/fetchChatPartnerData';
+import ChatConversationListItem from '../ChatConversationListItem/ChatConversationListItem';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;
     currentUserId: string | undefined;
+    hasUnreadMessage: boolean;
 };
 
 export default function ChatConversation({
     conversation,
     currentUserId,
+    hasUnreadMessage,
 }: ChatConversationProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
@@ -52,5 +54,16 @@ export default function ChatConversation({
         );
     }
 
-    return <ChatUserListItem listItemData={chatPartner} />;
+    return (
+        <div className="flex items-center w-full gap-4 p-2 text-regularText dark:text-regularTextDark bg-card dark:bg-cardDark hover:bg-cBlue dark:hover:bg-cBlue rounded-3xl">
+            <ChatConversationListItem listItemData={chatPartner} />
+            <div className="flex gap-2">
+                {hasUnreadMessage && (
+                    <div className="-translate-x-12 translate-y-3 md:-translate-x-0 md:translate-y-0 flex justify-center items-center mr-4">
+                        <div className="w-3 h-3 bg-highlight dark:bg-highlightDark rounded-full animate-pulse" />
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }
