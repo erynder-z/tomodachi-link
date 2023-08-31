@@ -11,9 +11,10 @@ import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
 import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
+import { CurrentViewType } from '../../../types/currentViewType';
 
 type FriendSectionProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<string>>;
+    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     setActiveChat: React.Dispatch<
         React.SetStateAction<ChatConversationType | null>
     >;
