@@ -4,6 +4,7 @@ export type ChatConversationType = {
     conversationStatus: {
         member: string;
         hasUnreadMessage: boolean;
+        hasMutedConversation: boolean;
     }[];
     createdAt: Date;
     updatedAt: Date;

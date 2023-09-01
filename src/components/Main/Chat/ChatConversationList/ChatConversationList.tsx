@@ -24,6 +24,11 @@ export default function ChatConversationList({
                     {conversations.map((conv, index) => {
                         const hasUnreadMessage =
                             conversationsWithUnreadMessages.includes(conv._id);
+                        const isMuted = conv.conversationStatus.some(
+                            (status) =>
+                                status.member === currentUserId &&
+                                status.hasMutedConversation
+                        );
                         return (
                             <div
                                 onClick={() =>
@@ -36,6 +41,7 @@ export default function ChatConversationList({
                                     conversation={conv}
                                     currentUserId={currentUserId}
                                     hasUnreadMessage={hasUnreadMessage}
+                                    isMuted={isMuted}
                                 />
                             </div>
                         );
