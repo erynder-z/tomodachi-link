@@ -7,7 +7,9 @@ type NotificationBubblesContextProviderProps = {
 
 type NotificationBubblesContextProps = {
     conversationsWithUnreadMessages: string[];
-    setConversationsWithUnreadMessages: (conversations: string[]) => void;
+    setConversationsWithUnreadMessages: (
+        conversations: string[] | ((prev: string[]) => string[])
+    ) => void;
     activeChat: ChatConversationType | null;
     setActiveChat: (chat: ChatConversationType | null) => void;
 };
@@ -15,8 +17,11 @@ type NotificationBubblesContextProps = {
 const NotificationBubblesContext =
     createContext<NotificationBubblesContextProps>({
         conversationsWithUnreadMessages: [],
-        // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-        setConversationsWithUnreadMessages: (conversations: string[]) => {},
+        setConversationsWithUnreadMessages: (
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            conversations: string[] | ((prev: string[]) => string[])
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+        ) => {},
         activeChat: null,
         // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
         setActiveChat: (chat: ChatConversationType | null) => {},
