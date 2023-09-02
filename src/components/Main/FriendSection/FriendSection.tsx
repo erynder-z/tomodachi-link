@@ -6,27 +6,22 @@ import useInfoCard from '../../../hooks/useInfoCard';
 import FriendCard from './FriendCard/FriendCard';
 import SuggestionCardRandom from './SuggestionCardRandom/SuggestionCardRandom';
 import SuggestionCardFriend from './SuggestionCardFriend/SuggestionCardFriend';
-import { ChatConversationType } from '../../../types/chatConversationType';
 import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
 import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 import { CurrentViewType } from '../../../types/currentViewType';
+import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 
 type FriendSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
 };
 
-export default function FriendSection({
-    setCurrentView,
-    setActiveChat,
-}: FriendSectionProps) {
+export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const { friendData } = useFriendData();
+    const { setActiveChat } = useNotificationBubblesContext();
     const [friendsOfFriends, setFriendsOfFriends] = useState<
         FriendsOfFriendsType[]
     >([]);

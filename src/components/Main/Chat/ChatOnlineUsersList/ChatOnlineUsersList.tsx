@@ -3,20 +3,17 @@ import { ChatMemberType } from '../../../../types/chatMemberType';
 import useFriendData from '../../../../hooks/useFriendData';
 import ChatOnlineUserlistItem from './ChatOnlineUserlistItem/ChatOnlineUserlistItem';
 import { FriendDataType } from '../../../../types/friendDataType';
-import { ChatConversationType } from '../../../../types/chatConversationType';
+import useNotificationBubblesContext from '../../../../hooks/useNotificationBubblesContext';
 
 type ChatOnlineUsersListProps = {
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
     onlineUsers: ChatMemberType[];
 };
 
-export default function OnlineUsersList({
-    setActiveChat,
+export default function ChatOnlineUsersList({
     onlineUsers,
 }: ChatOnlineUsersListProps) {
     const { friendData } = useFriendData();
+    const { setActiveChat } = useNotificationBubblesContext();
 
     const isOnline = (user: FriendDataType) => {
         return onlineUsers?.some(

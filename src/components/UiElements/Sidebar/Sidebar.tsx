@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import UserListSome from '../../Main/UserList/UserListSome/UserListSome';
 import { CurrentViewType } from '../../../types/currentViewType';
 import UserListAll from '../../Main/UserList/UserListAll/UserListAll';
-import OnlineUsersList from '../../Main/Chat/ChatOnlineUsersList/ChatOnlineUsersList';
+import ChatOnlineUsersList from '../../Main/Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
-import { ChatConversationType } from '../../../types/chatConversationType';
 import { ChatMemberType } from '../../../types/chatMemberType';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -14,9 +13,6 @@ type SidebarProps = {
     showSidebar: boolean;
     toggleSidebar?: () => void;
     socket: Socket | undefined;
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
 };
 
 export default function Sidebar({
@@ -24,7 +20,6 @@ export default function Sidebar({
     showSidebar,
     toggleSidebar,
     socket,
-    setActiveChat,
 }: SidebarProps) {
     const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -38,10 +33,7 @@ export default function Sidebar({
                     <LoadingSpinner />
                 </div>
             ) : (
-                <OnlineUsersList
-                    setActiveChat={setActiveChat}
-                    onlineUsers={onlineUsers}
-                />
+                <ChatOnlineUsersList onlineUsers={onlineUsers} />
             );
         } else {
             return <UserListSome />;

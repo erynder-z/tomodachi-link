@@ -28,12 +28,15 @@ import { useLocation } from 'react-router-dom';
 import { ChatConversationType } from './types/chatConversationType';
 import { handleChatSetup } from './utilities/handleChatSetup';
 import useTheme from './hooks/useTheme';
+import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
 
 function App() {
     const { isAuth, token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
     const { theme } = useTheme();
+    const { setConversationsWithUnreadMessages, setActiveChat } =
+        useNotificationBubblesContext();
 
     const [currentView, setCurrentView] = useState<CurrentViewType>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
@@ -48,14 +51,6 @@ function App() {
     });
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
-    const [activeChat, setActiveChat] = useState<ChatConversationType | null>(
-        null
-    );
-
-    const [
-        conversationsWithUnreadMessages,
-        setConversationsWithUnreadMessages,
-    ] = useState<string[]>([]);
 
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
@@ -116,12 +111,6 @@ function App() {
         }
     }, [isAuth && currentUserData?._id]);
 
-    useEffect(() => {
-        setConversationsWithUnreadMessages((prevUnreadMessages) =>
-            prevUnreadMessages.filter((id) => id !== activeChat?._id)
-        );
-    }, [conversationsWithUnreadMessages.length]);
-
     if (!isAuth) {
         return (
             <>
@@ -140,9 +129,6 @@ function App() {
                     <Navbar
                         shouldOverlaysShow={shouldOverlaysShow}
                         setShouldOverlaysShow={setShouldOverlaysShow}
-                        conversationsWithUnreadMessages={
-                            conversationsWithUnreadMessages
-                        }
                     />
                 </nav>
             </div>
@@ -195,7 +181,6 @@ function App() {
                                 element={
                                     <FriendSection
                                         setCurrentView={setCurrentView}
-                                        setActiveChat={setActiveChat}
                                     />
                                 }
                             />
@@ -208,14 +193,6 @@ function App() {
                                         <Chat
                                             setCurrentView={setCurrentView}
                                             socket={socket.current}
-                                            activeChat={activeChat}
-                                            setActiveChat={setActiveChat}
-                                            conversationsWithUnreadMessages={
-                                                conversationsWithUnreadMessages
-                                            }
-                                            setConversationsWithUnreadMessages={
-                                                setConversationsWithUnreadMessages
-                                            }
                                         />
                                     )
                                 }
@@ -264,7 +241,6 @@ function App() {
                     showSidebar={showSidebar}
                     toggleSidebar={toggleSidebar}
                     socket={socket.current}
-                    setActiveChat={setActiveChat}
                 />
                 <ScrollToTopButton />
             </main>

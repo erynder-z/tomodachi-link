@@ -9,9 +9,7 @@ import { handleInitializeChat } from '../../../../../utilities/handleInitializeC
 type ChatOnlineUserlistItemProps = {
     listItemData: MinimalUserTypes;
     isOnline: boolean;
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
+    setActiveChat: (chat: ChatConversationType) => void;
 };
 
 export default function ChatOnlineUserlistItem({

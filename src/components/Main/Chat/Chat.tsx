@@ -9,31 +9,23 @@ import { ChatConversationType } from '../../../types/chatConversationType';
 import Chatroom from './Chatroom/Chatroom';
 import { Socket } from 'socket.io-client';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
+import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 
 type ChatProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     socket: Socket | undefined;
-    activeChat: ChatConversationType | null;
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
-    conversationsWithUnreadMessages: string[];
-    setConversationsWithUnreadMessages: React.Dispatch<
-        React.SetStateAction<string[]>
-    >;
 };
 
-export default function Chat({
-    setCurrentView,
-    socket,
-    activeChat,
-    setActiveChat,
-    conversationsWithUnreadMessages,
-    setConversationsWithUnreadMessages,
-}: ChatProps) {
+export default function Chat({ setCurrentView, socket }: ChatProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
+    const {
+        conversationsWithUnreadMessages,
+        setConversationsWithUnreadMessages,
+        activeChat,
+        setActiveChat,
+    } = useNotificationBubblesContext();
 
     const [conversations, setConversations] = useState<ChatConversationType[]>(
         []

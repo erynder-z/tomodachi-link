@@ -8,6 +8,7 @@ import { CurrentUserDataContextProvider } from './contexts/CurrentUserDataContex
 import './index.css';
 import { FriendDataContextProvider } from './contexts/FriendDataContext';
 import { ThemeContextProvider } from './contexts/ThemeContext';
+import { NotificationBubblesContextProvider } from './contexts/NotificationBubblesContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                     <FriendDataContextProvider>
                         <InfoCardContextProvider>
                             <ThemeContextProvider>
-                                <App />
+                                <NotificationBubblesContextProvider>
+                                    <App />
+                                </NotificationBubblesContextProvider>
                             </ThemeContextProvider>
                         </InfoCardContextProvider>
                     </FriendDataContextProvider>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { InfoType } from '../types/infoType';
 import { initializeChat } from './initializeChat';
 import { ChatConversationType } from '../types/chatConversationType';
@@ -7,9 +6,7 @@ export const handleInitializeChat = async (
     token: string | null,
     setInfo: (info: InfoType | null) => void,
     chatPartnerId: string,
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >
+    setActiveChat: (chat: ChatConversationType) => void
 ) => {
     if (token && chatPartnerId) {
         const response = await initializeChat(token, chatPartnerId, setInfo);

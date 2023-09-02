@@ -11,9 +11,7 @@ export const handleChatSetup = (
     >,
     token: string | null,
     currentUserData: CurrentUserDataType,
-    setConversationsWithUnreadMessages: React.Dispatch<
-        React.SetStateAction<string[]>
-    >,
+    setConversationsWithUnreadMessages: (conversations: string[]) => void,
     setInfo: (info: InfoType | null) => void
 ) => {
     const connectToSocket = () => {

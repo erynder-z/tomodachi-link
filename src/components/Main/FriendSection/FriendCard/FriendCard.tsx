@@ -15,9 +15,7 @@ import { ChatConversationType } from '../../../../types/chatConversationType';
 
 type FriendCardProps = {
     friendData: MinimalUserTypes;
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
+    setActiveChat: (chat: ChatConversationType) => void;
 };
 
 export default function FriendCard({

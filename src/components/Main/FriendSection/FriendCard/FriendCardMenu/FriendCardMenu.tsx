@@ -12,9 +12,7 @@ import { handleInitializeChat } from '../../../../../utilities/handleInitializeC
 type FriendCardMenuProps = {
     id: string;
     firstName: string;
-    setActiveChat: React.Dispatch<
-        React.SetStateAction<ChatConversationType | null>
-    >;
+    setActiveChat: (chat: ChatConversationType) => void;
     handleUnfriendButtonClick: () => void;
 };
 
