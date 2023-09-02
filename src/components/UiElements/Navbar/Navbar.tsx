@@ -5,6 +5,7 @@ import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptions
 import SearchButton from './SearchButton/SearchButton';
 import ChatSectionButton from './ChatSectionButton/ChatSectionButton';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
+import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -21,18 +22,23 @@ type NavbarProps = {
             guestAccountOverlay: boolean;
         }>
     >;
-    conversationsWithUnreadMessages: string[];
 };
 
 export default function Navbar({
     shouldOverlaysShow,
     setShouldOverlaysShow,
-    conversationsWithUnreadMessages,
 }: NavbarProps) {
     const { currentUserData } = useCurrentUserData();
+    const { conversationsWithUnreadMessages, mutedConversations } =
+        useNotificationBubblesContext();
     const menuRef = useRef<HTMLDivElement>(null);
 
     const isChatDisabled = currentUserData?.accountType === 'guest';
+    const unmutedConversations = conversationsWithUnreadMessages.filter(
+        (conversation) => !mutedConversations.includes(conversation)
+    );
+    console.log(mutedConversations.length);
+    const shouldUnreadBubbleShow = unmutedConversations.length > 0;
 
     const handleSearchButtonClick = () => {
         setShouldOverlaysShow({
@@ -77,7 +83,7 @@ export default function Navbar({
                 <FriendSectionButton />
                 <div className="relative">
                     <ChatSectionButton isChatDisabled={isChatDisabled} />
-                    {conversationsWithUnreadMessages.length > 0 && (
+                    {shouldUnreadBubbleShow && (
                         <div className="absolute -bottom-1 -right-1">
                             <div className="w-3 h-3 bg-highlight dark:bg-highlightDark rounded-full animate-pulse   " />
                         </div>

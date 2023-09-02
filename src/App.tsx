@@ -25,7 +25,6 @@ import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import Chat from './components/Main/Chat/Chat';
 import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
-import { ChatConversationType } from './types/chatConversationType';
 import { handleChatSetup } from './utilities/handleChatSetup';
 import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
@@ -35,8 +34,11 @@ function App() {
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
     const { theme } = useTheme();
-    const { setConversationsWithUnreadMessages, setActiveChat } =
-        useNotificationBubblesContext();
+    const {
+        setConversationsWithUnreadMessages,
+        setMutedConversations,
+        setActiveChat,
+    } = useNotificationBubblesContext();
 
     const [currentView, setCurrentView] = useState<CurrentViewType>(
         (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
@@ -101,6 +103,7 @@ function App() {
                 token,
                 currentUserData,
                 setConversationsWithUnreadMessages,
+                setMutedConversations,
                 setInfo
             );
 

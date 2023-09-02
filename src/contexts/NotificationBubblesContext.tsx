@@ -1,39 +1,41 @@
 import { createContext, useEffect, useState } from 'react';
 import { ChatConversationType } from '../types/chatConversationType';
 
-type NotificationBubblesContextProviderProps = {
-    children: React.ReactElement;
-};
-
 type NotificationBubblesContextProps = {
     conversationsWithUnreadMessages: string[];
     setConversationsWithUnreadMessages: (
         conversations: string[] | ((prev: string[]) => string[])
     ) => void;
+    mutedConversations: string[];
+    setMutedConversations: (
+        conversations: string[] | ((prev: string[]) => string[])
+    ) => void;
     activeChat: ChatConversationType | null;
     setActiveChat: (chat: ChatConversationType | null) => void;
 };
-
 const NotificationBubblesContext =
     createContext<NotificationBubblesContextProps>({
         conversationsWithUnreadMessages: [],
-        setConversationsWithUnreadMessages: (
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            conversations: string[] | ((prev: string[]) => string[])
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-        ) => {},
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        setConversationsWithUnreadMessages: () => {},
+        mutedConversations: [],
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        setMutedConversations: () => {},
         activeChat: null,
-        // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-        setActiveChat: (chat: ChatConversationType | null) => {},
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        setActiveChat: () => {},
     });
 
 export function NotificationBubblesContextProvider({
     children,
-}: NotificationBubblesContextProviderProps) {
+}: {
+    children: React.ReactNode;
+}) {
     const [
         conversationsWithUnreadMessages,
         setConversationsWithUnreadMessages,
     ] = useState<string[]>([]);
+    const [mutedConversations, setMutedConversations] = useState<string[]>([]);
     const [activeChat, setActiveChat] = useState<ChatConversationType | null>(
         null
     );
@@ -44,15 +46,17 @@ export function NotificationBubblesContextProvider({
         );
     }, [conversationsWithUnreadMessages.length]);
 
+    const contextValue: NotificationBubblesContextProps = {
+        conversationsWithUnreadMessages,
+        setConversationsWithUnreadMessages,
+        mutedConversations,
+        setMutedConversations,
+        activeChat,
+        setActiveChat,
+    };
+
     return (
-        <NotificationBubblesContext.Provider
-            value={{
-                conversationsWithUnreadMessages,
-                setConversationsWithUnreadMessages,
-                activeChat,
-                setActiveChat,
-            }}
-        >
+        <NotificationBubblesContext.Provider value={contextValue}>
             {children}
         </NotificationBubblesContext.Provider>
     );
