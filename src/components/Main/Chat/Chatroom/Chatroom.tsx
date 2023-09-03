@@ -158,9 +158,6 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 handleTyping();
             }
         });
-        return () => {
-            socket?.off('typing', handleTyping);
-        };
     };
 
     const scrollToBottom = () => {
@@ -169,11 +166,18 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
 
     useEffect(() => {
         listenForMessage();
-        listenForTyping();
-
-        return () => {
+        const cleanupMessage = () => {
             socket?.off('receiveMessage');
         };
+        return cleanupMessage;
+    }, [socket]);
+
+    useEffect(() => {
+        listenForTyping();
+        const cleanupTyping = () => {
+            socket?.off('typing', handleTyping);
+        };
+        return cleanupTyping;
     }, [socket]);
 
     useEffect(() => {
@@ -203,7 +207,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
+        <div className="flex flex-col min-h-[calc(100vh-_5rem)] lg:min-h-full bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
             <ChatroomHeader
                 currentUserData={currentUserData}
                 partnerData={partnerData}
