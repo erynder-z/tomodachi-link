@@ -14,7 +14,7 @@ import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
 import { postMessage } from '../../../../utilities/postMessage';
 import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
 import { DisplayChatMessageType } from '../../../../types/displayChatMessageType';
-import { SocketTypingIndicatorType } from '../../../../types/sockeTypingIndicatorType';
+import { SocketTypingIndicatorType } from '../../../../types/socketTypingIndicatorType';
 import TypingIndicator from './TypingIndicator/TypingIndicator';
 import { markMessageUnreadInDB } from '../../../../utilities/markMessageUnreadInDB';
 import { markMessageReadInDB } from '../../../../utilities/markMessageReadInDB';
