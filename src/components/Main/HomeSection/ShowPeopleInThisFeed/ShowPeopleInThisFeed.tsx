@@ -6,6 +6,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
+import { motion } from 'framer-motion';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];
@@ -64,9 +65,14 @@ export default function ShowPeopleInThisFeed({
     }, [IdsOfPeopleInFeed]);
 
     const feedUserList = feedUsers?.map((feedUser: MinimalUserTypes) => (
-        <div key={feedUser?._id} className="animate-popInAnimation">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            key={feedUser?._id}
+        >
             <FeedUserListItem listItemData={feedUser} />
-        </div>
+        </motion.div>
     ));
 
     return (

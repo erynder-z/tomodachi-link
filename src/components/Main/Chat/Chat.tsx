@@ -10,6 +10,7 @@ import Chatroom from './Chatroom/Chatroom';
 import { Socket } from 'socket.io-client';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
+import { motion } from 'framer-motion';
 
 type ChatProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -123,11 +124,18 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
 
                 <div className="flex flex-col gap-8">
                     {activeChat ? (
-                        <Chatroom
-                            chatId={activeChatId}
-                            partnerId={chatPartnerId}
-                            socket={socket}
-                        />
+                        <motion.div
+                            key={activeChat?._id}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                        >
+                            <Chatroom
+                                chatId={activeChatId}
+                                partnerId={chatPartnerId}
+                                socket={socket}
+                            />
+                        </motion.div>
                     ) : (
                         <div className="flex justify-center items-center text-3xl font-bold text-gray-400 text-center h-[calc(100vh_-_10rem)]  lg:h-[calc(100vh_-_5rem)]">
                             No conversation selected

@@ -12,6 +12,7 @@ import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOf
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 import { CurrentViewType } from '../../../types/currentViewType';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
+import { motion } from 'framer-motion';
 
 type FriendSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -94,9 +95,14 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     );
 
     return (
-        <div className="flex flex-col gap-4 min-h-[calc(100vh_-_5rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col gap-4 min-h-[calc(100vh_-_5rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg"
+        >
             <h1 className="text-center text-xl font-bold">Friends</h1>
-            <div className="animate-popInAnimation flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
+            <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {friendProfileCardList}
                 {friendProfileCardList?.length === 0 && (
                     <span className="text-center">
@@ -111,6 +117,6 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
                 {getSuggestionList()}
                 {loading && <LoadingSpinner />}
             </div>
-        </div>
+        </motion.div>
     );
 }

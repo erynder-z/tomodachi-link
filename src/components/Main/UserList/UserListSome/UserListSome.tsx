@@ -5,6 +5,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchSomeUsers } from '../../../../utilities/fetchSomeUsers';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { motion } from 'framer-motion';
 
 export default function UserListSome() {
     const { token, authUser } = useAuth();
@@ -35,7 +36,12 @@ export default function UserListSome() {
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
-        <div className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ once: true }}
+            className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
+        >
             <h1 className="text-center font-bold">People you may know:</h1>
             {userList}
             {loading && (
@@ -43,6 +49,6 @@ export default function UserListSome() {
                     <LoadingSpinner />
                 </div>
             )}
-        </div>
+        </motion.div>
     );
 }

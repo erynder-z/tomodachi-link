@@ -6,6 +6,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import { fetchAllUsers } from '../../../../utilities/fetchAllUsers';
 import { fetchNumberOfUsers } from '../../../../utilities/fetchNumberOfUsers';
+import { motion } from 'framer-motion';
 
 export default function UserListAll() {
     const { token, authUser } = useAuth();
@@ -55,7 +56,12 @@ export default function UserListAll() {
         <UserListItem key={user._id} listItemData={user} />
     ));
     return (
-        <div className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ once: true }}
+            className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
+        >
             <h1 className="text-center font-bold">All users:</h1>
             {loading ? (
                 <div className="flex justify-center items-center w-full py-4">
@@ -75,6 +81,6 @@ export default function UserListAll() {
                         )}
                 </>
             )}
-        </div>
+        </motion.div>
     );
 }
