@@ -37,7 +37,6 @@ export default function Navbar({
     const unmutedConversations = conversationsWithUnreadMessages.filter(
         (conversation) => !mutedConversations.includes(conversation)
     );
-    console.log(mutedConversations.length);
     const shouldUnreadBubbleShow = unmutedConversations.length > 0;
 
     const handleSearchButtonClick = () => {
