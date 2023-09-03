@@ -96,9 +96,8 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             className="flex flex-col gap-4 min-h-[calc(100vh_-_5rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg"
         >
             <h1 className="text-center text-xl font-bold">Friends</h1>

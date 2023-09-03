@@ -55,31 +55,31 @@ export default function UserListAll() {
     const userList = users?.map((user: MinimalUserTypes) => (
         <UserListItem key={user._id} listItemData={user} />
     ));
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ once: true }}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <h1 className="text-center font-bold">All users:</h1>
-            {loading ? (
-                <div className="flex justify-center items-center w-full py-4">
-                    <LoadingSpinner />
-                </div>
-            ) : (
-                <>
-                    {userList}
-                    {numberOfUsers != null &&
-                        users.length < numberOfUsers - 1 && (
-                            <button
-                                onClick={handleButtonClick}
-                                className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-regularTextDark px-2 py-1 mt-4 text-sm"
-                            >
-                                Get more
-                            </button>
-                        )}
-                </>
+
+            {userList}
+            {numberOfUsers != null && users.length < numberOfUsers - 1 && (
+                <button
+                    onClick={handleButtonClick}
+                    className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-regularTextDark px-2 py-1 mt-4 text-sm"
+                >
+                    Get more
+                </button>
             )}
         </motion.div>
     );

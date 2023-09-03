@@ -99,7 +99,11 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg">
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg"
+        >
             <div
                 className={`${
                     loading ? 'flex' : 'hidden'
@@ -127,8 +131,7 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
                         <motion.div
                             key={activeChat?._id}
                             initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
+                            animate={{ opacity: 1 }}
                         >
                             <Chatroom
                                 chatId={activeChatId}
@@ -143,6 +146,6 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
                     )}
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
