@@ -11,6 +11,7 @@ import PictureList from '../SharedComponents/PictureList/PictureList';
 import PostList from '../SharedComponents/PostList/PostList';
 import tinycolor from 'tinycolor2';
 import { FinalColor } from 'extract-colors';
+import { motion } from 'framer-motion';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -84,7 +85,10 @@ export default function MyPage({
                 <h1 className="font-bold">getting user data!</h1>
                 <LoadingSpinner />
             </div>
-            <div
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
                 className={`${
                     loading ? 'hidden' : 'md:grid'
                 } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
@@ -122,7 +126,7 @@ export default function MyPage({
                         onPostChange={handleRefreshPosts}
                     />
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }

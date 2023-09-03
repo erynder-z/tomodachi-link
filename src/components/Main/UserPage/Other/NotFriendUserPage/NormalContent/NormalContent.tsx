@@ -4,6 +4,7 @@ import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import { OtherUserPageDataTypes } from '../../../../../../types/otherUserPageDataTypes';
 import { handleSendFriendRequest } from '../../../../../../utilities/handleSendFriendRequest';
+import { motion } from 'framer-motion';
 
 type NormalContentProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -54,11 +55,16 @@ export default function NormalContent({
         }
     };
     return (
-        <div className="flex flex-col justify-center items-center gap-4 p-4">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-center items-center gap-4 p-4"
+        >
             <h2 className="font-bold">
                 Become friends with {firstName} {lastName} to view more!
             </h2>
             {getButton()}
-        </div>
+        </motion.div>
     );
 }

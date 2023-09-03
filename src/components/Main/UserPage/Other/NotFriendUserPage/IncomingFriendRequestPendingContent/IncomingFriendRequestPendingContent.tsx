@@ -6,6 +6,7 @@ import useFriendData from '../../../../../../hooks/useFriendData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
 import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';
+import { motion } from 'framer-motion';
 
 type IncomingFriendRequestPendingContentProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -51,7 +52,12 @@ export default function IncomingFriendRequestPendingContent({
     };
 
     return (
-        <div className="flex flex-col gap-4 p-4 text-center">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-4 p-4 text-center"
+        >
             {firstName} {lastName} already sent you a friend request!
             <div className="col-span-5 place-content-center flex items-center gap-4">
                 <button
@@ -67,6 +73,6 @@ export default function IncomingFriendRequestPendingContent({
                     Decline
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 }

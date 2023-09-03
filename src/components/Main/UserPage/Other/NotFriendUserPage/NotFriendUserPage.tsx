@@ -6,6 +6,7 @@ import IncomingFriendRequestPendingContent from './IncomingFriendRequestPendingC
 import NotFriendCoverSection from './NotFriendCoverSection/NotFriendCoverSection';
 import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
+import { motion } from 'framer-motion';
 
 type NotFriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -30,7 +31,12 @@ export default function NotFriendUserPage({
     const userPicture = convertDatabaseImageToBase64(userpic);
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark"
+        >
             <NotFriendCoverSection
                 firstName={firstName}
                 lastName={lastName}
@@ -52,6 +58,6 @@ export default function NotFriendUserPage({
                     />
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 }

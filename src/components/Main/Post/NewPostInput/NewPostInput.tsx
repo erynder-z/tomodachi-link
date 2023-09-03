@@ -13,6 +13,7 @@ import GifArea from './GifArea/GifArea';
 import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
 import { ViewMode } from '../../../../types/postInputSelectors';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type NewPostInputProps = {
     handleRefreshPosts?: () => void;
@@ -166,27 +167,55 @@ export default function NewPostInput({
                     />
                 </div>
             </form>
+            <AnimatePresence>
+                {viewMode === ViewMode.EmojiPicker && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <EmojiSelector
+                            setText={setPostText}
+                            setShowEmojiPicker={() =>
+                                setViewMode(ViewMode.None)
+                            }
+                        />
+                    </motion.div>
+                )}
 
-            {viewMode === ViewMode.EmojiPicker && (
-                <EmojiSelector
-                    setText={setPostText}
-                    setShowEmojiPicker={() => setViewMode(ViewMode.None)}
-                />
-            )}
+                {viewMode === ViewMode.GifSelector && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <GifSelector
+                            setShowGifSelector={() =>
+                                setViewMode(ViewMode.None)
+                            }
+                            setGif={setGif}
+                        />
+                    </motion.div>
+                )}
 
-            {viewMode === ViewMode.GifSelector && (
-                <GifSelector
-                    setShowGifSelector={() => setViewMode(ViewMode.None)}
-                    setGif={setGif}
-                />
-            )}
-
-            {viewMode === ViewMode.YoutubeEmbed && (
-                <EmbedYoutubeVideoSelector
-                    setShowYoutubeEmbed={() => setViewMode(ViewMode.None)}
-                    setYoutubeID={setYoutubeID}
-                />
-            )}
+                {viewMode === ViewMode.YoutubeEmbed && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <EmbedYoutubeVideoSelector
+                            setShowYoutubeEmbed={() =>
+                                setViewMode(ViewMode.None)
+                            }
+                            setYoutubeID={setYoutubeID}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

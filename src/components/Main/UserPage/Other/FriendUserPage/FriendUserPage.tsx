@@ -8,6 +8,7 @@ import PictureList from '../../SharedComponents/PictureList/PictureList';
 import PostList from '../../SharedComponents/PostList/PostList';
 import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
+import { motion } from 'framer-motion';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -42,7 +43,12 @@ export default function FriendUserPage({
         : '';
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark"
+        >
             <div className="flex flex-col h-full gap-8">
                 <FriendCoverSection
                     _id={_id}
@@ -73,6 +79,6 @@ export default function FriendUserPage({
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
