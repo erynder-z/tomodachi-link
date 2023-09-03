@@ -44,6 +44,9 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+    const shouldFetch = useRef(true);
+    const shouldInitializeSocket = useRef(true);
+
     const dummy = useRef<HTMLSpanElement>(null);
     const userId = currentUserData?._id;
 
@@ -161,29 +164,40 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     };
 
     const scrollToBottom = () => {
-        dummy?.current?.scrollIntoView({ behavior: 'smooth' });
+        dummy?.current?.scrollIntoView({
+            behavior: 'smooth',
+        });
     };
 
     useEffect(() => {
-        listenForMessage();
-        const cleanupMessage = () => {
-            socket?.off('receiveMessage');
-        };
-        return cleanupMessage;
+        if (shouldInitializeSocket.current === true) {
+            listenForMessage();
+            listenForTyping();
+            const cleanupMessage = () => {
+                socket?.off('receiveMessage');
+            };
+
+            const cleanupTyping = () => {
+                socket?.off('typing', handleTyping);
+            };
+
+            return () => {
+                cleanupMessage();
+                cleanupTyping();
+                shouldInitializeSocket.current = false;
+            };
+        }
     }, [socket]);
 
     useEffect(() => {
-        listenForTyping();
-        const cleanupTyping = () => {
-            socket?.off('typing', handleTyping);
+        if (shouldFetch.current === true) {
+            handleFetchPartnerData();
+            handleFetchChatMessages();
+        }
+        return () => {
+            shouldFetch.current = false;
         };
-        return cleanupTyping;
-    }, [socket]);
-
-    useEffect(() => {
-        handleFetchPartnerData();
-        handleFetchChatMessages();
-    }, [partnerId]);
+    }, []);
 
     useEffect(() => {
         if (receivedMessage && partnerId === receivedMessage.senderId) {
