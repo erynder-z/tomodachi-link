@@ -5,13 +5,16 @@ import ChatOnlineUserlistItem from './ChatOnlineUserlistItem/ChatOnlineUserlistI
 import { FriendDataType } from '../../../../types/friendDataType';
 import useNotificationBubblesContext from '../../../../hooks/useNotificationBubblesContext';
 import { motion } from 'framer-motion';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type ChatOnlineUsersListProps = {
     onlineUsers: ChatMemberType[];
+    loading: boolean;
 };
 
 export default function ChatOnlineUsersList({
     onlineUsers,
+    loading,
 }: ChatOnlineUsersListProps) {
     const { friendData } = useFriendData();
     const { setActiveChat } = useNotificationBubblesContext();
@@ -31,11 +34,18 @@ export default function ChatOnlineUsersList({
         />
     ));
 
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ once: true }}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark"
         >
             <h1 className="text-center font-bold">Friends</h1>
