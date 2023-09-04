@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { MinimalPostType } from '../../../../types/minimalPostType';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
-import { motion } from 'framer-motion';
+import { MinimalPostType } from '../../../../types/minimalPostType';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];
@@ -20,67 +21,103 @@ export default function ShowPeopleInThisFeed({
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
-    const [IdsOfPeopleInFeed, setIdsOfPeopleInFeed] = useState<string[]>([]);
     const [feedUsers, setFeedUsers] = useState<MinimalUserTypes[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const isInitialLoad = useRef(true);
 
     const getIdsOfPeopleInFeed = () => {
-        const newPeopleInFeed: Set<string> = new Set();
+        const newPeopleInFeed = new Set<string>();
         minimalPosts.forEach((post) => {
             if (
                 friendList.includes(post?.owner?._id) ||
                 currentUserData?._id === post?.owner?._id
             ) {
                 newPeopleInFeed.add(post?.owner?._id);
-            } else {
-                if (newPeopleInFeed.has(post?.owner?._id)) {
-                    newPeopleInFeed.delete(post?.owner?._id);
-                }
+            } else if (newPeopleInFeed.has(post?.owner?._id)) {
+                newPeopleInFeed.delete(post?.owner?._id);
             }
         });
-        setIdsOfPeopleInFeed(Array.from(newPeopleInFeed));
+        return Array.from(newPeopleInFeed);
     };
 
-    const handleGetUserDetails = async () => {
+    const handleGetUserDetails = async (ids: string[]) => {
         if (token) {
-            const requests = Array.from(new Set(IdsOfPeopleInFeed)).map((p) =>
-                fetchMinimalUserData(token, p, setInfo)
+            const requests = ids.map((id) =>
+                fetchMinimalUserData(token, id, setInfo)
             );
             const responses = await Promise.all(requests);
-            setFeedUsers((prevUsers) => {
-                const existingUserIds = prevUsers.map((user) => user?._id);
-                const newUsers = responses.filter(
-                    (user) => !existingUserIds.includes(user?._id)
-                );
-                return [...prevUsers, ...newUsers];
-            });
+            setFeedUsers((prevUsers) => [
+                ...prevUsers,
+                ...responses.filter(
+                    (user) => !prevUsers.some((u) => u._id === user._id)
+                ),
+            ]);
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getIdsOfPeopleInFeed();
-    }, [minimalPosts]);
+        if (minimalPosts.length > 0) {
+            const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
+            if (idsOfPeopleInFeed.length > 0) {
+                handleGetUserDetails(idsOfPeopleInFeed);
+            }
+        } else {
+            setLoading(false);
+        }
+    }, [minimalPosts, token]);
 
     useEffect(() => {
-        handleGetUserDetails();
-    }, [IdsOfPeopleInFeed]);
-
-    const feedUserList = feedUsers?.map((feedUser: MinimalUserTypes) => (
-        <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            key={feedUser?._id}
-        >
-            <FeedUserListItem listItemData={feedUser} />
-        </motion.div>
-    ));
+        if (isInitialLoad.current) {
+            setLoading(true);
+            isInitialLoad.current = false;
+        }
+    }, []);
 
     return (
-        <div className="block sticky -top-1 lg:top-10 h-fit md:w-full  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
-            <h1 className="text-center flex">People in this feed:</h1>
-            <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-4 lg:gap-0 w-full md:w-full p-2 lg:p-0">
-                {feedUserList}
-            </div>
+        <div className="block sticky -top-1 lg:top-10 h-fit md:w-full bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
+            {loading ? (
+                <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="flex flex-col md:col-span-2 justify-center items-center gap-2 md:gap-8 w-full h-full md:py-4 text-regularText dark:text-regularTextDark"
+                >
+                    <h1 className="font-bold text-xs">
+                        Getting users in this feed...
+                    </h1>
+                    <LoadingSpinner />
+                </motion.div>
+            ) : (
+                <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-4 lg:gap-0 w-full md:w-full p-2 lg:p-0">
+                    {feedUsers.length > 0 ? (
+                        <>
+                            <h1 className="text-center flex">
+                                People in this feed:
+                            </h1>
+                            {feedUsers.map((feedUser: MinimalUserTypes) => (
+                                <motion.div
+                                    key={feedUser?._id}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <FeedUserListItem listItemData={feedUser} />
+                                </motion.div>
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            <span className="hidden md:flex justify-center text-2xl w-full">
+                                👉
+                            </span>
+                            <span className="md:hidden flex justify-center text-2xl">
+                                👇
+                            </span>
+                        </>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
