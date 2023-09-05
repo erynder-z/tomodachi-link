@@ -8,6 +8,7 @@ import { fetchPosts } from '../../../../../utilities/fetchPosts';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { ImageType } from '../../../../../types/imageType';
 import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type MyPostListProps = {
     userId: string | undefined;
@@ -74,22 +75,30 @@ export default function PostList({
                 </span>
             )}
             {loading && (
-                <div className="flex justify-center items-center w-full py-4 ">
+                <motion.div
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex justify-center items-center w-full py-4 "
+                >
                     <LoadingSpinner />
-                </div>
+                </motion.div>
             )}
-            {showImageLightbox && (
-                <LightBox
-                    image={clickedImage}
-                    onClose={() => setClickedImage(null)}
-                />
-            )}
-            {showGifLightbox && (
-                <LightBox
-                    image={clickedGif}
-                    onClose={() => setClickedGif(null)}
-                />
-            )}
+            <AnimatePresence>
+                {showImageLightbox && (
+                    <LightBox
+                        image={clickedImage}
+                        onClose={() => setClickedImage(null)}
+                    />
+                )}
+                {showGifLightbox && (
+                    <LightBox
+                        image={clickedGif}
+                        onClose={() => setClickedGif(null)}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

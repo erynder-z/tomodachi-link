@@ -1,6 +1,7 @@
 import { ImageType } from '../../../types/imageType';
 import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import { FaTimes } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 type LightBoxProps = {
     image: ImageType | string | null;
@@ -21,10 +22,12 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
     }
 
     return (
-        <div
-            className={`${
-                image ? 'animate-inAnimation' : 'animate-outAnimation'
-            } fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center`}
+        <motion.div
+            key="lightbox"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center"
         >
             {src && (
                 <img
@@ -39,6 +42,6 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
             >
                 <FaTimes />
             </button>
-        </div>
+        </motion.div>
     );
 }

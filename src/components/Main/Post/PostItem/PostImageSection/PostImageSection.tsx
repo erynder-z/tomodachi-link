@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageType } from '../../../../types/imageType';
+import { ImageType } from '../../../../../types/imageType';
 
 type PostImageSectionProps = {
     handleImageClick: (image: ImageType) => void;

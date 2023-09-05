@@ -10,6 +10,7 @@ import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
 import { MdKeyboardDoubleArrowRight, MdOutlineZoomIn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 type PictureListProps = {
     userId: string | undefined;
@@ -98,13 +99,14 @@ export default function PictureList({ userId }: PictureListProps) {
                     See all <MdKeyboardDoubleArrowRight size="1.25em" />
                 </Link>
             )}
-
-            {selectedImage && (
-                <LightBox
-                    image={selectedImage}
-                    onClose={() => setSelectedImage(null)}
-                />
-            )}
+            <AnimatePresence>
+                {selectedImage && (
+                    <LightBox
+                        image={selectedImage}
+                        onClose={() => setSelectedImage(null)}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

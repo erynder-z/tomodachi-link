@@ -10,7 +10,7 @@ import { MinimalPostType } from '../../../../types/minimalPostType';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import FeedPostList from './FeedPostList/FeedPostList';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type FreedProps = {
     friendList: string[];
@@ -95,19 +95,20 @@ export default function Feed({
                                 setClickedImage={setClickedImage}
                                 setClickedGif={setClickedGif}
                             />
-
-                            {showImageLightbox && (
-                                <LightBox
-                                    image={clickedImage}
-                                    onClose={() => setClickedImage(null)}
-                                />
-                            )}
-                            {showGifLightbox && (
-                                <LightBox
-                                    image={clickedGif}
-                                    onClose={() => setClickedGif(null)}
-                                />
-                            )}
+                            <AnimatePresence>
+                                {showImageLightbox && (
+                                    <LightBox
+                                        image={clickedImage}
+                                        onClose={() => setClickedImage(null)}
+                                    />
+                                )}
+                                {showGifLightbox && (
+                                    <LightBox
+                                        image={clickedGif}
+                                        onClose={() => setClickedGif(null)}
+                                    />
+                                )}
+                            </AnimatePresence>
                         </div>
                     </>
                 )}
