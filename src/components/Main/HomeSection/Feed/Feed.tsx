@@ -37,7 +37,6 @@ export default function Feed({
 
     const handleGetFeed = async () => {
         if (authUser && token) {
-            console.log('getting');
             const response = await fetchFeed(token, setInfo, skip, friendList);
             setMinimalPosts([...minimalPosts, ...response]);
             setLoading(false);
