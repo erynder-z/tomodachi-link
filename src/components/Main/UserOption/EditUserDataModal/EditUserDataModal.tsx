@@ -18,7 +18,6 @@ type EditUserDataModalProps = {
 };
 
 export default function EditUserDataModal({
-    shouldEditUserDataModalShow,
     setShouldOverlaysShow,
     setShowOptions,
 }: EditUserDataModalProps): JSX.Element {
@@ -61,13 +60,7 @@ export default function EditUserDataModal({
     };
 
     return (
-        <div
-            className={`${
-                shouldEditUserDataModalShow
-                    ? 'animate-inAnimation'
-                    : 'animate-outAnimation'
-            } fixed top-0 left-0 right-0 bottom-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black/80`}
-        >
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black/80">
             <div className="relative w-11/12 lg:w-1/5 flex flex-col justify-around shadow-lg p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark  rounded lg:rounded-lg">
                 <button
                     onClick={handleCloseButtonClick}
