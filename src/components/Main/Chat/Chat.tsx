@@ -92,8 +92,8 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
-                <LoadingSpinner />
+            <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark">
+                <LoadingSpinner message="Getting chat data!" />
             </div>
         );
     }
@@ -102,16 +102,8 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg"
+            className="flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg"
         >
-            <div
-                className={`${
-                    loading ? 'flex' : 'hidden'
-                } flex-col justify-center items-center w-full h-[calc(100vh_-_7rem)] py-4 bg-card dark:bg-cardDark`}
-            >
-                <h1 className="font-bold">getting chat data!</h1>
-                <LoadingSpinner />
-            </div>
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'

@@ -73,15 +73,14 @@ export default function Feed({
             className="flex flex-col h-1/4 md:h-auto w-full gap-8 "
         >
             <NewPostInput handleRefreshPosts={refreshFeed} />
-            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
+            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
                 {loading ? (
                     <motion.div
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        className="flex flex-col md:col-span-2 justify-center items-center w-full h-full py-4  text-regularText dark:text-regularTextDark "
+                        className="flex flex-col md:col-span-2 justify-center items-center w-full h-full py-4 gap-4 text-regularText dark:text-regularTextDark "
                     >
-                        <h1 className="font-bold">Getting feed...</h1>
-                        <LoadingSpinner />
+                        <LoadingSpinner message="Getting feed..." />
                     </motion.div>
                 ) : (
                     <>

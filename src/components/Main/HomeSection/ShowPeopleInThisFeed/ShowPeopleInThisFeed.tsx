@@ -83,10 +83,7 @@ export default function ShowPeopleInThisFeed({
                     animate={{ y: 0, opacity: 1 }}
                     className="flex flex-col md:col-span-2 justify-center items-center gap-2 md:gap-8 w-full h-full md:py-4 text-regularText dark:text-regularTextDark"
                 >
-                    <h1 className="font-bold text-xs">
-                        Getting users in this feed...
-                    </h1>
-                    <LoadingSpinner />
+                    <LoadingSpinner message="Getting users in feed..." />
                 </motion.div>
             ) : (
                 <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-4 lg:gap-0 w-full md:w-full p-2 lg:p-0">

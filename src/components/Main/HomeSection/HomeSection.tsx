@@ -48,14 +48,14 @@ export default function HomeSection({
 
     if (loading) {
         return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark">
+            <div className="flex min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 lg:w-full justify-center items-center shadow-lg bg-card dark:bg-cardDark">
                 <LoadingSpinner />
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg">
+        <div className="flex flex-col just min-h-[calc(100vh_-_3rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg">
             <h1 className="text-center text-xl font-bold mb-4">Your feed</h1>
             <Feed
                 friendList={friendList}
