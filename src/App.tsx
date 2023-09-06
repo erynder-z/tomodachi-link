@@ -141,7 +141,7 @@ function App() {
                 onScroll={handleScroll}
             >
                 <ScrollToTop />
-                <div className="hidden lg:flex flex-col gap-4  w-1/6 lg:sticky lg:top-1">
+                <div className="hidden lg:flex flex-col gap-4 w-1/6 lg:sticky lg:top-0">
                     <ProfileCard socket={socket.current} />
                     <OptionsCard
                         shouldOverlaysShow={shouldOverlaysShow}
