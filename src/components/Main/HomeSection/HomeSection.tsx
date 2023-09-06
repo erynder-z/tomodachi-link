@@ -49,7 +49,7 @@ export default function HomeSection({
     if (loading) {
         return (
             <div className="flex min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 lg:w-full justify-center items-center shadow-lg bg-card dark:bg-cardDark">
-                <LoadingSpinner />
+                <LoadingSpinner message="Loading homepage..." />
             </div>
         );
     }
