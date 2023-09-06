@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import UnfriendButton from '../UnfriendButton/UnfriendButton';
-import { CoverOption } from '../../../../../../types/coverOptionTypes';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../../utilities/getColors';
 import { FinalColor } from 'extract-colors';
@@ -32,27 +31,14 @@ export default function FriendCoverSection({
     lastSeenFormatted,
     mutualFriends,
 }: FriendCoverSectionProps) {
-    const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
-        null
-    );
-
-    function getUserCoverImage() {
-        const userCover = cover;
-        const displayCover = COVER_OPTIONS.find((coverImage) => {
-            return coverImage.name === userCover;
-        });
-        return displayCover;
-    }
-
-    useEffect(() => {
-        setSelectedCover(getUserCoverImage() || null);
-    }, [cover]);
-
     useEffect(() => {
         setColorPalette([]);
-        if (selectedCover) {
-            const image = selectedCover?.image;
-            getColors(image)
+        const displayCover = COVER_OPTIONS.find(
+            (coverImage) => coverImage.name === cover
+        );
+
+        if (displayCover) {
+            getColors(displayCover.image)
                 .then((palette) => {
                     if (palette) {
                         setColorPalette(palette as FinalColor[]);
@@ -60,13 +46,17 @@ export default function FriendCoverSection({
                 })
                 .catch(console.error);
         }
-    }, [selectedCover]);
+    }, [cover, setColorPalette]);
 
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
+        <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex rounded-t">
                 <img
-                    src={selectedCover?.image}
+                    src={
+                        cover
+                            ? COVER_OPTIONS.find((c) => c.name === cover)?.image
+                            : ''
+                    }
                     alt="cover image"
                     className="h-full w-full object-cover"
                 />
@@ -94,9 +84,9 @@ export default function FriendCoverSection({
                     </h1>
                     <p className="text-center text-xs">
                         {numberOfFriends} friend
-                        {numberOfFriends > 1 && 's'} • {mutualFriends} mutual
-                        friend
-                        {mutualFriends > 1 && 's'}
+                        {numberOfFriends > 1 ? 's' : ''} • {mutualFriends}{' '}
+                        mutual friend
+                        {mutualFriends > 1 ? 's' : ''}
                     </p>
                 </div>
                 <div className="flex flex-col justify-between gap-4 md:ml-auto ">

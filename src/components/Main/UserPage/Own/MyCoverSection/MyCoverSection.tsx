@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaImages } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
@@ -8,8 +8,8 @@ import { saveCoverImage } from '../../../../../utilities/saveCoverImage';
 import { COVER_OPTIONS } from '../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../utilities/getColors';
 import ChangeCoverMenu from './ChangeCoverMenu/ChangeCoverMenu';
-import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 import { FinalColor } from 'extract-colors';
+import { AnimatePresence } from 'framer-motion';
 
 type MyCoverSectionProps = {
     onFetchComplete: (nameOfComponent: string) => void;
@@ -30,20 +30,17 @@ export default function MyCoverSection({
     const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
         null
     );
-
-    const [shouldMenuShow, setShouldMenuShow] = useState<boolean>(false);
+    const [showMenu, setShowMenu] = useState<boolean>(false);
     const [isSaveButtonShown, setIsSaveButtonShown] = useState<boolean>(false);
-    const isMenuMounted = shouldMenuShow;
-    const showMenu = useDelayUnmount(isMenuMounted, 150);
     const [initialCover, setInitialCover] = useState<CoverOption | null>(null);
 
-    const handleChangeCoverImage = () => {
-        setShouldMenuShow(!shouldMenuShow);
-    };
+    const shouldSendFetchCompleteInfo = useRef(true);
+
+    const handleChangeCoverImage = () => setShowMenu(!showMenu);
 
     const handleCoverOptionClick = (coverImage: CoverOption) => {
         setSelectedCover(coverImage);
-        setShouldMenuShow(false);
+        setShowMenu(false);
     };
 
     const handleSaveCoverImage = () => {
@@ -56,50 +53,53 @@ export default function MyCoverSection({
     };
 
     function getUserCoverImage() {
-        if (currentUserData) {
-            const userCover = currentUserData.cover;
-            const cover = COVER_OPTIONS.find((coverImage) => {
-                return coverImage.name === userCover;
-            });
-            return cover;
-        }
+        return currentUserData
+            ? COVER_OPTIONS.find(
+                  (coverImage) => coverImage.name === currentUserData.cover
+              )
+            : null;
     }
 
-    const getColorPalette = () => {
+    const getColorPalette = async () => {
         setColorPalette([]);
         if (selectedCover) {
-            const image = selectedCover?.image;
-            getColors(image)
-                .then((palette) => {
-                    if (palette) {
-                        setColorPalette(palette as FinalColor[]);
-                    }
-                })
-                .catch(console.error);
+            try {
+                const palette = await getColors(selectedCover.image);
+                if (palette) {
+                    setColorPalette(palette as FinalColor[]);
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
-    const checkSaveButton = () => {
+    const checkSaveButton = () =>
         selectedCover !== initialCover
             ? setIsSaveButtonShown(true)
             : setIsSaveButtonShown(false);
-    };
 
-    const handleCloseButtonCLick = () => {
-        setShouldMenuShow(false);
-    };
+    const handleCloseButtonCLick = () => setShowMenu(false);
 
     useEffect(() => {
         if (currentUserData) {
-            setSelectedCover(getUserCoverImage() || null);
-            setInitialCover(getUserCoverImage() || null);
+            const userCoverImage = getUserCoverImage();
+            if (userCoverImage) {
+                setSelectedCover(userCoverImage);
+                setInitialCover(userCoverImage);
+            }
         }
     }, [currentUserData?.cover]);
 
     useEffect(() => {
         getColorPalette();
         checkSaveButton();
-        onFetchComplete('coverSection');
+        if (shouldSendFetchCompleteInfo.current) {
+            onFetchComplete('coverSection');
+        }
+        return () => {
+            shouldSendFetchCompleteInfo.current = false;
+        };
     }, [selectedCover, initialCover]);
 
     return (
@@ -113,18 +113,19 @@ export default function MyCoverSection({
                 {!showMenu && (
                     <button
                         onClick={handleChangeCoverImage}
-                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
+                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
                     >
                         Change cover image <FaImages size="1.5em" />
                     </button>
                 )}
-                {showMenu && (
-                    <ChangeCoverMenu
-                        handleCloseButtonCLick={handleCloseButtonCLick}
-                        handleCoverOptionClick={handleCoverOptionClick}
-                        shouldMenuShow={shouldMenuShow}
-                    />
-                )}
+                <AnimatePresence>
+                    {showMenu && (
+                        <ChangeCoverMenu
+                            handleCloseButtonCLick={handleCloseButtonCLick}
+                            handleCoverOptionClick={handleCoverOptionClick}
+                        />
+                    )}
+                </AnimatePresence>
                 {isSaveButtonShown && (
                     <button
                         className="absolute bottom-4 right-4  py-2 px-4 border-2  rounded lg:rounded-lg"

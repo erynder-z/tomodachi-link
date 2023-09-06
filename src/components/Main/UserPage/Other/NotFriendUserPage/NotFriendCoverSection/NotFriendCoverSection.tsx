@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { CoverOption } from '../../../../../../types/coverOptionTypes';
+import React, { useEffect } from 'react';
 import { getColors } from '../../../../../../utilities/getColors';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { FinalColor } from 'extract-colors';
@@ -23,27 +22,14 @@ export default function NotFriendCoverSection({
     textColor,
     setColorPalette,
 }: NotFriendCoverSectionProps) {
-    const [selectedCover, setSelectedCover] = useState<CoverOption | null>(
-        null
-    );
-
-    function getUserCoverImage() {
-        const userCover = cover;
-        const displayCover = COVER_OPTIONS.find((coverImage) => {
-            return coverImage.name === userCover;
-        });
-        return displayCover;
-    }
-
     useEffect(() => {
-        setSelectedCover(getUserCoverImage() || null);
-    }, [cover]);
+        const displayCover = COVER_OPTIONS.find(
+            (coverImage) => coverImage.name === cover
+        );
 
-    useEffect(() => {
-        setColorPalette([]);
-        if (selectedCover) {
-            const image = selectedCover?.image;
-            getColors(image)
+        if (displayCover) {
+            setColorPalette([]);
+            getColors(displayCover.image)
                 .then((palette) => {
                     if (palette) {
                         setColorPalette(palette as FinalColor[]);
@@ -51,13 +37,17 @@ export default function NotFriendCoverSection({
                 })
                 .catch(console.error);
         }
-    }, [selectedCover]);
+    }, [cover, setColorPalette]);
 
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
+        <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex ">
                 <img
-                    src={selectedCover?.image}
+                    src={
+                        cover
+                            ? COVER_OPTIONS.find((c) => c.name === cover)?.image
+                            : ''
+                    }
                     alt="cover image"
                     className="h-full w-full object-cover rounded-t"
                 />
