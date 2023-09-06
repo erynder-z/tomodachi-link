@@ -93,7 +93,7 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
     if (loading) {
         return (
             <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark">
-                <LoadingSpinner message="Getting chat data!" />
+                <LoadingSpinner />
             </div>
         );
     }
