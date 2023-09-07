@@ -41,6 +41,7 @@ export default function UserPage({
 
     useEffect(() => {
         if (token) {
+            setLoading(true);
             fetchOtherUserData(id, token, setInfo);
         }
     }, [id]);
