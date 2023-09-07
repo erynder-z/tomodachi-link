@@ -13,10 +13,14 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 type PictureListProps = {
+    onFetchComplete: (nameOfComponent: string) => void;
     userId: string | undefined;
 };
 
-export default function PictureList({ userId }: PictureListProps) {
+export default function PictureList({
+    onFetchComplete,
+    userId,
+}: PictureListProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [pictures, setPictures] = useState<ImageType[]>([]);
@@ -26,20 +30,26 @@ export default function PictureList({ userId }: PictureListProps) {
 
     const handleFetchUserPics = async () => {
         if (token && userId) {
-            const pictureListResponse = await fetchPictureList(
-                userId,
-                token,
-                setInfo,
-                0 // skip 0 since only the most recent pictures are fetched
-            );
-            const numberOfPicsResponse = await fetchNumberOfPics(
-                token,
-                userId,
-                setInfo
-            );
-            setPictures([...pictureListResponse]);
-            setNumberOfPictures(numberOfPicsResponse);
-            setLoading(false);
+            try {
+                const pictureListResponse = await fetchPictureList(
+                    userId,
+                    token,
+                    setInfo,
+                    0 // skip 0 since only the most recent pictures are fetched
+                );
+                const numberOfPicsResponse = await fetchNumberOfPics(
+                    token,
+                    userId,
+                    setInfo
+                );
+                setPictures([...pictureListResponse]);
+                setNumberOfPictures(numberOfPicsResponse);
+                setLoading(false);
+                onFetchComplete('pictureList');
+            } catch (error) {
+                setLoading(false);
+                onFetchComplete('pictureList');
+            }
         }
     };
 

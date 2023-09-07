@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import UnfriendButton from '../UnfriendButton/UnfriendButton';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../../utilities/getColors';
@@ -31,6 +31,8 @@ export default function FriendCoverSection({
     lastSeenFormatted,
     mutualFriends,
 }: FriendCoverSectionProps) {
+    const [coverImageSrc, setCoverImageSrc] = useState<string>('');
+
     useEffect(() => {
         setColorPalette([]);
         const displayCover = COVER_OPTIONS.find(
@@ -45,6 +47,8 @@ export default function FriendCoverSection({
                     }
                 })
                 .catch(console.error);
+
+            setCoverImageSrc(displayCover.image);
         }
     }, [cover, setColorPalette]);
 
@@ -52,11 +56,7 @@ export default function FriendCoverSection({
         <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex rounded-t">
                 <img
-                    src={
-                        cover
-                            ? COVER_OPTIONS.find((c) => c.name === cover)?.image
-                            : ''
-                    }
+                    src={coverImageSrc}
                     alt="cover image"
                     className="h-full w-full object-cover"
                 />

@@ -13,10 +13,12 @@ import useFriendData from '../../../../../../hooks/useFriendData';
 
 type FriendRequestListItemProps = {
     friendRequestUserId: string;
+    handleFetchComplete: () => void;
 };
 
 export default function FriendRequestListItem({
     friendRequestUserId,
+    handleFetchComplete,
 }: FriendRequestListItemProps) {
     const navigate = useNavigate();
     const { token } = useAuth();
@@ -72,13 +74,21 @@ export default function FriendRequestListItem({
     useEffect(() => {
         const fetchUserData = async () => {
             if (token) {
-                const response = await fetchMinimalUserData(
-                    token,
-                    friendRequestUserId,
-                    setInfo
-                );
-                setFriendRequestData(response);
-                setLoading(false);
+                try {
+                    const response = await fetchMinimalUserData(
+                        token,
+                        friendRequestUserId,
+                        setInfo
+                    );
+                    setFriendRequestData(response);
+                    setLoading(false);
+
+                    handleFetchComplete();
+                } catch (error) {
+                    setLoading(false);
+
+                    handleFetchComplete();
+                }
             }
         };
 

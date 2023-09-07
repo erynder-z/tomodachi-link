@@ -29,8 +29,9 @@ export default function MyPage({
     const [myPicsKey, setMyPicsKey] = useState(0);
     const [loading, setLoading] = useState<boolean>(true);
     const [componentLoading, setComponentLoading] = useState({
-        currentUserData: true,
         coverSection: true,
+        friendRequests: true,
+        pictureList: true,
     });
     const [colorPalette, setColorPalette] = useState<FinalColor[]>([]);
     const backgroundColor = colorPalette[0]?.hex;
@@ -52,7 +53,10 @@ export default function MyPage({
     };
 
     const onFetchComplete = (nameOfComponent: string) => {
-        setComponentLoading({ ...componentLoading, [nameOfComponent]: false });
+        setComponentLoading((prevLoading) => ({
+            ...prevLoading,
+            [nameOfComponent]: false,
+        }));
     };
 
     useEffect(() => {
@@ -64,10 +68,6 @@ export default function MyPage({
             shouldSetCurrentView.current = false;
         };
     }, []);
-
-    useEffect(() => {
-        setComponentLoading({ ...componentLoading, currentUserData: false });
-    }, [currentUserData]);
 
     useEffect(() => {
         if (Object.values(componentLoading).every((v) => v === false)) {
@@ -82,7 +82,7 @@ export default function MyPage({
                     loading ? 'flex' : 'hidden'
                 } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark `}
             >
-                <LoadingSpinner message="Getting user data..." />
+                <LoadingSpinner />
             </div>
             <motion.div
                 initial={{ opacity: 0 }}
@@ -102,12 +102,17 @@ export default function MyPage({
                     {numberOfPendingFriendRequests ? (
                         <div className="flex h-1/4 md:h-auto md:p-4">
                             <FriendRequests
+                                onFetchComplete={onFetchComplete}
                                 pendingFriendRequests={pendingFriendRequests}
                             />
                         </div>
                     ) : null}
                     <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
-                        <PictureList key={myPicsKey} userId={userId} />
+                        <PictureList
+                            key={myPicsKey}
+                            onFetchComplete={onFetchComplete}
+                            userId={userId}
+                        />
 
                         <FriendList friendData={friendData} userId={userId} />
                     </div>

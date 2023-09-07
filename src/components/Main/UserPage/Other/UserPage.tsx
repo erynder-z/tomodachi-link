@@ -75,7 +75,7 @@ export default function UserPage({
     if (loading) {
         return (
             <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark">
-                <LoadingSpinner message="Getting user data..." />
+                <LoadingSpinner />
             </div>
         );
     }

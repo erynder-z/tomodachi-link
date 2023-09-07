@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getColors } from '../../../../../../utilities/getColors';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { FinalColor } from 'extract-colors';
@@ -22,6 +22,8 @@ export default function NotFriendCoverSection({
     textColor,
     setColorPalette,
 }: NotFriendCoverSectionProps) {
+    const [coverImageSrc, setCoverImageSrc] = useState<string>('');
+
     useEffect(() => {
         const displayCover = COVER_OPTIONS.find(
             (coverImage) => coverImage.name === cover
@@ -36,18 +38,16 @@ export default function NotFriendCoverSection({
                     }
                 })
                 .catch(console.error);
+
+            setCoverImageSrc(displayCover.image);
         }
     }, [cover, setColorPalette]);
 
     return (
         <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
-            <div className="relative row-span-3 flex ">
+            <div className="relative row-span-3 flex">
                 <img
-                    src={
-                        cover
-                            ? COVER_OPTIONS.find((c) => c.name === cover)?.image
-                            : ''
-                    }
+                    src={coverImageSrc}
                     alt="cover image"
                     className="h-full w-full object-cover rounded-t"
                 />

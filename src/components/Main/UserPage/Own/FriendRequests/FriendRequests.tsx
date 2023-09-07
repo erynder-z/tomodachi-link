@@ -3,16 +3,29 @@ import FriendRequestListItem from './FriendRequestListItem/FriendRequestListItem
 
 type FriendRequestsProps = {
     pendingFriendRequests: string[];
+    onFetchComplete: (nameOfComponent: string) => void;
 };
 
 export default function FriendRequests({
     pendingFriendRequests,
+    onFetchComplete,
 }: FriendRequestsProps) {
+    let completedFetchCount = 0;
+
+    const handleFetchComplete = () => {
+        completedFetchCount++;
+
+        if (completedFetchCount === pendingFriendRequests.length) {
+            onFetchComplete('friendRequests');
+        }
+    };
+
     const friendRequestItemsList = pendingFriendRequests?.map(
         (requestingUserId) => (
             <FriendRequestListItem
                 key={requestingUserId}
                 friendRequestUserId={requestingUserId}
+                handleFetchComplete={handleFetchComplete}
             />
         )
     );
