@@ -30,6 +30,8 @@ module.exports = {
                 friendCardHighlight: '#CD3232',
                 friendSuggestionCardHighlight: '#0752A8',
                 friendRandomCardHighlight: '#0598BC',
+                loading: '#00000066',
+                loadingDark: '#ffffff66',
                 cBlack: '#020202',
                 cRed: '#CD3232',
                 cGreen: '#00BC00',
