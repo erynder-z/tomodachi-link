@@ -16,6 +16,7 @@ type FriendCoverSectionProps = {
     numberOfFriends: number;
     lastSeenFormatted: string;
     mutualFriends: number;
+    onFetchComplete: (nameOfComponent: string) => void;
 };
 
 export default function FriendCoverSection({
@@ -30,6 +31,7 @@ export default function FriendCoverSection({
     numberOfFriends,
     lastSeenFormatted,
     mutualFriends,
+    onFetchComplete,
 }: FriendCoverSectionProps) {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
 
@@ -46,7 +48,10 @@ export default function FriendCoverSection({
                         setColorPalette(palette as FinalColor[]);
                     }
                 })
-                .catch(console.error);
+                .catch(console.error)
+                .finally(() => {
+                    onFetchComplete('coverSection');
+                });
 
             setCoverImageSrc(displayCover.image);
         }

@@ -11,6 +11,7 @@ type NotFriendCoverSectionProps = {
     backgroundColor: string;
     textColor: string;
     setColorPalette: React.Dispatch<React.SetStateAction<FinalColor[]>>;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function NotFriendCoverSection({
@@ -21,6 +22,7 @@ export default function NotFriendCoverSection({
     backgroundColor,
     textColor,
     setColorPalette,
+    setLoading,
 }: NotFriendCoverSectionProps) {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
 
@@ -37,7 +39,10 @@ export default function NotFriendCoverSection({
                         setColorPalette(palette as FinalColor[]);
                     }
                 })
-                .catch(console.error);
+                .catch(console.error)
+                .finally(() => {
+                    setLoading(false);
+                });
 
             setCoverImageSrc(displayCover.image);
         }

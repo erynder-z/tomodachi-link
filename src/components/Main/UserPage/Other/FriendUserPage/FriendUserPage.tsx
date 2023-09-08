@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
@@ -31,6 +31,10 @@ export default function FriendUserPage({
         lastSeen,
     } = userPageData || {};
     const [loading, setLoading] = useState<boolean>(true);
+    const [componentLoading, setComponentLoading] = useState({
+        coverSection: true,
+        pictureList: true,
+    });
     const [colorPalette, setColorPalette] = useState<FinalColor[]>([]);
     const backgroundColor = colorPalette[0]?.hex;
     const textColor = tinycolor(backgroundColor).isDark()
@@ -43,9 +47,18 @@ export default function FriendUserPage({
         ? `${formatDistanceToNow(new Date(lastSeen), { addSuffix: true })} `
         : '';
 
-    const onFetchComplete = () => {
-        setLoading(false);
+    const onFetchComplete = (nameOfComponent: string) => {
+        setComponentLoading((prevLoading) => ({
+            ...prevLoading,
+            [nameOfComponent]: false,
+        }));
     };
+
+    useEffect(() => {
+        if (Object.values(componentLoading).every((v) => v === false)) {
+            setLoading(false);
+        }
+    }, [componentLoading]);
 
     return (
         <>
@@ -79,6 +92,7 @@ export default function FriendUserPage({
                         numberOfFriends={numberOfFriends}
                         lastSeenFormatted={lastSeenFormatted}
                         mutualFriends={mutualFriends}
+                        onFetchComplete={onFetchComplete}
                     />
                     <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8">
                         <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
