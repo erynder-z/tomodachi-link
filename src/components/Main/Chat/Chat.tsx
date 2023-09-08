@@ -118,12 +118,13 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
                     currentUserId={currentUserId}
                 />
 
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 ">
                     {activeChat ? (
                         <motion.div
                             key={activeChat?._id}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
+                            className="h-full"
                         >
                             <Chatroom
                                 chatId={activeChatId}
