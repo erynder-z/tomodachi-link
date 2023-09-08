@@ -21,7 +21,7 @@
         "react-dom": "^18.2.0",
         "react-icons": "^4.8.0",
         "react-image-file-resizer": "^0.4.8",
-        "react-loader-spinner": "^5.3.4",
+        "react-loader-spinner": "^5.4.5",
         "react-markdown": "^8.0.6",
         "react-router-dom": "^6.9.0",
         "socket.io-client": "^4.7.1",
