@@ -2,6 +2,7 @@ import { FaTimes } from 'react-icons/fa';
 import SignupForm from './SignupForm';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -125,9 +126,15 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
     };
 
     return (
-        <div className="animate-inAnimation fixed inset-0 z-50 flex justify-center items-center">
+        <motion.div
+            key="signupPage"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex justify-center items-center"
+        >
             <div className="flex justify-center items-center w-full h-full">
-                <div className="relative w-5/6 sm:w-2/3 lg:w-1/4 px-4 lg:py-10 bg-white shadow-lg sm:p-10 rounded lg:rounded-lg">
+                <div className="relative w-5/6 sm:w-2/3 lg:w-1/4 px-4  bg-white shadow-lg p-4 md:p-8 rounded lg:rounded-lg">
                     <button
                         onClick={handleCloseButtonClick}
                         className="absolute top-4 right-4"
@@ -140,6 +147,6 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                     />
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }

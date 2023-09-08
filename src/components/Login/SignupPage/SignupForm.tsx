@@ -12,9 +12,11 @@ export default function SignupForm({
     isSubmitting,
 }: SignupFormProps) {
     return (
-        <div className="max-w-md mx-auto">
+        <div className="w-full py-2">
             <div>
-                <h1 className="text-2xl font-semibold">Set up your account</h1>
+                <h1 className="md:text-2xl font-semibold">
+                    Set up your account
+                </h1>
             </div>
             <form
                 action=""
@@ -22,7 +24,7 @@ export default function SignupForm({
                 onSubmit={handleSubmit}
                 className="divide-y divide-gray-200"
             >
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="pt-2 md:pt-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative z-0">
                         <input
                             required
@@ -128,16 +130,16 @@ export default function SignupForm({
                     <div className="flex w-full">
                         <button
                             disabled={isSubmitting}
-                            className={`relative overflow-hidden w-full bg-green-600 text-white text-xl font-bold rounded transition duration-500 ease-in-out ${
+                            className={`relative overflow-hidden w-full bg-green-600 text-white text-lg md:text-xl font-bold rounded transition duration-500 ease-in-out ${
                                 isSubmitting
                                     ? 'bg-gray-500 cursor-not-allowed'
-                                    : 'hover:bg-green-500'
+                                    : 'hover:bg-green-600'
                             }`}
                         >
                             {isSubmitting ? (
                                 <ButtonBusy />
                             ) : (
-                                <span className="z-10 relative w-full flex justify-center items-center group p-4">
+                                <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-xl">
                                     <span className="transition-all duration-300 group-hover:pr-4">
                                         Register
                                         <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
