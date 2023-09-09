@@ -20,8 +20,8 @@ export default function ButtonArea({
     postText,
     isSubmitting,
 }: ButtonAreaProps) {
-    return (
-        <div className="flex w-full gap-4">
+    const YoutubeButton = (
+        <>
             <label className="flex items-center cursor-pointer">
                 <input
                     type="file"
@@ -46,45 +46,63 @@ export default function ButtonArea({
             >
                 <FaYoutube />
             </button>
-            <button
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setViewMode(
-                        viewMode === ViewMode.GifSelector
-                            ? ViewMode.None
-                            : ViewMode.GifSelector
-                    );
-                }}
-                className="text-back hover:text-blue-500"
-            >
-                <TbGif />
-            </button>
-            <button
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setViewMode(
-                        viewMode === ViewMode.EmojiPicker
-                            ? ViewMode.None
-                            : ViewMode.EmojiPicker
-                    );
-                }}
-                className="text-back hover:text-blue-500"
-            >
-                <FaRegSmileBeam />
-            </button>
-            <button
-                disabled={isSubmitting}
-                className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm ${
-                    !postText || isSubmitting
-                        ? 'bg-gray-500 hover:bg-gray-600'
-                        : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover'
-                }`}
-                title={postText ? undefined : 'Please enter a message'}
-            >
-                {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
-            </button>
+        </>
+    );
+
+    const GifButton = (
+        <button
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setViewMode(
+                    viewMode === ViewMode.GifSelector
+                        ? ViewMode.None
+                        : ViewMode.GifSelector
+                );
+            }}
+            className="text-back hover:text-blue-500"
+        >
+            <TbGif />
+        </button>
+    );
+
+    const EmojiButton = (
+        <button
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setViewMode(
+                    viewMode === ViewMode.EmojiPicker
+                        ? ViewMode.None
+                        : ViewMode.EmojiPicker
+                );
+            }}
+            className="text-back hover:text-blue-500"
+        >
+            <FaRegSmileBeam />
+        </button>
+    );
+
+    const SendButton = (
+        <button
+            disabled={isSubmitting}
+            className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm ${
+                !postText || isSubmitting
+                    ? 'bg-gray-500 hover:bg-gray-600'
+                    : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover'
+            }`}
+            title={postText ? undefined : 'Please enter a message'}
+        >
+            {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
+        </button>
+    );
+
+    return (
+        <div className="flex w-full gap-4">
+            {YoutubeButton}
+            {GifButton}
+            {EmojiButton}
+            {SendButton}
         </div>
     );
 }

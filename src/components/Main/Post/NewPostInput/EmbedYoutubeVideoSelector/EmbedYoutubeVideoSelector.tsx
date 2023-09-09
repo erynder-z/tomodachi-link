@@ -44,6 +44,42 @@ export default function EmbedYoutubeVideoSelector({
         setVideoID(getYoutubeID(selectedURL));
     }, [selectedURL]);
 
+    const CloseButton = (
+        <button
+            onClick={handleComponentClose}
+            className="absolute -top-16 -right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+        >
+            <FaTimes size="1.25em" />
+        </button>
+    );
+
+    const InputField = (
+        <>
+            <input
+                required
+                autoComplete="off"
+                id="embedVideoURL"
+                name="embedVideoURL"
+                type="text"
+                onChange={(event) => {
+                    setSelectedURL(event.target.value);
+                }}
+                className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                placeholder=" "
+            />
+            <label
+                htmlFor="embedVideoURL"
+                className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+                Enter URL
+            </label>
+        </>
+    );
+
+    const AddButton = (
+        <button className="w-full bg-blue-500 text-white px-2 py-1">Add</button>
+    );
+
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
             <form
@@ -53,37 +89,10 @@ export default function EmbedYoutubeVideoSelector({
                 className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-card dark:bg-cardDark rounded-md text-gray-700 dark:text-gray-400 sm:text-lg sm:leading-7 p-4"
             >
                 <div className="relative z-0">
-                    <button
-                        onClick={handleComponentClose}
-                        className="absolute -top-16 -right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
-                    >
-                        <FaTimes size="1.25em" />
-                    </button>
-                    <input
-                        required
-                        autoComplete="off"
-                        id="embedVideoURL"
-                        name="embedVideoURL"
-                        type="text"
-                        onChange={(event) => {
-                            setSelectedURL(event.target.value);
-                        }}
-                        className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="embedVideoURL"
-                        className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    >
-                        Enter URL
-                    </label>
+                    {CloseButton}
+                    {InputField}
                 </div>
-
-                <div className="flex w-full">
-                    <button className="w-full bg-blue-500 text-white px-2 py-1">
-                        Add
-                    </button>
-                </div>
+                <div className="flex w-full">{AddButton} </div>
             </form>
         </div>
     );

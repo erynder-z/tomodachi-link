@@ -129,92 +129,96 @@ export default function NewPostInput({
         }
     };
 
+    const FormContent = (
+        <form
+            action=""
+            method="POST"
+            onSubmit={handleSubmit}
+            className="flex w-full divide-gray-200"
+        >
+            <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 dark:text-gray-300 sm:text-lg sm:leading-7">
+                <PostInputTextarea
+                    postText={postText}
+                    handleNewPostChange={handleNewPostChange}
+                    username={username}
+                />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {youtubeID && (
+                        <EmbeddedYoutubeVideoArea
+                            setYoutubeID={setYoutubeID}
+                            youtubeID={youtubeID}
+                        />
+                    )}
+                    {selectedImage && (
+                        <SelectedImageArea
+                            setSelectedImage={setSelectedImage}
+                            selectedImage={selectedImage}
+                        />
+                    )}
+                    {gif && <GifArea setGif={setGif} gif={gif} />}
+                </div>
+                <ButtonArea
+                    handleImageSelect={handleImageSelect}
+                    viewMode={viewMode}
+                    setViewMode={setViewMode}
+                    postText={postText}
+                    isSubmitting={isSubmitting}
+                />
+            </div>
+        </form>
+    );
+
+    const EmojiSelectorModal = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            viewport={{ once: true }}
+        >
+            <EmojiSelector
+                setText={setPostText}
+                setShowEmojiPicker={() => setViewMode(ViewMode.None)}
+            />
+        </motion.div>
+    );
+
+    const GifSelectorModal = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            viewport={{ once: true }}
+        >
+            <GifSelector
+                setShowGifSelector={() => setViewMode(ViewMode.None)}
+                setGif={setGif}
+            />
+        </motion.div>
+    );
+
+    const YoutubeSelectorModal = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            viewport={{ once: true }}
+        >
+            <EmbedYoutubeVideoSelector
+                setShowYoutubeEmbed={() => setViewMode(ViewMode.None)}
+                setYoutubeID={setYoutubeID}
+            />
+        </motion.div>
+    );
+
     return (
         <div className="font-roboto flex gap-4 p-2 md:p-4 lg:w-full lg:flex-row lg:justify-around rounded lg:shadow-lg bg-card dark:bg-cardDark">
-            <form
-                action=""
-                method="POST"
-                onSubmit={handleSubmit}
-                className="flex w-full divide-gray-200"
-            >
-                <div className="relative w-full text-base leading-6 space-y-4 text-gray-700 dark:text-gray-300 sm:text-lg sm:leading-7">
-                    <PostInputTextarea
-                        postText={postText}
-                        handleNewPostChange={handleNewPostChange}
-                        username={username}
-                    />
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {youtubeID && (
-                            <EmbeddedYoutubeVideoArea
-                                setYoutubeID={setYoutubeID}
-                                youtubeID={youtubeID}
-                            />
-                        )}
-                        {selectedImage && (
-                            <SelectedImageArea
-                                setSelectedImage={setSelectedImage}
-                                selectedImage={selectedImage}
-                            />
-                        )}
-                        {gif && <GifArea setGif={setGif} gif={gif} />}
-                    </div>
-                    <ButtonArea
-                        handleImageSelect={handleImageSelect}
-                        viewMode={viewMode}
-                        setViewMode={setViewMode}
-                        postText={postText}
-                        isSubmitting={isSubmitting}
-                    />
-                </div>
-            </form>
+            {FormContent}
             <AnimatePresence>
-                {viewMode === ViewMode.EmojiPicker && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <EmojiSelector
-                            setText={setPostText}
-                            setShowEmojiPicker={() =>
-                                setViewMode(ViewMode.None)
-                            }
-                        />
-                    </motion.div>
-                )}
+                {viewMode === ViewMode.EmojiPicker && EmojiSelectorModal}
 
-                {viewMode === ViewMode.GifSelector && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <GifSelector
-                            setShowGifSelector={() =>
-                                setViewMode(ViewMode.None)
-                            }
-                            setGif={setGif}
-                        />
-                    </motion.div>
-                )}
+                {viewMode === ViewMode.GifSelector && GifSelectorModal}
 
-                {viewMode === ViewMode.YoutubeEmbed && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <EmbedYoutubeVideoSelector
-                            setShowYoutubeEmbed={() =>
-                                setViewMode(ViewMode.None)
-                            }
-                            setYoutubeID={setYoutubeID}
-                        />
-                    </motion.div>
-                )}
+                {viewMode === ViewMode.YoutubeEmbed && YoutubeSelectorModal}
             </AnimatePresence>
         </div>
     );
