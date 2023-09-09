@@ -75,6 +75,18 @@ export default function MyPage({
         }
     }, [componentLoading]);
 
+    useEffect(() => {
+        if (
+            numberOfPendingFriendRequests !== undefined &&
+            numberOfPendingFriendRequests === 0
+        ) {
+            setComponentLoading((prevLoading) => ({
+                ...prevLoading,
+                friendRequests: false,
+            }));
+        }
+    }, [numberOfPendingFriendRequests]);
+
     return (
         <div className="flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg">
             <div
