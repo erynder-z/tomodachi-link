@@ -94,12 +94,12 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
         )
     );
 
-    return (
-        <motion.div
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="flex flex-col gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg"
-        >
+    const SuggestionList = getSuggestionList();
+
+    const LoadingContent = <LoadingSpinner />;
+
+    const FriendContent = (
+        <>
             <h1 className="text-center text-xl font-bold">Friends</h1>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {friendProfileCardList}
@@ -109,13 +109,28 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
                     </span>
                 )}
             </div>
+        </>
+    );
+
+    const SuggestionContent = (
+        <>
             <h1 className="text-center text-xl font-bold">
                 Maybe you know these people?
             </h1>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
-                {getSuggestionList()}
-                {loading && <LoadingSpinner />}
+                {loading ? LoadingContent : SuggestionList}
             </div>
+        </>
+    );
+
+    return (
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="flex flex-col gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg"
+        >
+            {FriendContent}
+            {SuggestionContent}
         </motion.div>
     );
 }

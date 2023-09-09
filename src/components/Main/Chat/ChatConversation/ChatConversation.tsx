@@ -73,11 +73,13 @@ export default function ChatConversation({
         }
     };
 
-    return loading ? (
+    const LoadingContent = (
         <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
             <LoadingSpinner />
         </div>
-    ) : (
+    );
+
+    const ChatConversationContent = (
         <div className="flex items-center w-full gap-4 p-2 text-regularText dark:text-regularTextDark bg-card dark:bg-cardDark hover:bg-cBlue dark:hover:bg-cBlue rounded-3xl">
             <ChatConversationListItem listItemData={chatPartner} />
             <div className="flex gap-2">
@@ -102,4 +104,6 @@ export default function ChatConversation({
             </div>
         </div>
     );
+
+    return loading ? LoadingContent : ChatConversationContent;
 }

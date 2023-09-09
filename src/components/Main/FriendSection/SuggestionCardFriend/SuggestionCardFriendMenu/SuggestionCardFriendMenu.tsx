@@ -55,50 +55,60 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         );
     }, [isFriendRequestPending]);
 
+    const LinkToUser = (
+        <Link
+            to={`/users/${id}`}
+            className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
+        >
+            <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                Visit page
+            </span>
+            <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                <TbLink />
+            </div>
+        </Link>
+    );
+
+    const PendingFriendRequestContent = (
+        <div className="flex justify-between items-center w-full text-left text-gray-400 group leading-tight">
+            <span>Friend request pending</span>
+
+            <TbUserPlus size="1.75em" />
+        </div>
+    );
+
+    const CanSendFriendRequestContent = (
+        <button
+            onClick={() => {
+                handleSendFriendRequest(
+                    token,
+                    currentUserId,
+                    otherUserId,
+                    setInfo,
+                    setDisableFriendRequestButton
+                );
+            }}
+            className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight"
+        >
+            <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                Send friend request
+            </span>
+            <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                <TbUserPlus />
+            </div>
+        </button>
+    );
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="flex flex-col gap-2 justify-around items-center"
         >
-            <Link
-                to={`/users/${id}`}
-                className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
-            >
-                <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                    Visit page
-                </span>
-                <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                    <TbLink />
-                </div>
-            </Link>
-            {disableFriendRequestButton ? (
-                <div className="flex justify-between items-center w-full text-left text-gray-400 group leading-tight">
-                    <span>Friend request pending</span>
-
-                    <TbUserPlus size="1.75em" />
-                </div>
-            ) : (
-                <button
-                    onClick={() => {
-                        handleSendFriendRequest(
-                            token,
-                            currentUserId,
-                            otherUserId,
-                            setInfo,
-                            setDisableFriendRequestButton
-                        );
-                    }}
-                    className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight"
-                >
-                    <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                        Send friend request
-                    </span>
-                    <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                        <TbUserPlus />
-                    </div>
-                </button>
-            )}
+            {LinkToUser}
+            {disableFriendRequestButton
+                ? PendingFriendRequestContent
+                : CanSendFriendRequestContent}
         </motion.div>
     );
 };

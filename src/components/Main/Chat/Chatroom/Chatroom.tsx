@@ -212,15 +212,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         scrollToBottom();
     }, [messages]);
 
-    if (loading) {
-        return (
-            <div className="flex flex-col gap-4 h-full md:p-4 lg:w-full lg:justify-around shadow-lg">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="flex flex-col gap-4 h-full md:p-4 lg:w-full lg:justify-around shadow-lg">
+            <LoadingSpinner />
+        </div>
+    );
 
-    return (
+    const ChatroomContent = (
         <div className="flex flex-col min-h-[calc(100vh-_5rem)] lg:min-h-full bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
             <ChatroomHeader
                 currentUserData={currentUserData}
@@ -249,4 +247,6 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
             )}
         </div>
     );
+
+    return loading ? LoadingContent : ChatroomContent;
 }

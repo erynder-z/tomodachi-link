@@ -90,15 +90,13 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
         };
     }, []);
 
-    if (loading) {
-        return (
-            <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark">
+            <LoadingSpinner />
+        </div>
+    );
 
-    return (
+    const ChatContent = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -141,4 +139,6 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
             </div>
         </motion.div>
     );
+
+    return loading ? LoadingContent : ChatContent;
 }

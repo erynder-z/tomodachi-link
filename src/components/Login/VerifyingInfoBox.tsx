@@ -11,7 +11,7 @@ export default function VerifyingInfoBox() {
                 wrapperStyle={{}}
                 wrapperClass="blocks-wrapper"
             />
-            verifying...
+            Verifying...
         </div>
     );
 }

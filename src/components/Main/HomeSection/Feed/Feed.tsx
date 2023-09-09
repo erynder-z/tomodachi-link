@@ -66,6 +66,46 @@ export default function Feed({
         }
     }, [skip]);
 
+    const LoadingContent = (
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="flex flex-col md:col-span-2 justify-center items-center w-full h-full py-4 gap-4 text-regularText dark:text-regularTextDark "
+        >
+            <LoadingSpinner message="Getting feed..." />
+        </motion.div>
+    );
+
+    const FeedContent = (
+        <>
+            <ShowPeopleInThisFeed
+                friendList={friendList}
+                minimalPosts={minimalPosts}
+            />
+            <div className="flex flex-col gap-4 pb-4">
+                <FeedPostList
+                    posts={minimalPosts}
+                    setClickedImage={setClickedImage}
+                    setClickedGif={setClickedGif}
+                />
+                <AnimatePresence>
+                    {showImageLightbox && (
+                        <LightBox
+                            image={clickedImage}
+                            onClose={() => setClickedImage(null)}
+                        />
+                    )}
+                    {showGifLightbox && (
+                        <LightBox
+                            image={clickedGif}
+                            onClose={() => setClickedGif(null)}
+                        />
+                    )}
+                </AnimatePresence>
+            </div>
+        </>
+    );
+
     return (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
@@ -74,43 +114,7 @@ export default function Feed({
         >
             <NewPostInput handleRefreshPosts={refreshFeed} />
             <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
-                {loading ? (
-                    <motion.div
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="flex flex-col md:col-span-2 justify-center items-center w-full h-full py-4 gap-4 text-regularText dark:text-regularTextDark "
-                    >
-                        <LoadingSpinner message="Getting feed..." />
-                    </motion.div>
-                ) : (
-                    <>
-                        <ShowPeopleInThisFeed
-                            friendList={friendList}
-                            minimalPosts={minimalPosts}
-                        />
-                        <div className="flex flex-col gap-4 pb-4">
-                            <FeedPostList
-                                posts={minimalPosts}
-                                setClickedImage={setClickedImage}
-                                setClickedGif={setClickedGif}
-                            />
-                            <AnimatePresence>
-                                {showImageLightbox && (
-                                    <LightBox
-                                        image={clickedImage}
-                                        onClose={() => setClickedImage(null)}
-                                    />
-                                )}
-                                {showGifLightbox && (
-                                    <LightBox
-                                        image={clickedGif}
-                                        onClose={() => setClickedGif(null)}
-                                    />
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    </>
-                )}
+                {loading ? LoadingContent : FeedContent}
             </div>
         </motion.div>
     );

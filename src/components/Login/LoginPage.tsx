@@ -130,66 +130,64 @@ export default function LoginPage() {
         };
     }, []);
 
+    const SignupContent = <SignupPage setShowSignup={setShowSignup} />;
+
+    const AsciiBackground = (
+        <div className="absolute inset-0 z-0">
+            <canvas
+                id="asciiArtCanvas"
+                className="h-full w-full object-cover"
+            ></canvas>
+        </div>
+    );
+
+    const LoginContent = (
+        <>
+            <motion.div
+                key="greeting"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+            >
+                <GreetingSection />
+            </motion.div>
+            <motion.div
+                key="loginForm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className=" w-5/6 md:w-1/2 mx-auto  bg-white shadow-lg p-4 lg:p-8 rounded lg:rounded-lg h-90 md:h-3/5"
+            >
+                {isVerifying ? (
+                    <VerifyingInfoBox />
+                ) : (
+                    <>
+                        <LoginForm
+                            handleLoginSubmit={handleLoginSubmit}
+                            isSubmitting={isSubmitting}
+                        />
+                        <div className="flex flex-col w-full">
+                            <GuestLoginButton
+                                handleGuestLogin={handleGuestLogin}
+                                isSubmitting={isSubmitting}
+                            />
+                            <span className="mt-8">Don't have an account?</span>
+                            <RegisterButton
+                                handleRegisterClick={handleRegisterClick}
+                            />
+                        </div>
+                    </>
+                )}
+            </motion.div>
+        </>
+    );
+
     return (
         <div className="h-screen bg-cBlack overflow-auto">
-            <div className="absolute inset-0 z-0">
-                <canvas
-                    id="asciiArtCanvas"
-                    className="h-full w-full object-cover"
-                ></canvas>
-            </div>
+            {AsciiBackground}
             <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full h-full md:h-screen gap-4 relative z-10">
                 <AnimatePresence>
-                    {showSignup ? (
-                        <SignupPage setShowSignup={setShowSignup} />
-                    ) : (
-                        <>
-                            <motion.div
-                                key="greeting"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                            >
-                                <GreetingSection />
-                            </motion.div>
-                            <motion.div
-                                key="loginForm"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className=" w-5/6 md:w-1/2 mx-auto  bg-white shadow-lg p-4 lg:p-8 rounded lg:rounded-lg h-90 md:h-3/5"
-                            >
-                                {isVerifying ? (
-                                    <VerifyingInfoBox />
-                                ) : (
-                                    <>
-                                        <LoginForm
-                                            handleLoginSubmit={
-                                                handleLoginSubmit
-                                            }
-                                            isSubmitting={isSubmitting}
-                                        />
-                                        <div className="flex flex-col w-full">
-                                            <GuestLoginButton
-                                                handleGuestLogin={
-                                                    handleGuestLogin
-                                                }
-                                                isSubmitting={isSubmitting}
-                                            />
-                                            <span className="mt-8">
-                                                Don't have an account?
-                                            </span>
-                                            <RegisterButton
-                                                handleRegisterClick={
-                                                    handleRegisterClick
-                                                }
-                                            />
-                                        </div>
-                                    </>
-                                )}
-                            </motion.div>
-                        </>
-                    )}
+                    {showSignup ? SignupContent : LoginContent}
                 </AnimatePresence>
             </div>
         </div>

@@ -11,6 +11,18 @@ export default function GuestLoginButton({
     handleGuestLogin,
     isSubmitting,
 }: GuestLoginButtonProps) {
+    const BusyButtonContent = <ButtonBusy />;
+
+    const NormalButtonContent = (
+        <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-xl">
+            <span className="transition-all duration-300 group-hover:pr-4">
+                Login as guest
+                <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
+                    <MdKeyboardDoubleArrowRight size="1.5em" />
+                </span>
+            </span>
+        </span>
+    );
     return (
         <button
             disabled={isSubmitting}
@@ -21,18 +33,7 @@ export default function GuestLoginButton({
                     : 'hover:bg-indigo-700'
             }`}
         >
-            {isSubmitting ? (
-                <ButtonBusy />
-            ) : (
-                <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-xl">
-                    <span className="transition-all duration-300 group-hover:pr-4">
-                        Login as guest
-                        <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
-                            <MdKeyboardDoubleArrowRight size="1.5em" />
-                        </span>
-                    </span>
-                </span>
-            )}
+            {isSubmitting ? BusyButtonContent : NormalButtonContent}
         </button>
     );
 }

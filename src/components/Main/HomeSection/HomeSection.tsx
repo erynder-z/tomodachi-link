@@ -46,15 +46,13 @@ export default function HomeSection({
         };
     }, []);
 
-    if (loading) {
-        return (
-            <div className="flex min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 lg:w-full justify-center items-center shadow-lg bg-card dark:bg-cardDark">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="flex min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 lg:w-full justify-center items-center shadow-lg bg-card dark:bg-cardDark">
+            <LoadingSpinner />
+        </div>
+    );
 
-    return (
+    const HomeContent = (
         <div className="flex flex-col just min-h-[calc(100vh_-_3rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg">
             <h1 className="text-center text-xl font-bold mb-4">Your feed</h1>
             <Feed
@@ -63,4 +61,6 @@ export default function HomeSection({
             />
         </div>
     );
+
+    return loading ? LoadingContent : HomeContent;
 }

@@ -40,12 +40,9 @@ export default function SuggestionCardFriendInfo({
             </p>
         )
     );
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex flex-col gap-4"
-        >
+
+    const FriendData = (
+        <>
             <img
                 className="w-20 h-20 object-cover mx-auto rounded-full border-4 border-regularText dark:border-regularTextDark"
                 src={`data:image/png;base64,${getCorrectUserpicFormat(
@@ -56,17 +53,29 @@ export default function SuggestionCardFriendInfo({
             <p className="font-semibold text-sm break-all text-regularText dark:text-regularTextDark">
                 {firstName} {lastName}
             </p>
-            {commonFriends && (
-                <div className="flex flex-col">
-                    <h1 className="font-semibold text-xs leading-tight">
-                        {`Common friend${commonFriends.length > 1 ? 's' : ''}`}
-                    </h1>
-                    {commonFriendsList}
-                    {additionalItemsCount > 0 && (
-                        <p className="text-xs">{`and ${additionalItemsCount} more`}</p>
-                    )}
-                </div>
+        </>
+    );
+
+    const CommonFriendsContent = (
+        <div className="flex flex-col">
+            <h1 className="font-semibold text-xs leading-tight">
+                {`Common friend${commonFriends.length > 1 ? 's' : ''}`}
+            </h1>
+            {commonFriendsList}
+            {additionalItemsCount > 0 && (
+                <p className="text-xs">{`and ${additionalItemsCount} more`}</p>
             )}
+        </div>
+    );
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col gap-4"
+        >
+            {FriendData}
+            {commonFriends && CommonFriendsContent}
         </motion.div>
     );
 }

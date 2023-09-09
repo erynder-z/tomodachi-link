@@ -87,62 +87,66 @@ export default function MyPage({
         }
     }, [numberOfPendingFriendRequests]);
 
+    const LoadingContent = (
+        <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ">
+            <LoadingSpinner />
+        </div>
+    );
+
+    const MyPageContent = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={`${
+                loading ? 'hidden' : 'md:grid'
+            } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
+        >
+            <MyCoverSection
+                onFetchComplete={onFetchComplete}
+                backgroundColor={backgroundColor}
+                textColor={textColor}
+                setColorPalette={setColorPalette}
+            />
+            <div className="flex flex-col lg:h-1/2">
+                {numberOfPendingFriendRequests ? (
+                    <div className="flex h-1/4 md:h-auto md:p-4">
+                        <FriendRequests
+                            onFetchComplete={onFetchComplete}
+                            pendingFriendRequests={pendingFriendRequests}
+                        />
+                    </div>
+                ) : null}
+                <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
+                    <PictureList
+                        key={myPicsKey}
+                        onFetchComplete={onFetchComplete}
+                        userId={userId}
+                    />
+
+                    <FriendList friendData={friendData} userId={userId} />
+                </div>
+            </div>
+            <div className="flex flex-col gap-8 md:px-4">
+                <NewPostInput
+                    handleRefreshPosts={handleRefreshPosts}
+                    handleRefreshPics={handleRefreshPics}
+                />
+
+                <PostList
+                    key={myPostsKey}
+                    userId={userId}
+                    isPaginationTriggered={isPaginationTriggered}
+                    onPostChange={handleRefreshPosts}
+                />
+            </div>
+        </motion.div>
+    );
+
     return (
         <div className="flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg">
-            <div
-                className={`${
-                    loading ? 'flex' : 'hidden'
-                } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark `}
-            >
-                <LoadingSpinner />
-            </div>
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className={`${
-                    loading ? 'hidden' : 'md:grid'
-                } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}
-            >
-                <MyCoverSection
-                    onFetchComplete={onFetchComplete}
-                    backgroundColor={backgroundColor}
-                    textColor={textColor}
-                    setColorPalette={setColorPalette}
-                />
-                <div className="flex flex-col lg:h-1/2">
-                    {numberOfPendingFriendRequests ? (
-                        <div className="flex h-1/4 md:h-auto md:p-4">
-                            <FriendRequests
-                                onFetchComplete={onFetchComplete}
-                                pendingFriendRequests={pendingFriendRequests}
-                            />
-                        </div>
-                    ) : null}
-                    <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
-                        <PictureList
-                            key={myPicsKey}
-                            onFetchComplete={onFetchComplete}
-                            userId={userId}
-                        />
-
-                        <FriendList friendData={friendData} userId={userId} />
-                    </div>
-                </div>
-                <div className="flex flex-col gap-8 md:px-4">
-                    <NewPostInput
-                        handleRefreshPosts={handleRefreshPosts}
-                        handleRefreshPics={handleRefreshPics}
-                    />
-
-                    <PostList
-                        key={myPostsKey}
-                        userId={userId}
-                        isPaginationTriggered={isPaginationTriggered}
-                        onPostChange={handleRefreshPosts}
-                    />
-                </div>
-            </motion.div>
+            {loading && LoadingContent}
+            {MyPageContent}
         </div>
     );
 }

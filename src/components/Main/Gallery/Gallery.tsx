@@ -101,22 +101,26 @@ export default function Gallery({
             </div>
         </div>
     ));
+
+    const LoadingContent = (
+        <div className="flex flex-col justify-center items-center h-screen w-full py-4 ">
+            <span>Getting pictures</span>
+            <LoadingSpinner />
+        </div>
+    );
+
+    const GalleryContent = (
+        <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg">
+            <h1 className="font-bold">{numberOfPictures} Pictures</h1>
+            <div className="flex flex-col md:grid grid-cols-3 gap-4">
+                {pictureList}
+            </div>
+        </div>
+    );
+
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            {loading ? (
-                <div className="flex flex-col justify-center items-center h-screen w-full py-4 ">
-                    <span>Getting pictures</span>
-                    <LoadingSpinner />
-                </div>
-            ) : (
-                <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg">
-                    <h1 className="font-bold">{numberOfPictures} Pictures</h1>
-                    <div className="flex flex-col md:grid grid-cols-3 gap-4">
-                        {pictureList}
-                    </div>
-                </div>
-            )}
-
+            {loading ? LoadingContent : GalleryContent}
             {showLightbox && (
                 <LightBox
                     image={selectedImage}
