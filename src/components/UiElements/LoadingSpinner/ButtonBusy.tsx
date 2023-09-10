@@ -3,7 +3,7 @@ import { RotatingLines } from 'react-loader-spinner';
 
 export default function ButtonBusy() {
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center p-2 md:p-4">
             <RotatingLines
                 strokeColor="white"
                 strokeWidth="4"
