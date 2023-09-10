@@ -2,7 +2,7 @@ import React from 'react';
 import { FriendDataType } from '../../../../../../types/friendDataType';
 import { useNavigate } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
-import { MdOutlineContactEmergency } from 'react-icons/md';
+import { TbUserSearch } from 'react-icons/tb';
 
 type FriendListItemProps = {
     friendData: FriendDataType;
@@ -24,15 +24,15 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
 
     return (
         <div onClick={handleUserClick} className="cursor-pointer">
-            <div className="relative flex">
+            <div className="relative flex rounded outline-highlight dark:outline-highlightDark hover:outline">
                 <img
-                    className="h-auto aspect-square object-cover shadow-lg rounded"
+                    className="h-auto aspect-square object-cover rounded"
                     src={`data:image/png;base64,${userpic.data}`}
                     alt="User avatar"
                 />
-                <div className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer rounded">
+                <div className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-75 opacity-0 hover:opacity-75 transition-opacity cursor-pointer rounded">
                     <span className="text-white text-lg font-bold">
-                        <MdOutlineContactEmergency size="1.5em" />
+                        <TbUserSearch size="1.5em" />
                     </span>
                 </div>
             </div>

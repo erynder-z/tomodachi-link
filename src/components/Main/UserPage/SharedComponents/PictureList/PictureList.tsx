@@ -8,7 +8,7 @@ import { fetchPictureList } from '../../../../../utilities/fetchPictureList';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
-import { MdKeyboardDoubleArrowRight, MdOutlineZoomIn } from 'react-icons/md';
+import { MdKeyboardDoubleArrowRight, MdZoomOutMap } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
@@ -62,9 +62,12 @@ export default function PictureList({
     }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
-        <div key={uuidv4()} className="relative flex">
+        <div
+            key={uuidv4()}
+            className="relative flex rounded outline-highlight dark:outline-highlightDark hover:outline"
+        >
             <img
-                className="h-auto aspect-square object-cover shadow-lg rounded"
+                className="h-auto aspect-square object-cover  rounded"
                 src={`data:image/png;base64,${convertDatabaseImageToBase64(
                     picture
                 )}`}
@@ -72,10 +75,10 @@ export default function PictureList({
             />
             <div
                 onClick={() => handleImageClick(picture)}
-                className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer rounded"
+                className="absolute inset-0 flex justify-center items-center aspect-square bg-black bg-opacity-75 opacity-0 hover:opacity-80 transition-opacity cursor-pointer rounded"
             >
                 <span className="text-white text-lg font-bold">
-                    <MdOutlineZoomIn size="1.5em" />
+                    <MdZoomOutMap size="1.5em" />
                 </span>
             </div>
         </div>
