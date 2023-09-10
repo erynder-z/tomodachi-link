@@ -28,6 +28,7 @@ import { useLocation } from 'react-router-dom';
 import { handleChatSetup } from './utilities/handleChatSetup';
 import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
     const { isAuth, token } = useAuth();
@@ -114,16 +115,14 @@ function App() {
         }
     }, [isAuth && currentUserData?._id]);
 
-    if (!isAuth) {
-        return (
-            <>
-                <LoginPage />
-                <InfoCard info={info} />
-            </>
-        );
-    }
+    const LoginContent = (
+        <>
+            <LoginPage />
+            <InfoCard info={info} />
+        </>
+    );
 
-    return (
+    const AppContent = (
         <div
             className={`font-regularFont text-regularText dark:text-regularTextDark flex flex-col lg:flex-row h-full pb-12 lg:pb-0 ${theme}`}
         >
@@ -150,94 +149,96 @@ function App() {
                 </div>
 
                 <div className="relative flex-1 max-w-3xl z-10">
-                    <Routes>
-                        <Route element={<RequireAuth />}>
-                            <Route path="*" element={<NotFoundPage />} />
-                            <Route
-                                path="/"
-                                element={<Navigate replace to="/home" />}
-                            />
-                            <Route
-                                path="/home"
-                                element={
-                                    <HomeSection
-                                        setCurrentView={setCurrentView}
-                                        isPaginationTriggered={
-                                            isPaginationTriggered
-                                        }
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/mypage"
-                                element={
-                                    <MyPage
-                                        setCurrentView={setCurrentView}
-                                        isPaginationTriggered={
-                                            isPaginationTriggered
-                                        }
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/friends"
-                                element={
-                                    <FriendSection
-                                        setCurrentView={setCurrentView}
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/chat"
-                                element={
-                                    accountType === 'guest' ? (
-                                        <Navigate replace to="/home" />
-                                    ) : (
-                                        <Chat
+                    <AnimatePresence>
+                        <Routes key={location.pathname} location={location}>
+                            <Route element={<RequireAuth />}>
+                                <Route path="*" element={<NotFoundPage />} />
+                                <Route
+                                    path="/"
+                                    element={<Navigate replace to="/home" />}
+                                />
+                                <Route
+                                    path="/home"
+                                    element={
+                                        <HomeSection
                                             setCurrentView={setCurrentView}
-                                            socket={socket.current}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
                                         />
-                                    )
-                                }
-                            />
-                            <Route
-                                path="/users/:id"
-                                element={
-                                    <UserPage
-                                        key={
-                                            currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
-                                        }
-                                        setCurrentView={setCurrentView}
-                                        isPaginationTriggered={
-                                            isPaginationTriggered
-                                        }
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/users/:id/gallery"
-                                element={
-                                    <Gallery
-                                        setCurrentView={setCurrentView}
-                                        isPaginationTriggered={
-                                            isPaginationTriggered
-                                        }
-                                    />
-                                }
-                            />
-                            <Route
-                                path="/users/:id/friends/list"
-                                element={
-                                    <AllFriendsPage
-                                        setCurrentView={setCurrentView}
-                                        isPaginationTriggered={
-                                            isPaginationTriggered
-                                        }
-                                    />
-                                }
-                            />
-                        </Route>
-                    </Routes>
+                                    }
+                                />
+                                <Route
+                                    path="/mypage"
+                                    element={
+                                        <MyPage
+                                            setCurrentView={setCurrentView}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/friends"
+                                    element={
+                                        <FriendSection
+                                            setCurrentView={setCurrentView}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/chat"
+                                    element={
+                                        accountType === 'guest' ? (
+                                            <Navigate replace to="/home" />
+                                        ) : (
+                                            <Chat
+                                                setCurrentView={setCurrentView}
+                                                socket={socket.current}
+                                            />
+                                        )
+                                    }
+                                />
+                                <Route
+                                    path="/users/:id"
+                                    element={
+                                        <UserPage
+                                            key={
+                                                currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
+                                            }
+                                            setCurrentView={setCurrentView}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/users/:id/gallery"
+                                    element={
+                                        <Gallery
+                                            setCurrentView={setCurrentView}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/users/:id/friends/list"
+                                    element={
+                                        <AllFriendsPage
+                                            setCurrentView={setCurrentView}
+                                            isPaginationTriggered={
+                                                isPaginationTriggered
+                                            }
+                                        />
+                                    }
+                                />
+                            </Route>
+                        </Routes>
+                    </AnimatePresence>
                 </div>
                 <Sidebar
                     currentView={currentView}
@@ -258,6 +259,8 @@ function App() {
             <InfoCard info={info} />
         </div>
     );
+
+    return isAuth ? AppContent : LoginContent;
 }
 
 export default App;

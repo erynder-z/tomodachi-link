@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
@@ -8,7 +8,7 @@ import PictureList from '../../SharedComponents/PictureList/PictureList';
 import PostList from '../../SharedComponents/PostList/PostList';
 import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type FriendUserPageProps = {
@@ -41,6 +41,9 @@ export default function FriendUserPage({
         ? '#e4e6ea'
         : '#020202';
 
+    const FriendPageContentRef = useRef(null);
+    const isInView = useInView(FriendPageContentRef, { once: true });
+
     const userPicture = convertDatabaseImageToBase64(userpic);
     const numberOfFriends = friends.length;
     const lastSeenFormatted = lastSeen
@@ -72,9 +75,11 @@ export default function FriendUserPage({
 
     const UserPageContent = (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            ref={FriendPageContentRef}
+            initial={{ y: 10, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className={`${
                 loading
                     ? 'hidden'
@@ -119,9 +124,9 @@ export default function FriendUserPage({
     );
 
     return (
-        <>
+        <AnimatePresence>
             {LoadingContent}
             {UserPageContent}
-        </>
+        </AnimatePresence>
     );
 }

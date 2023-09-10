@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import NormalContent from './NormalContent/NormalContent';
@@ -6,7 +6,7 @@ import IncomingFriendRequestPendingContent from './IncomingFriendRequestPendingC
 import NotFriendCoverSection from './NotFriendCoverSection/NotFriendCoverSection';
 import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type NotFriendUserPageProps = {
@@ -30,6 +30,9 @@ export default function NotFriendUserPage({
         ? '#e4e6ea'
         : '#020202';
 
+    const NotFriendPageContentRef = useRef(null);
+    const isInView = useInView(NotFriendPageContentRef, { once: true });
+
     const userPicture = convertDatabaseImageToBase64(userpic);
 
     const LoadingContent = (
@@ -44,9 +47,11 @@ export default function NotFriendUserPage({
 
     const UserPageContent = (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            ref={NotFriendPageContentRef}
+            initial={{ y: 10, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className={`${
                 loading
                     ? 'hidden'

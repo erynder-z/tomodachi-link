@@ -11,7 +11,7 @@ import PictureList from '../SharedComponents/PictureList/PictureList';
 import PostList from '../SharedComponents/PostList/PostList';
 import tinycolor from 'tinycolor2';
 import { FinalColor } from 'extract-colors';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 type MyPageProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -38,6 +38,9 @@ export default function MyPage({
     const textColor = tinycolor(backgroundColor).isDark()
         ? '#e4e6ea'
         : '#020202';
+
+    const MyPageContentRef = useRef(null);
+    const isInView = useInView(MyPageContentRef, { once: true });
 
     const shouldSetCurrentView = useRef(true);
 
@@ -95,9 +98,11 @@ export default function MyPage({
 
     const MyPageContent = (
         <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            ref={MyPageContentRef}
+            initial={{ y: 10, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className={`${
                 loading ? 'hidden' : 'md:grid'
             } flex flex-col grid-cols-[1fr,2fr] h-full gap-8`}

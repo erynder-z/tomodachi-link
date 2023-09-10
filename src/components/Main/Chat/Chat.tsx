@@ -91,15 +91,23 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
     }, []);
 
     const LoadingContent = (
-        <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark">
+        <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark"
+        >
             <LoadingSpinner />
-        </div>
+        </motion.div>
     );
 
     const ChatContent = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className="flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg"
         >
             <div
