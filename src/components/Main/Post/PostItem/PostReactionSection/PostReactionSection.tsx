@@ -36,47 +36,53 @@ export default function PostReactionSection({
         setAnimateReaction('');
     };
 
+    const CommentButton = (
+        <button
+            onClick={() =>
+                handleReactionClick('comments', handleShowCommentsClick)
+            }
+            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+                animateReaction === 'comments' ? 'animate-popInAnimation' : ''
+            }`}
+            onAnimationEnd={handleAnimationEnd}
+        >
+            <MdOutlineModeComment /> {numberOfComments}
+        </button>
+    );
+
+    const PositiveReactionButton = (
+        <button
+            onClick={() =>
+                handleReactionClick('positive', handlePositiveReactionClick)
+            }
+            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+                animateReaction === 'positive' ? 'animate-popInAnimation' : ''
+            }`}
+            onAnimationEnd={handleAnimationEnd}
+        >
+            <MdThumbUpOffAlt /> {numberOfPositiveReactions}
+        </button>
+    );
+
+    const NegativeReactionButton = (
+        <button
+            onClick={() =>
+                handleReactionClick('negative', handleNegativeReactionClick)
+            }
+            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+                animateReaction === 'negative' ? 'animate-popInAnimation' : ''
+            }`}
+            onAnimationEnd={handleAnimationEnd}
+        >
+            <MdThumbDownOffAlt /> {numberOfNegativeReactions}
+        </button>
+    );
+
     return (
         <div className="flex justify-around items-center">
-            <button
-                onClick={() =>
-                    handleReactionClick('comments', handleShowCommentsClick)
-                }
-                className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
-                    animateReaction === 'comments'
-                        ? 'animate-popInAnimation'
-                        : ''
-                }`}
-                onAnimationEnd={handleAnimationEnd}
-            >
-                <MdOutlineModeComment /> {numberOfComments}
-            </button>
-            <button
-                onClick={() =>
-                    handleReactionClick('positive', handlePositiveReactionClick)
-                }
-                className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
-                    animateReaction === 'positive'
-                        ? 'animate-popInAnimation'
-                        : ''
-                }`}
-                onAnimationEnd={handleAnimationEnd}
-            >
-                <MdThumbUpOffAlt /> {numberOfPositiveReactions}
-            </button>
-            <button
-                onClick={() =>
-                    handleReactionClick('negative', handleNegativeReactionClick)
-                }
-                className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
-                    animateReaction === 'negative'
-                        ? 'animate-popInAnimation'
-                        : ''
-                }`}
-                onAnimationEnd={handleAnimationEnd}
-            >
-                <MdThumbDownOffAlt /> {numberOfNegativeReactions}
-            </button>
+            {CommentButton}
+            {PositiveReactionButton}
+            {NegativeReactionButton}
         </div>
     );
 }

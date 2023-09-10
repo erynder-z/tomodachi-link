@@ -13,6 +13,7 @@ export default function ThemeToggle() {
 
     const icon =
         theme === 'dark' ? <TbSun size="1.5em" /> : <TbMoon size="1.5em" />;
+
     return (
         <div
             onClick={toggleTheme}

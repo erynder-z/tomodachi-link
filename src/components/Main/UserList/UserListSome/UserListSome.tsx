@@ -36,14 +36,13 @@ export default function UserListSome() {
         <UserListItem key={user._id} listItemData={user} />
     ));
 
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
-                <LoadingSpinner />
-            </div>
-        );
-    }
-    return (
+    const LoadingContent = (
+        <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
+            <LoadingSpinner />
+        </div>
+    );
+
+    const UserListContent = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -53,4 +52,6 @@ export default function UserListSome() {
             {userList}
         </motion.div>
     );
+
+    return loading ? LoadingContent : UserListContent;
 }

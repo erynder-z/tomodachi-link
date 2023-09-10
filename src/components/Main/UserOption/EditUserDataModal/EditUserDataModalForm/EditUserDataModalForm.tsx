@@ -108,6 +108,130 @@ export default function EditUserDataModalForm({
         setImage(originalImage);
     };
 
+    const UserImageSection = (
+        <div className="flex flex-col ml-auto">
+            <img
+                className="w-16 h-16 object-cover rounded-full mx-auto "
+                src={imageUrl}
+                alt="User avatar"
+            />
+            <label className="flex items-end justify-end cursor-pointer">
+                <input
+                    type="file"
+                    name="imagePicker"
+                    onChange={(event) => {
+                        const file = event.target.files?.[0];
+                        setImage((prevState) => ({
+                            selectedFile: file || null,
+                            preview: file
+                                ? URL.createObjectURL(file)
+                                : prevState.preview,
+                        }));
+
+                        setShowCropper(true);
+                    }}
+                    className="hidden"
+                />
+                <FaFileUpload />
+            </label>
+        </div>
+    );
+
+    const FirstNameInput = (
+        <div className="relative z-0">
+            <input
+                required
+                autoComplete="off"
+                id="firstName"
+                name="firstName"
+                type="text"
+                defaultValue={firstName}
+                className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
+                placeholder=" "
+            />
+            <label
+                htmlFor="firstName"
+                className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+                First name
+            </label>
+        </div>
+    );
+
+    const LastNameInput = (
+        <div className="relative z-0">
+            <input
+                required
+                autoComplete="off"
+                id="lastName"
+                name="lastName"
+                type="text"
+                defaultValue={lastName}
+                className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
+                placeholder=" "
+            />
+            <label
+                htmlFor="lastName"
+                className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+                Last name
+            </label>
+        </div>
+    );
+
+    const EmailInput = (
+        <div className="relative z-0">
+            <input
+                required
+                autoComplete="off"
+                id="email"
+                name="email"
+                type="email"
+                defaultValue={email}
+                className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
+                placeholder=" "
+            />
+            <label
+                htmlFor="email"
+                className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+                Email
+            </label>
+        </div>
+    );
+
+    const PasswordInput = (
+        <div className="relative mt-12 z-0">
+            <input
+                required
+                autoComplete="off"
+                id="password"
+                name="password"
+                type="password"
+                className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
+                placeholder=" "
+            />
+            <label
+                htmlFor="password"
+                className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+                Enter password to authorize:
+            </label>
+        </div>
+    );
+
+    const GuestButton = (
+        <button disabled className="w-full bg-gray-500 text-white px-2 py-1">
+            Cannot update guest account!
+        </button>
+    );
+
+    const NormalUserButton = (
+        <button className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded">
+            Update
+        </button>
+    );
+
     return (
         <>
             <div>
@@ -120,117 +244,14 @@ export default function EditUserDataModalForm({
                 className="divide-y divide-gray-200"
             >
                 <div className="py-8 text-base flex flex-col gap-4 text-regularText dark:text-regularTextDark sm:text-lg sm:leading-7">
-                    <div className="flex flex-col ml-auto">
-                        <img
-                            className="w-16 h-16 object-cover rounded-full mx-auto "
-                            src={imageUrl}
-                            alt="User avatar"
-                        />
-                        <label className="flex items-end justify-end cursor-pointer">
-                            <input
-                                type="file"
-                                name="imagePicker"
-                                onChange={(event) => {
-                                    const file = event.target.files?.[0];
-                                    setImage((prevState) => ({
-                                        selectedFile: file || null,
-                                        preview: file
-                                            ? URL.createObjectURL(file)
-                                            : prevState.preview,
-                                    }));
+                    {UserImageSection}
+                    {FirstNameInput}
+                    {LastNameInput}
+                    {EmailInput}
+                    {PasswordInput}
 
-                                    setShowCropper(true);
-                                }}
-                                className="hidden"
-                            />
-                            <FaFileUpload />
-                        </label>
-                    </div>
-                    <div className="relative z-0">
-                        <input
-                            required
-                            autoComplete="off"
-                            id="firstName"
-                            name="firstName"
-                            type="text"
-                            defaultValue={firstName}
-                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="firstName"
-                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                            First name
-                        </label>
-                    </div>
-                    <div className="relative z-0">
-                        <input
-                            required
-                            autoComplete="off"
-                            id="lastName"
-                            name="lastName"
-                            type="text"
-                            defaultValue={lastName}
-                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="lastName"
-                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                            Last name
-                        </label>
-                    </div>
-                    <div className="relative z-0">
-                        <input
-                            required
-                            autoComplete="off"
-                            id="email"
-                            name="email"
-                            type="email"
-                            defaultValue={email}
-                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="email"
-                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                            Email
-                        </label>
-                    </div>
-
-                    <div className="relative mt-12 z-0">
-                        <input
-                            required
-                            autoComplete="off"
-                            id="password"
-                            name="password"
-                            type="password"
-                            className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="password"
-                            className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                            Enter password to authorize:
-                        </label>
-                    </div>
                     <div className="flex w-full">
-                        {isGuest ? (
-                            <button
-                                disabled
-                                className="w-full bg-gray-500 text-white px-2 py-1"
-                            >
-                                Cannot update guest account!
-                            </button>
-                        ) : (
-                            <button className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded">
-                                Update
-                            </button>
-                        )}
+                        {isGuest ? GuestButton : NormalUserButton}
                     </div>
                 </div>
             </form>

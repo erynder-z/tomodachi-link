@@ -102,22 +102,61 @@ export default function MyCoverSection({
         };
     }, [selectedCover, initialCover]);
 
+    const CoverImage = (
+        <img
+            src={selectedCover?.image}
+            alt="cover image"
+            className="h-full w-full object-cover rounded-t"
+        />
+    );
+
+    const ChangeCoverButton = (
+        <button
+            onClick={handleChangeCoverImage}
+            className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
+        >
+            Change cover image <FaImages size="1.5em" />
+        </button>
+    );
+
+    const SaveButton = (
+        <button
+            className="absolute bottom-4 right-4  py-2 px-4 border-2  rounded lg:rounded-lg"
+            style={{
+                backgroundColor: backgroundColor,
+                color: textColor,
+            }}
+            onClick={handleSaveCoverImage}
+        >
+            Save
+        </button>
+    );
+
+    const ColoredHeaderSection = (
+        <div
+            className="relative row-span-1 flex h-full gap-4 px-4 bg-card dark:bg-cardDark rounded-b"
+            style={
+                backgroundColor && textColor
+                    ? {
+                          backgroundColor: backgroundColor,
+                          color: textColor,
+                      }
+                    : {}
+            }
+        >
+            <div className="flex flex-col justify-center w-full">
+                <h1 className="text-2xl text-center font-bold h-auto">
+                    My Page
+                </h1>
+            </div>
+        </div>
+    );
+
     return (
         <div className="h-[calc(100vh_-_5rem)] md:h-96 col-span-2 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex">
-                <img
-                    src={selectedCover?.image}
-                    alt="cover image"
-                    className="h-full w-full object-cover rounded-t"
-                />
-                {!showMenu && (
-                    <button
-                        onClick={handleChangeCoverImage}
-                        className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
-                    >
-                        Change cover image <FaImages size="1.5em" />
-                    </button>
-                )}
+                {CoverImage}
+                {!showMenu && ChangeCoverButton}
                 <AnimatePresence>
                     {showMenu && (
                         <ChangeCoverMenu
@@ -126,36 +165,9 @@ export default function MyCoverSection({
                         />
                     )}
                 </AnimatePresence>
-                {isSaveButtonShown && (
-                    <button
-                        className="absolute bottom-4 right-4  py-2 px-4 border-2  rounded lg:rounded-lg"
-                        style={{
-                            backgroundColor: backgroundColor,
-                            color: textColor,
-                        }}
-                        onClick={handleSaveCoverImage}
-                    >
-                        Save
-                    </button>
-                )}
+                {isSaveButtonShown && SaveButton}
             </div>
-            <div
-                className="relative row-span-1 flex h-full gap-4 px-4 bg-card dark:bg-cardDark rounded-b"
-                style={
-                    backgroundColor && textColor
-                        ? {
-                              backgroundColor: backgroundColor,
-                              color: textColor,
-                          }
-                        : {}
-                }
-            >
-                <div className="flex flex-col justify-center w-full">
-                    <h1 className="text-2xl text-center font-bold h-auto">
-                        My Page
-                    </h1>
-                </div>
-            </div>
+            {ColoredHeaderSection}
         </div>
     );
 }

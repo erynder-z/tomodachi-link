@@ -60,60 +60,68 @@ export default function FriendUserPage({
         }
     }, [componentLoading]);
 
-    return (
-        <>
-            <div
-                className={`${
-                    loading ? 'flex' : 'hidden'
-                } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark `}
-            >
-                <LoadingSpinner />
-            </div>
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className={`${
-                    loading
-                        ? 'hidden'
-                        : 'flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark'
-                }`}
-            >
-                <div className="flex flex-col h-full gap-8">
-                    <FriendCoverSection
-                        _id={_id}
-                        firstName={firstName}
-                        lastName={lastName}
-                        userPicture={userPicture}
-                        cover={cover}
-                        backgroundColor={backgroundColor}
-                        textColor={textColor}
-                        setColorPalette={setColorPalette}
-                        numberOfFriends={numberOfFriends}
-                        lastSeenFormatted={lastSeenFormatted}
-                        mutualFriends={mutualFriends}
-                        onFetchComplete={onFetchComplete}
-                    />
-                    <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8">
-                        <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
-                            <PictureList
-                                onFetchComplete={onFetchComplete}
-                                userId={userPageData._id}
-                            />
+    const LoadingContent = (
+        <div
+            className={`${
+                loading ? 'flex' : 'hidden'
+            } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark `}
+        >
+            <LoadingSpinner />
+        </div>
+    );
 
-                            <FriendList friendData={friends} userId={_id} />
-                        </div>
+    const UserPageContent = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={`${
+                loading
+                    ? 'hidden'
+                    : 'flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark'
+            }`}
+        >
+            <div className="flex flex-col h-full gap-8">
+                <FriendCoverSection
+                    _id={_id}
+                    firstName={firstName}
+                    lastName={lastName}
+                    userPicture={userPicture}
+                    cover={cover}
+                    backgroundColor={backgroundColor}
+                    textColor={textColor}
+                    setColorPalette={setColorPalette}
+                    numberOfFriends={numberOfFriends}
+                    lastSeenFormatted={lastSeenFormatted}
+                    mutualFriends={mutualFriends}
+                    onFetchComplete={onFetchComplete}
+                />
+                <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8">
+                    <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
+                        <PictureList
+                            onFetchComplete={onFetchComplete}
+                            userId={userPageData._id}
+                        />
 
-                        <div className="flex flex-col gap-8 md:px-4 overflow-auto">
-                            <PostList
-                                userId={_id}
-                                key={_id}
-                                isPaginationTriggered={isPaginationTriggered}
-                            />
-                        </div>
+                        <FriendList friendData={friends} userId={_id} />
+                    </div>
+
+                    <div className="flex flex-col gap-8 md:px-4 overflow-auto">
+                        <PostList
+                            userId={_id}
+                            key={_id}
+                            isPaginationTriggered={isPaginationTriggered}
+                        />
                     </div>
                 </div>
-            </motion.div>
+            </div>
+        </motion.div>
+    );
+
+    return (
+        <>
+            {LoadingContent}
+            {UserPageContent}
         </>
     );
 }

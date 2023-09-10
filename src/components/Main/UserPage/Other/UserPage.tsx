@@ -73,27 +73,29 @@ export default function UserPage({
         };
     }, []);
 
-    if (loading) {
-        return (
-            <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark">
+            <LoadingSpinner />
+        </div>
+    );
 
-    if (!isFriend) {
-        return (
-            <NotFriendUserPage
-                userPageData={userPageData}
-                isFriendRequestPending={isFriendRequestPending}
-            />
-        );
-    }
+    const NorFriendContent = (
+        <NotFriendUserPage
+            userPageData={userPageData}
+            isFriendRequestPending={isFriendRequestPending}
+        />
+    );
 
-    return (
+    const FriendContent = (
         <FriendUserPage
             userPageData={userPageData}
             isPaginationTriggered={isPaginationTriggered}
         />
     );
+
+    return loading
+        ? LoadingContent
+        : isFriend
+        ? FriendContent
+        : NorFriendContent;
 }

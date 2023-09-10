@@ -44,26 +44,40 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
         );
     }
 
+    const UserImage = (
+        <img
+            className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
+            src={`data:image/png;base64,${userImage}`}
+            alt="User avatar"
+        />
+    );
+
+    const UserName = (
+        <p className="font-semibold text-xl my-5 break-all">
+            {firstName} {lastName}
+        </p>
+    );
+
+    const FriendNumber = <span> {numberOfFriends} Friends</span>;
+
+    const LinkToChat = (
+        <Link
+            to="/chat"
+            className="text-regularText dark:text-regularTextDark text-xs"
+        >
+            {' '}
+            ( {matchedFriendsCount} Online )
+        </Link>
+    );
+
     return (
         <div className="flex w-full md:shadow-md">
             <div className="w-full text-center p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">
-                <img
-                    className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
-                    src={`data:image/png;base64,${userImage}`}
-                    alt="User avatar"
-                />
-                <p className="font-semibold text-xl my-5 break-all">
-                    {firstName} {lastName}
-                </p>
+                {UserImage}
+                {UserName}
                 <p className="flex flex-col text-sm mb-2">
-                    <span> {numberOfFriends} Friends</span>
-                    <Link
-                        to="/chat"
-                        className="text-regularText dark:text-regularTextDark text-xs"
-                    >
-                        {' '}
-                        ( {matchedFriendsCount} Online )
-                    </Link>
+                    {FriendNumber}
+                    {LinkToChat}
                 </p>
             </div>
         </div>

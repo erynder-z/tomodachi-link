@@ -95,15 +95,13 @@ export default function FriendRequestListItem({
         fetchUserData();
     }, []);
 
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center w-full py-4 ">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="flex justify-center items-center w-full py-4 ">
+            <LoadingSpinner />
+        </div>
+    );
 
-    return (
+    const FriendRequestListContent = (
         <div className="flex flex-col gap-4">
             <div
                 onClick={handleUserClick}
@@ -134,4 +132,6 @@ export default function FriendRequestListItem({
             </div>
         </div>
     );
+
+    return loading ? LoadingContent : FriendRequestListContent;
 }

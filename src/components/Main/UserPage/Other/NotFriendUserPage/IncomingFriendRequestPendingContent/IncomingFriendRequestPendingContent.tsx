@@ -51,6 +51,30 @@ export default function IncomingFriendRequestPendingContent({
         }
     };
 
+    const UserNameSection = (
+        <>
+            {firstName} {lastName} already sent you a friend request!
+        </>
+    );
+
+    const AcceptButton = (
+        <button
+            onClick={handleAcceptFriendRequest}
+            className="bg-green-500 text-regularTextDark text-xs px-2 py-1 hover:bg-green-600"
+        >
+            Accept
+        </button>
+    );
+
+    const DeclineButton = (
+        <button
+            onClick={handleDeclineFriendRequest}
+            className="bg-red-500 text-regularTextDark text-xs px-2 py-1 hover:bg-red-600"
+        >
+            Decline
+        </button>
+    );
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -58,20 +82,10 @@ export default function IncomingFriendRequestPendingContent({
             viewport={{ once: true }}
             className="flex flex-col gap-4 p-4 text-center"
         >
-            {firstName} {lastName} already sent you a friend request!
+            {UserNameSection}
             <div className="col-span-5 place-content-center flex items-center gap-4">
-                <button
-                    onClick={handleAcceptFriendRequest}
-                    className="bg-green-500 text-regularTextDark text-xs px-2 py-1 hover:bg-green-600"
-                >
-                    Accept
-                </button>
-                <button
-                    onClick={handleDeclineFriendRequest}
-                    className="bg-red-500 text-regularTextDark text-xs px-2 py-1 hover:bg-red-600"
-                >
-                    Decline
-                </button>
+                {AcceptButton}
+                {DeclineButton}
             </div>
         </motion.div>
     );

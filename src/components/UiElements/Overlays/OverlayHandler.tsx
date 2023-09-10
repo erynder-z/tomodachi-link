@@ -30,65 +30,71 @@ export default function OverlayHandler({
     showSidebar,
     toggleSidebar,
 }: OverlayHandlerProps) {
+    const OverlayGuest = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <GuestAccountOverlay
+                setShouldOverlaysShow={setShouldOverlaysShow}
+            />
+        </motion.div>
+    );
+
+    const OverlaySearch = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <SearchOverlay
+                shouldSearchOverlayShow={shouldOverlaysShow.searchOverlay}
+                setShouldOverlaysShow={setShouldOverlaysShow}
+            />
+        </motion.div>
+    );
+
+    const OverlayEditUser = (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <EditUserDataModal
+                shouldEditUserDataModalShow={
+                    shouldOverlaysShow.editUserDataModal
+                }
+                setShouldOverlaysShow={setShouldOverlaysShow}
+            />
+        </motion.div>
+    );
+
+    const OverlayMobileOptions = (
+        <motion.div
+            key="mobileOptionsModal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <div className="lg:hidden absolute bottom-0 right-0 mt-2 p-2 bg-card dark:bg-cardDark shadow-xl z-10 rounded lg:rounded-lg">
+                <OptionsCard
+                    shouldOverlaysShow={shouldOverlaysShow}
+                    setShouldOverlaysShow={setShouldOverlaysShow}
+                    showSidebar={showSidebar}
+                    toggleSidebar={toggleSidebar}
+                />
+            </div>
+        </motion.div>
+    );
+
     return (
         <div className="relative z-50">
             <AnimatePresence>
-                {shouldOverlaysShow.guestAccountOverlay && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <GuestAccountOverlay
-                            setShouldOverlaysShow={setShouldOverlaysShow}
-                        />
-                    </motion.div>
-                )}
-                {shouldOverlaysShow.searchOverlay && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <SearchOverlay
-                            shouldSearchOverlayShow={
-                                shouldOverlaysShow.searchOverlay
-                            }
-                            setShouldOverlaysShow={setShouldOverlaysShow}
-                        />
-                    </motion.div>
-                )}
-                {shouldOverlaysShow.editUserDataModal && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <EditUserDataModal
-                            shouldEditUserDataModalShow={
-                                shouldOverlaysShow.editUserDataModal
-                            }
-                            setShouldOverlaysShow={setShouldOverlaysShow}
-                        />
-                    </motion.div>
-                )}
-                {shouldOverlaysShow.mobileOptionsModal && (
-                    <motion.div
-                        key="mobileOptionsModal"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <div className="lg:hidden absolute bottom-0 right-0 mt-2 p-2 bg-card dark:bg-cardDark shadow-xl z-10 rounded lg:rounded-lg">
-                            <OptionsCard
-                                shouldOverlaysShow={shouldOverlaysShow}
-                                setShouldOverlaysShow={setShouldOverlaysShow}
-                                showSidebar={showSidebar}
-                                toggleSidebar={toggleSidebar}
-                            />
-                        </div>
-                    </motion.div>
-                )}
+                {shouldOverlaysShow.guestAccountOverlay && OverlayGuest}
+                {shouldOverlaysShow.searchOverlay && OverlaySearch}
+                {shouldOverlaysShow.editUserDataModal && OverlayEditUser}
+                {shouldOverlaysShow.mobileOptionsModal && OverlayMobileOptions}
             </AnimatePresence>
         </div>
     );

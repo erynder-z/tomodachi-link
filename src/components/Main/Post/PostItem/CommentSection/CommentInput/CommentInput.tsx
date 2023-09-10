@@ -89,38 +89,50 @@ export default function CommentInput({
         }
     };
 
+    const CommentTextArea = (
+        <textarea
+            className="w-full p-2 mb-2 bg-gray-200 dark:bg-gray-600 text-sm focus:outline-none focus:shadow-outline"
+            placeholder="Write a comment..."
+            value={commentText}
+            onChange={handleInputChange}
+        />
+    );
+
+    const EmojiInputButton = (
+        <button
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowEmojiPicker(!showEmojiPicker);
+            }}
+            className="text-back hover:text-blue-500"
+        >
+            <FaRegSmileBeam />
+        </button>
+    );
+
+    const SubmitButton = (
+        <button
+            disabled={isSubmitting || !commentText}
+            className={`flex justify-center items-center text-regularTextDark font-bold h-8 w-16 py-2 px-4 rounded ${
+                !commentText || isSubmitting
+                    ? 'bg-gray-500 hover:bg-gray-600'
+                    : 'bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover'
+            }`}
+            type="submit"
+        >
+            {isSubmitting ? <ButtonBusy /> : <MdSend />}
+        </button>
+    );
+
     return (
         <>
             <form onSubmit={handleSubmit}>
                 <div className="flex gap-4">
-                    <textarea
-                        className="w-full p-2 mb-2 bg-gray-200 dark:bg-gray-600 text-sm focus:outline-none focus:shadow-outline"
-                        placeholder="Write a comment..."
-                        value={commentText}
-                        onChange={handleInputChange}
-                    />
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setShowEmojiPicker(!showEmojiPicker);
-                        }}
-                        className="text-back hover:text-blue-500"
-                    >
-                        <FaRegSmileBeam />
-                    </button>
+                    {CommentTextArea}
+                    {EmojiInputButton}
                 </div>
-                <button
-                    disabled={isSubmitting || !commentText}
-                    className={`flex justify-center items-center text-regularTextDark font-bold h-8 w-16 py-2 px-4 rounded ${
-                        !commentText || isSubmitting
-                            ? 'bg-gray-500 hover:bg-gray-600'
-                            : 'bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover'
-                    }`}
-                    type="submit"
-                >
-                    {isSubmitting ? <ButtonBusy /> : <MdSend />}
-                </button>
+                {SubmitButton}
             </form>
             {showEmojiPicker && (
                 <EmojiSelector

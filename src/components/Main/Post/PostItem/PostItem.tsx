@@ -100,15 +100,13 @@ export default React.memo(function PostItem({
         };
     }, []);
 
-    if (loading) {
-        return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
+            <LoadingSpinner />
+        </div>
+    );
 
-    return (
+    const PostItemContent = (
         <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -164,4 +162,6 @@ export default React.memo(function PostItem({
             )}
         </motion.div>
     );
+
+    return loading ? LoadingContent : PostItemContent;
 });

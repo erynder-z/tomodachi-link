@@ -79,43 +79,50 @@ export default function PostOptionsSection({
         setShouldMenuShow(false);
     };
 
-    return (
-        <>
-            {showConfirmDialog && (
-                <ConfirmationOverlay
-                    shouldConfirmDialogShow={shouldConfirmDialogShow}
-                    setShouldConfirmDialogShow={setShouldConfirmDialogShow}
-                    onConfirm={() => {
-                        handleDelete();
-                    }}
-                    dialogInfo={{
-                        message: 'Do you really want to delete this post?',
-                        icon: '✋',
-                    }}
+    const ConfirmModal = (
+        <ConfirmationOverlay
+            shouldConfirmDialogShow={shouldConfirmDialogShow}
+            setShouldConfirmDialogShow={setShouldConfirmDialogShow}
+            onConfirm={() => {
+                handleDelete();
+            }}
+            dialogInfo={{
+                message: 'Do you really want to delete this post?',
+                icon: '✋',
+            }}
+        />
+    );
+
+    const PostOptionsContent = (
+        <div className="relative inline-block cursor-pointer">
+            <ToggleListButton
+                onToggleListButtonClick={handleShowPostMenu}
+                showMenu={showMenu}
+            />
+
+            {showMenu && (
+                <PostMenu
+                    handleEditButtonClick={handleEditButtonClick}
+                    handleDeleteButtonClick={handleDeleteButtonClick}
+                    shouldMenuShow={shouldMenuShow}
                 />
             )}
-            <div className="relative inline-block cursor-pointer">
-                <ToggleListButton
-                    onToggleListButtonClick={handleShowPostMenu}
-                    showMenu={showMenu}
-                />
 
-                {showMenu && (
-                    <PostMenu
-                        handleEditButtonClick={handleEditButtonClick}
-                        handleDeleteButtonClick={handleDeleteButtonClick}
-                        shouldMenuShow={shouldMenuShow}
-                    />
-                )}
-                {showPostEdit && (
-                    <EditPostInput
-                        postDetails={postDetails}
-                        shouldPostEditShow={shouldPostEditShow}
-                        setShouldPostEditShow={setShouldPostEditShow}
-                        onPostChange={onPostChange}
-                    />
-                )}
-            </div>
+            {showPostEdit && (
+                <EditPostInput
+                    postDetails={postDetails}
+                    shouldPostEditShow={shouldPostEditShow}
+                    setShouldPostEditShow={setShouldPostEditShow}
+                    onPostChange={onPostChange}
+                />
+            )}
+        </div>
+    );
+
+    return (
+        <>
+            {showConfirmDialog && ConfirmModal}
+            {PostOptionsContent}
         </>
     );
 }

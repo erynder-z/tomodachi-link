@@ -65,26 +65,31 @@ export default function PostList({
         />
     ));
 
+    const PostListContent =
+        postItemsList.length > 0 ? (
+            postItemsList
+        ) : (
+            <span className="text-sm font-medium text-center">
+                Your posts will appear here
+            </span>
+        );
+
+    const LoadingContent = (
+        <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex justify-center items-center w-full py-4 "
+        >
+            <LoadingSpinner />
+        </motion.div>
+    );
+
     return (
         <div className="flex flex-col gap-4 pb-4 ">
-            {postItemsList.length > 0 ? (
-                postItemsList
-            ) : (
-                <span className="text-sm font-medium text-center">
-                    Your posts will appear here
-                </span>
-            )}
-            {loading && (
-                <motion.div
-                    key="loading"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex justify-center items-center w-full py-4 "
-                >
-                    <LoadingSpinner />
-                </motion.div>
-            )}
+            {PostListContent}
+            {loading && LoadingContent}
             <AnimatePresence>
                 {showImageLightbox && (
                     <LightBox

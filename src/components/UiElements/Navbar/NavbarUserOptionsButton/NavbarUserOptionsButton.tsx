@@ -1,7 +1,6 @@
 import React from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 export default function NavbarUserOptionsButton() {
     const { currentUserData } = useCurrentUserData();
@@ -12,18 +11,14 @@ export default function NavbarUserOptionsButton() {
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
-    if (!userImage) {
-        return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg">
-                <LoadingSpinner />
-            </div>
-        );
-    }
+    const LoadingContent = (
+        <div className="w-8 h-8 object-cover rounded-full mx-auto bg-gray-600/50 animate-pulse"></div>
+    );
 
-    return (
+    const NavbarUserOptionsButton = (
         <div className="relative">
             <img
-                className="w-8 h-8 object-cover rounded-full mx-auto shadow-lg"
+                className="w-8 h-8 object-cover rounded-full mx-auto"
                 src={`data:image/png;base64,${userImage}`}
                 alt="User avatar"
             />
@@ -32,4 +27,6 @@ export default function NavbarUserOptionsButton() {
             ) : null}
         </div>
     );
+
+    return !userImage ? LoadingContent : NavbarUserOptionsButton;
 }

@@ -59,14 +59,44 @@ function AvatarCreator({
         setScale(parseFloat(e.target.value));
     };
 
+    const CloseButton = (
+        <button
+            onClick={handleCloseButtonClick}
+            className="absolute top-2 right-2 text-white"
+        >
+            <FaTimes />
+        </button>
+    );
+
+    const ScaleInput = (
+        <div className="flex flex-col">
+            <label htmlFor="scale" className="text-white">
+                Adjust scale:
+            </label>
+            <input
+                type="range"
+                min="1"
+                max="2"
+                step="0.1"
+                value={scale}
+                onChange={handleScaleChange}
+                id="scale"
+            />
+        </div>
+    );
+
+    const ConfirmButton = (
+        <button
+            onClick={handleConfirmButtonClick}
+            className="bg-blue-500 text-white px-2 py-1"
+        >
+            Confirm
+        </button>
+    );
+
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 bg-black">
-            <button
-                onClick={handleCloseButtonClick}
-                className="absolute top-2 right-2 text-white"
-            >
-                <FaTimes />
-            </button>
+            {CloseButton}
             <h3 className="text-white">
                 Grab the image to position your avatar
             </h3>
@@ -81,26 +111,8 @@ function AvatarCreator({
                 scale={scale}
                 rotate={0}
             />
-            <div className="flex flex-col">
-                <label htmlFor="scale" className="text-white">
-                    Adjust scale:
-                </label>
-                <input
-                    type="range"
-                    min="1"
-                    max="2"
-                    step="0.1"
-                    value={scale}
-                    onChange={handleScaleChange}
-                    id="scale"
-                />
-            </div>
-            <button
-                onClick={handleConfirmButtonClick}
-                className="bg-blue-500 text-white px-2 py-1"
-            >
-                Confirm
-            </button>
+            {ScaleInput}
+            {ConfirmButton}
         </div>
     );
 }

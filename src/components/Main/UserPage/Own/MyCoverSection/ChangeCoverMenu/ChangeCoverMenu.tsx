@@ -13,6 +13,30 @@ export default function ChangeCoverMenu({
     handleCloseButtonCLick,
     handleCoverOptionClick,
 }: ChangeCoverMenuProps) {
+    const CloseButton = (
+        <button
+            onClick={handleCloseButtonCLick}
+            className="ml-auto p-2 text-red-500 hover:text-red-700 cursor-pointer"
+        >
+            <FaTimes />
+        </button>
+    );
+
+    const MenuList = COVER_OPTIONS.map((coverImage, index) => (
+        <div
+            key={index}
+            className="flex items-center p-2  cursor-pointer hover:bg-red-300"
+            onClick={() => handleCoverOptionClick(coverImage)}
+        >
+            <img
+                src={coverImage.image}
+                alt={`cover option ${index + 1}`}
+                className="w-20 h-12 mr-2 object-cover"
+            />
+            <span> {coverImage.name}</span>
+        </div>
+    ));
+
     return (
         <motion.div
             key="coverMenu"
@@ -25,28 +49,9 @@ export default function ChangeCoverMenu({
                 <span className="flex justify-center items-center p-2">
                     Choose a cover:
                 </span>
-                <button
-                    onClick={handleCloseButtonCLick}
-                    className="ml-auto p-2 text-red-500 hover:text-red-700 cursor-pointer"
-                >
-                    <FaTimes />
-                </button>
             </div>
-
-            {COVER_OPTIONS.map((coverImage, index) => (
-                <div
-                    key={index}
-                    className="flex items-center p-2  cursor-pointer hover:bg-red-300"
-                    onClick={() => handleCoverOptionClick(coverImage)}
-                >
-                    <img
-                        src={coverImage.image}
-                        alt={`cover option ${index + 1}`}
-                        className="w-20 h-12 mr-2 object-cover"
-                    />
-                    <span> {coverImage.name}</span>
-                </div>
-            ))}
+            {CloseButton}
+            {MenuList}
         </motion.div>
     );
 }

@@ -28,36 +28,42 @@ export default function UnfriendButton({
         setShouldConfirmDialogShow(true);
     };
 
+    const ConfirmationModal = (
+        <ConfirmationOverlay
+            shouldConfirmDialogShow={shouldConfirmDialogShow}
+            setShouldConfirmDialogShow={setShouldConfirmDialogShow}
+            onConfirm={() => {
+                if (token && currentUserData) {
+                    unfriendUser(
+                        token,
+                        currentUserData?._id,
+                        unfriendUserId,
+                        handleFetchUserData,
+                        handleFetchFriendData,
+                        setInfo
+                    );
+                }
+            }}
+            dialogInfo={{
+                message: 'Do you really want to stop being friends?',
+                icon: '✋',
+            }}
+        />
+    );
+
+    const Button = (
+        <button
+            className="flex justify-center items-center gap-2 bg-red-500 text-regularTextDark px-2 py-1 w-fit m-auto md:ml-auto hover:bg-red-600 rounded"
+            onClick={handleUnfriendButtonClick}
+        >
+            Unfriend <TbUserMinus size="1.25em" />
+        </button>
+    );
+
     return (
         <>
-            {showConfirmDialog && (
-                <ConfirmationOverlay
-                    shouldConfirmDialogShow={shouldConfirmDialogShow}
-                    setShouldConfirmDialogShow={setShouldConfirmDialogShow}
-                    onConfirm={() => {
-                        if (token && currentUserData) {
-                            unfriendUser(
-                                token,
-                                currentUserData?._id,
-                                unfriendUserId,
-                                handleFetchUserData,
-                                handleFetchFriendData,
-                                setInfo
-                            );
-                        }
-                    }}
-                    dialogInfo={{
-                        message: 'Do you really want to stop being friends?',
-                        icon: '✋',
-                    }}
-                />
-            )}
-            <button
-                className="flex justify-center items-center gap-2 bg-red-500 text-regularTextDark px-2 py-1 w-fit m-auto md:ml-auto hover:bg-red-600 rounded"
-                onClick={handleUnfriendButtonClick}
-            >
-                Unfriend <TbUserMinus size="1.25em" />
-            </button>
+            {showConfirmDialog && ConfirmationModal}
+            {Button}
         </>
     );
 }
