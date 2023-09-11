@@ -8,7 +8,7 @@ import PictureList from '../../SharedComponents/PictureList/PictureList';
 import PostList from '../../SharedComponents/PostList/PostList';
 import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type FriendUserPageProps = {
@@ -124,9 +124,9 @@ export default function FriendUserPage({
     );
 
     return (
-        <AnimatePresence>
+        <>
             {LoadingContent}
             {UserPageContent}
-        </AnimatePresence>
+        </>
     );
 }
