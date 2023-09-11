@@ -1,6 +1,6 @@
 import React from 'react';
 import { FriendDataType } from '../../../../../../types/friendDataType';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { TbUserSearch } from 'react-icons/tb';
 
@@ -9,21 +9,17 @@ type FriendListItemProps = {
 };
 
 export default function FriendListItem({ friendData }: FriendListItemProps) {
-    const navigate = useNavigate();
     const { currentUserData } = useCurrentUserData();
     const { _id, firstName, lastName, userpic } = friendData ?? {};
 
-    const handleUserClick = () => {
-        if (!currentUserData) {
-            return;
-        }
-
-        const path = currentUserData?._id === _id ? '/mypage' : `/users/${_id}`;
-        navigate(path);
-    };
+    const isCurrentUser = currentUserData?._id === _id;
+    const path = isCurrentUser ? '/mypage' : `/users/${_id}`;
 
     return (
-        <div onClick={handleUserClick} className="cursor-pointer">
+        <Link
+            to={path}
+            className="cursor-pointer text-regularText dark:text-regularTextDark text-xs"
+        >
             <div className="relative flex rounded outline-highlight dark:outline-highlightDark hover:outline">
                 <img
                     className="h-auto aspect-square object-cover rounded"
@@ -39,6 +35,6 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
             <div className="text-xs p-1 break-all">
                 {firstName} {lastName}
             </div>
-        </div>
+        </Link>
     );
 }
