@@ -39,9 +39,9 @@ export default function NotFriendUserPage({
         <div
             className={`${
                 loading ? 'flex' : 'hidden'
-            } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark `}
+            } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-background2 dark:bg-background2Dark `}
         >
-            <LoadingSpinner />
+            <LoadingSpinner message={`Setting up ${firstName}'s page`} />
         </div>
     );
 
@@ -55,7 +55,7 @@ export default function NotFriendUserPage({
             className={`${
                 loading
                     ? 'hidden'
-                    : 'flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark'
+                    : 'flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark'
             }`}
         >
             <NotFriendCoverSection

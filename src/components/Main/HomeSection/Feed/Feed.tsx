@@ -26,6 +26,7 @@ export default function Feed({
     const [minimalPosts, setMinimalPosts] = useState<MinimalPostType[]>([]);
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
+    const [isFeedRefreshing, setIsFeedRefreshing] = useState<boolean>(false);
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
     const [clickedGif, setClickedGif] = useState<string | null>(null);
 
@@ -44,13 +45,15 @@ export default function Feed({
     };
 
     const refreshFeed = async () => {
-        setLoading(true);
+        /*  setLoading(true); */
+        setIsFeedRefreshing(true);
         setMinimalPosts([]);
         setSkip(0);
         if (authUser && token) {
             const response = await fetchFeed(token, setInfo, skip, friendList);
             setMinimalPosts([...response]);
             setLoading(false);
+            setIsFeedRefreshing(false);
         }
     };
 
@@ -87,6 +90,7 @@ export default function Feed({
                     posts={minimalPosts}
                     setClickedImage={setClickedImage}
                     setClickedGif={setClickedGif}
+                    isFeedRefreshing={isFeedRefreshing}
                 />
                 <AnimatePresence>
                     {showImageLightbox && (

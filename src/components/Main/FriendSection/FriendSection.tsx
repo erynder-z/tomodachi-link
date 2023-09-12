@@ -12,7 +12,7 @@ import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOf
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 import { CurrentViewType } from '../../../types/currentViewType';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 type FriendSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -30,6 +30,8 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const [loading, setLoading] = useState<boolean>(true);
 
     const shouldFetchFriendsOfFriends = useRef(true);
+    const FriendSectionContentRef = useRef(null);
+    const isInView = useInView(FriendSectionContentRef, { once: true });
 
     useEffect(() => {
         if (shouldFetchFriendsOfFriends.current) {
@@ -96,9 +98,17 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
 
     const SuggestionList = getSuggestionList();
 
-    const LoadingContent = <LoadingSpinner />;
+    const LoadingContent = (
+        <div
+            className={`${
+                loading ? 'flex' : 'hidden'
+            } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-background2 dark:bg-background2Dark `}
+        >
+            <LoadingSpinner message="Getting friend data" />
+        </div>
+    );
 
-    const FriendContent = (
+    const FriendListContent = (
         <>
             <h1 className="text-center text-xl font-bold">Friends</h1>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
@@ -112,27 +122,39 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
         </>
     );
 
-    const SuggestionContent = (
+    const SuggestionListContent = (
         <>
             <h1 className="text-center text-xl font-bold">
                 Maybe you know these people?
             </h1>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
-                {loading ? LoadingContent : SuggestionList}
+                {SuggestionList}
             </div>
         </>
     );
 
-    return (
+    const FriendSectionContent = (
         <motion.div
+            ref={FriendSectionContentRef}
             initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={isInView ? { y: 0, opacity: 1 } : { y: 10, opacity: 0 }}
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg"
+            className={`${
+                loading
+                    ? 'hidden'
+                    : 'flex flex-col gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg'
+            }`}
         >
-            {FriendContent}
-            {SuggestionContent}
+            {FriendListContent}
+            {SuggestionListContent}
         </motion.div>
+    );
+
+    return (
+        <>
+            {LoadingContent}
+            {FriendSectionContent}
+        </>
     );
 }

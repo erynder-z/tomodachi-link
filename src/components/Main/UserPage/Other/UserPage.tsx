@@ -74,8 +74,8 @@ export default function UserPage({
     }, []);
 
     const LoadingContent = (
-        <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-card dark:bg-cardDark">
-            <LoadingSpinner />
+        <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-background2 dark:bg-background2Dark">
+            <LoadingSpinner message="Getting user data" />
         </div>
     );
 

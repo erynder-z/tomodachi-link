@@ -214,7 +214,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
 
     const LoadingContent = (
         <div className="flex flex-col gap-4 h-full md:p-4 lg:w-full lg:justify-around shadow-lg">
-            <LoadingSpinner />
+            <LoadingSpinner message="Getting conversation" />
         </div>
     );
 

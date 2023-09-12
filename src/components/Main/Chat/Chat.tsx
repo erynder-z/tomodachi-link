@@ -96,9 +96,9 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ext-regularText dark:text-regularTextDark"
+            className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark"
         >
-            <LoadingSpinner />
+            <LoadingSpinner message="Loading chat" />
         </motion.div>
     );
 

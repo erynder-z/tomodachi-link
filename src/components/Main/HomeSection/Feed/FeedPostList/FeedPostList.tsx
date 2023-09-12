@@ -2,17 +2,20 @@ import React from 'react';
 import { MinimalPostType } from '../../../../../types/minimalPostType';
 import PostItem from '../../../Post/PostItem/PostItem';
 import { ImageType } from '../../../../../types/imageType';
+import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type FeedPostListProps = {
     posts: MinimalPostType[];
     setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
     setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
+    isFeedRefreshing: boolean;
 };
 
 export default function FeedPostList({
     posts,
     setClickedImage,
     setClickedGif,
+    isFeedRefreshing,
 }: FeedPostListProps) {
     const HasFeedContent = posts.map((post) => (
         <PostItem
@@ -29,5 +32,14 @@ export default function FeedPostList({
         </span>
     );
 
-    return posts.length > 0 ? HasFeedContent : EmptyFeedContent;
+    const LoadingContent = (
+        <div className="flex justify-center items-center h-full w-full py-4">
+            <LoadingSpinner message="Refreshing feed" />
+        </div>
+    );
+
+    const FeedPostListContents =
+        posts.length > 0 ? HasFeedContent : EmptyFeedContent;
+
+    return isFeedRefreshing ? LoadingContent : FeedPostListContents;
 }

@@ -91,8 +91,8 @@ export default function MyPage({
     }, [numberOfPendingFriendRequests]);
 
     const LoadingContent = (
-        <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-card dark:bg-cardDark ">
-            <LoadingSpinner />
+        <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-background2 dark:bg-background2Dark ">
+            <LoadingSpinner message="Setting up your page" />
         </div>
     );
 

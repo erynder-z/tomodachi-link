@@ -106,8 +106,8 @@ export default function SearchOverlay({
     );
 
     const Loading = (
-        <div className=" fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <LoadingSpinner />
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <LoadingSpinner message="Searching" />
         </div>
     );
 
@@ -133,6 +133,14 @@ export default function SearchOverlay({
         </div>
     );
 
+    const NoResultsFound = (
+        <div className="flex justify-center items-center">
+            <span className="text-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-regularTextDark">
+                🌵 No results found
+            </span>
+        </div>
+    );
+
     const ClearButton = (
         <button
             className="absolute -top-5 right-2 text-regularTextDark hover:text-highlight dark:hover:text-highlightDark text-xs"
@@ -153,6 +161,8 @@ export default function SearchOverlay({
                         : searchResults.length > 0 &&
                           Array.isArray(searchResults)
                         ? SearchResults
+                        : searchText
+                        ? NoResultsFound
                         : SpyGlassIcon}
                     {searchText && ClearButton}
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineWave } from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 import useTheme from '../../../hooks/useTheme';
 
 type LoadingSpinnerProps = {
@@ -13,9 +13,9 @@ export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
     const darkThemeColor = 'rgba(255,255,255,0.4)';
     const highlightColor = '#0598BC';
     const darkHighlightColor = '#BC05BC';
-    const mainColor = theme === 'bright' ? brightThemeColor : darkThemeColor;
-    const middleBarColor =
-        theme === 'bright' ? highlightColor : darkHighlightColor;
+    const firstColor = theme === 'bright' ? highlightColor : darkHighlightColor;
+    const secondColor = theme === 'bright' ? brightThemeColor : darkThemeColor;
+
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-4">
             {message && (
@@ -23,13 +23,17 @@ export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
                     {message}
                 </h1>
             )}
-            <LineWave
-                height="100"
-                width="100"
-                color={mainColor}
-                ariaLabel="line-wave"
+            <Oval
+                height={30}
+                width={30}
+                color={firstColor}
+                wrapperStyle={{}}
+                wrapperClass=""
                 visible={true}
-                middleLineColor={middleBarColor}
+                ariaLabel="oval-loading"
+                secondaryColor={secondColor}
+                strokeWidth={5}
+                strokeWidthSecondary={5}
             />
         </div>
     );
