@@ -7,7 +7,9 @@ const ScrollToTop = () => {
 
     useEffect(() => {
         const el = document.getElementById('container-main');
-        el?.scrollTo(0, 0);
+        setTimeout(() => {
+            el?.scrollTo(0, 0);
+        }, 200);
     }, [pathname]);
 
     return null;
