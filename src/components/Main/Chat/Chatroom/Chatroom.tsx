@@ -174,7 +174,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
             listenForMessage();
             listenForTyping();
             const cleanupMessage = () => {
-                socket?.off('receiveMessage');
+                socket?.off('receiveMessage', setReceivedMessage);
             };
 
             const cleanupTyping = () => {
