@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChatConversationType } from '../../../../types/chatConversationType';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
@@ -36,6 +36,8 @@ export default function ChatConversation({
     const [loading, setLoading] = useState(false);
     const [isConversationMuted, setIsConversationMuted] = useState(isMuted);
 
+    const shouldFetchPartnerData = useRef(true);
+
     const conversationId = conversation?._id;
 
     useEffect(() => {
@@ -56,8 +58,12 @@ export default function ChatConversation({
                     console.error(error);
                 }
             };
-
-            fetchPartnerData();
+            if (shouldFetchPartnerData.current) {
+                fetchPartnerData();
+            }
+            return () => {
+                shouldFetchPartnerData.current = false;
+            };
         }
     }, [currentUserId, conversation, token, setInfo]);
 

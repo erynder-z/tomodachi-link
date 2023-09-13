@@ -26,7 +26,7 @@ export default function Gallery({
     const id: string | undefined = params.id;
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
-    const [skip, setSkip] = useState<number>(0);
+    const [skip, setSkip] = useState<number | null>(null);
     const [pictures, setPictures] = useState<ImageType[]>([]);
     const [numberOfPictures, setNumberOfPictures] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
@@ -34,7 +34,7 @@ export default function Gallery({
     const isLightboxMounted = selectedImage ? true : false;
     const showLightbox = useDelayUnmount(isLightboxMounted, 150);
 
-    const shouldSetCurrentView = useRef(true);
+    const shouldInitialize = useRef(true);
 
     const handleFetchUserPics = async () => {
         if (token && id) {
@@ -60,24 +60,21 @@ export default function Gallery({
     };
 
     useEffect(() => {
-        if (pictures) {
-            setSkip(pictures.length);
-        }
-    }, [isPaginationTriggered]);
+        if (pictures) setSkip(pictures.length);
+    }, [isPaginationTriggered, numberOfPictures]);
 
     useEffect(() => {
-        if (id) {
+        if (skip) handleFetchUserPics();
+    }, [skip]);
+
+    useEffect(() => {
+        if (shouldInitialize.current) {
             handleFetchUserPics();
-        }
-    }, [skip, id]);
-
-    useEffect(() => {
-        if (shouldSetCurrentView.current === true) {
             setCurrentView('Gallery');
             localStorage.setItem('currentViewOdinBook', 'Gallery');
         }
         return () => {
-            shouldSetCurrentView.current = false;
+            shouldInitialize.current = false;
         };
     }, []);
 
@@ -103,7 +100,7 @@ export default function Gallery({
     ));
 
     const LoadingContent = (
-        <div className="flex flex-col justify-center items-center h-screen w-full py-4 ">
+        <div className="flex flex-col justify-center items-center h-screen w-full py-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark ">
             <span>Getting pictures</span>
             <LoadingSpinner />
         </div>

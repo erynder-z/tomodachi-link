@@ -20,6 +20,7 @@ export default function HomeSection({
     const [loading, setLoading] = useState<boolean>(true);
 
     const shouldSetCurrentView = useRef(true);
+    const shouldExtractFriendIds = useRef(true);
 
     const extractFriendIdFromFriendData = (friendData: FriendDataType[]) => {
         const idArray: string[] = [];
@@ -31,14 +32,17 @@ export default function HomeSection({
     };
 
     useEffect(() => {
-        if (friendData) {
+        if (friendData && shouldExtractFriendIds.current) {
             setFriendList(extractFriendIdFromFriendData(friendData));
             setLoading(false);
+            return () => {
+                shouldExtractFriendIds.current = false;
+            };
         }
     }, [friendData]);
 
     useEffect(() => {
-        if (shouldSetCurrentView.current === true) {
+        if (shouldSetCurrentView.current) {
             setCurrentView('Home');
             localStorage.setItem('currentViewOdinBook', 'Home');
         }

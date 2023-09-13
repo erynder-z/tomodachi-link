@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import GifPicker, { TenorImage, Theme } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
@@ -18,6 +18,8 @@ export default function GifSelector({
     const { theme } = useTheme();
     const [apiKey, setApiKey] = useState<string | undefined>(undefined);
 
+    const shouldFetchAPIKey = useRef(true);
+
     const handleComponentClose = () => {
         setShowGifSelector(false);
     };
@@ -26,7 +28,10 @@ export default function GifSelector({
         theme === 'dark' ? Theme.DARK : Theme.LIGHT;
 
     useEffect(() => {
-        fetchTenorApiKey(token, setApiKey);
+        if (shouldFetchAPIKey.current) fetchTenorApiKey(token, setApiKey);
+        return () => {
+            shouldFetchAPIKey.current = false;
+        };
     }, []);
 
     const CloseButton = (

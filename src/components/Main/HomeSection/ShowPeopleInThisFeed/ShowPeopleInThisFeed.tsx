@@ -58,22 +58,20 @@ export default function ShowPeopleInThisFeed({
     };
 
     useEffect(() => {
-        if (minimalPosts.length > 0) {
-            const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
-            if (idsOfPeopleInFeed.length > 0) {
-                handleGetUserDetails(idsOfPeopleInFeed);
-            }
-        } else {
-            setLoading(false);
-        }
-    }, [minimalPosts, token]);
-
-    useEffect(() => {
         if (isInitialLoad.current) {
             setLoading(true);
             isInitialLoad.current = false;
+        } else {
+            if (minimalPosts.length === 0) {
+                setLoading(false);
+            } else if (token) {
+                const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
+                if (idsOfPeopleInFeed.length > 0) {
+                    handleGetUserDetails(idsOfPeopleInFeed);
+                }
+            }
         }
-    }, []);
+    }, [minimalPosts, token]);
 
     const LoadingContent = (
         <motion.div

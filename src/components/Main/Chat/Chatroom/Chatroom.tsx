@@ -170,7 +170,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     };
 
     useEffect(() => {
-        if (shouldInitializeSocket.current === true) {
+        if (shouldInitializeSocket.current) {
             listenForMessage();
             listenForTyping();
             const cleanupMessage = () => {
@@ -190,7 +190,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }, [socket]);
 
     useEffect(() => {
-        if (shouldFetch.current === true) {
+        if (shouldFetch.current) {
             handleFetchPartnerData();
             handleFetchChatMessages();
         }

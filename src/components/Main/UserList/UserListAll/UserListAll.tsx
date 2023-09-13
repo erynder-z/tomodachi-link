@@ -16,7 +16,7 @@ export default function UserListAll() {
     const [skip, setSkip] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const shouldFetchNumberOfUsers = useRef(true);
+    const shouldInitialize = useRef(true);
 
     const handleFetchAllUsers = async () => {
         if (authUser && token) {
@@ -40,15 +40,16 @@ export default function UserListAll() {
     };
 
     useEffect(() => {
-        handleFetchAllUsers();
+        if (skip) handleFetchAllUsers();
     }, [skip]);
 
     useEffect(() => {
-        if (shouldFetchNumberOfUsers.current === true) {
+        if (shouldInitialize.current) {
             handleFetchNumberOfUsers();
+            handleFetchAllUsers();
         }
         return () => {
-            shouldFetchNumberOfUsers.current = false;
+            shouldInitialize.current = false;
         };
     }, []);
 

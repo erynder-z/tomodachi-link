@@ -41,7 +41,9 @@ export default function EmbedYoutubeVideoSelector({
     };
 
     useEffect(() => {
-        setVideoID(getYoutubeID(selectedURL));
+        if (selectedURL) {
+            setVideoID(getYoutubeID(selectedURL));
+        }
     }, [selectedURL]);
 
     const CloseButton = (

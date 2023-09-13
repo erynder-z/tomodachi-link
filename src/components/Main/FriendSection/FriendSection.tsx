@@ -29,6 +29,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const [randomUsers, setRandomUsers] = useState<MinimalUserTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldSetCurrentView = useRef(true);
     const shouldFetchFriendsOfFriends = useRef(true);
     const FriendSectionContentRef = useRef(null);
     const isInView = useInView(FriendSectionContentRef, { once: true });
@@ -43,8 +44,13 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     }, [friendData]);
 
     useEffect(() => {
-        setCurrentView('Friends');
-        localStorage.setItem('currentViewOdinBook', 'Friends');
+        if (shouldSetCurrentView.current) {
+            setCurrentView('Friends');
+            localStorage.setItem('currentViewOdinBook', 'Friends');
+        }
+        return () => {
+            shouldSetCurrentView.current = false;
+        };
     }, []);
 
     const handleFetchFriendsOfFriends = async () => {

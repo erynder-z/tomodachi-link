@@ -122,7 +122,7 @@ export default function LoginPage() {
     }, [isAuth]);
 
     useEffect(() => {
-        if (shouldRenderAscii.current === true) {
+        if (shouldRenderAscii.current) {
             generateAsciiImage(introBackground, 'asciiArtCanvas', 15);
         }
         return () => {

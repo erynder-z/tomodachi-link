@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchFeed } from '../../../../utilities/fetchFeed';
@@ -24,11 +24,13 @@ export default function Feed({
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [minimalPosts, setMinimalPosts] = useState<MinimalPostType[]>([]);
-    const [skip, setSkip] = useState<number>(0);
+    const [skip, setSkip] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [isFeedRefreshing, setIsFeedRefreshing] = useState<boolean>(false);
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
     const [clickedGif, setClickedGif] = useState<string | null>(null);
+
+    const shouldInitialize = useRef(true);
 
     const isImageLightboxMounted = clickedImage ? true : false;
     const showImageLightbox = useDelayUnmount(isImageLightboxMounted, 150);
@@ -45,7 +47,6 @@ export default function Feed({
     };
 
     const refreshFeed = async () => {
-        /*  setLoading(true); */
         setIsFeedRefreshing(true);
         setMinimalPosts([]);
         setSkip(0);
@@ -64,10 +65,18 @@ export default function Feed({
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        if (token) {
+        if (token && skip) {
             handleGetFeed();
         }
     }, [skip]);
+
+    useEffect(() => {
+        if (shouldInitialize.current) handleGetFeed();
+
+        return () => {
+            shouldInitialize.current = false;
+        };
+    }, []);
 
     const LoadingContent = (
         <motion.div

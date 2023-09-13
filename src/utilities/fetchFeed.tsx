@@ -4,7 +4,7 @@ import { handleFetchErrors } from './handleFetchErrors';
 export const fetchFeed = async (
     token: string,
     setInfo: (info: InfoType | null) => void,
-    skip: number,
+    skip: number | null = 0,
     friendList: string[]
 ) => {
     try {

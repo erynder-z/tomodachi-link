@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { countUsers } from '../../../utilities/countUsers';
 import useInfoCard from '../../../hooks/useInfoCard';
 
 export default function GreetingSection() {
     const { setInfo } = useInfoCard();
     const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
+
+    const shouldGetNumberOfUsers = useRef(true);
 
     const formattedNumberOfUsers = numberOfUsers.toLocaleString(undefined, {
         minimumIntegerDigits: 4,
@@ -33,7 +35,12 @@ export default function GreetingSection() {
     };
 
     useEffect(() => {
-        getNumberOfUsers();
+        if (shouldGetNumberOfUsers.current) {
+            getNumberOfUsers();
+        }
+        return () => {
+            shouldGetNumberOfUsers.current = false;
+        };
     }, []);
 
     return (

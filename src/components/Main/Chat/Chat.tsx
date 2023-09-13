@@ -77,7 +77,7 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
     }, [activeChat]);
 
     useEffect(() => {
-        if (shouldSetCurrentView.current === true) {
+        if (shouldSetCurrentView.current) {
             setCurrentView('Chat');
             localStorage.setItem('currentViewOdinBook', 'Chat');
 
