@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import UnfriendButton from '../UnfriendButton/UnfriendButton';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../../utilities/getColors';
@@ -35,27 +35,34 @@ export default function FriendCoverSection({
 }: FriendCoverSectionProps) {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
 
+    const shouldInitialize = useRef(true);
+
     useEffect(() => {
-        setColorPalette([]);
-        const displayCover = COVER_OPTIONS.find(
-            (coverImage) => coverImage.name === cover
-        );
+        if (shouldInitialize.current) {
+            setColorPalette([]);
+            const displayCover = COVER_OPTIONS.find(
+                (coverImage) => coverImage.name === cover
+            );
 
-        if (displayCover) {
-            getColors(displayCover.image)
-                .then((palette) => {
-                    if (palette) {
-                        setColorPalette(palette as FinalColor[]);
-                    }
-                })
-                .catch(console.error)
-                .finally(() => {
-                    onFetchComplete('coverSection');
-                });
+            if (displayCover) {
+                getColors(displayCover.image)
+                    .then((palette) => {
+                        if (palette) {
+                            setColorPalette(palette as FinalColor[]);
+                        }
+                    })
+                    .catch(console.error)
+                    .finally(() => {
+                        onFetchComplete('coverSection');
+                    });
 
-            setCoverImageSrc(displayCover.image);
+                setCoverImageSrc(displayCover.image);
+            }
         }
-    }, [cover, setColorPalette]);
+        return () => {
+            shouldInitialize.current = false;
+        };
+    }, []);
 
     const CoverImage = (
         <div className="relative row-span-3 flex rounded-t">

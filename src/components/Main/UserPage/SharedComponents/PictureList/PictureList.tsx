@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
@@ -28,8 +28,10 @@ export default function PictureList({
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldInitialize = useRef(true);
+
     const handleFetchUserPics = async () => {
-        if (token && userId) {
+        if (token && userId && shouldInitialize.current) {
             try {
                 const pictureListResponse = await fetchPictureList(
                     userId,
@@ -51,6 +53,9 @@ export default function PictureList({
                 onFetchComplete('pictureList');
             }
         }
+        return () => {
+            shouldInitialize.current = false;
+        };
     };
 
     const handleImageClick = (image: ImageType) => {

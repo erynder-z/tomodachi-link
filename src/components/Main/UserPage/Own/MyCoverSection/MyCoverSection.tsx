@@ -92,14 +92,16 @@ export default function MyCoverSection({
     }, [currentUserData?.cover]);
 
     useEffect(() => {
-        getColorPalette();
-        checkSaveButton();
-        if (shouldSendFetchCompleteInfo.current) {
-            onFetchComplete('coverSection');
+        if (selectedCover) {
+            getColorPalette();
+            checkSaveButton();
+            if (shouldSendFetchCompleteInfo.current) {
+                onFetchComplete('coverSection');
+            }
+            return () => {
+                shouldSendFetchCompleteInfo.current = false;
+            };
         }
-        return () => {
-            shouldSendFetchCompleteInfo.current = false;
-        };
     }, [selectedCover, initialCover]);
 
     const CoverImage = (

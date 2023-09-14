@@ -59,6 +59,7 @@ function App() {
     const location = useLocation();
 
     const accountType = currentUserData?.accountType;
+    const numberOfFriends = currentUserData?.friends.length;
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
@@ -204,9 +205,7 @@ function App() {
                                     path="/users/:id"
                                     element={
                                         <UserPage
-                                            key={
-                                                currentUserData?.friends.length // use number of friends to trigger component refresh when unfriending a user
-                                            }
+                                            key={`userPage + ${numberOfFriends}`} // use number of friends to trigger component refresh when unfriending a user
                                             setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered

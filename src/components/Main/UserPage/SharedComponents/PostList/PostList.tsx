@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PostItem from '../../../Post/PostItem/PostItem';
 import { PostType } from '../../../../../types/postType';
 import useAuth from '../../../../../hooks/useAuth';
@@ -24,7 +24,7 @@ export default function PostList({
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [posts, setPosts] = useState<PostType[]>([]);
-    const [skip, setSkip] = useState<number>(0);
+    const [skip, setSkip] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
     const [clickedGif, setClickedGif] = useState<string | null>(null);
@@ -34,6 +34,8 @@ export default function PostList({
 
     const isGifLightboxMounted = clickedGif ? true : false;
     const showGifLightbox = useDelayUnmount(isGifLightboxMounted, 150);
+
+    const shouldInitialize = useRef(true);
 
     const handleFetchPosts = async () => {
         if (authUser && token && userId) {
@@ -50,10 +52,19 @@ export default function PostList({
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        if (userId) {
+        if (skip && userId) {
             handleFetchPosts();
         }
     }, [skip, userId]);
+
+    useEffect(() => {
+        if (userId && shouldInitialize.current) {
+            handleFetchPosts();
+            return () => {
+                shouldInitialize.current = false;
+            };
+        }
+    }, [userId]);
 
     const postItemsList = posts?.map((post) => (
         <PostItem
@@ -70,7 +81,7 @@ export default function PostList({
             postItemsList
         ) : (
             <span className="text-sm font-medium text-center">
-                Your posts will appear here
+                Nothing to show yet!
             </span>
         );
 

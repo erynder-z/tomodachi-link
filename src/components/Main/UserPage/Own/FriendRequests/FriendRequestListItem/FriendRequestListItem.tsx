@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
 import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
@@ -31,6 +31,8 @@ export default function FriendRequestListItem({
     >({});
 
     const { firstName, lastName } = friendRequestData || {};
+
+    const shouldInitialize = useRef(true);
 
     const userPic =
         convertDatabaseImageToBase64(friendRequestData?.userpic) || '';
@@ -92,7 +94,13 @@ export default function FriendRequestListItem({
             }
         };
 
-        fetchUserData();
+        if (shouldInitialize.current) {
+            fetchUserData();
+        }
+
+        return () => {
+            shouldInitialize.current = false;
+        };
     }, []);
 
     const LoadingContent = (

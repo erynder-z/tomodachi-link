@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { getColors } from '../../../../../../utilities/getColors';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { FinalColor } from 'extract-colors';
@@ -26,27 +26,35 @@ export default function NotFriendCoverSection({
 }: NotFriendCoverSectionProps) {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
 
+    const shouldInitialize = useRef(true);
+
     useEffect(() => {
-        const displayCover = COVER_OPTIONS.find(
-            (coverImage) => coverImage.name === cover
-        );
+        if (shouldInitialize.current) {
+            console.log('working');
+            const displayCover = COVER_OPTIONS.find(
+                (coverImage) => coverImage.name === cover
+            );
 
-        if (displayCover) {
-            setColorPalette([]);
-            getColors(displayCover.image)
-                .then((palette) => {
-                    if (palette) {
-                        setColorPalette(palette as FinalColor[]);
-                    }
-                })
-                .catch(console.error)
-                .finally(() => {
-                    setLoading(false);
-                });
+            if (displayCover) {
+                setColorPalette([]);
+                getColors(displayCover.image)
+                    .then((palette) => {
+                        if (palette) {
+                            setColorPalette(palette as FinalColor[]);
+                        }
+                    })
+                    .catch(console.error)
+                    .finally(() => {
+                        setLoading(false);
+                    });
 
-            setCoverImageSrc(displayCover.image);
+                setCoverImageSrc(displayCover.image);
+            }
         }
-    }, [cover, setColorPalette]);
+        return () => {
+            shouldInitialize.current = false;
+        };
+    }, []);
 
     const CoverImageSection = (
         <div className="relative row-span-3 flex">

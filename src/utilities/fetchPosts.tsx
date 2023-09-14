@@ -5,7 +5,7 @@ export const fetchPosts = async (
     id: string,
     token: string,
     setInfo: (info: InfoType | null) => void,
-    skip: number
+    skip: number | null = 0
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
