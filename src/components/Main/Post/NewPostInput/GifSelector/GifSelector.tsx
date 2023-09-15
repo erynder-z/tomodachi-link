@@ -20,9 +20,7 @@ export default function GifSelector({
 
     const shouldFetchAPIKey = useRef(true);
 
-    const handleComponentClose = () => {
-        setShowGifSelector(false);
-    };
+    const handleComponentClose = () => setShowGifSelector(false);
 
     const getThemeVariable = () =>
         theme === 'dark' ? Theme.DARK : Theme.LIGHT;

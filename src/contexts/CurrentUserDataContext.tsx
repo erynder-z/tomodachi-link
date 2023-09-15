@@ -41,10 +41,7 @@ export const CurrentUserDataContextProvider = ({
 
     // Fetch user data if the token and authenticated user are both present
     useEffect(() => {
-        if (authUser && token) {
-            /*    fetchUserData(token, setUserData, setInfo); */
-            handleFetchUserData();
-        }
+        if (authUser && token) handleFetchUserData();
     }, [isAuth]);
 
     return (

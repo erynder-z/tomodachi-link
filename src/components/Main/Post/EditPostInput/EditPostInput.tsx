@@ -145,20 +145,15 @@ export default function EditPostInput({
         }
     };
 
-    const handleComponentClose = () => {
-        setShouldPostEditShow(false);
-    };
+    const handleComponentClose = () => setShouldPostEditShow(false);
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
-        setPostText(event.target.value);
-    };
+    ) => setPostText(event.target.value);
 
     const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
+        if (event.target.files && event.target.files.length > 0)
             setSelectedImage(event.target.files[0]);
-        }
     };
 
     const handleImageDelete = () => {

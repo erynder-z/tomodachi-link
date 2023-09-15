@@ -33,9 +33,7 @@ export const FriendDataContextProvider = ({
     }, [!isAuth]);
 
     useEffect(() => {
-        if (authUser && token) {
-            handleFetchFriendData();
-        }
+        if (authUser && token) handleFetchFriendData();
     }, [isAuth]);
 
     return (

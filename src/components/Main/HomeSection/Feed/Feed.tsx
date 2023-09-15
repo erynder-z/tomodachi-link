@@ -59,15 +59,11 @@ export default function Feed({
     };
 
     useEffect(() => {
-        if (minimalPosts) {
-            setSkip(minimalPosts.length);
-        }
+        if (minimalPosts) setSkip(minimalPosts.length);
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        if (token && skip) {
-            handleGetFeed();
-        }
+        if (token && skip) handleGetFeed();
     }, [skip]);
 
     useEffect(() => {

@@ -20,9 +20,8 @@ export const handleConversationMuteBackend = async (
             }
         );
 
-        if (!response.ok) {
-            handleFetchErrors(response, setInfo);
-        }
+        if (!response.ok) handleFetchErrors(response, setInfo);
+
         return response;
     } catch (err: unknown) {
         setInfo({

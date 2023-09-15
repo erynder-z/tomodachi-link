@@ -23,7 +23,7 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
 
     return (
         <motion.div
-            key="lightbox"
+            key="lightBox"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

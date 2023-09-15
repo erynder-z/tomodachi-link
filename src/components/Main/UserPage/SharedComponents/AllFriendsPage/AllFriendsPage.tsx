@@ -23,7 +23,7 @@ export default function AllFriendsPage({
     ));
 
     useEffect(() => {
-        if (shouldSetCurrentView.current === true) {
+        if (shouldSetCurrentView.current) {
             setCurrentView('AllFriendsPage');
             localStorage.setItem('currentViewOdinBook', 'AllFriendsPage');
         }

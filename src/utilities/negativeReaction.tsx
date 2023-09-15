@@ -19,9 +19,7 @@ export const negativeReaction = async (
             }
         );
 
-        if (!response.ok) {
-            handleFetchErrors(response, setInfo);
-        }
+        if (!response.ok) handleFetchErrors(response, setInfo);
 
         setInfo({
             typeOfInfo: 'good',

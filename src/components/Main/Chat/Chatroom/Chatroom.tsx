@@ -71,9 +71,8 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     };
 
     const handleMarkMessageUnreadInDB = async () => {
-        if (token && chatId) {
+        if (token && chatId)
             await markMessageUnreadInDB(token, chatId, setInfo);
-        }
     };
 
     const handleTyping = () => {
@@ -173,13 +172,9 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         if (shouldInitializeSocket.current) {
             listenForMessage();
             listenForTyping();
-            const cleanupMessage = () => {
+            const cleanupMessage = () =>
                 socket?.off('receiveMessage', setReceivedMessage);
-            };
-
-            const cleanupTyping = () => {
-                socket?.off('typing', handleTyping);
-            };
+            const cleanupTyping = () => socket?.off('typing', handleTyping);
 
             return () => {
                 cleanupMessage();
@@ -203,9 +198,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         if (receivedMessage && partnerId === receivedMessage.senderId) {
             setMessages((prevMessages) => [...prevMessages, receivedMessage]);
         }
-        if (token && chatId) {
-            markMessageReadInDB(token, chatId, setInfo);
-        }
+        if (token && chatId) markMessageReadInDB(token, chatId, setInfo);
     }, [receivedMessage]);
 
     useEffect(() => {

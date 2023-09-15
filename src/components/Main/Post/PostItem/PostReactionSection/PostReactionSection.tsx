@@ -32,9 +32,7 @@ export default function PostReactionSection({
         callback();
     };
 
-    const handleAnimationEnd = () => {
-        setAnimateReaction('');
-    };
+    const handleAnimationEnd = () => setAnimateReaction('');
 
     const CommentButton = (
         <button

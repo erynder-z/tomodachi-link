@@ -22,11 +22,8 @@ export default function CommentInput({
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const handleInputChange = (
-        event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
         setCommentText(event.target.value);
-    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

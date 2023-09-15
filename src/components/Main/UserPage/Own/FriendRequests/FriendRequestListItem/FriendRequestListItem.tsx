@@ -69,10 +69,7 @@ export default function FriendRequestListItem({
         }
     };
 
-    const handleUserClick = () => {
-        navigate(`/users/${friendRequestUserId}`);
-    };
-
+    const handleUserClick = () => navigate(`/users/${friendRequestUserId}`);
     useEffect(() => {
         const fetchUserData = async () => {
             if (token) {
@@ -94,9 +91,7 @@ export default function FriendRequestListItem({
             }
         };
 
-        if (shouldInitialize.current) {
-            fetchUserData();
-        }
+        if (shouldInitialize.current) fetchUserData();
 
         return () => {
             shouldInitialize.current = false;

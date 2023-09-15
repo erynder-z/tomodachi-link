@@ -16,9 +16,7 @@ export default function SuggestionCardRandom({
 
     const [showMenu, setShowMenu] = useState(false);
 
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    };
+    const toggleMenu = () => setShowMenu(!showMenu);
 
     const MenuOpenIcon = (
         <motion.div

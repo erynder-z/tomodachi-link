@@ -64,7 +64,7 @@ export default function UserPage({
     }, [id, currentUserData?.pendingFriendRequests]);
 
     useEffect(() => {
-        if (shouldSetCurrentView.current === true) {
+        if (shouldSetCurrentView.current) {
             setCurrentView('OtherUserPage');
             localStorage.setItem('currentViewOdinBook', 'OtherUserPage');
         }

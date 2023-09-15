@@ -35,9 +35,8 @@ export default function GreetingSection() {
     };
 
     useEffect(() => {
-        if (shouldGetNumberOfUsers.current) {
-            getNumberOfUsers();
-        }
+        if (shouldGetNumberOfUsers.current) getNumberOfUsers();
+
         return () => {
             shouldGetNumberOfUsers.current = false;
         };

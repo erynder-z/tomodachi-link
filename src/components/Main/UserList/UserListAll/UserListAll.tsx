@@ -34,9 +34,7 @@ export default function UserListAll() {
     };
 
     const handleButtonClick = () => {
-        if (users) {
-            setSkip(users.length);
-        }
+        if (users) setSkip(users.length);
     };
 
     useEffect(() => {

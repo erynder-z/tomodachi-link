@@ -15,9 +15,7 @@ export default function AllFiendsPageItem({
     const { _id, firstName, lastName, userpic } = friendData ?? {};
 
     const handleUserClick = () => {
-        if (!currentUserData) {
-            return;
-        }
+        if (!currentUserData) return;
 
         const path = currentUserData?._id === _id ? '/mypage' : `/users/${_id}`;
         navigate(path);

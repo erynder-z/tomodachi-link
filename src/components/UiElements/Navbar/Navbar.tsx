@@ -58,21 +58,16 @@ export default function Navbar({
     };
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (
-            menuRef.current &&
-            !menuRef.current.contains(event.target as Node)
-        ) {
+        if (menuRef.current && !menuRef.current.contains(event.target as Node))
             closeAllOverlays();
-        }
     };
 
     useEffect(() => {
-        if (shouldOverlaysShow.mobileOptionsModal) {
+        if (shouldOverlaysShow.mobileOptionsModal)
             document.addEventListener('mousedown', handleClickOutside);
-            return () => {
-                document.removeEventListener('mousedown', handleClickOutside);
-            };
-        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
     }, [menuRef, shouldOverlaysShow.mobileOptionsModal]);
 
     const MobileOptionsButton = (

@@ -47,13 +47,9 @@ export default function MyPage({
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
     const userId = currentUserData?._id;
 
-    const handleRefreshPosts = () => {
-        setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
-    };
+    const handleRefreshPosts = () => setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
 
-    const handleRefreshPics = () => {
-        setMyPicsKey((prevKey) => prevKey + 1); // update state variable to force remount
-    };
+    const handleRefreshPics = () => setMyPicsKey((prevKey) => prevKey + 1); // update state variable to force remount
 
     const onFetchComplete = (nameOfComponent: string) => {
         setComponentLoading((prevLoading) => ({
@@ -73,9 +69,8 @@ export default function MyPage({
     }, []);
 
     useEffect(() => {
-        if (Object.values(componentLoading).every((v) => v === false)) {
+        if (Object.values(componentLoading).every((v) => v === false))
             setLoading(false);
-        }
     }, [componentLoading]);
 
     useEffect(() => {

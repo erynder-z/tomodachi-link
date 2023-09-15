@@ -15,9 +15,7 @@ export default function EmbedYoutubeVideoSelector({
     const [selectedURL, setSelectedURL] = useState<string>('');
     const [videoID, setVideoID] = useState<string | null>(null);
 
-    const handleComponentClose = () => {
-        setShowYoutubeEmbed(false);
-    };
+    const handleComponentClose = () => setShowYoutubeEmbed(false);
 
     const getYoutubeID = (url: string) => {
         const URLcopy = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/);
@@ -41,9 +39,7 @@ export default function EmbedYoutubeVideoSelector({
     };
 
     useEffect(() => {
-        if (selectedURL) {
-            setVideoID(getYoutubeID(selectedURL));
-        }
+        if (selectedURL) setVideoID(getYoutubeID(selectedURL));
     }, [selectedURL]);
 
     const CloseButton = (

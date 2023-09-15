@@ -58,9 +58,8 @@ export default function FriendUserPage({
     };
 
     useEffect(() => {
-        if (Object.values(componentLoading).every((v) => v === false)) {
+        if (Object.values(componentLoading).every((v) => v === false))
             setLoading(false);
-        }
     }, [componentLoading]);
 
     const LoadingContent = (

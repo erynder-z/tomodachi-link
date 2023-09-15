@@ -18,9 +18,7 @@ export const postMessage = async (
             },
             body: JSON.stringify(message),
         });
-        if (!response.ok) {
-            handleFetchErrors(response, setInfo);
-        }
+        if (!response.ok) handleFetchErrors(response, setInfo);
 
         return response;
     } catch (err: unknown) {

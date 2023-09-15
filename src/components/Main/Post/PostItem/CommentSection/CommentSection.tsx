@@ -18,9 +18,8 @@ export default function CommentSection({
     handleShowCommentsClick,
     shouldCommentSectionShow,
 }: CommentSectionProps) {
-    const onToggleListButtonClick = () => {
-        handleShowCommentsClick();
-    };
+    const onToggleListButtonClick = () => handleShowCommentsClick();
+
     return (
         <div
             className={`${

@@ -51,13 +51,10 @@ function AvatarCreator({
         return new File([blob], filename, { type: blob.type });
     }
 
-    const handleCloseButtonClick = () => {
-        handleAvatarCreatorClose();
-    };
+    const handleCloseButtonClick = () => handleAvatarCreatorClose();
 
-    const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         setScale(parseFloat(e.target.value));
-    };
 
     const CloseButton = (
         <button

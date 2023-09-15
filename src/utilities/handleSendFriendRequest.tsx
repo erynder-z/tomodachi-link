@@ -11,8 +11,6 @@ export const handleSendFriendRequest = (
 ) => {
     if (token && currentUserId && otherUserId) {
         sendFriendRequest(token, currentUserId, otherUserId, setInfo);
-        if (setDisableButton) {
-            setDisableButton(true);
-        }
+        if (setDisableButton) setDisableButton(true);
     }
 };

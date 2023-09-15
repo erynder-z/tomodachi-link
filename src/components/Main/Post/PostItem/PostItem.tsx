@@ -79,22 +79,16 @@ export default React.memo(function PostItem({
         }
     };
 
-    const handleShowCommentsClick = () => {
+    const handleShowCommentsClick = () =>
         setShouldCommentSectionShow(!shouldCommentSectionShow);
-    };
 
-    const handleImageClick = (image: ImageType) => {
-        setClickedImage(image);
-    };
+    const handleImageClick = (image: ImageType) => setClickedImage(image);
 
-    const handleGifClick = (gifURL: string) => {
-        setClickedGif(gifURL);
-    };
+    const handleGifClick = (gifURL: string) => setClickedGif(gifURL);
 
     useEffect(() => {
-        if (shouldGetPostDetails.current === true) {
-            getPostDetails(postID);
-        }
+        if (shouldGetPostDetails.current) getPostDetails(postID);
+
         return () => {
             shouldGetPostDetails.current = false;
         };

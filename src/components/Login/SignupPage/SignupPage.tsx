@@ -121,9 +121,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         setIsSubmitting(false);
     };
 
-    const handleCloseButtonClick = () => {
-        setShowSignup(false);
-    };
+    const handleCloseButtonClick = () => setShowSignup(false);
 
     return (
         <motion.div

@@ -35,9 +35,8 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const isInView = useInView(FriendSectionContentRef, { once: true });
 
     useEffect(() => {
-        if (shouldFetchFriendsOfFriends.current) {
-            handleFetchFriendsOfFriends();
-        }
+        if (shouldFetchFriendsOfFriends.current) handleFetchFriendsOfFriends();
+
         return () => {
             shouldFetchFriendsOfFriends.current = false;
         };
@@ -58,9 +57,7 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
             const response = await fetchSomeFriendsOfFriends(token, setInfo);
             setFriendsOfFriends(response);
             setLoading(response.length <= 0);
-            if (response.length <= 0) {
-                handleFetchRandomUsers();
-            }
+            if (response.length <= 0) handleFetchRandomUsers();
         }
     };
 

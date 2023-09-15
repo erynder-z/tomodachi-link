@@ -66,9 +66,8 @@ export default function ShowPeopleInThisFeed({
                 setLoading(false);
             } else if (token) {
                 const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
-                if (idsOfPeopleInFeed.length > 0) {
+                if (idsOfPeopleInFeed.length > 0)
                     handleGetUserDetails(idsOfPeopleInFeed);
-                }
             }
         }
     }, [minimalPosts, token]);

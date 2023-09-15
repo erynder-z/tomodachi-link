@@ -89,9 +89,7 @@ export default function LoginPage() {
         setIsSubmitting(false);
     };
 
-    const handleRegisterClick = () => {
-        setShowSignup(true);
-    };
+    const handleRegisterClick = () => setShowSignup(true);
 
     const handleGuestLogin = async () => {
         setIsSubmitting(true);
@@ -116,15 +114,13 @@ export default function LoginPage() {
     };
 
     useEffect(() => {
-        if (isAuth) {
-            setIsVerifying(false);
-        }
+        if (isAuth) setIsVerifying(false);
     }, [isAuth]);
 
     useEffect(() => {
-        if (shouldRenderAscii.current) {
+        if (shouldRenderAscii.current)
             generateAsciiImage(introBackground, 'asciiArtCanvas', 15);
-        }
+
         return () => {
             shouldRenderAscii.current = false;
         };

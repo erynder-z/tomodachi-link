@@ -74,9 +74,8 @@ export default function ChatConversation({
             : [...mutedConversations, conversationId];
         setMutedConversations(updatedMutedConversations);
 
-        if (token && conversationId) {
+        if (token && conversationId)
             handleConversationMuteBackend(token, conversationId, setInfo);
-        }
     };
 
     const LoadingContent = (

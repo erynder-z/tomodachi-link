@@ -35,9 +35,7 @@ export default function FriendCard({
 
     const [showMenu, setShowMenu] = useState(false);
 
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    };
+    const toggleMenu = () => setShowMenu(!showMenu);
 
     const handleUnfriendButtonClick = () => {
         setShouldConfirmDialogShow(true);

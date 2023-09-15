@@ -41,9 +41,7 @@ export default function NewPostInput({
 
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
-        setPostText(event.target.value);
-    };
+    ) => setPostText(event.target.value);
 
     const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {

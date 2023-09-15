@@ -69,9 +69,8 @@ function App() {
         );
     };
 
-    const toggleSidebar = () => {
+    const toggleSidebar = () =>
         setShowSidebar((prevShowSidebar) => !prevShowSidebar);
-    };
 
     useEffect(() => {
         setIsPaginationTriggered(false);

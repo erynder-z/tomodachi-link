@@ -19,9 +19,7 @@ export const markMessageUnreadInDB = async (
             }
         );
 
-        if (!response.ok) {
-            handleFetchErrors(response, setInfo);
-        }
+        if (!response.ok) handleFetchErrors(response, setInfo);
     } catch (err: unknown) {
         setInfo({
             typeOfInfo: 'bad',

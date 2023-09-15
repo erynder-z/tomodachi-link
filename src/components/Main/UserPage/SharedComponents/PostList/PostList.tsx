@@ -46,24 +46,18 @@ export default function PostList({
     };
 
     useEffect(() => {
-        if (posts) {
-            setSkip(posts.length);
-        }
+        if (posts) setSkip(posts.length);
     }, [isPaginationTriggered]);
 
     useEffect(() => {
-        if (skip && userId) {
-            handleFetchPosts();
-        }
+        if (skip && userId) handleFetchPosts();
     }, [skip, userId]);
 
     useEffect(() => {
-        if (userId && shouldInitialize.current) {
-            handleFetchPosts();
-            return () => {
-                shouldInitialize.current = false;
-            };
-        }
+        if (userId && shouldInitialize.current) handleFetchPosts();
+        return () => {
+            shouldInitialize.current = false;
+        };
     }, [userId]);
 
     const postItemsList = posts?.map((post) => (

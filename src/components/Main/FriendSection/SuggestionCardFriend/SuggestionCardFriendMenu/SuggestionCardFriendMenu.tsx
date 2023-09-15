@@ -41,9 +41,8 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     };
 
     useEffect(() => {
-        if (shouldFetchFriendData.current) {
-            fetchUserData();
-        }
+        if (shouldFetchFriendData.current) fetchUserData();
+
         return () => {
             shouldFetchFriendData.current = false;
         };

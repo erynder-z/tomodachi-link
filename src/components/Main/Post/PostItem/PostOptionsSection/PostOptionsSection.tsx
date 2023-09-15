@@ -44,18 +44,14 @@ export default function PostOptionsSection({
                 },
             });
 
-            if (!response.ok) {
-                handleFetchErrors(response, setInfo);
-            }
+            if (!response.ok) handleFetchErrors(response, setInfo);
 
             setInfo({
                 typeOfInfo: 'good',
                 message: 'Post deleted!',
                 icon: '🗑️',
             });
-            if (onPostChange) {
-                onPostChange();
-            }
+            if (onPostChange) onPostChange();
         } catch (err: unknown) {
             setInfo({
                 typeOfInfo: 'bad',
@@ -65,9 +61,7 @@ export default function PostOptionsSection({
         }
     };
 
-    const handleShowPostMenu = () => {
-        setShouldMenuShow(!shouldMenuShow);
-    };
+    const handleShowPostMenu = () => setShouldMenuShow(!shouldMenuShow);
 
     const handleEditButtonClick = () => {
         setShouldPostEditShow(true);

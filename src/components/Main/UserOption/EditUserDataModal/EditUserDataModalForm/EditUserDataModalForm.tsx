@@ -80,9 +80,7 @@ export default function EditUserDataModalForm({
                 body: formData,
             });
 
-            if (!response.ok) {
-                await handleFetchErrors(response, setInfo);
-            }
+            if (!response.ok) await handleFetchErrors(response, setInfo);
 
             setInfo({
                 typeOfInfo: 'good',
@@ -100,13 +98,9 @@ export default function EditUserDataModalForm({
         }
     };
 
-    const handleConfirmImage = () => {
-        setShowCropper(false);
-    };
+    const handleConfirmImage = () => setShowCropper(false);
 
-    const handleAvatarCreatorClose = () => {
-        setImage(originalImage);
-    };
+    const handleAvatarCreatorClose = () => setImage(originalImage);
 
     const UserImageSection = (
         <div className="flex flex-col ml-auto">

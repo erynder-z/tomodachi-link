@@ -24,9 +24,8 @@ export default function UserListSome() {
     };
 
     useEffect(() => {
-        if (shouldFetchUsers.current === true) {
-            handleFetchUsers();
-        }
+        if (shouldFetchUsers.current) handleFetchUsers();
+
         return () => {
             shouldFetchUsers.current = false;
         };

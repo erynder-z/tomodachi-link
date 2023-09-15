@@ -55,9 +55,7 @@ export default function Gallery({
         }
     };
 
-    const handleImageClick = (image: ImageType) => {
-        setSelectedImage(image);
-    };
+    const handleImageClick = (image: ImageType) => setSelectedImage(image);
 
     useEffect(() => {
         if (pictures) setSkip(pictures.length);

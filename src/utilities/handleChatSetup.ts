@@ -21,10 +21,7 @@ export const handleChatSetup = (
 ) => {
     const serverURL = import.meta.env.VITE_SERVER_URL;
 
-    const connectToSocket = () => {
-        socket.current = io(serverURL);
-    };
-
+    const connectToSocket = () => (socket.current = io(serverURL));
     const addCurrentUserToChat = () => {
         const userId = currentUserData?._id;
         socket.current?.emit('addUser', userId);
@@ -89,9 +86,7 @@ export const handleChatSetup = (
     listenForUnreadMessages();
     updateConversations();
 
-    if (socket.current && currentUserData) {
-        addCurrentUserToChat();
-    }
+    if (socket.current && currentUserData) addCurrentUserToChat();
 
     return () => {
         socket.current?.disconnect();

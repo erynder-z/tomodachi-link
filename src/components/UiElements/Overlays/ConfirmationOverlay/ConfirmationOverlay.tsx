@@ -19,10 +19,7 @@ const ConfirmationOverlay = ({
         setShouldConfirmDialogShow(false);
     };
 
-    const handleNoButtonClick = () => {
-        setShouldConfirmDialogShow(false);
-    };
-
+    const handleNoButtonClick = () => setShouldConfirmDialogShow(false);
     const Dialog = (
         <h2 className="flex flex-col items-center gap-4 text-white text-2xl font-semibold">
             <span className="text-5xl">

@@ -95,9 +95,9 @@ export default function MyCoverSection({
         if (selectedCover) {
             getColorPalette();
             checkSaveButton();
-            if (shouldSendFetchCompleteInfo.current) {
+            if (shouldSendFetchCompleteInfo.current)
                 onFetchComplete('coverSection');
-            }
+
             return () => {
                 shouldSendFetchCompleteInfo.current = false;
             };

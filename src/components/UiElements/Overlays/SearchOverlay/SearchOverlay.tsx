@@ -56,11 +56,8 @@ export default function SearchOverlay({
         }
     }, [searchText]);
 
-    const handleTextareaChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleTextareaChange = (event: React.ChangeEvent<HTMLInputElement>) =>
         setSearchText(event.target.value);
-    };
 
     const handleCloseButtonClick = () => {
         setShouldOverlaysShow({

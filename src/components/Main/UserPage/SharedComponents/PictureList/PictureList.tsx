@@ -58,9 +58,7 @@ export default function PictureList({
         };
     };
 
-    const handleImageClick = (image: ImageType) => {
-        setSelectedImage(image);
-    };
+    const handleImageClick = (image: ImageType) => setSelectedImage(image);
 
     useEffect(() => {
         handleFetchUserPics();
