@@ -2,6 +2,7 @@ import React from 'react';
 import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { Link } from 'react-router-dom';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
+import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 
 type FeedUserListItemProps = {
     listItemData: MinimalUserTypes;
@@ -10,11 +11,15 @@ type FeedUserListItemProps = {
 export default function FeedUserListItem({
     listItemData,
 }: FeedUserListItemProps) {
+    const { currentUserData } = useCurrentUserData();
     const { _id, firstName, lastName, userpic } = listItemData || {};
+
+    const isCurrentUser = currentUserData?._id === _id;
+    const path = isCurrentUser ? '/mypage' : `/users/${_id}`;
 
     return (
         <Link
-            to={`/users/${_id}`}
+            to={path}
             className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <img
