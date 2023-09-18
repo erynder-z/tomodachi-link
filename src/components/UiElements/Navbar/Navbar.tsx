@@ -6,6 +6,7 @@ import SearchButton from './SearchButton/SearchButton';
 import ChatSectionButton from './ChatSectionButton/ChatSectionButton';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
+import PollSectionButton from './PollSectionButton/PollSectionButton';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -92,6 +93,7 @@ export default function Navbar({
             <div className="flex lg:flex-col justify-center items-center gap-4">
                 <HomeSectionButton />
                 <FriendSectionButton />
+                <PollSectionButton />
                 <div className="relative">
                     <ChatSectionButton isChatDisabled={isChatDisabled} />
                     {shouldUnreadBubbleShow && (
