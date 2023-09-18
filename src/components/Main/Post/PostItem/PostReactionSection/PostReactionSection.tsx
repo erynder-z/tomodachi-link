@@ -40,7 +40,9 @@ export default function PostReactionSection({
                 handleReactionClick('comments', handleShowCommentsClick)
             }
             className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
-                animateReaction === 'comments' ? 'animate-popInAnimation' : ''
+                animateReaction === 'comments'
+                    ? 'animate-postReactionAnimation'
+                    : ''
             }`}
             onAnimationEnd={handleAnimationEnd}
         >
@@ -54,7 +56,9 @@ export default function PostReactionSection({
                 handleReactionClick('positive', handlePositiveReactionClick)
             }
             className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
-                animateReaction === 'positive' ? 'animate-popInAnimation' : ''
+                animateReaction === 'positive'
+                    ? 'animate-postReactionAnimation'
+                    : ''
             }`}
             onAnimationEnd={handleAnimationEnd}
         >
@@ -68,7 +72,9 @@ export default function PostReactionSection({
                 handleReactionClick('negative', handleNegativeReactionClick)
             }
             className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
-                animateReaction === 'negative' ? 'animate-popInAnimation' : ''
+                animateReaction === 'negative'
+                    ? 'animate-postReactionAnimation'
+                    : ''
             }`}
             onAnimationEnd={handleAnimationEnd}
         >

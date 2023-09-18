@@ -95,6 +95,20 @@ module.exports = {
                         'background-position': 'right center',
                     },
                 },
+                postReactionAnimation: {
+                    '0%': {
+                        transform: 'scale(1)',
+                        filter: 'invert(0%)',
+                    },
+                    '70%': {
+                        transform: 'scale(1.5)',
+                        filter: 'invert(100%)',
+                    },
+                    '100%': {
+                        transform: 'scale(1)',
+                        filter: 'invert(0%)',
+                    },
+                },
             },
             animation: {
                 inAnimation: 'inAnimation 150ms ease-in',
@@ -103,6 +117,8 @@ module.exports = {
                 popOutAnimation: 'popOutAnimation 220ms ease-in-out',
                 gradientBorderAnimation:
                     'gradientBorderAnimation 5s ease infinite',
+                postReactionAnimation:
+                    'postReactionAnimation 300ms ease-in-out',
             },
         },
     },
