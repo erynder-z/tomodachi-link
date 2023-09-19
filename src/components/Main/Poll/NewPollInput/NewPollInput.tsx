@@ -3,6 +3,7 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import PollQuestionInput from './PollQuestionInput/PollQuestionInput';
+import PollOptionsNumberDropdown from './PollOptionsNumberDropdown/PollOptionsNumberDropdown';
 
 export default function NewPollInput() {
     const { token } = useAuth();
@@ -11,9 +12,17 @@ export default function NewPollInput() {
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [pollTitle, setPollTitle] = useState<string>('');
+    const [numberOfPollOptions, setNumberOfPollOptions] = useState<number>(1);
+    const [pollOptions, setPollOptions] = useState<string[]>(['']);
 
     const handleQuestionChange = (event: React.ChangeEvent<HTMLInputElement>) =>
         setPollTitle(event.target.value);
+
+    const handleOptionsNumberChange = (selectedNumber: number) => {
+        setNumberOfPollOptions(selectedNumber);
+
+        setPollOptions(Array.from({ length: selectedNumber }, () => ''));
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -46,6 +55,9 @@ export default function NewPollInput() {
                 <PollQuestionInput
                     pollTitle={pollTitle}
                     handleQuestionChange={handleQuestionChange}
+                />
+                <PollOptionsNumberDropdown
+                    handleOptionsNumberChange={handleOptionsNumberChange}
                 />
             </div>
         </form>
