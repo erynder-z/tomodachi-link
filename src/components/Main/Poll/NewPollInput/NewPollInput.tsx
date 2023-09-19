@@ -3,8 +3,6 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import PollQuestionInput from './PollQuestionInput/PollQuestionInput';
-import PollOptionsNumberDropdown from './PollOptionsNumberDropdown/PollOptionsNumberDropdown';
-import PollOptionsInput from './PollOptionsInput/PollOptionsInput';
 
 export default function NewPollInput() {
     const { token } = useAuth();
@@ -13,23 +11,9 @@ export default function NewPollInput() {
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [pollTitle, setPollTitle] = useState<string>('');
-    const [numberOfPollOptions, setNumberOfPollOptions] = useState<number>(1);
-    const [pollOptions, setPollOptions] = useState<string[]>(['']);
 
     const handleQuestionChange = (event: React.ChangeEvent<HTMLInputElement>) =>
         setPollTitle(event.target.value);
-
-    const handleOptionsNumberChange = (selectedNumber: number) => {
-        setNumberOfPollOptions(selectedNumber);
-
-        setPollOptions(Array.from({ length: selectedNumber }, () => ''));
-    };
-
-    const handlePollOptionChange = (index: number, value: string) => {
-        const updatedOptions = [...pollOptions];
-        updatedOptions[index] = value;
-        setPollOptions(updatedOptions);
-    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -62,14 +46,6 @@ export default function NewPollInput() {
                 <PollQuestionInput
                     pollTitle={pollTitle}
                     handleQuestionChange={handleQuestionChange}
-                />
-                <PollOptionsNumberDropdown
-                    handleOptionsNumberChange={handleOptionsNumberChange}
-                />
-                <PollOptionsInput
-                    numberOfPollOptions={numberOfPollOptions}
-                    pollOptions={pollOptions}
-                    onPollOptionChange={handlePollOptionChange}
                 />
             </div>
         </form>
