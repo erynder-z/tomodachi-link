@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import { motion } from 'framer-motion';
 import { CurrentViewType } from '../../../types/currentViewType';
+import NewPollInput from '../Poll/NewPollInput/NewPollInput';
 
 type PollSectionProps = {
     setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
@@ -47,7 +48,7 @@ export default function PollSection({
             className="flex flex-col just min-h-[calc(100vh_-_3rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg"
         >
             <h1 className="text-center text-xl font-bold mb-4">Polls</h1>
-            <h1>Something</h1>
+            <NewPollInput />
         </motion.div>
     );
 
