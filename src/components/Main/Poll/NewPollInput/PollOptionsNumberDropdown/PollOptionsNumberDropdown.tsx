@@ -1,21 +1,19 @@
 type NumberDropdownProps = {
-    handleOptionsNumberChange: (selectedNumber: number) => void;
+    handleOptionsNumberSelect: (selectedNumber: number) => void;
 };
 
 export default function PollOptionsNumberDropdown({
-    handleOptionsNumberChange,
+    handleOptionsNumberSelect,
 }: NumberDropdownProps) {
-    const handleSelect = (number: number) => {
-        handleOptionsNumberChange(number);
-    };
-
     const numbers = [1, 2, 3, 4, 5];
 
     return (
         <div className="relative z-0">
             <select
                 className="block py-2.5 px-0 text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 cursor-pointer"
-                onChange={(e) => handleSelect(Number(e.target.value))}
+                onChange={(e) =>
+                    handleOptionsNumberSelect(Number(e.target.value))
+                }
             >
                 {numbers.map((number) => (
                     <option
