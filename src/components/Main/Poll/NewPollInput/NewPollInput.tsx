@@ -1,34 +1,58 @@
 import React, { useState } from 'react';
-import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import PollQuestionInput from './PollQuestionInput/PollQuestionInput';
 import PollOptionsNumberDropdown from './PollOptionsNumberDropdown/PollOptionsNumberDropdown';
 import PollOptionsInput from './PollOptionsInput/PollOptionsInput';
+import PollDescriptionTextArea from './PollDescriptionTextArea/PollDescriptionTextArea';
+import CreatePollButton from './CreatePollButton/CreatePollButton';
+import { PollDataType } from '../../../../types/pollDataType';
+import FriendsOnlyCheckbox from './PollRestrictions/FriendsOnlyCheckbox/FriendsOnlyCheckbox';
+import CommentsCheckbox from './PollRestrictions/CommentsCheckbox/CommentsCheckbox';
 
 export default function NewPollInput() {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
-    const { currentUserData } = useCurrentUserData();
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const [pollTitle, setPollTitle] = useState<string>('');
-    const [numberOfPollOptions, setNumberOfPollOptions] = useState<number>(1);
-    const [pollOptions, setPollOptions] = useState<string[]>(['']);
+    const [pollData, setPollData] = useState<PollDataType>({
+        question: '',
+        numberOfOptions: 1,
+        options: [''],
+        description: '',
+        isFriendOnly: false,
+        allowComments: false,
+    });
 
-    const handleQuestionChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-        setPollTitle(event.target.value);
-
-    const handleOptionsNumberChange = (selectedNumber: number) => {
-        setNumberOfPollOptions(selectedNumber);
-
-        setPollOptions(Array.from({ length: selectedNumber }, () => ''));
+    const handleQuestionInputChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const question = event.target.value;
+        setPollData((prevData: PollDataType) => ({
+            ...prevData,
+            question: question,
+        }));
     };
 
-    const handlePollOptionChange = (index: number, value: string) => {
-        const updatedOptions = [...pollOptions];
+    const handleOptionsNumberSelect = (selectedNumber: number) => {
+        const arrayWithGivenNumberOfEmptyStrings = Array.from(
+            { length: selectedNumber },
+            () => ''
+        );
+        setPollData((prevData: PollDataType) => ({
+            ...prevData,
+            numberOfOptions: selectedNumber,
+            options: arrayWithGivenNumberOfEmptyStrings,
+        }));
+    };
+
+    const handlePollOptionInputChange = (index: number, value: string) => {
+        const updatedOptions = [...pollData.options];
         updatedOptions[index] = value;
-        setPollOptions(updatedOptions);
+        setPollData((prevData: PollDataType) => ({
+            ...prevData,
+            options: updatedOptions,
+        }));
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +62,7 @@ export default function NewPollInput() {
             setIsSubmitting(true);
 
             try {
-                console.log('submit');
+                console.log(pollData);
             } catch (error) {
                 setInfo({
                     typeOfInfo: 'bad',
@@ -56,22 +80,37 @@ export default function NewPollInput() {
             action=""
             method="POST"
             onSubmit={handleSubmit}
-            className="flex w-full divide-gray-200"
+            className="flex flex-col w-full divide-gray-200"
         >
             <div className="flex flex-col gap-4 relative w-full text-base leading-6 space-y-4 text-gray-700 dark:text-gray-300 sm:text-lg sm:leading-7">
                 <PollQuestionInput
-                    pollTitle={pollTitle}
-                    handleQuestionChange={handleQuestionChange}
+                    pollData={pollData}
+                    handleQuestionInputChange={handleQuestionInputChange}
                 />
                 <PollOptionsNumberDropdown
-                    handleOptionsNumberChange={handleOptionsNumberChange}
+                    handleOptionsNumberSelect={handleOptionsNumberSelect}
                 />
                 <PollOptionsInput
-                    numberOfPollOptions={numberOfPollOptions}
-                    pollOptions={pollOptions}
-                    onPollOptionChange={handlePollOptionChange}
+                    pollData={pollData}
+                    handlePollOptionInputChange={handlePollOptionInputChange}
+                />
+                <PollDescriptionTextArea
+                    pollData={pollData}
+                    setPollData={setPollData}
+                />
+                <FriendsOnlyCheckbox
+                    pollData={pollData}
+                    setPollData={setPollData}
+                />
+                <CommentsCheckbox
+                    pollData={pollData}
+                    setPollData={setPollData}
                 />
             </div>
+            <CreatePollButton
+                pollQuestion={pollData.question}
+                isSubmitting={isSubmitting}
+            />
         </form>
     );
 
