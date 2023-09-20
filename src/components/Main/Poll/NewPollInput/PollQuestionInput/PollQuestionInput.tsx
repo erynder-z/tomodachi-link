@@ -1,17 +1,18 @@
 import React from 'react';
+import { PollDataType } from '../../../../../types/pollDataType';
 
 type PollQuestionInputProps = {
-    pollTitle: string;
-    handleQuestionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    pollData: PollDataType;
+    handleQuestionInputChange: (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => void;
 };
 
 export default function PollQuestionInput({
-    pollTitle,
-    handleQuestionChange,
+    pollData,
+    handleQuestionInputChange,
 }: PollQuestionInputProps) {
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        handleQuestionChange(event);
-    };
+    const { question } = pollData;
 
     return (
         <div className="relative z-0">
@@ -22,8 +23,8 @@ export default function PollQuestionInput({
                 name="newPollQuestion"
                 className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0  peer overflow-hidden resize-none"
                 placeholder=" "
-                value={pollTitle}
-                onChange={handleInputChange}
+                value={question}
+                onChange={handleQuestionInputChange}
             />
 
             <label
