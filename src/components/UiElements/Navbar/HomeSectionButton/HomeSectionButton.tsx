@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdHomeFilled } from 'react-icons/md';
+import { MdDynamicFeed } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
 export default function HomeSectionButton() {
@@ -13,7 +13,7 @@ export default function HomeSectionButton() {
             }
         >
             <button type="button">
-                <MdHomeFilled size="1.5em" />
+                <MdDynamicFeed size="1.5em" />
             </button>
         </NavLink>
     );
