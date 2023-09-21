@@ -1,19 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import { CurrentViewType } from '../../../../../types/currentViewType';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { FriendDataType } from '../../../../../types/friendDataType';
 import AllFiendsPageItem from './AllFriendsPageItem/AllFriendsPageItem';
 
 type AllFriendsPageProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
 
 export default function AllFriendsPage({
-    setCurrentView,
+    isPaginationTriggered,
 }: AllFriendsPageProps) {
-    const shouldSetCurrentView = useRef(true);
-
     const location = useLocation();
     const friendData = location.state?.friendData; // receive FriendData from Router-Link in "FriendList" component.
     // type: friendData: FriendDataType[] | null;
@@ -21,16 +17,6 @@ export default function AllFriendsPage({
     const completeFriendList = friendData?.map((friend: FriendDataType) => (
         <AllFiendsPageItem key={friend._id} friendData={friend} />
     ));
-
-    useEffect(() => {
-        if (shouldSetCurrentView.current) {
-            setCurrentView('AllFriendsPage');
-            localStorage.setItem('currentViewOdinBook', 'AllFriendsPage');
-        }
-        return () => {
-            shouldSetCurrentView.current = false;
-        };
-    }, []);
 
     return (
         <div className="flex flex-col justify-center items-center w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">

@@ -10,15 +10,10 @@ import { FriendsOfFriendsType } from '../../../types/friendsOfFriendsType';
 import { MinimalUserTypes } from '../../../types/minimalUserTypes';
 import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
 import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
-import { CurrentViewType } from '../../../types/currentViewType';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import { motion, useInView } from 'framer-motion';
 
-type FriendSectionProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
-};
-
-export default function FriendSection({ setCurrentView }: FriendSectionProps) {
+export default function FriendSection() {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const { friendData } = useFriendData();
@@ -29,7 +24,6 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
     const [randomUsers, setRandomUsers] = useState<MinimalUserTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const shouldSetCurrentView = useRef(true);
     const shouldFetchFriendsOfFriends = useRef(true);
     const FriendSectionContentRef = useRef(null);
     const isInView = useInView(FriendSectionContentRef, { once: true });
@@ -41,16 +35,6 @@ export default function FriendSection({ setCurrentView }: FriendSectionProps) {
             shouldFetchFriendsOfFriends.current = false;
         };
     }, [friendData]);
-
-    useEffect(() => {
-        if (shouldSetCurrentView.current) {
-            setCurrentView('Friends');
-            localStorage.setItem('currentViewOdinBook', 'Friends');
-        }
-        return () => {
-            shouldSetCurrentView.current = false;
-        };
-    }, []);
 
     const handleFetchFriendsOfFriends = async () => {
         if (authUser && token) {

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CurrentViewType } from '../../../types/currentViewType';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { fetchChatConversation } from '../../../utilities/fetchChatConversation';
 import useAuth from '../../../hooks/useAuth';
@@ -13,11 +12,10 @@ import useNotificationBubblesContext from '../../../hooks/useNotificationBubbles
 import { motion } from 'framer-motion';
 
 type ChatProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     socket: Socket | undefined;
 };
 
-export default function Chat({ setCurrentView, socket }: ChatProps) {
+export default function Chat({ socket }: ChatProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -33,7 +31,7 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
     );
     const [loading, setLoading] = useState<boolean>(true);
 
-    const shouldSetCurrentView = useRef(true);
+    const shouldInitialize = useRef(true);
 
     const currentUserId = currentUserData?._id;
     const activeChatId = activeChat?._id;
@@ -77,16 +75,13 @@ export default function Chat({ setCurrentView, socket }: ChatProps) {
     }, [activeChat]);
 
     useEffect(() => {
-        if (shouldSetCurrentView.current) {
-            setCurrentView('Chat');
-            localStorage.setItem('currentViewOdinBook', 'Chat');
-
+        if (shouldInitialize.current) {
             return () => {
                 setActiveChat(null);
             };
         }
         return () => {
-            shouldSetCurrentView.current = false;
+            shouldInitialize.current = false;
         };
     }, []);
 

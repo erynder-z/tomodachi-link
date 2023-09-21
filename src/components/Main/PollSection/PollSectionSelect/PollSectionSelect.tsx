@@ -1,28 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { CurrentViewType } from '../../../../types/currentViewType';
 import { MdAddChart, MdInsights } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-type PollSectionProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
-};
-
-export default function PollSectionSelect({
-    setCurrentView,
-}: PollSectionProps) {
-    const shouldInitialize = useRef(true);
-
-    useEffect(() => {
-        if (shouldInitialize.current) {
-            setCurrentView('Polls');
-            localStorage.setItem('currentViewOdinBook', 'Polls');
-        }
-        return () => {
-            shouldInitialize.current = false;
-        };
-    }, []);
-
+export default function PollSectionSelect() {
     return (
         <motion.div
             initial={{ y: 10, opacity: 0 }}

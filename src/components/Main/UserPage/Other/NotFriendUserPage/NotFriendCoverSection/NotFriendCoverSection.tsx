@@ -30,7 +30,6 @@ export default function NotFriendCoverSection({
 
     useEffect(() => {
         if (shouldInitialize.current) {
-            console.log('working');
             const displayCover = COVER_OPTIONS.find(
                 (coverImage) => coverImage.name === cover
             );

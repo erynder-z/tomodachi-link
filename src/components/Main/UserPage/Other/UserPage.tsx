@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchOtherUserData } from '../../../../utilities/fetchOtherUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { CurrentViewType } from '../../../../types/currentViewType';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { OtherUserPageDataTypes } from '../../../../types/otherUserPageDataTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
@@ -11,14 +10,10 @@ import FriendUserPage from './FriendUserPage/FriendUserPage';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 
 type UserPageProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
 
-export default function UserPage({
-    setCurrentView,
-    isPaginationTriggered,
-}: UserPageProps) {
+export default function UserPage({ isPaginationTriggered }: UserPageProps) {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
@@ -36,8 +31,6 @@ export default function UserPage({
         outgoing: false,
     });
     const [loading, setLoading] = useState<boolean>(true);
-
-    const shouldSetCurrentView = useRef(true);
 
     useEffect(() => {
         if (token) {
@@ -62,16 +55,6 @@ export default function UserPage({
     useEffect(() => {
         fetchUserData();
     }, [id, currentUserData?.pendingFriendRequests]);
-
-    useEffect(() => {
-        if (shouldSetCurrentView.current) {
-            setCurrentView('OtherUserPage');
-            localStorage.setItem('currentViewOdinBook', 'OtherUserPage');
-        }
-        return () => {
-            shouldSetCurrentView.current = false;
-        };
-    }, []);
 
     const LoadingContent = (
         <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-background2 dark:bg-background2Dark">

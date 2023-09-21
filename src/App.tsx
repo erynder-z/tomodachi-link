@@ -6,7 +6,6 @@ import Sidebar from './components/UiElements/Sidebar/Sidebar';
 import ProfileCard from './components/UiElements/ProfileCard/ProfileCard';
 import FriendSection from './components/Main/FriendSection/FriendSection';
 import HomeSection from './components/Main/HomeSection/HomeSection';
-import { CurrentViewType } from './types/currentViewType';
 import useAuth from './hooks/useAuth';
 import useInfoCard from './hooks/useInfoCard';
 import RequireAuth from './components/Main/RequireAuth';
@@ -44,10 +43,6 @@ function App() {
         setActiveChat,
     } = useNotificationBubblesContext();
 
-    const [currentView, setCurrentView] = useState<CurrentViewType>(
-        (localStorage.getItem('odinbookCurrentView') as CurrentViewType) ||
-            'Home'
-    );
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [shouldOverlaysShow, setShouldOverlaysShow] = useState({
         searchOverlay: false,
@@ -164,7 +159,6 @@ function App() {
                                     path="/home"
                                     element={
                                         <HomeSection
-                                            setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
@@ -175,7 +169,6 @@ function App() {
                                     path="/mypage"
                                     element={
                                         <MyPage
-                                            setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
@@ -184,19 +177,11 @@ function App() {
                                 />
                                 <Route
                                     path="/friends"
-                                    element={
-                                        <FriendSection
-                                            setCurrentView={setCurrentView}
-                                        />
-                                    }
+                                    element={<FriendSection />}
                                 />
                                 <Route
                                     path="/polls"
-                                    element={
-                                        <PollSectionSelect
-                                            setCurrentView={setCurrentView}
-                                        />
-                                    }
+                                    element={<PollSectionSelect />}
                                 />
                                 <Route
                                     path="/polls/list"
@@ -218,10 +203,7 @@ function App() {
                                         accountType === 'guest' ? (
                                             <Navigate replace to="/home" />
                                         ) : (
-                                            <Chat
-                                                setCurrentView={setCurrentView}
-                                                socket={socket.current}
-                                            />
+                                            <Chat socket={socket.current} />
                                         )
                                     }
                                 />
@@ -230,7 +212,6 @@ function App() {
                                     element={
                                         <UserPage
                                             key={`userPage + ${numberOfFriends}`} // use number of friends to trigger component refresh when unfriending a user
-                                            setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
@@ -241,7 +222,6 @@ function App() {
                                     path="/users/:id/gallery"
                                     element={
                                         <Gallery
-                                            setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
@@ -252,7 +232,6 @@ function App() {
                                     path="/users/:id/friends/list"
                                     element={
                                         <AllFriendsPage
-                                            setCurrentView={setCurrentView}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
@@ -264,7 +243,6 @@ function App() {
                     </AnimatePresence>
                 </div>
                 <Sidebar
-                    currentView={currentView}
                     showSidebar={showSidebar}
                     toggleSidebar={toggleSidebar}
                     socket={socket.current}

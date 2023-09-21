@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { CurrentViewType } from '../../../types/currentViewType';
 import { ImageType } from '../../../types/imageType';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
@@ -14,14 +13,10 @@ import { MdOutlineZoomIn } from 'react-icons/md';
 import useDelayUnmount from '../../../hooks/useDelayUnmount';
 
 type GalleryProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
 
-export default function Gallery({
-    setCurrentView,
-    isPaginationTriggered,
-}: GalleryProps) {
+export default function Gallery({ isPaginationTriggered }: GalleryProps) {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
@@ -68,8 +63,6 @@ export default function Gallery({
     useEffect(() => {
         if (shouldInitialize.current) {
             handleFetchUserPics();
-            setCurrentView('Gallery');
-            localStorage.setItem('currentViewOdinBook', 'Gallery');
         }
         return () => {
             shouldInitialize.current = false;

@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import UserListSome from '../../Main/UserList/UserListSome/UserListSome';
-import { CurrentViewType } from '../../../types/currentViewType';
 import UserListAll from '../../Main/UserList/UserListAll/UserListAll';
 import ChatOnlineUsersList from '../../Main/Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 import { ChatMemberType } from '../../../types/chatMemberType';
+import { useLocation } from 'react-router-dom';
 
 type SidebarProps = {
-    currentView: CurrentViewType;
     showSidebar: boolean;
     toggleSidebar?: () => void;
     socket: Socket | undefined;
 };
 
 export default function Sidebar({
-    currentView,
     showSidebar,
     toggleSidebar,
     socket,
 }: SidebarProps) {
     const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const location = useLocation();
+    const pathname = location.pathname;
+    const routeName = pathname.split('/').pop();
 
     let content = null;
 
@@ -36,11 +38,11 @@ export default function Sidebar({
         getOnlineUsers();
     }, [socket]);
 
-    switch (currentView) {
-        case 'Friends':
+    switch (routeName) {
+        case 'friends':
             content = <UserListAll />;
             break;
-        case 'Chat':
+        case 'chat':
             content = (
                 <ChatOnlineUsersList
                     onlineUsers={onlineUsers}

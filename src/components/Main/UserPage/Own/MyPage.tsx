@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CurrentViewType } from '../../../../types/currentViewType';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import useFriendData from '../../../../hooks/useFriendData';
@@ -14,14 +13,10 @@ import { FinalColor } from 'extract-colors';
 import { motion, useInView } from 'framer-motion';
 
 type MyPageProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
 
-export default function MyPage({
-    setCurrentView,
-    isPaginationTriggered,
-}: MyPageProps) {
+export default function MyPage({ isPaginationTriggered }: MyPageProps) {
     const { currentUserData } = useCurrentUserData();
     const { friendData } = useFriendData();
     const { pendingFriendRequests } = currentUserData || {};
@@ -42,8 +37,6 @@ export default function MyPage({
     const MyPageContentRef = useRef(null);
     const isInView = useInView(MyPageContentRef, { once: true });
 
-    const shouldSetCurrentView = useRef(true);
-
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
     const userId = currentUserData?._id;
 
@@ -57,16 +50,6 @@ export default function MyPage({
             [nameOfComponent]: false,
         }));
     };
-
-    useEffect(() => {
-        if (shouldSetCurrentView.current) {
-            setCurrentView('MyPage');
-            localStorage.setItem('currentViewOdinBook', 'MyPage');
-        }
-        return () => {
-            shouldSetCurrentView.current = false;
-        };
-    }, []);
 
     useEffect(() => {
         if (Object.values(componentLoading).every((v) => v === false))

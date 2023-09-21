@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CurrentViewType } from '../../../types/currentViewType';
 import useFriendData from '../../../hooks/useFriendData';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import Feed from './Feed/Feed';
@@ -7,19 +6,16 @@ import { FriendDataType } from '../../../types/friendDataType';
 import { motion } from 'framer-motion';
 
 type HomeSectionProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
     isPaginationTriggered: boolean;
 };
 
 export default function HomeSection({
-    setCurrentView,
     isPaginationTriggered,
 }: HomeSectionProps) {
     const { friendData } = useFriendData();
     const [friendList, setFriendList] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const shouldSetCurrentView = useRef(true);
     const shouldExtractFriendIds = useRef(true);
 
     const extractFriendIdFromFriendData = (friendData: FriendDataType[]) => {
@@ -40,16 +36,6 @@ export default function HomeSection({
             };
         }
     }, [friendData]);
-
-    useEffect(() => {
-        if (shouldSetCurrentView.current) {
-            setCurrentView('Home');
-            localStorage.setItem('currentViewOdinBook', 'Home');
-        }
-        return () => {
-            shouldSetCurrentView.current = false;
-        };
-    }, []);
 
     const LoadingContent = (
         <motion.div
