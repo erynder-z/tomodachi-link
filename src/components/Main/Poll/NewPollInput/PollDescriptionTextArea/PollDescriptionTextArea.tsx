@@ -35,7 +35,6 @@ export default function PollDescriptionTextArea({
         <div className="relative z-0">
             <textarea
                 rows={textareaRows}
-                required
                 autoComplete="off"
                 id="newPost"
                 name="newPost"

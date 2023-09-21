@@ -1,25 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
-import { motion } from 'framer-motion';
-import { CurrentViewType } from '../../../types/currentViewType';
-import NewPollInput from '../Poll/NewPollInput/NewPollInput';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 
-type PollSectionProps = {
-    setCurrentView: React.Dispatch<React.SetStateAction<CurrentViewType>>;
+import { motion } from 'framer-motion';
+
+type PollListProps = {
     isPaginationTriggered: boolean;
 };
 
-export default function PollSection({
-    setCurrentView,
-    isPaginationTriggered,
-}: PollSectionProps) {
+export default function PollList({ isPaginationTriggered }: PollListProps) {
     const [loading, setLoading] = useState<boolean>(true);
+
     const shouldInitialize = useRef(true);
 
     useEffect(() => {
         if (shouldInitialize.current) {
-            setCurrentView('Polls');
-            localStorage.setItem('currentViewOdinBook', 'Polls');
+            console.log('fetching');
             setLoading(false);
         }
         return () => {
@@ -39,7 +34,7 @@ export default function PollSection({
         </motion.div>
     );
 
-    const PollSectionContent = (
+    const PollListContent = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -47,10 +42,10 @@ export default function PollSection({
             transition={{ duration: 0.2 }}
             className="flex flex-col just min-h-[calc(100vh_-_3rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg"
         >
-            <h1 className="text-center text-xl font-bold mb-4">Polls</h1>
-            <NewPollInput />
+            <h1 className="text-center text-xl font-bold mb-4">Poll list</h1>
+            Something
         </motion.div>
     );
 
-    return loading ? LoadingContent : PollSectionContent;
+    return loading ? LoadingContent : PollListContent;
 }
