@@ -107,10 +107,7 @@ export default function NewPollInput() {
                     setPollData={setPollData}
                 />
             </div>
-            <CreatePollButton
-                pollQuestion={pollData.question}
-                isSubmitting={isSubmitting}
-            />
+            <CreatePollButton pollData={pollData} isSubmitting={isSubmitting} />
         </form>
     );
 
