@@ -29,7 +29,9 @@ import { handleChatSetup } from './utilities/handleChatSetup';
 import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
 import { AnimatePresence } from 'framer-motion';
-import PollSection from './components/Main/PollSection/PollSection';
+import PollSectionSelect from './components/Main/PollSection/PollSectionSelect/PollSectionSelect';
+import NewPollSection from './components/Main/PollSection/NewPollSection/NewPollSection';
+import PollList from './components/Main/PollSection/PollList/PollList';
 
 function App() {
     const { isAuth, token } = useAuth();
@@ -191,13 +193,24 @@ function App() {
                                 <Route
                                     path="/polls"
                                     element={
-                                        <PollSection
+                                        <PollSectionSelect
                                             setCurrentView={setCurrentView}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/polls/list"
+                                    element={
+                                        <PollList
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
                                         />
                                     }
+                                />
+                                <Route
+                                    path="/polls/new"
+                                    element={<NewPollSection />}
                                 />
                                 <Route
                                     path="/chat"
