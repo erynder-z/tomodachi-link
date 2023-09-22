@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdEmojiPeople } from 'react-icons/md';
+import { MdOutlineDiversity3 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
 export default function FriendSectionButton() {
@@ -13,7 +13,7 @@ export default function FriendSectionButton() {
             }
         >
             <button type="button">
-                <MdEmojiPeople size="1.5em" />
+                <MdOutlineDiversity3 size="1.5em" />
             </button>
         </NavLink>
     );
