@@ -9,10 +9,12 @@ import CreatePollButton from './CreatePollButton/CreatePollButton';
 import { PollDataType } from '../../../../types/pollDataType';
 import FriendsOnlyCheckbox from './PollRestrictions/FriendsOnlyCheckbox/FriendsOnlyCheckbox';
 import CommentsCheckbox from './PollRestrictions/CommentsCheckbox/CommentsCheckbox';
+import { useNavigate } from 'react-router-dom';
 
 export default function NewPollInput() {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const navigate = useNavigate();
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [pollData, setPollData] = useState<PollDataType>({
@@ -62,7 +64,47 @@ export default function NewPollInput() {
             setIsSubmitting(true);
 
             try {
-                console.log(pollData);
+                const serverURL = import.meta.env.VITE_SERVER_URL;
+                const response = await fetch(`${serverURL}/api/v1/poll`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pollData),
+                });
+
+                if (response.ok) {
+                    setInfo({
+                        typeOfInfo: 'good',
+                        message: 'Poll created successfully!',
+                        icon: '👍',
+                    });
+                    setPollData({
+                        question: '',
+                        numberOfOptions: 1,
+                        options: [''],
+                        description: '',
+                        isFriendOnly: false,
+                        allowComments: false,
+                    });
+                } else {
+                    const data = await response.json();
+                    const errorMessages = data.errors;
+                    const message = errorMessages
+                        .map((error: { msg: string }) => error.msg)
+                        .join(', ');
+
+                    setInfo({
+                        typeOfInfo: 'bad',
+                        message: message,
+                        icon: '👻',
+                    });
+
+                    throw new Error(
+                        `Error: ${response.status} ${response.statusText}`
+                    );
+                }
             } catch (error) {
                 setInfo({
                     typeOfInfo: 'bad',
@@ -72,6 +114,7 @@ export default function NewPollInput() {
             }
 
             setIsSubmitting(false);
+            navigate('/polls/list');
         }
     };
 
