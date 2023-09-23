@@ -40,7 +40,7 @@ export default function Feed({
 
     const handleGetFeed = async () => {
         if (authUser && token) {
-            const response = await fetchFeed(token, setInfo, skip, friendList);
+            const response = await fetchFeed(token, setInfo, skip);
             setMinimalPosts([...minimalPosts, ...response]);
             setLoading(false);
         }
@@ -51,7 +51,7 @@ export default function Feed({
         setMinimalPosts([]);
         setSkip(0);
         if (authUser && token) {
-            const response = await fetchFeed(token, setInfo, skip, friendList);
+            const response = await fetchFeed(token, setInfo, skip);
             setMinimalPosts([...response]);
             setLoading(false);
             setIsFeedRefreshing(false);

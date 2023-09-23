@@ -4,22 +4,16 @@ import { handleFetchErrors } from './handleFetchErrors';
 export const fetchFeed = async (
     token: string,
     setInfo: (info: InfoType | null) => void,
-    skip: number | null = 0,
-    friendList: string[]
+    skip: number | null = 0
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
-        const requestBody = {
-            friendList,
-        };
 
         const response = await fetch(`${serverURL}/api/v1/feed?skip=${skip}`, {
-            method: 'POST', // use POST instead of GET in order to send the friendList as payload
+            method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestBody),
         });
 
         if (response.ok) {
