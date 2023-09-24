@@ -6,7 +6,7 @@ import PollOptionsNumberDropdown from './PollOptionsNumberDropdown/PollOptionsNu
 import PollOptionsInput from './PollOptionsInput/PollOptionsInput';
 import PollDescriptionTextArea from './PollDescriptionTextArea/PollDescriptionTextArea';
 import CreatePollButton from './CreatePollButton/CreatePollButton';
-import { PollDataType } from '../../../../types/pollDataType';
+import { CreatedPollDataType } from '../../../../types/createdPollDataType';
 import FriendsOnlyCheckbox from './PollRestrictions/FriendsOnlyCheckbox/FriendsOnlyCheckbox';
 import CommentsCheckbox from './PollRestrictions/CommentsCheckbox/CommentsCheckbox';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ export default function NewPollInput() {
     const navigate = useNavigate();
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const [pollData, setPollData] = useState<PollDataType>({
+    const [pollData, setPollData] = useState<CreatedPollDataType>({
         question: '',
         numberOfOptions: 1,
         options: [''],
@@ -30,7 +30,7 @@ export default function NewPollInput() {
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const question = event.target.value;
-        setPollData((prevData: PollDataType) => ({
+        setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             question: question,
         }));
@@ -41,7 +41,7 @@ export default function NewPollInput() {
             { length: selectedNumber },
             () => ''
         );
-        setPollData((prevData: PollDataType) => ({
+        setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             numberOfOptions: selectedNumber,
             options: arrayWithGivenNumberOfEmptyStrings,
@@ -51,7 +51,7 @@ export default function NewPollInput() {
     const handlePollOptionInputChange = (index: number, value: string) => {
         const updatedOptions = [...pollData.options];
         updatedOptions[index] = value;
-        setPollData((prevData: PollDataType) => ({
+        setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             options: updatedOptions,
         }));

@@ -1,4 +1,4 @@
-export type PollDataType = {
+export type CreatedPollDataType = {
     question: string;
     numberOfOptions: number;
     options: string[];

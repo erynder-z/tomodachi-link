@@ -1,5 +1,5 @@
 import React from 'react';
-import { PollDataType } from '../../../../../../types/pollDataType';
+import { PollDataType } from '../../../../../../types/createdPollDataType';
 
 type PollRestrictionsProps = {
     pollData: PollDataType;

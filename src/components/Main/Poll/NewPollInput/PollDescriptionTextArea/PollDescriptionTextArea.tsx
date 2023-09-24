@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PollDataType } from '../../../../../types/pollDataType';
+import { PollDataType } from '../../../../../types/createdPollDataType';
 
 type PollDescriptionTextAreaProps = {
     pollData: PollDataType;
