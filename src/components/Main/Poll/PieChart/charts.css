@@ -1,0 +1,80 @@
+.container .slice {
+  transition-duration: 0.3s;
+  transition-property: filter, opacity;
+  filter: saturate(100%);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.container.hasHighlight .slice {
+  filter: saturate(50%);
+  opacity: 0.2;
+}
+
+.container.hasHighlight .slice:hover {
+  filter: saturate(100%);
+  opacity: 1;
+}
+
+.legend {
+  stroke: whitesmoke;
+  fill: whitesmoke;
+}
+
+.graph {
+  fill: none;
+  stroke: salmon;
+}
+
+.histogram .bar {
+  fill: violet;
+  transition-duration: 0.3s;
+  transition-property: filter, opacity;
+  filter: saturate(100%);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.histogram:hover .bar:not(.hasHighlight) {
+  filter: saturate(50%);
+  opacity: 0.2;
+}
+
+.bar.hasHighlight:hover {
+  filter: saturate(100%);
+  opacity: 1;
+}
+
+.histogramHighlightText {
+  fill: whitesmoke;
+  font-size: 14;
+  font-weight: bold;
+  text-anchor: end;
+}
+
+.scatterPlot .circles {
+  opacity: 1;
+  stroke: greenyellow;
+  fill: greenyellow;
+  fill-opacity: 0.5;
+  stroke-width: 1;
+}
+
+.scatterPlot .axisLine {
+  stroke: whitesmoke;
+  stroke-width: 0.5;
+}
+
+.scatterPlot .xAxisText {
+  font-size: 10px;
+  text-anchor: middle;
+  transform: translateY(20px);
+  fill: whitesmoke;
+}
+
+.scatterPlot .yAxisText {
+  font-size: 10px;
+  text-anchor: middle;
+  transform: translateX(-20px);
+  fill: whitesmoke;
+}
