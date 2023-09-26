@@ -6,6 +6,8 @@ import format from 'date-fns/format';
 import PollUserInfoSection from './PollUserInfoSection/PollUserInfoSection';
 import PollDateSection from './PollDateSection/PollDateSection';
 import { PieChart } from '../PieChart/PieChart';
+import PollAnswerSection from './PollAnswerSection/PollAnswerSection';
+import PollQuestionSection from './PollQuestionSection/PollQuestionSection';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -42,6 +44,8 @@ export default function PollItem({ pollData }: PollItemProps) {
                 />
                 <PollDateSection date={date} />
             </div>
+            <PollQuestionSection pollData={pollData} />
+            <PollAnswerSection pollData={pollData} />
 
             {hasPollData ? (
                 <p>No poll data available ☹️</p>
