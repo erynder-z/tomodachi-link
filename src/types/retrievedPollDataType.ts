@@ -7,7 +7,7 @@ export type RetrievedPollDataType = {
     timestamp: Date;
     question: string;
     numberOfOptions: number;
-    options: { nameOfOption: string; selectionCount: number }[];
+    options: { _id: string; nameOfOption: string; selectionCount: number }[];
     description?: string;
     isFriendOnly: boolean;
     allowComments: boolean;
