@@ -6,10 +6,12 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
+    canAnswerPost: boolean;
 };
 
 export default function PollAnswerSection({
     pollData,
+    canAnswerPost,
 }: PollAnswerSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
@@ -53,14 +55,20 @@ export default function PollAnswerSection({
     }) => {
         const { _id, nameOfOption } = option;
         const pollID = pollData._id;
-        const optionID = option._id;
+        const optionID = _id;
+
         return (
             <button
                 key={optionID}
+                disabled={!canAnswerPost}
                 onClick={() => {
                     handleButtonClick(pollID, optionID);
                 }}
-                className="p-2 w-12 min-w-max bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark"
+                className={`${
+                    canAnswerPost
+                        ? 'p-2 w-12 min-w-max text-base bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark'
+                        : 'p-2 w-12 min-w-max text-base bg-gray-500'
+                }`}
             >
                 {nameOfOption}
             </button>
@@ -68,9 +76,13 @@ export default function PollAnswerSection({
     };
 
     return (
-        <div>
-            PollAnswerSection
-            <div className="flex gap-4">
+        <div className="flex flex-col gap-4 text-xs">
+            {canAnswerPost ? (
+                <span>Choose an answer!</span>
+            ) : (
+                <span>You have already answered this poll!</span>
+            )}
+            <div className="flex flex-wrap gap-4">
                 {options.map((option) => OptionButton(option))}
             </div>
         </div>
