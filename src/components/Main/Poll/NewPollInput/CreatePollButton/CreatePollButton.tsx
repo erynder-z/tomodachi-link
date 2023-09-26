@@ -1,10 +1,10 @@
 import React from 'react';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 import { MdOutlineStart } from 'react-icons/md';
-import { PollDataType } from '../../../../../types/createdPollDataType';
+import { CreatedPollDataType } from '../../../../../types/createdPollDataType';
 
 type CreatePollButtonProps = {
-    pollData: PollDataType;
+    pollData: CreatedPollDataType;
     isSubmitting: boolean;
 };
 
