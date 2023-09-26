@@ -102,7 +102,7 @@ export const PieChart = ({ width, height, data }: PieChartProps) => {
                     textAnchor={textAnchor}
                     dominantBaseline="middle"
                     fontSize={14}
-                    className="text-base fill-regularText dark:fill-regularTextDark"
+                    className="text-xs md:text-base fill-regularText dark:fill-regularTextDark"
                 >
                     {labelText}
                 </text>
