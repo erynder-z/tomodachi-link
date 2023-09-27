@@ -24,10 +24,18 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
     const handleGetPolls = async () => {
         if (authUser && token) {
             const response = await fetchPolls(token, setInfo, skip);
-            setPolls(response);
+            setPolls([...polls, ...response]);
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (polls) setSkip(polls.length);
+    }, [isPaginationTriggered]);
+
+    useEffect(() => {
+        if (token && skip) handleGetPolls();
+    }, [skip]);
 
     useEffect(() => {
         if (shouldInitialize.current) handleGetPolls();
