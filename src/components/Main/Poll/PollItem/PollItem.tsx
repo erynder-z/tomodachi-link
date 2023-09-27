@@ -11,6 +11,9 @@ import PollQuestionSection from './PollQuestionSection/PollQuestionSection';
 import useAuth from '../../../../hooks/useAuth';
 import PollDescriptionSection from './PollDescriptionSection/PollDescriptionSection';
 import FriendOnlyInfoSection from './FriendOnlyInfoSection/FriendOnlyInfoSection';
+import { PollDataItemType } from '../../../../types/pollDataItemType';
+import useInfoCard from '../../../../hooks/useInfoCard';
+import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -18,13 +21,19 @@ type PollItemProps = {
 
 export default function PollItem({ pollData }: PollItemProps) {
     const { token } = useAuth();
+    const { setInfo } = useInfoCard();
     const [canAnswerPost, setCanAnswerPost] = useState<boolean>(false);
+    const [pollOptionsData, setPollOptionsData] = useState<PollDataItemType[]>(
+        pollData.options
+    );
     const { userpic, firstName, lastName } = pollData.owner;
-    const { _id, timestamp, options, isFriendOnly } = pollData;
+    const { _id, timestamp, isFriendOnly } = pollData;
     const displayName = `${firstName} ${lastName} `;
     const userPic = convertDatabaseImageToBase64(userpic);
     const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
-    const hasPollData = options.every((option) => option.selectionCount === 0);
+    const hasPollData = pollOptionsData.every(
+        (option) => option.selectionCount === 0
+    );
     const hasDescription = pollData.description;
 
     const shouldInitialize = useRef(true);
@@ -50,6 +59,36 @@ export default function PollItem({ pollData }: PollItemProps) {
         }
     };
 
+    const handleRefreshPollOptionsData = async () => {
+        try {
+            const pollID = _id;
+            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(
+                `${serverURL}/api/v1/poll/${pollID}/details`,
+                {
+                    method: 'get',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+
+                setPollOptionsData(data.retrievedPoll.options);
+            } else {
+                handleFetchErrors(response, setInfo);
+            }
+        } catch (err: unknown) {
+            setInfo({
+                typeOfInfo: 'bad',
+                message: 'Could not refresh poll data!',
+                icon: '👻',
+            });
+        }
+    };
+
     useEffect(() => {
         if (shouldInitialize.current) checkAnswerStatus();
 
@@ -61,7 +100,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     const pieChartData = {
         width: 640,
         height: 400,
-        data: options.map(({ nameOfOption, selectionCount }) => ({
+        data: pollOptionsData.map(({ nameOfOption, selectionCount }) => ({
             nameOfOption,
             selectionCount,
         })),
@@ -86,6 +125,7 @@ export default function PollItem({ pollData }: PollItemProps) {
             <PollAnswerSection
                 pollData={pollData}
                 canAnswerPost={canAnswerPost}
+                handleRefreshPollOptionsData={handleRefreshPollOptionsData}
             />
             {hasPollData ? (
                 <p>No poll data available ☹️</p>
