@@ -61,55 +61,57 @@ export const PieChart = ({ width, height, data }: PieChartProps) => {
         const textAnchor = isRightLabel ? 'start' : 'end';
 
         const labelText = slice.data.nameOfOption + ' (' + slice.value + ')';
-
-        return (
-            <g
-                key={index}
-                className="slice transition duration-300 filter saturate-100 opacity-100 cursor-pointer"
-                onMouseEnter={() => {
-                    if (svgRef.current) {
-                        svgRef.current.classList.add('hasHighlight');
-                    }
-                }}
-                onMouseLeave={() => {
-                    if (svgRef.current) {
-                        svgRef.current.classList.remove('hasHighlight');
-                    }
-                }}
-            >
-                <path
-                    d={String(slicePath)}
-                    fill={colorScale(index.toString())}
-                />
-                <circle cx={centroid[0]} cy={centroid[1]} r={2} />
-                <line
-                    x1={centroid[0]}
-                    y1={centroid[1]}
-                    x2={labelExtensionPoint[0]}
-                    y2={labelExtensionPoint[1]}
-                    className="stroke-regularText dark:stroke-regularTextDark"
-                />
-                <line
-                    x1={labelExtensionPoint[0]}
-                    y1={labelExtensionPoint[1]}
-                    x2={labelPosX}
-                    y2={labelExtensionPoint[1]}
-                    className="stroke-regularText dark:stroke-regularTextDark"
-                />
-                <text
-                    x={labelPosX + (isRightLabel ? 2 : -2)}
-                    y={labelExtensionPoint[1]}
-                    textAnchor={textAnchor}
-                    dominantBaseline="middle"
-                    fontSize={14}
-                    className="text-xs md:text-base fill-regularText dark:fill-regularTextDark"
+        if (slice.value > 0) {
+            return (
+                <g
+                    key={index}
+                    className="slice transition duration-300 filter saturate-100 opacity-100 cursor-pointer"
+                    onMouseEnter={() => {
+                        if (svgRef.current) {
+                            svgRef.current.classList.add('hasHighlight');
+                        }
+                    }}
+                    onMouseLeave={() => {
+                        if (svgRef.current) {
+                            svgRef.current.classList.remove('hasHighlight');
+                        }
+                    }}
                 >
-                    {labelText}
-                </text>
-            </g>
-        );
+                    <path
+                        d={String(slicePath)}
+                        fill={colorScale(index.toString())}
+                    />
+                    <circle cx={centroid[0]} cy={centroid[1]} r={2} />
+                    <line
+                        x1={centroid[0]}
+                        y1={centroid[1]}
+                        x2={labelExtensionPoint[0]}
+                        y2={labelExtensionPoint[1]}
+                        className="stroke-regularText dark:stroke-regularTextDark"
+                    />
+                    <line
+                        x1={labelExtensionPoint[0]}
+                        y1={labelExtensionPoint[1]}
+                        x2={labelPosX}
+                        y2={labelExtensionPoint[1]}
+                        className="stroke-regularText dark:stroke-regularTextDark"
+                    />
+                    <text
+                        x={labelPosX + (isRightLabel ? 2 : -2)}
+                        y={labelExtensionPoint[1]}
+                        textAnchor={textAnchor}
+                        dominantBaseline="middle"
+                        fontSize={14}
+                        className="text-xs md:text-base fill-regularText dark:fill-regularTextDark"
+                    >
+                        {labelText}
+                    </text>
+                </g>
+            );
+        } else {
+            return null;
+        }
     });
-
     return (
         <div ref={wrapperDivRef}>
             <svg width={chartWidth} height={chartHeight}>
