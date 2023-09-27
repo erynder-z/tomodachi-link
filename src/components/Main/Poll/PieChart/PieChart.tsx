@@ -14,7 +14,7 @@ const MARGIN_X = 150;
 const MARGIN_Y = 50;
 const LABEL_EXTENSION = 20;
 
-const colorScale = d3.scaleOrdinal<string>().range(d3.schemeCategory10);
+const colorScale = d3.scaleOrdinal<string>().range(d3.schemeTableau10);
 
 export const PieChart = ({ width, height, data }: PieChartProps) => {
     const svgRef = useRef<SVGGElement | null>(null);
