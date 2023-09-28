@@ -9,6 +9,7 @@ type FeedPostListProps = {
     setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
     setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
     isFeedRefreshing: boolean;
+    onPostChange: () => Promise<void>;
 };
 
 export default function FeedPostList({
@@ -16,6 +17,7 @@ export default function FeedPostList({
     setClickedImage,
     setClickedGif,
     isFeedRefreshing,
+    onPostChange,
 }: FeedPostListProps) {
     const HasFeedContent = posts.map((post) => (
         <PostItem
@@ -23,6 +25,7 @@ export default function FeedPostList({
             postID={post._id}
             setClickedImage={setClickedImage}
             setClickedGif={setClickedGif}
+            onPostChange={onPostChange}
         />
     ));
 

@@ -96,6 +96,7 @@ export default function Feed({
                     setClickedImage={setClickedImage}
                     setClickedGif={setClickedGif}
                     isFeedRefreshing={isFeedRefreshing}
+                    onPostChange={refreshFeed}
                 />
                 <AnimatePresence>
                     {showImageLightbox && (
