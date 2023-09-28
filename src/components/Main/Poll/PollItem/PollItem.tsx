@@ -14,6 +14,7 @@ import FriendOnlyInfoSection from './FriendOnlyInfoSection/FriendOnlyInfoSection
 import { PollDataItemType } from '../../../../types/pollDataItemType';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -23,6 +24,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [canAnswerPost, setCanAnswerPost] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const [pollOptionsData, setPollOptionsData] = useState<PollDataItemType[]>(
         pollData.options
     );
@@ -31,7 +33,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     const displayName = `${firstName} ${lastName} `;
     const userPic = convertDatabaseImageToBase64(userpic);
     const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
-    const hasPollData = pollOptionsData.every(
+    const hasNoPollData = pollOptionsData.every(
         (option) => option.selectionCount === 0
     );
     const hasDescription = pollData.description;
@@ -60,6 +62,8 @@ export default function PollItem({ pollData }: PollItemProps) {
     };
 
     const handleRefreshPollOptionsData = async () => {
+        setLoading(true);
+        checkAnswerStatus();
         try {
             const pollID = _id;
             const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -86,6 +90,8 @@ export default function PollItem({ pollData }: PollItemProps) {
                 message: 'Could not refresh poll data!',
                 icon: '👻',
             });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -105,6 +111,28 @@ export default function PollItem({ pollData }: PollItemProps) {
             selectionCount,
         })),
     };
+
+    const LoadingContent = (
+        <div className="flex flex-col gap-4 h-[400px] md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
+            <LoadingSpinner message="Updating poll data" />
+        </div>
+    );
+
+    const ChartContent = loading ? (
+        LoadingContent
+    ) : (
+        <PieChart
+            width={pieChartData.width}
+            height={pieChartData.height}
+            data={pieChartData.data}
+        />
+    );
+
+    const HasNoPollContent = loading ? (
+        LoadingContent
+    ) : (
+        <p>No poll data available ☹️</p>
+    );
 
     return (
         <motion.div
@@ -127,15 +155,7 @@ export default function PollItem({ pollData }: PollItemProps) {
                 canAnswerPost={canAnswerPost}
                 handleRefreshPollOptionsData={handleRefreshPollOptionsData}
             />
-            {hasPollData ? (
-                <p>No poll data available ☹️</p>
-            ) : (
-                <PieChart
-                    width={pieChartData.width}
-                    height={pieChartData.height}
-                    data={pieChartData.data}
-                />
-            )}
+            {hasNoPollData ? HasNoPollContent : ChartContent}
             {isFriendOnly && (
                 <FriendOnlyInfoSection displayName={displayName} />
             )}
