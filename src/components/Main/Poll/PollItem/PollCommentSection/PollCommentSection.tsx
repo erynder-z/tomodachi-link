@@ -1,0 +1,61 @@
+import { useState } from 'react';
+import { CommentType } from '../../../../../types/commentType';
+import PollCommentButton from './PollCommentButton/PollCommentButton';
+import { MdOutlineCommentsDisabled } from 'react-icons/md';
+import CommentList from '../../../Comments/CommentList/CommentList';
+import CommentInput from '../../../Comments/CommentInput/CommentInput';
+
+type PollCommentSectionProps = {
+    areCommentsAllowed: boolean;
+    comments: CommentType[] | undefined;
+    parentItemID: string;
+    handleRefreshPollData: () => Promise<void>;
+};
+
+export default function PollCommentSection({
+    areCommentsAllowed,
+    comments,
+    parentItemID,
+    handleRefreshPollData,
+}: PollCommentSectionProps) {
+    const [shouldCommentsShow, setShouldCommentsShow] =
+        useState<boolean>(false);
+    const numberOfComments = comments?.length;
+
+    const handleShowCommentsClick = () => {
+        setShouldCommentsShow(!shouldCommentsShow);
+    };
+
+    const NoCommentsAllowedContent = <MdOutlineCommentsDisabled />;
+
+    const CommentsAllowedContent = (
+        <div className="flex flex-col">
+            <PollCommentButton
+                handleShowCommentsClick={handleShowCommentsClick}
+                numberOfComments={numberOfComments}
+            />
+            {shouldCommentsShow && (
+                <div
+                    className={`${
+                        shouldCommentsShow
+                            ? 'animate-popInAnimation'
+                            : 'animate-popOutAnimation'
+                    } flex flex-col gap-4`}
+                >
+                    <CommentList
+                        comments={comments}
+                        onToggleListButtonClick={handleShowCommentsClick}
+                    />
+                    <CommentInput
+                        parentItemID={parentItemID}
+                        handleRefreshPollData={handleRefreshPollData}
+                    />
+                </div>
+            )}
+        </div>
+    );
+
+    return areCommentsAllowed
+        ? CommentsAllowedContent
+        : NoCommentsAllowedContent;
+}

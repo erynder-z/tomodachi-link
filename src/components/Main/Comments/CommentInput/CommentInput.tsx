@@ -8,12 +8,14 @@ import ButtonBusy from '../../../UiElements/LoadingSpinner/ButtonBusy';
 
 type CommentInputProps = {
     parentItemID: string;
-    getPostDetails: (postID: string) => Promise<void>;
+    getPostDetails?: (postID: string) => Promise<void>;
+    handleRefreshPollData?: () => Promise<void>;
 };
 
 export default function CommentInput({
     parentItemID,
     getPostDetails,
+    handleRefreshPollData,
 }: CommentInputProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
@@ -56,7 +58,8 @@ export default function CommentInput({
                         icon: '👍',
                     });
                     setCommentText('');
-                    getPostDetails(parentItemID);
+                    if (getPostDetails) getPostDetails(parentItemID);
+                    if (handleRefreshPollData) handleRefreshPollData();
                 } else {
                     const data = await response.json();
                     const errorMessages = data.errors;

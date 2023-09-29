@@ -15,6 +15,8 @@ import { PollDataItemType } from '../../../../types/pollDataItemType';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
+import PollCommentSection from './PollCommentSection/PollCommentSection';
+import { CommentType } from '../../../../types/commentType';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -28,8 +30,11 @@ export default function PollItem({ pollData }: PollItemProps) {
     const [pollOptionsData, setPollOptionsData] = useState<PollDataItemType[]>(
         pollData.options
     );
+    const [pollComments, setPollComments] = useState<CommentType[]>(
+        pollData.comments || []
+    );
     const { userpic, firstName, lastName } = pollData.owner;
-    const { _id, timestamp, isFriendOnly } = pollData;
+    const { _id, timestamp, isFriendOnly, allowComments } = pollData;
     const displayName = `${firstName} ${lastName} `;
     const userPic = convertDatabaseImageToBase64(userpic);
     const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
@@ -61,7 +66,7 @@ export default function PollItem({ pollData }: PollItemProps) {
         }
     };
 
-    const handleRefreshPollOptionsData = async () => {
+    const handleRefreshPollData = async () => {
         setLoading(true);
         checkAnswerStatus();
         try {
@@ -81,6 +86,7 @@ export default function PollItem({ pollData }: PollItemProps) {
                 const data = await response.json();
 
                 setPollOptionsData(data.retrievedPoll.options);
+                setPollComments(data.retrievedPoll.comments);
             } else {
                 handleFetchErrors(response, setInfo);
             }
@@ -153,12 +159,20 @@ export default function PollItem({ pollData }: PollItemProps) {
             <PollAnswerSection
                 pollData={pollData}
                 canAnswerPost={canAnswerPost}
-                handleRefreshPollOptionsData={handleRefreshPollOptionsData}
+                handleRefreshPollData={handleRefreshPollData}
             />
             {hasNoPollData ? HasNoPollContent : ChartContent}
-            {isFriendOnly && (
-                <FriendOnlyInfoSection displayName={displayName} />
-            )}
+            <div className="w-full flex justify-between">
+                <PollCommentSection
+                    areCommentsAllowed={allowComments}
+                    comments={pollComments}
+                    parentItemID={_id}
+                    handleRefreshPollData={handleRefreshPollData}
+                />
+                {isFriendOnly && (
+                    <FriendOnlyInfoSection displayName={displayName} />
+                )}
+            </div>
         </motion.div>
     );
 }

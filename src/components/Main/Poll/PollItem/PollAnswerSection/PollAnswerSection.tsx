@@ -7,13 +7,13 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
     canAnswerPost: boolean;
-    handleRefreshPollOptionsData: () => Promise<void>;
+    handleRefreshPollData: () => Promise<void>;
 };
 
 export default function PollAnswerSection({
     pollData,
     canAnswerPost,
-    handleRefreshPollOptionsData,
+    handleRefreshPollData,
 }: PollAnswerSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
@@ -41,7 +41,7 @@ export default function PollAnswerSection({
                 message: 'Answer submitted!',
                 icon: '😎',
             });
-            handleRefreshPollOptionsData();
+            handleRefreshPollData();
         } catch (err: unknown) {
             setInfo({
                 typeOfInfo: 'bad',
