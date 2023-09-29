@@ -40,7 +40,7 @@ export default function CommentInput({
                 const serverURL = import.meta.env.VITE_SERVER_URL;
                 const id = parentItemID;
                 const response = await fetch(
-                    `${serverURL}/api/v1/post/${id}/comment`,
+                    `${serverURL}/api/v1/comment/${id}/create`,
                     {
                         method: 'POST',
                         headers: {
