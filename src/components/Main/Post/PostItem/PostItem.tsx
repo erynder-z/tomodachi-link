@@ -17,7 +17,7 @@ import PostImageSection from './PostImageSection/PostImageSection';
 import PostGifSection from './PostGifSection/PostGifSection';
 import PostEmbeddedYoutubeVideoSection from './PostEmbeddedYoutubeVideoSection/PostEmbeddedYoutubeVideoSection';
 import PostReactionSection from './PostReactionSection/PostReactionSection';
-import CommentSection from './CommentSection/CommentSection';
+import PostCommentSection from './PostCommentSection/PostCommentSection';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import { motion } from 'framer-motion';
 
@@ -146,9 +146,9 @@ export default React.memo(function PostItem({
                 numberOfNegativeReactions={reactions?.negative}
             />
             {showCommentSection && (
-                <CommentSection
+                <PostCommentSection
                     comments={postDetails?.comments}
-                    parentPostID={postID}
+                    parentItemID={postID}
                     getPostDetails={getPostDetails}
                     handleShowCommentsClick={handleShowCommentsClick}
                     shouldCommentSectionShow={shouldCommentSectionShow}

@@ -1,7 +1,7 @@
 import React from 'react';
-import { CommentType } from '../../../../../../types/commentType';
+import { CommentType } from '../../../../types/commentType';
 import CommentItem from './CommentItem/CommentItem';
-import ToggleListButton from '../../../../../UiElements/ToggleListButton/ToggleListButton';
+import ToggleListButton from '../../../UiElements/ToggleListButton/ToggleListButton';
 
 type CommentListProps = {
     comments?: CommentType[];

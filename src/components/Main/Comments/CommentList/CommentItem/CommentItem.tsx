@@ -1,7 +1,7 @@
 import React from 'react';
-import { CommentType } from '../../../../../../../types/commentType';
+import { CommentType } from '../../../../../types/commentType';
 import { formatDistanceToNow } from 'date-fns';
-import { convertDatabaseImageToBase64 } from '../../../../../../../utilities/convertDatabaseImageToBase64';
+import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 
 type CommentItemProps = {
     commentDetails: CommentType;

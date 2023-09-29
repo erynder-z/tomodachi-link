@@ -1,23 +1,23 @@
 import React from 'react';
 import { CommentType } from '../../../../../types/commentType';
-import CommentList from './CommentList/CommentList';
-import CommentInput from './CommentInput/CommentInput';
+import CommentList from '../../../Comments/CommentList/CommentList';
+import CommentInput from '../../../Comments/CommentInput/CommentInput';
 
-type CommentSectionProps = {
+type PostCommentSectionProps = {
     comments: CommentType[] | undefined;
-    parentPostID: string;
+    parentItemID: string;
     getPostDetails: (postID: string) => Promise<void>;
     handleShowCommentsClick: () => void;
     shouldCommentSectionShow: boolean;
 };
 
-export default function CommentSection({
+export default function PostCommentSection({
     comments,
-    parentPostID,
+    parentItemID,
     getPostDetails,
     handleShowCommentsClick,
     shouldCommentSectionShow,
-}: CommentSectionProps) {
+}: PostCommentSectionProps) {
     const onToggleListButtonClick = () => handleShowCommentsClick();
 
     return (
@@ -33,7 +33,7 @@ export default function CommentSection({
                 onToggleListButtonClick={onToggleListButtonClick}
             />
             <CommentInput
-                parentPostID={parentPostID}
+                parentItemID={parentItemID}
                 getPostDetails={getPostDetails}
             />
         </div>

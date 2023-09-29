@@ -2,7 +2,7 @@ import { ImageType } from './imageType';
 
 export type CommentType = {
     _id: string;
-    parentPost: string;
+    parentItem: string;
     owner: {
         id: string;
         firstName: string;

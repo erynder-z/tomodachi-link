@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import useAuth from '../../../../../../hooks/useAuth';
-import useInfoCard from '../../../../../../hooks/useInfoCard';
+import useAuth from '../../../../hooks/useAuth';
+import useInfoCard from '../../../../hooks/useInfoCard';
 import { FaRegSmileBeam } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
-import EmojiSelector from '../../../NewPostInput/EmojiSelector/EmojiPicker';
-import ButtonBusy from '../../../../../UiElements/LoadingSpinner/ButtonBusy';
+import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
+import ButtonBusy from '../../../UiElements/LoadingSpinner/ButtonBusy';
 
 type CommentInputProps = {
-    parentPostID: string;
+    parentItemID: string;
     getPostDetails: (postID: string) => Promise<void>;
 };
 
 export default function CommentInput({
-    parentPostID,
+    parentItemID,
     getPostDetails,
 }: CommentInputProps) {
     const { token } = useAuth();
@@ -36,7 +36,7 @@ export default function CommentInput({
                 };
 
                 const serverURL = import.meta.env.VITE_SERVER_URL;
-                const id = parentPostID;
+                const id = parentItemID;
                 const response = await fetch(
                     `${serverURL}/api/v1/post/${id}/comment`,
                     {
@@ -56,7 +56,7 @@ export default function CommentInput({
                         icon: '👍',
                     });
                     setCommentText('');
-                    getPostDetails(parentPostID);
+                    getPostDetails(parentItemID);
                 } else {
                     const data = await response.json();
                     const errorMessages = data.errors;
