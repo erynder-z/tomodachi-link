@@ -8,14 +8,14 @@ type CommentItemProps = {
 };
 
 export default function CommentItem({ commentDetails }: CommentItemProps) {
-    const { owner, timestamp, text } = commentDetails;
+    const { owner, createdAt, text } = commentDetails;
     const { firstName, lastName, userpic } = owner;
 
     const displayName = `${firstName} ${lastName}`;
     const userPic = convertDatabaseImageToBase64(userpic);
 
-    const time = timestamp
-        ? `${formatDistanceToNow(new Date(timestamp), { addSuffix: true })}`
+    const time = createdAt
+        ? `${formatDistanceToNow(new Date(createdAt), { addSuffix: true })}`
         : '';
 
     return (

@@ -9,11 +9,12 @@ export type PostType = {
         lastName: string;
         userpic: ImageType;
     };
-    timestamp: Date;
     text: string;
     image?: any;
     gifUrl: string;
     embeddedVideoID?: string;
     comments: CommentType[];
     reactions: { positive: number; negative: number };
+    createdAt: Date;
+    updatedAt: Date;
 };

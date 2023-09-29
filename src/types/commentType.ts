@@ -9,6 +9,7 @@ export type CommentType = {
         lastName: string;
         userpic: ImageType;
     };
-    timestamp: Date;
     text: string;
+    createdAt: Date;
+    UpdatedAt: Date;
 };

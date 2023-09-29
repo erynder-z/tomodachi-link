@@ -34,10 +34,10 @@ export default function PollItem({ pollData }: PollItemProps) {
         pollData.comments || []
     );
     const { userpic, firstName, lastName } = pollData.owner;
-    const { _id, timestamp, isFriendOnly, allowComments } = pollData;
+    const { _id, createdAt, isFriendOnly, allowComments } = pollData;
     const displayName = `${firstName} ${lastName} `;
     const userPic = convertDatabaseImageToBase64(userpic);
-    const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
+    const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
     const hasNoPollData = pollOptionsData.every(
         (option) => option.selectionCount === 0
     );

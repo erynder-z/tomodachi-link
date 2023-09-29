@@ -41,7 +41,7 @@ export default React.memo(function PostItem({
     const [shouldCommentSectionShow, setShouldCommentSectionShow] =
         useState<boolean>(false);
 
-    const { timestamp, text, comments, reactions, gifUrl } = postDetails || {};
+    const { updatedAt, text, comments, reactions, gifUrl } = postDetails || {};
     const { _id, firstName, lastName } = postDetails?.owner || {};
 
     const isCommentSectionMounted = shouldCommentSectionShow;
@@ -52,7 +52,7 @@ export default React.memo(function PostItem({
     const userPic = convertDatabaseImageToBase64(postDetails?.owner?.userpic);
     const postImage = convertDatabaseImageToBase64(postDetails?.image);
     const postVideoID = postDetails?.embeddedVideoID;
-    const date = timestamp ? format(new Date(timestamp), 'MMMM dd, yyyy') : '';
+    const date = updatedAt ? format(new Date(updatedAt), 'MMMM dd, yyyy') : '';
 
     const shouldGetPostDetails = useRef(true);
 

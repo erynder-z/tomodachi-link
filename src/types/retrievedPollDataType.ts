@@ -4,7 +4,6 @@ import { MinimalUserTypes } from './minimalUserTypes';
 export type RetrievedPollDataType = {
     _id: string;
     owner: MinimalUserTypes;
-    timestamp: Date;
     question: string;
     numberOfOptions: number;
     options: { _id: string; nameOfOption: string; selectionCount: number }[];
@@ -12,4 +11,6 @@ export type RetrievedPollDataType = {
     isFriendOnly: boolean;
     allowComments: boolean;
     comments?: CommentType[];
+    createdAt: Date;
+    updatedAt: Date;
 };
