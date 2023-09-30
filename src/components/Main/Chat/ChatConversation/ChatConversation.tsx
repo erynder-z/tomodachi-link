@@ -87,19 +87,19 @@ export default function ChatConversation({
     const ChatConversationContent = (
         <div className="flex items-center w-full gap-2 md:gap-4 p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-cBlue dark:hover:bg-cBlue rounded-3xl">
             <ChatConversationListItem listItemData={chatPartner} />
-            <div className="flex flex-col md:flex-row md:gap-2">
-                <div
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleMuteConversation();
-                    }}
-                >
-                    {isConversationMuted ? (
-                        <MdOutlineNotificationsOff />
-                    ) : (
-                        <MdOutlineNotifications />
-                    )}
-                </div>
+            <div
+                className="flex flex-col md:flex-row md:gap-2 "
+                onClick={(e) => {
+                    e.stopPropagation();
+                    handleMuteConversation();
+                }}
+            >
+                {isConversationMuted ? (
+                    <MdOutlineNotificationsOff />
+                ) : (
+                    <MdOutlineNotifications />
+                )}
+
                 {hasUnreadMessage && !isConversationMuted && (
                     <div className="flex justify-center items-center">
                         <div className="absolute md:static bottom-1 right-7 w-3 h-3 bg-highlight dark:bg-highlightDark rounded-full animate-pulse" />

@@ -145,7 +145,7 @@ export default function PollItem({ pollData }: PollItemProps) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-4 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
+            className="flex flex-col gap-4 p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
         >
             <div className="flex justify-between">
                 <PollUserInfoSection
@@ -162,17 +162,15 @@ export default function PollItem({ pollData }: PollItemProps) {
                 handleRefreshPollData={handleRefreshPollData}
             />
             {hasNoPollData ? HasNoPollContent : ChartContent}
-            <div className="w-full flex justify-between">
-                <PollCommentSection
-                    areCommentsAllowed={allowComments}
-                    comments={pollComments}
-                    parentItemID={_id}
-                    handleRefreshPollData={handleRefreshPollData}
-                />
-                {isFriendOnly && (
-                    <FriendOnlyInfoSection displayName={displayName} />
-                )}
-            </div>
+            {isFriendOnly && (
+                <FriendOnlyInfoSection displayName={displayName} />
+            )}
+            <PollCommentSection
+                areCommentsAllowed={allowComments}
+                comments={pollComments}
+                parentItemID={_id}
+                handleRefreshPollData={handleRefreshPollData}
+            />
         </motion.div>
     );
 }
