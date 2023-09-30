@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 type PostInputTextareaProps = {
     postText: string;
@@ -15,6 +15,13 @@ export default function PostInputTextarea({
 }: PostInputTextareaProps) {
     const [textareaRows, setTextareaRows] = useState(1);
     const [isTextareaFocused, setIsTextareaFocused] = useState(false);
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+    useEffect(() => {
+        if (textareaRef.current) {
+            autoResizeTextarea(textareaRef.current);
+        }
+    }, []);
 
     const handleTextareaChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
@@ -32,6 +39,7 @@ export default function PostInputTextarea({
     return (
         <div className="relative z-0">
             <textarea
+                ref={textareaRef}
                 rows={textareaRows}
                 required
                 autoComplete="off"
