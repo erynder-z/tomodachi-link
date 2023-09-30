@@ -6,19 +6,21 @@ type PostInputTextareaProps = {
         event: React.ChangeEvent<HTMLTextAreaElement>
     ) => void;
     username: string | undefined;
+    isPostEdit?: boolean;
 };
 
 export default function PostInputTextarea({
     postText,
     handleNewPostChange,
     username,
+    isPostEdit,
 }: PostInputTextareaProps) {
     const [textareaRows, setTextareaRows] = useState(1);
     const [isTextareaFocused, setIsTextareaFocused] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
     useEffect(() => {
-        if (textareaRef.current) {
+        if (textareaRef.current && isPostEdit) {
             autoResizeTextarea(textareaRef.current);
         }
     }, []);

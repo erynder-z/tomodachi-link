@@ -192,6 +192,7 @@ export default function EditPostInput({
                     postText={postText}
                     handleNewPostChange={handleNewPostChange}
                     username={username}
+                    isPostEdit={true}
                 />
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {dbImage && (
