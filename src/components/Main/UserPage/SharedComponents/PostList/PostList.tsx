@@ -54,10 +54,10 @@ export default function PostList({
     }, [skip, userId]);
 
     useEffect(() => {
-        if (userId && shouldInitialize.current) handleFetchPosts();
-        return () => {
+        if (userId && shouldInitialize.current) {
+            handleFetchPosts();
             shouldInitialize.current = false;
-        };
+        }
     }, [userId]);
 
     const postItemsList = posts?.map((post) => (
