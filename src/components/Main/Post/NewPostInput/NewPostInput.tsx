@@ -12,7 +12,7 @@ import SelectedImageArea from './SelectedImageArea/SelectedImageArea';
 import GifArea from './GifArea/GifArea';
 import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
-import { ViewMode } from '../../../../types/postInputSelectors';
+import { ViewMode } from '../../../../types/miscTypes';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type NewPostInputProps = {
