@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import NormalContent from './NormalContent/NormalContent';

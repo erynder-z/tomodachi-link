@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { MdAddChart, MdInsights } from 'react-icons/md';
 import { Link } from 'react-router-dom';

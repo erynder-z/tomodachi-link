@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImageType } from '../../../../../types/imageType';
 
 type PostImageSectionProps = {

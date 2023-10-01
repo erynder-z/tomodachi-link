@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { PollDataType } from '../../../../../types/createdPollDataType';
+import { useState } from 'react';
+import { CreatedPollDataType } from '../../../../../types/createdPollDataType';
 
 type PollDescriptionTextAreaProps = {
-    pollData: PollDataType;
-    setPollData: React.Dispatch<React.SetStateAction<PollDataType>>;
+    pollData: CreatedPollDataType;
+    setPollData: React.Dispatch<React.SetStateAction<CreatedPollDataType>>;
 };
 
 export default function PollDescriptionTextArea({
@@ -23,7 +23,7 @@ export default function PollDescriptionTextArea({
     const handleDescriptionChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
-        setPollData((prevData: PollDataType) => ({
+        setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             description: event.target.value,
         }));

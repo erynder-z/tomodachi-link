@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FriendsOfFriendsType } from '../../../../types/friendsOfFriendsType';
 import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';

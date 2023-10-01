@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdOutlineDiversity3 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 

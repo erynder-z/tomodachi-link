@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TbUserMinus } from 'react-icons/tb';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';

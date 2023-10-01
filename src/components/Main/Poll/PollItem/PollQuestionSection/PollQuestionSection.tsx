@@ -1,4 +1,3 @@
-import React from 'react';
 import { RetrievedPollDataType } from '../../../../../types/retrievedPollDataType';
 
 type PollQuestionSectionProps = {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';
 import SuggestionCardRandomMenu from './SuggestionCardRandomMenu/SuggestionCardRandomMenu';

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchFeed } from '../../../../utilities/fetchFeed';

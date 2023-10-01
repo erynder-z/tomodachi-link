@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdSend } from 'react-icons/md';
 import { FaRegSmileBeam } from 'react-icons/fa';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';

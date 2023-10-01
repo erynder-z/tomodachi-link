@@ -1,4 +1,3 @@
-import React from 'react';
 import { InfoType } from '../types/infoType';
 import { sendFriendRequest } from './sendFriendRequest';
 

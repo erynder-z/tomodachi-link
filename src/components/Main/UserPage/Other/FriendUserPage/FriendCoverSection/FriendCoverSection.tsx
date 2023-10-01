@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import UnfriendButton from '../UnfriendButton/UnfriendButton';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../../utilities/getColors';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 

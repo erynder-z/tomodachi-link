@@ -1,4 +1,3 @@
-import React from 'react';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 import { MdOutlineStart } from 'react-icons/md';
 import { CreatedPollDataType } from '../../../../../types/createdPollDataType';

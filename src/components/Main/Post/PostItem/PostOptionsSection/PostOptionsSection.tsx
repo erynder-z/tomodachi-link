@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';

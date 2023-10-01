@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChatConversationType } from '../../../../types/chatConversationType';
 import ChatConversation from '../ChatConversation/ChatConversation';
 import { motion } from 'framer-motion';

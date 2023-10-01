@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChatMemberType } from '../../../../types/chatMemberType';
 import useFriendData from '../../../../hooks/useFriendData';
 import ChatOnlineUserlistItem from './ChatOnlineUserlistItem/ChatOnlineUserlistItem';

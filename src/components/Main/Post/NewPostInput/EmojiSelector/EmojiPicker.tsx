@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import EmojiPicker, { EmojiClickData, Theme } from 'emoji-picker-react';
 import useTheme from '../../../../../hooks/useTheme';

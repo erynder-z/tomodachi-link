@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RetrievedPollDataType } from '../../../../types/retrievedPollDataType';
 import { motion } from 'framer-motion';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';

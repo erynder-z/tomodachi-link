@@ -1,4 +1,3 @@
-import React from 'react';
 import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
 import { Link } from 'react-router-dom';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';

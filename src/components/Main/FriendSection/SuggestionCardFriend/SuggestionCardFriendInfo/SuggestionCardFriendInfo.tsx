@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import { motion } from 'framer-motion';
 import { shuffleArray } from '../../../../../utilities/shuffleArray';

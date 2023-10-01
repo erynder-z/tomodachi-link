@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';

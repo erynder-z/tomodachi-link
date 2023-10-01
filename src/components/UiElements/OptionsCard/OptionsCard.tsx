@@ -1,4 +1,3 @@
-import React from 'react';
 import LogoutButton from './LogoutButton/LogoutButton';
 import OptionsButton from './OptionsButton/OptionsButton';
 import ProfilePageButton from './ProfilePageButton/ProfilePageButton';

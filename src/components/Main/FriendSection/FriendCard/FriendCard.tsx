@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import useAuth from '../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';

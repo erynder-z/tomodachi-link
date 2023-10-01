@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
 import useAuth from '../../../../hooks/useAuth';

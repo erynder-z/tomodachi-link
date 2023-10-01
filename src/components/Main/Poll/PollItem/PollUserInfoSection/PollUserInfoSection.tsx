@@ -1,5 +1,3 @@
-import React from 'react';
-
 type PollUserInfoSectionProps = {
     userPic: string;
     displayName: string;

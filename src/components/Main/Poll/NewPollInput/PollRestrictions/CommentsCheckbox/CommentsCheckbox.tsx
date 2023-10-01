@@ -1,9 +1,8 @@
-import React from 'react';
-import { PollDataType } from '../../../../../../types/createdPollDataType';
+import { CreatedPollDataType } from '../../../../../../types/createdPollDataType';
 
 type PollRestrictionsProps = {
-    pollData: PollDataType;
-    setPollData: React.Dispatch<React.SetStateAction<PollDataType>>;
+    pollData: CreatedPollDataType;
+    setPollData: React.Dispatch<React.SetStateAction<CreatedPollDataType>>;
 };
 
 export default function CommentsCheckbox({
@@ -15,7 +14,7 @@ export default function CommentsCheckbox({
     const handleCheckboxChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setPollData((prevData: PollDataType) => ({
+        setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             allowComments: event.target.checked,
         }));

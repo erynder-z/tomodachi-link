@@ -1,4 +1,3 @@
-import React from 'react';
 import { RetrievedPollDataType } from '../../../../../types/retrievedPollDataType';
 import useAuth from '../../../../../hooks/useAuth';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';

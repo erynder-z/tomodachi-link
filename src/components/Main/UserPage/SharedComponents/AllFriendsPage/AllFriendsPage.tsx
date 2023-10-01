@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { FriendDataType } from '../../../../../types/friendDataType';
 import AllFiendsPageItem from './AllFriendsPageItem/AllFriendsPageItem';

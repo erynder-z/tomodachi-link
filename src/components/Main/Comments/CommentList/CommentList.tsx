@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommentType } from '../../../../types/commentType';
 import CommentItem from './CommentItem/CommentItem';
 import ToggleListButton from '../../../UiElements/ToggleListButton/ToggleListButton';

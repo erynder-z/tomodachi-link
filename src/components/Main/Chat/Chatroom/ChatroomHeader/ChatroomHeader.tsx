@@ -1,4 +1,3 @@
-import React from 'react';
 import { TbMessages } from 'react-icons/tb';
 import { CurrentUserDataType } from '../../../../../types/currentUserDataType';
 import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';

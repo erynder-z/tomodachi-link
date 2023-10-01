@@ -1,4 +1,3 @@
-import React from 'react';
 import { format } from 'date-fns';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { DisplayChatMessageType } from '../../../../../types/displayChatMessageType';

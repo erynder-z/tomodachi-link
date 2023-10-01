@@ -1,4 +1,3 @@
-import React from 'react';
 import { EmbeddedYoutubeVideo } from './EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 
 type PostEmbeddedYoutubeVideoSectionProps = {

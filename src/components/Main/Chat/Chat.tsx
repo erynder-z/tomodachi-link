@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { fetchChatConversation } from '../../../utilities/fetchChatConversation';
 import useAuth from '../../../hooks/useAuth';

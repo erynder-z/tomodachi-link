@@ -1,5 +1,3 @@
-import React from 'react';
-
 type PostGifSectionProps = {
     handleGifClick: (gifURL: string) => void;
     gifUrl: string;

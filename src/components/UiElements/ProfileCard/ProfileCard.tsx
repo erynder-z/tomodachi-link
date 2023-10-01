@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';

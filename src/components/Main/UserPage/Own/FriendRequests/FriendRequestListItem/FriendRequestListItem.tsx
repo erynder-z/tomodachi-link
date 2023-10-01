@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
 import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommentType } from '../../../../../types/commentType';
 import CommentList from '../../../Comments/CommentList/CommentList';
 import CommentInput from '../../../Comments/CommentInput/CommentInput';

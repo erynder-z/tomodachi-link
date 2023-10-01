@@ -1,4 +1,3 @@
-import React from 'react';
 import NewPollInput from '../../Poll/NewPollInput/NewPollInput';
 import { motion } from 'framer-motion';
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import GifPicker, { TenorImage, Theme } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';

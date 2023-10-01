@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaRegSmileBeam, FaRegImage, FaYoutube } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';

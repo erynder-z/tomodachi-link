@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdKey } from 'react-icons/md';
 
 type UpdatePasswordButtonProps = {

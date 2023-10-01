@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { countUsers } from '../../../utilities/countUsers';
 import useInfoCard from '../../../hooks/useInfoCard';
 

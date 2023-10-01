@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-
 import { motion } from 'framer-motion';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';

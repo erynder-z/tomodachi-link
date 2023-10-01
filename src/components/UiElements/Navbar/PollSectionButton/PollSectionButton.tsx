@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdPieChartOutlined } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 

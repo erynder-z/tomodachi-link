@@ -1,4 +1,3 @@
-import React from 'react';
 import { Comment } from 'react-loader-spinner';
 
 type TypingIndicatorProps = {

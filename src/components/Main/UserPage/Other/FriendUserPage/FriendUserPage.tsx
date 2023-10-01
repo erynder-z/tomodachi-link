@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';

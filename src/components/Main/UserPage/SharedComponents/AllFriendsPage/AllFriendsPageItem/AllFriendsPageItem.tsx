@@ -1,4 +1,3 @@
-import React from 'react';
 import { FriendDataType } from '../../../../../../types/friendDataType';
 import { useNavigate } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';

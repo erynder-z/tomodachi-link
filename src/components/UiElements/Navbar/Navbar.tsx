@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
 import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';

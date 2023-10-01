@@ -1,4 +1,3 @@
-import React from 'react';
 import { MinimalPostType } from '../../../../../types/minimalPostType';
 import PostItem from '../../../Post/PostItem/PostItem';
 import { ImageType } from '../../../../../types/imageType';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { TenorImage } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
 

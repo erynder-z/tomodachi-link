@@ -1,4 +1,3 @@
-import React from 'react';
 import { TbLink, TbUserMinus, TbMessage } from 'react-icons/tb';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';

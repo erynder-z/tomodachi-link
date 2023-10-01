@@ -1,4 +1,3 @@
-import React from 'react';
 import FriendRequestListItem from './FriendRequestListItem/FriendRequestListItem';
 
 type FriendRequestsProps = {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 
 // Scroll to the "container-main"-anchor when the URL changes to reset the current scroll position when Linking inside the Router

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PostItem from '../../../Post/PostItem/PostItem';
 import { PostType } from '../../../../../types/postType';
 import useAuth from '../../../../../hooks/useAuth';

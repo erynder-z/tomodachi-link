@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchOverlay from './SearchOverlay/SearchOverlay';
 import EditUserDataModal from '../../Main/UserOption/EditUserDataModal/EditUserDataModal';
 import OptionsCard from '../../UiElements/OptionsCard/OptionsCard';

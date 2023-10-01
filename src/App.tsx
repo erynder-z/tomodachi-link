@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/Login/LoginPage';
 import Navbar from './components/UiElements/Navbar/Navbar';

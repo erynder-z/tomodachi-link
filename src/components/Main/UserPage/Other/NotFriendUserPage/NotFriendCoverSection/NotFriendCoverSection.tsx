@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getColors } from '../../../../../../utilities/getColors';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { FinalColor } from 'extract-colors';

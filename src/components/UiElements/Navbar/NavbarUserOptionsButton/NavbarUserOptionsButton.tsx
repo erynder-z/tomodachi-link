@@ -1,4 +1,3 @@
-import React from 'react';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 

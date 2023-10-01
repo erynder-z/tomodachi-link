@@ -1,4 +1,3 @@
-import React from 'react';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { usePasswordComparison } from '../../../../../hooks/usePasswordComparison';

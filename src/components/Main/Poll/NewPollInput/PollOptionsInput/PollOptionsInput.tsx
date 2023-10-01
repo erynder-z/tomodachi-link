@@ -1,8 +1,7 @@
-import React from 'react';
-import { PollDataType } from '../../../../../types/createdPollDataType';
+import { CreatedPollDataType } from '../../../../../types/createdPollDataType';
 
 type PollOptionsInputProps = {
-    pollData: PollDataType;
+    pollData: CreatedPollDataType;
     handlePollOptionInputChange: (index: number, value: string) => void;
 };
 

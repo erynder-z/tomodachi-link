@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import PostInputTextarea from '../NewPostInput/PostInputTextarea/PostInputTextarea';
 import SelectedImageArea from '../NewPostInput/SelectedImageArea/SelectedImageArea';

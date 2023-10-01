@@ -1,4 +1,3 @@
-import React from 'react';
 import { TbUserCircle } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';

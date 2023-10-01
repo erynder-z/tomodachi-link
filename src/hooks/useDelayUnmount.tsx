@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function useDelayUnmount(isMounted: boolean, delayTime: number) {
     const [showElement, setShowElement] = useState<boolean>(false);

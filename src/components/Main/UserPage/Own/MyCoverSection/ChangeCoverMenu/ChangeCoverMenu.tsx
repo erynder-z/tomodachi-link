@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { CoverOption } from '../../../../../../types/coverOptionTypes';

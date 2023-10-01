@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import useFriendData from '../../../hooks/useFriendData';
 import useAuth from '../../../hooks/useAuth';

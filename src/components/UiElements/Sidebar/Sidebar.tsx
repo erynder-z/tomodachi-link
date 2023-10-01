@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserListSome from '../../Main/UserList/UserListSome/UserListSome';
 import UserListAll from '../../Main/UserList/UserListAll/UserListAll';
 import ChatOnlineUsersList from '../../Main/Chat/ChatOnlineUsersList/ChatOnlineUsersList';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { TbLogout } from 'react-icons/tb';
 import useAuth from '../../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useFriendData from '../../../hooks/useFriendData';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import Feed from './Feed/Feed';

@@ -1,4 +1,3 @@
-import React from 'react';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
 import { MdSentimentVerySatisfied } from 'react-icons/md';
 

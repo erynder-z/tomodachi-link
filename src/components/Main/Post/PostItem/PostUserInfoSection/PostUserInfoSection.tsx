@@ -1,5 +1,3 @@
-import React from 'react';
-
 type PostUserInfoSectionProps = {
     userPic: string;
     displayName: string;

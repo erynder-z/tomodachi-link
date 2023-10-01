@@ -1,4 +1,3 @@
-import React from 'react';
 import { TbSun, TbMoon } from 'react-icons/tb';
 import useTheme from '../../../../hooks/useTheme';
 

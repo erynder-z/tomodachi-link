@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { EmbeddedYoutubeVideo } from '../../PostItem/PostEmbeddedYoutubeVideoSection/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
 

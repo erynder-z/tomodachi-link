@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { FaTimes } from 'react-icons/fa';
 import resizeFile from '../../../../../utilities/ImageResizer';

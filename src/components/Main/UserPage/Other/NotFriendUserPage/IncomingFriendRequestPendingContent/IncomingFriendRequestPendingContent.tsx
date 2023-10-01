@@ -1,4 +1,3 @@
-import React from 'react';
 import { OtherUserPageDataTypes } from '../../../../../../types/otherUserPageDataTypes';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';

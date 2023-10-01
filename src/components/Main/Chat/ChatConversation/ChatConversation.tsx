@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChatConversationType } from '../../../../types/chatConversationType';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
