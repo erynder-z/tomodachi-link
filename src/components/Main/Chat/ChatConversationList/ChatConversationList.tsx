@@ -1,4 +1,4 @@
-import { ChatConversationType } from '../../../../types/chatConversationType';
+import { ChatConversationType } from '../../../../types/chatTypes';
 import ChatConversation from '../ChatConversation/ChatConversation';
 import { motion } from 'framer-motion';
 

@@ -1,4 +1,4 @@
-import { RetrievedPollDataType } from '../../../../../types/retrievedPollDataType';
+import { RetrievedPollDataType } from '../../../../../types/pollTypes';
 import useAuth from '../../../../../hooks/useAuth';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import useInfoCard from '../../../../../hooks/useInfoCard';

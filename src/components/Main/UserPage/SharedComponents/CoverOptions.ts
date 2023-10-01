@@ -1,4 +1,4 @@
-import { CoverOption } from '../../../../types/coverOptionTypes';
+import { CoverOption } from '../../../../types/miscTypes';
 import defaultCover from '../../../../assets/defaultCover.webp';
 import cover1 from '../../../../assets/cover01.webp';
 import cover2 from '../../../../assets/cover02.webp';

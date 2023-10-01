@@ -4,7 +4,7 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import ConfirmationOverlay from '../../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
 import EditPostInput from '../../EditPostInput/EditPostInput';
-import { PostType } from '../../../../../types/postType';
+import { PostType } from '../../../../../types/postTypes';
 import ToggleListButton from '../../../../UiElements/ToggleListButton/ToggleListButton';
 import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 import PostMenu from './PostMenu/PostMenu';

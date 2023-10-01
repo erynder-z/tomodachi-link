@@ -1,4 +1,4 @@
-import { OtherUserPageDataTypes } from '../../../../../../types/otherUserPageDataTypes';
+import { OtherUserPageDataTypes } from '../../../../../../types/otherUserTypes';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useFriendData from '../../../../../../hooks/useFriendData';

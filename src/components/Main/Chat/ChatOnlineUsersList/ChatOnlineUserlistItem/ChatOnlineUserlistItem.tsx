@@ -1,8 +1,8 @@
-import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../../types/otherUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import { ChatConversationType } from '../../../../../types/chatConversationType';
+import { ChatConversationType } from '../../../../../types/chatTypes';
 import { handleInitializeChat } from '../../../../../utilities/handleInitializeChat';
 
 type ChatOnlineUserlistItemProps = {

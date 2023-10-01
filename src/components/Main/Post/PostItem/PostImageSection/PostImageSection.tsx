@@ -1,4 +1,4 @@
-import { ImageType } from '../../../../../types/imageType';
+import { ImageType } from '../../../../../types/miscTypes';
 
 type PostImageSectionProps = {
     handleImageClick: (image: ImageType) => void;

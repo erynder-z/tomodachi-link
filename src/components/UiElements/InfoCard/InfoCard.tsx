@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { InfoType } from '../../../types/infoType';
+import { InfoType } from '../../../types/infoTypes';
 import { FaTimes } from 'react-icons/fa';
 
 type infoCardPropsType = {

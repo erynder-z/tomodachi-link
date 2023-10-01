@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PostType } from '../../../../types/postType';
+import { PostType } from '../../../../types/postTypes';
 import format from 'date-fns/format';
 import { positiveReaction } from '../../../../utilities/positiveReaction';
 import useInfoCard from '../../../../hooks/useInfoCard';
@@ -8,7 +8,7 @@ import { negativeReaction } from '../../../../utilities/negativeReaction';
 import { fetchPostContent } from '../../../../utilities/fetchPostContent';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
-import { ImageType } from '../../../../types/imageType';
+import { ImageType } from '../../../../types/miscTypes';
 import PostUserInfoSection from './PostUserInfoSection/PostUserInfoSection';
 import DateSection from './DateSection/DateSection';
 import PostOptionsSection from './PostOptionsSection/PostOptionsSection';

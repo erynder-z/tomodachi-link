@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 import * as d3 from 'd3';
 import './charts.css';
 import { useDimensions } from '../../../../hooks/useDimensions';
-import { PollDataItemType } from '../../../../types/pollDataItemType';
+import { PollDataItemType } from '../../../../types/pollTypes';
 
 type PieChartProps = {
     width: number;

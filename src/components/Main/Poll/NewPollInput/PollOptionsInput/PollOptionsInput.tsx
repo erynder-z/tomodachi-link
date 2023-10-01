@@ -1,4 +1,4 @@
-import { CreatedPollDataType } from '../../../../../types/createdPollDataType';
+import { CreatedPollDataType } from '../../../../../types/pollTypes';
 
 type PollOptionsInputProps = {
     pollData: CreatedPollDataType;

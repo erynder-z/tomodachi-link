@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import useAuth from '../../../../hooks/useAuth';
 import UserListItem from '../../../Main/UserList/UserListItem/UserListItem';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';

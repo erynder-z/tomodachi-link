@@ -1,4 +1,4 @@
-import { ImageType } from './imageType';
+import { ImageType } from './miscTypes';
 
 export type CommentType = {
     _id: string;

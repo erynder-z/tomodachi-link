@@ -1,4 +1,4 @@
-import { ImageType } from '../../../types/imageType';
+import { ImageType } from '../../../types/miscTypes';
 import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';

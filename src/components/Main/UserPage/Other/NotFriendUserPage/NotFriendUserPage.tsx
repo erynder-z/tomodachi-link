@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
+import { OtherUserPageDataTypes } from '../../../../../types/otherUserTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import NormalContent from './NormalContent/NormalContent';
 import IncomingFriendRequestPendingContent from './IncomingFriendRequestPendingContent/IncomingFriendRequestPendingContent';

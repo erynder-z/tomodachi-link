@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import { ImageType } from '../../../../../types/imageType';
+import { ImageType } from '../../../../../types/miscTypes';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { fetchPictureList } from '../../../../../utilities/fetchPictureList';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';

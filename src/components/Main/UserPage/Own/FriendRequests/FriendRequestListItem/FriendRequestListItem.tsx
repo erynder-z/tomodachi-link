@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
-import { MinimalUserTypes } from '../../../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../../../types/otherUserTypes';
 import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../../UiElements/LoadingSpinner/LoadingSpinner';

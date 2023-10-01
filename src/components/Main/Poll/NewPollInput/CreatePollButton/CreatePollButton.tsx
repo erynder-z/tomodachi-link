@@ -1,6 +1,6 @@
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 import { MdOutlineStart } from 'react-icons/md';
-import { CreatedPollDataType } from '../../../../../types/createdPollDataType';
+import { CreatedPollDataType } from '../../../../../types/pollTypes';
 
 type CreatePollButtonProps = {
     pollData: CreatedPollDataType;

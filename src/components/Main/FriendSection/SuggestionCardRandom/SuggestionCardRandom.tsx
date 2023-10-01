@@ -3,7 +3,7 @@ import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';
 import SuggestionCardRandomMenu from './SuggestionCardRandomMenu/SuggestionCardRandomMenu';
 import SuggestionCardRandomInfo from './SuggestionCardRandomInfo/SuggestionCardRandomInfo';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 
 type SuggestionCardRandomProps = {
     userData: MinimalUserTypes;

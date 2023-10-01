@@ -5,7 +5,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchPolls } from '../../../../utilities/fetchPolls';
 import PollItem from '../../Poll/PollItem/PollItem';
-import { RetrievedPollDataType } from '../../../../types/retrievedPollDataType';
+import { RetrievedPollDataType } from '../../../../types/pollTypes';
 
 type PollListProps = {
     isPaginationTriggered: boolean;

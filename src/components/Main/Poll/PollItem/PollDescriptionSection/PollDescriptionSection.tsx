@@ -1,4 +1,4 @@
-import { RetrievedPollDataType } from '../../../../../types/retrievedPollDataType';
+import { RetrievedPollDataType } from '../../../../../types/pollTypes';
 
 type PollDescriptionSectionProps = {
     pollData: RetrievedPollDataType;

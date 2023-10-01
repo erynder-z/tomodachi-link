@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FriendsOfFriendsType } from '../../../../types/friendsOfFriendsType';
+import { FriendsOfFriendsType } from '../../../../types/friendTypes';
 import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';
 import SuggestionCardFriendMenu from './SuggestionCardFriendMenu/SuggestionCardFriendMenu';

@@ -1,4 +1,4 @@
-import { InfoType } from '../types/infoType';
+import { InfoType } from '../types/infoTypes';
 import { sendFriendRequest } from './sendFriendRequest';
 
 export const handleSendFriendRequest = (

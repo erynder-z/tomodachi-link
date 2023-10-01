@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChatConversationType } from '../../../../types/chatConversationType';
+import { ChatConversationType } from '../../../../types/chatTypes';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
@@ -7,7 +7,7 @@ import {
     MdOutlineNotifications,
     MdOutlineNotificationsOff,
 } from 'react-icons/md';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { fetchChatPartnerData } from '../../../../utilities/fetchChatPartnerData';
 import ChatConversationListItem from '../ChatConversationListItem/ChatConversationListItem';
 import { handleConversationMuteBackend } from '../../../../utilities/handleConversationMuteBackend';

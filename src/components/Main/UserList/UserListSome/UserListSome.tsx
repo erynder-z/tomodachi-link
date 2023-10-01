@@ -4,7 +4,7 @@ import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchSomeUsers } from '../../../../utilities/fetchSomeUsers';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { motion } from 'framer-motion';
 
 export default function UserListSome() {

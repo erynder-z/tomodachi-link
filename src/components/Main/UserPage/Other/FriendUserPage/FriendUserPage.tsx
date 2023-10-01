@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { OtherUserPageDataTypes } from '../../../../../types/otherUserPageDataTypes';
+import { OtherUserPageDataTypes } from '../../../../../types/otherUserTypes';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';

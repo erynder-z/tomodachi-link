@@ -3,7 +3,7 @@ import UserListItem from '../UserListItem/UserListItem';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { fetchAllUsers } from '../../../../utilities/fetchAllUsers';
 import { fetchNumberOfUsers } from '../../../../utilities/fetchNumberOfUsers';
 import { motion } from 'framer-motion';

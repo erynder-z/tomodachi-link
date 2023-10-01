@@ -6,7 +6,7 @@ import PollOptionsNumberDropdown from './PollOptionsNumberDropdown/PollOptionsNu
 import PollOptionsInput from './PollOptionsInput/PollOptionsInput';
 import PollDescriptionTextArea from './PollDescriptionTextArea/PollDescriptionTextArea';
 import CreatePollButton from './CreatePollButton/CreatePollButton';
-import { CreatedPollDataType } from '../../../../types/createdPollDataType';
+import { CreatedPollDataType } from '../../../../types/pollTypes';
 import FriendsOnlyCheckbox from './PollRestrictions/FriendsOnlyCheckbox/FriendsOnlyCheckbox';
 import CommentsCheckbox from './PollRestrictions/CommentsCheckbox/CommentsCheckbox';
 import { useNavigate } from 'react-router-dom';

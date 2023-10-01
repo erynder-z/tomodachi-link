@@ -1,6 +1,6 @@
-import { InfoType } from '../types/infoType';
+import { InfoType } from '../types/infoTypes';
 import { handleFetchErrors } from './handleFetchErrors';
-import { DatabaseChatMessageType } from '../types/databaseChatMessageType';
+import { DatabaseChatMessageType } from '../types/chatTypes';
 
 export const postMessage = async (
     token: string,

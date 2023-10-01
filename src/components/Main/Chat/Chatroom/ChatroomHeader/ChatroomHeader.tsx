@@ -1,6 +1,6 @@
 import { TbMessages } from 'react-icons/tb';
-import { CurrentUserDataType } from '../../../../../types/currentUserDataType';
-import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
+import { CurrentUserDataType } from '../../../../../types/currentUserTypes';
+import { MinimalUserTypes } from '../../../../../types/otherUserTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 
 type ChatroomHeaderProps = {

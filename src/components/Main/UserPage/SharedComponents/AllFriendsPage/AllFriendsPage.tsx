@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { FriendDataType } from '../../../../../types/friendDataType';
+import { FriendDataType } from '../../../../../types/friendTypes';
 import AllFiendsPageItem from './AllFriendsPageItem/AllFriendsPageItem';
 
 type AllFriendsPageProps = {

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import PostItem from '../../../Post/PostItem/PostItem';
-import { PostType } from '../../../../../types/postType';
+import { PostType } from '../../../../../types/postTypes';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { fetchPosts } from '../../../../../utilities/fetchPosts';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
-import { ImageType } from '../../../../../types/imageType';
+import { ImageType } from '../../../../../types/miscTypes';
 import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 import { motion, AnimatePresence } from 'framer-motion';
 

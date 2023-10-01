@@ -1,4 +1,4 @@
-import { CommentType } from '../../../../../types/commentType';
+import { CommentType } from '../../../../../types/commentTypes';
 import { formatDistanceToNow } from 'date-fns';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 

@@ -3,7 +3,7 @@ import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { Socket } from 'socket.io-client';
-import { ChatMemberType } from '../../../types/chatMemberType';
+import { ChatMemberType } from '../../../types/chatTypes';
 import { Link } from 'react-router-dom';
 
 type ProfileCardProps = {
@@ -23,7 +23,7 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
     useEffect(() => {
         if (socket) {
             socket.on('getUsers', (users: ChatMemberType[]) => {
-                const matchedCount = friends?.filter((friend) =>
+                const matchedCount = friends?.filter((friend: string) =>
                     users.some((user) => user.userId === friend)
                 ).length;
 

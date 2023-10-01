@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import useFriendData from '../../../hooks/useFriendData';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import Feed from './Feed/Feed';
-import { FriendDataType } from '../../../types/friendDataType';
+import { FriendDataType } from '../../../types/friendTypes';
 import { motion } from 'framer-motion';
 
 type HomeSectionProps = {

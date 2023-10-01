@@ -1,7 +1,7 @@
-import { ChatMemberType } from '../../../../types/chatMemberType';
+import { ChatMemberType } from '../../../../types/chatTypes';
 import useFriendData from '../../../../hooks/useFriendData';
 import ChatOnlineUserlistItem from './ChatOnlineUserlistItem/ChatOnlineUserlistItem';
-import { FriendDataType } from '../../../../types/friendDataType';
+import { FriendDataType } from '../../../../types/friendTypes';
 import useNotificationBubblesContext from '../../../../hooks/useNotificationBubblesContext';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
@@ -24,7 +24,7 @@ export default function ChatOnlineUsersList({
         );
     };
 
-    const userList = friendData?.map((friend) => (
+    const userList = friendData?.map((friend: FriendDataType) => (
         <ChatOnlineUserlistItem
             key={friend._id}
             listItemData={friend}

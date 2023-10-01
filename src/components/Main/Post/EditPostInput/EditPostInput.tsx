@@ -8,18 +8,17 @@ import EmbedYoutubeVideoSelector from '../NewPostInput/EmbedYoutubeVideoSelector
 import { TenorImage } from 'gif-picker-react';
 import GifArea from '../NewPostInput/GifArea/GifArea';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import { PostType } from '../../../../types/postType';
+import { PostType } from '../../../../types/postTypes';
 import EmojiSelector from '../NewPostInput/EmojiSelector/EmojiPicker';
 import PostEditImageSection from './PostEditImageSection/PostEditImageSection';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import PostEditGifSection from './PostEditGifSection/PostEditGifSection';
 import PostEditEmbeddedYoutubeVideo from './PostEditEmbeddedYoutubeVideo/PostEditEmbeddedYoutubeVideo';
-import { ImageType } from '../../../../types/imageType';
+import { ImageType, ViewMode } from '../../../../types/miscTypes';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import resizeFile from '../../../../utilities/ImageResizer';
 import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/EmbeddedYoutubeVideoArea';
-import { ViewMode } from '../../../../types/postInputSelectors';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type EditPostInputProps = {

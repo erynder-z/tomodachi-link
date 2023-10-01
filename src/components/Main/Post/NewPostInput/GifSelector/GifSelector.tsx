@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import GifPicker, { TenorImage, Theme } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
-import { fetchTenorApiKey } from '../../../../../utilities/fetchTenorApiKEy';
+import { fetchTenorApiKey } from '../../../../../utilities/fetchTenorApiKey';
 import useTheme from '../../../../../hooks/useTheme';
 
 type GifSelectorProps = {

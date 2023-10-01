@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
-import { OtherUserPageDataTypes } from '../../../../../../types/otherUserPageDataTypes';
+import { OtherUserPageDataTypes } from '../../../../../../types/otherUserTypes';
 import { handleSendFriendRequest } from '../../../../../../utilities/handleSendFriendRequest';
 import { motion } from 'framer-motion';
 

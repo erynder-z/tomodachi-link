@@ -1,4 +1,4 @@
-import { InfoType } from '../../../../types/infoType';
+import { InfoType } from '../../../../types/infoTypes';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type ConfirmationOverlayProps = {

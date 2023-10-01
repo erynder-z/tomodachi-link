@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CommentType } from '../../../../../types/commentType';
+import { CommentType } from '../../../../../types/commentTypes';
 import PollCommentButton from './PollCommentButton/PollCommentButton';
 import { MdOutlineCommentsDisabled } from 'react-icons/md';
 import CommentList from '../../../Comments/CommentList/CommentList';

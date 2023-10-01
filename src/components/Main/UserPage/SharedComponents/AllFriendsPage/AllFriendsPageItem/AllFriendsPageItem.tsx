@@ -1,4 +1,4 @@
-import { FriendDataType } from '../../../../../../types/friendDataType';
+import { FriendDataType } from '../../../../../../types/friendTypes';
 import { useNavigate } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 

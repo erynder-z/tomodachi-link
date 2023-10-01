@@ -5,7 +5,7 @@ import useAuth from '../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { fetchChatConversation } from '../../../../../utilities/fetchChatConversation';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import { ChatConversationType } from '../../../../../types/chatConversationType';
+import { ChatConversationType } from '../../../../../types/chatTypes';
 import { handleInitializeChat } from '../../../../../utilities/handleInitializeChat';
 
 type FriendCardMenuProps = {

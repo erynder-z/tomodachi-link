@@ -1,6 +1,6 @@
-import { MinimalPostType } from '../../../../../types/minimalPostType';
+import { MinimalPostType } from '../../../../../types/postTypes';
 import PostItem from '../../../Post/PostItem/PostItem';
-import { ImageType } from '../../../../../types/imageType';
+import { ImageType } from '../../../../../types/miscTypes';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type FeedPostListProps = {

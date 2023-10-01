@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
-import { DisplayChatMessageType } from '../../../../../types/displayChatMessageType';
+import { DisplayChatMessageType } from '../../../../../types/chatTypes';
 import { motion } from 'framer-motion';
 
 type ChatroomMessageProps = {

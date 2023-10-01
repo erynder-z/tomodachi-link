@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import useAuth from '../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../hooks/useInfoCard';
@@ -11,7 +11,7 @@ import FriendInfoCard from './FriendInfoCard/FriendInfoCard';
 import FriendCardMenu from './FriendCardMenu/FriendCardMenu';
 import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';
-import { ChatConversationType } from '../../../../types/chatConversationType';
+import { ChatConversationType } from '../../../../types/chatTypes';
 
 type FriendCardProps = {
     friendData: MinimalUserTypes;

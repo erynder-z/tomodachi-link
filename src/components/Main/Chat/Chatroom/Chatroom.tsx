@@ -7,14 +7,16 @@ import ChatroomHeader from './ChatroomHeader/ChatroomHeader';
 import ChatroomMessage from './ChatroomMessage/ChatroomMessage';
 import ChatroomInput from './ChatroomInput/ChatroomInput';
 import { Socket } from 'socket.io-client';
-import { DatabaseChatMessageType } from '../../../../types/databaseChatMessageType';
+import {
+    DatabaseChatMessageType,
+    SocketChatMessageType,
+    DisplayChatMessageType,
+    SocketTypingIndicatorType,
+} from '../../../../types/chatTypes';
 import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
 import { postMessage } from '../../../../utilities/postMessage';
-import { SocketChatMessageType } from '../../../../types/socketChatMessageType';
-import { DisplayChatMessageType } from '../../../../types/displayChatMessageType';
-import { SocketTypingIndicatorType } from '../../../../types/socketTypingIndicatorType';
 import TypingIndicator from './TypingIndicator/TypingIndicator';
 import { markMessageUnreadInDB } from '../../../../utilities/markMessageUnreadInDB';
 import { markMessageReadInDB } from '../../../../utilities/markMessageReadInDB';

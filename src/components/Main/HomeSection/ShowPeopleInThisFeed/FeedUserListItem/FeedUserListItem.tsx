@@ -1,4 +1,4 @@
-import { MinimalUserTypes } from '../../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../../types/otherUserTypes';
 import { Link } from 'react-router-dom';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';

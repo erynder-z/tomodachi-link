@@ -1,7 +1,7 @@
 import { FaRegSmileBeam, FaRegImage, FaYoutube } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';
-import { ViewMode } from '../../../../../types/postInputSelectors';
+import { ViewMode } from '../../../../../types/miscTypes';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 
 type ButtonAreaProps = {

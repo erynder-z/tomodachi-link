@@ -1,6 +1,6 @@
-import { InfoType } from '../types/infoType';
+import { InfoType } from '../types/infoTypes';
 import { initializeChat } from './initializeChat';
-import { ChatConversationType } from '../types/chatConversationType';
+import { ChatConversationType } from '../types/chatTypes';
 
 export const handleInitializeChat = async (
     token: string | null,

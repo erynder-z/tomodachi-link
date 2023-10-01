@@ -1,5 +1,5 @@
-import { CommentType } from './commentType';
-import { ImageType } from './imageType';
+import { CommentType } from './commentTypes';
+import { ImageType } from './miscTypes';
 
 export type PostType = {
     _id: string;
@@ -17,4 +17,10 @@ export type PostType = {
     reactions: { positive: number; negative: number };
     createdAt: Date;
     updatedAt: Date;
+};
+
+export type MinimalPostType = {
+    _id: string;
+    owner: { _id: string };
+    timestamp: Date;
 };

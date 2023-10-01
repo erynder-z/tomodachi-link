@@ -1,4 +1,4 @@
-import { InfoType } from '../types/infoType';
+import { InfoType } from '../types/infoTypes';
 
 export const getTimeOfDayMessage = (): InfoType => {
     const date = new Date();

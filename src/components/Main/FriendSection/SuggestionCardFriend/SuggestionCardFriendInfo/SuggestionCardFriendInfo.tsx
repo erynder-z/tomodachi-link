@@ -1,7 +1,7 @@
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import { motion } from 'framer-motion';
 import { shuffleArray } from '../../../../../utilities/shuffleArray';
-import { CommonFriendType } from '../../../../../types/friendsOfFriendsType';
+import { CommonFriendType } from '../../../../../types/friendTypes';
 
 type SuggestionCardFriendInfoProps = {
     userpic: {

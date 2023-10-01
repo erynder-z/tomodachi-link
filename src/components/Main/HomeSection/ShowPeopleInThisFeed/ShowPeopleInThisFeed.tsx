@@ -4,10 +4,10 @@ import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { MinimalUserTypes } from '../../../../types/minimalUserTypes';
+import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
-import { MinimalPostType } from '../../../../types/minimalPostType';
+import { MinimalPostType } from '../../../../types/postTypes';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];

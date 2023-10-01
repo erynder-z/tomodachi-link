@@ -1,6 +1,6 @@
 import React from 'react';
 import FriendListItem from './FriendListItem/FriendListItem';
-import { FriendDataType } from '../../../../../types/friendDataType';
+import { FriendDataType } from '../../../../../types/friendTypes';
 import { Link } from 'react-router-dom';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 

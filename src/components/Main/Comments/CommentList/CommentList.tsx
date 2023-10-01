@@ -1,4 +1,4 @@
-import { CommentType } from '../../../../types/commentType';
+import { CommentType } from '../../../../types/commentTypes';
 import CommentItem from './CommentItem/CommentItem';
 import ToggleListButton from '../../../UiElements/ToggleListButton/ToggleListButton';
 

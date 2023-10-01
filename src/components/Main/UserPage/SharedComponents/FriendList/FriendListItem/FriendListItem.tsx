@@ -1,4 +1,4 @@
-import { FriendDataType } from '../../../../../../types/friendDataType';
+import { FriendDataType } from '../../../../../../types/friendTypes';
 import { Link } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { TbUserSearch } from 'react-icons/tb';

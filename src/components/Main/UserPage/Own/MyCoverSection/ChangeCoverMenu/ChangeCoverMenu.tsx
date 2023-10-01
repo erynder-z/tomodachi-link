@@ -1,6 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
-import { CoverOption } from '../../../../../../types/coverOptionTypes';
+import { CoverOption } from '../../../../../../types/miscTypes';
 import { motion } from 'framer-motion';
 
 type ChangeCoverMenuProps = {

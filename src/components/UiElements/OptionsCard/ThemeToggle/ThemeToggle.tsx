@@ -1,11 +1,12 @@
 import { TbSun, TbMoon } from 'react-icons/tb';
 import useTheme from '../../../../hooks/useTheme';
+import { ThemeType } from '../../../../types/miscTypes';
 
 export default function ThemeToggle() {
     const { theme, setTheme } = useTheme();
 
     const toggleTheme = () => {
-        const newTheme = theme === 'bright' ? 'dark' : 'bright';
+        const newTheme: ThemeType = theme === 'bright' ? 'dark' : 'bright';
         setTheme(newTheme);
         localStorage.setItem('themeOdinBook', newTheme);
     };

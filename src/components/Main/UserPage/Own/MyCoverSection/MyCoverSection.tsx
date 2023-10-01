@@ -3,7 +3,7 @@ import { FaImages } from 'react-icons/fa';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
-import { CoverOption } from '../../../../../types/coverOptionTypes';
+import { CoverOption } from '../../../../../types/miscTypes';
 import { saveCoverImage } from '../../../../../utilities/saveCoverImage';
 import { COVER_OPTIONS } from '../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../utilities/getColors';

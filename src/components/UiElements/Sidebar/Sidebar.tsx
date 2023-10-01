@@ -4,7 +4,7 @@ import UserListAll from '../../Main/UserList/UserListAll/UserListAll';
 import ChatOnlineUsersList from '../../Main/Chat/ChatOnlineUsersList/ChatOnlineUsersList';
 import { Socket } from 'socket.io-client';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
-import { ChatMemberType } from '../../../types/chatMemberType';
+import { ChatMemberType } from '../../../types/chatTypes';
 import { useLocation } from 'react-router-dom';
 
 type SidebarProps = {

@@ -1,9 +1,9 @@
 import { Socket, io } from 'socket.io-client';
-import { CurrentUserDataType } from '../types/currentUserDataType';
+import { CurrentUserDataType } from '../types/currentUserTypes';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { fetchChatConversation } from './fetchChatConversation';
-import { InfoType } from '../types/infoType';
-import { ChatConversationType } from '../types/chatConversationType';
+import { InfoType } from '../types/infoTypes';
+import { ChatConversationType } from '../types/chatTypes';
 
 export const handleChatSetup = (
     socket: React.MutableRefObject<

@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { RetrievedPollDataType } from '../../../../types/retrievedPollDataType';
+import {
+    RetrievedPollDataType,
+    PollDataItemType,
+} from '../../../../types/pollTypes';
 import { motion } from 'framer-motion';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import format from 'date-fns/format';
@@ -11,12 +14,11 @@ import PollQuestionSection from './PollQuestionSection/PollQuestionSection';
 import useAuth from '../../../../hooks/useAuth';
 import PollDescriptionSection from './PollDescriptionSection/PollDescriptionSection';
 import FriendOnlyInfoSection from './FriendOnlyInfoSection/FriendOnlyInfoSection';
-import { PollDataItemType } from '../../../../types/pollDataItemType';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import PollCommentSection from './PollCommentSection/PollCommentSection';
-import { CommentType } from '../../../../types/commentType';
+import { CommentType } from '../../../../types/commentTypes';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;

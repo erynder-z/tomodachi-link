@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { ImageType } from '../../../types/imageType';
+import { ImageType } from '../../../types/miscTypes';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { useParams } from 'react-router-dom';
