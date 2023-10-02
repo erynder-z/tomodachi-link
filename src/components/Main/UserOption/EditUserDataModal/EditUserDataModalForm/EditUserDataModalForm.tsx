@@ -6,6 +6,7 @@ import { FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
+import useSeed from '../../../../../hooks/useSeed';
 
 type EditUserDataModalFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -24,6 +25,7 @@ export default function EditUserDataModalForm({
     setShowOptions,
 }: EditUserDataModalFormProps) {
     const { token } = useAuth();
+    const { generateNewSeed } = useSeed();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const {
@@ -88,6 +90,7 @@ export default function EditUserDataModalForm({
                 icon: '👍',
             });
             handleFetchUserData();
+            generateNewSeed();
             setShouldOverlaysShow({
                 searchOverlay: false,
                 editUserDataModal: false,

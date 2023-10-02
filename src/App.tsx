@@ -31,11 +31,13 @@ import { AnimatePresence } from 'framer-motion';
 import PollSectionSelect from './components/Main/PollSection/PollSectionSelect/PollSectionSelect';
 import NewPollSection from './components/Main/PollSection/NewPollSection/NewPollSection';
 import PollList from './components/Main/PollSection/PollList/PollList';
+import useSeed from './hooks/useSeed';
 
 function App() {
     const { isAuth, token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
+    const { seed } = useSeed();
     const { theme } = useTheme();
     const {
         setConversationsWithUnreadMessages,
@@ -133,6 +135,7 @@ function App() {
                 </nav>
             </div>
             <main
+                key={seed}
                 id="container-main"
                 className="relative block md:flex h-[calc(100vh_-_3rem)] lg:h-screen w-screen gap-4 md:p-4 bg-background1 dark:bg-background1Dark overflow-y-auto"
                 onScroll={handleScroll}
