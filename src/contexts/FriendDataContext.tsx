@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { FriendDataContextProps } from '../types/friendDataContextTypes';
-import { FriendDataType } from '../types/friendDataType';
+import { FriendDataContextProps, FriendDataType } from '../types/friendTypes';
 import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
 import { fetchFriendData } from '../utilities/fetchFriendData';

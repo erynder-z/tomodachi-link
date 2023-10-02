@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { ThemeType } from '../types/themeTypes';
+import { ThemeType } from '../types/miscTypes';
 
 type ThemeContextProviderProps = {
     children: React.ReactElement;

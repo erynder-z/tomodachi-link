@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
-import { CurrentUserDataContextProps } from '../types/currentUserDataContextTypes';
-import { CurrentUserDataType } from '../types/currentUserDataType';
+import { CurrentUserDataContextProps } from '../types/currentUserTypes';
+import { CurrentUserDataType } from '../types/currentUserTypes';
 import { fetchUserData } from '../utilities/fetchUserData';
 
 const CurrentUserDataContext = createContext<CurrentUserDataContextProps>({

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { ChatConversationType } from '../types/chatConversationType';
+import { ChatConversationType } from '../types/chatTypes';
 
 type NotificationBubblesContextProps = {
     conversationsWithUnreadMessages: string[];

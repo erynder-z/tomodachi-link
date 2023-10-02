@@ -3,7 +3,7 @@ import {
     AuthContextProps,
     AuthContextProviderProps,
     User,
-} from '../types/authContextTypes';
+} from '../types/authTypes';
 import useInfoCard from '../hooks/useInfoCard';
 import useCurrentUserData from '../hooks/useCurrentUserData';
 import FullscreenLoading from '../components/UiElements/LoadingSpinner/FullscreenLoading';

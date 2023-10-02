@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from 'react';
 import {
     InfoCardContextProps,
     InfoCardContextProviderProps,
-} from '../types/infoCardContextTypes';
-import { InfoType } from '../types/infoType';
+    InfoType,
+} from '../types/infoTypes';
 
 const InfoCardContext = createContext<InfoCardContextProps>({
     info: null,
