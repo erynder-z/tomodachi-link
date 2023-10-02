@@ -21,12 +21,12 @@ const ConfirmationOverlay = ({
 
     const handleNoButtonClick = () => setShouldConfirmDialogShow(false);
     const Dialog = (
-        <h2 className="flex flex-col items-center gap-4 text-white text-2xl font-semibold">
+        <div className="flex flex-col items-center gap-4 text-white text-2xl font-semibold">
             <span className="text-5xl">
                 {dialogInfo?.icon && dialogInfo?.icon}
             </span>
             <h1>{dialogInfo?.message}</h1>
-        </h2>
+        </div>
     );
 
     const YesButton = (
