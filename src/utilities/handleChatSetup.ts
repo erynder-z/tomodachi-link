@@ -1,9 +1,9 @@
 import { Socket, io } from 'socket.io-client';
 import { CurrentUserDataType } from '../types/currentUserTypes';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { fetchChatConversation } from './fetchChatConversation';
 import { InfoType } from '../types/infoTypes';
 import { ChatConversationType } from '../types/chatTypes';
+import { backendFetch } from './backendFetch';
 
 export const handleChatSetup = (
     socket: React.MutableRefObject<
@@ -34,9 +34,19 @@ export const handleChatSetup = (
         const userId = currentUserData._id;
 
         if (userId && token) {
+            const apiEndpointURL = '/api/v1/chat/';
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch conversation!';
+
             try {
                 const conversations: ChatConversationType[] =
-                    await fetchChatConversation(token, setInfo);
+                    await backendFetch(
+                        token,
+                        setInfo,
+                        apiEndpointURL,
+                        method,
+                        errorMessage
+                    );
 
                 const conversationsWithUnreadMessages = conversations
                     .filter((conversation) =>

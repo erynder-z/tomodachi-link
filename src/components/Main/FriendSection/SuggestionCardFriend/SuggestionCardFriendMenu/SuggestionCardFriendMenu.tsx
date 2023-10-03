@@ -5,8 +5,8 @@ import { handleSendFriendRequest } from '../../../../../utilities/handleSendFrie
 import useAuth from '../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../hooks/useInfoCard';
-import { fetchOtherUserData } from '../../../../../utilities/fetchOtherUserData';
 import { TbLink, TbUserPlus } from 'react-icons/tb';
+import { backendFetch } from '../../../../../utilities/backendFetch';
 
 type SuggestionCardFriendMenuProps = {
     id: string;
@@ -31,7 +31,16 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
 
     const fetchUserData = async () => {
         if (token) {
-            const response = await fetchOtherUserData(id, token, setInfo);
+            const apiEndpointURL = `/api/v1/users/${id}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch user data!';
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
 
             setIsFriendRequestPending({
                 incoming: response?.isIncomingFriendRequestPending || false,

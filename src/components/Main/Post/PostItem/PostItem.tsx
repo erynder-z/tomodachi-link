@@ -5,7 +5,6 @@ import { positiveReaction } from '../../../../utilities/positiveReaction';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import useAuth from '../../../../hooks/useAuth';
 import { negativeReaction } from '../../../../utilities/negativeReaction';
-import { fetchPostContent } from '../../../../utilities/fetchPostContent';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import { ImageType } from '../../../../types/miscTypes';
@@ -20,6 +19,7 @@ import PostReactionSection from './PostReactionSection/PostReactionSection';
 import PostCommentSection from './PostCommentSection/PostCommentSection';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import { motion } from 'framer-motion';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type PostItemProps = {
     postID: string;
@@ -58,9 +58,18 @@ export default React.memo(function PostItem({
 
     const getPostDetails = async (postID: string) => {
         if (token) {
-            const response = await fetchPostContent(token, postID, setInfo);
+            const apiEndpointURL = `/api/v1/post/${postID}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch posts!';
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
 
-            setPostDetails(response);
+            setPostDetails(response?.retrievedPost);
             setLoading(false);
         }
     };

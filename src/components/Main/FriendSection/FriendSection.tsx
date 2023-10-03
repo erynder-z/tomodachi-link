@@ -8,10 +8,9 @@ import SuggestionCardRandom from './SuggestionCardRandom/SuggestionCardRandom';
 import SuggestionCardFriend from './SuggestionCardFriend/SuggestionCardFriend';
 import { FriendsOfFriendsType } from '../../../types/friendTypes';
 import { MinimalUserTypes } from '../../../types/otherUserTypes';
-import { fetchSomeFriendsOfFriends } from '../../../utilities/fetchSomeFriendsOfFriends';
-import { fetchSomeUsers } from '../../../utilities/fetchSomeUsers';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import { motion, useInView } from 'framer-motion';
+import { backendFetch } from '../../../utilities/backendFetch';
 
 export default function FriendSection() {
     const { token, authUser } = useAuth();
@@ -38,8 +37,18 @@ export default function FriendSection() {
 
     const handleFetchFriendsOfFriends = async () => {
         if (authUser && token) {
-            const response = await fetchSomeFriendsOfFriends(token, setInfo);
-            setFriendsOfFriends(response);
+            const apiEndpointURL = '/api/v1/users/maybefriends';
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch users!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setFriendsOfFriends(response?.friendsOfFriends);
             setLoading(response.length <= 0);
             if (response.length <= 0) handleFetchRandomUsers();
         }
@@ -47,8 +56,18 @@ export default function FriendSection() {
 
     const handleFetchRandomUsers = async () => {
         if (authUser && token) {
-            const response = await fetchSomeUsers(token, setInfo);
-            setRandomUsers(response);
+            const apiEndpointURL = `/api/v1/users/some`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch users!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setRandomUsers(response?.userList);
             setLoading(false);
         }
     };

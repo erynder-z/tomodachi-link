@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { fetchFeed } from '../../../../utilities/fetchFeed';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 import { MinimalPostType } from '../../../../types/postTypes';
 import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import FeedPostList from './FeedPostList/FeedPostList';
 import { motion } from 'framer-motion';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type FreedProps = {
     friendList: string[];
@@ -29,8 +29,18 @@ export default function Feed({
 
     const handleGetFeed = async () => {
         if (authUser && token) {
-            const response = await fetchFeed(token, setInfo, skip);
-            setMinimalPosts([...minimalPosts, ...response]);
+            const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch feed!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setMinimalPosts([...minimalPosts, ...response.paginatedFeed]);
             setLoading(false);
         }
     };
@@ -40,8 +50,18 @@ export default function Feed({
         setMinimalPosts([]);
         setSkip(0);
         if (authUser && token) {
-            const response = await fetchFeed(token, setInfo, skip);
-            setMinimalPosts([...response]);
+            const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch feed!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setMinimalPosts([...response.paginatedFeed]);
             setLoading(false);
             setIsFeedRefreshing(false);
         }

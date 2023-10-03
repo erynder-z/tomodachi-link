@@ -8,10 +8,10 @@ import {
     MdOutlineNotificationsOff,
 } from 'react-icons/md';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
-import { fetchChatPartnerData } from '../../../../utilities/fetchChatPartnerData';
 import ChatConversationListItem from '../ChatConversationListItem/ChatConversationListItem';
 import { handleConversationMuteBackend } from '../../../../utilities/handleConversationMuteBackend';
 import useNotificationBubblesContext from '../../../../hooks/useNotificationBubblesContext';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;
@@ -47,12 +47,18 @@ export default function ChatConversation({
         if (partnerId && token) {
             const fetchPartnerData = async () => {
                 try {
-                    const response = await fetchChatPartnerData(
+                    const apiEndpointURL = `/api/v1/chat/user/${partnerId}`;
+                    const method = 'GET';
+                    const errorMessage = 'Unable to fetch user data!';
+
+                    const response = await backendFetch(
                         token,
-                        partnerId,
-                        setInfo
+                        setInfo,
+                        apiEndpointURL,
+                        method,
+                        errorMessage
                     );
-                    setChatPartner(response);
+                    setChatPartner(response?.chatPartnerData);
                     setLoading(false);
                 } catch (error) {
                     console.error(error);

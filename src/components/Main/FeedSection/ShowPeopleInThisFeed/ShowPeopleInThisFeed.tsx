@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
 import { MinimalPostType } from '../../../../types/postTypes';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type ShowPeopleInThisFeedProps = {
     friendList: string[];
@@ -43,9 +43,20 @@ export default function ShowPeopleInThisFeed({
 
     const handleGetUserDetails = async (ids: string[]) => {
         if (token) {
-            const requests = ids.map((id) =>
-                fetchMinimalUserData(token, id, setInfo)
-            );
+            const requests = ids.map(async (id) => {
+                const apiEndpointURL = `/api/v1/users/${id}`;
+                const method = 'GET';
+                const errorMessage = 'Unable to fetch user data!';
+
+                const singleUserResponse = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                return singleUserResponse?.user;
+            });
             const responses = await Promise.all(requests);
             setFeedUsers((prevUsers) => [
                 ...prevUsers,

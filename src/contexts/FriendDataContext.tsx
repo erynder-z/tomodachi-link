@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { FriendDataContextProps, FriendDataType } from '../types/friendTypes';
 import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
-import { fetchFriendData } from '../utilities/fetchFriendData';
+import { backendFetch } from '../utilities/backendFetch';
 
 const FriendDataContext = createContext<FriendDataContextProps>({
     friendData: null,
@@ -22,8 +22,19 @@ export const FriendDataContextProvider = ({
 
     const handleFetchFriendData = async () => {
         if (authUser && token) {
-            const response = await fetchFriendData(token, setInfo);
-            setFriendData(response);
+            const apiEndpointURL = '/api/v1/frienddata';
+            const method = 'GET';
+
+            const errorMessage = 'Unable to fetch friend data!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setFriendData(response?.friendDataList);
         }
     };
 

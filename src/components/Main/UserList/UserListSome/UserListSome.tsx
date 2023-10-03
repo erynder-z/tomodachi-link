@@ -3,9 +3,9 @@ import UserListItem from '../UserListItem/UserListItem';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { fetchSomeUsers } from '../../../../utilities/fetchSomeUsers';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { motion } from 'framer-motion';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 export default function UserListSome() {
     const { token, authUser } = useAuth();
@@ -17,8 +17,18 @@ export default function UserListSome() {
 
     const handleFetchUsers = async () => {
         if (authUser && token) {
-            const response = await fetchSomeUsers(token, setInfo);
-            setUsers(response);
+            const apiEndpointURL = `/api/v1/users/some`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch users!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setUsers(response?.userList);
             setLoading(false);
         }
     };

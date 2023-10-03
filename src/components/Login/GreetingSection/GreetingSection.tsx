@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { countUsers } from '../../../utilities/countUsers';
 import useInfoCard from '../../../hooks/useInfoCard';
+import { backendFetch } from '../../../utilities/backendFetch';
 
 export default function GreetingSection() {
     const { setInfo } = useInfoCard();
@@ -30,8 +30,18 @@ export default function GreetingSection() {
     };
 
     const getNumberOfUsers = async () => {
-        const response = await countUsers(setInfo);
-        animateCount(0, response, 500);
+        const token = undefined;
+        const apiEndpointURL = '/api/v1/users/count';
+        const method = 'GET';
+        const errorMessage = 'Unable to fetch number of users!';
+        const response = await backendFetch(
+            token,
+            setInfo,
+            apiEndpointURL,
+            method,
+            errorMessage
+        );
+        animateCount(0, response?.numberOfUsers, 500);
     };
 
     useEffect(() => {

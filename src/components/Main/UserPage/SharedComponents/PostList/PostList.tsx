@@ -4,10 +4,10 @@ import { PostType } from '../../../../../types/postTypes';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
-import { fetchPosts } from '../../../../../utilities/fetchPosts';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { ImageType } from '../../../../../types/miscTypes';
 import { motion, AnimatePresence } from 'framer-motion';
+import { backendFetch } from '../../../../../utilities/backendFetch';
 
 type MyPostListProps = {
     userId: string | undefined;
@@ -35,8 +35,17 @@ export default function PostList({
 
     const handleFetchPosts = async () => {
         if (authUser && token && userId) {
-            const response = await fetchPosts(userId, token, setInfo, skip);
-            setPosts([...posts, ...response]);
+            const apiEndpointURL = `/api/v1/users/${userId}/post?skip=${skip}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch posts!';
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setPosts([...posts, ...response.userPosts]);
             setLoading(false);
         }
     };

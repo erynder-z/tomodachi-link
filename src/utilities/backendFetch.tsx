@@ -1,34 +1,36 @@
 import { InfoType } from '../types/infoTypes';
 import { handleFetchErrors } from './handleFetchErrors';
 
-export const fetchPolls = async (
-    token: string,
+export const backendFetch = async (
+    token: string | undefined,
     setInfo: (info: InfoType | null) => void,
-    skip: number | null = 0
+    apiEndpointURL: string,
+    method: string,
+    errorMessage: string
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
+        const headers: Record<string, string> = {};
 
-        const response = await fetch(
-            `${serverURL}/api/v1/poll/collection?skip=${skip}`,
-            {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+        if (token) {
+            headers.Authorization = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${serverURL}${apiEndpointURL}`, {
+            method: method,
+            headers,
+        });
 
         if (response.ok) {
             const data = await response.json();
-            return data.pollCollection;
+            return data;
         } else {
             handleFetchErrors(response, setInfo);
         }
     } catch (err: unknown) {
         setInfo({
             typeOfInfo: 'bad',
-            message: 'Unable to fetch polls!',
+            message: errorMessage,
             icon: '👻',
         });
     }

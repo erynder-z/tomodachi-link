@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
-import { fetchChatConversation } from '../../../utilities/fetchChatConversation';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
-import { ChatConversationType } from '../../../types/chatConversationType';
+import { ChatConversationType } from '../../../types/chatTypes';
 import Chatroom from './Chatroom/Chatroom';
 import { Socket } from 'socket.io-client';
 import ChatConversationList from './ChatConversationList/ChatConversationList';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import { motion } from 'framer-motion';
+import { backendFetch } from '../../../utilities/backendFetch';
 
 type ChatProps = {
     socket: Socket | undefined;
@@ -41,8 +41,18 @@ export default function Chat({ socket }: ChatProps) {
 
     const getConversations = async () => {
         if (currentUserId && token) {
-            const response = await fetchChatConversation(token, setInfo);
-            setConversations(response);
+            const apiEndpointURL = '/api/v1/chat/';
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch conversation!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setConversations(response?.conversation);
             setLoading(false);
         }
     };

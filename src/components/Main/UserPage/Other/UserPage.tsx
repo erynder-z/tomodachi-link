@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchOtherUserData } from '../../../../utilities/fetchOtherUserData';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
@@ -8,6 +7,7 @@ import { OtherUserPageDataTypes } from '../../../../types/otherUserTypes';
 import NotFriendUserPage from './NotFriendUserPage/NotFriendUserPage';
 import FriendUserPage from './FriendUserPage/FriendUserPage';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type UserPageProps = {
     isPaginationTriggered: boolean;
@@ -32,17 +32,21 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
     });
     const [loading, setLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        if (token) {
-            setLoading(true);
-            fetchOtherUserData(id, token, setInfo);
-        }
-    }, [id]);
-
     const fetchUserData = async () => {
         if (token) {
-            const response = await fetchOtherUserData(id, token, setInfo);
-            setUserPageData(response?.pageData ?? {});
+            const apiEndpointURL = `/api/v1/users/${id}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch posts!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+
+            setUserPageData(response?.user ?? {});
             setIsFriend(response?.isFriend ?? false);
             setIsFriendRequestPending({
                 incoming: response?.isIncomingFriendRequestPending ?? false,

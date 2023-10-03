@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuth from '../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
-import { fetchChatConversation } from '../../../../../utilities/fetchChatConversation';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ChatConversationType } from '../../../../../types/chatTypes';
 import { handleInitializeChat } from '../../../../../utilities/handleInitializeChat';
+import { backendFetch } from '../../../../../utilities/backendFetch';
 
 type FriendCardMenuProps = {
     id: string;
@@ -30,11 +30,18 @@ export default function FriendCardMenu({
 
     const handleChatButtonClick = async () => {
         if (currentUserId && token) {
-            const conversationList = await fetchChatConversation(
+            const apiEndpointURL = '/api/v1/chat/';
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch conversation!';
+
+            const response = await backendFetch(
                 token,
-                setInfo
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
             );
-            const conversationWithCurrentFriend = conversationList.find(
+            const conversationWithCurrentFriend = response?.conversation.find(
                 (conversation: ChatConversationType) => {
                     const members = conversation.members;
                     return (

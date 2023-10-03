@@ -4,9 +4,8 @@ import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
-import { fetchAllUsers } from '../../../../utilities/fetchAllUsers';
-import { fetchNumberOfUsers } from '../../../../utilities/fetchNumberOfUsers';
 import { motion } from 'framer-motion';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 export default function UserListAll() {
     const { token, authUser } = useAuth();
@@ -20,16 +19,36 @@ export default function UserListAll() {
 
     const handleFetchAllUsers = async () => {
         if (authUser && token) {
-            const fetchedUsers = await fetchAllUsers(token, setInfo, skip);
-            setUsers([...users, ...fetchedUsers]);
+            const apiEndpointURL = `/api/v1/users/all?skip=${skip}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch users!';
+            const fetchedUsers = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setUsers([...users, ...fetchedUsers.userList]);
             setLoading(false);
         }
     };
 
     const handleFetchNumberOfUsers = async () => {
         if (authUser && token) {
-            const fetchedNumberOfUsers = await fetchNumberOfUsers(setInfo);
-            setNumberOfUsers(fetchedNumberOfUsers);
+            const apiEndpointURL = '/api/v1/users/count';
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch users!';
+
+            const fetchedNumberOfUsers = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+
+                errorMessage
+            );
+            setNumberOfUsers(fetchedNumberOfUsers?.numberOfUsers);
         }
     };
 

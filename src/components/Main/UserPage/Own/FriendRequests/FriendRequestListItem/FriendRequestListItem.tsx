@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
 import { MinimalUserTypes } from '../../../../../../types/otherUserTypes';
-import { fetchMinimalUserData } from '../../../../../../utilities/fetchMinimalUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
@@ -10,6 +9,7 @@ import { declineFriendRequest } from '../../../../../../utilities/declineFriendR
 import { useNavigate } from 'react-router-dom';
 import { convertDatabaseImageToBase64 } from '../../../../../../utilities/convertDatabaseImageToBase64';
 import useFriendData from '../../../../../../hooks/useFriendData';
+import { backendFetch } from '../../../../../../utilities/backendFetch';
 
 type FriendRequestListItemProps = {
     friendRequestUserId: string;
@@ -73,13 +73,18 @@ export default function FriendRequestListItem({
     useEffect(() => {
         const fetchUserData = async () => {
             if (token) {
+                const apiEndpointURL = `/api/v1/users/${friendRequestUserId}`;
+                const method = 'GET';
+                const errorMessage = 'Unable to fetch user data!';
                 try {
-                    const response = await fetchMinimalUserData(
+                    const response = await backendFetch(
                         token,
-                        friendRequestUserId,
-                        setInfo
+                        setInfo,
+                        apiEndpointURL,
+                        method,
+                        errorMessage
                     );
-                    setFriendRequestData(response);
+                    setFriendRequestData(response?.user);
                     setLoading(false);
 
                     handleFetchComplete();

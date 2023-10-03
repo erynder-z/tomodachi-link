@@ -3,7 +3,7 @@ import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
 import { CurrentUserDataContextProps } from '../types/currentUserTypes';
 import { CurrentUserDataType } from '../types/currentUserTypes';
-import { fetchUserData } from '../utilities/fetchUserData';
+import { backendFetch } from '../utilities/backendFetch';
 
 const CurrentUserDataContext = createContext<CurrentUserDataContextProps>({
     currentUserData: null,
@@ -29,8 +29,18 @@ export const CurrentUserDataContextProvider = ({
     // Define trigger function
     const handleFetchUserData = async () => {
         if (authUser && token) {
-            const response = await fetchUserData(token, setInfo);
-            setCurrentUserData(response);
+            const apiEndpointURL = '/api/v1/userdata';
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch userdata';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setCurrentUserData(response?.user);
         }
     };
 

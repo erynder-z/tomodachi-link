@@ -4,13 +4,12 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ImageType } from '../../../../../types/miscTypes';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
-import { fetchPictureList } from '../../../../../utilities/fetchPictureList';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
-import { fetchNumberOfPics } from '../../../../../utilities/fetchNumberOfPics';
 import { MdKeyboardDoubleArrowRight, MdZoomOutMap } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { backendFetch } from '../../../../../utilities/backendFetch';
 
 type PictureListProps = {
     onFetchComplete: (nameOfComponent: string) => void;
@@ -32,20 +31,33 @@ export default function PictureList({
 
     const handleFetchUserPics = async () => {
         if (token && userId && shouldInitialize.current) {
+            const skip = 0;
+            const apiEndpointURLList = `/api/v1/users/${userId}/picture?skip=${skip}`;
+            const apiEndpointURLNumber = `/api/v1/users/${userId}/count_pictures`;
+            const method = 'GET';
+            const errorMessageList = 'Unable to fetch pictures!';
+            const errorMessageNumber = 'Unable to fetch number of pictures!';
+
+            let pictureListResponse;
+            let numberOfPicsResponse;
+
             try {
-                const pictureListResponse = await fetchPictureList(
-                    userId,
+                pictureListResponse = await backendFetch(
                     token,
                     setInfo,
-                    0 // skip 0 since only the most recent pictures are fetched
+                    apiEndpointURLList,
+                    method,
+                    errorMessageList
                 );
-                const numberOfPicsResponse = await fetchNumberOfPics(
+                numberOfPicsResponse = await backendFetch(
                     token,
-                    userId,
-                    setInfo
+                    setInfo,
+                    apiEndpointURLNumber,
+                    method,
+                    errorMessageNumber
                 );
-                setPictures([...pictureListResponse]);
-                setNumberOfPictures(numberOfPicsResponse);
+                setPictures([...pictureListResponse.images]);
+                setNumberOfPictures(numberOfPicsResponse?.count);
                 setLoading(false);
                 onFetchComplete('pictureList');
             } catch (error) {

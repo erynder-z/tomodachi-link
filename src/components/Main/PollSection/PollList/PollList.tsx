@@ -3,9 +3,9 @@ import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { motion } from 'framer-motion';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
-import { fetchPolls } from '../../../../utilities/fetchPolls';
 import PollItem from '../../Poll/PollItem/PollItem';
 import { RetrievedPollDataType } from '../../../../types/pollTypes';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type PollListProps = {
     isPaginationTriggered: boolean;
@@ -22,8 +22,17 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
 
     const handleGetPolls = async () => {
         if (authUser && token) {
-            const response = await fetchPolls(token, setInfo, skip);
-            setPolls([...polls, ...response]);
+            const apiEndpointURL = `/api/v1/poll/collection?skip=${skip}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch polls!';
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setPolls([...polls, ...response.pollCollection]);
             setLoading(false);
         }
     };

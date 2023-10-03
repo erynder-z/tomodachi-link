@@ -13,14 +13,13 @@ import {
     DisplayChatMessageType,
     SocketTypingIndicatorType,
 } from '../../../../types/chatTypes';
-import { fetchMinimalUserData } from '../../../../utilities/fetchMinimalUserData';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
-import { fetchChatMessages } from '../../../../utilities/fetchChatMessages';
 import { postMessage } from '../../../../utilities/postMessage';
 import TypingIndicator from './TypingIndicator/TypingIndicator';
 import { markMessageUnreadInDB } from '../../../../utilities/markMessageUnreadInDB';
 import { markMessageReadInDB } from '../../../../utilities/markMessageReadInDB';
 import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
+import { backendFetch } from '../../../../utilities/backendFetch';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -54,20 +53,38 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
 
     const handleFetchPartnerData = async () => {
         if (token && partnerId) {
-            const response = await fetchMinimalUserData(
+            const apiEndpointURL = `/api/v1/users/${partnerId}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch user data!';
+
+            const response = await backendFetch(
                 token,
-                partnerId,
-                setInfo
+                setInfo,
+                apiEndpointURL,
+                method,
+
+                errorMessage
             );
-            setPartnerData(response);
+            setPartnerData(response?.user);
             setLoading(false);
         }
     };
 
     const handleFetchChatMessages = async () => {
         if (token && chatId) {
-            const response = await fetchChatMessages(token, chatId, setInfo);
-            setMessages(response);
+            const apiEndpointURL = `/api/v1/message/${chatId}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch conversation!';
+
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+
+                errorMessage
+            );
+            setMessages(response?.messages);
             setLoading(false);
         }
     };
