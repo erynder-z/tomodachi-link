@@ -1,15 +1,16 @@
 import { InfoType } from '../types/infoTypes';
 import { handleFetchErrors } from './handleFetchErrors';
 
-export const positiveReaction = async (
+export const handlePostReaction = async (
     token: string,
     setInfo: (info: InfoType | null) => void,
-    _id: string
+    _id: string,
+    reaction: string
 ) => {
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(
-            `${serverURL}/api/v1/post/${_id}/positive`,
+            `${serverURL}/api/v1/post/${_id}/${reaction}`,
             {
                 method: 'PATCH',
                 headers: {

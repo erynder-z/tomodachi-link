@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PostType } from '../../../../types/postTypes';
 import format from 'date-fns/format';
-import { positiveReaction } from '../../../../utilities/positiveReaction';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import useAuth from '../../../../hooks/useAuth';
-import { negativeReaction } from '../../../../utilities/negativeReaction';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import { ImageType } from '../../../../types/miscTypes';
@@ -20,6 +18,7 @@ import PostCommentSection from './PostCommentSection/PostCommentSection';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import { motion } from 'framer-motion';
 import { backendFetch } from '../../../../utilities/backendFetch';
+import { handlePostReaction } from '../../../../utilities/handlePostReaction';
 
 type PostItemProps = {
     postID: string;
@@ -76,14 +75,14 @@ export default React.memo(function PostItem({
 
     const handlePositiveReactionClick = async () => {
         if (token) {
-            await positiveReaction(token, setInfo, postID);
+            await handlePostReaction(token, setInfo, postID, 'positive');
             getPostDetails(postID);
         }
     };
 
     const handleNegativeReactionClick = async () => {
         if (token) {
-            await negativeReaction(token, setInfo, postID);
+            await handlePostReaction(token, setInfo, postID, 'negative');
             getPostDetails(postID);
         }
     };
