@@ -16,10 +16,9 @@ import {
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { postMessage } from '../../../../utilities/postMessage';
 import TypingIndicator from './TypingIndicator/TypingIndicator';
-import { markMessageUnreadInDB } from '../../../../utilities/markMessageUnreadInDB';
-import { markMessageReadInDB } from '../../../../utilities/markMessageReadInDB';
 import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 import { backendFetch } from '../../../../utilities/backendFetch';
+import { handleChatMessagesInDB } from '../../../../utilities/handleChatMessagesInDatabase';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -90,8 +89,15 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     };
 
     const handleMarkMessageUnreadInDB = async () => {
-        if (token && chatId)
-            await markMessageUnreadInDB(token, chatId, setInfo);
+        if (token && chatId) {
+            const typeOfOperation = 'unread';
+            await handleChatMessagesInDB(
+                token,
+                chatId,
+                setInfo,
+                typeOfOperation
+            );
+        }
     };
 
     const handleTyping = () => {
@@ -217,7 +223,10 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         if (receivedMessage && partnerId === receivedMessage.senderId) {
             setMessages((prevMessages) => [...prevMessages, receivedMessage]);
         }
-        if (token && chatId) markMessageReadInDB(token, chatId, setInfo);
+        if (token && chatId) {
+            const typeOfOperation = 'read';
+            handleChatMessagesInDB(token, chatId, setInfo, typeOfOperation);
+        }
     }, [receivedMessage]);
 
     useEffect(() => {
