@@ -39,7 +39,7 @@ export const handleChatSetup = (
             const errorMessage = 'Unable to fetch conversation!';
 
             try {
-                const conversations: ChatConversationType[] =
+                const response: { conversation: ChatConversationType[] } =
                     await backendFetch(
                         token,
                         setInfo,
@@ -47,8 +47,7 @@ export const handleChatSetup = (
                         method,
                         errorMessage
                     );
-
-                const conversationsWithUnreadMessages = conversations
+                const conversationsWithUnreadMessages = response?.conversation
                     .filter((conversation) =>
                         conversation.conversationStatus.some(
                             (status) =>
@@ -58,7 +57,7 @@ export const handleChatSetup = (
                     )
                     .map((conversation) => conversation._id);
 
-                const mutedConversations = conversations
+                const mutedConversations = response?.conversation
                     .filter((conversation) =>
                         conversation.conversationStatus.some(
                             (status) =>
