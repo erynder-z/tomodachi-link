@@ -7,7 +7,6 @@ import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner
 import { fetchPosts } from '../../../../../utilities/fetchPosts';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { ImageType } from '../../../../../types/miscTypes';
-import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type MyPostListProps = {
@@ -29,11 +28,8 @@ export default function PostList({
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
     const [clickedGif, setClickedGif] = useState<string | null>(null);
 
-    const isImageLightboxMounted = clickedImage ? true : false;
-    const showImageLightbox = useDelayUnmount(isImageLightboxMounted, 150);
-
-    const isGifLightboxMounted = clickedGif ? true : false;
-    const showGifLightbox = useDelayUnmount(isGifLightboxMounted, 150);
+    const showImageLightbox = !!clickedImage;
+    const showGifLightbox = !!clickedGif;
 
     const shouldInitialize = useRef(true);
 

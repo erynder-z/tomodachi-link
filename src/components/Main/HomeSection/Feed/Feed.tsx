@@ -3,14 +3,11 @@ import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { fetchFeed } from '../../../../utilities/fetchFeed';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import LightBox from '../../../UiElements/LightBox/LightBox';
-import { ImageType } from '../../../../types/miscTypes';
 import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 import { MinimalPostType } from '../../../../types/postTypes';
-import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import FeedPostList from './FeedPostList/FeedPostList';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 type FreedProps = {
     friendList: string[];
@@ -27,16 +24,8 @@ export default function Feed({
     const [skip, setSkip] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [isFeedRefreshing, setIsFeedRefreshing] = useState<boolean>(false);
-    const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
-    const [clickedGif, setClickedGif] = useState<string | null>(null);
 
     const shouldInitialize = useRef(true);
-
-    const isImageLightboxMounted = clickedImage ? true : false;
-    const showImageLightbox = useDelayUnmount(isImageLightboxMounted, 150);
-
-    const isGifLightboxMounted = clickedGif ? true : false;
-    const showGifLightbox = useDelayUnmount(isGifLightboxMounted, 150);
 
     const handleGetFeed = async () => {
         if (authUser && token) {
@@ -93,25 +82,9 @@ export default function Feed({
             <div className="flex flex-col gap-4 pb-4">
                 <FeedPostList
                     posts={minimalPosts}
-                    setClickedImage={setClickedImage}
-                    setClickedGif={setClickedGif}
                     isFeedRefreshing={isFeedRefreshing}
                     onPostChange={refreshFeed}
                 />
-                <AnimatePresence>
-                    {showImageLightbox && (
-                        <LightBox
-                            image={clickedImage}
-                            onClose={() => setClickedImage(null)}
-                        />
-                    )}
-                    {showGifLightbox && (
-                        <LightBox
-                            image={clickedGif}
-                            onClose={() => setClickedGif(null)}
-                        />
-                    )}
-                </AnimatePresence>
             </div>
         </>
     );

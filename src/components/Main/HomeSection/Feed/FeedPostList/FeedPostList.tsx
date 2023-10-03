@@ -1,23 +1,28 @@
+import { useState } from 'react';
 import { MinimalPostType } from '../../../../../types/postTypes';
-import PostItem from '../../../Post/PostItem/PostItem';
 import { ImageType } from '../../../../../types/miscTypes';
+import PostItem from '../../../Post/PostItem/PostItem';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
+import LightBox from '../../../../UiElements/LightBox/LightBox';
+import { AnimatePresence } from 'framer-motion';
 
 type FeedPostListProps = {
     posts: MinimalPostType[];
-    setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
-    setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
     isFeedRefreshing: boolean;
     onPostChange: () => Promise<void>;
 };
 
 export default function FeedPostList({
     posts,
-    setClickedImage,
-    setClickedGif,
     isFeedRefreshing,
     onPostChange,
 }: FeedPostListProps) {
+    const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
+    const [clickedGif, setClickedGif] = useState<string | null>(null);
+
+    const showImageLightbox = !!clickedImage;
+    const showGifLightbox = !!clickedGif;
+
     const HasFeedContent = posts.map((post) => (
         <PostItem
             key={post._id}
@@ -43,5 +48,23 @@ export default function FeedPostList({
     const FeedPostListContents =
         posts.length > 0 ? HasFeedContent : EmptyFeedContent;
 
-    return isFeedRefreshing ? LoadingContent : FeedPostListContents;
+    return (
+        <div className="flex flex-col gap-4 pb-4">
+            {isFeedRefreshing ? LoadingContent : FeedPostListContents}
+            <AnimatePresence>
+                {showImageLightbox && (
+                    <LightBox
+                        image={clickedImage}
+                        onClose={() => setClickedImage(null)}
+                    />
+                )}
+                {showGifLightbox && (
+                    <LightBox
+                        image={clickedGif}
+                        onClose={() => setClickedGif(null)}
+                    />
+                )}
+            </AnimatePresence>
+        </div>
+    );
 }
