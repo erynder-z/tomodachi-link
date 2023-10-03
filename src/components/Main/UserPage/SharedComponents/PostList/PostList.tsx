@@ -73,6 +73,8 @@ export default function PostList({
     const PostListContent =
         postItemsList.length > 0 ? (
             postItemsList
+        ) : loading ? (
+            ''
         ) : (
             <span className="text-sm font-medium text-center">
                 Nothing to show yet!
