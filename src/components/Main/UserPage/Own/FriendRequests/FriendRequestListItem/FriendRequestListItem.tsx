@@ -4,12 +4,11 @@ import { MinimalUserTypes } from '../../../../../../types/otherUserTypes';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
-import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
-import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';
 import { useNavigate } from 'react-router-dom';
 import { convertDatabaseImageToBase64 } from '../../../../../../utilities/convertDatabaseImageToBase64';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import { backendFetch } from '../../../../../../utilities/backendFetch';
+import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
 
 type FriendRequestListItemProps = {
     friendRequestUserId: string;
@@ -41,14 +40,16 @@ export default function FriendRequestListItem({
         if (currentUserData && token) {
             const currentUserId = currentUserData?._id;
             const otherUserId = friendRequestData._id;
+            const typeOfRequest = 'accept';
 
-            acceptFriendRequest(
+            handleFriendRequest(
                 token,
                 currentUserId,
                 otherUserId,
+                setInfo,
+                typeOfRequest,
                 handleFetchUserData,
-                handleFetchFriendData,
-                setInfo
+                handleFetchFriendData
             );
         }
     };
@@ -57,14 +58,16 @@ export default function FriendRequestListItem({
         if (currentUserData && token) {
             const currentUserId = currentUserData?._id;
             const otherUserId = friendRequestData._id;
+            const typeOfRequest = 'decline';
 
-            declineFriendRequest(
+            handleFriendRequest(
                 token,
                 currentUserId,
                 otherUserId,
+                setInfo,
+                typeOfRequest,
                 handleFetchUserData,
-                handleFetchFriendData,
-                setInfo
+                handleFetchFriendData
             );
         }
     };

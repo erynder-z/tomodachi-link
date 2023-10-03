@@ -1,5 +1,5 @@
 import { InfoType } from '../types/infoTypes';
-import { sendFriendRequest } from './sendFriendRequest';
+import { handleFriendRequest } from './handleFriendRequests';
 
 export const handleSendFriendRequest = (
     token: string | null,
@@ -9,7 +9,14 @@ export const handleSendFriendRequest = (
     setDisableButton?: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
     if (token && currentUserId && otherUserId) {
-        sendFriendRequest(token, currentUserId, otherUserId, setInfo);
+        const typeOfRequest = 'send';
+        handleFriendRequest(
+            token,
+            currentUserId,
+            otherUserId,
+            setInfo,
+            typeOfRequest
+        );
         if (setDisableButton) setDisableButton(true);
     }
 };

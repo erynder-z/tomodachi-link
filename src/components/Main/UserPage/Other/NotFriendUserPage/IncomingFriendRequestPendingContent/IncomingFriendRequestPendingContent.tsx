@@ -3,9 +3,8 @@ import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
-import { acceptFriendRequest } from '../../../../../../utilities/acceptFriendRequest';
-import { declineFriendRequest } from '../../../../../../utilities/declineFriendRequest';
 import { motion } from 'framer-motion';
+import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
 
 type IncomingFriendRequestPendingContentProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -26,26 +25,30 @@ export default function IncomingFriendRequestPendingContent({
 
     const handleAcceptFriendRequest = () => {
         if (currentUserId && token) {
-            acceptFriendRequest(
+            const typeOfRequest = 'accept';
+            handleFriendRequest(
                 token,
                 currentUserId,
                 otherUserId,
+                setInfo,
+                typeOfRequest,
                 handleFetchUserData,
-                handleFetchFriendData,
-                setInfo
+                handleFetchFriendData
             );
         }
     };
 
     const handleDeclineFriendRequest = () => {
         if (currentUserId && token) {
-            declineFriendRequest(
+            const typeOfRequest = 'decline';
+            handleFriendRequest(
                 token,
                 currentUserId,
                 otherUserId,
+                setInfo,
+                typeOfRequest,
                 handleFetchUserData,
-                handleFetchFriendData,
-                setInfo
+                handleFetchFriendData
             );
         }
     };
