@@ -5,13 +5,13 @@ import Feed from './Feed/Feed';
 import { FriendDataType } from '../../../types/friendTypes';
 import { motion } from 'framer-motion';
 
-type HomeSectionProps = {
+type FeedSectionProps = {
     isPaginationTriggered: boolean;
 };
 
-export default function HomeSection({
+export default function FeedSection({
     isPaginationTriggered,
-}: HomeSectionProps) {
+}: FeedSectionProps) {
     const { friendData } = useFriendData();
     const [friendList, setFriendList] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);

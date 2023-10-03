@@ -5,7 +5,7 @@ import Navbar from './components/UiElements/Navbar/Navbar';
 import Sidebar from './components/UiElements/Sidebar/Sidebar';
 import ProfileCard from './components/UiElements/ProfileCard/ProfileCard';
 import FriendSection from './components/Main/FriendSection/FriendSection';
-import HomeSection from './components/Main/HomeSection/HomeSection';
+import FeedSection from './components/Main/FeedSection/FeedSection';
 import useAuth from './hooks/useAuth';
 import useInfoCard from './hooks/useInfoCard';
 import RequireAuth from './components/Main/RequireAuth';
@@ -161,7 +161,7 @@ function App() {
                                 <Route
                                     path="/home"
                                     element={
-                                        <HomeSection
+                                        <FeedSection
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
