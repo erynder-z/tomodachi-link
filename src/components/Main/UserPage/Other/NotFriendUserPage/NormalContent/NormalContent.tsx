@@ -3,8 +3,8 @@ import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import { OtherUserPageDataTypes } from '../../../../../../types/otherUserTypes';
-import { handleSendFriendRequest } from '../../../../../../utilities/handleSendFriendRequest';
 import { motion } from 'framer-motion';
+import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
 
 type NormalContentProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -39,13 +39,17 @@ export default function NormalContent({
             return (
                 <button
                     onClick={() => {
-                        handleSendFriendRequest(
-                            token,
-                            currentUserId,
-                            otherUserId,
-                            setInfo,
-                            setDisableButton
-                        );
+                        if (token && currentUserId) {
+                            const typeOfRequest = 'send';
+                            setDisableButton(true);
+                            handleFriendRequest(
+                                token,
+                                currentUserId,
+                                otherUserId,
+                                setInfo,
+                                typeOfRequest
+                            );
+                        }
                     }}
                     className="bg-blue-500 text-white px-2 py-1 hover:bg-blue-600"
                 >

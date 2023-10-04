@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { handleSendFriendRequest } from '../../../../../utilities/handleSendFriendRequest';
 import useAuth from '../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { TbLink, TbUserPlus } from 'react-icons/tb';
 import { backendFetch } from '../../../../../utilities/backendFetch';
+import { handleFriendRequest } from '../../../../../utilities/handleFriendRequests';
 
 type SuggestionCardFriendMenuProps = {
     id: string;
@@ -88,13 +88,17 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     const CanSendFriendRequestContent = (
         <button
             onClick={() => {
-                handleSendFriendRequest(
-                    token,
-                    currentUserId,
-                    otherUserId,
-                    setInfo,
-                    setDisableFriendRequestButton
-                );
+                if (token && currentUserId) {
+                    const typeOfRequest = 'send';
+                    setDisableFriendRequestButton(true);
+                    handleFriendRequest(
+                        token,
+                        currentUserId,
+                        otherUserId,
+                        setInfo,
+                        typeOfRequest
+                    );
+                }
             }}
             className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight"
         >

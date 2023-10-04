@@ -3,10 +3,10 @@ import { TbUserMinus } from 'react-icons/tb';
 import useAuth from '../../../../../../hooks/useAuth';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
-import { unfriendUser } from '../../../../../../utilities/unfriendUser';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import ConfirmationOverlay from '../../../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
 import useDelayUnmount from '../../../../../../hooks/useDelayUnmount';
+import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
 
 type UnfriendButtonProps = {
     unfriendUserId: string;
@@ -34,13 +34,15 @@ export default function UnfriendButton({
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
             onConfirm={() => {
                 if (token && currentUserData) {
-                    unfriendUser(
+                    const requestType = 'unfriend';
+                    handleFriendRequest(
                         token,
                         currentUserData?._id,
                         unfriendUserId,
+                        setInfo,
+                        requestType,
                         handleFetchUserData,
-                        handleFetchFriendData,
-                        setInfo
+                        handleFetchFriendData
                     );
                 }
             }}

@@ -5,13 +5,13 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import useDelayUnmount from '../../../../hooks/useDelayUnmount';
 import ConfirmationOverlay from '../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
-import { unfriendUser } from '../../../../utilities/unfriendUser';
 import useFriendData from '../../../../hooks/useFriendData';
 import FriendInfoCard from './FriendInfoCard/FriendInfoCard';
 import FriendCardMenu from './FriendCardMenu/FriendCardMenu';
 import { TbDotsDiagonal, TbFoldUp } from 'react-icons/tb';
 import { motion } from 'framer-motion';
 import { ChatConversationType } from '../../../../types/chatTypes';
+import { handleFriendRequest } from '../../../../utilities/handleFriendRequests';
 
 type FriendCardProps = {
     friendData: MinimalUserTypes;
@@ -48,13 +48,15 @@ export default function FriendCard({
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
             onConfirm={() => {
                 if (token && currentUserData) {
-                    unfriendUser(
+                    const requestType = 'unfriend';
+                    handleFriendRequest(
                         token,
                         currentUserData?._id,
                         _id,
+                        setInfo,
+                        requestType,
                         handleFetchUserData,
-                        handleFetchFriendData,
-                        setInfo
+                        handleFetchFriendData
                     );
                 }
             }}
