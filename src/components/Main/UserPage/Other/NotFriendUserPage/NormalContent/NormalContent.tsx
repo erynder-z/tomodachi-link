@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useAuth from '../../../../../../hooks/useAuth';
-import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../../hooks/useInfoCard';
 import { OtherUserPageDataTypes } from '../../../../../../types/otherUserTypes';
 import { motion } from 'framer-motion';
@@ -19,13 +18,11 @@ export default function NormalContent({
     isFriendRequestPending,
 }: NormalContentProps) {
     const { token } = useAuth();
-    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const [disableButton, setDisableButton] = useState<boolean>(
         isFriendRequestPending.outgoing
     );
     const { firstName, lastName } = userPageData || {};
-    const currentUserId = currentUserData?._id;
     const otherUserId = userPageData._id;
 
     const getButton = () => {
@@ -39,12 +36,11 @@ export default function NormalContent({
             return (
                 <button
                     onClick={() => {
-                        if (token && currentUserId) {
+                        if (token) {
                             const typeOfRequest = 'send';
                             setDisableButton(true);
                             handleFriendRequest(
                                 token,
-                                currentUserId,
                                 otherUserId,
                                 setInfo,
                                 typeOfRequest

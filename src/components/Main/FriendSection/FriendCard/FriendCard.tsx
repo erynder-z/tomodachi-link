@@ -25,7 +25,7 @@ export default function FriendCard({
     const { userpic, firstName, lastName, _id } = friendData;
 
     const { token } = useAuth();
-    const { currentUserData, handleFetchUserData } = useCurrentUserData();
+    const { handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoCard();
     const [shouldConfirmDialogShow, setShouldConfirmDialogShow] =
@@ -47,11 +47,10 @@ export default function FriendCard({
             shouldConfirmDialogShow={shouldConfirmDialogShow}
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
             onConfirm={() => {
-                if (token && currentUserData) {
+                if (token) {
                     const requestType = 'unfriend';
                     handleFriendRequest(
                         token,
-                        currentUserData?._id,
                         _id,
                         setInfo,
                         requestType,

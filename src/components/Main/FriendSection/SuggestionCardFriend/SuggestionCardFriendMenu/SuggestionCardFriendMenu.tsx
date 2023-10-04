@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuth from '../../../../../hooks/useAuth';
-import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { TbLink, TbUserPlus } from 'react-icons/tb';
 import { backendFetch } from '../../../../../utilities/backendFetch';
@@ -16,7 +15,6 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     id,
 }: SuggestionCardFriendMenuProps) => {
     const { token } = useAuth();
-    const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
     const [isFriendRequestPending, setIsFriendRequestPending] = useState({
         incoming: false,
@@ -25,8 +23,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     const [disableFriendRequestButton, setDisableFriendRequestButton] =
         useState(false);
     const shouldFetchFriendData = useRef(true);
-
-    const { _id: currentUserId } = currentUserData || {};
+ 
     const otherUserId = id;
 
     const fetchUserData = async () => {
@@ -88,12 +85,11 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     const CanSendFriendRequestContent = (
         <button
             onClick={() => {
-                if (token && currentUserId) {
+                if (token) {
                     const typeOfRequest = 'send';
                     setDisableFriendRequestButton(true);
                     handleFriendRequest(
                         token,
-                        currentUserId,
                         otherUserId,
                         setInfo,
                         typeOfRequest

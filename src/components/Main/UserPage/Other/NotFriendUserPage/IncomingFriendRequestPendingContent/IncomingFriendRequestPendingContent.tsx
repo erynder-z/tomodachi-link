@@ -14,21 +14,19 @@ export default function IncomingFriendRequestPendingContent({
     userPageData,
 }: IncomingFriendRequestPendingContentProps) {
     const { token } = useAuth();
-    const { currentUserData, handleFetchUserData } = useCurrentUserData();
+    const { handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoCard();
 
     const { _id, firstName, lastName } = userPageData || {};
 
-    const currentUserId = currentUserData?._id;
     const otherUserId = _id;
 
     const handleAcceptFriendRequest = () => {
-        if (currentUserId && token) {
+        if (token) {
             const typeOfRequest = 'accept';
             handleFriendRequest(
                 token,
-                currentUserId,
                 otherUserId,
                 setInfo,
                 typeOfRequest,
@@ -39,11 +37,10 @@ export default function IncomingFriendRequestPendingContent({
     };
 
     const handleDeclineFriendRequest = () => {
-        if (currentUserId && token) {
+        if (token) {
             const typeOfRequest = 'decline';
             handleFriendRequest(
                 token,
-                currentUserId,
                 otherUserId,
                 setInfo,
                 typeOfRequest,

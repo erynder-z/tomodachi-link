@@ -16,7 +16,7 @@ export default function UnfriendButton({
     unfriendUserId,
 }: UnfriendButtonProps) {
     const { token } = useAuth();
-    const { currentUserData, handleFetchUserData } = useCurrentUserData();
+    const { handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoCard();
     const [shouldConfirmDialogShow, setShouldConfirmDialogShow] =
@@ -33,11 +33,10 @@ export default function UnfriendButton({
             shouldConfirmDialogShow={shouldConfirmDialogShow}
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
             onConfirm={() => {
-                if (token && currentUserData) {
+                if (token) {
                     const requestType = 'unfriend';
                     handleFriendRequest(
                         token,
-                        currentUserData?._id,
                         unfriendUserId,
                         setInfo,
                         requestType,

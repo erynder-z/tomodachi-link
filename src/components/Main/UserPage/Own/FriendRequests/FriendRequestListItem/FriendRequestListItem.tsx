@@ -21,7 +21,7 @@ export default function FriendRequestListItem({
 }: FriendRequestListItemProps) {
     const navigate = useNavigate();
     const { token } = useAuth();
-    const { currentUserData, handleFetchUserData } = useCurrentUserData();
+    const { handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
     const { setInfo } = useInfoCard();
     const [loading, setLoading] = useState<boolean>(true);
@@ -37,14 +37,12 @@ export default function FriendRequestListItem({
         convertDatabaseImageToBase64(friendRequestData?.userpic) || '';
 
     const handleAcceptFriendRequest = () => {
-        if (currentUserData && token) {
-            const currentUserId = currentUserData?._id;
+        if (token) {
             const otherUserId = friendRequestData._id;
             const typeOfRequest = 'accept';
 
             handleFriendRequest(
                 token,
-                currentUserId,
                 otherUserId,
                 setInfo,
                 typeOfRequest,
@@ -55,14 +53,12 @@ export default function FriendRequestListItem({
     };
 
     const handleDeclineFriendRequest = () => {
-        if (currentUserData && token) {
-            const currentUserId = currentUserData?._id;
+        if (token) {
             const otherUserId = friendRequestData._id;
             const typeOfRequest = 'decline';
 
             handleFriendRequest(
                 token,
-                currentUserId,
                 otherUserId,
                 setInfo,
                 typeOfRequest,

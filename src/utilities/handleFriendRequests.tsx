@@ -3,7 +3,6 @@ import { handleFetchErrors } from './handleFetchErrors';
 
 export const handleFriendRequest = async (
     token: string,
-    currentUserId: string,
     otherUserId: string,
     setInfo: (info: InfoType | null) => void,
     requestType: string,
@@ -13,7 +12,6 @@ export const handleFriendRequest = async (
     try {
         const serverURL = import.meta.env.VITE_SERVER_URL;
         const requestBody = {
-            currentUserId,
             otherUserId,
         };
 
