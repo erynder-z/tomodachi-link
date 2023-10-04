@@ -53,7 +53,52 @@ export default function NewPostInput({
         }
     };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const submitFormData = async (formData: FormData) => {
+        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const response = await fetch(`${serverURL}/api/v1/post`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        if (response.ok) {
+            setInfo({
+                typeOfInfo: 'good',
+                message: 'Post created successfully!',
+                icon: '👍',
+            });
+            setPostText('');
+            setSelectedImage(undefined);
+            setYoutubeID(undefined);
+            setGif(undefined);
+            if (handleRefreshPosts) {
+                handleRefreshPosts();
+                if (handleRefreshPics && hasImage) {
+                    handleRefreshPics();
+                }
+            }
+        } else {
+            const data = await response.json();
+            const errorMessages = data.errors;
+            const message = errorMessages
+                .map((error: { msg: string }) => error.msg)
+                .join(', ');
+
+            setInfo({
+                typeOfInfo: 'bad',
+                message: message,
+                icon: '👻',
+            });
+
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+    };
+
+    const handleFormSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ) => {
         event.preventDefault();
 
         if (token) {
@@ -73,48 +118,7 @@ export default function NewPostInput({
                     formData.append('gifUrl', gif.url);
                 }
 
-                const serverURL = import.meta.env.VITE_SERVER_URL;
-                const response = await fetch(`${serverURL}/api/v1/post`, {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    setInfo({
-                        typeOfInfo: 'good',
-                        message: 'Post created successfully!',
-                        icon: '👍',
-                    });
-                    setPostText('');
-                    setSelectedImage(undefined);
-                    setYoutubeID(undefined);
-                    setGif(undefined);
-                    if (handleRefreshPosts) {
-                        handleRefreshPosts();
-                        if (handleRefreshPics && hasImage) {
-                            handleRefreshPics();
-                        }
-                    }
-                } else {
-                    const data = await response.json();
-                    const errorMessages = data.errors;
-                    const message = errorMessages
-                        .map((error: { msg: string }) => error.msg)
-                        .join(', ');
-
-                    setInfo({
-                        typeOfInfo: 'bad',
-                        message: message,
-                        icon: '👻',
-                    });
-
-                    throw new Error(
-                        `Error: ${response.status} ${response.statusText}`
-                    );
-                }
+                await submitFormData(formData);
             } catch (error) {
                 setInfo({
                     typeOfInfo: 'bad',
@@ -125,6 +129,10 @@ export default function NewPostInput({
 
             setIsSubmitting(false);
         }
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        handleFormSubmit(event);
     };
 
     const FormContent = (
