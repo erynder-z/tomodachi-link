@@ -44,7 +44,7 @@ function FriendList({ friendData, userId }: FriendListProps) {
                     ? RandomFriendList
                     : NoFriendsContent}
             </div>
-            {numberOfFriends > 9 && SeeAllFriendsButton}
+            {numberOfFriends > 2 && SeeAllFriendsButton}
         </div>
     );
 }

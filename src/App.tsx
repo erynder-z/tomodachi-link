@@ -233,13 +233,7 @@ function App() {
                                 />
                                 <Route
                                     path="/users/:id/friends/list"
-                                    element={
-                                        <AllFriendsPage
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
+                                    element={<AllFriendsPage />}
                                 />
                             </Route>
                         </Routes>

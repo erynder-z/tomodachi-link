@@ -2,13 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { FriendDataType } from '../../../../../types/friendTypes';
 import AllFiendsPageItem from './AllFriendsPageItem/AllFriendsPageItem';
 
-type AllFriendsPageProps = {
-    isPaginationTriggered: boolean;
-};
-
-export default function AllFriendsPage({
-    isPaginationTriggered,
-}: AllFriendsPageProps) {
+export default function AllFriendsPage() {
     const location = useLocation();
     const friendData = location.state?.friendData; // receive FriendData from Router-Link in "FriendList" component.
     // type: friendData: FriendDataType[] | null;
