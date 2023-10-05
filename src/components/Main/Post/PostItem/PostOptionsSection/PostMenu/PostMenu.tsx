@@ -15,7 +15,7 @@ export default function PostMenu({
     const EditButton = (
         <button
             onClick={handleEditButtonClick}
-            className="flex justify-around items-center gap-2 w-full p-4 hover:bg-red-300"
+            className="flex justify-around items-center w-full p-2 rounded-t text-regularText dark:text-regularTextDark bg-cardDark/20 dark:bg-card/20 hover:bg-highlight dark:hover:bg-highlightDark duration-300"
         >
             <MdEdit size="1.25em" />
         </button>
@@ -24,7 +24,7 @@ export default function PostMenu({
     const DeleteButton = (
         <button
             onClick={handleDeleteButtonClick}
-            className="flex justify-center items-center gap-2 w-full p-4 hover:bg-red-300"
+            className="flex justify-center items-center w-full p-2 rounded-b text-regularText dark:text-regularTextDark bg-cardDark/20 dark:bg-card/20 hover:bg-highlight dark:hover:bg-highlightDark duration-300"
         >
             <MdOutlineDeleteForever size="1.25em" />
         </button>
@@ -38,9 +38,9 @@ export default function PostMenu({
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1.1, opacity: 1 }}
                     exit={{ scale: 0, opacity: 0 }}
-                    className="absolute top-8 right-0 z-10 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark border-2 border-regularText dark:border-regularTextDark shadow-lg rounded lg:rounded-lg"
+                    className="absolute top-12 right-0 z-10 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg rounded"
                 >
-                    <ul className="flex flex-col gap-4 ">
+                    <ul className="flex flex-col">
                         <li>{EditButton}</li>
                         <li>{DeleteButton}</li>
                     </ul>

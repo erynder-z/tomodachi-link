@@ -114,7 +114,7 @@ export default function CommentInput({
     const SubmitButton = (
         <button
             disabled={isSubmitting || !commentText}
-            className={`flex justify-center items-center text-regularTextDark font-bold h-8 w-16 py-2 px-4 rounded ${
+            className={`flex justify-center items-center text-regularTextDark font-bold h-8 w-16 py-2 px-4 rounded duration-300 ${
                 !commentText || isSubmitting
                     ? 'bg-gray-500 hover:bg-gray-600'
                     : 'bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover'

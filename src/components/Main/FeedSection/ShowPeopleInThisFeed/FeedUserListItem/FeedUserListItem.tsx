@@ -19,7 +19,7 @@ export default function FeedUserListItem({
     return (
         <Link
             to={path}
-            className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
+            className="group flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 rounded lg:rounded-lg"
         >
             <img
                 loading="lazy"

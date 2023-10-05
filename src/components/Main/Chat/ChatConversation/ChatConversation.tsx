@@ -91,7 +91,7 @@ export default function ChatConversation({
     );
 
     const ChatConversationContent = (
-        <div className="flex items-center w-full gap-2 md:gap-4 p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-cBlue dark:hover:bg-cBlue rounded-3xl">
+        <div className="flex items-center w-full gap-2 md:gap-4 p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-3xl">
             <ChatConversationListItem listItemData={chatPartner} />
             <div
                 className="flex flex-col md:flex-row md:gap-2 "

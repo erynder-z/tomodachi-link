@@ -56,7 +56,7 @@ export default function ChatroomInput({
                 e.stopPropagation();
                 setShowEmojiPicker(true);
             }}
-            className="absolute bottom-4 right-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark"
+            className="absolute bottom-4 right-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             <FaRegSmileBeam />
         </button>
@@ -81,7 +81,7 @@ export default function ChatroomInput({
             className={`flex items-center justify-center w-24 h-full  text-regularTextDark text-sm ${
                 !inputMessage
                     ? 'bg-gray-500 hover:bg-gray-600'
-                    : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover'
+                    : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover duration-300'
             }`}
             title={inputMessage ? undefined : 'Please enter a message'}
         >

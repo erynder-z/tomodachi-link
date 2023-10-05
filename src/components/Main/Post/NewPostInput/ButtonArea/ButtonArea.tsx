@@ -29,7 +29,7 @@ export default function ButtonArea({
                     className="hidden"
                     onChange={handleImageSelect}
                 />
-                <FaRegImage className="text-back hover:text-blue-500" />
+                <FaRegImage className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300t" />
             </label>
             <button
                 onClick={(e) => {
@@ -41,7 +41,7 @@ export default function ButtonArea({
                             : ViewMode.YoutubeEmbed
                     );
                 }}
-                className="text-back hover:text-blue-500"
+                className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
             >
                 <FaYoutube />
             </button>
@@ -59,7 +59,7 @@ export default function ButtonArea({
                         : ViewMode.GifSelector
                 );
             }}
-            className="text-back hover:text-blue-500"
+            className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             <TbGif />
         </button>
@@ -76,7 +76,7 @@ export default function ButtonArea({
                         : ViewMode.EmojiPicker
                 );
             }}
-            className="text-back hover:text-blue-500"
+            className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             <FaRegSmileBeam />
         </button>
@@ -85,7 +85,7 @@ export default function ButtonArea({
     const SendButton = (
         <button
             disabled={isSubmitting}
-            className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm ${
+            className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm duration-300 ${
                 !postText || isSubmitting
                     ? 'bg-gray-500 hover:bg-gray-600'
                     : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover'
