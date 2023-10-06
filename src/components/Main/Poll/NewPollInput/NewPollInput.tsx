@@ -19,7 +19,7 @@ export default function NewPollInput() {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [pollData, setPollData] = useState<CreatedPollDataType>({
         question: '',
-        numberOfOptions: 1,
+        numberOfOptions: 2,
         options: [''],
         description: '',
         isFriendOnly: false,
