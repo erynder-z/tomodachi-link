@@ -91,10 +91,10 @@ export default function ChatConversation({
     );
 
     const ChatConversationContent = (
-        <div className="flex items-center w-full gap-2 md:gap-4 p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-3xl">
+        <div className="flex items-center w-full gap-2 p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-3xl">
             <ChatConversationListItem listItemData={chatPartner} />
             <div
-                className="flex flex-col md:flex-row md:gap-2 "
+                className="flex flex-col md:flex-row md:gap-4 md:w-16"
                 onClick={(e) => {
                     e.stopPropagation();
                     handleMuteConversation();
@@ -107,8 +107,9 @@ export default function ChatConversation({
                 )}
 
                 {hasUnreadMessage && !isConversationMuted && (
-                    <div className="flex justify-center items-center">
-                        <div className="absolute md:static bottom-1 right-7 w-3 h-3 bg-highlight dark:bg-highlightDark rounded-full animate-pulse" />
+                    <div className="absolute md:relative bottom-2 md:-bottom-0.5 right-7 md:right-1 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-regularText dark:bg-regularTextDark opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-highlight dark:bg-highlightDark"></span>
                     </div>
                 )}
             </div>

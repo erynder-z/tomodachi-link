@@ -18,7 +18,7 @@ export default function ChatConversationListItem({
     );
 
     const ChatConversationListItemContent = (
-        <div className="w-full flex gap-2">
+        <div className="w-full flex items-center gap-2">
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
@@ -27,7 +27,7 @@ export default function ChatConversationListItem({
                 )}`}
                 alt="User avatar"
             />
-            <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis">
+            <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis text-sm">
                 {firstName} {lastName}
             </div>
         </div>

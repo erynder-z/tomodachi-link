@@ -97,8 +97,9 @@ export default function Navbar({
                 <div className="relative">
                     <ChatSectionButton isChatDisabled={isChatDisabled} />
                     {shouldUnreadBubbleShow && (
-                        <div className="absolute -bottom-1 -right-1">
-                            <div className="w-3 h-3 bg-highlight dark:bg-highlightDark rounded-full animate-pulse   " />
+                        <div className="absolute -bottom-1 -right-1 flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-regularText dark:bg-regularTextDark opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-highlight dark:bg-highlightDark"></span>
                         </div>
                     )}
                 </div>
