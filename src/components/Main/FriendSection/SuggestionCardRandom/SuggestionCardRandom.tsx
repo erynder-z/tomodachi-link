@@ -30,7 +30,7 @@ export default function SuggestionCardRandom({
             }}
             transition={{ duration: 0.3 }}
         >
-            <TbFoldUp />
+            <TbFoldUp className="group-hover:scale-150 duration-300" />
         </motion.div>
     );
 
@@ -40,7 +40,7 @@ export default function SuggestionCardRandom({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
         >
-            <TbDotsDiagonal />
+            <TbDotsDiagonal className="group-hover:scale-150 duration-300" />
         </motion.div>
     );
 

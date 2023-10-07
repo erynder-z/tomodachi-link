@@ -39,10 +39,10 @@ export default function PostReactionSection({
             onClick={() =>
                 handleReactionClick('comments', handleShowCommentsClick)
             }
-            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+            className={`flex justify-center items-center gap-1  hover:text-highlight dark:hover:text-highlightDark transition-all ${
                 animateReaction === 'comments'
                     ? 'animate-postReactionAnimation'
-                    : ''
+                    : 'hover:animate-squish'
             }`}
             onAnimationEnd={handleAnimationEnd}
         >
@@ -55,10 +55,10 @@ export default function PostReactionSection({
             onClick={() =>
                 handleReactionClick('positive', handlePositiveReactionClick)
             }
-            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark  transition-all ${
                 animateReaction === 'positive'
                     ? 'animate-postReactionAnimation'
-                    : ''
+                    : 'hover:animate-squish'
             }`}
             onAnimationEnd={handleAnimationEnd}
         >
@@ -71,10 +71,10 @@ export default function PostReactionSection({
             onClick={() =>
                 handleReactionClick('negative', handleNegativeReactionClick)
             }
-            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+            className={`flex justify-center items-center gap-1 hover:text-highlight dark:hover:text-highlightDark transition-all ${
                 animateReaction === 'negative'
                     ? 'animate-postReactionAnimation'
-                    : ''
+                    : 'hover:animate-squish'
             }`}
             onAnimationEnd={handleAnimationEnd}
         >

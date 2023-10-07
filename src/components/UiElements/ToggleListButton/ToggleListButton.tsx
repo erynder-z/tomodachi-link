@@ -17,7 +17,7 @@ export default function ToggleListButton({
             }`}
             onClick={onToggleListButtonClick}
         >
-            <MdExpandMore size="2em" />
+            <MdExpandMore size="2em" className="hover:animate-squish" />
         </div>
     );
 }

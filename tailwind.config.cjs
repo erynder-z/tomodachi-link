@@ -109,6 +109,11 @@ module.exports = {
                         filter: 'invert(0%)',
                     },
                 },
+                squish: {
+                    '50%': {
+                        transform: 'scaleX(1.2) scaleY(0.8)',
+                    },
+                },
             },
             animation: {
                 inAnimation: 'inAnimation 150ms ease-in',
@@ -119,6 +124,7 @@ module.exports = {
                     'gradientBorderAnimation 5s ease infinite',
                 postReactionAnimation:
                     'postReactionAnimation 300ms ease-in-out',
+                squish: 'squish 300ms ease-in-out',
             },
         },
     },
