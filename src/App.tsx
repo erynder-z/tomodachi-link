@@ -156,10 +156,10 @@ function App() {
                                 <Route path="*" element={<NotFoundPage />} />
                                 <Route
                                     path="/"
-                                    element={<Navigate replace to="/home" />}
+                                    element={<Navigate replace to="/feed" />}
                                 />
                                 <Route
-                                    path="/home"
+                                    path="/feed"
                                     element={
                                         <FeedSection
                                             isPaginationTriggered={
@@ -204,7 +204,7 @@ function App() {
                                     path="/chat"
                                     element={
                                         accountType === 'guest' ? (
-                                            <Navigate replace to="/home" />
+                                            <Navigate replace to="/feed" />
                                         ) : (
                                             <Chat socket={socket.current} />
                                         )

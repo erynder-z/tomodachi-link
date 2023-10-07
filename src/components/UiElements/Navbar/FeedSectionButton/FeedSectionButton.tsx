@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export default function FeedSectionButton() {
     return (
         <NavLink
-            to="/home"
+            to="/feed"
             className={({ isActive }) =>
                 isActive
                     ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
