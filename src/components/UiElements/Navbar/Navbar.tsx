@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import FriendSectionButton from './FriendSectionButton/FriendSectionButton';
-import HomeSectionButton from './HomeSectionButton/HomeSectionButton';
+import FeedSectionButton from './FeedSectionButton/FeedSectionButton';
 import NavbarUserOptionsButton from './NavbarUserOptionsButton/NavbarUserOptionsButton';
 import SearchButton from './SearchButton/SearchButton';
 import ChatSectionButton from './ChatSectionButton/ChatSectionButton';
@@ -91,7 +91,7 @@ export default function Navbar({
     return (
         <div className="h-12 lg:h-full w-screen md:w-full flex justify-between items-center lg:items-start px-2 py-1 lg:py-2 bg-navbar dark:bg-navbarDark text-regularText dark:text-regularTextDark">
             <div className="flex lg:flex-col justify-center items-center gap-4">
-                <HomeSectionButton />
+                <FeedSectionButton />
                 <FriendSectionButton />
                 <PollSectionButton />
                 <div className="relative">

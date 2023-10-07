@@ -1,7 +1,7 @@
 import { MdDynamicFeed } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
-export default function HomeSectionButton() {
+export default function FeedSectionButton() {
     return (
         <NavLink
             to="/home"
