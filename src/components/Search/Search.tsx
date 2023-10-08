@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import { MinimalUserTypes } from '../../types/otherUserTypes';
-import UserListItem from '../Main/UserList/UserListItem/UserListItem';
 import LoadingSpinner from '../UiElements/LoadingSpinner/LoadingSpinner';
+import {
+    SearchResultPollType,
+    SearchResultPostType,
+    SearchResultType,
+    SearchResultUserType,
+} from '../../types/searchTypes';
+import SearchResultsUserListItem from './SearchResults/SearchResultsUserItem/SearchResultsUserItem';
+import SearchResultsPostItem from './SearchResults/SearchResultsPostItem/SearchResultsPostItem';
+import SearchResultsPollItem from './SearchResults/SearchResultsPollItem/SearchResultsPollItem';
 
 type SearchPropsType = {
     handleCloseButtonClick: () => void;
@@ -11,7 +18,7 @@ type SearchPropsType = {
 export default function Search({ handleCloseButtonClick }: SearchPropsType) {
     const { token } = useAuth();
     const [searchText, setSearchText] = useState<string>('');
-    const [searchResults, setSearchResults] = useState<MinimalUserTypes[]>([]);
+    const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +28,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 setIsLoading(true);
                 const serverURL = import.meta.env.VITE_SERVER_URL;
                 const response = await fetch(
-                    `${serverURL}/api/v1/users?query=${searchText}`,
+                    `${serverURL}/api/v1/search?query=${searchText}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -52,6 +59,31 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
         setSearchResults([]);
     };
 
+    const getSearchResultComponent = (resultItem: SearchResultType) => {
+        switch (resultItem.type) {
+            case 'user':
+                return (
+                    <SearchResultsUserListItem
+                        itemData={resultItem.data as SearchResultUserType}
+                    />
+                );
+            case 'post':
+                return (
+                    <SearchResultsPostItem
+                        itemData={resultItem.data as SearchResultPostType}
+                    />
+                );
+            case 'poll':
+                return (
+                    <SearchResultsPollItem
+                        itemData={resultItem.data as SearchResultPollType}
+                    />
+                );
+            default:
+                return null;
+        }
+    };
+
     const SearchInput = (
         <>
             <input
@@ -67,7 +99,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 htmlFor="searchInput"
                 className="absolute text-sm text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-highlight dark:peer-focus:text-highlightDark peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-                Search for user
+                Search for user, post or poll
             </label>
         </>
     );
@@ -83,9 +115,9 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
             className="w-full p-2 bg-slate-800/80 peer-focus:bg-white/70 dark:peer-focus:bg-white/20 overflow-auto ${
             max-h-[50vh]"
         >
-            {searchResults?.map((user: MinimalUserTypes) => (
-                <div key={user._id} onClick={handleCloseButtonClick}>
-                    <UserListItem listItemData={user} />
+            {searchResults?.map((resultItem: SearchResultType) => (
+                <div key={resultItem.data._id} onClick={handleCloseButtonClick}>
+                    {getSearchResultComponent(resultItem)}
                 </div>
             ))}
         </ul>
