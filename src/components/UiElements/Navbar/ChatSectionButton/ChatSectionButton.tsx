@@ -22,7 +22,7 @@ export default function ChatSectionButton({
                 to="/chat"
                 className={({ isActive }) =>
                     isActive
-                        ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
+                        ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full hover:scale-110 duration-300'
                         : 'text-regularText dark:text-regularTextDark flex self-center cursor-pointer h-6 w-full'
                 }
             >
