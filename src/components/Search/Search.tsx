@@ -71,6 +71,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 return (
                     <SearchResultsPostItem
                         itemData={resultItem.data as SearchResultPostType}
+                        queryString={searchText}
                     />
                 );
             case 'poll':
