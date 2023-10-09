@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
 import { SearchResultUserType } from '../../../../types/searchTypes';
+import { MdOutlineAccountBox } from 'react-icons/md';
 
 type SearchResultsUserListItem = {
     itemData: SearchResultUserType;
@@ -29,7 +30,12 @@ export default function SearchResultsUserListItem({
                     {firstName} {lastName}
                 </div>
             </div>
-            <div>User</div>
+            <div>
+                <MdOutlineAccountBox
+                    size="1.25em"
+                    className="text-sky-700 dark:text-sky-400"
+                />
+            </div>
         </Link>
     );
 }

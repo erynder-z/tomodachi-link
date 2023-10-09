@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { SearchResultPollType } from '../../../../types/searchTypes';
 import { getExcerptWithHighlightedQuery } from '../../../../utilities/getExcerptWithHighlightedQuery ';
+import { MdPieChartOutlined } from 'react-icons/md';
 
 type SearchResultsPollItemType = {
     itemData: SearchResultPollType;
@@ -24,7 +25,12 @@ export default function SearchResultsPollItem({
                     {getExcerptWithHighlightedQuery(pollText, queryString)}
                 </div>
             </div>
-            <div>Poll</div>
+            <div>
+                <MdPieChartOutlined
+                    size="1.25em"
+                    className="text-amber-700 dark:text-amber-400"
+                />
+            </div>
         </Link>
     );
 }

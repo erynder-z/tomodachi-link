@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { SearchResultPostType } from '../../../../types/searchTypes';
 import { getExcerptWithHighlightedQuery } from '../../../../utilities/getExcerptWithHighlightedQuery ';
+import { MdOutlineArticle } from 'react-icons/md';
 
 type SearchResultsPostItemType = {
     itemData: SearchResultPostType;
@@ -23,7 +24,12 @@ export default function SearchResultsPostItem({
                     {getExcerptWithHighlightedQuery(text, queryString)}
                 </div>
             </div>
-            <div>Post</div>
+            <div>
+                <MdOutlineArticle
+                    size="1.25em"
+                    className="text-lime-700 dark:text-lime-400"
+                />
+            </div>
         </Link>
     );
 }
