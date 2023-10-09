@@ -20,7 +20,7 @@ export default function NewPollInput() {
     const [pollData, setPollData] = useState<CreatedPollDataType>({
         question: '',
         numberOfOptions: 2,
-        options: [''],
+        options: ['', ''],
         description: '',
         isFriendOnly: false,
         allowComments: false,
