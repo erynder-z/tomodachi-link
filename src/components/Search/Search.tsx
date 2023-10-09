@@ -78,6 +78,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 return (
                     <SearchResultsPollItem
                         itemData={resultItem.data as SearchResultPollType}
+                        queryString={searchText}
                     />
                 );
             default:
