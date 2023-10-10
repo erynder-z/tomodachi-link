@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SearchResultPollType } from '../../../../types/searchTypes';
-import { getExcerptWithHighlightedQuery } from '../../../../utilities/getExcerptWithHighlightedQuery ';
+import { getExcerptWithHighlightedQuery } from '../../../../utilities/getExcerptWithHighlightedQuery';
 import { MdPieChartOutlined } from 'react-icons/md';
 
 type SearchResultsPollItemType = {

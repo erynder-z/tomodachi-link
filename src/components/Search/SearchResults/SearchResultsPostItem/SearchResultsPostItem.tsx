@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SearchResultPostType } from '../../../../types/searchTypes';
-import { getExcerptWithHighlightedQuery } from '../../../../utilities/getExcerptWithHighlightedQuery ';
+import { getExcerptWithHighlightedQuery } from '../../../../utilities/getExcerptWithHighlightedQuery';
 import { MdOutlineArticle } from 'react-icons/md';
 
 type SearchResultsPostItemType = {
