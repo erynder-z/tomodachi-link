@@ -42,9 +42,9 @@ export function NotificationBubblesContextProvider({
 
     useEffect(() => {
         setConversationsWithUnreadMessages((prevUnreadMessages) =>
-            prevUnreadMessages.filter((id) => id !== activeChat?._id)
+            prevUnreadMessages?.filter((id) => id !== activeChat?._id)
         );
-    }, [conversationsWithUnreadMessages.length]);
+    }, [conversationsWithUnreadMessages?.length]);
 
     const contextValue: NotificationBubblesContextProps = {
         conversationsWithUnreadMessages,

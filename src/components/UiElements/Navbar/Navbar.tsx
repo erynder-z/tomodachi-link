@@ -35,10 +35,10 @@ export default function Navbar({
     const menuRef = useRef<HTMLDivElement>(null);
 
     const isChatDisabled = currentUserData?.accountType === 'guest';
-    const unmutedConversations = conversationsWithUnreadMessages.filter(
+    const unmutedConversations = conversationsWithUnreadMessages?.filter(
         (conversation) => !mutedConversations.includes(conversation)
     );
-    const shouldUnreadBubbleShow = unmutedConversations.length > 0;
+    const shouldUnreadBubbleShow = unmutedConversations?.length > 0;
 
     const handleSearchButtonClick = () => {
         setShouldOverlaysShow({
