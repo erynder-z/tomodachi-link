@@ -47,10 +47,7 @@ export default function OverlayHandler({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <SearchOverlay
-                shouldSearchOverlayShow={shouldOverlaysShow.searchOverlay}
-                setShouldOverlaysShow={setShouldOverlaysShow}
-            />
+            <SearchOverlay setShouldOverlaysShow={setShouldOverlaysShow} />
         </motion.div>
     );
 
