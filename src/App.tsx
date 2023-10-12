@@ -33,6 +33,7 @@ import NewPollSection from './components/Main/PollSection/NewPollSection/NewPoll
 import PollList from './components/Main/PollSection/PollList/PollList';
 import useSeed from './hooks/useSeed';
 import SinglePostPage from './components/Main/Post/SinglePostPage/SinglePostPage';
+import SinglePollPage from './components/Main/Poll/SinglePollPage/SinglePollPage';
 
 function App() {
     const { isAuth, token } = useAuth();
@@ -239,6 +240,10 @@ function App() {
                                 <Route
                                     path="/post/:id"
                                     element={<SinglePostPage />}
+                                />
+                                <Route
+                                    path="/poll/:id"
+                                    element={<SinglePollPage />}
                                 />
                             </Route>
                         </Routes>
