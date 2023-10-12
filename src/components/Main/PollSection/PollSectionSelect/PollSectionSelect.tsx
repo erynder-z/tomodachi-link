@@ -11,9 +11,6 @@ export default function PollSectionSelect() {
             transition={{ duration: 0.2 }}
             className="flex flex-col gap-4 min-h-[calc(100vh_-_3rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg"
         >
-            <h1 className="text-center text-xl font-bold mb-4">
-                Select your poison
-            </h1>
             <div className="flex justify-center gap-8 my-auto">
                 <Link
                     to="/polls/new"
