@@ -12,12 +12,12 @@ export default function SearchResultsPollItem({
     itemData,
     queryString,
 }: SearchResultsPollItemType) {
-    const { question, description } = itemData;
+    const { _id, question, description } = itemData;
     const pollText = `${question} ${description}`;
 
     return (
         <Link
-            to="/"
+            to={`/poll/${_id}`}
             className="flex justify-between w-full py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 rounded lg:rounded-lg text-xs md:text-base"
         >
             <div className="flex justify-center gap-4">
