@@ -118,7 +118,7 @@ export default function Chat({ socket }: ChatProps) {
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } grid-cols-[1fr,2fr] md:min-h-[calc(100vh_-_3rem)] gap-8 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
+                } grid-cols-[1fr,2fr] md:min-h-[calc(100vh_-_4rem)] gap-8 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
             >
                 <ChatConversationList
                     conversations={conversations}
