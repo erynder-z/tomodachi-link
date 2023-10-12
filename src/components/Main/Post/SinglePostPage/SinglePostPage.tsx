@@ -18,7 +18,7 @@ export default function SinglePostPage() {
 
     const postID = id || '';
 
-    const refreshPost = async () => {
+    const refreshPost = () => {
         setPostKeyModifier(postKeyModifier + 1);
     };
 
