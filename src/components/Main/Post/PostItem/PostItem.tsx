@@ -115,52 +115,64 @@ export default React.memo(function PostItem({
             viewport={{ once: true }}
             className="font-roboto flex flex-col gap-4 p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
         >
-            <div className="flex justify-between">
-                <PostUserInfoSection
-                    userPic={userPic}
-                    displayName={displayName}
-                />
-                <DateSection date={date} />
-                {isPostFromCurrentUser && (
-                    <PostOptionsSection
-                        postDetails={postDetails}
-                        onPostChange={onPostChange}
+            {postDetails ? (
+                <>
+                    <div className="flex justify-between">
+                        <PostUserInfoSection
+                            userPic={userPic}
+                            displayName={displayName}
+                        />
+                        <DateSection date={date} />
+                        {isPostFromCurrentUser && (
+                            <PostOptionsSection
+                                postDetails={postDetails}
+                                onPostChange={onPostChange}
+                            />
+                        )}
+                    </div>
+                    <PostTextSection text={text} />
+                    {postImage && (
+                        <PostImageSection
+                            handleImageClick={handleImageClick}
+                            databaseImage={postDetails?.image}
+                            convertedImage={postImage}
+                        />
+                    )}
+                    {gifUrl && (
+                        <PostGifSection
+                            handleGifClick={handleGifClick}
+                            gifUrl={gifUrl}
+                        />
+                    )}
+                    {postVideoID && (
+                        <PostEmbeddedYoutubeVideoSection
+                            postVideoID={postVideoID}
+                        />
+                    )}
+                    <PostReactionSection
+                        handleShowCommentsClick={handleShowCommentsClick}
+                        numberOfComments={comments?.length}
+                        handlePositiveReactionClick={
+                            handlePositiveReactionClick
+                        }
+                        numberOfPositiveReactions={reactions?.positive}
+                        handleNegativeReactionClick={
+                            handleNegativeReactionClick
+                        }
+                        numberOfNegativeReactions={reactions?.negative}
                     />
-                )}
-            </div>
-            <PostTextSection text={text} />
-            {postImage && (
-                <PostImageSection
-                    handleImageClick={handleImageClick}
-                    databaseImage={postDetails?.image}
-                    convertedImage={postImage}
-                />
-            )}
-            {gifUrl && (
-                <PostGifSection
-                    handleGifClick={handleGifClick}
-                    gifUrl={gifUrl}
-                />
-            )}
-            {postVideoID && (
-                <PostEmbeddedYoutubeVideoSection postVideoID={postVideoID} />
-            )}
-            <PostReactionSection
-                handleShowCommentsClick={handleShowCommentsClick}
-                numberOfComments={comments?.length}
-                handlePositiveReactionClick={handlePositiveReactionClick}
-                numberOfPositiveReactions={reactions?.positive}
-                handleNegativeReactionClick={handleNegativeReactionClick}
-                numberOfNegativeReactions={reactions?.negative}
-            />
-            {showCommentSection && (
-                <PostCommentSection
-                    comments={postDetails?.comments}
-                    parentItemID={postID}
-                    getPostDetails={getPostDetails}
-                    handleShowCommentsClick={handleShowCommentsClick}
-                    shouldCommentSectionShow={shouldCommentSectionShow}
-                />
+                    {showCommentSection && (
+                        <PostCommentSection
+                            comments={postDetails?.comments}
+                            parentItemID={postID}
+                            getPostDetails={getPostDetails}
+                            handleShowCommentsClick={handleShowCommentsClick}
+                            shouldCommentSectionShow={shouldCommentSectionShow}
+                        />
+                    )}
+                </>
+            ) : (
+                <div className="text-center">Could not load post</div>
             )}
         </motion.div>
     );
