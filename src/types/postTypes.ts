@@ -22,5 +22,6 @@ export type PostType = {
 export type MinimalPostType = {
     _id: string;
     owner: { _id: string };
-    timestamp: Date;
+    createdAt: Date;
+    updatedAt: Date;
 };
