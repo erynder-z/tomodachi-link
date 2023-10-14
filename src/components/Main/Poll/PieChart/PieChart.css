@@ -1,0 +1,9 @@
+.container.hasHighlight .slice {
+    filter: saturate(50%);
+    opacity: 0.2;
+}
+
+.container.hasHighlight .slice:hover {
+    filter: saturate(100%);
+    opacity: 1;
+}
