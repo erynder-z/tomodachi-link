@@ -20,11 +20,16 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
     const [searchText, setSearchText] = useState<string>('');
     const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isDebouncing, setIsDebouncing] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const debounce = useRef<NodeJS.Timeout | null>(null);
+
+    const DEBOUNCE_TIMEOUT = 500;
 
     useEffect(() => {
         const fetchSearchResults = async () => {
             try {
+                setIsDebouncing(false);
                 setIsLoading(true);
                 const serverURL = import.meta.env.VITE_SERVER_URL;
                 const response = await fetch(
@@ -44,13 +49,19 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
             }
         };
 
-        if (searchText) {
-            fetchSearchResults();
-        } else {
-            setSearchResults([]);
+        if (debounce.current) {
+            clearTimeout(debounce.current);
         }
-    }, [searchText]);
 
+        setIsDebouncing(true);
+        debounce.current = setTimeout(() => {
+            if (searchText) {
+                fetchSearchResults();
+            } else {
+                setSearchResults([]);
+            }
+        }, DEBOUNCE_TIMEOUT);
+    }, [searchText]);
     const handleTextareaChange = (event: React.ChangeEvent<HTMLInputElement>) =>
         setSearchText(event.target.value);
 
@@ -153,7 +164,9 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
     return (
         <div className="relative z-0 px-4 w-full" ref={dropdownRef}>
             {SearchInput}
-            {isLoading
+            {isDebouncing && searchText
+                ? Loading
+                : isLoading
                 ? Loading
                 : searchResults.length > 0 && Array.isArray(searchResults)
                 ? SearchResults
