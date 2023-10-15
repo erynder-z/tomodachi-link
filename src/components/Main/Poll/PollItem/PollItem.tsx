@@ -22,6 +22,7 @@ import { CommentType } from '../../../../types/commentTypes';
 import TypeOfChartSwitcher from './TypeOfChartSwitcher/TypeOfChartSwitcher';
 import { BarChart } from '../BarChart/BarChart';
 import { useDimensions } from '../../../../hooks/useDimensions';
+import TotalVotesCounter from './TotalVotesCounter/TotalVotesCounter';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -133,6 +134,11 @@ export default function PollItem({ pollData }: PollItemProps) {
         })),
     };
 
+    const totalVotes = pollOptionsData.reduce(
+        (total, option) => total + option.selectionCount,
+        0
+    );
+
     const LoadingContent = (
         <div className="flex flex-col gap-4 h-[400px] md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
             <LoadingSpinner message="Updating poll data" />
@@ -179,6 +185,7 @@ export default function PollItem({ pollData }: PollItemProps) {
                 handleRefreshPollData={handleRefreshPollData}
             />
             {hasNoPollData ? HasNoPollContent : ChartContent}
+            {!hasNoPollData && <TotalVotesCounter totalVotes={totalVotes} />}
             {isFriendOnly && (
                 <FriendOnlyInfoSection displayName={displayName} />
             )}
