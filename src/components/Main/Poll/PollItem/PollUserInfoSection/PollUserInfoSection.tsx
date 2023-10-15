@@ -1,14 +1,29 @@
+import { Link } from 'react-router-dom';
+import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
+
 type PollUserInfoSectionProps = {
+    pollOwnerID: string;
     userPic: string;
     displayName: string;
 };
 
 export default function PollUserInfoSection({
+    pollOwnerID,
     userPic,
     displayName,
 }: PollUserInfoSectionProps) {
+    const { currentUserData } = useCurrentUserData();
+
+    const linkTarget =
+        pollOwnerID === currentUserData?._id
+            ? `/mypage`
+            : `/users/${pollOwnerID}`;
+
     return (
-        <div className="flex items-center gap-4">
+        <Link
+            to={linkTarget}
+            className="flex items-center gap-4 text-regularText dark:text-regularTextDark"
+        >
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
@@ -21,6 +36,6 @@ export default function PollUserInfoSection({
                     {displayName}
                 </span>
             </div>
-        </div>
+        </Link>
     );
 }

@@ -41,7 +41,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     );
     const [typeOfChart, setTypeOfChart] = useState<'PIE' | 'BAR'>('PIE');
     const { userpic, firstName, lastName } = pollData.owner;
-    const { _id, createdAt, isFriendOnly, allowComments } = pollData;
+    const { createdAt, isFriendOnly, allowComments } = pollData;
     const displayName = `${firstName} ${lastName} `;
     const userPic = convertDatabaseImageToBase64(userpic);
     const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
@@ -49,6 +49,9 @@ export default function PollItem({ pollData }: PollItemProps) {
         (option) => option.selectionCount === 0
     );
     const hasDescription = pollData.description;
+
+    const ownerID = pollData.owner._id;
+    const pollID = pollData._id;
 
     const wrapperDivRef = useRef<HTMLDivElement | null>(null);
     // Get the dimensions of the wrapper div.
@@ -58,7 +61,6 @@ export default function PollItem({ pollData }: PollItemProps) {
 
     const checkAnswerStatus = async () => {
         try {
-            const pollID = _id;
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
                 `${serverURL}/api/v1/poll/${pollID}/check`,
@@ -81,7 +83,6 @@ export default function PollItem({ pollData }: PollItemProps) {
         setLoading(true);
         checkAnswerStatus();
         try {
-            const pollID = _id;
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
                 `${serverURL}/api/v1/poll/${pollID}/details`,
@@ -186,6 +187,7 @@ export default function PollItem({ pollData }: PollItemProps) {
         >
             <div className="flex justify-between">
                 <PollUserInfoSection
+                    pollOwnerID={ownerID}
                     userPic={userPic}
                     displayName={displayName}
                 />
@@ -213,7 +215,7 @@ export default function PollItem({ pollData }: PollItemProps) {
             <PollCommentSection
                 areCommentsAllowed={allowComments}
                 comments={pollComments}
-                parentItemID={_id}
+                parentItemID={pollID}
                 handleRefreshPollData={handleRefreshPollData}
             />
         </motion.div>

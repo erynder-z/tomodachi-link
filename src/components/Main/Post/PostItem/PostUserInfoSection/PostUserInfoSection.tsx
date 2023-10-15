@@ -1,14 +1,29 @@
+import { Link } from 'react-router-dom';
+import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
+
 type PostUserInfoSectionProps = {
+    postOwnerID: string;
     userPic: string;
     displayName: string;
 };
 
 export default function PostUserInfoSection({
+    postOwnerID,
     userPic,
     displayName,
 }: PostUserInfoSectionProps) {
+    const { currentUserData } = useCurrentUserData();
+
+    const linkTarget =
+        postOwnerID === currentUserData?._id
+            ? `/mypage`
+            : `/users/${postOwnerID}`;
+
     return (
-        <div className="flex gap-4">
+        <Link
+            to={linkTarget}
+            className="flex gap-4 text-regularText dark:text-regularTextDark"
+        >
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
@@ -16,6 +31,6 @@ export default function PostUserInfoSection({
                 alt="User avatar"
             />
             <div className="font-bold">{displayName}</div>
-        </div>
+        </Link>
     );
 }

@@ -41,17 +41,17 @@ export default React.memo(function PostItem({
         useState<boolean>(false);
 
     const { createdAt, text, comments, reactions, gifUrl } = postDetails || {};
-    const { _id, firstName, lastName } = postDetails?.owner || {};
+    const { firstName, lastName } = postDetails?.owner || {};
 
     const isCommentSectionMounted = shouldCommentSectionShow;
     const showCommentSection = useDelayUnmount(isCommentSectionMounted, 150);
-
-    const isPostFromCurrentUser = authUser?.user._id === _id;
     const displayName = `${firstName} ${lastName} `;
     const userPic = convertDatabaseImageToBase64(postDetails?.owner?.userpic);
     const postImage = convertDatabaseImageToBase64(postDetails?.image);
     const postVideoID = postDetails?.embeddedVideoID;
+    const postOwnerID = postDetails?.owner._id;
     const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
+    const isPostFromCurrentUser = authUser?.user._id === postOwnerID;
 
     const shouldGetPostDetails = useRef(true);
 
@@ -119,6 +119,7 @@ export default React.memo(function PostItem({
                 <>
                     <div className="flex justify-between">
                         <PostUserInfoSection
+                            postOwnerID={postDetails?.owner._id}
                             userPic={userPic}
                             displayName={displayName}
                         />
