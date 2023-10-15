@@ -27,7 +27,7 @@ export default function PollCommentButton({
             onClick={() =>
                 handleReactionClick('comments', handleShowCommentsClick)
             }
-            className={`flex items-center gap-1  hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+            className={`flex items-center gap-2 hover:text-highlight dark:hover:text-highlightDark origin-left hover:scale-110 transition-all ${
                 animateReaction === 'comments'
                     ? 'animate-postReactionAnimation'
                     : ''

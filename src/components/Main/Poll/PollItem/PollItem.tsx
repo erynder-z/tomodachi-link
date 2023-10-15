@@ -153,9 +153,10 @@ export default function PollItem({ pollData }: PollItemProps) {
             <motion.div
                 key={typeOfChart}
                 ref={wrapperDivRef}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ x: 10, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
             >
                 {typeOfChart === 'PIE' ? (
                     <PieChart
