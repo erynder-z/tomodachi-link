@@ -29,7 +29,7 @@ export default function PollCommentSection({
         setShouldCommentsShow(!shouldCommentsShow);
     };
 
-    const NoCommentsAllowedContent = <MdOutlineCommentsDisabled />;
+    const NoCommentsAllowedContent = <MdOutlineCommentsDisabled size="1.5em" />;
 
     const CommentsAllowedContent = (
         <div className="flex flex-col w-full">

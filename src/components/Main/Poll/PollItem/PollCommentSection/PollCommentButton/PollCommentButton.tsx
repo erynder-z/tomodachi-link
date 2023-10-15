@@ -27,14 +27,14 @@ export default function PollCommentButton({
             onClick={() =>
                 handleReactionClick('comments', handleShowCommentsClick)
             }
-            className={`flex justify-center items-center gap-1 mr-auto hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
+            className={`flex items-center gap-1  hover:text-highlight dark:hover:text-highlightDark hover:scale-110 transition-all ${
                 animateReaction === 'comments'
                     ? 'animate-postReactionAnimation'
                     : ''
             }`}
             onAnimationEnd={handleAnimationEnd}
         >
-            <MdOutlineModeComment /> {numberOfComments}
+            <MdOutlineModeComment size="1.5em" /> {numberOfComments}
         </button>
     );
 }

@@ -3,7 +3,7 @@ import {
     RetrievedPollDataType,
     PollDataItemType,
 } from '../../../../types/pollTypes';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import format from 'date-fns/format';
 import PollUserInfoSection from './PollUserInfoSection/PollUserInfoSection';
@@ -147,14 +147,28 @@ export default function PollItem({ pollData }: PollItemProps) {
 
     const ChartContent = loading ? (
         LoadingContent
-    ) : typeOfChart === 'PIE' ? (
-        <div ref={wrapperDivRef}>
-            <PieChart dimensions={dimensions} data={pieChartData.data} />
-        </div>
     ) : (
-        <div ref={wrapperDivRef}>
-            <BarChart dimensions={dimensions} data={barChartData.data} />
-        </div>
+        <AnimatePresence mode="wait">
+            <motion.div
+                key={typeOfChart}
+                ref={wrapperDivRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+            >
+                {typeOfChart === 'PIE' ? (
+                    <PieChart
+                        dimensions={dimensions}
+                        data={pieChartData.data}
+                    />
+                ) : (
+                    <BarChart
+                        dimensions={dimensions}
+                        data={barChartData.data}
+                    />
+                )}
+            </motion.div>
+        </AnimatePresence>
     );
 
     const HasNoPollContent = loading ? (

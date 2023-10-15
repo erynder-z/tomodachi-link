@@ -1,4 +1,5 @@
 import { MdPieChartOutline, MdBarChart } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
 type TypeOfChartSwitcherProps = {
     typeOfChart: 'PIE' | 'BAR';
@@ -14,19 +15,27 @@ export default function TypeOfChartSwitcher({
     return (
         <button
             onClick={toggleChart}
-            className="flex justify-center md:justify-start items-center w-full hover:text-highlight dark:hover:text-highlightDark duration-300"
+            className="w-fit hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             {typeOfChart === 'PIE' ? (
-                <div className="flex items-center gap-4">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="flex items-center gap-4"
+                >
                     <MdBarChart
                         size="1.5em"
                         style={{ transform: 'rotate(90deg)' }}
                     />
-                </div>
+                </motion.div>
             ) : (
-                <div className="flex items-center gap-4">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="flex items-center gap-4"
+                >
                     <MdPieChartOutline size="1.5em" />
-                </div>
+                </motion.div>
             )}
         </button>
     );

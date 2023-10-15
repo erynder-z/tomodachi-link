@@ -28,7 +28,7 @@ export const PieChart = ({ dimensions, data }: PieChartProps) => {
 
     const radius =
         Math.min(chartWidth - 2 * MARGIN_X, chartHeight - 2 * MARGIN_Y) / 2;
-    const innerRadius = radius * 0.6;
+    const innerRadius = 0;
 
     const pieData = useMemo(() => {
         const pieGenerator = d3
