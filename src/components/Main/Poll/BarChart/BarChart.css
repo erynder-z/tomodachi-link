@@ -1,0 +1,9 @@
+.container.hasHighlight .bar {
+    filter: saturate(50%);
+    opacity: 0.2;
+}
+
+.container.hasHighlight .bar:hover {
+    filter: saturate(100%);
+    opacity: 1;
+}
