@@ -1,12 +1,13 @@
 import { useMemo, useRef } from 'react';
 import * as d3 from 'd3';
 import './PieChart.css';
-import { useDimensions } from '../../../../hooks/useDimensions';
 import { PollDataItemType } from '../../../../types/pollTypes';
 
 type PieChartProps = {
-    width: number;
-    height: number;
+    dimensions: {
+        width: number;
+        height: number;
+    };
     data: PollDataItemType[];
 };
 
@@ -14,15 +15,16 @@ const MARGIN_X = 150;
 const MARGIN_Y = 50;
 const LABEL_EXTENSION = 20;
 
+const FALLBACK_HEIGHT = 480;
+const FALLBACK_WIDTH = 640;
+
 const colorScale = d3.scaleOrdinal<string>().range(d3.schemeTableau10);
 
-export const PieChart = ({ width, height, data }: PieChartProps) => {
+export const PieChart = ({ dimensions, data }: PieChartProps) => {
     const svgRef = useRef<SVGGElement | null>(null);
-    const wrapperDivRef = useRef<HTMLDivElement | null>(null);
-    const dimensions = useDimensions(wrapperDivRef);
 
-    const chartWidth = dimensions.width || width;
-    const chartHeight = dimensions.height || height;
+    const chartWidth = dimensions.width || FALLBACK_WIDTH;
+    const chartHeight = dimensions.height || FALLBACK_HEIGHT;
 
     const radius =
         Math.min(chartWidth - 2 * MARGIN_X, chartHeight - 2 * MARGIN_Y) / 2;
@@ -113,7 +115,7 @@ export const PieChart = ({ width, height, data }: PieChartProps) => {
         }
     });
     return (
-        <div ref={wrapperDivRef}>
+        <div>
             <svg width={chartWidth} height={chartHeight}>
                 <g
                     transform={`translate(${chartWidth / 2}, ${

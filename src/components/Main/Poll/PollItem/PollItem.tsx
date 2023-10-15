@@ -19,6 +19,9 @@ import { handleFetchErrors } from '../../../../utilities/handleFetchErrors';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import PollCommentSection from './PollCommentSection/PollCommentSection';
 import { CommentType } from '../../../../types/commentTypes';
+import TypeOfChartSwitcher from './TypeOfChartSwitcher/TypeOfChartSwitcher';
+import { BarChart } from '../BarChart/BarChart';
+import { useDimensions } from '../../../../hooks/useDimensions';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -35,6 +38,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     const [pollComments, setPollComments] = useState<CommentType[]>(
         pollData.comments || []
     );
+    const [typeOfChart, setTypeOfChart] = useState<'PIE' | 'BAR'>('PIE');
     const { userpic, firstName, lastName } = pollData.owner;
     const { _id, createdAt, isFriendOnly, allowComments } = pollData;
     const displayName = `${firstName} ${lastName} `;
@@ -44,6 +48,10 @@ export default function PollItem({ pollData }: PollItemProps) {
         (option) => option.selectionCount === 0
     );
     const hasDescription = pollData.description;
+
+    const wrapperDivRef = useRef<HTMLDivElement | null>(null);
+    // Get the dimensions of the wrapper div.
+    const dimensions = useDimensions(wrapperDivRef);
 
     const shouldInitialize = useRef(true);
 
@@ -112,8 +120,13 @@ export default function PollItem({ pollData }: PollItemProps) {
     }, []);
 
     const pieChartData = {
-        width: 640,
-        height: 400,
+        data: pollOptionsData.map(({ nameOfOption, selectionCount }) => ({
+            nameOfOption,
+            selectionCount,
+        })),
+    };
+
+    const barChartData = {
         data: pollOptionsData.map(({ nameOfOption, selectionCount }) => ({
             nameOfOption,
             selectionCount,
@@ -128,12 +141,14 @@ export default function PollItem({ pollData }: PollItemProps) {
 
     const ChartContent = loading ? (
         LoadingContent
+    ) : typeOfChart === 'PIE' ? (
+        <div ref={wrapperDivRef}>
+            <PieChart dimensions={dimensions} data={pieChartData.data} />
+        </div>
     ) : (
-        <PieChart
-            width={pieChartData.width}
-            height={pieChartData.height}
-            data={pieChartData.data}
-        />
+        <div ref={wrapperDivRef}>
+            <BarChart dimensions={dimensions} data={barChartData.data} />
+        </div>
     );
 
     const HasNoPollContent = loading ? (
@@ -167,6 +182,13 @@ export default function PollItem({ pollData }: PollItemProps) {
             {isFriendOnly && (
                 <FriendOnlyInfoSection displayName={displayName} />
             )}
+            {!hasNoPollData && (
+                <TypeOfChartSwitcher
+                    typeOfChart={typeOfChart}
+                    setTypeOfChart={setTypeOfChart}
+                />
+            )}
+
             <PollCommentSection
                 areCommentsAllowed={allowComments}
                 comments={pollComments}
