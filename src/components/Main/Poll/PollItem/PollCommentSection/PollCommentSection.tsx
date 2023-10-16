@@ -48,13 +48,13 @@ export default function PollCommentSection({
                         shouldCommentsShow
                             ? 'animate-popInAnimation'
                             : 'animate-popOutAnimation'
-                    }  flex flex-col gap-4`}
+                    }  flex flex-col`}
                 >
                     <CommentList
                         comments={comments}
                         onToggleListButtonClick={handleShowCommentsClick}
                     />
-                    <div className="px-10">
+                    <div className="p-4">
                         <CommentInput
                             parentItemID={parentItemID}
                             handleRefreshPollData={handleRefreshPollData}
