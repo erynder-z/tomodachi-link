@@ -1,6 +1,7 @@
 import { TbSun, TbMoon } from 'react-icons/tb';
 import useTheme from '../../../../hooks/useTheme';
 import { ThemeType } from '../../../../types/miscTypes';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function ThemeToggle() {
     const { theme, setTheme } = useTheme();
@@ -11,15 +12,26 @@ export default function ThemeToggle() {
         localStorage.setItem('themeOdinBook', newTheme);
     };
 
-    const icon =
-        theme === 'dark' ? <TbSun size="1.5em" /> : <TbMoon size="1.5em" />;
+    const iconRotation = theme === 'dark' ? 180 : 0;
 
     return (
-        <div
-            onClick={toggleTheme}
-            className="cursor-pointer  hover:text-highlight dark:hover:text-highlightDark duration-300"
-        >
-            {icon}
-        </div>
+        <AnimatePresence initial={false}>
+            <motion.div
+                onClick={toggleTheme}
+                className="cursor-pointer hover:text-highlight dark:hover:text-highlightDark duration-300"
+            >
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: iconRotation }}
+                    transition={{ type: 'spring', stiffness: 100 }}
+                >
+                    {theme === 'dark' ? (
+                        <TbSun size="1.5em" />
+                    ) : (
+                        <TbMoon size="1.5em" />
+                    )}
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
     );
 }
