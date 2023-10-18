@@ -26,6 +26,7 @@ type EditPostInputProps = {
     shouldPostEditShow: boolean;
     setShouldPostEditShow: React.Dispatch<React.SetStateAction<boolean>>;
     onPostChange?: () => void;
+    setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function EditPostInput({
@@ -33,6 +34,7 @@ export default function EditPostInput({
     shouldPostEditShow,
     setShouldPostEditShow,
     onPostChange,
+    setShouldRefreshPictureList,
 }: EditPostInputProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
@@ -44,6 +46,7 @@ export default function EditPostInput({
     );
     const [youtubeID, setYoutubeID] = useState<string | undefined>(undefined);
     const [gif, setGif] = useState<TenorImage | undefined>(undefined);
+    const [hasImage, setHasImage] = useState(false);
     const [dbImage, setDbImage] = useState<ImageType | undefined>(
         postDetails?.image
     );
@@ -86,6 +89,12 @@ export default function EditPostInput({
             setGif(undefined);
             if (onPostChange) {
                 onPostChange();
+            }
+            if (
+                (setShouldRefreshPictureList && hasImage) ||
+                (setShouldRefreshPictureList && shouldImageBeDeleted)
+            ) {
+                setShouldRefreshPictureList(true);
             }
         } else {
             const data = await response.json();
@@ -162,8 +171,14 @@ export default function EditPostInput({
     ) => setPostText(event.target.value);
 
     const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0)
+        if (event.target.files && event.target.files.length > 0) {
             setSelectedImage(event.target.files[0]);
+            setHasImage(true);
+        } else {
+            setSelectedImage(undefined);
+            setHasImage(false);
+        }
+
         setShouldImageBeDeleted(false);
     };
 

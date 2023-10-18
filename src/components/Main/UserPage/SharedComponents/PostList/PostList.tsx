@@ -13,12 +13,14 @@ type MyPostListProps = {
     userId: string | undefined;
     isPaginationTriggered: boolean;
     onPostChange?: () => void;
+    setShouldRefreshPictureList: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function PostList({
     userId,
     isPaginationTriggered,
     onPostChange,
+    setShouldRefreshPictureList,
 }: MyPostListProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
@@ -72,6 +74,7 @@ export default function PostList({
             setClickedImage={setClickedImage}
             setClickedGif={setClickedGif}
             onPostChange={onPostChange}
+            setShouldRefreshPictureList={setShouldRefreshPictureList}
         />
     ));
 

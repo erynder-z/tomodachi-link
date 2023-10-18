@@ -11,12 +11,16 @@ import PostMenu from './PostMenu/PostMenu';
 
 type PostOptionsSectionProps = {
     postDetails: PostType | null;
+    hasImage: boolean;
     onPostChange?: () => void;
+    setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function PostOptionsSection({
     postDetails,
+    hasImage,
     onPostChange,
+    setShouldRefreshPictureList,
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
@@ -51,6 +55,8 @@ export default function PostOptionsSection({
                 message: 'Post deleted!',
                 icon: '🗑️',
             });
+            if (setShouldRefreshPictureList && hasImage)
+                setShouldRefreshPictureList(true);
             if (onPostChange) onPostChange();
         } catch (err: unknown) {
             setInfo({
@@ -108,6 +114,7 @@ export default function PostOptionsSection({
                     shouldPostEditShow={shouldPostEditShow}
                     setShouldPostEditShow={setShouldPostEditShow}
                     onPostChange={onPostChange}
+                    setShouldRefreshPictureList={setShouldRefreshPictureList}
                 />
             )}
         </div>

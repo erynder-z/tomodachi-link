@@ -51,6 +51,17 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
         }));
     };
 
+    const [shouldRefreshPictureList, setShouldRefreshPictureList] =
+        useState<boolean>(false);
+
+    useEffect(() => {
+        if (shouldRefreshPictureList === true) handleRefreshPics();
+
+        return () => {
+            setShouldRefreshPictureList(false);
+        };
+    }, [shouldRefreshPictureList]);
+
     useEffect(() => {
         if (Object.values(componentLoading).every((v) => v === false))
             setLoading(false);
@@ -121,6 +132,7 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
                     userId={userId}
                     isPaginationTriggered={isPaginationTriggered}
                     onPostChange={handleRefreshPosts}
+                    setShouldRefreshPictureList={setShouldRefreshPictureList}
                 />
             </div>
         </motion.div>

@@ -25,6 +25,7 @@ type PostItemProps = {
     setClickedImage: React.Dispatch<React.SetStateAction<ImageType | null>>;
     setClickedGif: React.Dispatch<React.SetStateAction<string | null>>;
     onPostChange?: () => void;
+    setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default React.memo(function PostItem({
@@ -32,6 +33,7 @@ export default React.memo(function PostItem({
     setClickedImage,
     setClickedGif,
     onPostChange,
+    setShouldRefreshPictureList,
 }: PostItemProps) {
     const { setInfo } = useInfoCard();
     const { token, authUser } = useAuth();
@@ -52,6 +54,7 @@ export default React.memo(function PostItem({
     const postOwnerID = postDetails?.owner._id;
     const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
     const isPostFromCurrentUser = authUser?.user._id === postOwnerID;
+    const hasImage = !!postImage;
 
     const shouldGetPostDetails = useRef(true);
 
@@ -127,7 +130,11 @@ export default React.memo(function PostItem({
                         {isPostFromCurrentUser && (
                             <PostOptionsSection
                                 postDetails={postDetails}
+                                hasImage={hasImage}
                                 onPostChange={onPostChange}
+                                setShouldRefreshPictureList={
+                                    setShouldRefreshPictureList
+                                }
                             />
                         )}
                     </div>
