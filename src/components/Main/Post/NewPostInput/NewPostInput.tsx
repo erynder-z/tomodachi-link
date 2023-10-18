@@ -77,6 +77,7 @@ export default function NewPostInput({
                 handleRefreshPosts();
                 if (handleRefreshPics && hasImage) {
                     handleRefreshPics();
+                    setHasImage(false);
                 }
             }
         } else {
