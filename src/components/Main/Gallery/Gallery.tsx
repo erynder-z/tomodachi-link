@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { ImageType } from '../../../types/miscTypes';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
@@ -92,7 +91,7 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
     }, []);
 
     const pictureList = pictures?.map((picture) => (
-        <div key={uuidv4()} className="relative">
+        <div key={picture.id} className="relative">
             <img
                 loading="lazy"
                 className="w-full h-auto aspect-square object-cover shadow-lg cursor-pointer"

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ImageType } from '../../../../../types/miscTypes';
@@ -78,7 +77,7 @@ export default function PictureList({
 
     const pictureList = pictures?.map((picture) => (
         <div
-            key={uuidv4()}
+            key={picture.id}
             className="relative flex rounded outline-highlight dark:outline-highlightDark hover:outline"
         >
             <img
