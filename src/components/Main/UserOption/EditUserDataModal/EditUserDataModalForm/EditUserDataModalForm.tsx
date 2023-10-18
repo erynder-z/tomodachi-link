@@ -90,6 +90,7 @@ export default function EditUserDataModalForm({
                 icon: '👍',
             });
             handleFetchUserData();
+            // Refresh the whole main component to display new user data
             generateNewSeed();
             setShouldOverlaysShow({
                 searchOverlay: false,
