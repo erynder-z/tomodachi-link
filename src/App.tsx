@@ -31,7 +31,6 @@ import { AnimatePresence } from 'framer-motion';
 import PollSectionSelect from './components/Main/PollSection/PollSectionSelect/PollSectionSelect';
 import NewPollSection from './components/Main/PollSection/NewPollSection/NewPollSection';
 import PollList from './components/Main/PollSection/PollList/PollList';
-import useSeed from './hooks/useSeed';
 import SinglePostPage from './components/Main/Post/SinglePostPage/SinglePostPage';
 import SinglePollPage from './components/Main/Poll/SinglePollPage/SinglePollPage';
 
@@ -39,7 +38,7 @@ function App() {
     const { isAuth, token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
-    const { seed } = useSeed();
+
     const { theme } = useTheme();
     const {
         setConversationsWithUnreadMessages,
@@ -60,8 +59,10 @@ function App() {
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
 
+    // Use this to force a re-render when user data changes
+    const userDataKey = `${currentUserData?._id} + ${currentUserData?.lastSeen}`;
+
     const accountType = currentUserData?.accountType;
-    const numberOfFriends = currentUserData?.friends.length;
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
@@ -137,13 +138,15 @@ function App() {
                 </nav>
             </div>
             <main
-                key={seed}
                 id="container-main"
                 className="relative block md:flex h-[calc(100vh_-_3rem)] lg:h-screen w-screen gap-4 md:p-4 bg-background1 dark:bg-background1Dark overflow-y-auto"
                 onScroll={handleScroll}
             >
                 <ScrollToTop />
-                <div className="hidden lg:flex flex-col gap-4 w-1/6 lg:sticky lg:top-0">
+                <div
+                    key={userDataKey}
+                    className="hidden lg:flex flex-col gap-4 w-1/6 lg:sticky lg:top-0"
+                >
                     <ProfileCard socket={socket.current} />
                     <OptionsCard
                         shouldOverlaysShow={shouldOverlaysShow}
@@ -216,7 +219,7 @@ function App() {
                                     path="/users/:id"
                                     element={
                                         <UserPage
-                                            key={`userPage + ${numberOfFriends}`} // use number of friends to trigger component refresh when unfriending a user
+                                            key={userDataKey}
                                             isPaginationTriggered={
                                                 isPaginationTriggered
                                             }
