@@ -1,38 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/Login/LoginPage';
 import Navbar from './components/UiElements/Navbar/Navbar';
 import Sidebar from './components/UiElements/Sidebar/Sidebar';
 import ProfileCard from './components/UiElements/ProfileCard/ProfileCard';
-import FriendSection from './components/Main/FriendSection/FriendSection';
-import FeedSection from './components/Main/FeedSection/FeedSection';
 import useAuth from './hooks/useAuth';
 import useInfoCard from './hooks/useInfoCard';
-import RequireAuth from './components/Main/RequireAuth';
-import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import OptionsCard from './components/UiElements/OptionsCard/OptionsCard';
-import MyPage from './components/Main/UserPage/Own/MyPage';
-import UserPage from './components/Main/UserPage/Other/UserPage';
 import useCurrentUserData from './hooks/useCurrentUserData';
 import InfoCard from './components/UiElements/InfoCard/InfoCard';
-import Gallery from './components/Main/Gallery/Gallery';
-import AllFriendsPage from './components/Main/UserPage/SharedComponents/AllFriendsPage/AllFriendsPage';
 import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/UiElements/ScrollToTopButton/ScrollToTopButton';
 import OverlayHandler from './components/UiElements/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
-import Chat from './components/Main/Chat/Chat';
 import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
 import { handleChatSetup } from './utilities/handleChatSetup';
 import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
 import { AnimatePresence } from 'framer-motion';
-import PollSectionSelect from './components/Main/PollSection/PollSectionSelect/PollSectionSelect';
-import NewPollSection from './components/Main/PollSection/NewPollSection/NewPollSection';
-import PollList from './components/Main/PollSection/PollList/PollList';
-import SinglePostPage from './components/Main/Post/SinglePostPage/SinglePostPage';
-import SinglePollPage from './components/Main/Poll/SinglePollPage/SinglePollPage';
+import AppRoutes from './AppRoutes';
 
 function App() {
     const { isAuth, token } = useAuth();
@@ -156,100 +142,13 @@ function App() {
 
                 <div className="relative flex-1 max-w-3xl z-10">
                     <AnimatePresence>
-                        <Routes key={location.pathname} location={location}>
-                            <Route element={<RequireAuth />}>
-                                <Route path="*" element={<NotFoundPage />} />
-                                <Route
-                                    path="/"
-                                    element={<Navigate replace to="/feed" />}
-                                />
-                                <Route
-                                    path="/feed"
-                                    element={
-                                        <FeedSection
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/mypage"
-                                    element={
-                                        <MyPage
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/friends"
-                                    element={<FriendSection />}
-                                />
-                                <Route
-                                    path="/polls"
-                                    element={<PollSectionSelect />}
-                                />
-                                <Route
-                                    path="/polls/list"
-                                    element={
-                                        <PollList
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/polls/new"
-                                    element={<NewPollSection />}
-                                />
-                                <Route
-                                    path="/chat"
-                                    element={
-                                        accountType === 'guest' ? (
-                                            <Navigate replace to="/feed" />
-                                        ) : (
-                                            <Chat socket={socket.current} />
-                                        )
-                                    }
-                                />
-                                <Route
-                                    path="/users/:id"
-                                    element={
-                                        <UserPage
-                                            key={userDataKey}
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/users/:id/gallery"
-                                    element={
-                                        <Gallery
-                                            isPaginationTriggered={
-                                                isPaginationTriggered
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/users/:id/friends/list"
-                                    element={<AllFriendsPage />}
-                                />
-                                <Route
-                                    path="/post/:id"
-                                    element={<SinglePostPage />}
-                                />
-                                <Route
-                                    path="/poll/:id"
-                                    element={<SinglePollPage />}
-                                />
-                            </Route>
-                        </Routes>
+                        <AppRoutes
+                            location={location}
+                            isPaginationTriggered={isPaginationTriggered}
+                            accountType={accountType}
+                            socket={socket.current}
+                            userDataKey={userDataKey}
+                        />
                     </AnimatePresence>
                 </div>
                 <Sidebar
