@@ -9,25 +9,22 @@ import './index.css';
 import { FriendDataContextProvider } from './contexts/FriendDataContext';
 import { ThemeContextProvider } from './contexts/ThemeContext';
 import { NotificationBubblesContextProvider } from './contexts/NotificationBubblesContext';
-import { SeedContextProvider } from './contexts/SeedContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <HashRouter>
             <AuthContextProvider>
-                <SeedContextProvider>
-                    <CurrentUserDataContextProvider>
-                        <FriendDataContextProvider>
-                            <InfoCardContextProvider>
-                                <ThemeContextProvider>
-                                    <NotificationBubblesContextProvider>
-                                        <App />
-                                    </NotificationBubblesContextProvider>
-                                </ThemeContextProvider>
-                            </InfoCardContextProvider>
-                        </FriendDataContextProvider>
-                    </CurrentUserDataContextProvider>
-                </SeedContextProvider>
+                <CurrentUserDataContextProvider>
+                    <FriendDataContextProvider>
+                        <InfoCardContextProvider>
+                            <ThemeContextProvider>
+                                <NotificationBubblesContextProvider>
+                                    <App />
+                                </NotificationBubblesContextProvider>
+                            </ThemeContextProvider>
+                        </InfoCardContextProvider>
+                    </FriendDataContextProvider>
+                </CurrentUserDataContextProvider>
             </AuthContextProvider>
         </HashRouter>
     </React.StrictMode>
