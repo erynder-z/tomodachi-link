@@ -29,17 +29,15 @@ export default function PictureList({
     const shouldInitialize = useRef(true);
 
     const handleFetchUserPics = async () => {
-        if (token && userId && shouldInitialize.current) {
+        if (token && userId) {
             const skip = 0;
             const apiEndpointURLList = `/api/v1/users/${userId}/picture?skip=${skip}`;
             const apiEndpointURLNumber = `/api/v1/users/${userId}/count_pictures`;
             const method = 'GET';
             const errorMessageList = 'Unable to fetch pictures!';
             const errorMessageNumber = 'Unable to fetch number of pictures!';
-
             let pictureListResponse;
             let numberOfPicsResponse;
-
             try {
                 pictureListResponse = await backendFetch(
                     token,
@@ -63,16 +61,15 @@ export default function PictureList({
                 setLoading(false);
                 onFetchComplete('pictureList');
             }
-        }
-        return () => {
+
             shouldInitialize.current = false;
-        };
+        }
     };
 
     const handleImageClick = (image: ImageType) => setSelectedImage(image);
 
     useEffect(() => {
-        handleFetchUserPics();
+        if (shouldInitialize.current === true) handleFetchUserPics();
     }, [userId]);
 
     const pictureList = pictures?.map((picture) => (
