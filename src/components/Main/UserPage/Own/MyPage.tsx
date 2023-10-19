@@ -16,12 +16,17 @@ type MyPageProps = {
     isPaginationTriggered: boolean;
 };
 
+const TEXT_DARK_COLOR = '#020202';
+const TEXT_LIGHT_COLOR = '#e4e6ea';
+
 export default function MyPage({ isPaginationTriggered }: MyPageProps) {
     const { currentUserData } = useCurrentUserData();
     const { friendData } = useFriendData();
     const { pendingFriendRequests } = currentUserData || {};
     const [myPostsKey, setMyPostsKey] = useState(0);
     const [myPicsKey, setMyPicsKey] = useState(0);
+    const [shouldRefreshPictureList, setShouldRefreshPictureList] =
+        useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [componentLoading, setComponentLoading] = useState({
         coverSection: true,
@@ -31,8 +36,8 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
     const [colorPalette, setColorPalette] = useState<FinalColor[]>([]);
     const backgroundColor = colorPalette[0]?.hex;
     const textColor = tinycolor(backgroundColor).isDark()
-        ? '#e4e6ea'
-        : '#020202';
+        ? TEXT_LIGHT_COLOR
+        : TEXT_DARK_COLOR;
 
     const MyPageContentRef = useRef(null);
     const isInView = useInView(MyPageContentRef, { once: true });
@@ -50,9 +55,6 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
             [nameOfComponent]: false,
         }));
     };
-
-    const [shouldRefreshPictureList, setShouldRefreshPictureList] =
-        useState<boolean>(false);
 
     useEffect(() => {
         if (shouldRefreshPictureList === true) handleRefreshPics();
