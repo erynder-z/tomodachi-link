@@ -6,6 +6,7 @@ export type FriendDataContextProviderProps = {
 
 export type FriendDataContextProps = {
     friendData: FriendDataType[] | null;
+    friendIDs: string[];
     setFriendData: (friendList: FriendDataType[] | null) => void;
     handleFetchFriendData: () => void;
 };
@@ -27,12 +28,7 @@ export type FriendsOfFriendsType = {
     firstName: string;
     lastName: string;
     username: string;
-    userpic: {
-        data: {
-            data: Buffer;
-        };
-        contentType: string;
-    };
+    userpic: ImageType;
     commonFriends: CommonFriendType[];
 };
 

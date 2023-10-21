@@ -17,10 +17,8 @@ export type CoverType =
     | 'cover9';
 
 export type ImageType = {
-    id: string;
-    data: {
-        data: Buffer;
-    };
+    id?: string;
+    data: string;
     contentType: string;
 };
 

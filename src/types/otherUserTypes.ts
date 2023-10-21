@@ -20,8 +20,5 @@ export type MinimalUserTypes = {
     firstName: string;
     lastName: string;
     username: string;
-    userpic: {
-        data: { data: Buffer };
-        contentType: string;
-    };
+    userpic: ImageType;
 };
