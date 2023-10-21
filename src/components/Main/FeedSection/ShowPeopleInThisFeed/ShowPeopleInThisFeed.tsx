@@ -2,35 +2,35 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
-import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
 import { MinimalPostType } from '../../../../types/postTypes';
-import { backendFetch } from '../../../../utilities/backendFetch';
+import useFriendData from '../../../../hooks/useFriendData';
+import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 
 type ShowPeopleInThisFeedProps = {
-    friendList: string[];
     minimalPosts: MinimalPostType[];
 };
 
 export default function ShowPeopleInThisFeed({
-    friendList,
     minimalPosts,
 }: ShowPeopleInThisFeedProps) {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
-    const { setInfo } = useInfoCard();
+    const { friendData, friendIDs } = useFriendData();
     const [feedUsers, setFeedUsers] = useState<MinimalUserTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     const isInitialLoad = useRef(true);
 
+    const currentUserId = currentUserData?._id;
+
     const getIdsOfPeopleInFeed = () => {
         const newPeopleInFeed = new Set<string>();
         minimalPosts.forEach((post) => {
             if (
-                friendList.includes(post?.owner?._id) ||
+                friendIDs.includes(post?.owner?._id) ||
                 currentUserData?._id === post?.owner?._id
             ) {
                 newPeopleInFeed.add(post?.owner?._id);
@@ -41,26 +41,28 @@ export default function ShowPeopleInThisFeed({
         return Array.from(newPeopleInFeed);
     };
 
-    const handleGetUserDetails = async (ids: string[]) => {
-        if (token) {
-            const requests = ids.map(async (id) => {
-                const apiEndpointURL = `/api/v1/users/${id}`;
-                const method = 'GET';
-                const errorMessage = 'Unable to fetch user data!';
+    const handleGetUserDetails = (ids: string[]) => {
+        if (currentUserId && ids.includes(currentUserId)) {
+            const minimalCurrentUser: MinimalUserTypes = {
+                _id: currentUserData?._id,
+                firstName: currentUserData?.firstName,
+                lastName: currentUserData?.lastName,
+                username: currentUserData?.username,
+                userpic: {
+                    data: convertDatabaseImageToBase64(
+                        currentUserData?.userpic
+                    ),
+                    contentType: currentUserData?.userpic.contentType,
+                },
+            };
+            setFeedUsers([minimalCurrentUser]);
+        }
 
-                const singleUserResponse = await backendFetch(
-                    token,
-                    setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
-                );
-                return singleUserResponse?.user;
-            });
-            const responses = await Promise.all(requests);
+        if (friendData) {
+            const users = friendData.filter((user) => ids.includes(user._id));
             setFeedUsers((prevUsers) => [
                 ...prevUsers,
-                ...responses.filter(
+                ...users.filter(
                     (user) => !prevUsers.some((u) => u._id === user._id)
                 ),
             ]);
@@ -77,11 +79,12 @@ export default function ShowPeopleInThisFeed({
                 setLoading(false);
             } else if (token) {
                 const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
-                if (idsOfPeopleInFeed.length > 0)
+                if (idsOfPeopleInFeed.length > 0) {
                     handleGetUserDetails(idsOfPeopleInFeed);
+                }
             }
         }
-    }, [minimalPosts, token]);
+    }, [friendIDs, minimalPosts, token]);
 
     const LoadingContent = (
         <motion.div

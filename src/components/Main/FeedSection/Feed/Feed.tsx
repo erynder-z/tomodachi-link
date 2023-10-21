@@ -1,88 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-import useAuth from '../../../../hooks/useAuth';
-import useInfoCard from '../../../../hooks/useInfoCard';
-import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import ShowPeopleInThisFeed from '../ShowPeopleInThisFeed/ShowPeopleInThisFeed';
 import { MinimalPostType } from '../../../../types/postTypes';
 import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import FeedPostList from './FeedPostList/FeedPostList';
 import { motion } from 'framer-motion';
-import { backendFetch } from '../../../../utilities/backendFetch';
+import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type FreedProps = {
-    friendList: string[];
-    isPaginationTriggered: boolean;
+    minimalPosts: MinimalPostType[];
+    refreshFeed: () => Promise<void>;
+    isFeedRefreshing: boolean;
 };
 
 export default function Feed({
-    friendList,
-    isPaginationTriggered,
+    minimalPosts,
+    refreshFeed,
+    isFeedRefreshing,
 }: FreedProps) {
-    const { token, authUser } = useAuth();
-    const { setInfo } = useInfoCard();
-    const [minimalPosts, setMinimalPosts] = useState<MinimalPostType[]>([]);
-    const [skip, setSkip] = useState<number | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [isFeedRefreshing, setIsFeedRefreshing] = useState<boolean>(false);
-
-    const shouldInitialize = useRef(true);
-
-    const handleGetFeed = async () => {
-        if (authUser && token) {
-            const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch feed!';
-
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setMinimalPosts([...minimalPosts, ...response.paginatedFeed]);
-            setLoading(false);
-        }
-    };
-
-    const refreshFeed = async () => {
-        setIsFeedRefreshing(true);
-        setMinimalPosts([]);
-        setSkip(0);
-        if (authUser && token) {
-            const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch feed!';
-
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setMinimalPosts([...response.paginatedFeed]);
-            setLoading(false);
-            setIsFeedRefreshing(false);
-        }
-    };
-
-    useEffect(() => {
-        if (minimalPosts) setSkip(minimalPosts.length);
-    }, [isPaginationTriggered]);
-
-    useEffect(() => {
-        if (token && skip) handleGetFeed();
-    }, [skip]);
-
-    useEffect(() => {
-        if (shouldInitialize.current) handleGetFeed();
-
-        return () => {
-            shouldInitialize.current = false;
-        };
-    }, []);
-
     const LoadingContent = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
@@ -94,19 +27,12 @@ export default function Feed({
     );
 
     const FeedContent = (
-        <>
-            <ShowPeopleInThisFeed
-                friendList={friendList}
-                minimalPosts={minimalPosts}
-            />
+        <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
+            <ShowPeopleInThisFeed minimalPosts={minimalPosts} />
             <div className="flex flex-col gap-4 pb-4">
-                <FeedPostList
-                    posts={minimalPosts}
-                    isFeedRefreshing={isFeedRefreshing}
-                    onPostChange={refreshFeed}
-                />
+                <FeedPostList posts={minimalPosts} onPostChange={refreshFeed} />
             </div>
-        </>
+        </div>
     );
 
     return (
@@ -116,9 +42,7 @@ export default function Feed({
             className="flex flex-col h-1/4 md:h-auto w-full gap-8 "
         >
             <NewPostInput handleRefreshPosts={refreshFeed} />
-            <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
-                {loading ? LoadingContent : FeedContent}
-            </div>
+            {isFeedRefreshing ? LoadingContent : FeedContent}
         </motion.div>
     );
 }

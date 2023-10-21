@@ -6,6 +6,7 @@ import { backendFetch } from '../utilities/backendFetch';
 
 const FriendDataContext = createContext<FriendDataContextProps>({
     friendData: null,
+    friendIDs: [],
     setFriendData: () => null,
     handleFetchFriendData: () => null,
 });
@@ -38,6 +39,8 @@ export const FriendDataContextProvider = ({
         }
     };
 
+    const friendIDs = friendData ? friendData.map((friend) => friend._id) : [];
+
     useEffect(() => {
         setFriendData(null);
     }, [!isAuth]);
@@ -48,7 +51,12 @@ export const FriendDataContextProvider = ({
 
     return (
         <FriendDataContext.Provider
-            value={{ friendData, setFriendData, handleFetchFriendData }}
+            value={{
+                friendData,
+                friendIDs,
+                setFriendData,
+                handleFetchFriendData,
+            }}
         >
             {children}
         </FriendDataContext.Provider>
