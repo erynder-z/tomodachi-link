@@ -82,6 +82,7 @@ export default function ShowPeopleInThisFeed({
             isInitialLoad.current = false;
         } else {
             if (minimalPosts.length === 0) {
+                setFeedUsers([]);
                 setLoading(false);
             } else if (token) {
                 const idsOfPeopleInFeed = getIdsOfPeopleInFeed();

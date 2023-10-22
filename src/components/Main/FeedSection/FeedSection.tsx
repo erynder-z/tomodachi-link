@@ -45,9 +45,8 @@ export default function FeedSection({
     const refreshFeed = async () => {
         setIsFeedRefreshing(true);
         setMinimalPosts([]);
-        setSkip(0);
         if (authUser && token) {
-            const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
+            const apiEndpointURL = '/api/v1/feed?skip=0';
             const method = 'GET';
             const errorMessage = 'Unable to fetch feed!';
 
@@ -58,6 +57,7 @@ export default function FeedSection({
                 method,
                 errorMessage
             );
+
             setMinimalPosts([...response.paginatedFeed]);
             setLoading(false);
             setIsFeedRefreshing(false);
