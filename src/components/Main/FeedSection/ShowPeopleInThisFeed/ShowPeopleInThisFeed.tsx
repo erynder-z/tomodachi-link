@@ -8,6 +8,8 @@ import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
 import { MinimalPostType } from '../../../../types/postTypes';
 import useFriendData from '../../../../hooks/useFriendData';
 import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
+import { FriendDataType } from '../../../../types/friendTypes';
+import { CurrentUserDataType } from '../../../../types/currentUserTypes';
 
 type ShowPeopleInThisFeedProps = {
     minimalPosts: MinimalPostType[];
@@ -27,47 +29,51 @@ export default function ShowPeopleInThisFeed({
     const currentUserId = currentUserData?._id;
 
     const getIdsOfPeopleInFeed = () => {
-        const newPeopleInFeed = new Set<string>();
-        minimalPosts.forEach((post) => {
-            if (
-                friendIDs.includes(post?.owner?._id) ||
-                currentUserData?._id === post?.owner?._id
-            ) {
-                newPeopleInFeed.add(post?.owner?._id);
-            } else if (newPeopleInFeed.has(post?.owner?._id)) {
-                newPeopleInFeed.delete(post?.owner?._id);
-            }
-        });
-        return Array.from(newPeopleInFeed);
+        const postOwnerIds = minimalPosts.map((post) => post?.owner?._id);
+        const filteredIds = postOwnerIds.filter(
+            (id) => friendIDs.includes(id) || currentUserId === id
+        );
+        return [...new Set(filteredIds)];
     };
 
     const handleGetUserDetails = (ids: string[]) => {
         if (currentUserId && ids.includes(currentUserId)) {
-            const minimalCurrentUser: MinimalUserTypes = {
-                _id: currentUserData?._id,
-                firstName: currentUserData?.firstName,
-                lastName: currentUserData?.lastName,
-                username: currentUserData?.username,
-                userpic: {
-                    data: convertDatabaseImageToBase64(
-                        currentUserData?.userpic
-                    ),
-                    contentType: currentUserData?.userpic.contentType,
-                },
-            };
+            const minimalCurrentUser: MinimalUserTypes =
+                formatUserData(currentUserData);
             setFeedUsers([minimalCurrentUser]);
         }
 
         if (friendData) {
             const users = friendData.filter((user) => ids.includes(user._id));
+            const formattedFriendData = users.map((user) =>
+                formatUserData(user)
+            );
             setFeedUsers((prevUsers) => [
                 ...prevUsers,
-                ...users.filter(
+                ...formattedFriendData.filter(
                     (user) => !prevUsers.some((u) => u._id === user._id)
                 ),
             ]);
             setLoading(false);
         }
+    };
+
+    const formatUserData = (
+        user: FriendDataType | CurrentUserDataType
+    ): MinimalUserTypes => {
+        // the userpic of the currentUser has to be converted to base64 in order to be rendered
+        const isCurrentUser = user._id === currentUserData?._id;
+        return {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            userpic: {
+                data: isCurrentUser
+                    ? convertDatabaseImageToBase64(user.userpic)
+                    : user.userpic.data,
+                contentType: user.userpic.contentType,
+            },
+        };
     };
 
     useEffect(() => {
@@ -97,20 +103,32 @@ export default function ShowPeopleInThisFeed({
     );
 
     const ShowPeopleInFeedContent = (
-        <div className="flex md:flex-col overflow-y-auto lg:overflow-hidden gap-4 lg:gap-0 w-full md:w-full p-2 lg:p-0">
+        <div className="flex md:flex-col gap-4 lg:gap-0 w-full p-2 lg:p-0 ">
             {feedUsers.length > 0 ? (
                 <>
-                    <h1 className="text-center flex">People in this feed:</h1>
-                    {feedUsers.map((feedUser: MinimalUserTypes) => (
-                        <motion.div
-                            key={feedUser?._id}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                        >
-                            <FeedUserListItem listItemData={feedUser} />
-                        </motion.div>
-                    ))}
+                    <h1 className="flex justify-center items-center text-center text-xs md:text-base">
+                        People in this feed:
+                    </h1>
+                    {feedUsers
+                        // sort items by occurrence in the feedUsers-array
+                        .map((feedUser) => {
+                            const index = minimalPosts.findIndex(
+                                (post) => post.owner?._id === feedUser._id
+                            );
+                            return { user: feedUser, index };
+                        })
+                        .sort((a, b) => a.index - b.index)
+                        .map(({ user }) => (
+                            <motion.div
+                                key={user._id}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                className=" flex overflow-y-auto"
+                            >
+                                <FeedUserListItem listItemData={user} />
+                            </motion.div>
+                        ))}
                 </>
             ) : (
                 <>
