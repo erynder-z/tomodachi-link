@@ -6,6 +6,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import PollItem from '../../Poll/PollItem/PollItem';
 import { RetrievedPollDataType } from '../../../../types/pollTypes';
 import { backendFetch } from '../../../../utilities/backendFetch';
+import RefreshPollButton from './RefreshPollButton/RefreshPollButton';
 
 type PollListProps = {
     isPaginationTriggered: boolean;
@@ -23,6 +24,25 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
     const handleGetPolls = async () => {
         if (authUser && token) {
             const apiEndpointURL = `/api/v1/poll/collection?skip=${skip}`;
+            const method = 'GET';
+            const errorMessage = 'Unable to fetch polls!';
+            const response = await backendFetch(
+                token,
+                setInfo,
+                apiEndpointURL,
+                method,
+                errorMessage
+            );
+            setPolls([...polls, ...response.pollCollection]);
+            setLoading(false);
+        }
+    };
+
+    const refreshPoll = async () => {
+        setLoading(true);
+        setPolls([]);
+        if (authUser && token) {
+            const apiEndpointURL = '/api/v1/poll/collection?skip=0';
             const method = 'GET';
             const errorMessage = 'Unable to fetch polls!';
             const response = await backendFetch(
@@ -81,10 +101,13 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col just min-h-[calc(100vh_-_3rem)] lg:min-h-full p-0 md:p-4 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg"
+            className="flex flex-col items-center min-h-[calc(100vh_-_3rem)] lg:min-h-full p-0 md:p-4 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg"
         >
-            <h1 className="text-center text-xl font-bold mb-4">Poll list</h1>
-            <div className="flex flex-col gap-4 pb-4">
+            <h1 className="flex justify-center gap-2 text-xl font-bold sticky top-0 mb-4  px-4 w-fit rounded-full bg-gray-300/80 dark:bg-gray-500/80">
+                Poll list
+                <RefreshPollButton refreshPoll={refreshPoll} />
+            </h1>
+            <div className="flex flex-col gap-4 pb-4 w-full">
                 {polls.length > 0 ? HasPollContent : EmptyListContent}
             </div>
         </motion.div>
