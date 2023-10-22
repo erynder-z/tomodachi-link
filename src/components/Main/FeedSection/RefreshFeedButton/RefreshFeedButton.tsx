@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdSync } from 'react-icons/md';
 import './RefreshFeedButton.css';
 

@@ -184,7 +184,7 @@ export default function PollItem({ pollData }: PollItemProps) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-4 p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
+            className="flex flex-col gap-4 p-4 w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
         >
             <div className="flex justify-between">
                 <PollUserInfoSection
