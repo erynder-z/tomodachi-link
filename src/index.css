@@ -25,11 +25,12 @@
 
 * {
     scrollbar-width: thin;
-    /*     scrollbar-color: cRed background1 */
+    scrollbar-color: cRed background1;
 }
 
 *::-webkit-scrollbar {
     @apply w-1;
+    @apply h-1;
 }
 *::-webkit-scrollbar-track {
     @apply bg-background1 dark:bg-background1Dark;

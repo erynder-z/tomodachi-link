@@ -104,7 +104,7 @@ export default function ShowPeopleInThisFeed({
     );
 
     const ShowPeopleInFeedContent = (
-        <div className="flex md:flex-col gap-4 lg:gap-0 w-full p-2 lg:p-0 ">
+        <div className="flex md:flex-col gap-4 lg:gap-0 w-full overflow-x-auto p-2 lg:p-0 ">
             {feedUsers.length > 0 ? (
                 <>
                     <h1 className="flex justify-center items-center text-center text-xs md:text-base">
@@ -125,7 +125,7 @@ export default function ShowPeopleInThisFeed({
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
-                                className=" flex overflow-y-auto"
+                                className="min-w-fit"
                             >
                                 <FeedUserListItem listItemData={user} />
                             </motion.div>
@@ -145,7 +145,7 @@ export default function ShowPeopleInThisFeed({
     );
 
     return (
-        <div className="block sticky -top-1 lg:top-10 h-fit md:w-full bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
+        <div className="block sticky top-8 h-fit w-full bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
             {loading ? LoadingContent : ShowPeopleInFeedContent}
         </div>
     );
