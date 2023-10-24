@@ -7,28 +7,38 @@ import SearchResults from './SearchResults/SearchResults';
 import SpyGlassIcon from './SpyGlassIcon/SpyGlassIcon';
 import NoResultsFound from './SearchResults/NoResultsFound/NoResultsFound';
 import ClearButton from './ClearButton/ClearButton';
+import { FetchStatusType } from '../../types/miscTypes';
 
 type SearchPropsType = {
     handleCloseButtonClick: () => void;
 };
+
+const DEBOUNCE_TIMEOUT = 500;
+const USER_NOTIFICATION_TIMEOUT = 3000;
 
 export default function Search({ handleCloseButtonClick }: SearchPropsType) {
     const { token } = useAuth();
     const [searchText, setSearchText] = useState<string>('');
     const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [isDebouncing, setIsDebouncing] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const debounce = useRef<NodeJS.Timeout | null>(null);
 
-    const DEBOUNCE_TIMEOUT = 500;
-
     useEffect(() => {
         const fetchSearchResults = async () => {
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
             try {
                 setIsDebouncing(false);
                 setIsLoading(true);
+                setFetchStatus('fetching');
+
                 const serverURL = import.meta.env.VITE_SERVER_URL;
+
                 const response = await fetch(
                     `${serverURL}/api/v1/search?query=${searchText}`,
                     {
@@ -42,6 +52,8 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
             } catch (error) {
                 console.error('Error fetching search results:', error);
             } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
                 setIsLoading(false);
             }
         };
@@ -62,7 +74,13 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
 
     const Loading = (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <LoadingSpinner message="Searching" />
+            <LoadingSpinner
+                message={
+                    fetchStatus === 'delayed'
+                        ? 'Your request is taking longer than normal'
+                        : 'Searching'
+                }
+            />
         </div>
     );
 

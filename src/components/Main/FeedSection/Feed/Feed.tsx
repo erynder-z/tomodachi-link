@@ -4,17 +4,20 @@ import NewPostInput from '../../Post/NewPostInput/NewPostInput';
 import FeedPostList from './FeedPostList/FeedPostList';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
+import { FetchStatusType } from '../../../../types/miscTypes';
 
 type FreedProps = {
     minimalPosts: MinimalPostType[];
     refreshFeed: () => Promise<void>;
     isFeedRefreshing: boolean;
+    fetchStatus: FetchStatusType;
 };
 
 export default function Feed({
     minimalPosts,
     refreshFeed,
     isFeedRefreshing,
+    fetchStatus,
 }: FreedProps) {
     const LoadingContent = (
         <motion.div
@@ -22,7 +25,13 @@ export default function Feed({
             animate={{ y: 0, opacity: 1 }}
             className="flex flex-col md:col-span-2 justify-center items-center w-full h-full py-4 gap-4 text-regularText dark:text-regularTextDark "
         >
-            <LoadingSpinner message="Getting feed..." />
+            <LoadingSpinner
+                message={
+                    fetchStatus === 'delayed'
+                        ? 'Your request is taking longer than normal'
+                        : 'Getting feed'
+                }
+            />
         </motion.div>
     );
 

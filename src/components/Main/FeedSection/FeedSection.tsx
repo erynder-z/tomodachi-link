@@ -7,10 +7,13 @@ import { backendFetch } from '../../../utilities/backendFetch';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { MinimalPostType } from '../../../types/postTypes';
+import { FetchStatusType } from '../../../types/miscTypes';
 
 type FeedSectionProps = {
     isPaginationTriggered: boolean;
 };
+
+const USER_NOTIFICATION_TIMEOUT = 3000;
 
 export default function FeedSection({
     isPaginationTriggered,
@@ -18,6 +21,7 @@ export default function FeedSection({
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [loading, setLoading] = useState<boolean>(true);
+    const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [minimalPosts, setMinimalPosts] = useState<MinimalPostType[]>([]);
     const [skip, setSkip] = useState<number | null>(null);
     const [isFeedRefreshing, setIsFeedRefreshing] = useState<boolean>(false);
@@ -25,24 +29,40 @@ export default function FeedSection({
     const shouldInitialize = useRef(true);
 
     const handleGetFeed = async () => {
+        const currentFeed = minimalPosts;
         if (authUser && token) {
             const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
             const method = 'GET';
             const errorMessage = 'Unable to fetch feed!';
 
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setMinimalPosts([...minimalPosts, ...response.paginatedFeed]);
-            setLoading(false);
+            setFetchStatus('fetching');
+
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+
+                setMinimalPosts([...minimalPosts, ...response.paginatedFeed]);
+            } catch {
+                setMinimalPosts(currentFeed);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+                setLoading(false);
+            }
         }
     };
 
     const refreshFeed = async () => {
+        const currentFeed = minimalPosts;
         setIsFeedRefreshing(true);
         setMinimalPosts([]);
         if (authUser && token) {
@@ -50,17 +70,29 @@ export default function FeedSection({
             const method = 'GET';
             const errorMessage = 'Unable to fetch feed!';
 
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
+            setFetchStatus('fetching');
 
-            setMinimalPosts([...response.paginatedFeed]);
-            setLoading(false);
-            setIsFeedRefreshing(false);
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                setMinimalPosts([...response.paginatedFeed]);
+            } catch (error) {
+                setMinimalPosts(currentFeed);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+                setLoading(false);
+                setIsFeedRefreshing(false);
+            }
         }
     };
 
@@ -88,7 +120,13 @@ export default function FeedSection({
             transition={{ duration: 0.2 }}
             className="flex min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 lg:w-full justify-center items-center shadow-lg bg-card dark:bg-cardDark"
         >
-            <LoadingSpinner message="Getting feed" />
+            <LoadingSpinner
+                message={
+                    fetchStatus === 'delayed'
+                        ? 'Your request is taking longer than normal'
+                        : 'Getting feed'
+                }
+            />
         </motion.div>
     );
 
@@ -109,6 +147,7 @@ export default function FeedSection({
                 minimalPosts={minimalPosts}
                 refreshFeed={refreshFeed}
                 isFeedRefreshing={isFeedRefreshing}
+                fetchStatus={fetchStatus}
             />
         </motion.div>
     );

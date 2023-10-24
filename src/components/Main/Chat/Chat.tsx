@@ -10,10 +10,13 @@ import ChatConversationList from './ChatConversationList/ChatConversationList';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import { motion } from 'framer-motion';
 import { backendFetch } from '../../../utilities/backendFetch';
+import { FetchStatusType } from '../../../types/miscTypes';
 
 type ChatProps = {
     socket: Socket | undefined;
 };
+
+const USER_NOTIFICATION_TIMEOUT = 3000;
 
 export default function Chat({ socket }: ChatProps) {
     const { token } = useAuth();
@@ -29,6 +32,7 @@ export default function Chat({ socket }: ChatProps) {
     const [conversations, setConversations] = useState<ChatConversationType[]>(
         []
     );
+    const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [loading, setLoading] = useState<boolean>(true);
 
     const shouldInitialize = useRef(true);
@@ -40,20 +44,34 @@ export default function Chat({ socket }: ChatProps) {
     );
 
     const getConversations = async () => {
+        const currentConversations = conversations;
         if (currentUserId && token) {
             const apiEndpointURL = '/api/v1/chat/';
             const method = 'GET';
             const errorMessage = 'Unable to fetch conversation!';
 
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setConversations(response?.conversation);
-            setLoading(false);
+            setFetchStatus('fetching');
+
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                setConversations(response?.conversation);
+            } catch (error) {
+                setConversations(currentConversations);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+                setLoading(false);
+            }
         }
     };
 
@@ -103,7 +121,13 @@ export default function Chat({ socket }: ChatProps) {
             transition={{ duration: 0.2 }}
             className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark"
         >
-            <LoadingSpinner message="Loading chat" />
+            <LoadingSpinner
+                message={
+                    fetchStatus === 'delayed'
+                        ? 'Your request is taking longer than normal'
+                        : 'Loading chat'
+                }
+            />
         </motion.div>
     );
 

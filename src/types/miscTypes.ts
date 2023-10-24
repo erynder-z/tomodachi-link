@@ -36,3 +36,5 @@ export type TimeOfDayMessageType = {
     message: string;
     icon: JSX.Element;
 };
+
+export type FetchStatusType = 'idle' | 'fetching' | 'delayed';

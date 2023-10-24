@@ -7,53 +7,87 @@ import PollItem from '../../Poll/PollItem/PollItem';
 import { RetrievedPollDataType } from '../../../../types/pollTypes';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import RefreshPollButton from './RefreshPollButton/RefreshPollButton';
+import { FetchStatusType } from '../../../../types/miscTypes';
 
 type PollListProps = {
     isPaginationTriggered: boolean;
 };
+
+const USER_NOTIFICATION_TIMEOUT = 3000;
 
 export default function PollList({ isPaginationTriggered }: PollListProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [skip, setSkip] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [polls, setPolls] = useState<RetrievedPollDataType[]>([]);
 
     const shouldInitialize = useRef(true);
 
     const handleGetPolls = async () => {
+        const currentPolls = polls;
         if (authUser && token) {
             const apiEndpointURL = `/api/v1/poll/collection?skip=${skip}`;
             const method = 'GET';
             const errorMessage = 'Unable to fetch polls!';
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setPolls([...polls, ...response.pollCollection]);
-            setLoading(false);
+
+            setFetchStatus('fetching');
+
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                setPolls([...polls, ...response.pollCollection]);
+            } catch (error) {
+                setPolls(currentPolls);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+                setLoading(false);
+            }
         }
     };
 
     const refreshPoll = async () => {
+        const currentPolls = polls;
         setLoading(true);
         setPolls([]);
         if (authUser && token) {
             const apiEndpointURL = '/api/v1/poll/collection?skip=0';
             const method = 'GET';
             const errorMessage = 'Unable to fetch polls!';
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setPolls([...polls, ...response.pollCollection]);
-            setLoading(false);
+
+            setFetchStatus('fetching');
+
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                setPolls([...polls, ...response.pollCollection]);
+            } catch (error) {
+                setPolls(currentPolls);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+                setLoading(false);
+            }
         }
     };
 
@@ -91,7 +125,13 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
             transition={{ duration: 0.2 }}
             className="flex min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 lg:w-full justify-center items-center shadow-lg bg-card dark:bg-cardDark"
         >
-            <LoadingSpinner message="Getting polls" />
+            <LoadingSpinner
+                message={
+                    fetchStatus === 'delayed'
+                        ? 'Your request is taking longer than normal'
+                        : 'Getting polls'
+                }
+            />
         </motion.div>
     );
 

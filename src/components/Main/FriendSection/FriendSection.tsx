@@ -11,6 +11,9 @@ import { MinimalUserTypes } from '../../../types/otherUserTypes';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import { motion, useInView } from 'framer-motion';
 import { backendFetch } from '../../../utilities/backendFetch';
+import { FetchStatusType } from '../../../types/miscTypes';
+
+const USER_NOTIFICATION_TIMEOUT = 3000;
 
 export default function FriendSection() {
     const { token, authUser } = useAuth();
@@ -21,6 +24,7 @@ export default function FriendSection() {
         FriendsOfFriendsType[]
     >([]);
     const [randomUsers, setRandomUsers] = useState<MinimalUserTypes[]>([]);
+    const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [loading, setLoading] = useState<boolean>(true);
 
     const shouldFetchFriendsOfFriends = useRef(true);
@@ -36,39 +40,67 @@ export default function FriendSection() {
     }, [friendData]);
 
     const handleFetchFriendsOfFriends = async () => {
+        const currentFriendsOfFriends = friendsOfFriends;
         if (authUser && token) {
             const apiEndpointURL = '/api/v1/users/maybefriends';
             const method = 'GET';
             const errorMessage = 'Unable to fetch users!';
 
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setFriendsOfFriends(response?.friendsOfFriends);
-            setLoading(response.length <= 0);
-            if (response.length <= 0) handleFetchRandomUsers();
+            setFetchStatus('fetching');
+
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                setFriendsOfFriends(response?.friendsOfFriends);
+                setLoading(response.length <= 0);
+                if (response.length <= 0) handleFetchRandomUsers();
+            } catch (error) {
+                setFriendsOfFriends(currentFriendsOfFriends);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+            }
         }
     };
 
     const handleFetchRandomUsers = async () => {
+        const currentUserList = randomUsers;
         if (authUser && token) {
             const apiEndpointURL = `/api/v1/users/some`;
             const method = 'GET';
             const errorMessage = 'Unable to fetch users!';
 
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
-            );
-            setRandomUsers(response?.userList);
-            setLoading(false);
+            setFetchStatus('fetching');
+
+            const timeout = setTimeout(() => {
+                setFetchStatus('delayed');
+            }, USER_NOTIFICATION_TIMEOUT);
+
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    method,
+                    errorMessage
+                );
+                setRandomUsers(response?.userList);
+            } catch (error) {
+                setRandomUsers(currentUserList);
+            } finally {
+                clearTimeout(timeout);
+                setFetchStatus('idle');
+                setLoading(false);
+            }
         }
     };
 
@@ -110,13 +142,21 @@ export default function FriendSection() {
                 loading ? 'flex' : 'hidden'
             } flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-background2 dark:bg-background2Dark `}
         >
-            <LoadingSpinner message="Getting friend data" />
+            <LoadingSpinner
+                message={
+                    fetchStatus === 'delayed'
+                        ? 'Your request is taking longer than normal'
+                        : 'Getting friend data'
+                }
+            />
         </div>
     );
 
     const FriendListContent = (
         <>
-            <h1 className="text-center text-xl font-bold">Friends</h1>
+            <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
+                Friends
+            </h1>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {friendProfileCardList}
                 {friendProfileCardList?.length === 0 && (
@@ -149,11 +189,11 @@ export default function FriendSection() {
             className={`${
                 loading
                     ? 'hidden'
-                    : 'flex flex-col gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg'
+                    : 'flex flex-col items-center gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg'
             }`}
         >
             {FriendListContent}
-            {SuggestionListContent}
+            {SuggestionList.length > 0 && SuggestionListContent}
         </motion.div>
     );
 
