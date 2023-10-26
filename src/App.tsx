@@ -113,6 +113,7 @@ function App() {
 
     const AppContent = (
         <div
+            key={userDataKey}
             className={`font-regularFont text-regularText dark:text-regularTextDark flex flex-col lg:flex-row h-full pb-12 lg:pb-0 ${theme}`}
         >
             <div className="relative">
@@ -129,10 +130,7 @@ function App() {
                 onScroll={handleScroll}
             >
                 <ScrollToTop />
-                <div
-                    key={userDataKey}
-                    className="hidden lg:flex flex-col gap-4 w-1/6 lg:sticky lg:top-0"
-                >
+                <div className="hidden lg:flex flex-col gap-4 w-1/6 lg:sticky lg:top-0">
                     <ProfileCard socket={socket.current} />
                     <OptionsCard
                         shouldOverlaysShow={shouldOverlaysShow}
