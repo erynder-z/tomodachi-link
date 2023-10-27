@@ -85,14 +85,20 @@ module.exports = {
                         opacity: '0',
                     },
                 },
-                gradientBorderAnimation: {
+                colorChangeAnimationBright: {
                     '0%, 100%': {
-                        'background-size': '200% 200%',
-                        'background-position': 'left center',
+                        'background-color': 'mediumGray',
                     },
                     '50%': {
-                        'background-size': '200% 200%',
-                        'background-position': 'right center',
+                        'background-color': 'mediumVioletRed ',
+                    },
+                },
+                colorChangeAnimationDark: {
+                    '0%, 100%': {
+                        'background-color': 'gray',
+                    },
+                    '50%': {
+                        'background-color': 'gold',
                     },
                 },
                 postReactionAnimation: {
@@ -120,11 +126,13 @@ module.exports = {
                 outAnimation: 'outAnimation 170ms ease-out',
                 popInAnimation: 'popInAnimation 200ms ease-in-out',
                 popOutAnimation: 'popOutAnimation 220ms ease-in-out',
-                gradientBorderAnimation:
-                    'gradientBorderAnimation 5s ease infinite',
                 postReactionAnimation:
                     'postReactionAnimation 300ms ease-in-out',
                 squish: 'squish 300ms ease-in-out',
+                colorChangeAnimationBright:
+                    'colorChangeAnimationBright 5s ease infinite',
+                colorChangeAnimationDark:
+                    'colorChangeAnimationDark 3s ease infinite',
             },
         },
     },

@@ -62,10 +62,10 @@ export default function PostInputTextarea({
             </label>
             <div className="absolute left-0 bottom-0 w-full h-0.5 overflow-hidden">
                 <div
-                    className={`h-full w-full duration-300  ${
+                    className={`h-full w-full ${
                         isTextareaFocused
-                            ? 'bg-highlight dark:bg-highlightDark'
-                            : 'bg-gradient-to-r from-cGreen via-yellow-300 to-cBlue animate-gradientBorderAnimation'
+                            ? 'bg-highlight dark:bg-highlightDark '
+                            : 'animate-colorChangeAnimationBright dark:animate-colorChangeAnimationDark'
                     } `}
                 />
             </div>
