@@ -9,7 +9,7 @@ import { COVER_OPTIONS } from '../../SharedComponents/CoverOptions';
 import { getColors } from '../../../../../utilities/getColors';
 import ChangeCoverMenu from './ChangeCoverMenu/ChangeCoverMenu';
 import { FinalColor } from 'extract-colors';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type MyCoverSectionProps = {
     onFetchComplete: (nameOfComponent: string) => void;
@@ -113,12 +113,13 @@ export default function MyCoverSection({
     );
 
     const ChangeCoverButton = (
-        <button
+        <motion.button
             onClick={handleChangeCoverImage}
-            className="absolute right-4 top-4 flex justify-center items-center gap-1 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
+            whileTap={{ scale: 0.97 }}
+            className="absolute right-4 top-4 flex justify-center items-center gap-2 cursor-pointer bg-background1/80 dark:bg-background1Dark/80 text-regularText dark:text-regularTextDark px-4 py-2 text-xs rounded lg:rounded-lg"
         >
             Change cover image <FaImages size="1.5em" />
-        </button>
+        </motion.button>
     );
 
     const SaveButton = (
@@ -160,12 +161,11 @@ export default function MyCoverSection({
                 {CoverImage}
                 {!showMenu && ChangeCoverButton}
                 <AnimatePresence>
-                    {showMenu && (
-                        <ChangeCoverMenu
-                            handleCloseButtonCLick={handleCloseButtonCLick}
-                            handleCoverOptionClick={handleCoverOptionClick}
-                        />
-                    )}
+                    <ChangeCoverMenu
+                        showMenu={showMenu}
+                        handleCloseButtonCLick={handleCloseButtonCLick}
+                        handleCoverOptionClick={handleCoverOptionClick}
+                    />
                 </AnimatePresence>
                 {isSaveButtonShown && SaveButton}
             </div>
