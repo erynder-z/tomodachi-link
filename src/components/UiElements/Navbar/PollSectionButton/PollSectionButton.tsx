@@ -1,19 +1,20 @@
 import { MdPieChartOutlined } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function PollSectionButton() {
     return (
-        <NavLink
-            to="/polls"
-            className={({ isActive }) =>
-                isActive
-                    ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
-                    : 'text-regularText dark:text-regularTextDark flex self-center cursor-pointer h-6 w-full '
-            }
-        >
-            <button type="button">
+        <motion.button whileTap={{ scale: 0.97 }}>
+            <NavLink
+                to="/polls"
+                className={({ isActive }) =>
+                    isActive
+                        ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
+                        : 'text-regularText dark:text-regularTextDark flex self-center cursor-pointer h-6 w-full '
+                }
+            >
                 <MdPieChartOutlined size="1.5em" />
-            </button>
-        </NavLink>
+            </NavLink>
+        </motion.button>
     );
 }
