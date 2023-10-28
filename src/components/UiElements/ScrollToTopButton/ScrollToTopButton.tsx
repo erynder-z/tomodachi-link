@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MdKeyboardDoubleArrowUp } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
 export function ScrollToTopButton() {
     const [showButton, setShowButton] = useState(false);
@@ -38,7 +39,9 @@ export function ScrollToTopButton() {
             onClick={handleClick}
             style={{ scrollBehavior: 'smooth' }}
         >
-            <MdKeyboardDoubleArrowUp size="2em" />
+            <motion.div whileTap={{ scale: 0.97 }}>
+                <MdKeyboardDoubleArrowUp size="2em" />
+            </motion.div>
         </button>
     );
 }

@@ -18,6 +18,7 @@ export default function ThemeToggle() {
         <AnimatePresence initial={false}>
             <motion.div
                 onClick={toggleTheme}
+                whileTap={{ scale: 0.97 }}
                 className="cursor-pointer hover:text-highlight dark:hover:text-highlightDark duration-300"
             >
                 <motion.div

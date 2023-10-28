@@ -1,5 +1,6 @@
 import { TenorImage } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 type GifAreaProps = {
     setGif: React.Dispatch<React.SetStateAction<TenorImage | undefined>>;
@@ -8,14 +9,15 @@ type GifAreaProps = {
 
 export default function GifArea({ setGif, gif }: GifAreaProps) {
     const CloseButton = (
-        <button
+        <motion.button
             onClick={() => {
                 setGif(undefined);
             }}
+            whileTap={{ scale: 0.97 }}
             className="absolute top-0 right-0 text-red-500 z-5"
         >
             <FaTimes size="1.5em" />
-        </button>
+        </motion.button>
     );
     return (
         <div className="flex flex-col text-xs">

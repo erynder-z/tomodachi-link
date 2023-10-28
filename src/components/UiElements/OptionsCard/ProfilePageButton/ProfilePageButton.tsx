@@ -2,6 +2,7 @@ import { TbUserCircle } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import Badge from '../Badge/Badge';
+import { motion } from 'framer-motion';
 
 type ProfilePageButtonProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -31,15 +32,17 @@ export default function ProfilePageButton({
     };
 
     return (
-        <Link
-            to={'/mypage'}
-            onClick={handleCloseOptions}
-            className="relative cursor-pointer hover:drop-shadow-lg text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
-        >
-            <TbUserCircle size="1.5em" />
-            {numberOfPendingFriendRequests ? (
-                <Badge numberToShow={numberOfPendingFriendRequests} />
-            ) : null}
-        </Link>
+        <motion.div whileTap={{ scale: 0.97 }}>
+            <Link
+                to={'/mypage'}
+                onClick={handleCloseOptions}
+                className="relative cursor-pointer hover:drop-shadow-lg text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
+            >
+                <TbUserCircle size="1.5em" />
+                {numberOfPendingFriendRequests ? (
+                    <Badge numberToShow={numberOfPendingFriendRequests} />
+                ) : null}
+            </Link>
+        </motion.div>
     );
 }

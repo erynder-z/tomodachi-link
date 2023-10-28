@@ -2,6 +2,7 @@ import { FriendDataType } from '../../../../../../types/friendTypes';
 import { useNavigate } from 'react-router-dom';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { TbUserSearch } from 'react-icons/tb';
+import { motion } from 'framer-motion';
 
 type AllFiendsPageItemProps = {
     friendData: FriendDataType;
@@ -23,8 +24,9 @@ export default function AllFiendsPageItem({
 
     return (
         <div className="flex flex-col">
-            <div
+            <motion.div
                 onClick={handleUserClick}
+                whileTap={{ scale: 0.97 }}
                 className="cursor-pointer relative rounded outline-highlight dark:outline-highlightDark hover:outline hover:outline-8"
             >
                 <img
@@ -37,7 +39,7 @@ export default function AllFiendsPageItem({
                         <TbUserSearch size="2.5em" />
                     </span>
                 </div>
-            </div>
+            </motion.div>
             <div className="text-center text-xs font-bold p-1 break-all">
                 {firstName} {lastName}
             </div>

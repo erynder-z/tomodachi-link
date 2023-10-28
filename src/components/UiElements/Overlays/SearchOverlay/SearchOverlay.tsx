@@ -1,5 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import Search from '../../../Search/Search';
+import { motion } from 'framer-motion';
 
 type SearchOverlayProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -25,12 +26,13 @@ export default function SearchOverlay({
     };
 
     const CloseButton = (
-        <button
-            className="absolute top-0 right-0 m-4 text-regularTextDark font-bold text-lg"
+        <motion.button
+            whileTap={{ scale: 0.97 }}
+            className="absolute top-0 right-0 m-4 text-red-500 font-bold text-lg"
             onClick={handleCloseButtonClick}
         >
-            <FaTimes />
-        </button>
+            <FaTimes size="1.25em" />
+        </motion.button>
     );
 
     return (

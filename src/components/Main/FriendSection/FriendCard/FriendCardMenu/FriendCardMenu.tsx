@@ -59,21 +59,24 @@ export default function FriendCardMenu({
     };
 
     const LinkToUser = (
-        <Link
-            to={`/users/${id}`}
-            className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
-        >
-            <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                Visit page
-            </span>
-            <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                <TbLink />
-            </div>
-        </Link>
+        <motion.button whileTap={{ scale: 0.97 }} className="w-full">
+            <Link
+                to={`/users/${id}`}
+                className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
+            >
+                <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                    Visit page
+                </span>
+                <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                    <TbLink />
+                </div>
+            </Link>
+        </motion.button>
     );
 
     const ChatWithUser = (
-        <button
+        <motion.button
+            whileTap={{ scale: 0.97 }}
             className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
             onClick={handleChatButtonClick}
         >
@@ -83,11 +86,12 @@ export default function FriendCardMenu({
             <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                 <TbMessage />
             </div>
-        </button>
+        </motion.button>
     );
 
     const Unfriend = (
-        <button
+        <motion.button
+            whileTap={{ scale: 0.97 }}
             className="flex justify-between items-center w-full text-left cursor-pointer group"
             onClick={handleUnfriendButtonClick}
         >
@@ -95,7 +99,7 @@ export default function FriendCardMenu({
                 Unfriend
             </span>
             <TbUserMinus className="h-8 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all" />
-        </button>
+        </motion.button>
     );
 
     return (

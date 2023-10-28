@@ -90,12 +90,13 @@ export default function UserListAll() {
 
             {userList}
             {numberOfUsers != null && users.length < numberOfUsers - 1 && (
-                <button
+                <motion.button
                     onClick={handleButtonClick}
+                    whileTap={{ scale: 0.97 }}
                     className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit  bg-blue-500 hover:bg-blue-600 text-regularTextDark px-2 py-1 mt-4 text-sm"
                 >
                     Get more
-                </button>
+                </motion.button>
             )}
         </motion.div>
     );

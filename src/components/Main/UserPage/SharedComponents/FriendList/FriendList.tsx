@@ -3,6 +3,7 @@ import FriendListItem from './FriendListItem/FriendListItem';
 import { FriendDataType } from '../../../../../types/friendTypes';
 import { Link } from 'react-router-dom';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
 type FriendListProps = {
     friendData: FriendDataType[] | null;
@@ -27,13 +28,15 @@ function FriendList({ friendData, userId }: FriendListProps) {
     );
 
     const SeeAllFriendsButton = (
-        <Link
-            to={`/users/${userId}/friends/list`}
-            state={{ friendData: friendData }}
-            className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded  px-2 py-1 mt-4 text-sm"
-        >
-            See all <MdKeyboardDoubleArrowRight size="1.25em" />
-        </Link>
+        <motion.button whileTap={{ scale: 0.97 }}>
+            <Link
+                to={`/users/${userId}/friends/list`}
+                state={{ friendData: friendData }}
+                className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded  px-2 py-1 mt-4 text-sm"
+            >
+                See all <MdKeyboardDoubleArrowRight size="1.25em" />
+            </Link>
+        </motion.button>
     );
 
     return (

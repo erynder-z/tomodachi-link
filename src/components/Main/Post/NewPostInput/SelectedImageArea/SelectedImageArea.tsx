@@ -1,4 +1,5 @@
 import { FaTimes } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 type SelectedImageAreaProps = {
     setSelectedImage: React.Dispatch<React.SetStateAction<File | undefined>>;
@@ -22,14 +23,15 @@ export default function SelectedImageArea({
                     }
                     alt="uploaded image"
                 />
-                <button
+                <motion.button
                     onClick={() => {
                         setSelectedImage(undefined);
                     }}
+                    whileTap={{ scale: 0.97 }}
                     className="absolute top-0 right-0 text-red-500 z-5"
                 >
                     <FaTimes size="1.5em" />
-                </button>
+                </motion.button>
             </div>
         </div>
     );

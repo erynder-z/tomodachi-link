@@ -13,8 +13,9 @@ export default function TypeOfChartSwitcher({
         typeOfChart === 'PIE' ? setTypeOfChart('BAR') : setTypeOfChart('PIE');
     };
     return (
-        <button
+        <motion.button
             onClick={toggleChart}
+            whileTap={{ scale: 0.97 }}
             className="w-fit hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             {typeOfChart === 'PIE' ? (
@@ -37,6 +38,6 @@ export default function TypeOfChartSwitcher({
                     <MdPieChartOutline size="1.5em" />
                 </motion.div>
             )}
-        </button>
+        </motion.button>
     );
 }

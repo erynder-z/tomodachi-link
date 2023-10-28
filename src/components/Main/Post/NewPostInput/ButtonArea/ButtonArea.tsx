@@ -3,6 +3,7 @@ import { MdSend } from 'react-icons/md';
 import { TbGif } from 'react-icons/tb';
 import { ViewMode } from '../../../../../types/miscTypes';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
+import { motion } from 'framer-motion';
 
 type ButtonAreaProps = {
     handleImageSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -31,7 +32,7 @@ export default function ButtonArea({
                 />
                 <FaRegImage className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300t" />
             </label>
-            <button
+            <motion.button
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -41,15 +42,16 @@ export default function ButtonArea({
                             : ViewMode.YoutubeEmbed
                     );
                 }}
+                whileTap={{ scale: 0.97 }}
                 className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
             >
                 <FaYoutube />
-            </button>
+            </motion.button>
         </>
     );
 
     const GifButton = (
-        <button
+        <motion.button
             onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -59,14 +61,15 @@ export default function ButtonArea({
                         : ViewMode.GifSelector
                 );
             }}
+            whileTap={{ scale: 0.97 }}
             className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             <TbGif />
-        </button>
+        </motion.button>
     );
 
     const EmojiButton = (
-        <button
+        <motion.button
             onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -76,15 +79,17 @@ export default function ButtonArea({
                         : ViewMode.EmojiPicker
                 );
             }}
+            whileTap={{ scale: 0.97 }}
             className="text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             <FaRegSmileBeam />
-        </button>
+        </motion.button>
     );
 
     const SendButton = (
-        <button
+        <motion.button
             disabled={isSubmitting}
+            whileTap={{ scale: 0.97 }}
             className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm duration-300 ${
                 !postText || isSubmitting
                     ? 'bg-gray-500 hover:bg-gray-600'
@@ -93,7 +98,7 @@ export default function ButtonArea({
             title={postText ? undefined : 'Please enter a message'}
         >
             {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
-        </button>
+        </motion.button>
     );
 
     return (

@@ -198,12 +198,13 @@ export default function EditPostInput({
     };
 
     const CloseButton = (
-        <button
+        <motion.button
             onClick={handleComponentClose}
+            whileTap={{ scale: 0.97 }}
             className="absolute -top-8 -right-0 md:-right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
         >
             <FaTimes size="1.5em" />
-        </button>
+        </motion.button>
     );
 
     const PostEditForm = (

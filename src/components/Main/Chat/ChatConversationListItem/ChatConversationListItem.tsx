@@ -1,5 +1,6 @@
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
+import { motion } from 'framer-motion';
 
 type ChatConversationListItemProps = {
     listItemData: MinimalUserTypes | null;
@@ -18,7 +19,10 @@ export default function ChatConversationListItem({
     );
 
     const ChatConversationListItemContent = (
-        <div className="w-full flex items-center gap-2">
+        <motion.div
+            whileTap={{ scale: 0.97 }}
+            className="w-full flex items-center gap-2"
+        >
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
@@ -30,7 +34,7 @@ export default function ChatConversationListItem({
             <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis text-sm">
                 {firstName} {lastName}
             </div>
-        </div>
+        </motion.div>
     );
 
     return !listItemData ? LoadingContent : ChatConversationListItemContent;

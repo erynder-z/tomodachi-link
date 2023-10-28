@@ -5,6 +5,7 @@ import { FaRegSmileBeam } from 'react-icons/fa';
 import { MdSend } from 'react-icons/md';
 import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 import ButtonBusy from '../../../UiElements/LoadingSpinner/ButtonBusy';
+import { motion } from 'framer-motion';
 
 type CommentInputProps = {
     parentItemID: string;
@@ -99,21 +100,23 @@ export default function CommentInput({
     );
 
     const EmojiInputButton = (
-        <button
+        <motion.button
             onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 setShowEmojiPicker(!showEmojiPicker);
             }}
+            whileTap={{ scale: 0.97 }}
             className="text-back hover:text-blue-500"
         >
             <FaRegSmileBeam />
-        </button>
+        </motion.button>
     );
 
     const SubmitButton = (
-        <button
+        <motion.button
             disabled={isSubmitting || !commentText}
+            whileTap={{ scale: 0.97 }}
             className={`flex justify-center items-center text-regularTextDark font-bold h-8 w-16 py-2 px-4 rounded duration-300 ${
                 !commentText || isSubmitting
                     ? 'bg-gray-500 hover:bg-gray-600'
@@ -122,7 +125,7 @@ export default function CommentInput({
             type="submit"
         >
             {isSubmitting ? <ButtonBusy /> : <MdSend />}
-        </button>
+        </motion.button>
     );
 
     return (

@@ -7,6 +7,7 @@ import useFriendData from '../../../../../../hooks/useFriendData';
 import ConfirmationOverlay from '../../../../../UiElements/Overlays/ConfirmationOverlay/ConfirmationOverlay';
 import useDelayUnmount from '../../../../../../hooks/useDelayUnmount';
 import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
+import { motion } from 'framer-motion';
 
 type UnfriendButtonProps = {
     unfriendUserId: string;
@@ -53,12 +54,13 @@ export default function UnfriendButton({
     );
 
     const Button = (
-        <button
+        <motion.button
+            whileTap={{ scale: 0.97 }}
             className="flex justify-center items-center gap-2 bg-red-500 text-regularTextDark px-2 py-1 w-fit m-auto md:ml-auto hover:bg-red-600 rounded"
             onClick={handleUnfriendButtonClick}
         >
             Unfriend <TbUserMinus size="1.25em" />
-        </button>
+        </motion.button>
     );
 
     return (

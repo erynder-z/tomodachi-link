@@ -1,6 +1,7 @@
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 import { MdOutlineStart } from 'react-icons/md';
 import { CreatedPollDataType } from '../../../../../types/pollTypes';
+import { motion } from 'framer-motion';
 
 type CreatePollButtonProps = {
     pollData: CreatedPollDataType;
@@ -19,8 +20,9 @@ export default function CreatePollButton({
         options.some((option) => option.trim() === '');
 
     return (
-        <button
+        <motion.button
             disabled={isButtonDisabled}
+            whileTap={{ scale: 0.97 }}
             className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm ${
                 isButtonDisabled
                     ? 'bg-gray-500 hover:bg-gray-600'
@@ -33,6 +35,6 @@ export default function CreatePollButton({
             }
         >
             {isSubmitting ? <ButtonBusy /> : <MdOutlineStart size="1.5em" />}
-        </button>
+        </motion.button>
     );
 }

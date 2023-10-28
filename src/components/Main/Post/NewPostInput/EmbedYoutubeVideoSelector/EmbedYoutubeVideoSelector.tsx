@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import useInfoCard from '../../../../../hooks/useInfoCard';
+import { motion } from 'framer-motion';
 
 type EmbedYoutubeVideoSelectorProps = {
     setShowYoutubeEmbed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,12 +44,13 @@ export default function EmbedYoutubeVideoSelector({
     }, [selectedURL]);
 
     const CloseButton = (
-        <button
+        <motion.button
             onClick={handleComponentClose}
+            whileTap={{ scale: 0.97 }}
             className="absolute -top-16 -right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
         >
             <FaTimes size="1.25em" />
-        </button>
+        </motion.button>
     );
 
     const InputField = (
@@ -75,7 +77,12 @@ export default function EmbedYoutubeVideoSelector({
     );
 
     const AddButton = (
-        <button className="w-full bg-blue-500 text-white px-2 py-1">Add</button>
+        <motion.button
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-blue-500 text-white px-2 py-1"
+        >
+            Add
+        </motion.button>
     );
 
     return (

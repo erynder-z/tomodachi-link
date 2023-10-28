@@ -57,21 +57,23 @@ export default function IncomingFriendRequestPendingContent({
     );
 
     const AcceptButton = (
-        <button
+        <motion.button
             onClick={handleAcceptFriendRequest}
+            whileTap={{ scale: 0.97 }}
             className="bg-green-500 text-regularTextDark text-xs px-2 py-1 hover:bg-green-600"
         >
             Accept
-        </button>
+        </motion.button>
     );
 
     const DeclineButton = (
-        <button
+        <motion.button
             onClick={handleDeclineFriendRequest}
+            whileTap={{ scale: 0.97 }}
             className="bg-red-500 text-regularTextDark text-xs px-2 py-1 hover:bg-red-600"
         >
             Decline
-        </button>
+        </motion.button>
     );
 
     return (

@@ -6,6 +6,7 @@ import { FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
+import { motion } from 'framer-motion';
 
 type EditUserDataModalFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -215,15 +216,22 @@ export default function EditUserDataModalForm({
     );
 
     const GuestButton = (
-        <button disabled className="w-full bg-gray-500 text-white px-2 py-1">
+        <motion.button
+            disabled
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-gray-500 text-white px-2 py-1"
+        >
             Cannot update guest account!
-        </button>
+        </motion.button>
     );
 
     const NormalUserButton = (
-        <button className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded">
+        <motion.button
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded"
+        >
             Update
-        </button>
+        </motion.button>
     );
 
     return (

@@ -12,6 +12,7 @@ import ChatConversationListItem from '../ChatConversationListItem/ChatConversati
 import { handleConversationMuteBackend } from '../../../../utilities/handleConversationMuteBackend';
 import useNotificationBubblesContext from '../../../../hooks/useNotificationBubblesContext';
 import { backendFetch } from '../../../../utilities/backendFetch';
+import { motion } from 'framer-motion';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;
@@ -93,7 +94,8 @@ export default function ChatConversation({
     const ChatConversationContent = (
         <div className="flex items-center w-full gap-2 p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-3xl">
             <ChatConversationListItem listItemData={chatPartner} />
-            <div
+            <motion.div
+                whileTap={{ scale: 0.97 }}
                 className="flex flex-col md:flex-row md:gap-4 md:w-16"
                 onClick={(e) => {
                     e.stopPropagation();
@@ -112,7 +114,7 @@ export default function ChatConversation({
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-highlight dark:bg-highlightDark"></span>
                     </div>
                 )}
-            </div>
+            </motion.div>
         </div>
     );
 

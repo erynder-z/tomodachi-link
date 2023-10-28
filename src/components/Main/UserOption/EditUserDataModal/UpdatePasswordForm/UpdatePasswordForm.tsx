@@ -2,6 +2,7 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { usePasswordComparison } from '../../../../../hooks/usePasswordComparison';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
+import { motion } from 'framer-motion';
 
 type UpdatePasswordFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -153,18 +154,22 @@ export default function UpdatePasswordForm({
     );
 
     const GuestButton = (
-        <button
+        <motion.button
             disabled
+            whileTap={{ scale: 0.97 }}
             className="w-full bg-gray-500 text-regularTextDark px-2 py-1 rounded"
         >
             Cannot change guest password!
-        </button>
+        </motion.button>
     );
 
     const NormalUserButton = (
-        <button className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded">
+        <motion.button
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded"
+        >
             Update
-        </button>
+        </motion.button>
     );
 
     return (

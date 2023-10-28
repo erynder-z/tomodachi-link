@@ -3,6 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 import EditUserDataModalForm from './EditUserDataModalForm/EditUserDataModalForm';
 import UpdatePasswordButton from './UpdatePasswordButton/UpdatePasswordButton';
 import UpdatePasswordForm from './UpdatePasswordForm/UpdatePasswordForm';
+import { motion } from 'framer-motion';
 
 type EditUserDataModalProps = {
     shouldEditUserDataModalShow: boolean;
@@ -62,12 +63,13 @@ export default function EditUserDataModal({
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black/80">
             <div className="relative w-11/12 lg:w-1/5 flex flex-col justify-around shadow-lg p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark  rounded lg:rounded-lg">
-                <button
+                <motion.button
                     onClick={handleCloseButtonClick}
+                    whileTap={{ scale: 0.97 }}
                     className="absolute top-2 right-2"
                 >
                     <FaTimes />
-                </button>
+                </motion.button>
                 {renderCurrentMenu()}
             </div>
         </div>

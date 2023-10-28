@@ -28,13 +28,17 @@ export default function NormalContent({
     const getButton = () => {
         if (disableButton) {
             return (
-                <button disabled className="bg-gray-500 text-white px-2 py-1">
+                <motion.button
+                    disabled
+                    whileTap={{ scale: 0.97 }}
+                    className="bg-gray-500 text-white px-2 py-1"
+                >
                     Friend request pending
-                </button>
+                </motion.button>
             );
         } else {
             return (
-                <button
+                <motion.button
                     onClick={() => {
                         if (token) {
                             const typeOfRequest = 'send';
@@ -47,10 +51,11 @@ export default function NormalContent({
                             );
                         }
                     }}
+                    whileTap={{ scale: 0.97 }}
                     className="bg-blue-500 text-white px-2 py-1 hover:bg-blue-600"
                 >
                     Send friend request
-                </button>
+                </motion.button>
             );
         }
     };

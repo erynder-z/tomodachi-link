@@ -1,4 +1,5 @@
 import { MdKey } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
 type UpdatePasswordButtonProps = {
     setCurrentMenu: React.Dispatch<React.SetStateAction<string>>;
@@ -12,12 +13,13 @@ export default function UpdatePasswordButton({
     };
     return (
         <div className="flex w-full">
-            <button
+            <motion.button
                 onClick={handleUpdatePasswordButtonClick}
+                whileTap={{ scale: 0.97 }}
                 className="flex justify-center items-center gap-4 w-full bg-fuchsia-700 hover:bg-fuchsia-800 text-regularTextDark px-2 py-1 rounded"
             >
                 <MdKey size="1.5em" /> Change Password
-            </button>
+            </motion.button>
         </div>
     );
 }

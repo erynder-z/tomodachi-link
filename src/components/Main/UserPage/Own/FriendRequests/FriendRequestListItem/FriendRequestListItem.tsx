@@ -9,6 +9,7 @@ import { convertDatabaseImageToBase64 } from '../../../../../../utilities/conver
 import useFriendData from '../../../../../../hooks/useFriendData';
 import { backendFetch } from '../../../../../../utilities/backendFetch';
 import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
+import { motion } from 'framer-motion';
 
 type FriendRequestListItemProps = {
     friendRequestUserId: string;
@@ -124,18 +125,20 @@ export default function FriendRequestListItem({
                 </div>
             </div>
             <div className="flex items-center gap-4">
-                <button
+                <motion.button
                     onClick={handleAcceptFriendRequest}
+                    whileTap={{ scale: 0.97 }}
                     className="bg-green-500 text-regularTextDark text-xs px-2 py-1 hover:bg-green-600 rounded"
                 >
                     Accept
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                     onClick={handleDeclineFriendRequest}
+                    whileTap={{ scale: 0.97 }}
                     className="bg-red-500 text-regularTextDark text-xs px-2 py-1 hover:bg-red-600 rounded"
                 >
                     Decline
-                </button>
+                </motion.button>
             </div>
         </div>
     );

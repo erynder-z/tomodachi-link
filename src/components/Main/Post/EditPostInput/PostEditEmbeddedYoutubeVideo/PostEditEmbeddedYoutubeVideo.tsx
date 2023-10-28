@@ -1,5 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import { EmbeddedYoutubeVideo } from '../../PostItem/PostEmbeddedYoutubeVideoSection/EmbeddedYoutubeVideo/EmbeddedYoutubeVideo';
+import { motion } from 'framer-motion';
 
 type PostEditEmbeddedYoutubeVideoProps = {
     dbEmbeddedVideoID: string;
@@ -19,14 +20,15 @@ export default function PostEditEmbeddedYoutubeVideo({
     return (
         <div className="relative flex flex-col justify-center items-center text-xs h-auto w-full">
             <EmbeddedYoutubeVideo videoID={dbEmbeddedVideoID} />
-            <button
+            <motion.button
                 onClick={(e) => {
                     handleRemoveButtonClick(e);
                 }}
+                whileTap={{ scale: 0.97 }}
                 className="absolute top-0 right-0 text-red-500 z-5"
             >
                 <FaTimes size="1.25rem" />
-            </button>
+            </motion.button>
         </div>
     );
 }

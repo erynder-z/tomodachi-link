@@ -2,6 +2,7 @@ import { RetrievedPollDataType } from '../../../../../types/pollTypes';
 import useAuth from '../../../../../hooks/useAuth';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import useInfoCard from '../../../../../hooks/useInfoCard';
+import { motion } from 'framer-motion';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
@@ -60,12 +61,13 @@ export default function PollAnswerSection({
         const optionID = _id;
 
         return (
-            <button
+            <motion.button
                 key={optionID}
                 disabled={!canAnswerPost}
                 onClick={() => {
                     handleButtonClick(pollID, optionID);
                 }}
+                whileTap={{ scale: 0.97 }}
                 className={`${
                     canAnswerPost
                         ? 'p-2 w-12 min-w-max text-base bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark duration-300 rounded'
@@ -73,7 +75,7 @@ export default function PollAnswerSection({
                 }`}
             >
                 {nameOfOption}
-            </button>
+            </motion.button>
         );
     };
 

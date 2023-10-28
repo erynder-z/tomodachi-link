@@ -1,4 +1,5 @@
 import { TbSettings } from 'react-icons/tb';
+import { motion } from 'framer-motion';
 
 type OptionsButtonProps = {
     shouldOverlaysShow: {
@@ -30,12 +31,13 @@ export default function OptionsButton({
     };
 
     return (
-        <button
+        <motion.button
             type="button"
             onClick={handleButtonClick}
+            whileTap={{ scale: 0.97 }}
             className="cursor-pointer hover:drop-shadow-md hover:text-highlight dark:hover:text-highlightDark duration-300"
         >
             <TbSettings size="1.5em" />
-        </button>
+        </motion.button>
     );
 }

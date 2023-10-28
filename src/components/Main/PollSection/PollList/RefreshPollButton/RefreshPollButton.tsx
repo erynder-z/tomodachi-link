@@ -1,4 +1,5 @@
 import { MdSync } from 'react-icons/md';
+import { motion } from 'framer-motion';
 import './RefreshPollButton.css';
 
 type RefreshPollButtonProps = {
@@ -9,8 +10,12 @@ export default function RefreshPollButton({
     refreshPoll,
 }: RefreshPollButtonProps) {
     return (
-        <button onClick={refreshPoll} className="refresh-button">
+        <motion.button
+            onClick={refreshPoll}
+            whileTap={{ scale: 0.97 }}
+            className="refresh-button"
+        >
             <MdSync className="spin-on-hover" />
-        </button>
+        </motion.button>
     );
 }

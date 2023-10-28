@@ -1,4 +1,5 @@
 import { SearchResultType } from '../../../types/searchTypes';
+import { motion } from 'framer-motion';
 
 type ClearButtonProps = {
     setSearchText: React.Dispatch<React.SetStateAction<string>>;
@@ -15,11 +16,12 @@ export default function ClearButton({
     };
 
     return (
-        <button
+        <motion.button
+            whileTap={{ scale: 0.97 }}
             className="absolute -top-5 right-2 text-regularTextDark hover:text-highlight dark:hover:text-highlightDark text-xs"
             onClick={handleClear}
         >
             Clear
-        </button>
+        </motion.button>
     );
 }

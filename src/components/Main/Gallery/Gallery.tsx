@@ -9,6 +9,7 @@ import LightBox from '../../UiElements/LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
 import useDelayUnmount from '../../../hooks/useDelayUnmount';
 import { backendFetch } from '../../../utilities/backendFetch';
+import { motion } from 'framer-motion';
 
 type GalleryProps = {
     isPaginationTriggered: boolean;
@@ -91,7 +92,11 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
     }, []);
 
     const pictureList = pictures?.map((picture) => (
-        <div key={picture.id} className="relative">
+        <motion.div
+            key={picture.id}
+            whileTap={{ scale: 0.97 }}
+            className="relative"
+        >
             <img
                 loading="lazy"
                 className="w-full h-auto aspect-square object-cover shadow-lg cursor-pointer"
@@ -108,7 +113,7 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
                     <MdOutlineZoomIn size="1.5em" />
                 </span>
             </div>
-        </div>
+        </motion.div>
     ));
 
     const LoadingContent = (

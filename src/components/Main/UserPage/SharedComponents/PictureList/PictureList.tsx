@@ -9,6 +9,7 @@ import { MdKeyboardDoubleArrowRight, MdZoomOutMap } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { backendFetch } from '../../../../../utilities/backendFetch';
+import { motion } from 'framer-motion';
 
 type PictureListProps = {
     onFetchComplete: (nameOfComponent: string) => void;
@@ -111,12 +112,14 @@ export default function PictureList({
         );
 
     const SeeAllPicturesButton = (
-        <Link
-            to={`/users/${userId}/gallery`}
-            className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded px-2 py-1 mt-4 text-sm"
-        >
-            See all <MdKeyboardDoubleArrowRight size="1.25em" />
-        </Link>
+        <motion.button whileTap={{ scale: 0.97 }}>
+            <Link
+                to={`/users/${userId}/gallery`}
+                className="flex items-center justify-center md:justify-start gap-2 w-full md:w-fit bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded px-2 py-1 mt-4 text-sm"
+            >
+                See all <MdKeyboardDoubleArrowRight size="1.25em" />
+            </Link>
+        </motion.button>
     );
 
     return (

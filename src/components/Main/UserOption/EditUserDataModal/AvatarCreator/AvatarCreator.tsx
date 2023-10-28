@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { FaTimes } from 'react-icons/fa';
 import resizeFile from '../../../../../utilities/ImageResizer';
+import { motion } from 'framer-motion';
 
 type AvatarCreatorProps = {
     image: File;
@@ -57,12 +58,13 @@ function AvatarCreator({
         setScale(parseFloat(e.target.value));
 
     const CloseButton = (
-        <button
+        <motion.button
             onClick={handleCloseButtonClick}
+            whileTap={{ scale: 0.97 }}
             className="absolute top-2 right-2 text-white"
         >
             <FaTimes />
-        </button>
+        </motion.button>
     );
 
     const ScaleInput = (
@@ -83,12 +85,13 @@ function AvatarCreator({
     );
 
     const ConfirmButton = (
-        <button
+        <motion.button
             onClick={handleConfirmButtonClick}
+            whileTap={{ scale: 0.97 }}
             className="bg-blue-500 text-white px-2 py-1"
         >
             Confirm
-        </button>
+        </motion.button>
     );
 
     return (

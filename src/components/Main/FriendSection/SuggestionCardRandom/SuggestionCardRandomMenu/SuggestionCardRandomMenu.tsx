@@ -13,6 +13,7 @@ export default function SuggestionCardRandomMenu({
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            whileTap={{ scale: 0.97 }}
             className="flex flex-col gap-2 justify-around items-center"
         >
             <Link

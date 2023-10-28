@@ -23,7 +23,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     const [disableFriendRequestButton, setDisableFriendRequestButton] =
         useState(false);
     const shouldFetchFriendData = useRef(true);
- 
+
     const otherUserId = id;
 
     const fetchUserData = async () => {
@@ -61,17 +61,19 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     }, [isFriendRequestPending]);
 
     const LinkToUser = (
-        <Link
-            to={`/users/${id}`}
-            className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
-        >
-            <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                Visit page
-            </span>
-            <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
-                <TbLink />
-            </div>
-        </Link>
+        <motion.button whileTap={{ scale: 0.97 }} className="w-full">
+            <Link
+                to={`/users/${id}`}
+                className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
+            >
+                <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                    Visit page
+                </span>
+                <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                    <TbLink />
+                </div>
+            </Link>
+        </motion.button>
     );
 
     const PendingFriendRequestContent = (
@@ -83,7 +85,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     );
 
     const CanSendFriendRequestContent = (
-        <button
+        <motion.button
             onClick={() => {
                 if (token) {
                     const typeOfRequest = 'send';
@@ -96,6 +98,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
                     );
                 }
             }}
+            whileTap={{ scale: 0.97 }}
             className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight"
         >
             <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
@@ -104,7 +107,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
             <div className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                 <TbUserPlus />
             </div>
-        </button>
+        </motion.button>
     );
 
     return (

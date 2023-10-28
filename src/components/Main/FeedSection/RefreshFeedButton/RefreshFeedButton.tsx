@@ -1,4 +1,5 @@
 import { MdSync } from 'react-icons/md';
+import { motion } from 'framer-motion';
 import './RefreshFeedButton.css';
 
 type RefreshFeedButtonProps = {
@@ -9,8 +10,12 @@ export default function RefreshFeedButton({
     refreshFeed,
 }: RefreshFeedButtonProps) {
     return (
-        <button onClick={refreshFeed} className="refresh-button">
+        <motion.button
+            onClick={refreshFeed}
+            whileTap={{ scale: 0.97 }}
+            className="refresh-button"
+        >
             <MdSync className="spin-on-hover" />
-        </button>
+        </motion.button>
     );
 }

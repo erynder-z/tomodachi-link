@@ -1,4 +1,5 @@
 import { FaTimes } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 type PostEditImageSectionProps = {
     convertedImage: string;
@@ -22,14 +23,15 @@ export default function PostEditImageSection({
                 src={`data:image/png;base64,${convertedImage}`}
                 alt="User uploaded image"
             />
-            <button
+            <motion.button
                 onClick={(e) => {
                     handleRemoveButtonClick(e);
                 }}
+                whileTap={{ scale: 0.97 }}
                 className="absolute top-0 right-0 text-red-500 z-5"
             >
                 <FaTimes size="1.25rem" />
-            </button>
+            </motion.button>
         </div>
     );
 }

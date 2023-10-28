@@ -36,12 +36,13 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
                     alt="Selected image"
                 />
             )}
-            <button
+            <motion.button
+                whileTap={{ scale: 0.97 }}
                 className="absolute top-0 right-0 m-4 text-regularTextDark font-bold text-lg"
                 onClick={onClose}
             >
                 <FaTimes />
-            </button>
+            </motion.button>
         </motion.div>
     );
 }
