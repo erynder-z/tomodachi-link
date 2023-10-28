@@ -13,7 +13,7 @@ type MyPostListProps = {
     userId: string | undefined;
     isPaginationTriggered: boolean;
     onPostChange?: () => void;
-    setShouldRefreshPictureList: React.Dispatch<React.SetStateAction<boolean>>;
+    setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function PostList({
