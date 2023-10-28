@@ -249,6 +249,11 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}
+                {messages.length === 0 && (
+                    <div className="flex flex-col justify-center items-center px-4 text-xl font-bold text-gray-400 text-center h-[calc(100vh_-_19rem)]  lg:h-[calc(100vh_-_22rem)]">
+                        <span>Chat message will appear here.</span>
+                    </div>
+                )}
                 <TypingIndicator isTyping={isTyping} />
                 <span ref={dummy} />
             </div>

@@ -94,7 +94,7 @@ export default function Navbar({
                 <FeedSectionButton />
                 <FriendSectionButton />
                 <PollSectionButton />
-                <div className="relative">
+                <div className="relative flex justify-center items-center">
                     <ChatSectionButton isChatDisabled={isChatDisabled} />
                     {shouldUnreadBubbleShow && (
                         <div className="absolute -bottom-1 -right-1 flex h-3 w-3">
