@@ -19,6 +19,7 @@ import TypingIndicator from './TypingIndicator/TypingIndicator';
 import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { handleChatMessagesInDB } from '../../../../utilities/handleChatMessagesInDatabase';
+import GetOlderMessagesButton from './GetOlderMessagesButton/GetOlderMessagesButton';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -35,6 +36,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         null
     );
     const [messages, setMessages] = useState<DisplayChatMessageType[]>([]);
+    const [totalMessages, setTotalMessages] = useState<number>(0);
     const [inputMessage, setInputMessage] = useState<string>('');
     const [receivedMessage, setReceivedMessage] =
         useState<DisplayChatMessageType | null>(null);
@@ -46,6 +48,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
 
     const shouldFetch = useRef(true);
     const shouldInitializeSocket = useRef(true);
+    const canLoadMoreMessages = messages.length < totalMessages;
 
     const dummy = useRef<HTMLSpanElement>(null);
     const userId = currentUserData?._id;
@@ -69,9 +72,12 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const handleFetchChatMessages = async () => {
+    const handleFetchChatMessages = async (
+        messageScope: 'all' | 'latest' = 'latest'
+    ) => {
         if (token && chatId) {
-            const apiEndpointURL = `/api/v1/message/${chatId}`;
+            setIsSubmitting(true);
+            const apiEndpointURL = `/api/v1/message/${chatId}?messageScope=${messageScope}`;
             const method = 'GET';
             const errorMessage = 'Unable to fetch conversation!';
 
@@ -84,6 +90,8 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 errorMessage
             );
             setMessages(response?.messages);
+            setTotalMessages(response?.totalMessageCount);
+            setIsSubmitting(false);
             setLoading(false);
         }
     };
@@ -212,7 +220,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     useEffect(() => {
         if (shouldFetch.current) {
             handleFetchPartnerData();
-            handleFetchChatMessages();
+            handleFetchChatMessages('latest');
         }
         return () => {
             shouldFetch.current = false;
@@ -246,6 +254,12 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 partnerData={partnerData}
             />
             <div className="flex-1 overflow-y-auto pb-12 mt-4">
+                {canLoadMoreMessages && (
+                    <GetOlderMessagesButton
+                        handleFetchChatMessages={handleFetchChatMessages}
+                        isSubmitting={isSubmitting}
+                    />
+                )}
                 {messages.map((message, index) => (
                     <ChatroomMessage key={index} message={message} />
                 ))}
