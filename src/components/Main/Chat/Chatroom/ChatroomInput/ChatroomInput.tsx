@@ -68,7 +68,7 @@ export default function ChatroomInput({
                 className={`h-full w-full  ${
                     isInputFocused
                         ? 'bg-highlight dark:bg-highlightDark'
-                        : 'bg-gradient-to-r from-cGreen via-yellow-300 to-cBlue animate-gradientBorderAnimation'
+                        : 'animate-colorChangeAnimationBright dark:animate-colorChangeAnimationDark'
                 } `}
             />
         </div>
