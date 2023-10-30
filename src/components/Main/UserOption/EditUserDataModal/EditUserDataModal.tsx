@@ -66,10 +66,21 @@ export default function EditUserDataModal({
                 <motion.button
                     onClick={handleCloseButtonClick}
                     whileTap={{ scale: 0.97 }}
-                    className="absolute top-2 right-2"
+                    id="non-mobile-close-button"
+                    className="absolute -top-8 -right-8 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
                 >
-                    <FaTimes />
+                    <FaTimes size="1.25em" />
                 </motion.button>
+                <div className="md:hidden">
+                    <motion.button
+                        onClick={handleCloseButtonClick}
+                        whileTap={{ scale: 0.97 }}
+                        id="mobile-close-button"
+                        className="absolute top-2 right-2"
+                    >
+                        <FaTimes />
+                    </motion.button>
+                </div>
                 {renderCurrentMenu()}
             </div>
         </div>

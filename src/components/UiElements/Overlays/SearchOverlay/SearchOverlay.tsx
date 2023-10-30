@@ -27,9 +27,9 @@ export default function SearchOverlay({
 
     const CloseButton = (
         <motion.button
-            whileTap={{ scale: 0.97 }}
-            className="absolute top-0 right-0 m-4 text-red-500 font-bold text-lg"
             onClick={handleCloseButtonClick}
+            whileTap={{ scale: 0.97 }}
+            className="absolute top-4 right-4 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
         >
             <FaTimes size="1.25em" />
         </motion.button>

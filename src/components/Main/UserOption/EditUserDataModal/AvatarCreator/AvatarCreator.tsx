@@ -61,9 +61,9 @@ function AvatarCreator({
         <motion.button
             onClick={handleCloseButtonClick}
             whileTap={{ scale: 0.97 }}
-            className="absolute top-2 right-2 text-white"
+            className="relative  -right-28 md:-right-48 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
         >
-            <FaTimes />
+            <FaTimes size="1.25em" />
         </motion.button>
     );
 
@@ -97,7 +97,7 @@ function AvatarCreator({
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 bg-black">
             {CloseButton}
-            <h3 className="text-white">
+            <h3 className="text-white text-sm md:text-base">
                 Grab the image to position your avatar
             </h3>
             <AvatarEditor

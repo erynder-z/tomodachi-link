@@ -29,20 +29,22 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
             exit={{ opacity: 0 }}
             className="fixed top-0 left-0 z-50 w-screen h-screen bg-gray-800 bg-opacity-75 flex justify-center items-center"
         >
-            {src && (
-                <img
-                    className="max-w-full max-h-full"
-                    src={src}
-                    alt="Selected image"
-                />
-            )}
-            <motion.button
-                whileTap={{ scale: 0.97 }}
-                className="absolute top-0 right-0 m-4 text-regularTextDark font-bold text-lg"
-                onClick={onClose}
-            >
-                <FaTimes />
-            </motion.button>
+            <div className=" flex flex-col items-end justify-end">
+                <motion.button
+                    onClick={onClose}
+                    whileTap={{ scale: 0.97 }}
+                    className="relative -top-2 right-2 md:-right-8 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+                >
+                    <FaTimes size="1.25em" />
+                </motion.button>
+                {src && (
+                    <img
+                        className="max-w-full max-h-full"
+                        src={src}
+                        alt="Selected image"
+                    />
+                )}
+            </div>
         </motion.div>
     );
 }

@@ -196,7 +196,7 @@ export default function EditUserDataModalForm({
     );
 
     const PasswordInput = (
-        <div className="relative mt-12 z-0">
+        <div className="relative mt-4 md:mt-12 z-0">
             <input
                 required
                 autoComplete="off"
@@ -245,7 +245,7 @@ export default function EditUserDataModalForm({
                 onSubmit={handleSubmit}
                 className="divide-y divide-gray-200"
             >
-                <div className="py-8 text-base flex flex-col gap-4 text-regularText dark:text-regularTextDark sm:text-lg sm:leading-7">
+                <div className="py-4 md:py-8 text-base flex flex-col gap-4 text-regularText dark:text-regularTextDark sm:text-lg sm:leading-7">
                     {UserImageSection}
                     {FirstNameInput}
                     {LastNameInput}
