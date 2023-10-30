@@ -221,11 +221,13 @@ export default function NewPostInput({
         <div className="font-roboto flex gap-4 p-2 md:p-4 lg:w-full lg:flex-row lg:justify-around rounded lg:shadow-lg bg-card dark:bg-cardDark">
             {FormContent}
             <AnimatePresence>
-                {viewMode === ViewMode.EmojiPicker && EmojiSelectorModal}
+                <div className="absolute z-50">
+                    {viewMode === ViewMode.EmojiPicker && EmojiSelectorModal}
 
-                {viewMode === ViewMode.GifSelector && GifSelectorModal}
+                    {viewMode === ViewMode.GifSelector && GifSelectorModal}
 
-                {viewMode === ViewMode.YoutubeEmbed && YoutubeSelectorModal}
+                    {viewMode === ViewMode.YoutubeEmbed && YoutubeSelectorModal}
+                </div>
             </AnimatePresence>
         </div>
     );
