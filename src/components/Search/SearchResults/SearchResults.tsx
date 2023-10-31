@@ -7,6 +7,7 @@ import {
 import SearchResultsUserListItem from './SearchResultsUserItem/SearchResultsUserItem';
 import SearchResultsPostItem from './SearchResultsPostItem/SearchResultsPostItem';
 import SearchResultsPollItem from './SearchResultsPollItem/SearchResultsPollItem';
+import { motion } from 'framer-motion';
 
 type SearchResultsProps = {
     searchText: string;
@@ -46,14 +47,23 @@ export default function SearchResults({
         }
     };
     return (
-        <ul
-            className="w-full p-2 bg-slate-800/80 peer-focus:bg-white/70 dark:peer-focus:bg-white/20 overflow-auto ${
-    max-h-[50vh]"
-        >
-            {searchResults?.map((resultItem: SearchResultType) => (
-                <div key={resultItem.data._id} onClick={handleCloseButtonClick}>
+        <ul className="w-full p-2 bg-slate-800/80 peer-focus:bg-white/70 dark:peer-focus:bg-white/20 overflow-auto max-h-[50vh] overflow-x-hidden">
+            {searchResults?.map((resultItem: SearchResultType, index) => (
+                <motion.li
+                    key={resultItem.data._id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{
+                        type: 'spring',
+                        bounce: 0,
+                        duration: 0.3,
+                        delay: index * 0.03,
+                    }}
+                    onClick={handleCloseButtonClick}
+                >
                     {getSearchResultComponent(resultItem)}
-                </div>
+                </motion.li>
             ))}
         </ul>
     );

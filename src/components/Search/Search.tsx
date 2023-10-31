@@ -8,6 +8,7 @@ import SpyGlassIcon from './SpyGlassIcon/SpyGlassIcon';
 import NoResultsFound from './SearchResults/NoResultsFound/NoResultsFound';
 import ClearButton from './ClearButton/ClearButton';
 import { FetchStatusType } from '../../types/miscTypes';
+import { AnimatePresence } from 'framer-motion';
 
 type SearchPropsType = {
     handleCloseButtonClick: () => void;
@@ -98,27 +99,29 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 searchText={searchText}
                 setSearchText={setSearchText}
             />
-            {isDebouncing && searchText ? (
-                Loading
-            ) : isLoading ? (
-                Loading
-            ) : searchResults.length > 0 && Array.isArray(searchResults) ? (
-                <SearchResults
-                    searchText={searchText}
-                    searchResults={searchResults}
-                    handleCloseButtonClick={handleCloseButtonClick}
-                />
-            ) : searchText ? (
-                <NoResultsFound />
-            ) : (
-                <SpyGlassIcon />
-            )}
-            {searchText && (
-                <ClearButton
-                    setSearchText={setSearchText}
-                    setSearchResults={setSearchResults}
-                />
-            )}
+            <AnimatePresence>
+                {isDebouncing && searchText ? (
+                    Loading
+                ) : isLoading ? (
+                    Loading
+                ) : searchResults.length > 0 && Array.isArray(searchResults) ? (
+                    <SearchResults
+                        searchText={searchText}
+                        searchResults={searchResults}
+                        handleCloseButtonClick={handleCloseButtonClick}
+                    />
+                ) : searchText ? (
+                    <NoResultsFound />
+                ) : (
+                    <SpyGlassIcon />
+                )}
+                {searchText && (
+                    <ClearButton
+                        setSearchText={setSearchText}
+                        setSearchResults={setSearchResults}
+                    />
+                )}{' '}
+            </AnimatePresence>
         </div>
     );
 }
