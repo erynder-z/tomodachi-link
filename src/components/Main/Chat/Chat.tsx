@@ -17,6 +17,7 @@ type ChatProps = {
 };
 
 const USER_NOTIFICATION_TIMEOUT = 3000;
+const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
 export default function Chat({ socket }: ChatProps) {
     const { token } = useAuth();
@@ -52,9 +53,13 @@ export default function Chat({ socket }: ChatProps) {
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -68,7 +73,8 @@ export default function Chat({ socket }: ChatProps) {
             } catch (error) {
                 setConversations(currentConversations);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
                 setLoading(false);
             }
@@ -125,6 +131,8 @@ export default function Chat({ socket }: ChatProps) {
                 message={
                     fetchStatus === 'delayed'
                         ? 'Your request is taking longer than normal'
+                        : fetchStatus === 'error'
+                        ? 'It should not take this long...Try refreshing the page!'
                         : 'Loading chat'
                 }
             />

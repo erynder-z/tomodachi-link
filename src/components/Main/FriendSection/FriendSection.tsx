@@ -14,6 +14,7 @@ import { backendFetch } from '../../../utilities/backendFetch';
 import { FetchStatusType } from '../../../types/miscTypes';
 
 const USER_NOTIFICATION_TIMEOUT = 3000;
+const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
 export default function FriendSection() {
     const { token, authUser } = useAuth();
@@ -48,9 +49,13 @@ export default function FriendSection() {
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -66,7 +71,8 @@ export default function FriendSection() {
             } catch (error) {
                 setFriendsOfFriends(currentFriendsOfFriends);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
             }
         }
@@ -81,9 +87,13 @@ export default function FriendSection() {
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -97,7 +107,8 @@ export default function FriendSection() {
             } catch (error) {
                 setRandomUsers(currentUserList);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
                 setLoading(false);
             }
@@ -146,6 +157,8 @@ export default function FriendSection() {
                 message={
                     fetchStatus === 'delayed'
                         ? 'Your request is taking longer than normal'
+                        : fetchStatus === 'error'
+                        ? 'It should not take this long...Try refreshing the page!'
                         : 'Getting friend data'
                 }
             />

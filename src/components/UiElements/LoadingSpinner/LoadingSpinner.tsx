@@ -25,7 +25,7 @@ export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="font-bold text-loading dark:text-loadingDark"
+                        className="font-bold text-center text-loading dark:text-loadingDark"
                     >
                         {message}
                     </motion.h1>

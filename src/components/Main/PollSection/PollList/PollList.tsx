@@ -14,6 +14,7 @@ type PollListProps = {
 };
 
 const USER_NOTIFICATION_TIMEOUT = 3000;
+const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
 export default function PollList({ isPaginationTriggered }: PollListProps) {
     const { token, authUser } = useAuth();
@@ -34,9 +35,13 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -50,7 +55,8 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
             } catch (error) {
                 setPolls(currentPolls);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
                 setLoading(false);
             }
@@ -68,9 +74,13 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -84,7 +94,8 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
             } catch (error) {
                 setPolls(currentPolls);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
                 setLoading(false);
             }
@@ -129,6 +140,8 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
                 message={
                     fetchStatus === 'delayed'
                         ? 'Your request is taking longer than normal'
+                        : fetchStatus === 'error'
+                        ? 'It should not take this long...Try refreshing the page!'
                         : 'Getting polls'
                 }
             />

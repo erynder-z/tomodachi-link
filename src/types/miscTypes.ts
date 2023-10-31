@@ -37,4 +37,4 @@ export type TimeOfDayMessageType = {
     icon: JSX.Element;
 };
 
-export type FetchStatusType = 'idle' | 'fetching' | 'delayed';
+export type FetchStatusType = 'idle' | 'fetching' | 'delayed' | 'error';

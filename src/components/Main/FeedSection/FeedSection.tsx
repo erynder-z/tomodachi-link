@@ -14,6 +14,7 @@ type FeedSectionProps = {
 };
 
 const USER_NOTIFICATION_TIMEOUT = 3000;
+const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
 export default function FeedSection({
     isPaginationTriggered,
@@ -37,9 +38,13 @@ export default function FeedSection({
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -54,7 +59,8 @@ export default function FeedSection({
             } catch {
                 setMinimalPosts(currentFeed);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
                 setLoading(false);
             }
@@ -72,9 +78,13 @@ export default function FeedSection({
 
             setFetchStatus('fetching');
 
-            const timeout = setTimeout(() => {
+            const delayedNotificationTimeout = setTimeout(() => {
                 setFetchStatus('delayed');
             }, USER_NOTIFICATION_TIMEOUT);
+
+            const errorNotificationTimeout = setTimeout(() => {
+                setFetchStatus('error');
+            }, USER_ERROR_NOTIFICATION_TIMEOUT);
 
             try {
                 const response = await backendFetch(
@@ -88,7 +98,8 @@ export default function FeedSection({
             } catch (error) {
                 setMinimalPosts(currentFeed);
             } finally {
-                clearTimeout(timeout);
+                clearTimeout(delayedNotificationTimeout);
+                clearTimeout(errorNotificationTimeout);
                 setFetchStatus('idle');
                 setLoading(false);
                 setIsFeedRefreshing(false);
@@ -124,6 +135,8 @@ export default function FeedSection({
                 message={
                     fetchStatus === 'delayed'
                         ? 'Your request is taking longer than normal'
+                        : fetchStatus === 'error'
+                        ? 'It should not take this long...Try refreshing the page!'
                         : 'Getting feed'
                 }
             />
