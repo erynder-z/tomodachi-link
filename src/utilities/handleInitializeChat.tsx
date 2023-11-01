@@ -17,7 +17,7 @@ export const handleInitializeChat = async (
                 : setActiveChat(data.savedConversation);
         }
 
-        if (response && !response.ok) {
+        if ((response && !response.ok) || !response) {
             setInfo({
                 typeOfInfo: 'bad',
                 message: 'Could not initialize chat!',

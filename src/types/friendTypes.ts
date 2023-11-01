@@ -20,6 +20,7 @@ export type FriendDataType = {
     lastSeen: Date;
     userpic: ImageType;
     cover?: string;
+    accountType: 'guest' | 'regularUser';
 };
 
 export type FriendsOfFriendsType = {

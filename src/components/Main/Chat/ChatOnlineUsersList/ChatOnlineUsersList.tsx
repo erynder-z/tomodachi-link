@@ -24,7 +24,11 @@ export default function ChatOnlineUsersList({
         );
     };
 
-    const userList = friendData?.map((friend: FriendDataType) => (
+    const friendsWithoutGuestUser = friendData?.filter(
+        (user) => user.accountType !== 'guest'
+    );
+
+    const userList = friendsWithoutGuestUser?.map((friend: FriendDataType) => (
         <ChatOnlineUserlistItem
             key={friend._id}
             listItemData={friend}

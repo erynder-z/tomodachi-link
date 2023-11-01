@@ -88,19 +88,21 @@ function App() {
                 icon: timeOfDayMessage.icon,
             });
 
-            const cleanupSocket = handleChatSetup(
-                socket,
-                token,
-                currentUserData,
-                setConversationsWithUnreadMessages,
-                setMutedConversations,
-                setInfo
-            );
+            if (currentUserData.accountType !== 'guest') {
+                const cleanupSocket = handleChatSetup(
+                    socket,
+                    token,
+                    currentUserData,
+                    setConversationsWithUnreadMessages,
+                    setMutedConversations,
+                    setInfo
+                );
 
-            return () => {
-                setActiveChat(null);
-                cleanupSocket();
-            };
+                return () => {
+                    setActiveChat(null);
+                    cleanupSocket();
+                };
+            }
         }
     }, [isAuth && currentUserData?._id]);
 
