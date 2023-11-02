@@ -106,6 +106,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                     Loading
                 ) : searchResults.length > 0 && Array.isArray(searchResults) ? (
                     <SearchResults
+                        key="searchResults"
                         searchText={searchText}
                         searchResults={searchResults}
                         handleCloseButtonClick={handleCloseButtonClick}
@@ -117,6 +118,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 )}
                 {searchText && (
                     <ClearButton
+                        key="ClearButton"
                         setSearchText={setSearchText}
                         setSearchResults={setSearchResults}
                     />
