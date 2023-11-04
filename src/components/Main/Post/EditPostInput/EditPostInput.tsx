@@ -20,6 +20,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import resizeFile from '../../../../utilities/ImageResizer';
 import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/EmbeddedYoutubeVideoArea';
 import { motion, AnimatePresence } from 'framer-motion';
+import { InfoType } from '../../../../types/infoTypes';
 
 type EditPostInputProps = {
     postDetails: PostType | null;
@@ -78,11 +79,13 @@ export default function EditPostInput({
         });
 
         if (response.ok) {
-            setInfo({
+            const successInfo = {
                 typeOfInfo: 'good',
                 message: 'Post updated successfully!',
                 icon: '👍',
-            });
+            };
+
+            setInfo(successInfo as InfoType);
             setPostText('');
             setSelectedImage(undefined);
             setYoutubeID(undefined);
@@ -102,12 +105,13 @@ export default function EditPostInput({
             const message = errorMessages
                 .map((error: { msg: string }) => error.msg)
                 .join(', ');
-
-            setInfo({
+            const failedInfo = {
                 typeOfInfo: 'bad',
                 message: message,
                 icon: '👻',
-            });
+            };
+
+            setInfo(failedInfo as InfoType);
 
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -149,11 +153,13 @@ export default function EditPostInput({
 
                 await submitEditFormData(formData);
             } catch (error) {
-                setInfo({
+                const errorInfo = {
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
                     icon: '👻',
-                });
+                };
+
+                setInfo(errorInfo as InfoType);
             }
 
             setIsSubmitting(false);

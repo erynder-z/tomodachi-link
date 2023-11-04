@@ -9,12 +9,13 @@ export const handleFetchErrors = async (
     const message = errorMessages
         .map((error: { msg: string }) => error.msg)
         .join(', ');
-
-    setInfo({
+    const failedInfo = {
         typeOfInfo: 'bad',
         message: message,
         icon: '👻',
-    });
+    };
+
+    setInfo(failedInfo as InfoType);
 
     throw new Error(`Error: ${response.status} ${response.statusText}`);
 };

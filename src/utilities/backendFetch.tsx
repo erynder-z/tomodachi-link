@@ -28,10 +28,11 @@ export const backendFetch = async (
             handleFetchErrors(response, setInfo);
         }
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
             message: errorMessage,
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };

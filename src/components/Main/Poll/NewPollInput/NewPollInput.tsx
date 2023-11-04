@@ -10,6 +10,7 @@ import { CreatedPollDataType } from '../../../../types/pollTypes';
 import FriendsOnlyCheckbox from './PollRestrictions/FriendsOnlyCheckbox/FriendsOnlyCheckbox';
 import CommentsCheckbox from './PollRestrictions/CommentsCheckbox/CommentsCheckbox';
 import { useNavigate } from 'react-router-dom';
+import { InfoType } from '../../../../types/infoTypes';
 
 export default function NewPollInput() {
     const { token } = useAuth();
@@ -75,11 +76,13 @@ export default function NewPollInput() {
                 });
 
                 if (response.ok) {
-                    setInfo({
+                    const successInfo = {
                         typeOfInfo: 'good',
                         message: 'Poll created successfully!',
                         icon: '👍',
-                    });
+                    };
+
+                    setInfo(successInfo as InfoType);
                     setPollData({
                         question: '',
                         numberOfOptions: 1,
@@ -94,23 +97,26 @@ export default function NewPollInput() {
                     const message = errorMessages
                         .map((error: { msg: string }) => error.msg)
                         .join(', ');
-
-                    setInfo({
+                    const failedInfo = {
                         typeOfInfo: 'bad',
                         message: message,
                         icon: '👻',
-                    });
+                    };
+
+                    setInfo(failedInfo as InfoType);
 
                     throw new Error(
                         `Error: ${response.status} ${response.statusText}`
                     );
                 }
             } catch (error) {
-                setInfo({
+                const errorInfo = {
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
                     icon: '👻',
-                });
+                };
+
+                setInfo(errorInfo as InfoType);
             }
 
             setIsSubmitting(false);

@@ -3,6 +3,7 @@ import SignupForm from './SignupForm';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { InfoType } from '../../../types/infoTypes';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,22 +46,26 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                     .map((error: { msg: string }) => error.msg)
                     .join(', ');
 
-                setInfo({
+                const failedInfo = {
                     typeOfInfo: 'bad',
                     message: message,
                     icon: '👻',
-                });
+                };
+
+                setInfo(failedInfo as InfoType);
 
                 throw new Error(
                     `Error: ${response.status} ${response.statusText}`
                 );
             }
 
-            setInfo({
+            const successInfo = {
                 typeOfInfo: 'good',
                 message: 'Registration successful!',
                 icon: '🥳',
-            });
+            };
+
+            setInfo(successInfo as InfoType);
         } catch (error: unknown) {
             console.error(error);
         }
@@ -112,11 +117,13 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 confirmPassword
             );
         } catch (error) {
-            setInfo({
+            const failedInfo = {
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: '👻',
-            });
+            };
+
+            setInfo(failedInfo as InfoType);
         }
         setIsSubmitting(false);
     };

@@ -20,6 +20,7 @@ import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { handleChatMessagesInDB } from '../../../../utilities/handleChatMessagesInDatabase';
 import GetOlderMessagesButton from './GetOlderMessagesButton/GetOlderMessagesButton';
+import { InfoType } from '../../../../types/infoTypes';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -64,7 +65,6 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 setInfo,
                 apiEndpointURL,
                 method,
-
                 errorMessage
             );
             setPartnerData(response?.user);
@@ -86,7 +86,6 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 setInfo,
                 apiEndpointURL,
                 method,
-
                 errorMessage
             );
             setMessages(response?.messages);
@@ -125,11 +124,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 const savedMessage = await response.json();
                 setMessages([...messages, savedMessage.savedMessage]);
             } else {
-                setInfo({
+                const failedInfo = {
                     typeOfInfo: 'bad',
                     message: 'Message not saved!',
                     icon: '👻',
-                });
+                };
+
+                setInfo(failedInfo as InfoType);
             }
         }
     };
@@ -155,11 +156,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 handleMarkMessageUnreadInDB();
                 setInputMessage('');
             } catch (error) {
-                setInfo({
+                const failedInfo = {
                     typeOfInfo: 'bad',
                     message: 'Something went wrong when sending your message!',
                     icon: '👻',
-                });
+                };
+
+                setInfo(failedInfo as InfoType);
             }
 
             setIsSubmitting(false);

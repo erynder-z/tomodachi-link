@@ -47,11 +47,13 @@ export const handleFriendRequest = async (
                 successMessage = `Success!`;
         }
 
-        setInfo({
+        const successInfo = {
             typeOfInfo: 'good',
             message: successMessage,
             icon: '🤝',
-        });
+        };
+
+        setInfo(successInfo as InfoType);
 
         if (handleFetchUserData) handleFetchUserData();
         if (handleFetchFriendData) handleFetchFriendData();
@@ -72,10 +74,12 @@ export const handleFriendRequest = async (
                 failedMessage = `Failed!`;
         }
 
-        setInfo({
+        const failedInfo = {
             typeOfInfo: 'bad',
             message: failedMessage,
-            icon: '🥳',
-        });
+            icon: '👻',
+        };
+
+        setInfo(failedInfo as InfoType);
     }
 };

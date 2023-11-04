@@ -23,17 +23,20 @@ export const saveCoverImage = async (
 
         if (!response.ok) handleFetchErrors(response, setInfo);
 
-        setInfo({
+        const successInfo = {
             typeOfInfo: 'good',
             message: 'Saved!',
             icon: '👍',
-        });
+        };
+
+        setInfo(successInfo as InfoType);
         handleFetchUserData();
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
             message: 'Unable to save!',
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };

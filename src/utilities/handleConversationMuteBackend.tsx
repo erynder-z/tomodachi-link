@@ -24,10 +24,11 @@ export const handleConversationMuteBackend = async (
 
         return response;
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
-            message: 'Could not too mute chat on backend!',
+            message: 'Unable to mute chat on backend!',
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };

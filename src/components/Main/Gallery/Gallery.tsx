@@ -10,6 +10,7 @@ import { MdOutlineZoomIn } from 'react-icons/md';
 import useDelayUnmount from '../../../hooks/useDelayUnmount';
 import { backendFetch } from '../../../utilities/backendFetch';
 import { motion } from 'framer-motion';
+import { InfoType } from '../../../types/infoTypes';
 
 type GalleryProps = {
     isPaginationTriggered: boolean;
@@ -57,11 +58,13 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
                     errorMessageNumber
                 );
             } catch (error) {
-                setInfo({
+                const errorInfo = {
                     typeOfInfo: 'bad',
                     message: 'Unable to fetch pictures!',
                     icon: '👻',
-                });
+                };
+
+                setInfo(errorInfo as InfoType);
             }
 
             if (pictureListResponse && numberOfPicsResponse) {

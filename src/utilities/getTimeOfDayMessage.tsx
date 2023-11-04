@@ -4,23 +4,29 @@ export const getTimeOfDayMessage = (): InfoType => {
     const date = new Date();
     const hour = date.getHours();
 
+    const morningInfo = {
+        typeOfInfo: 'greeting',
+        message: 'Good morning, ',
+        icon: '🌞',
+    };
+
+    const afternoonInfo = {
+        typeOfInfo: 'greeting',
+        message: 'Good afternoon, ',
+        icon: '🌞',
+    };
+
+    const eveningInfo = {
+        typeOfInfo: 'greeting',
+        message: 'Good evening, ',
+        icon: '🌛',
+    };
+
     if (hour < 12) {
-        return {
-            typeOfInfo: 'greeting',
-            message: 'Good morning, ',
-            icon: '🌞',
-        };
+        return morningInfo as InfoType;
     } else if (hour < 18) {
-        return {
-            typeOfInfo: 'greeting',
-            message: 'Good afternoon, ',
-            icon: '🌞',
-        };
+        return afternoonInfo as InfoType;
     } else {
-        return {
-            typeOfInfo: 'greeting',
-            message: 'Good evening, ',
-            icon: '🌛',
-        };
+        return eveningInfo as InfoType;
     }
 };

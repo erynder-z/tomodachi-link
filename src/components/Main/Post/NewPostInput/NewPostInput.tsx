@@ -14,6 +14,7 @@ import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
 import { ViewMode } from '../../../../types/miscTypes';
 import { motion, AnimatePresence } from 'framer-motion';
+import { InfoType } from '../../../../types/infoTypes';
 
 type NewPostInputProps = {
     handleRefreshPosts?: () => void;
@@ -64,11 +65,12 @@ export default function NewPostInput({
         });
 
         if (response.ok) {
-            setInfo({
+            const successInfo = {
                 typeOfInfo: 'good',
                 message: 'Post created successfully!',
                 icon: '👍',
-            });
+            };
+            setInfo(successInfo as InfoType);
             setPostText('');
             setSelectedImage(undefined);
             setYoutubeID(undefined);
@@ -86,12 +88,13 @@ export default function NewPostInput({
             const message = errorMessages
                 .map((error: { msg: string }) => error.msg)
                 .join(', ');
-
-            setInfo({
+            const failedInfo = {
                 typeOfInfo: 'bad',
                 message: message,
                 icon: '👻',
-            });
+            };
+
+            setInfo(failedInfo as InfoType);
 
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -121,11 +124,12 @@ export default function NewPostInput({
 
                 await submitFormData(formData);
             } catch (error) {
-                setInfo({
+                const errorInfo = {
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
                     icon: '👻',
-                });
+                };
+                setInfo(errorInfo as InfoType);
             }
 
             setIsSubmitting(false);

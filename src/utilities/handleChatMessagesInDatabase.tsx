@@ -22,10 +22,11 @@ export const handleChatMessagesInDB = async (
 
         if (!response.ok) handleFetchErrors(response, setInfo);
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
             message: `Unable to mark message as ${typeOfOperation}!`,
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };

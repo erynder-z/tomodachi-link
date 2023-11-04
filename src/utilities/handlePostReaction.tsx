@@ -22,16 +22,19 @@ export const handlePostReaction = async (
 
         if (!response.ok) handleFetchErrors(response, setInfo);
 
-        setInfo({
+        const successInfo = {
             typeOfInfo: 'good',
             message: 'Reaction successful!',
             icon: '😎',
-        });
+        };
+
+        setInfo(successInfo as InfoType);
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
-            message: 'Unable to fetch posts!',
+            message: 'Unable to react to post!',
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };

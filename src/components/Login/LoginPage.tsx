@@ -11,6 +11,7 @@ import GreetingSection from './GreetingSection/GreetingSection';
 import RegisterButton from './RegisterButton/RegisterButton';
 import GuestLoginButton from './GuestLoginButton/GuestLoginButton';
 import { motion, AnimatePresence } from 'framer-motion';
+import { InfoType } from '../../types/infoTypes';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -39,11 +40,13 @@ export default function LoginPage() {
                 const data = await response.json();
                 const errorMessage = data.error.message;
 
-                setInfo({
+                const failedInfo = {
                     typeOfInfo: 'bad',
                     message: errorMessage,
                     icon: '👻',
-                });
+                };
+
+                setInfo(failedInfo as InfoType);
 
                 throw new Error(
                     `Error: ${response.status} ${response.statusText}`
@@ -80,11 +83,13 @@ export default function LoginPage() {
         try {
             await login(username, password);
         } catch (error) {
-            setInfo({
+            const failedInfo = {
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: '👻',
-            });
+            };
+
+            setInfo(failedInfo as InfoType);
         }
         setIsSubmitting(false);
     };
@@ -104,11 +109,13 @@ export default function LoginPage() {
         try {
             await login(guestUsername, guestPassword);
         } catch (error) {
-            setInfo({
+            const failedInfo = {
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: '👻',
-            });
+            };
+
+            setInfo(failedInfo as InfoType);
         }
         setIsSubmitting(false);
     };

@@ -3,6 +3,7 @@ import useAuth from '../../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
+import { InfoType } from '../../../../types/infoTypes';
 
 export default function LogoutButton() {
     const { logout } = useAuth();
@@ -11,11 +12,12 @@ export default function LogoutButton() {
 
     const handleLogoutClick = () => {
         navigate('/');
-        setInfo({
+        const successInfo = {
             typeOfInfo: 'good',
             message: 'Logged out!',
             icon: '😺',
-        });
+        };
+        setInfo(successInfo as InfoType);
         logout();
     };
 

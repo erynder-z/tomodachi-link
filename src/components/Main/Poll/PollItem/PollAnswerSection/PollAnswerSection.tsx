@@ -3,6 +3,7 @@ import useAuth from '../../../../../hooks/useAuth';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
+import { InfoType } from '../../../../../types/infoTypes';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
@@ -36,18 +37,22 @@ export default function PollAnswerSection({
 
             if (!response.ok) handleFetchErrors(response, setInfo);
 
-            setInfo({
+            const successInfo = {
                 typeOfInfo: 'good',
                 message: 'Answer submitted!',
                 icon: '😎',
-            });
+            };
+
+            setInfo(successInfo as InfoType);
             handleRefreshPollData();
         } catch (err: unknown) {
-            setInfo({
+            const errorInfo = {
                 typeOfInfo: 'bad',
                 message: 'Unable to submit answer!',
                 icon: '👻',
-            });
+            };
+
+            setInfo(errorInfo as InfoType);
         }
     };
 

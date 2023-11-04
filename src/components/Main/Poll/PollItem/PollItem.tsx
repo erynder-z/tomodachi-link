@@ -23,6 +23,7 @@ import TypeOfChartSwitcher from './TypeOfChartSwitcher/TypeOfChartSwitcher';
 import { BarChart } from '../BarChart/BarChart';
 import { useDimensions } from '../../../../hooks/useDimensions';
 import TotalVotesCounter from './TotalVotesCounter/TotalVotesCounter';
+import { InfoType } from '../../../../types/infoTypes';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -103,11 +104,13 @@ export default function PollItem({ pollData }: PollItemProps) {
                 handleFetchErrors(response, setInfo);
             }
         } catch (err: unknown) {
-            setInfo({
+            const errorInfo = {
                 typeOfInfo: 'bad',
-                message: 'Could not refresh poll data!',
+                message: 'Unable to fetch poll data!',
                 icon: '👻',
-            });
+            };
+
+            setInfo(errorInfo as InfoType);
         } finally {
             setLoading(false);
         }

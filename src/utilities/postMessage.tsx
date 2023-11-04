@@ -22,10 +22,11 @@ export const postMessage = async (
 
         return response;
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
-            message: 'Message not saved!',
+            message: 'Unable to save message!',
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };

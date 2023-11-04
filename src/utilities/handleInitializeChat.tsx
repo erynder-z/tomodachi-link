@@ -18,11 +18,12 @@ export const handleInitializeChat = async (
         }
 
         if ((response && !response.ok) || !response) {
-            setInfo({
+            const failedInfo = {
                 typeOfInfo: 'bad',
                 message: 'Could not initialize chat!',
                 icon: '👻',
-            });
+            };
+            setInfo(failedInfo as InfoType);
         }
     }
 };

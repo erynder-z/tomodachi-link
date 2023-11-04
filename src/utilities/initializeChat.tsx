@@ -22,10 +22,11 @@ export const initializeChat = async (
 
         return response;
     } catch (err: unknown) {
-        setInfo({
+        const errorInfo = {
             typeOfInfo: 'bad',
-            message: 'Could not initialize chat!',
+            message: 'Unable to initialize chat!',
             icon: '👻',
-        });
+        };
+        setInfo(errorInfo as InfoType);
     }
 };
