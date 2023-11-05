@@ -21,15 +21,9 @@ export default function ScanLinesToggle() {
                 className="cursor-pointer hover:text-highlight dark:hover:text-highlightDark duration-300"
             >
                 {scanLines === 'none' ? (
-                    <TbEye
-                        size="1.5em"
-                        className="text-regularText dark:text-regularTextDark"
-                    />
+                    <TbEye size="1.5em" />
                 ) : (
-                    <TbEyeExclamation
-                        size="1.5em"
-                        className="text-regularText dark:text-regularTextDark"
-                    />
+                    <TbEyeExclamation size="1.5em" />
                 )}
             </motion.div>
         </AnimatePresence>
