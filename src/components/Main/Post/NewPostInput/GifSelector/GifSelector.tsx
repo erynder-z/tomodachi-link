@@ -16,7 +16,7 @@ export default function GifSelector({
     setGif,
 }: GifSelectorProps) {
     const { token } = useAuth();
-    const { theme } = useTheme();
+    const { colorScheme } = useTheme();
     const [apiKey, setApiKey] = useState<string | undefined>(undefined);
 
     const shouldFetchAPIKey = useRef(true);
@@ -24,7 +24,7 @@ export default function GifSelector({
     const handleComponentClose = () => setShowGifSelector(false);
 
     const getThemeVariable = () =>
-        theme === 'dark' ? Theme.DARK : Theme.LIGHT;
+        colorScheme === 'dark' ? Theme.DARK : Theme.LIGHT;
 
     useEffect(() => {
         if (shouldFetchAPIKey.current) fetchTenorApiKey(token, setApiKey);
@@ -50,7 +50,7 @@ export default function GifSelector({
                 {apiKey && (
                     <GifPicker
                         tenorApiKey={`${apiKey}`}
-                        theme={getThemeVariable()}
+                        colorScheme={getThemeVariable()}
                         onGifClick={(gif: TenorImage) => {
                             setGif(gif);
                             setShowGifSelector(false);

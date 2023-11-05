@@ -4,15 +4,16 @@ import { ThemeType } from '../../../../types/miscTypes';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function ThemeToggle() {
-    const { theme, setTheme } = useTheme();
+    const { colorScheme, setColorScheme } = useTheme();
 
     const toggleTheme = () => {
-        const newTheme: ThemeType = theme === 'bright' ? 'dark' : 'bright';
-        setTheme(newTheme);
-        localStorage.setItem('themeOdinBook', newTheme);
+        const newTheme: ThemeType =
+            colorScheme === 'bright' ? 'dark' : 'bright';
+        setColorScheme(newTheme);
+        localStorage.setItem('colorSchemeOdinBook', newTheme);
     };
 
-    const iconRotation = theme === 'dark' ? 180 : 0;
+    const iconRotation = colorScheme === 'dark' ? 180 : 0;
 
     return (
         <AnimatePresence initial={false}>
@@ -26,7 +27,7 @@ export default function ThemeToggle() {
                     animate={{ rotate: iconRotation }}
                     transition={{ type: 'spring', stiffness: 100 }}
                 >
-                    {theme === 'dark' ? (
+                    {colorScheme === 'dark' ? (
                         <TbSun size="1.5em" />
                     ) : (
                         <TbMoon size="1.5em" />

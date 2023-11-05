@@ -6,24 +6,24 @@ type ThemeContextProviderProps = {
 };
 
 type ThemeContextProps = {
-    theme: ThemeType;
-    setTheme: (theme: ThemeType) => void;
+    colorScheme: ThemeType;
+    setColorScheme: (colorScheme: ThemeType) => void;
     scanLines: ScanLinesType;
     setScanLines: (scanLines: ScanLinesType) => void;
 };
 
 const ThemeContext = createContext<ThemeContextProps>({
-    theme: 'bright',
+    colorScheme: 'bright',
     // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-    setTheme: (theme: ThemeType) => {},
+    setColorScheme: (colorScheme: ThemeType) => {},
     scanLines: 'none',
     // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
     setScanLines: (scanLines: ScanLinesType) => {},
 });
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
-    const [theme, setTheme] = useState<ThemeType>(
-        (localStorage.getItem('themeOdinBook') as ThemeType) || 'bright'
+    const [colorScheme, setColorScheme] = useState<ThemeType>(
+        (localStorage.getItem('colorSchemeOdinBook') as ThemeType) || 'bright'
     );
     const [scanLines, setScanLines] = useState<ScanLinesType>(
         (localStorage.getItem('scanLinesOdinBook') as ScanLinesType) || 'none'
@@ -31,7 +31,7 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
 
     return (
         <ThemeContext.Provider
-            value={{ theme, setTheme, scanLines, setScanLines }}
+            value={{ colorScheme, setColorScheme, scanLines, setScanLines }}
         >
             {children}
         </ThemeContext.Provider>

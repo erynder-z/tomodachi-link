@@ -7,14 +7,16 @@ type LoadingSpinnerProps = {
 };
 
 export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
-    const { theme } = useTheme();
+    const { colorScheme } = useTheme();
 
     const brightThemeColor = 'rgba(0,0,0,0.4)';
     const darkThemeColor = 'rgba(255,255,255,0.4)';
     const highlightColor = '#0598BC';
     const darkHighlightColor = '#BC05BC';
-    const firstColor = theme === 'bright' ? highlightColor : darkHighlightColor;
-    const secondColor = theme === 'bright' ? brightThemeColor : darkThemeColor;
+    const firstColor =
+        colorScheme === 'bright' ? highlightColor : darkHighlightColor;
+    const secondColor =
+        colorScheme === 'bright' ? brightThemeColor : darkThemeColor;
 
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-4">

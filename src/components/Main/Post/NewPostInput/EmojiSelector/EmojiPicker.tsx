@@ -12,13 +12,13 @@ export default function EmojiSelector({
     setText,
     setShowEmojiPicker,
 }: EmojiSelectorProps) {
-    const { theme } = useTheme();
+    const { colorScheme } = useTheme();
     const handleComponentClose = () => {
         setShowEmojiPicker(false);
     };
 
     const getThemeVariable = () =>
-        theme === 'dark' ? Theme.DARK : Theme.LIGHT;
+        colorScheme === 'dark' ? Theme.DARK : Theme.LIGHT;
 
     const CloseButton = (
         <motion.button
@@ -35,7 +35,7 @@ export default function EmojiSelector({
             <div className="relative">
                 {CloseButton}
                 <EmojiPicker
-                    theme={getThemeVariable()}
+                    colorScheme={getThemeVariable()}
                     onEmojiClick={(emojiData: EmojiClickData) => {
                         setText((prev) => prev + emojiData.emoji);
                         setShowEmojiPicker(false);
