@@ -19,13 +19,14 @@ import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
 import { AnimatePresence } from 'framer-motion';
 import AppRoutes from './AppRoutes';
+import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/ScanLinesOverlay';
 
 function App() {
     const { isAuth, token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
 
-    const { theme } = useTheme();
+    const { theme, scanLines } = useTheme();
     const {
         setConversationsWithUnreadMessages,
         setMutedConversations,
@@ -49,6 +50,8 @@ function App() {
     const userDataKey = `${currentUserData?._id} + ${currentUserData?.lastSeen}`;
 
     const accountType = currentUserData?.accountType;
+
+    const showScanLines = scanLines === 'matrix';
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
@@ -167,6 +170,7 @@ function App() {
             />
 
             <InfoCard info={info} />
+            {showScanLines && <ScanLinesOverlay />}
         </div>
     );
 

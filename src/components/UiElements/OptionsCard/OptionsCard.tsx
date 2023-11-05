@@ -6,6 +6,7 @@ import {
     TbLayoutSidebarLeftExpand,
 } from 'react-icons/tb';
 import ThemeToggle from './ThemeToggle/ThemeToggle';
+import ScanLinesToggle from './ScanLinesToggle/ScanLinesToggle';
 
 type OptionsCardProps = {
     shouldOverlaysShow: {
@@ -49,6 +50,7 @@ export default function OptionsCard({
                 setShouldOverlaysShow={setShouldOverlaysShow}
             />
             <ThemeToggle />
+            <ScanLinesToggle />
             <LogoutButton />
         </div>
     );

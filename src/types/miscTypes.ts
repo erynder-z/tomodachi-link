@@ -31,6 +31,8 @@ export enum ViewMode {
 
 export type ThemeType = 'bright' | 'dark';
 
+export type ScanLinesType = 'none' | 'matrix';
+
 export type TimeOfDayMessageType = {
     typeOfInfo: InfoType;
     message: string;
