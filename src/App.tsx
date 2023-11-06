@@ -51,7 +51,7 @@ function App() {
 
     const accountType = currentUserData?.accountType;
 
-    const showScanLines = scanLines === 'matrix';
+    const showScanLines = scanLines !== 'none';
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;

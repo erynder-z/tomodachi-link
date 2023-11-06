@@ -1,6 +1,17 @@
-.scanlines-matrix {
-    height: 100%;
-    background: radial-gradient(#000 0.5px, transparent 0.5px) 1px 1px /3px 3px,
-        radial-gradient(#000 0.5px, transparent 0.5px) 1px 1px /3px 3px,
-        radial-gradient(#000 0.5px, transparent 0.5px) 2px 2px /3px 3px;
+.scanlines-horizontal:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    touch-action: none;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 0.5px,
+        transparent 2px,
+        transparent 4px
+    );
 }

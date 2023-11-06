@@ -8,7 +8,7 @@ export default function ScanLinesToggle() {
 
     const toggleScanLines = () => {
         const newScanLineType: ScanLinesType =
-            scanLines === 'none' ? 'matrix' : 'none';
+            scanLines === 'none' ? 'horizontal' : 'none';
         setScanLines(newScanLineType);
         localStorage.setItem('scanLinesOdinBook', newScanLineType);
     };
