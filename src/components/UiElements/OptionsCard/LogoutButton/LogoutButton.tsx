@@ -12,12 +12,12 @@ export default function LogoutButton() {
 
     const handleLogoutClick = () => {
         navigate('/');
-        const successInfo = {
+        const SUCCESS_INFO = {
             typeOfInfo: 'good',
             message: 'Logged out!',
             icon: '😺',
         };
-        setInfo(successInfo as InfoType);
+        setInfo(SUCCESS_INFO as InfoType);
         logout();
     };
 

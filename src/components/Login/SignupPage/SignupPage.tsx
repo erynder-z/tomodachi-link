@@ -25,8 +25,8 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         setInfo(null);
 
         try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
-            const response = await fetch(`${serverURL}/api/v1/signup`, {
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(`${SERVER_URL}/api/v1/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -59,13 +59,13 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 );
             }
 
-            const successInfo = {
+            const SUCCESS_INFO = {
                 typeOfInfo: 'good',
                 message: 'Registration successful!',
                 icon: '🥳',
             };
 
-            setInfo(successInfo as InfoType);
+            setInfo(SUCCESS_INFO as InfoType);
         } catch (error: unknown) {
             console.error(error);
         }
@@ -117,13 +117,13 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 confirmPassword
             );
         } catch (error) {
-            const failedInfo = {
+            const FAILED_INFO = {
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: '👻',
             };
 
-            setInfo(failedInfo as InfoType);
+            setInfo(FAILED_INFO as InfoType);
         }
         setIsSubmitting(false);
     };

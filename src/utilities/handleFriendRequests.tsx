@@ -10,13 +10,13 @@ export const handleFriendRequest = async (
     handleFetchFriendData?: () => void
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const requestBody = {
             otherUserId,
         };
 
         const response = await fetch(
-            `${serverURL}/api/v1/users/${otherUserId}/request/${requestType}`,
+            `${SERVER_URL}/api/v1/users/${otherUserId}/request/${requestType}`,
             {
                 method: 'PATCH',
                 headers: {
@@ -47,13 +47,13 @@ export const handleFriendRequest = async (
                 successMessage = `Success!`;
         }
 
-        const successInfo = {
+        const SUCCESS_INFO = {
             typeOfInfo: 'good',
             message: successMessage,
             icon: '🤝',
         };
 
-        setInfo(successInfo as InfoType);
+        setInfo(SUCCESS_INFO as InfoType);
 
         if (handleFetchUserData) handleFetchUserData();
         if (handleFetchFriendData) handleFetchFriendData();

@@ -41,13 +41,13 @@ export default function NormalContent({
                 <motion.button
                     onClick={() => {
                         if (token) {
-                            const typeOfRequest = 'send';
+                            const TYPE_OF_REQUEST = 'send';
                             setDisableButton(true);
                             handleFriendRequest(
                                 token,
                                 otherUserId,
                                 setInfo,
-                                typeOfRequest
+                                TYPE_OF_REQUEST
                             );
                         }
                     }}

@@ -38,36 +38,39 @@ export default function PostOptionsSection({
 
     const handleDelete = async () => {
         try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const postID = postDetails?._id;
 
-            const response = await fetch(`${serverURL}/api/v1/post/${postID}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await fetch(
+                `${SERVER_URL}/api/v1/post/${postID}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
             if (!response.ok) handleFetchErrors(response, setInfo);
 
-            const successInfo = {
+            const SUCCESS_INFO = {
                 typeOfInfo: 'good',
                 message: 'Post deleted!',
                 icon: '🗑️',
             };
 
-            setInfo(successInfo as InfoType);
+            setInfo(SUCCESS_INFO as InfoType);
             if (setShouldRefreshPictureList && hasImage)
                 setShouldRefreshPictureList(true);
             if (onPostChange) onPostChange();
         } catch (err: unknown) {
-            const errorInfo = {
+            const ERROR_INFO = {
                 typeOfInfo: 'bad',
                 message: 'Unable to delete post!',
                 icon: '👻',
             };
-            setInfo(errorInfo as InfoType);
+            setInfo(ERROR_INFO as InfoType);
         }
     };
 

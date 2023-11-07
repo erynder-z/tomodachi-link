@@ -8,9 +8,9 @@ export const postMessage = async (
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const ERROR_INFO = import.meta.env.VITE_SERVER_URL;
 
-        const response = await fetch(`${serverURL}/api/v1/message`, {
+        const response = await fetch(`${ERROR_INFO}/api/v1/message`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,11 +22,11 @@ export const postMessage = async (
 
         return response;
     } catch (err: unknown) {
-        const errorInfo = {
+        const ERROR_URL = {
             typeOfInfo: 'bad',
             message: 'Unable to save message!',
             icon: '👻',
         };
-        setInfo(errorInfo as InfoType);
+        setInfo(ERROR_URL as InfoType);
     }
 };

@@ -34,18 +34,18 @@ export const handleChatSetup = (
         const userId = currentUserData._id;
 
         if (userId && token) {
-            const apiEndpointURL = '/api/v1/chat/';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch conversation!';
+            const API_ENDPOINT_URL = '/api/v1/chat/';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch conversation!';
 
             try {
                 const response: { conversation: ChatConversationType[] } =
                     await backendFetch(
                         token,
                         setInfo,
-                        apiEndpointURL,
-                        method,
-                        errorMessage
+                        API_ENDPOINT_URL,
+                        METHOD,
+                        ERROR_MESSAGE
                     );
                 const conversationsWithUnreadMessages = response?.conversation
                     .filter((conversation) =>

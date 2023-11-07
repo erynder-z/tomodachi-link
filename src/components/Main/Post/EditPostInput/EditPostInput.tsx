@@ -68,9 +68,9 @@ export default function EditPostInput({
     const { username } = currentUserData || {};
 
     const submitEditFormData = async (formData: FormData) => {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const id = postDetails?._id;
-        const response = await fetch(`${serverURL}/api/v1/post/${id}`, {
+        const response = await fetch(`${SERVER_URL}/api/v1/post/${id}`, {
             method: 'PATCH',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -79,13 +79,13 @@ export default function EditPostInput({
         });
 
         if (response.ok) {
-            const successInfo = {
+            const SUCCESS_INFO = {
                 typeOfInfo: 'good',
                 message: 'Post updated successfully!',
                 icon: '👍',
             };
 
-            setInfo(successInfo as InfoType);
+            setInfo(SUCCESS_INFO as InfoType);
             setPostText('');
             setSelectedImage(undefined);
             setYoutubeID(undefined);
@@ -153,13 +153,13 @@ export default function EditPostInput({
 
                 await submitEditFormData(formData);
             } catch (error) {
-                const errorInfo = {
+                const ERROR_INFO = {
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
                     icon: '👻',
                 };
 
-                setInfo(errorInfo as InfoType);
+                setInfo(ERROR_INFO as InfoType);
             }
 
             setIsSubmitting(false);

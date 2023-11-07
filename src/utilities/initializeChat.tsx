@@ -7,9 +7,9 @@ export const initializeChat = async (
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-        const response = await fetch(`${serverURL}/api/v1/chat`, {
+        const response = await fetch(`${SERVER_URL}/api/v1/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,11 +22,11 @@ export const initializeChat = async (
 
         return response;
     } catch (err: unknown) {
-        const errorInfo = {
+        const ERROR_INFO = {
             typeOfInfo: 'bad',
             message: 'Unable to initialize chat!',
             icon: '👻',
         };
-        setInfo(errorInfo as InfoType);
+        setInfo(ERROR_INFO as InfoType);
     }
 };

@@ -33,11 +33,11 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
 
     const handleFetchUserPics = async () => {
         if (token && id) {
-            const apiEndpointURLList = `/api/v1/users/${id}/picture?skip=${skip}`;
-            const apiEndpointURLNumber = `/api/v1/users/${id}/count_pictures`;
-            const method = 'GET';
-            const errorMessageList = 'Unable to fetch pictures!';
-            const errorMessageNumber = 'Unable to fetch number of pictures!';
+            const API_ENDPOINT_URL_LIST = `/api/v1/users/${id}/picture?skip=${skip}`;
+            const API_ENDPOINT_URL_NUMBER = `/api/v1/users/${id}/count_pictures`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE_LIST = 'Unable to fetch pictures!';
+            const ERROR_MESSAGE_NUMBER = 'Unable to fetch number of pictures!';
 
             let pictureListResponse;
             let numberOfPicsResponse;
@@ -46,25 +46,25 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
                 pictureListResponse = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURLList,
-                    method,
-                    errorMessageList
+                    API_ENDPOINT_URL_LIST,
+                    METHOD,
+                    ERROR_MESSAGE_LIST
                 );
                 numberOfPicsResponse = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURLNumber,
-                    method,
-                    errorMessageNumber
+                    API_ENDPOINT_URL_NUMBER,
+                    METHOD,
+                    ERROR_MESSAGE_NUMBER
                 );
             } catch (error) {
-                const errorInfo = {
+                const ERROR_INFO = {
                     typeOfInfo: 'bad',
                     message: 'Unable to fetch pictures!',
                     icon: '👻',
                 };
 
-                setInfo(errorInfo as InfoType);
+                setInfo(ERROR_INFO as InfoType);
             }
 
             if (pictureListResponse && numberOfPicsResponse) {

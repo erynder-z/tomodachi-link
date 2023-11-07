@@ -3,8 +3,8 @@ export const fetchTenorApiKey = async (
     setApiKey?: (key: string) => void
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
-        const response = await fetch(`${serverURL}/api/v1/key/tenor`, {
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+        const response = await fetch(`${SERVER_URL}/api/v1/key/tenor`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

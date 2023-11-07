@@ -25,15 +25,15 @@ export default function SinglePollPage() {
 
     const getPostDetails = async (pollID: string) => {
         if (token) {
-            const apiEndpointURL = `/api/v1/poll/${pollID}/single`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch poll!';
+            const API_ENDPOINT_URL = `/api/v1/poll/${pollID}/single`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch poll!';
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
 
             setPollData(response?.singlePoll);

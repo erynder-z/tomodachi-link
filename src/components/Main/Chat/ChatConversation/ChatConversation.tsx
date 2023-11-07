@@ -48,16 +48,16 @@ export default function ChatConversation({
         if (partnerId && token) {
             const fetchPartnerData = async () => {
                 try {
-                    const apiEndpointURL = `/api/v1/chat/user/${partnerId}`;
-                    const method = 'GET';
-                    const errorMessage = 'Unable to fetch user data!';
+                    const API_ENDPOINT_URL = `/api/v1/chat/user/${partnerId}`;
+                    const METHOD = 'GET';
+                    const ERROR_MESSAGE = 'Unable to fetch user data!';
 
                     const response = await backendFetch(
                         token,
                         setInfo,
-                        apiEndpointURL,
-                        method,
-                        errorMessage
+                        API_ENDPOINT_URL,
+                        METHOD,
+                        ERROR_MESSAGE
                     );
                     setChatPartner(response?.chatPartnerData);
                     setLoading(false);

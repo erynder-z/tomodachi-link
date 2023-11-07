@@ -7,10 +7,10 @@ export const handleConversationMuteBackend = async (
     setInfo: (info: InfoType | null) => void
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
         const response = await fetch(
-            `${serverURL}/api/v1/chat/${conversationId}/mute`,
+            `${SERVER_URL}/api/v1/chat/${conversationId}/mute`,
             {
                 method: 'PATCH',
                 headers: {
@@ -24,11 +24,11 @@ export const handleConversationMuteBackend = async (
 
         return response;
     } catch (err: unknown) {
-        const errorInfo = {
+        const ERROR_INFO = {
             typeOfInfo: 'bad',
             message: 'Unable to mute chat on backend!',
             icon: '👻',
         };
-        setInfo(errorInfo as InfoType);
+        setInfo(ERROR_INFO as InfoType);
     }
 };

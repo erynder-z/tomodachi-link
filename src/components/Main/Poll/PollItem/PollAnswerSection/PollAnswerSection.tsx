@@ -22,9 +22,9 @@ export default function PollAnswerSection({
 
     const handleButtonClick = async (pollID: string, optionID: string) => {
         try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
-                `${serverURL}/api/v1/poll/${pollID}/answer`,
+                `${SERVER_URL}/api/v1/poll/${pollID}/answer`,
                 {
                     method: 'PATCH',
                     headers: {
@@ -37,22 +37,22 @@ export default function PollAnswerSection({
 
             if (!response.ok) handleFetchErrors(response, setInfo);
 
-            const successInfo = {
+            const SUCCESS_INFO = {
                 typeOfInfo: 'good',
                 message: 'Answer submitted!',
                 icon: '😎',
             };
 
-            setInfo(successInfo as InfoType);
+            setInfo(SUCCESS_INFO as InfoType);
             handleRefreshPollData();
         } catch (err: unknown) {
-            const errorInfo = {
+            const ERROR_INFO = {
                 typeOfInfo: 'bad',
                 message: 'Unable to submit answer!',
                 icon: '👻',
             };
 
-            setInfo(errorInfo as InfoType);
+            setInfo(ERROR_INFO as InfoType);
         }
     };
 

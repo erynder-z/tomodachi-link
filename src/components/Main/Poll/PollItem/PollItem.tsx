@@ -62,9 +62,9 @@ export default function PollItem({ pollData }: PollItemProps) {
 
     const checkAnswerStatus = async () => {
         try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
-                `${serverURL}/api/v1/poll/${pollID}/check`,
+                `${SERVER_URL}/api/v1/poll/${pollID}/check`,
                 {
                     method: 'get',
                     headers: {
@@ -84,9 +84,9 @@ export default function PollItem({ pollData }: PollItemProps) {
         setLoading(true);
         checkAnswerStatus();
         try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
-                `${serverURL}/api/v1/poll/${pollID}/details`,
+                `${SERVER_URL}/api/v1/poll/${pollID}/details`,
                 {
                     method: 'get',
                     headers: {
@@ -104,13 +104,13 @@ export default function PollItem({ pollData }: PollItemProps) {
                 handleFetchErrors(response, setInfo);
             }
         } catch (err: unknown) {
-            const errorInfo = {
+            const ERROR_INFO = {
                 typeOfInfo: 'bad',
                 message: 'Unable to fetch poll data!',
                 icon: '👻',
             };
 
-            setInfo(errorInfo as InfoType);
+            setInfo(ERROR_INFO as InfoType);
         } finally {
             setLoading(false);
         }

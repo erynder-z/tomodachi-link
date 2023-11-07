@@ -1,13 +1,9 @@
+import { ImageType } from '../../../../../types/miscTypes';
 import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import { motion } from 'framer-motion';
 
 type FriendInfoCardProps = {
-    userpic: {
-        data: {
-            data: Buffer;
-        };
-        contentType: string;
-    };
+    userpic: ImageType;
     firstName: string;
     lastName: string;
 };

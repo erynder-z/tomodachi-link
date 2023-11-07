@@ -15,13 +15,15 @@ export default function CommentList({
         <CommentItem key={comment._id} commentDetails={comment} />
     ));
 
+    const hasComments = commentItems.length > 0;
+
     return (
         <div className="flex flex-col gap-4">
             <ToggleListButton
                 onToggleListButtonClick={onToggleListButtonClick}
                 showMenu={true}
             />
-            {commentItems.length > 0 ? (
+            {hasComments ? (
                 commentItems
             ) : (
                 <span className="text-xs font-bold">No comments yet!</span>

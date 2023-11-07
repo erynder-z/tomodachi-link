@@ -43,9 +43,9 @@ export default function FriendSection() {
     const handleFetchFriendsOfFriends = async () => {
         const currentFriendsOfFriends = friendsOfFriends;
         if (authUser && token) {
-            const apiEndpointURL = '/api/v1/users/maybefriends';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch users!';
+            const API_ENDPOINT_URL = '/api/v1/users/maybefriends';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch users!';
 
             setFetchStatus('fetching');
 
@@ -61,9 +61,9 @@ export default function FriendSection() {
                 const response = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
                 );
                 setFriendsOfFriends(response?.friendsOfFriends);
                 setLoading(response.length <= 0);
@@ -81,9 +81,9 @@ export default function FriendSection() {
     const handleFetchRandomUsers = async () => {
         const currentUserList = randomUsers;
         if (authUser && token) {
-            const apiEndpointURL = `/api/v1/users/some`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch users!';
+            const API_ENDPOINT_URL = `/api/v1/users/some`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch users!';
 
             setFetchStatus('fetching');
 
@@ -99,9 +99,9 @@ export default function FriendSection() {
                 const response = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
                 );
                 setRandomUsers(response?.userList);
             } catch (error) {

@@ -23,17 +23,16 @@ export const FriendDataContextProvider = ({
 
     const handleFetchFriendData = async () => {
         if (authUser && token) {
-            const apiEndpointURL = '/api/v1/frienddata';
-            const method = 'GET';
-
-            const errorMessage = 'Unable to fetch friend data!';
+            const API_ENDPOINT_URL = '/api/v1/frienddata';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch friend data!';
 
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             setFriendData(response?.friendDataList);
         }

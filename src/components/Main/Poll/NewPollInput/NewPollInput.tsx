@@ -65,8 +65,8 @@ export default function NewPollInput() {
             setIsSubmitting(true);
 
             try {
-                const serverURL = import.meta.env.VITE_SERVER_URL;
-                const response = await fetch(`${serverURL}/api/v1/poll`, {
+                const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+                const response = await fetch(`${SERVER_URL}/api/v1/poll`, {
                     method: 'POST',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -76,13 +76,13 @@ export default function NewPollInput() {
                 });
 
                 if (response.ok) {
-                    const successInfo = {
+                    const SUCCESS_INFO = {
                         typeOfInfo: 'good',
                         message: 'Poll created successfully!',
                         icon: '👍',
                     };
 
-                    setInfo(successInfo as InfoType);
+                    setInfo(SUCCESS_INFO as InfoType);
                     setPollData({
                         question: '',
                         numberOfOptions: 1,
@@ -110,13 +110,13 @@ export default function NewPollInput() {
                     );
                 }
             } catch (error) {
-                const errorInfo = {
+                const ERROR_INFO = {
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
                     icon: '👻',
                 };
 
-                setInfo(errorInfo as InfoType);
+                setInfo(ERROR_INFO as InfoType);
             }
 
             setIsSubmitting(false);

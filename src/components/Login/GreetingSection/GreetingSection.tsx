@@ -14,8 +14,8 @@ export default function GreetingSection() {
     });
 
     const animateCount = (from: number, to: number, duration: number) => {
-        const interval = 10;
-        const steps = Math.ceil(duration / interval);
+        const ANIMATION_INTERVAL = 10;
+        const steps = Math.ceil(duration / ANIMATION_INTERVAL);
         const stepValue = (to - from) / steps;
 
         let currentCount = from;
@@ -26,22 +26,25 @@ export default function GreetingSection() {
             if (Math.round(currentCount) >= to) {
                 clearInterval(animation);
             }
-        }, interval);
+        }, ANIMATION_INTERVAL);
     };
+
+    const API_ENDPOINT_URL = '/api/v1/users/count';
+    const METHOD = 'GET';
+    const ERROR_MESSAGE = 'Unable to fetch number of users!';
+
+    const ANIMATION_DURATION = 500;
 
     const getNumberOfUsers = async () => {
         const token = undefined;
-        const apiEndpointURL = '/api/v1/users/count';
-        const method = 'GET';
-        const errorMessage = 'Unable to fetch number of users!';
         const response = await backendFetch(
             token,
             setInfo,
-            apiEndpointURL,
-            method,
-            errorMessage
+            API_ENDPOINT_URL,
+            METHOD,
+            ERROR_MESSAGE
         );
-        animateCount(0, response?.numberOfUsers, 500);
+        animateCount(0, response?.numberOfUsers, ANIMATION_DURATION);
     };
 
     useEffect(() => {

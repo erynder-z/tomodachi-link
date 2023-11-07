@@ -56,13 +56,13 @@ export default function FriendRequestListItem({
     const handleDeclineFriendRequest = () => {
         if (token) {
             const otherUserId = friendRequestData._id;
-            const typeOfRequest = 'decline';
+            const TYPE_OF_REQUEST = 'decline';
 
             handleFriendRequest(
                 token,
                 otherUserId,
                 setInfo,
-                typeOfRequest,
+                TYPE_OF_REQUEST,
                 handleFetchUserData,
                 handleFetchFriendData
             );
@@ -74,15 +74,15 @@ export default function FriendRequestListItem({
         const fetchUserData = async () => {
             if (token) {
                 const apiEndpointURL = `/api/v1/users/${friendRequestUserId}`;
-                const method = 'GET';
-                const errorMessage = 'Unable to fetch user data!';
+                const METHOD = 'GET';
+                const ERROR_MESSAGE = 'Unable to fetch user data!';
                 try {
                     const response = await backendFetch(
                         token,
                         setInfo,
                         apiEndpointURL,
-                        method,
-                        errorMessage
+                        METHOD,
+                        ERROR_MESSAGE
                     );
                     setFriendRequestData(response?.user);
                     setLoading(false);

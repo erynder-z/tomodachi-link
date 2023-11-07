@@ -13,6 +13,8 @@ type PollCommentSectionProps = {
     handleRefreshPollData: () => Promise<void>;
 };
 
+const UNMOUNT_TIMEOUT = 150;
+
 export default function PollCommentSection({
     areCommentsAllowed,
     comments,
@@ -22,7 +24,10 @@ export default function PollCommentSection({
     const [shouldCommentsShow, setShouldCommentsShow] =
         useState<boolean>(false);
     const isCommentSectionMounted = shouldCommentsShow;
-    const showCommentSection = useDelayUnmount(isCommentSectionMounted, 150);
+    const showCommentSection = useDelayUnmount(
+        isCommentSectionMounted,
+        UNMOUNT_TIMEOUT
+    );
     const numberOfComments = comments?.length;
 
     const handleShowCommentsClick = () => {

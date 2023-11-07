@@ -56,16 +56,16 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
 
     const handleFetchPartnerData = async () => {
         if (token && partnerId) {
-            const apiEndpointURL = `/api/v1/users/${partnerId}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch user data!';
+            const API_ENDPOINT_URL = `/api/v1/users/${partnerId}`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch user data!';
 
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             setPartnerData(response?.user);
             setLoading(false);
@@ -77,16 +77,16 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     ) => {
         if (token && chatId) {
             setIsSubmitting(true);
-            const apiEndpointURL = `/api/v1/message/${chatId}?messageScope=${messageScope}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch conversation!';
+            const API_ENDPOINT_URL = `/api/v1/message/${chatId}?messageScope=${messageScope}`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch conversation!';
 
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             setMessages(response?.messages);
             setTotalMessages(response?.totalMessageCount);
@@ -108,13 +108,14 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     };
 
     const handleTyping = () => {
+        const TIMEOUT = 1500;
         setIsTyping(true);
         if (typingTimeoutRef.current) {
             clearTimeout(typingTimeoutRef.current);
         }
         typingTimeoutRef.current = setTimeout(() => {
             setIsTyping(false);
-        }, 1500);
+        }, TIMEOUT);
     };
 
     const handlePostMessage = async (message: DatabaseChatMessageType) => {
@@ -124,13 +125,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 const savedMessage = await response.json();
                 setMessages([...messages, savedMessage.savedMessage]);
             } else {
-                const failedInfo = {
+                const FAILED_INFO = {
                     typeOfInfo: 'bad',
                     message: 'Message not saved!',
                     icon: '👻',
                 };
 
-                setInfo(failedInfo as InfoType);
+                setInfo(FAILED_INFO as InfoType);
             }
         }
     };
@@ -156,13 +157,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 handleMarkMessageUnreadInDB();
                 setInputMessage('');
             } catch (error) {
-                const failedInfo = {
+                const FAILED_INFO = {
                     typeOfInfo: 'bad',
                     message: 'Something went wrong when sending your message!',
                     icon: '👻',
                 };
 
-                setInfo(failedInfo as InfoType);
+                setInfo(FAILED_INFO as InfoType);
             }
 
             setIsSubmitting(false);

@@ -8,9 +8,9 @@ export const handlePostReaction = async (
     reaction: string
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(
-            `${serverURL}/api/v1/post/${_id}/${reaction}`,
+            `${SERVER_URL}/api/v1/post/${_id}/${reaction}`,
             {
                 method: 'PATCH',
                 headers: {
@@ -22,19 +22,19 @@ export const handlePostReaction = async (
 
         if (!response.ok) handleFetchErrors(response, setInfo);
 
-        const successInfo = {
+        const SUCCESS_INFO = {
             typeOfInfo: 'good',
             message: 'Reaction successful!',
             icon: '😎',
         };
 
-        setInfo(successInfo as InfoType);
+        setInfo(SUCCESS_INFO as InfoType);
     } catch (err: unknown) {
-        const errorInfo = {
+        const ERROR_INFO = {
             typeOfInfo: 'bad',
             message: 'Unable to react to post!',
             icon: '👻',
         };
-        setInfo(errorInfo as InfoType);
+        setInfo(ERROR_INFO as InfoType);
     }
 };

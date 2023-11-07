@@ -29,9 +29,9 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
     const handleGetPolls = async () => {
         const currentPolls = polls;
         if (authUser && token) {
-            const apiEndpointURL = `/api/v1/poll/collection?skip=${skip}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch polls!';
+            const API_ENDPOINT_URL = `/api/v1/poll/collection?skip=${skip}`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch polls!';
 
             setFetchStatus('fetching');
 
@@ -47,9 +47,9 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
                 const response = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
                 );
                 setPolls([...polls, ...response.pollCollection]);
             } catch (error) {
@@ -68,9 +68,9 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
         setLoading(true);
         setPolls([]);
         if (authUser && token) {
-            const apiEndpointURL = '/api/v1/poll/collection?skip=0';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch polls!';
+            const API_ENDPOINT_URL = '/api/v1/poll/collection?skip=0';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch polls!';
 
             setFetchStatus('fetching');
 
@@ -86,9 +86,9 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
                 const response = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
                 );
                 setPolls([...polls, ...response.pollCollection]);
             } catch (error) {

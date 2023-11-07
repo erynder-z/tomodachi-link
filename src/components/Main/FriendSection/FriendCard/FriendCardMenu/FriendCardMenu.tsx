@@ -30,16 +30,16 @@ export default function FriendCardMenu({
 
     const handleChatButtonClick = async () => {
         if (currentUserId && token) {
-            const apiEndpointURL = '/api/v1/chat/';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch conversation!';
+            const API_ENDPOINT_URL = '/api/v1/chat/';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch conversation!';
 
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             const conversationWithCurrentFriend = response?.conversation.find(
                 (conversation: ChatConversationType) => {

@@ -42,9 +42,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     useEffect(() => {
         const checkToken = async () => {
             try {
-                const serverURL = import.meta.env.VITE_SERVER_URL;
+                const SERVER_URL = import.meta.env.VITE_SERVER_URL;
                 const response = await fetch(
-                    `${serverURL}/api/v1/check-token`,
+                    `${SERVER_URL}/api/v1/check-token`,
                     {
                         method: 'GET',
                         headers: {

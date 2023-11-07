@@ -61,14 +61,14 @@ export default React.memo(function PostItem({
     const getPostDetails = async (postID: string) => {
         if (token) {
             const apiEndpointURL = `/api/v1/post/${postID}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch posts!';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch posts!';
             const response = await backendFetch(
                 token,
                 setInfo,
                 apiEndpointURL,
-                method,
-                errorMessage
+                METHOD,
+                ERROR_MESSAGE
             );
 
             setPostDetails(response?.retrievedPost);

@@ -43,10 +43,10 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 setIsLoading(true);
                 setFetchStatus('fetching');
 
-                const serverURL = import.meta.env.VITE_SERVER_URL;
+                const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
                 const response = await fetch(
-                    `${serverURL}/api/v1/search?query=${searchText}`,
+                    `${SERVER_URL}/api/v1/search?query=${searchText}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

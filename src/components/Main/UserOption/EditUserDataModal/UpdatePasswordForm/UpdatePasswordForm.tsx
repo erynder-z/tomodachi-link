@@ -45,8 +45,8 @@ export default function UpdatePasswordForm({
                 confirmNewPassword: formData.get('confirmNewPassword'),
             };
 
-            const serverURL = import.meta.env.VITE_SERVER_URL;
-            const response = await fetch(`${serverURL}/api/v1/password`, {
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(`${SERVER_URL}/api/v1/password`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,13 +75,13 @@ export default function UpdatePasswordForm({
                 );
             }
 
-            const successInfo = {
+            const SUCCESS_INFO = {
                 typeOfInfo: 'good',
                 message: 'Password updated successfully!',
                 icon: '👍',
             };
 
-            setInfo(successInfo as InfoType);
+            setInfo(SUCCESS_INFO as InfoType);
             setShouldOverlaysShow({
                 searchOverlay: false,
                 editUserDataModal: false,

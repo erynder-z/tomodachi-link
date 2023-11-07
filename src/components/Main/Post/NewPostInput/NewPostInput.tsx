@@ -55,8 +55,8 @@ export default function NewPostInput({
     };
 
     const submitFormData = async (formData: FormData) => {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
-        const response = await fetch(`${serverURL}/api/v1/post`, {
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+        const response = await fetch(`${SERVER_URL}/api/v1/post`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -124,12 +124,12 @@ export default function NewPostInput({
 
                 await submitFormData(formData);
             } catch (error) {
-                const errorInfo = {
+                const ERROR_INFO = {
                     typeOfInfo: 'bad',
                     message: 'An error occurred',
                     icon: '👻',
                 };
-                setInfo(errorInfo as InfoType);
+                setInfo(ERROR_INFO as InfoType);
             }
 
             setIsSubmitting(false);

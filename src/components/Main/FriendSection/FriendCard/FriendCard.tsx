@@ -48,12 +48,12 @@ export default function FriendCard({
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
             onConfirm={() => {
                 if (token) {
-                    const requestType = 'unfriend';
+                    const REQUEST_TYPE = 'unfriend';
                     handleFriendRequest(
                         token,
                         _id,
                         setInfo,
-                        requestType,
+                        REQUEST_TYPE,
                         handleFetchUserData,
                         handleFetchFriendData
                     );

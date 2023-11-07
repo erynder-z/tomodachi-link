@@ -29,8 +29,8 @@ export default function LoginPage() {
         setInfo(null);
 
         try {
-            const serverURL = import.meta.env.VITE_SERVER_URL;
-            const response = await fetch(`${serverURL}/api/v1/login`, {
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(`${SERVER_URL}/api/v1/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
@@ -83,13 +83,13 @@ export default function LoginPage() {
         try {
             await login(username, password);
         } catch (error) {
-            const failedInfo = {
+            const FAILED_INFO = {
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: '👻',
             };
 
-            setInfo(failedInfo as InfoType);
+            setInfo(FAILED_INFO as InfoType);
         }
         setIsSubmitting(false);
     };
@@ -109,13 +109,13 @@ export default function LoginPage() {
         try {
             await login(guestUsername, guestPassword);
         } catch (error) {
-            const failedInfo = {
+            const FAILED_INFO = {
                 typeOfInfo: 'bad',
                 message: 'Something went wrong!',
                 icon: '👻',
             };
 
-            setInfo(failedInfo as InfoType);
+            setInfo(FAILED_INFO as InfoType);
         }
         setIsSubmitting(false);
     };

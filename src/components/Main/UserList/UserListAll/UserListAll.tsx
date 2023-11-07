@@ -20,14 +20,14 @@ export default function UserListAll() {
     const handleFetchAllUsers = async () => {
         if (authUser && token) {
             const apiEndpointURL = `/api/v1/users/all?skip=${skip}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch users!';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch users!';
             const fetchedUsers = await backendFetch(
                 token,
                 setInfo,
                 apiEndpointURL,
-                method,
-                errorMessage
+                METHOD,
+                ERROR_MESSAGE
             );
             setUsers([...users, ...fetchedUsers.userList]);
             setLoading(false);
@@ -36,17 +36,16 @@ export default function UserListAll() {
 
     const handleFetchNumberOfUsers = async () => {
         if (authUser && token) {
-            const apiEndpointURL = '/api/v1/users/count';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch users!';
+            const API_ENDPOINT_URL = '/api/v1/users/count';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch users!';
 
             const fetchedNumberOfUsers = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             setNumberOfUsers(fetchedNumberOfUsers?.numberOfUsers);
         }

@@ -35,15 +35,15 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
     const fetchUserData = async () => {
         if (token) {
             const apiEndpointURL = `/api/v1/users/${id}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch posts!';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch posts!';
 
             const response = await backendFetch(
                 token,
                 setInfo,
                 apiEndpointURL,
-                method,
-                errorMessage
+                METHOD,
+                ERROR_MESSAGE
             );
 
             setUserPageData(response?.user ?? {});

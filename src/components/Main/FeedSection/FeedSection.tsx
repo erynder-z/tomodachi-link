@@ -32,9 +32,9 @@ export default function FeedSection({
     const handleGetFeed = async () => {
         const currentFeed = minimalPosts;
         if (authUser && token) {
-            const apiEndpointURL = `/api/v1/feed?skip=${skip}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch feed!';
+            const API_ENDPOINT_URL = `/api/v1/feed?skip=${skip}`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch feed!';
 
             setFetchStatus('fetching');
 
@@ -50,9 +50,9 @@ export default function FeedSection({
                 const response = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
                 );
 
                 setMinimalPosts([...minimalPosts, ...response.paginatedFeed]);
@@ -72,9 +72,9 @@ export default function FeedSection({
         setIsFeedRefreshing(true);
         setMinimalPosts([]);
         if (authUser && token) {
-            const apiEndpointURL = '/api/v1/feed?skip=0';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch feed!';
+            const API_ENDPOINT_URL = '/api/v1/feed?skip=0';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch feed!';
 
             setFetchStatus('fetching');
 
@@ -90,9 +90,9 @@ export default function FeedSection({
                 const response = await backendFetch(
                     token,
                     setInfo,
-                    apiEndpointURL,
-                    method,
-                    errorMessage
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
                 );
                 setMinimalPosts([...response.paginatedFeed]);
             } catch (error) {

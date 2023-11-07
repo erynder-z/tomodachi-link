@@ -36,6 +36,8 @@ export default function SuggestionCardFriendInfo({
         )
     );
 
+    const hasAdditionalItems = additionalItemsCount > 0;
+
     const FriendData = (
         <>
             <img
@@ -57,7 +59,7 @@ export default function SuggestionCardFriendInfo({
                 {`Common friend${commonFriends.length > 1 ? 's' : ''}`}
             </h1>
             {commonFriendsList}
-            {additionalItemsCount > 0 && (
+            {hasAdditionalItems && (
                 <p className="text-xs">{`and ${additionalItemsCount} more`}</p>
             )}
         </div>

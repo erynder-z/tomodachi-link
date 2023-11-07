@@ -5,7 +5,7 @@ type NumberDropdownProps = {
 export default function PollOptionsNumberDropdown({
     handleOptionsNumberSelect,
 }: NumberDropdownProps) {
-    const numbers = [2, 3, 4, 5, 6];
+    const NUMBERS = [2, 3, 4, 5, 6];
 
     return (
         <div className="relative z-0">
@@ -15,7 +15,7 @@ export default function PollOptionsNumberDropdown({
                     handleOptionsNumberSelect(Number(e.target.value))
                 }
             >
-                {numbers.map((number) => (
+                {NUMBERS.map((number) => (
                     <option
                         className="bg-card dark:bg-cardDark"
                         key={number}

@@ -34,9 +34,9 @@ export default function PictureList({
             const skip = 0;
             const apiEndpointURLList = `/api/v1/users/${userId}/picture?skip=${skip}`;
             const apiEndpointURLNumber = `/api/v1/users/${userId}/count_pictures`;
-            const method = 'GET';
-            const errorMessageList = 'Unable to fetch pictures!';
-            const errorMessageNumber = 'Unable to fetch number of pictures!';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE_LIST = 'Unable to fetch pictures!';
+            const ERROR_MESSAGE_NUMBER = 'Unable to fetch number of pictures!';
             let pictureListResponse;
             let numberOfPicsResponse;
             try {
@@ -44,15 +44,15 @@ export default function PictureList({
                     token,
                     setInfo,
                     apiEndpointURLList,
-                    method,
-                    errorMessageList
+                    METHOD,
+                    ERROR_MESSAGE_LIST
                 );
                 numberOfPicsResponse = await backendFetch(
                     token,
                     setInfo,
                     apiEndpointURLNumber,
-                    method,
-                    errorMessageNumber
+                    METHOD,
+                    ERROR_MESSAGE_NUMBER
                 );
                 setPictures([...pictureListResponse.images]);
                 setNumberOfPictures(numberOfPicsResponse?.count);

@@ -29,16 +29,16 @@ export const CurrentUserDataContextProvider = ({
     // Define trigger function
     const handleFetchUserData = async () => {
         if (authUser && token) {
-            const apiEndpointURL = '/api/v1/userdata';
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch userdata';
+            const API_ENDPOINT_URL = '/api/v1/userdata';
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch userdata';
 
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             setCurrentUserData(response?.user);
         }

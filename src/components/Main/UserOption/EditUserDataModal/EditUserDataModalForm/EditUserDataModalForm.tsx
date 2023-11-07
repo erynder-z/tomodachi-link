@@ -7,6 +7,7 @@ import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
 import { motion } from 'framer-motion';
+import { InfoType } from '../../../../../types/infoTypes';
 
 type EditUserDataModalFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -72,8 +73,8 @@ export default function EditUserDataModalForm({
             formData.append('email', event.currentTarget.email.value);
             formData.append('password', event.currentTarget.password.value);
 
-            const serverURL = import.meta.env.VITE_SERVER_URL;
-            const response = await fetch(`${serverURL}/api/v1/userdata`, {
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(`${SERVER_URL}/api/v1/userdata`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -83,11 +84,13 @@ export default function EditUserDataModalForm({
 
             if (!response.ok) await handleFetchErrors(response, setInfo);
 
-            setInfo({
+            const SUCCESS_INFO = {
                 typeOfInfo: 'good',
                 message: 'Profile updated successfully!',
                 icon: '👍',
-            });
+            };
+
+            setInfo(SUCCESS_INFO as InfoType);
             handleFetchUserData();
             setShouldOverlaysShow({
                 searchOverlay: false,

@@ -28,15 +28,15 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
 
     const fetchUserData = async () => {
         if (token) {
-            const apiEndpointURL = `/api/v1/users/${id}`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch user data!';
+            const API_ENDPOINT_URL = `/api/v1/users/${id}`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch user data!';
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
 
             setIsFriendRequestPending({

@@ -8,9 +8,9 @@ export const handleChatMessagesInDB = async (
     typeOfOperation: string
 ) => {
     try {
-        const serverURL = import.meta.env.VITE_SERVER_URL;
+        const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(
-            `${serverURL}/api/v1/message/${conversationId}/${typeOfOperation}`,
+            `${SERVER_URL}/api/v1/message/${conversationId}/${typeOfOperation}`,
             {
                 method: 'PATCH',
                 headers: {

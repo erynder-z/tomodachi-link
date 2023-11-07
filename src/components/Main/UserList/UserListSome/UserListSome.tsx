@@ -17,16 +17,16 @@ export default function UserListSome() {
 
     const handleFetchUsers = async () => {
         if (authUser && token) {
-            const apiEndpointURL = `/api/v1/users/some`;
-            const method = 'GET';
-            const errorMessage = 'Unable to fetch users!';
+            const API_ENDPOINT_URL = `/api/v1/users/some`;
+            const METHOD = 'GET';
+            const ERROR_MESSAGE = 'Unable to fetch users!';
 
             const response = await backendFetch(
                 token,
                 setInfo,
-                apiEndpointURL,
-                method,
-                errorMessage
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
             );
             setUsers(response?.userList);
             setLoading(false);
