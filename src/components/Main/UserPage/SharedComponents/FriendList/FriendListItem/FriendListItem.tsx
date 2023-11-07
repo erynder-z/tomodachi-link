@@ -16,7 +16,7 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
     const path = isCurrentUser ? '/mypage' : `/users/${_id}`;
 
     return (
-        <motion.button whileTap={{ scale: 0.97 }}>
+        <motion.button whileTap={{ scale: 0.97 }} className="w-full h-full">
             <Link
                 to={path}
                 className="cursor-pointer text-regularText dark:text-regularTextDark text-xs"
@@ -33,7 +33,7 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
                         </span>
                     </div>
                 </div>
-                <div className="text-xs p-1 break-all">
+                <div className="text-xs py-1 whitespace-nowrap text-ellipsis overflow-hidden">
                     {firstName} {lastName}
                 </div>
             </Link>

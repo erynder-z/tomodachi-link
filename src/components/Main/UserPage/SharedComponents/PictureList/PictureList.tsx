@@ -123,7 +123,7 @@ export default function PictureList({
     );
 
     return (
-        <div>
+        <div className="px-4 md:px-0">
             <h1 className="font-bold">Pictures</h1>
 
             {loading ? (
