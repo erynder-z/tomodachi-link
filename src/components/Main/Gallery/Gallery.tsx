@@ -7,9 +7,8 @@ import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabase
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import LightBox from '../../UiElements/LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
-import useDelayUnmount from '../../../hooks/useDelayUnmount';
 import { backendFetch } from '../../../utilities/backendFetch';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { InfoType } from '../../../types/infoTypes';
 
 type GalleryProps = {
@@ -26,52 +25,49 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
     const [numberOfPictures, setNumberOfPictures] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const isLightboxMounted = selectedImage ? true : false;
-    const showLightbox = useDelayUnmount(isLightboxMounted, 150);
+    const showLightbox = selectedImage ? true : false;
 
     const shouldInitialize = useRef(true);
 
     const handleFetchUserPics = async () => {
-        if (token && id) {
-            const API_ENDPOINT_URL_LIST = `/api/v1/users/${id}/picture?skip=${skip}`;
-            const API_ENDPOINT_URL_NUMBER = `/api/v1/users/${id}/count_pictures`;
-            const METHOD = 'GET';
-            const ERROR_MESSAGE_LIST = 'Unable to fetch pictures!';
-            const ERROR_MESSAGE_NUMBER = 'Unable to fetch number of pictures!';
+        if (!token || !id) return;
 
-            let pictureListResponse;
-            let numberOfPicsResponse;
+        const API_ENDPOINT_URL_LIST = `/api/v1/users/${id}/picture?skip=${skip}`;
+        const API_ENDPOINT_URL_COUNT = `/api/v1/users/${id}/count_pictures`;
+        const METHOD = 'GET';
+        const ERROR_MESSAGE_LIST = 'Unable to fetch pictures!';
+        const ERROR_MESSAGE_COUNT = 'Unable to fetch number of pictures!';
 
-            try {
-                pictureListResponse = await backendFetch(
+        try {
+            const [picListRes, countPicRes] = await Promise.all([
+                backendFetch(
                     token,
                     setInfo,
                     API_ENDPOINT_URL_LIST,
                     METHOD,
                     ERROR_MESSAGE_LIST
-                );
-                numberOfPicsResponse = await backendFetch(
+                ),
+                backendFetch(
                     token,
                     setInfo,
-                    API_ENDPOINT_URL_NUMBER,
+                    API_ENDPOINT_URL_COUNT,
                     METHOD,
-                    ERROR_MESSAGE_NUMBER
-                );
-            } catch (error) {
-                const ERROR_INFO = {
-                    typeOfInfo: 'bad',
-                    message: 'Unable to fetch pictures!',
-                    icon: '👻',
-                };
+                    ERROR_MESSAGE_COUNT
+                ),
+            ]);
 
-                setInfo(ERROR_INFO as InfoType);
-            }
-
-            if (pictureListResponse && numberOfPicsResponse) {
-                setPictures([...pictures, ...pictureListResponse.images]);
-                setNumberOfPictures(numberOfPicsResponse?.count);
+            if (picListRes && countPicRes) {
+                setPictures([...pictures, ...picListRes.images]);
+                setNumberOfPictures(countPicRes?.count);
                 setLoading(false);
             }
+        } catch (error) {
+            const ERROR_MESSAGE = {
+                typeOfInfo: 'bad',
+                message: 'Unable to fetch pictures!',
+                icon: '👻',
+            };
+            setInfo(ERROR_MESSAGE as InfoType);
         }
     };
 
@@ -138,12 +134,14 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
     return (
         <div className="flex flex-col justify-center items-center w-full">
             {loading ? LoadingContent : GalleryContent}
-            {showLightbox && (
-                <LightBox
-                    image={selectedImage}
-                    onClose={() => setSelectedImage(null)}
-                />
-            )}
+            <AnimatePresence>
+                {showLightbox && (
+                    <LightBox
+                        image={selectedImage}
+                        onClose={() => setSelectedImage(null)}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }
