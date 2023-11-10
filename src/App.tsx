@@ -21,9 +21,11 @@ import { AnimatePresence } from 'framer-motion';
 import AppRoutes from './AppRoutes';
 import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/ScanLinesOverlay';
 
+const USERDATA_POLLING_INTERVAL = 300000;
+
 function App() {
     const { isAuth, token } = useAuth();
-    const { currentUserData } = useCurrentUserData();
+    const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
 
     const { colorScheme, scanLines } = useTheme();
@@ -33,6 +35,8 @@ function App() {
         setActiveChat,
     } = useNotificationBubblesContext();
 
+    const [shouldUpdateUserData, setShouldUpdateUserData] =
+        useState<boolean>(false);
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [shouldOverlaysShow, setShouldOverlaysShow] = useState({
         searchOverlay: false,
@@ -70,6 +74,11 @@ function App() {
 
     useEffect(() => {
         setShowSidebar(false);
+        if (shouldUpdateUserData) handleFetchUserData();
+
+        return () => {
+            setShouldUpdateUserData(false);
+        };
     }, [location.pathname]);
 
     useEffect(() => {
@@ -108,6 +117,14 @@ function App() {
             }
         }
     }, [isAuth && currentUserData?._id]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setShouldUpdateUserData(true);
+        }, USERDATA_POLLING_INTERVAL);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const LoginContent = (
         <>

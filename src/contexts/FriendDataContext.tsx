@@ -3,6 +3,7 @@ import { FriendDataContextProps, FriendDataType } from '../types/friendTypes';
 import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
 import { backendFetch } from '../utilities/backendFetch';
+import useCurrentUserData from '../hooks/useCurrentUserData';
 
 const FriendDataContext = createContext<FriendDataContextProps>({
     friendData: null,
@@ -18,8 +19,10 @@ export const FriendDataContextProvider = ({
 }) => {
     const { token, authUser, isAuth } = useAuth();
     const { setInfo } = useInfoCard();
-
+    const { currentUserData } = useCurrentUserData();
     const [friendData, setFriendData] = useState<FriendDataType[] | null>(null);
+
+    const numberOfFriends = currentUserData?.friends.length;
 
     const handleFetchFriendData = async () => {
         if (authUser && token) {
@@ -47,6 +50,10 @@ export const FriendDataContextProvider = ({
     useEffect(() => {
         if (authUser && token) handleFetchFriendData();
     }, [isAuth]);
+
+    useEffect(() => {
+        if (authUser && token && numberOfFriends) handleFetchFriendData();
+    }, [numberOfFriends]);
 
     return (
         <FriendDataContext.Provider
