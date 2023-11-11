@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
@@ -32,6 +32,8 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
     });
     const [loading, setLoading] = useState<boolean>(true);
 
+    const shouldFetchUserData = useRef(true);
+
     const fetchUserData = async () => {
         if (token) {
             const apiEndpointURL = `/api/v1/users/${id}`;
@@ -57,7 +59,11 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
     };
 
     useEffect(() => {
-        fetchUserData();
+        if (shouldFetchUserData.current) fetchUserData();
+
+        return () => {
+            shouldFetchUserData.current = false;
+        };
     }, [id, currentUserData?.pendingFriendRequests]);
 
     const LoadingContent = (
