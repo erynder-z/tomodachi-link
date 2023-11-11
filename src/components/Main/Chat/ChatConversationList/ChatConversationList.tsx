@@ -15,11 +15,11 @@ export default function ChatConversationList({
     handleChatConversationClick,
     currentUserId,
 }: ChatConversationListProps) {
-    const hasConversations = conversations.length > 0;
+    const hasConversations = conversations?.length > 0;
 
     const ConversationContent = (
         <div className="flex md:flex-col gap-2 lg:gap-4 p-2">
-            {conversations.map((conv, index) => {
+            {conversations?.map((conv, index) => {
                 const hasUnreadMessage =
                     conversationsWithUnreadMessages.includes(conv._id);
                 const isMuted = conv.conversationStatus.some(
