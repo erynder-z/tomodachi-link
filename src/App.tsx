@@ -24,7 +24,7 @@ import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/
 const USERDATA_POLLING_INTERVAL = 300000;
 
 function App() {
-    const { isAuth, token } = useAuth();
+    const { isAuth, token, tokenExpiration, logout } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
 
@@ -57,6 +57,8 @@ function App() {
 
     const showScanLines = scanLines !== 'none';
 
+    const shouldLogout = tokenExpiration && tokenExpiration < Date.now();
+
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -75,6 +77,7 @@ function App() {
     useEffect(() => {
         setShowSidebar(false);
         if (shouldUpdateUserData) handleFetchUserData();
+        if (shouldLogout) logout();
 
         return () => {
             setShouldUpdateUserData(false);

@@ -13,6 +13,7 @@ const AuthContext = createContext<AuthContextProps>({
     token: null,
     authUser: null,
     isAuth: false,
+    tokenExpiration: null,
     setToken: () => null,
     setAuthUser: () => null,
     setIsAuth: () => false,
@@ -25,6 +26,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     );
     const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
+    const [tokenExpiration, setTokenExpiration] = useState<number | null>(null);
     const { setInfo } = useInfoCard();
     const { setCurrentUserData } = useCurrentUserData();
     const [loading, setLoading] = useState<boolean>(true);
@@ -74,8 +76,17 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
             }
         };
 
+        const getTokenExpirationTime = () => {
+            if (token) {
+                const decodedToken = JSON.parse(atob(token.split('.')[1]));
+                const expirationTime = decodedToken.exp * 1000;
+                setTokenExpiration(expirationTime);
+            }
+        };
+
         if (token) {
             checkToken();
+            getTokenExpirationTime();
         } else {
             setLoading(false);
         }
@@ -97,6 +108,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 token,
                 authUser,
                 isAuth,
+                tokenExpiration,
                 setToken,
                 setAuthUser,
                 setIsAuth,

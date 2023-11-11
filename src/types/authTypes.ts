@@ -13,6 +13,7 @@ export type AuthContextProps = {
     token: string | null;
     authUser: User | null;
     isAuth: boolean;
+    tokenExpiration: number | null;
     setToken: (token: string | null) => void;
     setAuthUser: (user: User | null) => void;
     setIsAuth: (isAuth: boolean) => void;
