@@ -21,7 +21,7 @@ export default function ChatConversationListItem({
     const ChatConversationListItemContent = (
         <motion.div
             whileTap={{ scale: 0.97 }}
-            className="w-full flex items-center gap-2"
+            className="flex items-center gap-2"
         >
             <img
                 loading="lazy"

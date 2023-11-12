@@ -55,7 +55,7 @@ export default function ChatConversationList({
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="md:flex md:h-fit sticky top-0 md:top-2 flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-full md:w-full lg:p-0 bg-card dark:bg-cardDark md:bg-background2 md:dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10"
+            className="md:flex md:h-fit sticky top-0 md:top-2 flex-col overflow-y-auto lg:overflow-hidden gap-2 lg:gap-4 w-full lg:p-0 bg-card dark:bg-cardDark md:bg-background2 md:dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10"
         >
             <h1 className="text-center font-bold">Conversations</h1>
             {hasConversations ? ConversationContent : NoConversationContent}
