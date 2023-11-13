@@ -17,9 +17,10 @@ export type CoverType =
     | 'cover9';
 
 export type ImageType = {
-    id?: string;
-    data: string;
-    contentType: string;
+    id: string;
+    data: any;
+    contentType?: string;
+    type?: string;
 };
 
 export enum ViewMode {

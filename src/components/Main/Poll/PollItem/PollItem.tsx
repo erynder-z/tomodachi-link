@@ -4,7 +4,6 @@ import {
     PollDataItemType,
 } from '../../../../types/pollTypes';
 import { AnimatePresence, motion } from 'framer-motion';
-import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import format from 'date-fns/format';
 import PollUserInfoSection from './PollUserInfoSection/PollUserInfoSection';
 import PollDateSection from './PollDateSection/PollDateSection';
@@ -44,7 +43,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     const { userpic, firstName, lastName } = pollData.owner;
     const { createdAt, isFriendOnly, allowComments } = pollData;
     const displayName = `${firstName} ${lastName} `;
-    const userPic = convertDatabaseImageToBase64(userpic);
+    const userPic = userpic.data;
     const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
     const hasNoPollData = pollOptionsData.every(
         (option) => option.selectionCount === 0

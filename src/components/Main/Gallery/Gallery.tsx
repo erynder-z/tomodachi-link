@@ -3,7 +3,6 @@ import { ImageType } from '../../../types/miscTypes';
 import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { useParams } from 'react-router-dom';
-import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../../UiElements/LoadingSpinner/LoadingSpinner';
 import LightBox from '../../UiElements/LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
@@ -99,9 +98,7 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
             <img
                 loading="lazy"
                 className="w-full h-auto aspect-square object-cover shadow-lg cursor-pointer"
-                src={`data:image/png;base64,${convertDatabaseImageToBase64(
-                    picture
-                )}`}
+                src={`data:image/png;base64,${picture?.data}`}
                 alt="User uploaded image"
             />
             <div

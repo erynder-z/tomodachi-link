@@ -3,7 +3,6 @@ import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ImageType } from '../../../../../types/miscTypes';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
-import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import LightBox from '../../../../UiElements/LightBox/LightBox';
 import { MdKeyboardDoubleArrowRight, MdZoomOutMap } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -80,9 +79,7 @@ export default function PictureList({
         >
             <img
                 className="h-auto aspect-square object-cover  rounded"
-                src={`data:image/png;base64,${convertDatabaseImageToBase64(
-                    picture
-                )}`}
+                src={`data:image/png;base64,${picture?.data}`}
                 alt="User uploaded image"
             />
             <div
@@ -134,7 +131,7 @@ export default function PictureList({
                 </div>
             )}
 
-            {numberOfPictures > 9 && SeeAllPicturesButton}
+            {numberOfPictures > 1 && SeeAllPicturesButton}
             <AnimatePresence>
                 {selectedImage && (
                     <LightBox
