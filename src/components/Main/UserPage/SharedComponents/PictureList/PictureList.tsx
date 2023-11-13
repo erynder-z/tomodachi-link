@@ -28,6 +28,8 @@ export default function PictureList({
 
     const shouldInitialize = useRef(true);
 
+    const MAX_NUMBER_OF_PICTURES_TO_SHOW = 9;
+
     const handleFetchUserPics = async () => {
         if (token && userId) {
             const skip = 0;
@@ -131,7 +133,8 @@ export default function PictureList({
                 </div>
             )}
 
-            {numberOfPictures > 1 && SeeAllPicturesButton}
+            {numberOfPictures > MAX_NUMBER_OF_PICTURES_TO_SHOW &&
+                SeeAllPicturesButton}
             <AnimatePresence>
                 {selectedImage && (
                     <LightBox
