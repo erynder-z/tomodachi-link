@@ -11,7 +11,6 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { PostType } from '../../../../types/postTypes';
 import EmojiSelector from '../NewPostInput/EmojiSelector/EmojiPicker';
 import PostEditImageSection from './PostEditImageSection/PostEditImageSection';
-import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import PostEditGifSection from './PostEditGifSection/PostEditGifSection';
 import PostEditEmbeddedYoutubeVideo from './PostEditEmbeddedYoutubeVideo/PostEditEmbeddedYoutubeVideo';
 import { ImageType, ViewMode } from '../../../../types/miscTypes';
@@ -232,9 +231,7 @@ export default function EditPostInput({
                         <div className="bg-card dark:bg-cardDark py-2 md:py-4">
                             <PostEditImageSection
                                 handleImageDelete={handleImageDelete}
-                                convertedImage={convertDatabaseImageToBase64(
-                                    dbImage
-                                )}
+                                dbImage={dbImage.data}
                             />
                         </div>
                     )}

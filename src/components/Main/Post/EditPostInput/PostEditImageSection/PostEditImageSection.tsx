@@ -2,12 +2,12 @@ import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 type PostEditImageSectionProps = {
-    convertedImage: string;
+    dbImage: string;
     handleImageDelete: () => void;
 };
 
 export default function PostEditImageSection({
-    convertedImage,
+    dbImage,
     handleImageDelete,
 }: PostEditImageSectionProps) {
     const handleRemoveButtonClick = (
@@ -20,7 +20,7 @@ export default function PostEditImageSection({
         <div className="relative flex justify-center">
             <img
                 className="max-h-20 md:max-h-none object-contain shadow-lg cursor-pointer"
-                src={`data:image/png;base64,${convertedImage}`}
+                src={`data:image/png;base64,${dbImage}`}
                 alt="User uploaded image"
             />
             <motion.button

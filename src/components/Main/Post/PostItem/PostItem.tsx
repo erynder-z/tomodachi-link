@@ -4,7 +4,6 @@ import format from 'date-fns/format';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import useAuth from '../../../../hooks/useAuth';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import { ImageType } from '../../../../types/miscTypes';
 import PostUserInfoSection from './PostUserInfoSection/PostUserInfoSection';
 import DateSection from './DateSection/DateSection';
@@ -48,8 +47,8 @@ export default React.memo(function PostItem({
     const isCommentSectionMounted = shouldCommentSectionShow;
     const showCommentSection = useDelayUnmount(isCommentSectionMounted, 150);
     const displayName = `${firstName} ${lastName} `;
-    const userPic = convertDatabaseImageToBase64(postDetails?.owner?.userpic);
-    const postImage = convertDatabaseImageToBase64(postDetails?.image);
+    const userPic = postDetails?.owner?.userpic?.data;
+    const postImage = postDetails?.image?.data;
     const postVideoID = postDetails?.embeddedVideoID;
     const postOwnerID = postDetails?.owner._id;
     const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
