@@ -49,7 +49,7 @@ export default function Chat({ socket }: ChatProps) {
         if (currentUserId && token) {
             const apiEndpointURL = '/api/v1/chat/';
             const method = 'GET';
-            const errorMessage = 'Unable to fetch conversation!';
+            const errorMessage = 'Unable to fetch conversations!';
 
             setFetchStatus('fetching');
 
@@ -98,10 +98,6 @@ export default function Chat({ socket }: ChatProps) {
     };
 
     useEffect(() => {
-        getConversations();
-    }, [currentUserId]);
-
-    useEffect(() => {
         if (activeChat) {
             setActiveChat(activeChat);
             getConversations();
@@ -110,14 +106,14 @@ export default function Chat({ socket }: ChatProps) {
 
     useEffect(() => {
         if (shouldInitialize.current) {
+            getConversations();
+
             return () => {
                 setActiveChat(null);
+                shouldInitialize.current = false;
             };
         }
-        return () => {
-            shouldInitialize.current = false;
-        };
-    }, []);
+    }, [currentUserId]);
 
     const LoadingContent = (
         <motion.div
