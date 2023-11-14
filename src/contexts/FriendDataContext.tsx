@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { FriendDataContextProps, FriendDataType } from '../types/friendTypes';
 import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
@@ -21,6 +21,8 @@ export const FriendDataContextProvider = ({
     const { setInfo } = useInfoCard();
     const { currentUserData } = useCurrentUserData();
     const [friendData, setFriendData] = useState<FriendDataType[] | null>(null);
+
+    const shouldFetchFriendData = useRef(true);
 
     const numberOfFriends = currentUserData?.friends.length;
 
@@ -48,7 +50,12 @@ export const FriendDataContextProvider = ({
     }, [!isAuth]);
 
     useEffect(() => {
-        if (authUser && token) handleFetchFriendData();
+        if (authUser && token && shouldFetchFriendData.current) {
+            handleFetchFriendData();
+            return () => {
+                shouldFetchFriendData.current = false;
+            };
+        }
     }, [isAuth]);
 
     useEffect(() => {
