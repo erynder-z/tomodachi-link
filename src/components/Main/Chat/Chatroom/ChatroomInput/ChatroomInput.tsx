@@ -42,7 +42,11 @@ export default function ChatroomInput({
                 value={inputMessage}
                 autoComplete="off"
                 onChange={handleInputChange}
-                className="py-2.5 px-4 pr-12 text-sm  text-regularText dark:text-regularTextDark bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
+                className={`py-2.5 px-4 pr-12 text-sm   bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer ${
+                    isSubmitting
+                        ? 'text-gray-500'
+                        : 'text-regularText dark:text-regularTextDark'
+                }`}
                 placeholder=" "
                 onFocus={() => setIsInputFocused(true)}
                 onBlur={() => setIsInputFocused(false)}
@@ -50,7 +54,7 @@ export default function ChatroomInput({
             />
             <label
                 htmlFor="chatInput"
-                className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-4 origin-[0] peer-focus:left-0 peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 px-4 -z-10 peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark"
+                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-4 origin-[0] peer-focus:left-0 peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 px-4 -z-10 peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark"
             >
                 Enter a message...
             </label>
@@ -91,7 +95,9 @@ export default function ChatroomInput({
                     ? 'bg-gray-500 hover:bg-gray-600'
                     : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover duration-300'
             }`}
-            title={inputMessage ? undefined : 'Please enter a message'}
+            title={
+                inputMessage ? 'Shift+Enter to send' : 'Please enter a message'
+            }
         >
             {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
         </button>
