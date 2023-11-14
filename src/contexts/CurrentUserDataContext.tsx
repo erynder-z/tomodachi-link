@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import useInfoCard from '../hooks/useInfoCard';
 import { CurrentUserDataContextProps } from '../types/currentUserTypes';
@@ -26,6 +26,8 @@ export const CurrentUserDataContextProvider = ({
     const [currentUserData, setCurrentUserData] =
         useState<CurrentUserDataType | null>(null);
 
+    const shouldFetchUserData = useRef(true);
+
     // Define trigger function
     const handleFetchUserData = async () => {
         if (authUser && token) {
@@ -51,7 +53,14 @@ export const CurrentUserDataContextProvider = ({
 
     // Fetch user data if the token and authenticated user are both present
     useEffect(() => {
-        if (authUser && token) handleFetchUserData();
+        if (authUser && token && shouldFetchUserData.current) {
+            handleFetchUserData();
+
+            return () => {
+                shouldFetchUserData.current = false;
+            };
+        }
+        if (!isAuth) shouldFetchUserData.current = true;
     }, [isAuth]);
 
     return (
