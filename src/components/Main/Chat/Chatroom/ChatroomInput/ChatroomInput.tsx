@@ -27,6 +27,13 @@ export default function ChatroomInput({
         onTyping();
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    };
+
     const ChatInputContent = (
         <>
             <input
@@ -39,6 +46,7 @@ export default function ChatroomInput({
                 placeholder=" "
                 onFocus={() => setIsInputFocused(true)}
                 onBlur={() => setIsInputFocused(false)}
+                onKeyDown={handleKeyDown}
             />
             <label
                 htmlFor="chatInput"
