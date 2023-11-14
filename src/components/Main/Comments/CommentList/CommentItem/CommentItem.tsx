@@ -1,6 +1,5 @@
 import { CommentType } from '../../../../../types/commentTypes';
 import { formatDistanceToNow } from 'date-fns';
-import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 
 type CommentItemProps = {
     commentDetails: CommentType;
@@ -11,7 +10,7 @@ export default function CommentItem({ commentDetails }: CommentItemProps) {
     const { firstName, lastName, userpic } = owner;
 
     const displayName = `${firstName} ${lastName}`;
-    const userPic = convertDatabaseImageToBase64(userpic);
+    const userPic = userpic.data;
 
     const time = createdAt
         ? `${formatDistanceToNow(new Date(createdAt), { addSuffix: true })}`
