@@ -1,26 +1,14 @@
 import { ImageType } from '../../../types/miscTypes';
 import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 
 type LightBoxProps = {
-    image: ImageType | string | null;
+    image: ImageType | null;
     onClose: () => void;
 };
 
 export default function LightBox({ image, onClose }: LightBoxProps) {
-    let src = '';
-
-    if (typeof image === 'string') {
-        src = image;
-    } else if (image instanceof ArrayBuffer) {
-        src = URL.createObjectURL(new Blob([image]));
-    } else if (image && image.data.data && image.contentType) {
-        const convertedImage = convertDatabaseImageToBase64(image);
-        src = `data:${image.contentType};base64,${convertedImage}`;
-    } else if (image && image.data && image.contentType) {
-        src = `data:${image.contentType};base64,${image.data}`;
-    }
+    const imgSrc = image?.data;
 
     return (
         <motion.div
@@ -38,13 +26,11 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
                 >
                     <FaTimes size="1.25em" />
                 </motion.button>
-                {src && (
-                    <img
-                        className="max-w-full max-h-full"
-                        src={src}
-                        alt="Selected image"
-                    />
-                )}
+                <img
+                    className="max-w-full max-h-full"
+                    src={`data:image/png;base64,${imgSrc}`}
+                    alt="Selected image"
+                />
             </div>
         </motion.div>
     );

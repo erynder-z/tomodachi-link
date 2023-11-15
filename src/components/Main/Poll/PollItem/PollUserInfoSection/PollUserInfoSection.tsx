@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
-import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import { ImageType } from '../../../../../types/miscTypes';
 
 type PollUserInfoSectionProps = {
@@ -16,15 +15,6 @@ export default function PollUserInfoSection({
 }: PollUserInfoSectionProps) {
     const { currentUserData } = useCurrentUserData();
 
-    let src = '';
-
-    if (typeof userPic === 'string') {
-        src = `data:image/png;base64,${userPic}`;
-    } else if (userPic && userPic.type === 'Buffer') {
-        const convertedImage = convertDatabaseImageToBase64(userPic);
-        src = `data:image/png;base64,${convertedImage}`;
-    }
-
     const linkTarget =
         pollOwnerID === currentUserData?._id
             ? `/mypage`
@@ -38,7 +28,7 @@ export default function PollUserInfoSection({
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
-                src={src}
+                src={`data:image/png;base64,${userPic}`}
                 alt="User avatar"
             />
             <div className="flex items-center gap-2 text-xs">

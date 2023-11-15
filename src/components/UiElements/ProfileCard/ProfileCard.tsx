@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
-import { convertDatabaseImageToBase64 } from '../../../utilities/convertDatabaseImageToBase64';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { Socket } from 'socket.io-client';
 import { ChatMemberType } from '../../../types/chatTypes';
@@ -14,9 +13,7 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
     const { currentUserData } = useCurrentUserData();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
-    const userImage = userpic
-        ? convertDatabaseImageToBase64(userpic)
-        : undefined;
+    const userImage = userpic ? userpic?.data : undefined;
 
     const [matchedFriendsCount, setMatchedFriendsCount] = useState<number>(0);
 

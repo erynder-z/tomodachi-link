@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserTypes';
-import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import NormalContent from './NormalContent/NormalContent';
 import IncomingFriendRequestPendingContent from './IncomingFriendRequestPendingContent/IncomingFriendRequestPendingContent';
 import NotFriendCoverSection from './NotFriendCoverSection/NotFriendCoverSection';
@@ -33,7 +32,7 @@ export default function NotFriendUserPage({
     const NotFriendPageContentRef = useRef(null);
     const isInView = useInView(NotFriendPageContentRef, { once: true });
 
-    const userPicture = convertDatabaseImageToBase64(userpic);
+    const userPicture = userpic.data;
 
     const LoadingContent = (
         <div

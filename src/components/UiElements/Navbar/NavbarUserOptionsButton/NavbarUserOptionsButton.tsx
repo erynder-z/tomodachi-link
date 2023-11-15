@@ -1,12 +1,9 @@
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
-import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 
 export default function NavbarUserOptionsButton() {
     const { currentUserData } = useCurrentUserData();
     const { userpic, pendingFriendRequests } = currentUserData || {};
-    const userImage = userpic
-        ? convertDatabaseImageToBase64(userpic)
-        : undefined;
+    const userImage = userpic ? userpic.data : undefined;
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 

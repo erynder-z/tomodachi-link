@@ -1,7 +1,6 @@
 import { TbMessages } from 'react-icons/tb';
 import { CurrentUserDataType } from '../../../../../types/currentUserTypes';
 import { MinimalUserTypes } from '../../../../../types/otherUserTypes';
-import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 
 type ChatroomHeaderProps = {
     currentUserData: CurrentUserDataType | null;
@@ -12,14 +11,15 @@ export default function ChatroomHeader({
     currentUserData,
     partnerData,
 }: ChatroomHeaderProps) {
+    const currentUserPicSrc = currentUserData?.userpic.data;
+    const partnerPicSrc = partnerData?.userpic.data;
+
     const CurrentUserContent = (
         <div className="flex flex-col justify-center items-center">
             <img
                 loading="lazy"
                 className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"
-                src={`data:image/png;base64,${getCorrectUserpicFormat(
-                    currentUserData?.userpic.data
-                )}`}
+                src={`data:image/png;base64,${currentUserPicSrc}`}
                 alt="User avatar"
             />
             <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
@@ -40,9 +40,7 @@ export default function ChatroomHeader({
             <img
                 loading="lazy"
                 className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"
-                src={`data:image/png;base64,${getCorrectUserpicFormat(
-                    partnerData?.userpic
-                )}`}
+                src={`data:image/png;base64,${partnerPicSrc}`}
                 alt="User avatar"
             />
             <div className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">

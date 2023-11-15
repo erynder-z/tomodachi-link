@@ -5,7 +5,6 @@ import useInfoCard from '../../../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useCurrentUserData from '../../../../../../hooks/useCurrentUserData';
 import { useNavigate } from 'react-router-dom';
-import { convertDatabaseImageToBase64 } from '../../../../../../utilities/convertDatabaseImageToBase64';
 import useFriendData from '../../../../../../hooks/useFriendData';
 import { backendFetch } from '../../../../../../utilities/backendFetch';
 import { handleFriendRequest } from '../../../../../../utilities/handleFriendRequests';
@@ -34,8 +33,7 @@ export default function FriendRequestListItem({
 
     const shouldInitialize = useRef(true);
 
-    const userPic =
-        convertDatabaseImageToBase64(friendRequestData?.userpic) || '';
+    const userPic = friendRequestData?.userpic?.data || '';
 
     const handleAcceptFriendRequest = () => {
         if (token) {

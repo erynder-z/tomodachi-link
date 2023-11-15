@@ -1,5 +1,4 @@
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
-import { getCorrectUserpicFormat } from '../../../../utilities/getCorrectUserpicFormat';
 import { motion } from 'framer-motion';
 
 type ChatConversationListItemProps = {
@@ -26,9 +25,7 @@ export default function ChatConversationListItem({
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
-                src={`data:image/png;base64,${getCorrectUserpicFormat(
-                    userpic
-                )}`}
+                src={`data:image/png;base64,${userpic}`}
                 alt="User avatar"
             />
             <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis text-sm">

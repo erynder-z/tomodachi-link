@@ -7,7 +7,6 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
 import { MinimalPostType } from '../../../../types/postTypes';
 import useFriendData from '../../../../hooks/useFriendData';
-import { convertDatabaseImageToBase64 } from '../../../../utilities/convertDatabaseImageToBase64';
 import { FriendDataType } from '../../../../types/friendTypes';
 import { CurrentUserDataType } from '../../../../types/currentUserTypes';
 
@@ -61,18 +60,11 @@ export default function ShowPeopleInThisFeed({
     const formatUserData = (
         user: FriendDataType | CurrentUserDataType
     ): MinimalUserTypes => {
-        // the userpic of the currentUser has to be converted to base64 in order to be rendered
-        const isCurrentUser = user._id === currentUserData?._id;
         return {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
-            userpic: {
-                data: isCurrentUser
-                    ? convertDatabaseImageToBase64(user.userpic)
-                    : user.userpic.data,
-                contentType: user.userpic.contentType,
-            },
+            userpic: user.userpic,
         };
     };
 

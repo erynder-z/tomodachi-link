@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { OtherUserPageDataTypes } from '../../../../../types/otherUserTypes';
-import { convertDatabaseImageToBase64 } from '../../../../../utilities/convertDatabaseImageToBase64';
 import FriendList from '../../SharedComponents/FriendList/FriendList';
 import { formatDistanceToNow } from 'date-fns';
 import FriendCoverSection from './FriendCoverSection/FriendCoverSection';
@@ -44,7 +43,7 @@ export default function FriendUserPage({
     const FriendPageContentRef = useRef(null);
     const isInView = useInView(FriendPageContentRef, { once: true });
 
-    const userPicture = convertDatabaseImageToBase64(userpic);
+    const userPicture = userpic.data;
     const numberOfFriends = friends.length;
     const lastSeenFormatted = lastSeen
         ? `${formatDistanceToNow(new Date(lastSeen), { addSuffix: true })} `
