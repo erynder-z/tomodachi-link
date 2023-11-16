@@ -51,7 +51,7 @@ export default React.memo(function PostItem({
     const postImage = postDetails?.image?.data;
     const postVideoID = postDetails?.embeddedVideoID;
     const postOwnerID = postDetails?.owner._id;
-    const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
+    const date = createdAt ? format(new Date(createdAt), 'MMM dd, yyyy') : '';
     const isPostFromCurrentUser = authUser?.user._id === postOwnerID;
     const hasImage = !!postImage;
 
@@ -119,23 +119,27 @@ export default React.memo(function PostItem({
         >
             {postDetails ? (
                 <>
-                    <div className="flex justify-between">
-                        <PostUserInfoSection
-                            postOwnerID={postDetails?.owner._id}
-                            userPic={userPic}
-                            displayName={displayName}
-                        />
-                        <DateSection date={date} />
-                        {isPostFromCurrentUser && (
-                            <PostOptionsSection
-                                postDetails={postDetails}
-                                hasImage={hasImage}
-                                onPostChange={onPostChange}
-                                setShouldRefreshPictureList={
-                                    setShouldRefreshPictureList
-                                }
+                    <div className="flex justify-between gap-2">
+                        <div className="w-2/3">
+                            <PostUserInfoSection
+                                postOwnerID={postDetails?.owner._id}
+                                userPic={userPic}
+                                displayName={displayName}
                             />
-                        )}
+                        </div>
+                        <div className="w-1/3 flex gap-2 justify-end">
+                            <DateSection date={date} />
+                            {isPostFromCurrentUser && (
+                                <PostOptionsSection
+                                    postDetails={postDetails}
+                                    hasImage={hasImage}
+                                    onPostChange={onPostChange}
+                                    setShouldRefreshPictureList={
+                                        setShouldRefreshPictureList
+                                    }
+                                />
+                            )}
+                        </div>
                     </div>
                     <PostTextSection text={text} />
                     {postImage && (

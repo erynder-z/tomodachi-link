@@ -30,7 +30,7 @@ export default function PostUserInfoSection({
                 src={`data:image/png;base64,${userPic}`}
                 alt="User avatar"
             />
-            <div className="font-bold">{displayName}</div>
+            <div className="font-bold truncate">{displayName}</div>
         </Link>
     );
 }

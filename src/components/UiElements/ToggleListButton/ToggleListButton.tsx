@@ -12,12 +12,12 @@ export default function ToggleListButton({
 }: ToggleListButtonProps) {
     return (
         <div
-            className={`ml-auto rotate-on-hover cursor-pointer hover:text-highlight dark:hover:text-highlightDark transition-all ${
+            className={`ml-auto h-full flex items-center rotate-on-hover cursor-pointer hover:text-highlight dark:hover:text-highlightDark transition-all ${
                 showMenu ? 'rotate-up' : 'rotate-down'
             }`}
             onClick={onToggleListButtonClick}
         >
-            <MdExpandMore size="2em" className="hover:animate-squish" />
+            <MdExpandMore size="1.25em" className="hover:animate-squish" />
         </div>
     );
 }
