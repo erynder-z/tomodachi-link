@@ -234,10 +234,11 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     useEffect(() => {
         if (receivedMessage && partnerId === receivedMessage.senderId) {
             setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-        }
-        if (token && chatId) {
-            const typeOfOperation = 'read';
-            handleChatMessagesInDB(token, chatId, setInfo, typeOfOperation);
+
+            if (token && chatId) {
+                const typeOfOperation = 'read';
+                handleChatMessagesInDB(token, chatId, setInfo, typeOfOperation);
+            }
         }
     }, [receivedMessage]);
 
