@@ -1,6 +1,5 @@
 import { MinimalUserTypes } from '../../../../../types/otherUserTypes';
 import { Link } from 'react-router-dom';
-import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { motion } from 'framer-motion';
 
@@ -29,9 +28,7 @@ export default function FeedUserListItem({
                 <img
                     loading="lazy"
                     className="w-8 h-8 object-cover rounded-full"
-                    src={`data:image/png;base64,${getCorrectUserpicFormat(
-                        userpic
-                    )}`}
+                    src={`data:image/png;base64,${userpic?.data}`}
                     alt="User avatar"
                 />
                 <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis">

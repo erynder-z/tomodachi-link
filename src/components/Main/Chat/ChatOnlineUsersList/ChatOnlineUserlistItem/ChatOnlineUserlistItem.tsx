@@ -1,5 +1,4 @@
 import { MinimalUserTypes } from '../../../../../types/otherUserTypes';
-import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import useAuth from '../../../../../hooks/useAuth';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ChatConversationType } from '../../../../../types/chatTypes';
@@ -41,9 +40,7 @@ export default function ChatOnlineUserlistItem({
             <img
                 loading="lazy"
                 className="w-8 h-8 object-cover rounded-full"
-                src={`data:image/png;base64,${getCorrectUserpicFormat(
-                    userpic
-                )}`}
+                src={`data:image/png;base64,${userpic?.data}`}
                 alt="User avatar"
             />
             <div className="overflow-hidden whitespace-nowrap text-ellipsis">

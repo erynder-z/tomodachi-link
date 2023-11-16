@@ -1,5 +1,4 @@
 import { ImageType } from '../../../../../types/miscTypes';
-import { getCorrectUserpicFormat } from '../../../../../utilities/getCorrectUserpicFormat';
 import { motion } from 'framer-motion';
 
 type FriendInfoCardProps = {
@@ -21,9 +20,7 @@ export default function FriendInfoCard({
         >
             <img
                 className="w-20 h-20 object-cover mx-auto rounded-full border-4 border-regularText dark:border-regularTextDark"
-                src={`data:image/png;base64,${getCorrectUserpicFormat(
-                    userpic
-                )}`}
+                src={`data:image/png;base64,${userpic?.data}`}
                 alt="User avatar"
             />
             <p className="font-semibold text-sm break-all text-regularText dark:text-regularTextDark">
