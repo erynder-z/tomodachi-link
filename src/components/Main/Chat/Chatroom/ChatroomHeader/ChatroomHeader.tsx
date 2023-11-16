@@ -11,8 +11,8 @@ export default function ChatroomHeader({
     currentUserData,
     partnerData,
 }: ChatroomHeaderProps) {
-    const currentUserPicSrc = currentUserData?.userpic.data;
-    const partnerPicSrc = partnerData?.userpic.data;
+    const currentUserPicSrc = currentUserData?.userpic?.data || '';
+    const partnerPicSrc = partnerData?.userpic?.data || '';
 
     const CurrentUserContent = (
         <div className="flex flex-col justify-center items-center">
