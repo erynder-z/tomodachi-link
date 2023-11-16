@@ -14,12 +14,12 @@ import OverlayHandler from './components/UiElements/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import { Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
-import { handleChatSetup } from './utilities/handleChatSetup';
 import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
 import { AnimatePresence } from 'framer-motion';
 import AppRoutes from './AppRoutes';
 import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/ScanLinesOverlay';
+import { handleChatSetup } from './utilities/handleChatSetup';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
