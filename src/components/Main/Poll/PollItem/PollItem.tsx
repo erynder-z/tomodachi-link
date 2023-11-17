@@ -44,7 +44,7 @@ export default function PollItem({ pollData }: PollItemProps) {
     const { createdAt, isFriendOnly, allowComments } = pollData;
     const displayName = `${firstName} ${lastName} `;
     const userPic = userpic.data;
-    const date = createdAt ? format(new Date(createdAt), 'MMMM dd, yyyy') : '';
+    const date = createdAt ? format(new Date(createdAt), 'MMM dd, yyyy') : '';
     const hasNoPollData = pollOptionsData.every(
         (option) => option.selectionCount === 0
     );
@@ -186,15 +186,19 @@ export default function PollItem({ pollData }: PollItemProps) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-4 p-4 w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg"
+            className="flex flex-col gap-4 p-4 w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark rounded lg:rounded-lg "
         >
             <div className="flex justify-between">
-                <PollUserInfoSection
-                    pollOwnerID={ownerID}
-                    userPic={userPic}
-                    displayName={displayName}
-                />
-                <PollDateSection date={date} />
+                <div className="w-2/3 md:w-1/2 flex items-center">
+                    <PollUserInfoSection
+                        pollOwnerID={ownerID}
+                        userPic={userPic}
+                        displayName={displayName}
+                    />
+                </div>
+                <div className="w-1/3 md:w-1/2 flex justify-end items-center">
+                    <PollDateSection date={date} />
+                </div>
             </div>
             <PollQuestionSection pollData={pollData} />
             {hasDescription && <PollDescriptionSection pollData={pollData} />}
