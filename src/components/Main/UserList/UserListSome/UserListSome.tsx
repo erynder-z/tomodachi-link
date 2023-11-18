@@ -55,7 +55,7 @@ export default function UserListSome() {
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex flex-col w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
+            className="flex flex-col w-full p-4 gap-2 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <h1 className="text-center font-bold">People you may know:</h1>
             {userList}

@@ -19,11 +19,11 @@ export default function FeedUserListItem({
     return (
         <motion.div
             whileTap={{ scale: 0.97 }}
-            className="w-full flex items-center gap-2"
+            className="w-full  flex items-center gap-2"
         >
             <Link
                 to={path}
-                className="group flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 rounded lg:rounded-lg"
+                className="group flex items-center w-full gap-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 rounded lg:rounded-lg"
             >
                 <img
                     loading="lazy"
@@ -31,7 +31,7 @@ export default function FeedUserListItem({
                     src={`data:image/png;base64,${userpic?.data}`}
                     alt="User avatar"
                 />
-                <div className="hidden md:block overflow-hidden whitespace-nowrap text-ellipsis">
+                <div className="hidden md:block w-full truncate text-sm">
                     {firstName} {lastName}
                 </div>
             </Link>

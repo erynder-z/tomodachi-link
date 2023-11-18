@@ -36,9 +36,10 @@ export default function Feed({
     );
 
     const FeedContent = (
-        <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
+        <div className="flex flex-col md:grid grid-cols-[2fr,5fr] gap-4 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
             <ShowPeopleInThisFeed minimalPosts={minimalPosts} />
             <div className="flex flex-col gap-4 pb-4">
+                <NewPostInput handleRefreshPosts={refreshFeed} />
                 <FeedPostList posts={minimalPosts} onPostChange={refreshFeed} />
             </div>
         </div>
@@ -48,9 +49,9 @@ export default function Feed({
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex flex-col h-1/4 md:h-auto w-full gap-8 "
+            className=" h-1/4 md:h-auto w-full gap-8 "
         >
-            <NewPostInput handleRefreshPosts={refreshFeed} />
+            {/*   <NewPostInput handleRefreshPosts={refreshFeed} /> */}
             {isFeedRefreshing ? LoadingContent : FeedContent}
         </motion.div>
     );

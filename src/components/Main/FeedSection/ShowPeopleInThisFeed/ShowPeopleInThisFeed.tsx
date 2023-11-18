@@ -96,32 +96,34 @@ export default function ShowPeopleInThisFeed({
     );
 
     const ShowPeopleInFeedContent = (
-        <div className="flex md:flex-col gap-4 lg:gap-0 w-full overflow-x-auto p-2 lg:p-0 ">
+        <div className="flex md:flex-col gap-4 w-full lg:max-h-[calc(100vh_-_7rem)]  p-2 lg:p-0">
             {feedUsers.length > 0 ? (
                 <>
                     <h1 className="flex justify-center items-center text-center text-xs md:text-base">
                         People in this feed:
                     </h1>
-                    {feedUsers
-                        // sort items by occurrence in the feedUsers-array
-                        .map((feedUser) => {
-                            const index = minimalPosts.findIndex(
-                                (post) => post.owner?._id === feedUser._id
-                            );
-                            return { user: feedUser, index };
-                        })
-                        .sort((a, b) => a.index - b.index)
-                        .map(({ user }) => (
-                            <motion.div
-                                key={user._id}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                className="min-w-fit"
-                            >
-                                <FeedUserListItem listItemData={user} />
-                            </motion.div>
-                        ))}
+                    <div className="flex md:flex-col gap-4 w-full overflow-y-auto ">
+                        {feedUsers
+                            // sort items by occurrence in the feedUsers-array
+                            .map((feedUser) => {
+                                const index = minimalPosts.findIndex(
+                                    (post) => post.owner?._id === feedUser._id
+                                );
+                                return { user: feedUser, index };
+                            })
+                            .sort((a, b) => a.index - b.index)
+                            .map(({ user }) => (
+                                <motion.div
+                                    key={user._id}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    className="min-w-fit md:min-w-0 pb-2 md:pb-0"
+                                >
+                                    <FeedUserListItem listItemData={user} />
+                                </motion.div>
+                            ))}
+                    </div>
                 </>
             ) : (
                 <>
@@ -137,7 +139,7 @@ export default function ShowPeopleInThisFeed({
     );
 
     return (
-        <div className="block sticky top-8 h-fit w-full bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10">
+        <div className="block sticky top-8 md:top-[5rem] h-fit w-full min-w-0 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10 ">
             {loading ? LoadingContent : ShowPeopleInFeedContent}
         </div>
     );
