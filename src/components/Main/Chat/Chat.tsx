@@ -146,7 +146,7 @@ export default function Chat({ socket }: ChatProps) {
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } grid-cols-[1fr,2fr] md:min-h-[calc(100vh_-_4rem)] gap-8 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
+                } grid-cols-[2fr,5fr] md:min-h-[calc(100vh_-_4rem)] gap-4 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
             >
                 <ChatConversationList
                     conversations={conversations}
@@ -157,7 +157,7 @@ export default function Chat({ socket }: ChatProps) {
                     currentUserId={currentUserId}
                 />
 
-                <div className="flex flex-col gap-8 ">
+                <div className="flex flex-col gap-8">
                     {activeChat ? (
                         <motion.div
                             key={activeChat?._id}

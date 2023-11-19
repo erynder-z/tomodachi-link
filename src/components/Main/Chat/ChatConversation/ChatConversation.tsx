@@ -3,16 +3,11 @@ import { ChatConversationType } from '../../../../types/chatTypes';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import {
-    MdOutlineNotifications,
-    MdOutlineNotificationsOff,
-} from 'react-icons/md';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import ChatConversationListItem from '../ChatConversationListItem/ChatConversationListItem';
 import { handleConversationMuteBackend } from '../../../../utilities/handleConversationMuteBackend';
 import useNotificationBubblesContext from '../../../../hooks/useNotificationBubblesContext';
 import { backendFetch } from '../../../../utilities/backendFetch';
-import { motion } from 'framer-motion';
 
 type ChatConversationProps = {
     conversation: ChatConversationType;
@@ -92,29 +87,13 @@ export default function ChatConversation({
     );
 
     const ChatConversationContent = (
-        <div className="flex items-center justify-between w-20 md:w-full  py-2 px-2 md:px-4 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-3xl">
-            <ChatConversationListItem listItemData={chatPartner} />
-            <motion.div
-                whileTap={{ scale: 0.97 }}
-                className="flex flex-col md:flex-row justify-end md:gap-4 md:w-16"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    handleMuteConversation();
-                }}
-            >
-                {isConversationMuted ? (
-                    <MdOutlineNotificationsOff />
-                ) : (
-                    <MdOutlineNotifications />
-                )}
-
-                {hasUnreadMessage && !isConversationMuted && (
-                    <div className="absolute md:relative bottom-2 md:-bottom-0.5 right-10 md:right-1 flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-regularText dark:bg-regularTextDark opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-highlight dark:bg-highlightDark"></span>
-                    </div>
-                )}
-            </motion.div>
+        <div className="w-20 md:w-full py-2 px-2 md:px-4 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-full">
+            <ChatConversationListItem
+                listItemData={chatPartner}
+                isConversationMuted={isConversationMuted}
+                hasUnreadMessage={hasUnreadMessage}
+                handleMuteConversation={handleMuteConversation}
+            />
         </div>
     );
 

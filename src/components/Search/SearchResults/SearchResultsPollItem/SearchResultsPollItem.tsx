@@ -25,7 +25,7 @@ export default function SearchResultsPollItem({
                 to={`/poll/${_id}`}
                 className="flex justify-between text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
             >
-                <div className="flex justify-center gap-4">
+                <div className="flex justify-between gap-4 w-5/6">
                     <div className="overflow-hidden whitespace-nowrap text-ellipsis">
                         {getExcerptWithHighlightedQuery(pollText, queryString)}
                     </div>

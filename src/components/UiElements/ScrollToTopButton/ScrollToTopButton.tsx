@@ -39,7 +39,7 @@ export function ScrollToTopButton() {
             onClick={handleClick}
             style={{ scrollBehavior: 'smooth' }}
         >
-            <motion.div whileTap={{ scale: 0.97 }}>
+            <motion.div whileTap={{ scale: 0.5 }}>
                 <MdKeyboardDoubleArrowUp size="2em" />
             </motion.div>
         </button>

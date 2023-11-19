@@ -151,7 +151,7 @@ function App() {
             </div>
             <main
                 id="container-main"
-                className="relative block md:flex h-[calc(100vh_-_3rem)] lg:h-screen w-screen gap-4 md:p-4 bg-background1 dark:bg-background1Dark overflow-y-auto"
+                className="relative block md:flex h-[calc(100vh_-_3rem)] lg:h-screen w-screen gap-4 lg:p-4 bg-background1 dark:bg-background1Dark overflow-y-auto"
                 onScroll={handleScroll}
             >
                 <ScrollToTop />

@@ -32,7 +32,7 @@ export default function ChatOnlineUserlistItem({
                     setActiveChat
                 );
             }}
-            className="flex items-center w-full gap-4 py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300  cursor-pointer"
+            className="flex items-center gap-4 py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 cursor-pointer"
         >
             <div
                 className={`w-3 h-3 rounded-full bg-${indicatorColor}-500`}
@@ -43,7 +43,7 @@ export default function ChatOnlineUserlistItem({
                 src={`data:image/png;base64,${userpic?.data}`}
                 alt="User avatar"
             />
-            <div className="overflow-hidden whitespace-nowrap text-ellipsis">
+            <div className="flex-1 truncate">
                 {firstName} {lastName}
             </div>
         </div>

@@ -28,7 +28,7 @@ export default function NewPostInput({
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const { currentUserData } = useCurrentUserData();
-    const { username } = currentUserData || {};
+    const { firstName } = currentUserData || {};
 
     const [postText, setPostText] = useState<string>('');
     const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.None);
@@ -151,7 +151,7 @@ export default function NewPostInput({
                 <PostInputTextarea
                     postText={postText}
                     handleNewPostChange={handleNewPostChange}
-                    username={username}
+                    firstName={firstName}
                 />
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {youtubeID && (

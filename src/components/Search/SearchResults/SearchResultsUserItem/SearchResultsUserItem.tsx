@@ -15,20 +15,20 @@ export default function SearchResultsUserListItem({
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}
-            className=" w-full py-2  rounded lg:rounded-lg text-sm md:text-base"
+            className=" w-full py-2  rounded lg:rounded-lg text-sm md:text-base "
         >
             <Link
                 to={`/users/${_id}`}
                 className="flex justify-between text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
             >
-                <div className="flex justify-center gap-4">
+                <div className="flex gap-4 w-5/6">
                     <img
                         loading="lazy"
                         className="w-8 h-8 object-cover rounded-full"
                         src={`data:image/png;base64,${userpic?.data}`}
                         alt="User avatar"
                     />
-                    <div className="overflow-hidden whitespace-nowrap text-ellipsis">
+                    <div className="truncate">
                         {firstName} {lastName}
                     </div>
                 </div>

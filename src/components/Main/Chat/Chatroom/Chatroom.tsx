@@ -247,7 +247,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }, [messages]);
 
     const LoadingContent = (
-        <div className="flex flex-col gap-4 h-full md:p-4 lg:w-full lg:justify-around shadow-lg">
+        <div className="flex flex-col gap-4 h-full md:p-4 md:w-full lg:justify-around shadow-lg">
             <LoadingSpinner message="Getting conversation" />
         </div>
     );
@@ -258,7 +258,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 currentUserData={currentUserData}
                 partnerData={partnerData}
             />
-            <div className="flex-1 overflow-y-auto pb-12 mt-4">
+            <div className="flex-1 overflow-y-hidden pb-8 pt-20 lg:pb-8 lg:pt-12">
                 {canLoadMoreMessages && (
                     <GetOlderMessagesButton
                         handleFetchChatMessages={handleFetchChatMessages}
@@ -269,7 +269,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                     <ChatroomMessage key={index} message={message} />
                 ))}
                 {messages.length === 0 && (
-                    <div className="flex flex-col justify-center items-center px-4 text-xl font-bold text-gray-400 text-center h-[calc(100vh_-_19rem)]  lg:h-[calc(100vh_-_22rem)]">
+                    <div className="flex flex-col justify-center items-center px-4 text-xl font-bold text-gray-400 text-center h-[calc(100vh_-_24rem)]">
                         <span>Chat message will appear here.</span>
                     </div>
                 )}
