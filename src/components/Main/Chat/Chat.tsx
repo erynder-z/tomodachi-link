@@ -141,12 +141,12 @@ export default function Chat({ socket }: ChatProps) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg"
+            className=" flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full md:p-4 pb-4 bg-background2 dark:bg-background2Dark shadow-lg rounded lg:rounded-lg"
         >
             <div
                 className={`${
                     loading ? 'hidden' : 'md:grid'
-                } grid-cols-[2fr,5fr] md:min-h-[calc(100vh_-_4rem)] gap-4 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
+                } grid-cols-[2fr,5fr] md:min-h-[calc(100vh_-_5rem)] gap-4 bg-background2 dark:bg-background2Dark rounded lg:rounded-lg`}
             >
                 <ChatConversationList
                     conversations={conversations}
@@ -172,7 +172,7 @@ export default function Chat({ socket }: ChatProps) {
                             />
                         </motion.div>
                     ) : (
-                        <div className="flex justify-center items-center text-3xl font-bold text-gray-400 text-center h-[calc(100vh_-_10rem)]  lg:h-[calc(100vh_-_5rem)]">
+                        <div className="flex justify-center items-center text-3xl font-bold text-gray-400 text-center h-[calc(100vh_-_12rem)]  lg:h-[calc(100vh_-_5rem)]">
                             No conversation selected
                         </div>
                     )}

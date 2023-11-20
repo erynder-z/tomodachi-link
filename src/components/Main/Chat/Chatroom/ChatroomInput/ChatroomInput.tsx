@@ -75,7 +75,7 @@ export default function ChatroomInput({
     );
 
     const InputBottomBorder = (
-        <div className="w-full h-0.5 overflow-hidden">
+        <div className="w-full h-1 overflow-hidden">
             <div
                 className={`h-full w-full  ${
                     isInputFocused

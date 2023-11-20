@@ -57,7 +57,9 @@ export default function ChatConversationList({
             viewport={{ once: true }}
             className="md:flex md:h-fit sticky top-0 md:top-2 flex-col gap-2 lg:gap-4 w-full lg:p-0 bg-card dark:bg-cardDark md:bg-background2 md:dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10"
         >
-            <h1 className="text-center font-bold">Conversations</h1>
+            <h1 className="mx-auto text-xl font-bold text-center py-1 px-4 w-full md:w-fit md:rounded-full bg-card dark:bg-cardDark md:bg-gray-300/80 md:dark:bg-gray-500/80">
+                Chat
+            </h1>
             {hasConversations ? ConversationContent : NoConversationContent}
         </motion.div>
     );
