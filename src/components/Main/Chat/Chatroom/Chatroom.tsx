@@ -47,6 +47,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+    const shouldScroll = useRef(true);
     const shouldFetch = useRef(true);
     const shouldInitializeSocket = useRef(true);
     const canLoadMoreMessages = messages.length < totalMessages;
@@ -92,6 +93,10 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
             setTotalMessages(response?.totalMessageCount);
             setIsSubmitting(false);
             setLoading(false);
+            // prevent scrolling to bottom when loading all messages instead of only the latest
+            messageScope === 'all'
+                ? (shouldScroll.current = false)
+                : (shouldScroll.current = true);
         }
     };
 
@@ -243,7 +248,9 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     }, [receivedMessage]);
 
     useEffect(() => {
-        scrollToBottom();
+        if (shouldScroll.current) scrollToBottom();
+        // re-enable scrolling to bottom after all messages have been fetched
+        if (messages.length <= totalMessages) shouldScroll.current = true;
     }, [messages]);
 
     const LoadingContent = (
