@@ -92,8 +92,8 @@ export default function FriendCoverSection({
                 alt="User avatar"
             />
 
-            <div className="flex flex-col">
-                <h1 className="text-2xl text-center font-bold h-auto">
+            <div className="flex flex-col w-3/5">
+                <h1 className="text-2xl text-center font-bold h-auto truncate">
                     {firstName} {lastName}'s page
                 </h1>
                 <p className="text-center text-xs">

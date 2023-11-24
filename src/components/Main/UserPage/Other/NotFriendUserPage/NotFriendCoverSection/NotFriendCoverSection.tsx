@@ -82,8 +82,8 @@ export default function NotFriendCoverSection({
                 src={`data:image/png;base64,${userPicture}`}
                 alt="User avatar"
             />
-            <div className="flex flex-col">
-                <h1 className=" text-center font-bold h-auto">
+            <div className="flex flex-col items-start w-3/5">
+                <h1 className=" text-center font-bold h-auto truncate">
                     {firstName} {lastName}'s page
                 </h1>
             </div>
