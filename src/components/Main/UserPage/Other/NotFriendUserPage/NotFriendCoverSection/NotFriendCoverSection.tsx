@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getColors } from '../../../../../../utilities/getColors';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { FinalColor } from 'extract-colors';
+import defaultUserpic from '../../../../../../assets/defaultUserpic.png';
 
 type NotFriendCoverSectionProps = {
     firstName: string;
@@ -25,6 +26,11 @@ export default function NotFriendCoverSection({
     setLoading,
 }: NotFriendCoverSectionProps) {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
+
+    // Use the default userpic if no userpic is provided. (This should only apply to fake users created with faker.js)
+    const userpicSrc = userPicture
+        ? `data:image/png;base64,${userPicture}`
+        : defaultUserpic;
 
     const shouldInitialize = useRef(true);
 
@@ -79,7 +85,7 @@ export default function NotFriendCoverSection({
         >
             <img
                 className="w-20 h-fit object-cover rounded-full relative bottom-10 border-white border-2"
-                src={`data:image/png;base64,${userPicture}`}
+                src={userpicSrc}
                 alt="User avatar"
             />
             <div className="flex flex-col items-start w-3/5">

@@ -1,6 +1,7 @@
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import defaultUserpic from '../../../../assets/defaultUserpic.png';
 
 type UserListItemProps = {
     listItemData: MinimalUserTypes;
@@ -8,6 +9,11 @@ type UserListItemProps = {
 
 export default function UserListItem({ listItemData }: UserListItemProps) {
     const { _id, firstName, lastName, userpic } = listItemData || {};
+
+    // Use the default userpic if no userpic is provided. (This should only apply to fake users created with faker.js)
+    const userpicSrc = userpic?.data
+        ? `data:image/png;base64,${userpic.data}`
+        : defaultUserpic;
 
     return (
         <motion.button whileTap={{ scale: 0.97 }}>
@@ -18,7 +24,7 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
                 <img
                     loading="lazy"
                     className="w-8 h-8 object-cover rounded-full"
-                    src={`data:image/png;base64,${userpic?.data}`}
+                    src={userpicSrc}
                     alt="User avatar"
                 />
                 <div className="overflow-hidden whitespace-nowrap text-ellipsis">
