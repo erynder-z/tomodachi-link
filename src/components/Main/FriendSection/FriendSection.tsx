@@ -67,7 +67,8 @@ export default function FriendSection() {
                 );
                 setFriendsOfFriends(response?.friendsOfFriends);
                 setLoading(response.length <= 0);
-                if (response.length <= 0) handleFetchRandomUsers();
+                if (response.friendsOfFriends?.length <= 0)
+                    handleFetchRandomUsers();
             } catch (error) {
                 setFriendsOfFriends(currentFriendsOfFriends);
             } finally {
