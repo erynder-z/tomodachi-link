@@ -23,7 +23,7 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
             >
                 <img
                     loading="lazy"
-                    className="w-8 h-8 object-cover rounded-full"
+                    className="w-6 md:w-8 h-6 md:h-8 object-cover rounded-full"
                     src={userpicSrc}
                     alt="User avatar"
                 />
