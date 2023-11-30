@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { shuffleArray } from '../../../../../utilities/shuffleArray';
 import { CommonFriendType } from '../../../../../types/friendTypes';
 import { ImageType } from '../../../../../types/miscTypes';
+import { useMemo } from 'react';
 
 type SuggestionCardFriendInfoProps = {
     userpic: ImageType;
@@ -17,28 +18,42 @@ export default function SuggestionCardFriendInfo({
     commonFriends,
 }: SuggestionCardFriendInfoProps) {
     const MAX_DISPLAY_ITEMS = 2;
-    const shuffledCommonFriends = shuffleArray(commonFriends);
-    const displayedCommonFriends = shuffledCommonFriends?.slice(
-        0,
-        MAX_DISPLAY_ITEMS
+    const shuffledCommonFriends = useMemo(
+        () => shuffleArray(commonFriends),
+        [commonFriends]
     );
-    const additionalItemsCount =
-        commonFriends && commonFriends.length > MAX_DISPLAY_ITEMS
-            ? commonFriends.length - MAX_DISPLAY_ITEMS
-            : 0;
-
-    const commonFriendsList = displayedCommonFriends?.map(
-        (commonFriendObject: CommonFriendType) => (
-            <p
-                key={commonFriendObject._id}
-                className="text-xs break-all truncate"
-            >
-                {commonFriendObject.firstName} {commonFriendObject.lastName}
-            </p>
-        )
+    const displayedCommonFriends = useMemo(
+        () => shuffledCommonFriends?.slice(0, MAX_DISPLAY_ITEMS),
+        [shuffledCommonFriends]
+    );
+    const additionalItemsCount = useMemo(
+        () =>
+            commonFriends && commonFriends.length > MAX_DISPLAY_ITEMS
+                ? commonFriends.length - MAX_DISPLAY_ITEMS
+                : 0,
+        [commonFriends]
     );
 
-    const hasAdditionalItems = additionalItemsCount > 0;
+    const commonFriendsList = useMemo(
+        () =>
+            displayedCommonFriends?.map(
+                (commonFriendObject: CommonFriendType) => (
+                    <p
+                        key={commonFriendObject._id}
+                        className="text-xs break-all truncate"
+                    >
+                        {commonFriendObject.firstName}{' '}
+                        {commonFriendObject.lastName}
+                    </p>
+                )
+            ),
+        [displayedCommonFriends]
+    );
+
+    const hasAdditionalItems = useMemo(
+        () => additionalItemsCount > 0,
+        [additionalItemsCount]
+    );
 
     const FriendData = (
         <>
