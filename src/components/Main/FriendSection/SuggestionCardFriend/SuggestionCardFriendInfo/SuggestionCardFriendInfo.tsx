@@ -29,7 +29,10 @@ export default function SuggestionCardFriendInfo({
 
     const commonFriendsList = displayedCommonFriends?.map(
         (commonFriendObject: CommonFriendType) => (
-            <p key={commonFriendObject._id} className="text-xs break-all">
+            <p
+                key={commonFriendObject._id}
+                className="text-xs break-all truncate"
+            >
                 {commonFriendObject.firstName} {commonFriendObject.lastName}
             </p>
         )
@@ -44,7 +47,7 @@ export default function SuggestionCardFriendInfo({
                 src={`data:image/png;base64,${userpic?.data}`}
                 alt="User avatar"
             />
-            <p className="font-semibold text-sm break-all text-regularText dark:text-regularTextDark">
+            <p className="font-semibold text-sm break-all text-regularText dark:text-regularTextDark truncate">
                 {firstName} {lastName}
             </p>
         </>

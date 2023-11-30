@@ -29,7 +29,7 @@ export default function SuggestionCardRandomInfo({
                 src={userpicSrc}
                 alt="User avatar"
             />
-            <p className="font-semibold text-sm break-all text-regularText dark:text-regularTextDark">
+            <p className="font-semibold text-sm break-all text-regularText dark:text-regularTextDark truncate">
                 {firstName} {lastName}
             </p>
         </motion.div>
