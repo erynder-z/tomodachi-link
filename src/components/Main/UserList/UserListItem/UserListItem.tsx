@@ -16,7 +16,7 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
         : defaultUserpic;
 
     return (
-        <motion.button whileTap={{ scale: 0.97 }}>
+        <motion.button whileTap={{ scale: 0.97 }} className="flex-1">
             <Link
                 to={`/users/${_id}`}
                 className="flex items-center w-full gap-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 rounded lg:rounded-lg"

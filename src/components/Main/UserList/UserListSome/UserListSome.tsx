@@ -17,6 +17,7 @@ export default function UserListSome() {
 
     const handleFetchUsers = async () => {
         if (authUser && token) {
+            setLoading(true);
             const API_ENDPOINT_URL = `/api/v1/users/some`;
             const METHOD = 'GET';
             const ERROR_MESSAGE = 'Unable to fetch users!';
@@ -58,9 +59,15 @@ export default function UserListSome() {
             className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <h1 className="text-center font-bold mb-4">People you may know:</h1>
-            <div className="h-full overflow-auto flex flex-col gap-2 md:gap-3">
+            <div className="overflow-auto flex flex-col gap-2 md:gap-3 flex-1">
                 {userList}
             </div>
+            <button
+                onClick={handleFetchUsers}
+                className="flex items-center justify-center w-full p-2 mt-4 bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded  text-sm text-center"
+            >
+                Get new suggestions
+            </button>
         </motion.div>
     );
 
