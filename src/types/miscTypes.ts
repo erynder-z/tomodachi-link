@@ -1,4 +1,5 @@
 import { InfoType } from './infoTypes';
+import { MinimalUserTypes } from './otherUserTypes';
 
 export type CoverOption = {
     image: string;
@@ -41,3 +42,8 @@ export type TimeOfDayMessageType = {
 };
 
 export type FetchStatusType = 'idle' | 'fetching' | 'delayed' | 'error';
+
+export type PaginatedListDataType = {
+    page: number;
+    pageUserData: MinimalUserTypes[];
+};
