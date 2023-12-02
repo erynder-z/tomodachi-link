@@ -19,7 +19,7 @@ export default function ChatOnlineUserlistItem({
     const { setInfo } = useInfoCard();
     const { _id, firstName, lastName, userpic } = listItemData || {};
 
-    const indicatorColor = isOnline ? 'green' : 'gray';
+    const indicatorColor = isOnline ? 'bg-green-500' : 'bg-neutral-500';
     const chatPartnerId = _id;
 
     return (
@@ -34,15 +34,19 @@ export default function ChatOnlineUserlistItem({
             }}
             className="flex items-center gap-4 py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 cursor-pointer"
         >
-            <div
-                className={`w-3 h-3 rounded-full bg-${indicatorColor}-500`}
-            ></div>
-            <img
-                loading="lazy"
-                className="w-8 h-8 object-cover rounded-full"
-                src={`data:image/png;base64,${userpic?.data}`}
-                alt="User avatar"
-            />
+            <div className="relative">
+                <img
+                    loading="lazy"
+                    className="w-6 md:w-8 h-auto object-cover rounded-full"
+                    src={`data:image/png;base64,${userpic?.data}`}
+                    alt="User avatar"
+                />
+                <div className="group absolute -bottom-1 -right-1 flex h-3 w-3">
+                    <div
+                        className={`w-3 h-3 rounded-full ${indicatorColor}`}
+                    ></div>
+                </div>
+            </div>
             <div className="flex-1 truncate">
                 {firstName} {lastName}
             </div>
