@@ -4,7 +4,7 @@ import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { backendFetch } from '../../../../utilities/backendFetch';
 
 export default function UserListSome() {
@@ -54,8 +54,10 @@ export default function UserListSome() {
 
     const UserListContent = (
         <motion.div
+            key="userList"
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <h1 className="text-center font-bold mb-4">People you may know:</h1>
@@ -71,5 +73,9 @@ export default function UserListSome() {
         </motion.div>
     );
 
-    return loading ? LoadingContent : UserListContent;
+    return (
+        <AnimatePresence>
+            {loading ? LoadingContent : UserListContent}
+        </AnimatePresence>
+    );
 }

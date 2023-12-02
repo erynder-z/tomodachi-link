@@ -4,7 +4,7 @@ import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { PaginatedListDataType } from '../../../../types/miscTypes';
 
@@ -123,9 +123,11 @@ export default function UserListAll() {
 
     const UserListContent = (
         <motion.div
+            key="userList"
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="flex flex-col w-full h-full  p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
+            exit={{ opacity: 0 }}
+            className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <h1 className="text-center font-bold mb-4">All users:</h1>
 
@@ -171,5 +173,9 @@ export default function UserListAll() {
         </motion.div>
     );
 
-    return loading ? LoadingContent : UserListContent;
+    return (
+        <AnimatePresence>
+            {loading ? LoadingContent : UserListContent}
+        </AnimatePresence>
+    );
 }
