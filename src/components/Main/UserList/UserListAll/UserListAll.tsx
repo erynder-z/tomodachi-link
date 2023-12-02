@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import UserListItem from '../UserListItem/UserListItem';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
 import useAuth from '../../../../hooks/useAuth';
@@ -17,6 +17,8 @@ export default function UserListAll() {
     const [paginatedData, setPaginatedData] = useState<PaginatedListDataType[]>(
         []
     );
+
+    const shouldInitialize = useRef(true);
 
     const ITEMS_PER_PAGE = 12;
 
@@ -88,6 +90,7 @@ export default function UserListAll() {
     };
 
     useEffect(() => {
+        if (currentPage === 1) return;
         handleFetchAllUsers();
     }, [currentPage]);
 
@@ -102,7 +105,14 @@ export default function UserListAll() {
     }, [paginatedData, currentPage]);
 
     useEffect(() => {
-        handleFetchNumberOfUsers();
+        if (shouldInitialize.current) {
+            handleFetchNumberOfUsers();
+            handleFetchAllUsers();
+        }
+
+        return () => {
+            shouldInitialize.current = false;
+        };
     }, []);
 
     const LoadingContent = (
