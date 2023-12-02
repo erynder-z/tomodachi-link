@@ -3,12 +3,19 @@ import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 type LightBoxProps = {
-    image: ImageType | null;
+    image: ImageType | string | null;
     onClose: () => void;
 };
 
 export default function LightBox({ image, onClose }: LightBoxProps) {
-    const imgSrc = image?.data;
+    let src;
+    // image is a URL to the image
+    if (typeof image === 'string') {
+        src = image;
+    } else {
+        // image is an image object
+        src = `data:${image?.contentType};base64,${image?.data}`;
+    }
 
     return (
         <motion.div
@@ -28,7 +35,7 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
                 </motion.button>
                 <img
                     className="max-w-full max-h-full"
-                    src={`data:image/png;base64,${imgSrc}`}
+                    src={src}
                     alt="Selected image"
                 />
             </div>
