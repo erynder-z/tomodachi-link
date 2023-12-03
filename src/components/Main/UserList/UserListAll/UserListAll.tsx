@@ -8,7 +8,20 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { PaginatedListDataType } from '../../../../types/miscTypes';
 
-export default function UserListAll() {
+type UserListAllProps = {
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
+        }>
+    >;
+};
+
+export default function UserListAll({
+    setShouldOverlaysShow,
+}: UserListAllProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
@@ -89,6 +102,15 @@ export default function UserListAll() {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
     };
 
+    const handleSearchButtonClick = () => {
+        setShouldOverlaysShow({
+            searchOverlay: true,
+            editUserDataModal: false,
+            mobileOptionsModal: false,
+            guestAccountOverlay: false,
+        });
+    };
+
     useEffect(() => {
         if (currentPage === 1) return;
         handleFetchAllUsers();
@@ -129,7 +151,15 @@ export default function UserListAll() {
             exit={{ opacity: 0 }}
             className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full min-h-[calc(100vh_-_5rem)] md:min-h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
-            <h1 className="text-center font-bold mb-4">All users:</h1>
+            <div className="flex gap-2">
+                <h1 className="text-center font-bold mb-4">All users:</h1>
+                <button
+                    onClick={handleSearchButtonClick}
+                    className="bg-button dark:bg-buttonDark text-regularText dark:text-regularTextDark rounded px-4 py-1"
+                >
+                    Search
+                </button>
+            </div>
 
             <motion.div
                 key={currentPage}

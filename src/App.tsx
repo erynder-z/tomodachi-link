@@ -178,6 +178,7 @@ function App() {
                     showSidebar={showSidebar}
                     toggleSidebar={toggleSidebar}
                     socket={socket.current}
+                    setShouldOverlaysShow={setShouldOverlaysShow}
                 />
                 <ScrollToTopButton />
             </main>

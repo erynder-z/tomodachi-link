@@ -11,12 +11,21 @@ type SidebarProps = {
     showSidebar: boolean;
     toggleSidebar?: () => void;
     socket: Socket | undefined;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
+        }>
+    >;
 };
 
 export default function Sidebar({
     showSidebar,
     toggleSidebar,
     socket,
+    setShouldOverlaysShow,
 }: SidebarProps) {
     const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -40,7 +49,9 @@ export default function Sidebar({
 
     switch (routeName) {
         case 'friends':
-            content = <UserListAll />;
+            content = (
+                <UserListAll setShouldOverlaysShow={setShouldOverlaysShow} />
+            );
             break;
         case 'chat':
             content = (
