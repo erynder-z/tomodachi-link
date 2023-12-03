@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import LoadingSpinner from '../UiElements/LoadingSpinner/LoadingSpinner';
-import { SearchResultType } from '../../types/searchTypes';
+import { SearchModeType, SearchResultType } from '../../types/searchTypes';
 import SearchInput from './SearchInput/SearchInput';
 import SearchResults from './SearchResults/SearchResults';
 import SpyGlassIcon from './SpyGlassIcon/SpyGlassIcon';
@@ -9,6 +9,7 @@ import NoResultsFound from './SearchResults/NoResultsFound/NoResultsFound';
 import ClearButton from './ClearButton/ClearButton';
 import { FetchStatusType } from '../../types/miscTypes';
 import { AnimatePresence } from 'framer-motion';
+import SearchModeSelect from './SearchModeSelect/SearchModeSelect';
 
 type SearchPropsType = {
     handleCloseButtonClick: () => void;
@@ -25,8 +26,14 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [isDebouncing, setIsDebouncing] = useState<boolean>(false);
+    const [searchMode, setSearchMode] = useState<SearchModeType>('all');
     const dropdownRef = useRef<HTMLDivElement>(null);
     const debounce = useRef<NodeJS.Timeout | null>(null);
+
+    const clearSearch = () => {
+        setSearchText('');
+        setSearchResults([]);
+    };
 
     useEffect(() => {
         const fetchSearchResults = async () => {
@@ -46,7 +53,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
                 const response = await fetch(
-                    `${SERVER_URL}/api/v1/search?query=${searchText}`,
+                    `${SERVER_URL}/api/v1/search?query=${searchText}&searchMode=${searchMode}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -95,10 +102,18 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
 
     return (
         <div className="relative z-0 px-4 w-full" ref={dropdownRef}>
-            <SearchInput
-                searchText={searchText}
-                setSearchText={setSearchText}
-            />
+            <div className="flex flex-col gap-8">
+                <SearchModeSelect
+                    searchMode={searchMode}
+                    setSearchMode={setSearchMode}
+                    clearSearch={clearSearch}
+                />
+                <SearchInput
+                    searchText={searchText}
+                    setSearchText={setSearchText}
+                    searchMode={searchMode}
+                />
+            </div>
             <AnimatePresence>
                 {isDebouncing && searchText ? (
                     Loading
@@ -117,11 +132,7 @@ export default function Search({ handleCloseButtonClick }: SearchPropsType) {
                     <SpyGlassIcon />
                 )}
                 {searchText && (
-                    <ClearButton
-                        key="ClearButton"
-                        setSearchText={setSearchText}
-                        setSearchResults={setSearchResults}
-                    />
+                    <ClearButton key="ClearButton" clearSearch={clearSearch} />
                 )}{' '}
             </AnimatePresence>
         </div>

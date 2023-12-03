@@ -19,3 +19,5 @@ export type SearchResultType = {
     type: 'user' | 'post' | 'poll';
     data: SearchResultUserType | SearchResultPostType | SearchResultPollType;
 };
+
+export type SearchModeType = 'all' | 'users' | 'posts' | 'polls';
