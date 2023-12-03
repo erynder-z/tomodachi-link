@@ -13,20 +13,26 @@ import SearchModeSelect from './SearchModeSelect/SearchModeSelect';
 
 type SearchPropsType = {
     handleCloseButtonClick: () => void;
+    defaultSearchMode?: SearchModeType;
 };
 
 const DEBOUNCE_TIMEOUT = 500;
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
-export default function Search({ handleCloseButtonClick }: SearchPropsType) {
+export default function Search({
+    handleCloseButtonClick,
+    defaultSearchMode,
+}: SearchPropsType) {
     const { token } = useAuth();
     const [searchText, setSearchText] = useState<string>('');
     const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [fetchStatus, setFetchStatus] = useState<FetchStatusType>('idle');
     const [isDebouncing, setIsDebouncing] = useState<boolean>(false);
-    const [searchMode, setSearchMode] = useState<SearchModeType>('all');
+    const [searchMode, setSearchMode] = useState<SearchModeType>(
+        defaultSearchMode || 'all'
+    );
     const dropdownRef = useRef<HTMLDivElement>(null);
     const debounce = useRef<NodeJS.Timeout | null>(null);
 

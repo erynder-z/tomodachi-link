@@ -7,6 +7,7 @@ import ChatSectionButton from './ChatSectionButton/ChatSectionButton';
 import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import PollSectionButton from './PollSectionButton/PollSectionButton';
+import { SearchModeType } from '../../../types/searchTypes';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -23,11 +24,13 @@ type NavbarProps = {
             guestAccountOverlay: boolean;
         }>
     >;
+    setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
 export default function Navbar({
     shouldOverlaysShow,
     setShouldOverlaysShow,
+    setSearchMode,
 }: NavbarProps) {
     const { currentUserData } = useCurrentUserData();
     const { conversationsWithUnreadMessages, mutedConversations } =
@@ -47,6 +50,7 @@ export default function Navbar({
             mobileOptionsModal: false,
             guestAccountOverlay: false,
         });
+        setSearchMode('all');
     };
 
     const closeAllOverlays = () => {

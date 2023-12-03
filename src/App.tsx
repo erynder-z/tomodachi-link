@@ -20,6 +20,7 @@ import { AnimatePresence } from 'framer-motion';
 import AppRoutes from './AppRoutes';
 import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/ScanLinesOverlay';
 import { handleChatSetup } from './utilities/handleChatSetup';
+import { SearchModeType } from './types/searchTypes';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
@@ -44,6 +45,7 @@ function App() {
         mobileOptionsModal: false,
         guestAccountOverlay: false,
     });
+    const [searchMode, setSearchMode] = useState<SearchModeType>('all');
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
 
@@ -146,6 +148,7 @@ function App() {
                     <Navbar
                         shouldOverlaysShow={shouldOverlaysShow}
                         setShouldOverlaysShow={setShouldOverlaysShow}
+                        setSearchMode={setSearchMode}
                     />
                 </nav>
             </div>
@@ -179,6 +182,7 @@ function App() {
                     toggleSidebar={toggleSidebar}
                     socket={socket.current}
                     setShouldOverlaysShow={setShouldOverlaysShow}
+                    setSearchMode={setSearchMode}
                 />
                 <ScrollToTopButton />
             </main>
@@ -188,6 +192,7 @@ function App() {
                 setShouldOverlaysShow={setShouldOverlaysShow}
                 showSidebar={showSidebar}
                 toggleSidebar={toggleSidebar}
+                searchMode={searchMode}
             />
 
             <InfoCard info={info} />

@@ -3,6 +3,7 @@ import EditUserDataModal from '../../Main/UserOption/EditUserDataModal/EditUserD
 import OptionsCard from '../../UiElements/OptionsCard/OptionsCard';
 import GuestAccountOverlay from './GuestAccountOverlay/GuestAccountOverlay';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SearchModeType } from '../../../types/searchTypes';
 
 type OverlayHandlerProps = {
     shouldOverlaysShow: {
@@ -21,6 +22,7 @@ type OverlayHandlerProps = {
     >;
     showSidebar?: boolean;
     toggleSidebar?: () => void;
+    searchMode: SearchModeType;
 };
 
 export default function OverlayHandler({
@@ -28,6 +30,7 @@ export default function OverlayHandler({
     setShouldOverlaysShow,
     showSidebar,
     toggleSidebar,
+    searchMode,
 }: OverlayHandlerProps) {
     const OverlayGuest = (
         <motion.div
@@ -47,7 +50,10 @@ export default function OverlayHandler({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <SearchOverlay setShouldOverlaysShow={setShouldOverlaysShow} />
+            <SearchOverlay
+                setShouldOverlaysShow={setShouldOverlaysShow}
+                searchMode={searchMode}
+            />
         </motion.div>
     );
 

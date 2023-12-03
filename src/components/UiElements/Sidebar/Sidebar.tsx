@@ -6,6 +6,7 @@ import { Socket } from 'socket.io-client';
 import { TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 import { ChatMemberType } from '../../../types/chatTypes';
 import { useLocation } from 'react-router-dom';
+import { SearchModeType } from '../../../types/searchTypes';
 
 type SidebarProps = {
     showSidebar: boolean;
@@ -19,6 +20,7 @@ type SidebarProps = {
             guestAccountOverlay: boolean;
         }>
     >;
+    setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
 export default function Sidebar({
@@ -26,6 +28,7 @@ export default function Sidebar({
     toggleSidebar,
     socket,
     setShouldOverlaysShow,
+    setSearchMode,
 }: SidebarProps) {
     const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -50,7 +53,10 @@ export default function Sidebar({
     switch (routeName) {
         case 'friends':
             content = (
-                <UserListAll setShouldOverlaysShow={setShouldOverlaysShow} />
+                <UserListAll
+                    setShouldOverlaysShow={setShouldOverlaysShow}
+                    setSearchMode={setSearchMode}
+                />
             );
             break;
         case 'chat':

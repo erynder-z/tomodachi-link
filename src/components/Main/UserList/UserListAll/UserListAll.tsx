@@ -7,6 +7,7 @@ import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { PaginatedListDataType } from '../../../../types/miscTypes';
+import { SearchModeType } from '../../../../types/searchTypes';
 
 type UserListAllProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -17,10 +18,12 @@ type UserListAllProps = {
             guestAccountOverlay: boolean;
         }>
     >;
+    setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
 export default function UserListAll({
     setShouldOverlaysShow,
+    setSearchMode,
 }: UserListAllProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
@@ -103,6 +106,7 @@ export default function UserListAll({
     };
 
     const handleSearchButtonClick = () => {
+        setSearchMode('users');
         setShouldOverlaysShow({
             searchOverlay: true,
             editUserDataModal: false,
