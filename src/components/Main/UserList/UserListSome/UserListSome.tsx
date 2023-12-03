@@ -66,7 +66,7 @@ export default function UserListSome() {
             </div>
             <button
                 onClick={handleFetchUsers}
-                className="flex items-center justify-center w-full p-2 mt-4 bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded  text-sm text-center"
+                className="flex items-center justify-center w-full p-2 mt-4 bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded text-sm text-center transition-all"
             >
                 Get new suggestions
             </button>

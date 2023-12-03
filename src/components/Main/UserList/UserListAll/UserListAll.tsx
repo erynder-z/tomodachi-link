@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { PaginatedListDataType } from '../../../../types/miscTypes';
 import { SearchModeType } from '../../../../types/searchTypes';
+import { MdPersonSearch } from 'react-icons/md';
 
 type UserListAllProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -155,13 +156,13 @@ export default function UserListAll({
             exit={{ opacity: 0 }}
             className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full min-h-[calc(100vh_-_5rem)] md:min-h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
-            <div className="flex gap-2">
-                <h1 className="text-center font-bold mb-4">All users:</h1>
+            <div className="flex justify-between items-center gap-2 mb-4">
+                <h1 className="text-center font-bold">All users:</h1>
                 <button
                     onClick={handleSearchButtonClick}
-                    className="bg-button dark:bg-buttonDark text-regularText dark:text-regularTextDark rounded px-4 py-1"
+                    className="h-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark rounded px-4 transition-all"
                 >
-                    Search
+                    <MdPersonSearch onClick={handleSearchButtonClick} />
                 </button>
             </div>
 
@@ -194,7 +195,7 @@ export default function UserListAll({
                         onClick={handleNextPage}
                         whileTap={{ scale: 0.97 }}
                         disabled={isOnLastPage || loading || !numberOfUsers}
-                        className={`w-1/2 flex items-center justify-center p-2 text-regularTextDark rounded text-sm text-center ${
+                        className={`w-1/2 flex items-center justify-center p-2 text-regularTextDark rounded text-sm text-center transition-all ${
                             isOnLastPage || loading
                                 ? 'bg-gray-500 hover:bg-gray-600 cursor-default'
                                 : 'bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover'
