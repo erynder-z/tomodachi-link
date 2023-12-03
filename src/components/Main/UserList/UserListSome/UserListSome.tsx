@@ -47,7 +47,7 @@ export default function UserListSome() {
     ));
 
     const LoadingContent = (
-        <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
+        <div className="flex justify-center items-center w-full h-full py-4 ">
             <LoadingSpinner />
         </div>
     );
@@ -74,7 +74,7 @@ export default function UserListSome() {
     );
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {loading ? LoadingContent : UserListContent}
         </AnimatePresence>
     );

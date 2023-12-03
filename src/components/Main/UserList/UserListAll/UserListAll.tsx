@@ -116,7 +116,7 @@ export default function UserListAll() {
     }, []);
 
     const LoadingContent = (
-        <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
+        <div className="flex justify-center items-center w-full h-full py-4">
             <LoadingSpinner />
         </div>
     );
@@ -127,7 +127,7 @@ export default function UserListAll() {
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
+            className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full min-h-[calc(100vh_-_5rem)] md:min-h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <h1 className="text-center font-bold mb-4">All users:</h1>
 
@@ -174,7 +174,7 @@ export default function UserListAll() {
     );
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {loading ? LoadingContent : UserListContent}
         </AnimatePresence>
     );

@@ -38,7 +38,7 @@ export default function ChatOnlineUsersList({
     ));
 
     const LoadingContent = (
-        <div className="flex justify-center items-center w-full h-[calc(100vh_-_3rem)] py-4 ">
+        <div className="flex justify-center items-center w-full h-full py-4 ">
             <LoadingSpinner />
         </div>
     );
