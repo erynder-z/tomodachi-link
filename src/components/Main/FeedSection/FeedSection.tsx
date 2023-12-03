@@ -8,9 +8,20 @@ import useAuth from '../../../hooks/useAuth';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { MinimalPostType } from '../../../types/postTypes';
 import { FetchStatusType } from '../../../types/miscTypes';
+import SearchPostsButton from './SearchPostsButton/SearchPostsButton';
+import { SearchModeType } from '../../../types/searchTypes';
 
 type FeedSectionProps = {
     isPaginationTriggered: boolean;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
+        }>
+    >;
+    setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
 const USER_NOTIFICATION_TIMEOUT = 3000;
@@ -18,6 +29,8 @@ const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
 export default function FeedSection({
     isPaginationTriggered,
+    setShouldOverlaysShow,
+    setSearchMode,
 }: FeedSectionProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
@@ -154,6 +167,10 @@ export default function FeedSection({
             <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
                 Your feed
                 <RefreshFeedButton refreshFeed={refreshFeed} />
+                <SearchPostsButton
+                    setShouldOverlaysShow={setShouldOverlaysShow}
+                    setSearchMode={setSearchMode}
+                />
             </h1>
 
             <Feed

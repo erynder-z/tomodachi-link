@@ -174,6 +174,8 @@ function App() {
                             accountType={accountType}
                             socket={socket.current}
                             userDataKey={userDataKey}
+                            setShouldOverlaysShow={setShouldOverlaysShow}
+                            setSearchMode={setSearchMode}
                         />
                     </AnimatePresence>
                 </div>

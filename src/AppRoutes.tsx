@@ -14,6 +14,7 @@ import NewPollSection from './components/Main/PollSection/NewPollSection/NewPoll
 import PollList from './components/Main/PollSection/PollList/PollList';
 import SinglePostPage from './components/Main/Post/SinglePostPage/SinglePostPage';
 import SinglePollPage from './components/Main/Poll/SinglePollPage/SinglePollPage';
+import { SearchModeType } from './types/searchTypes';
 
 type AppRoutesProps = {
     location: ReturnType<typeof useLocation>;
@@ -21,6 +22,15 @@ type AppRoutesProps = {
     accountType: 'guest' | 'regularUser' | undefined;
     socket: Socket | undefined;
     userDataKey: string;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
+        }>
+    >;
+    setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
 export default function AppRoutes({
@@ -29,6 +39,8 @@ export default function AppRoutes({
     accountType,
     socket,
     userDataKey,
+    setShouldOverlaysShow,
+    setSearchMode,
 }: AppRoutesProps) {
     return (
         <Routes key={location.pathname} location={location}>
@@ -40,6 +52,8 @@ export default function AppRoutes({
                     element={
                         <FeedSection
                             isPaginationTriggered={isPaginationTriggered}
+                            setShouldOverlaysShow={setShouldOverlaysShow}
+                            setSearchMode={setSearchMode}
                         />
                     }
                 />
@@ -56,6 +70,8 @@ export default function AppRoutes({
                     element={
                         <PollList
                             isPaginationTriggered={isPaginationTriggered}
+                            setShouldOverlaysShow={setShouldOverlaysShow}
+                            setSearchMode={setSearchMode}
                         />
                     }
                 />

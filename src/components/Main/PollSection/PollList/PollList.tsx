@@ -8,15 +8,30 @@ import { RetrievedPollDataType } from '../../../../types/pollTypes';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import RefreshPollButton from './RefreshPollButton/RefreshPollButton';
 import { FetchStatusType } from '../../../../types/miscTypes';
+import { SearchModeType } from '../../../../types/searchTypes';
+import SearchPollsButton from '../SearchPollsButton/SearchPollsButton';
 
 type PollListProps = {
     isPaginationTriggered: boolean;
+    setShouldOverlaysShow: React.Dispatch<
+        React.SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
+        }>
+    >;
+    setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
-export default function PollList({ isPaginationTriggered }: PollListProps) {
+export default function PollList({
+    isPaginationTriggered,
+    setShouldOverlaysShow,
+    setSearchMode,
+}: PollListProps) {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [skip, setSkip] = useState<number | null>(null);
@@ -156,9 +171,13 @@ export default function PollList({ isPaginationTriggered }: PollListProps) {
             transition={{ duration: 0.2 }}
             className="flex flex-col items-center min-h-[calc(100vh_-_3rem)] lg:min-h-full p-0 md:p-4 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg "
         >
-            <h1 className="flex justify-center gap-2 text-xl font-bold sticky top-0 mb-4  px-4 w-fit rounded-full bg-gray-300/80 dark:bg-gray-500/80">
+            <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
                 Poll list
                 <RefreshPollButton refreshPoll={refreshPoll} />
+                <SearchPollsButton
+                    setShouldOverlaysShow={setShouldOverlaysShow}
+                    setSearchMode={setSearchMode}
+                />
             </h1>
             <div className="flex flex-col gap-4 pb-4 w-full">
                 {polls.length > 0 ? HasPollContent : EmptyListContent}
