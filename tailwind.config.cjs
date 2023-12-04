@@ -87,10 +87,10 @@ module.exports = {
                 },
                 colorChangeAnimationBright: {
                     '0%, 100%': {
-                        'background-color': 'mediumGray',
+                        'background-color': 'lightSteelBlue  ',
                     },
                     '50%': {
-                        'background-color': 'mediumVioletRed ',
+                        'background-color': 'orangeRed ',
                     },
                 },
                 colorChangeAnimationDark: {
