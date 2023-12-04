@@ -11,68 +11,25 @@ export default function SearchModeSelect({
     setSearchMode,
     clearSearch,
 }: SearchModeSelectProps) {
+    const options: SearchModeType[] = ['all', 'users', 'posts', 'polls'];
     return (
         <ol className="flex w-full justify-between text-regularTextDark">
-            <li
-                className={`w-full text-center cursor-pointer
-                    ${
-                        searchMode === 'all'
-                            ? 'bg-highlight dark:bg-highlightDark rounded'
+            {options.map((mode) => (
+                <li
+                    key={mode}
+                    className={`w-full text-center cursor-pointer relative transition-all ${
+                        searchMode === mode
+                            ? 'bg-highlight dark:bg-highlightDark rounded-3xl'
                             : ''
-                    }
-                        `}
-                onClick={() => {
-                    setSearchMode('all');
-                    clearSearch();
-                }}
-            >
-                All
-            </li>
-            <li
-                className={`w-full text-center cursor-pointer
-                 ${
-                     searchMode === 'users'
-                         ? 'bg-highlight dark:bg-highlightDark rounded'
-                         : ''
-                 }
-                     `}
-                onClick={() => {
-                    setSearchMode('users');
-                    clearSearch();
-                }}
-            >
-                Users
-            </li>
-            <li
-                className={`w-full text-center cursor-pointer
-                 ${
-                     searchMode === 'posts'
-                         ? 'bg-highlight dark:bg-highlightDark rounded'
-                         : ''
-                 }
-                     `}
-                onClick={() => {
-                    setSearchMode('posts');
-                    clearSearch();
-                }}
-            >
-                Posts
-            </li>
-            <li
-                className={`w-full text-center cursor-pointer
-                  ${
-                      searchMode === 'polls'
-                          ? 'bg-highlight dark:bg-highlightDark rounded'
-                          : ''
-                  }
-                      `}
-                onClick={() => {
-                    setSearchMode('polls');
-                    clearSearch();
-                }}
-            >
-                Polls
-            </li>
+                    }`}
+                    onClick={() => {
+                        setSearchMode(mode);
+                        clearSearch();
+                    }}
+                >
+                    <span>{mode.charAt(0).toUpperCase() + mode.slice(1)}</span>
+                </li>
+            ))}
         </ol>
     );
 }
