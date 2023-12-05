@@ -4,15 +4,68 @@ import useInfoCard from '../../../hooks/useInfoCard';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { InfoType } from '../../../types/infoTypes';
+import useAuth from '../../../hooks/useAuth';
+import LoggingInInfo from './LoggingInInfo/LoggingInInfo';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function SignupPage({ setShowSignup }: SignupPageProps) {
+    const { setToken } = useAuth();
     const { setInfo } = useInfoCard();
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
+
+    const displaySuccessInfo = (successMessage: string) => {
+        const successInfo = {
+            typeOfInfo: 'good',
+            message: successMessage,
+            icon: '🥳',
+        };
+        setInfo(successInfo as InfoType);
+    };
+
+    const displayErrorInfo = (errorMessage: string) => {
+        const failedInfo = {
+            typeOfInfo: 'bad',
+            message: errorMessage,
+            icon: '👻',
+        };
+        setInfo(failedInfo as InfoType);
+    };
+
+    const handleRequestError = async (response: Response) => {
+        const data = await response.json();
+        const errorMessage = data.error?.message || 'Something went wrong!';
+        displayErrorInfo(errorMessage);
+
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+    };
+
+    const login = async (username: string, password: string) => {
+        setInfo(null);
+
+        try {
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(`${SERVER_URL}/api/v1/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+                await handleRequestError(response);
+            }
+
+            const data = await response.json();
+            localStorage.setItem('jwtOdinBook', data.token);
+            setToken(data.token);
+        } catch (error: unknown) {
+            console.error(error);
+        }
+    };
 
     const signup = async (
         firstName: string,
@@ -40,32 +93,17 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
             });
 
             if (!response.ok) {
-                const data = await response.json();
-                const errorMessages = data.errors;
-                const message = errorMessages
-                    .map((error: { msg: string }) => error.msg)
-                    .join(', ');
-
-                const failedInfo = {
-                    typeOfInfo: 'bad',
-                    message: message,
-                    icon: '👻',
-                };
-
-                setInfo(failedInfo as InfoType);
-
-                throw new Error(
-                    `Error: ${response.status} ${response.statusText}`
-                );
+                await handleRequestError(response);
             }
 
-            const SUCCESS_INFO = {
-                typeOfInfo: 'good',
-                message: 'Registration successful!',
-                icon: '🥳',
-            };
+            displaySuccessInfo(
+                'Registration successful! You will automatically be logged in.'
+            );
 
-            setInfo(SUCCESS_INFO as InfoType);
+            setIsLoggingIn(true);
+            setTimeout(() => {
+                login(username, password);
+            }, 2000);
         } catch (error: unknown) {
             console.error(error);
         }
@@ -117,13 +155,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 confirmPassword
             );
         } catch (error) {
-            const FAILED_INFO = {
-                typeOfInfo: 'bad',
-                message: 'Something went wrong!',
-                icon: '👻',
-            };
-
-            setInfo(FAILED_INFO as InfoType);
+            displayErrorInfo('Something went wrong!');
         }
         setIsSubmitting(false);
     };
@@ -139,19 +171,24 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
             className="fixed inset-0 z-50 flex justify-center items-center"
         >
             <div className="flex justify-center items-center w-full h-full">
-                <div className="relative w-5/6 sm:w-2/3 lg:w-1/4 px-4  bg-white shadow-lg p-4 md:p-8 rounded lg:rounded-lg">
-                    <motion.button
-                        onClick={handleCloseButtonClick}
-                        whileTap={{ scale: 0.97 }}
-                        className="absolute top-4 right-4"
-                    >
-                        <FaTimes />
-                    </motion.button>
-                    <SignupForm
-                        handleSubmit={handleSubmit}
-                        isSubmitting={isSubmitting}
-                    />
-                </div>
+                {isLoggingIn ? (
+                    <LoggingInInfo />
+                ) : (
+                    <div className="relative w-5/6 sm:w-2/3 lg:w-1/4 px-4  bg-white shadow-lg p-4 md:p-8 rounded lg:rounded-lg">
+                        <motion.button
+                            onClick={handleCloseButtonClick}
+                            whileTap={{ scale: 0.97 }}
+                            className="absolute top-4 right-4"
+                        >
+                            <FaTimes />
+                        </motion.button>
+
+                        <SignupForm
+                            handleSubmit={handleSubmit}
+                            isSubmitting={isSubmitting}
+                        />
+                    </div>
+                )}
             </div>
         </motion.div>
     );
