@@ -3,9 +3,10 @@ import SignupForm from './SignupForm';
 import useInfoCard from '../../../hooks/useInfoCard';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { InfoType } from '../../../types/infoTypes';
 import useAuth from '../../../hooks/useAuth';
 import LoggingInInfo from './LoggingInInfo/LoggingInInfo';
+import { displayErrorInfo } from '../../UiElements/UserNotification/displayErrorInfo';
+import { displaySuccessInfo } from '../../UiElements/UserNotification/displaySuccessInfo';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,28 +19,11 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
 
-    const displaySuccessInfo = (successMessage: string) => {
-        const successInfo = {
-            typeOfInfo: 'good',
-            message: successMessage,
-            icon: '🥳',
-        };
-        setInfo(successInfo as InfoType);
-    };
-
-    const displayErrorInfo = (errorMessage: string) => {
-        const failedInfo = {
-            typeOfInfo: 'bad',
-            message: errorMessage,
-            icon: '👻',
-        };
-        setInfo(failedInfo as InfoType);
-    };
-
     const handleRequestError = async (response: Response) => {
         const data = await response.json();
         const errorMessage = data.error?.message || 'Something went wrong!';
-        displayErrorInfo(errorMessage);
+        /*        displayErrorInfo(errorMessage); */
+        displayErrorInfo(setInfo, errorMessage, '👻');
 
         throw new Error(`Error: ${response.status} ${response.statusText}`);
     };
@@ -97,9 +81,10 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
             }
 
             displaySuccessInfo(
-                'Registration successful! You will automatically be logged in.'
+                setInfo,
+                'Registration successful! You will automatically be logged in.',
+                '🥳'
             );
-
             setIsLoggingIn(true);
             setTimeout(() => {
                 login(username, password);
@@ -155,7 +140,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
                 confirmPassword
             );
         } catch (error) {
-            displayErrorInfo('Something went wrong!');
+            displayErrorInfo(setInfo, 'Something went wrong!', '👻');
         }
         setIsSubmitting(false);
     };

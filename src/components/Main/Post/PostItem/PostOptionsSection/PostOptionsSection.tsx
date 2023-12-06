@@ -8,7 +8,8 @@ import { PostType } from '../../../../../types/postTypes';
 import ToggleListButton from '../../../../UiElements/ToggleListButton/ToggleListButton';
 import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 import PostMenu from './PostMenu/PostMenu';
-import { InfoType } from '../../../../../types/infoTypes';
+import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
+import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
 
 type PostOptionsSectionProps = {
     postDetails: PostType | null;
@@ -54,23 +55,12 @@ export default function PostOptionsSection({
 
             if (!response.ok) handleFetchErrors(response, setInfo);
 
-            const SUCCESS_INFO = {
-                typeOfInfo: 'good',
-                message: 'Post deleted!',
-                icon: '🗑️',
-            };
-
-            setInfo(SUCCESS_INFO as InfoType);
+            displaySuccessInfo(setInfo, 'Post deleted!', '🗑️');
             if (setShouldRefreshPictureList && hasImage)
                 setShouldRefreshPictureList(true);
             if (onPostChange) onPostChange();
         } catch (err: unknown) {
-            const ERROR_INFO = {
-                typeOfInfo: 'bad',
-                message: 'Unable to delete post!',
-                icon: '👻',
-            };
-            setInfo(ERROR_INFO as InfoType);
+            displayErrorInfo(setInfo, 'Unable to delete post!', '👻');
         }
     };
 

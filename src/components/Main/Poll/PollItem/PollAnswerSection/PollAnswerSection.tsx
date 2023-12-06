@@ -3,7 +3,8 @@ import useAuth from '../../../../../hooks/useAuth';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
-import { InfoType } from '../../../../../types/infoTypes';
+import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
+import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
@@ -37,22 +38,10 @@ export default function PollAnswerSection({
 
             if (!response.ok) handleFetchErrors(response, setInfo);
 
-            const SUCCESS_INFO = {
-                typeOfInfo: 'good',
-                message: 'Answer submitted!',
-                icon: '😎',
-            };
-
-            setInfo(SUCCESS_INFO as InfoType);
+            displaySuccessInfo(setInfo, 'Answer submitted!', '😎');
             handleRefreshPollData();
         } catch (err: unknown) {
-            const ERROR_INFO = {
-                typeOfInfo: 'bad',
-                message: 'Unable to submit answer!',
-                icon: '👻',
-            };
-
-            setInfo(ERROR_INFO as InfoType);
+            displayErrorInfo(setInfo, 'Unable to submit answer!', '👻');
         }
     };
 

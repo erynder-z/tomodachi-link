@@ -11,7 +11,7 @@ import GreetingSection from './GreetingSection/GreetingSection';
 import RegisterButton from './RegisterButton/RegisterButton';
 import GuestLoginButton from './GuestLoginButton/GuestLoginButton';
 import { motion, AnimatePresence } from 'framer-motion';
-import { InfoType } from '../../types/infoTypes';
+import { displayErrorInfo } from '../UiElements/UserNotification/displayErrorInfo';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -39,14 +39,7 @@ export default function LoginPage() {
             if (!response.ok) {
                 const data = await response.json();
                 const errorMessage = data.error.message;
-
-                const failedInfo = {
-                    typeOfInfo: 'bad',
-                    message: errorMessage,
-                    icon: '👻',
-                };
-
-                setInfo(failedInfo as InfoType);
+                displayErrorInfo(setInfo, errorMessage, '👻');
 
                 throw new Error(
                     `Error: ${response.status} ${response.statusText}`
@@ -83,13 +76,7 @@ export default function LoginPage() {
         try {
             await login(username, password);
         } catch (error) {
-            const FAILED_INFO = {
-                typeOfInfo: 'bad',
-                message: 'Something went wrong!',
-                icon: '👻',
-            };
-
-            setInfo(FAILED_INFO as InfoType);
+            displayErrorInfo(setInfo, 'Something went wrong!', '👻');
         }
         setIsSubmitting(false);
     };
@@ -109,13 +96,7 @@ export default function LoginPage() {
         try {
             await login(guestUsername, guestPassword);
         } catch (error) {
-            const FAILED_INFO = {
-                typeOfInfo: 'bad',
-                message: 'Something went wrong!',
-                icon: '👻',
-            };
-
-            setInfo(FAILED_INFO as InfoType);
+            displayErrorInfo(setInfo, 'Something went wrong!', '👻');
         }
         setIsSubmitting(false);
     };

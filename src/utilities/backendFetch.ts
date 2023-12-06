@@ -1,3 +1,4 @@
+import { displayErrorInfo } from '../components/UiElements/UserNotification/displayErrorInfo';
 import { InfoType } from '../types/infoTypes';
 import { handleFetchErrors } from './handleFetchErrors';
 
@@ -28,11 +29,6 @@ export const backendFetch = async (
             handleFetchErrors(response, setInfo);
         }
     } catch (err: unknown) {
-        const errorInfo = {
-            typeOfInfo: 'bad',
-            message: errorMessage,
-            icon: '👻',
-        };
-        setInfo(errorInfo as InfoType);
+        displayErrorInfo(setInfo, errorMessage, '👻');
     }
 };

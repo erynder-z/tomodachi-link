@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
-import { InfoType } from '../../../../../types/infoTypes';
+import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
 
 type EmbedYoutubeVideoSelectorProps = {
     setShowYoutubeEmbed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,13 +32,7 @@ export default function EmbedYoutubeVideoSelector({
             setYoutubeID(videoID);
             setShowYoutubeEmbed(false);
         } else {
-            const errorInfo = {
-                typeOfInfo: 'bad',
-                message: 'This is no YouTube URL!',
-                icon: '😼',
-            };
-
-            setInfo(errorInfo as InfoType);
+            displayErrorInfo(setInfo, 'This is no YouTube URL!', '😼');
         }
     };
 

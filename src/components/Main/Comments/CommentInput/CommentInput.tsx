@@ -6,7 +6,8 @@ import { MdSend } from 'react-icons/md';
 import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 import ButtonBusy from '../../../UiElements/LoadingSpinner/ButtonBusy';
 import { motion } from 'framer-motion';
-import { InfoType } from '../../../../types/infoTypes';
+import { displaySuccessInfo } from '../../../UiElements/UserNotification/displaySuccessInfo';
+import { displayErrorInfo } from '../../../UiElements/UserNotification/displayErrorInfo';
 
 type CommentInputProps = {
     parentItemID: string;
@@ -54,13 +55,11 @@ export default function CommentInput({
                 );
 
                 if (response.ok) {
-                    const SUCCESS_INFO = {
-                        typeOfInfo: 'good',
-                        message: 'Comment created successfully!',
-                        icon: '👍',
-                    };
-
-                    setInfo(SUCCESS_INFO as InfoType);
+                    displaySuccessInfo(
+                        setInfo,
+                        'Comment created successfully!',
+                        '👍'
+                    );
                     setCommentText('');
 
                     if (getPostDetails) getPostDetails(parentItemID);
@@ -72,26 +71,14 @@ export default function CommentInput({
                         .map((error: { msg: string }) => error.msg)
                         .join(', ');
 
-                    const failedInfo = {
-                        typeOfInfo: 'bad',
-                        message: message,
-                        icon: '👻',
-                    };
-
-                    setInfo(failedInfo as InfoType);
+                    displayErrorInfo(setInfo, message, '👻');
 
                     throw new Error(
                         `Error: ${response.status} ${response.statusText}`
                     );
                 }
             } catch (error) {
-                const ERROR_INFO = {
-                    typeOfInfo: 'bad',
-                    message: 'An error occurred',
-                    icon: '👻',
-                };
-
-                setInfo(ERROR_INFO as InfoType);
+                displayErrorInfo(setInfo, 'Something went wrong!', '👻');
             }
 
             setIsSubmitting(false);

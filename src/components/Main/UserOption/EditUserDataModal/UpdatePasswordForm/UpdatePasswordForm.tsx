@@ -3,7 +3,8 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 import { usePasswordComparison } from '../../../../../hooks/usePasswordComparison';
 import useCurrentUserData from '../../../../../hooks/useCurrentUserData';
 import { motion } from 'framer-motion';
-import { InfoType } from '../../../../../types/infoTypes';
+import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
+import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 
 type UpdatePasswordFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -62,26 +63,14 @@ export default function UpdatePasswordForm({
                     .map((error: { msg: string }) => error.msg)
                     .join(', ');
 
-                const failedInfo = {
-                    typeOfInfo: 'bad',
-                    message: message,
-                    icon: '👻',
-                };
-
-                setInfo(failedInfo as InfoType);
+                displayErrorInfo(setInfo, message, '👻');
 
                 throw new Error(
                     `Error: ${response.status} ${response.statusText}`
                 );
             }
 
-            const SUCCESS_INFO = {
-                typeOfInfo: 'good',
-                message: 'Password updated successfully!',
-                icon: '👍',
-            };
-
-            setInfo(SUCCESS_INFO as InfoType);
+            displaySuccessInfo(setInfo, 'Password updated successfully!', '👍');
             setShouldOverlaysShow({
                 searchOverlay: false,
                 editUserDataModal: false,

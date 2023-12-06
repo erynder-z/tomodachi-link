@@ -22,7 +22,7 @@ import TypeOfChartSwitcher from './TypeOfChartSwitcher/TypeOfChartSwitcher';
 import { BarChart } from '../BarChart/BarChart';
 import { useDimensions } from '../../../../hooks/useDimensions';
 import TotalVotesCounter from './TotalVotesCounter/TotalVotesCounter';
-import { InfoType } from '../../../../types/infoTypes';
+import { displayErrorInfo } from '../../../UiElements/UserNotification/displayErrorInfo';
 
 type PollItemProps = {
     pollData: RetrievedPollDataType;
@@ -103,13 +103,7 @@ export default function PollItem({ pollData }: PollItemProps) {
                 handleFetchErrors(response, setInfo);
             }
         } catch (err: unknown) {
-            const ERROR_INFO = {
-                typeOfInfo: 'bad',
-                message: 'Unable to fetch poll data!',
-                icon: '👻',
-            };
-
-            setInfo(ERROR_INFO as InfoType);
+            displayErrorInfo(setInfo, 'Unable to fetch poll data!', '👻');
         } finally {
             setLoading(false);
         }

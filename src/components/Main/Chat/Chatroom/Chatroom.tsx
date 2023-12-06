@@ -20,7 +20,7 @@ import EmojiSelector from '../../Post/NewPostInput/EmojiSelector/EmojiPicker';
 import { backendFetch } from '../../../../utilities/backendFetch';
 import { handleChatMessagesInDB } from '../../../../utilities/handleChatMessagesInDatabase';
 import GetOlderMessagesButton from './GetOlderMessagesButton/GetOlderMessagesButton';
-import { InfoType } from '../../../../types/infoTypes';
+import { displayErrorInfo } from '../../../UiElements/UserNotification/displayErrorInfo';
 
 type ChatroomProps = {
     chatId: string | undefined;
@@ -130,13 +130,7 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 const savedMessage = await response.json();
                 setMessages([...messages, savedMessage.savedMessage]);
             } else {
-                const FAILED_INFO = {
-                    typeOfInfo: 'bad',
-                    message: 'Message not saved!',
-                    icon: '👻',
-                };
-
-                setInfo(FAILED_INFO as InfoType);
+                displayErrorInfo(setInfo, 'Message not saved!', '👻');
             }
         }
     };
@@ -162,13 +156,11 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
                 handleMarkMessageUnreadInDB();
                 setInputMessage('');
             } catch (error) {
-                const FAILED_INFO = {
-                    typeOfInfo: 'bad',
-                    message: 'Something went wrong when sending your message!',
-                    icon: '👻',
-                };
-
-                setInfo(FAILED_INFO as InfoType);
+                displayErrorInfo(
+                    setInfo,
+                    'Something went wrong when sending your message!',
+                    '👻'
+                );
             }
 
             setIsSubmitting(false);

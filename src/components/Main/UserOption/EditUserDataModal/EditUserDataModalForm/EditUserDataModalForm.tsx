@@ -6,7 +6,7 @@ import { FaFileUpload } from 'react-icons/fa';
 import { handleFetchErrors } from '../../../../../utilities/handleFetchErrors';
 import AvatarCreator from '../AvatarCreator/AvatarCreator';
 import { motion } from 'framer-motion';
-import { InfoType } from '../../../../../types/infoTypes';
+import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 
 type EditUserDataModalFormProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -80,13 +80,7 @@ export default function EditUserDataModalForm({
 
             if (!response.ok) await handleFetchErrors(response, setInfo);
 
-            const SUCCESS_INFO = {
-                typeOfInfo: 'good',
-                message: 'Profile updated successfully!',
-                icon: '👍',
-            };
-
-            setInfo(SUCCESS_INFO as InfoType);
+            displaySuccessInfo(setInfo, 'Profile updated successfully!', '👍');
             handleFetchUserData();
             setShouldOverlaysShow({
                 searchOverlay: false,

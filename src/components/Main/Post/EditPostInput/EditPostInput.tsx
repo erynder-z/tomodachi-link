@@ -19,7 +19,8 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import resizeFile from '../../../../utilities/ImageResizer';
 import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/EmbeddedYoutubeVideoArea';
 import { motion, AnimatePresence } from 'framer-motion';
-import { InfoType } from '../../../../types/infoTypes';
+import { displaySuccessInfo } from '../../../UiElements/UserNotification/displaySuccessInfo';
+import { displayErrorInfo } from '../../../UiElements/UserNotification/displayErrorInfo';
 
 type EditPostInputProps = {
     postDetails: PostType | null;
@@ -64,7 +65,7 @@ export default function EditPostInput({
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const { username } = currentUserData || {};
+    const { firstName } = currentUserData || {};
 
     const submitEditFormData = async (formData: FormData) => {
         const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -78,13 +79,7 @@ export default function EditPostInput({
         });
 
         if (response.ok) {
-            const SUCCESS_INFO = {
-                typeOfInfo: 'good',
-                message: 'Post updated successfully!',
-                icon: '👍',
-            };
-
-            setInfo(SUCCESS_INFO as InfoType);
+            displaySuccessInfo(setInfo, 'Post updated successfully!', '👍');
             setPostText('');
             setSelectedImage(undefined);
             setYoutubeID(undefined);
@@ -104,13 +99,8 @@ export default function EditPostInput({
             const message = errorMessages
                 .map((error: { msg: string }) => error.msg)
                 .join(', ');
-            const failedInfo = {
-                typeOfInfo: 'bad',
-                message: message,
-                icon: '👻',
-            };
 
-            setInfo(failedInfo as InfoType);
+            displayErrorInfo(setInfo, message, '👻');
 
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -152,13 +142,7 @@ export default function EditPostInput({
 
                 await submitEditFormData(formData);
             } catch (error) {
-                const ERROR_INFO = {
-                    typeOfInfo: 'bad',
-                    message: 'An error occurred',
-                    icon: '👻',
-                };
-
-                setInfo(ERROR_INFO as InfoType);
+                displayErrorInfo(setInfo, 'An error occurred', '👻');
             }
 
             setIsSubmitting(false);
@@ -223,7 +207,7 @@ export default function EditPostInput({
                 <PostInputTextarea
                     postText={postText}
                     handleNewPostChange={handleNewPostChange}
-                    username={username}
+                    firstName={firstName}
                     isPostEdit={true}
                 />
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

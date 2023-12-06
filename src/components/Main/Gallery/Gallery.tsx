@@ -8,7 +8,7 @@ import LightBox from '../../UiElements/LightBox/LightBox';
 import { MdOutlineZoomIn } from 'react-icons/md';
 import { backendFetch } from '../../../utilities/backendFetch';
 import { motion, AnimatePresence } from 'framer-motion';
-import { InfoType } from '../../../types/infoTypes';
+import { displayErrorInfo } from '../../UiElements/UserNotification/displayErrorInfo';
 
 type GalleryProps = {
     isPaginationTriggered: boolean;
@@ -61,12 +61,7 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
                 setLoading(false);
             }
         } catch (error) {
-            const ERROR_MESSAGE = {
-                typeOfInfo: 'bad',
-                message: 'Unable to fetch pictures!',
-                icon: '👻',
-            };
-            setInfo(ERROR_MESSAGE as InfoType);
+            displayErrorInfo(setInfo, 'Unable to fetch pictures!', '👻');
         }
     };
 
