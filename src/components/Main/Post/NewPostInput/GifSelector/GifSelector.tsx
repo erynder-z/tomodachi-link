@@ -50,7 +50,7 @@ export default function GifSelector({
                 {apiKey && (
                     <GifPicker
                         tenorApiKey={`${apiKey}`}
-                        colorScheme={getThemeVariable()}
+                        theme={getThemeVariable()}
                         onGifClick={(gif: TenorImage) => {
                             setGif(gif);
                             setShowGifSelector(false);

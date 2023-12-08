@@ -35,7 +35,7 @@ export default function EmojiSelector({
             <div className="relative">
                 {CloseButton}
                 <EmojiPicker
-                    colorScheme={getThemeVariable()}
+                    theme={getThemeVariable()}
                     onEmojiClick={(emojiData: EmojiClickData) => {
                         setText((prev) => prev + emojiData.emoji);
                         setShowEmojiPicker(false);
