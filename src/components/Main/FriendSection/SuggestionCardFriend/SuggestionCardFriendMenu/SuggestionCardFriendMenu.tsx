@@ -6,6 +6,7 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 import { TbLink, TbUserPlus } from 'react-icons/tb';
 import { backendFetch } from '../../../../../utilities/backendFetch';
 import { handleFriendRequest } from '../../../../../utilities/handleFriendRequests';
+import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type SuggestionCardFriendMenuProps = {
     id: string;
@@ -22,6 +23,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
     });
     const [disableFriendRequestButton, setDisableFriendRequestButton] =
         useState(false);
+    const [loading, setLoading] = useState(true);
     const shouldFetchFriendData = useRef(true);
 
     const otherUserId = id;
@@ -31,18 +33,25 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
             const API_ENDPOINT_URL = `/api/v1/users/${id}`;
             const METHOD = 'GET';
             const ERROR_MESSAGE = 'Unable to fetch user data!';
-            const response = await backendFetch(
-                token,
-                setInfo,
-                API_ENDPOINT_URL,
-                METHOD,
-                ERROR_MESSAGE
-            );
 
-            setIsFriendRequestPending({
-                incoming: response?.isIncomingFriendRequestPending || false,
-                outgoing: response?.isOutgoingFriendRequestPending || false,
-            });
+            try {
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    API_ENDPOINT_URL,
+                    METHOD,
+                    ERROR_MESSAGE
+                );
+
+                setIsFriendRequestPending({
+                    incoming: response?.isIncomingFriendRequestPending || false,
+                    outgoing: response?.isOutgoingFriendRequestPending || false,
+                });
+
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+            }
         }
     };
 
@@ -59,6 +68,12 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
             isFriendRequestPending.outgoing || isFriendRequestPending.incoming
         );
     }, [isFriendRequestPending]);
+
+    const LoadingContent = (
+        <div className="flex justify-center items-center w-full h-full py-4 ">
+            <LoadingSpinner message="Checking status" />
+        </div>
+    );
 
     const LinkToUser = (
         <motion.button whileTap={{ scale: 0.97 }} className="w-full">
@@ -117,7 +132,9 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
             className="flex flex-col gap-2 justify-around items-center"
         >
             {LinkToUser}
-            {disableFriendRequestButton
+            {loading
+                ? LoadingContent
+                : disableFriendRequestButton
                 ? PendingFriendRequestContent
                 : CanSendFriendRequestContent}
         </motion.div>
