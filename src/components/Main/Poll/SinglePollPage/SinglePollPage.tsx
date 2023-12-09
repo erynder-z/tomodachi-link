@@ -23,7 +23,7 @@ export default function SinglePollPage() {
 
     const shouldGetPollData = useRef(true);
 
-    const getPostDetails = async (pollID: string) => {
+    const getPollDetails = async (pollID: string) => {
         if (token) {
             const API_ENDPOINT_URL = `/api/v1/poll/${pollID}/single`;
             const METHOD = 'GET';
@@ -43,7 +43,7 @@ export default function SinglePollPage() {
 
     useEffect(() => {
         if (id) {
-            if (shouldGetPollData.current) getPostDetails(id);
+            if (shouldGetPollData.current) getPollDetails(id);
 
             return () => {
                 shouldGetPollData.current = false;
