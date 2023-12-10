@@ -1,4 +1,4 @@
-import { MdPersonAddAlt1 } from 'react-icons/md';
+import { FaUserPlus } from 'react-icons/fa';
 
 type RegisterButtonProps = {
     handleRegisterClick: () => void;
@@ -16,7 +16,7 @@ export default function RegisterButton({
                 <span className="transition-all duration-300 group-hover:pr-4">
                     Create account
                     <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
-                        <MdPersonAddAlt1 size="1.5em" />
+                        <FaUserPlus size="1.5em" />
                     </span>
                 </span>
             </span>

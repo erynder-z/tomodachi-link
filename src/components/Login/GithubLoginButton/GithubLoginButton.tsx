@@ -1,5 +1,4 @@
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaAngleDoubleRight } from 'react-icons/fa';
 
 export default function GithubLoginButton() {
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -14,7 +13,7 @@ export default function GithubLoginButton() {
                 <div className="transition-all duration-300 group-hover:pr-4 flex justify-center items-center gap-2">
                     Login with GitHub <FaGithub size="1.5em" />
                     <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
-                        <MdKeyboardDoubleArrowRight size="1.5em" />
+                        <FaAngleDoubleRight size="1.5em" />
                     </span>
                 </div>
             </a>

@@ -12,6 +12,7 @@ import RegisterButton from './RegisterButton/RegisterButton';
 import GuestLoginButton from './GuestLoginButton/GuestLoginButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { displayErrorInfo } from '../UiElements/UserNotification/displayErrorInfo';
+import GithubLoginButton from './GithubLoginButton/GithubLoginButton';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -140,7 +141,7 @@ export default function LoginPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className=" w-5/6 md:w-1/2 mx-auto  bg-white shadow-lg p-4 lg:p-8 rounded lg:rounded-lg h-90 md:h-2/3"
+                className=" w-5/6 md:w-1/2 mx-auto  bg-white shadow-lg p-4 lg:p-8 rounded lg:rounded-lg h-90 md:h-6/8"
             >
                 {isVerifying ? (
                     <VerifyingInfoBox />
@@ -150,11 +151,12 @@ export default function LoginPage() {
                             handleLoginSubmit={handleLoginSubmit}
                             isSubmitting={isSubmitting}
                         />
-                        <div className="flex flex-col w-full">
+                        <div className="flex flex-col w-full gap-4">
                             <GuestLoginButton
                                 handleGuestLogin={handleGuestLogin}
                                 isSubmitting={isSubmitting}
                             />
+                            <GithubLoginButton />
                             <span className="mt-8">Don't have an account?</span>
                             <RegisterButton
                                 handleRegisterClick={handleRegisterClick}

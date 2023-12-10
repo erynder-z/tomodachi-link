@@ -1,5 +1,5 @@
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { FaAngleDoubleRight } from 'react-icons/fa';
 
 type GuestLoginButtonProps = {
     handleGuestLogin: () => void;
@@ -13,11 +13,11 @@ export default function GuestLoginButton({
     const BusyButtonContent = <ButtonBusy />;
 
     const NormalButtonContent = (
-        <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-xl">
+        <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-lg">
             <span className="transition-all duration-300 group-hover:pr-4">
                 Login as guest
                 <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
-                    <MdKeyboardDoubleArrowRight size="1.5em" />
+                    <FaAngleDoubleRight size="1.5em" />
                 </span>
             </span>
         </span>

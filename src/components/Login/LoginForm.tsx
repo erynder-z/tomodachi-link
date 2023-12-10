@@ -1,5 +1,5 @@
 import ButtonBusy from '../UiElements/LoadingSpinner/ButtonBusy';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { FaAngleDoubleRight } from 'react-icons/fa';
 
 type LoginFormProps = {
     handleLoginSubmit: (
@@ -55,11 +55,11 @@ export default function LoginForm({
     const BusyButtonContent = <ButtonBusy />;
 
     const NormalButtonContent = (
-        <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-xl">
+        <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-lg">
             <span className="transition-all duration-300 group-hover:pr-4">
                 Login
                 <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
-                    <MdKeyboardDoubleArrowRight size="1.5em" />
+                    <FaAngleDoubleRight size="1.5em" />
                 </span>
             </span>
         </span>
@@ -68,7 +68,9 @@ export default function LoginForm({
     return (
         <div className="w-full">
             <div>
-                <h1 className="md:text-2xl font-semibold">Login</h1>
+                <h1 className="md:text-2xl font-semibold">
+                    Login to Odin-Book:
+                </h1>
             </div>
             <form
                 action=""
