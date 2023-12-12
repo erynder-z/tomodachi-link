@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import {
     AuthContextProps,
     AuthContextProviderProps,
@@ -21,9 +22,7 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-    const [token, setToken] = useState<string | null>(
-        localStorage.getItem('jwtOdinBook') || null
-    );
+    const [cookies, setCookie, removeCookie] = useCookies(['jwtOdinBook']);
     const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [tokenExpiration, setTokenExpiration] = useState<number | null>(null);
@@ -31,14 +30,14 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const { setCurrentUserData } = useCurrentUserData();
     const [loading, setLoading] = useState<boolean>(true);
 
-    // When the token changes, store it in local storage
     useEffect(() => {
-        if (token) {
-            localStorage.setItem('jwtOdinBook', token);
+        // When the token changes, store it in the cookie
+        if (cookies.jwtOdinBook) {
+            setCookie('jwtOdinBook', cookies.jwtOdinBook);
         } else {
-            localStorage.removeItem('jwtOdinBook');
+            removeCookie('jwtOdinBook');
         }
-    }, [token]);
+    }, [cookies.jwtOdinBook, setCookie, removeCookie]);
 
     // When the token changes, check it with the server to verify the user's authentication status
     useEffect(() => {
@@ -51,7 +50,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
+                            Authorization: `Bearer ${
+                                cookies.jwtOdinBook || ''
+                            }`,
                         },
                     }
                 );
@@ -77,39 +78,40 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         };
 
         const getTokenExpirationTime = () => {
-            if (token) {
-                const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            if (cookies.jwtOdinBook) {
+                const decodedToken = JSON.parse(
+                    atob(cookies.jwtOdinBook.split('.')[1])
+                );
                 const expirationTime = decodedToken.exp * 1000;
                 setTokenExpiration(expirationTime);
             }
         };
 
-        if (token) {
+        if (cookies.jwtOdinBook) {
             checkToken();
             getTokenExpirationTime();
         } else {
             setLoading(false);
         }
-    }, [token]);
+    }, [cookies.jwtOdinBook, setCookie]);
 
     const logout = () => {
-        setToken(null);
+        removeCookie('jwtOdinBook');
         setAuthUser(null);
         setIsAuth(false);
         setInfo(null);
         setCurrentUserData(null);
         localStorage.removeItem('currentViewOdinBook');
-        localStorage.removeItem('jwtOdinBook');
     };
 
     return (
         <AuthContext.Provider
             value={{
-                token,
+                token: cookies.jwtOdinBook || null,
                 authUser,
                 isAuth,
                 tokenExpiration,
-                setToken,
+                setToken: (token) => setCookie('jwtOdinBook', token),
                 setAuthUser,
                 setIsAuth,
                 logout,

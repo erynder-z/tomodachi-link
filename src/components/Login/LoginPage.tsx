@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import { Cookies, useCookies } from 'react-cookie';
 import AuthContext from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
 import SignupPage from './SignupPage/SignupPage';
@@ -18,6 +19,7 @@ export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const { isAuth } = useAuth();
     const { setInfo } = useInfoCard();
+    const [cookies, setCookie] = useCookies(['jwtOdinBook']);
 
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
@@ -48,7 +50,7 @@ export default function LoginPage() {
             }
 
             const data = await response.json();
-            localStorage.setItem('jwtOdinBook', data.token);
+            setCookie('jwtOdinBook', data.token, { path: '/' });
             setToken(data.token);
         } catch (error: unknown) {
             console.error(error);
