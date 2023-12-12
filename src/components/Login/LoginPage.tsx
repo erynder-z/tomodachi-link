@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Cookies, useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import AuthContext from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
 import SignupPage from './SignupPage/SignupPage';
@@ -19,6 +19,7 @@ export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const { isAuth } = useAuth();
     const { setInfo } = useInfoCard();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookies, setCookie] = useCookies(['jwtOdinBook']);
 
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
