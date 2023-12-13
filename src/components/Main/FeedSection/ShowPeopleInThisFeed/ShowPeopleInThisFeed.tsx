@@ -80,6 +80,8 @@ export default function ShowPeopleInThisFeed({
                 const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
                 if (idsOfPeopleInFeed.length > 0) {
                     handleGetUserDetails(idsOfPeopleInFeed);
+                } else {
+                    setLoading(false);
                 }
             }
         }
