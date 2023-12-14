@@ -67,7 +67,6 @@ export default function EditUserDataModalForm({
             formData.append('firstName', event.currentTarget.firstName.value);
             formData.append('lastName', event.currentTarget.lastName.value);
             formData.append('email', event.currentTarget.email.value);
-            formData.append('password', event.currentTarget.password.value);
 
             const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(`${SERVER_URL}/api/v1/userdata`, {
@@ -188,26 +187,6 @@ export default function EditUserDataModalForm({
         </div>
     );
 
-    const PasswordInput = (
-        <div className="relative mt-4 md:mt-12 z-0">
-            <input
-                required
-                autoComplete="off"
-                id="password"
-                name="password"
-                type="password"
-                className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
-                placeholder=" "
-            />
-            <label
-                htmlFor="password"
-                className="absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:border-highlight peer-focus:dark:border-highlightDark peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-                Enter password to authorize:
-            </label>
-        </div>
-    );
-
     const GuestButton = (
         <motion.button
             disabled
@@ -243,7 +222,7 @@ export default function EditUserDataModalForm({
                     {FirstNameInput}
                     {LastNameInput}
                     {EmailInput}
-                    {PasswordInput}
+                    {/*      {PasswordInput} */}
 
                     <div className="flex w-full">
                         {isGuest ? GuestButton : NormalUserButton}
