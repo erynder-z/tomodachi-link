@@ -49,9 +49,11 @@ export default function LoginPage() {
                     `Error: ${response.status} ${response.statusText}`
                 );
             }
-
             const data = await response.json();
-            setCookie('jwtOdinBook', data.token, { path: '/' });
+            setCookie('jwtOdinBook', data.token, {
+                secure: true,
+                sameSite: 'strict',
+            });
             setToken(data.token);
         } catch (error: unknown) {
             console.error(error);

@@ -33,7 +33,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     useEffect(() => {
         // When the token changes, store it in the cookie
         if (cookies.jwtOdinBook) {
-            setCookie('jwtOdinBook', cookies.jwtOdinBook);
+            setCookie('jwtOdinBook', cookies.jwtOdinBook, {
+                secure: true,
+                sameSite: 'strict',
+            });
         } else {
             removeCookie('jwtOdinBook');
         }
@@ -111,7 +114,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                 authUser,
                 isAuth,
                 tokenExpiration,
-                setToken: (token) => setCookie('jwtOdinBook', token),
+                setToken: (token) =>
+                    setCookie('jwtOdinBook', token, {
+                        secure: true,
+                        sameSite: 'strict',
+                    }),
                 setAuthUser,
                 setIsAuth,
                 logout,
