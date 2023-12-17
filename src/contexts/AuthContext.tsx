@@ -21,9 +21,18 @@ const AuthContext = createContext<AuthContextProps>({
     logout: () => null,
 });
 
+const retrieveTokenFromEncryptedStorage = () => {
+    try {
+        return encryptStorage.getItem('jwtOdinBook') || null;
+    } catch (error) {
+        console.error('Error retrieving token:', error);
+        return null;
+    }
+};
+
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [token, setToken] = useState<string | null>(
-        encryptStorage.getItem('jwtOdinBook') || null
+        retrieveTokenFromEncryptedStorage()
     );
     const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
