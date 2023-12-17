@@ -19,9 +19,7 @@ export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
     const { isAuth } = useAuth();
     const { setInfo } = useInfoCard();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [cookies, setCookie] = useCookies(['jwtOdinBook']);
-
+    const [cookies, setCookie, removeCookie] = useCookies(['jwtOdinBook']);
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -49,11 +47,8 @@ export default function LoginPage() {
                     `Error: ${response.status} ${response.statusText}`
                 );
             }
+
             const data = await response.json();
-            setCookie('jwtOdinBook', data.token, {
-                secure: true,
-                sameSite: 'strict',
-            });
             setToken(data.token);
         } catch (error: unknown) {
             console.error(error);
@@ -106,6 +101,20 @@ export default function LoginPage() {
         }
         setIsSubmitting(false);
     };
+
+    useEffect(() => {
+        const setTokenAndDeleteCookie = () => {
+            setCookie('jwtOdinBook', cookies.jwtOdinBook, {
+                secure: true,
+                sameSite: 'strict',
+            });
+            const token = cookies.jwtOdinBook;
+
+            setToken(token);
+            removeCookie('jwtOdinBook');
+        };
+        if (cookies.jwtOdinBook) setTokenAndDeleteCookie();
+    }, [cookies.jwtOdinBook, setToken, removeCookie, setInfo]);
 
     useEffect(() => {
         if (isAuth) setIsVerifying(false);
