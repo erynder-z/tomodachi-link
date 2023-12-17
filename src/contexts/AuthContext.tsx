@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import {
     AuthContextProps,
     AuthContextProviderProps,
@@ -8,6 +7,7 @@ import {
 import useInfoCard from '../hooks/useInfoCard';
 import useCurrentUserData from '../hooks/useCurrentUserData';
 import FullscreenLoading from '../components/UiElements/LoadingSpinner/FullscreenLoading';
+import { encryptStorage } from '../utilities/encryptedStorage';
 
 // Create an empty context object with default values for authentication state
 const AuthContext = createContext<AuthContextProps>({
@@ -22,7 +22,9 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-    const [cookies, setCookie, removeCookie] = useCookies(['jwtOdinBook']);
+    const [token, setToken] = useState<string | null>(
+        encryptStorage.getItem('jwtOdinBook') || null
+    );
     const [authUser, setAuthUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [tokenExpiration, setTokenExpiration] = useState<number | null>(null);
@@ -30,17 +32,14 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const { setCurrentUserData } = useCurrentUserData();
     const [loading, setLoading] = useState<boolean>(true);
 
+    // When the token changes, store it in local storage
     useEffect(() => {
-        // When the token changes, store it in the cookie
-        if (cookies.jwtOdinBook) {
-            setCookie('jwtOdinBook', cookies.jwtOdinBook, {
-                secure: true,
-                sameSite: 'strict',
-            });
+        if (token) {
+            encryptStorage.setItem('jwtOdinBook', token);
         } else {
-            removeCookie('jwtOdinBook');
+            encryptStorage.removeItem('jwtOdinBook');
         }
-    }, [cookies.jwtOdinBook, setCookie, removeCookie]);
+    }, [token]);
 
     // When the token changes, check it with the server to verify the user's authentication status
     useEffect(() => {
@@ -53,9 +52,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${
-                                cookies.jwtOdinBook || ''
-                            }`,
+                            Authorization: `Bearer ${token}`,
                         },
                     }
                 );
@@ -81,44 +78,39 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         };
 
         const getTokenExpirationTime = () => {
-            if (cookies.jwtOdinBook) {
-                const decodedToken = JSON.parse(
-                    atob(cookies.jwtOdinBook.split('.')[1])
-                );
+            if (token) {
+                const decodedToken = JSON.parse(atob(token.split('.')[1]));
                 const expirationTime = decodedToken.exp * 1000;
                 setTokenExpiration(expirationTime);
             }
         };
 
-        if (cookies.jwtOdinBook) {
+        if (token) {
             checkToken();
             getTokenExpirationTime();
         } else {
             setLoading(false);
         }
-    }, [cookies.jwtOdinBook, setCookie]);
+    }, [token]);
 
     const logout = () => {
-        removeCookie('jwtOdinBook');
+        setToken(null);
         setAuthUser(null);
         setIsAuth(false);
         setInfo(null);
         setCurrentUserData(null);
         localStorage.removeItem('currentViewOdinBook');
+        encryptStorage.removeItem('jwtOdinBook');
     };
 
     return (
         <AuthContext.Provider
             value={{
-                token: cookies.jwtOdinBook || null,
+                token,
                 authUser,
                 isAuth,
                 tokenExpiration,
-                setToken: (token) =>
-                    setCookie('jwtOdinBook', token, {
-                        secure: true,
-                        sameSite: 'strict',
-                    }),
+                setToken,
                 setAuthUser,
                 setIsAuth,
                 logout,
