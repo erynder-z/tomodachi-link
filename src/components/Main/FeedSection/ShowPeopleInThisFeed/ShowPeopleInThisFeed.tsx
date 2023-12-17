@@ -26,24 +26,38 @@ export default function ShowPeopleInThisFeed({
     const isInitialLoad = useRef(true);
 
     const currentUserId = currentUserData?._id;
+    const hasEmptyFeed = minimalPosts.length === 0;
 
     const getIdsOfPeopleInFeed = () => {
+        if (!minimalPosts.length) {
+            return [];
+        }
+
+        const friendIDsSet = new Set(friendIDs);
         const postOwnerIds = minimalPosts.map((post) => post?.owner?._id);
+
         const filteredIds = postOwnerIds.filter(
-            (id) => friendIDs.includes(id) || currentUserId === id
+            (id) => friendIDsSet.has(id) || currentUserId === id
         );
+
         return [...new Set(filteredIds)];
     };
 
     const handleGetUserDetails = (ids: string[]) => {
-        if (currentUserId && ids.includes(currentUserId)) {
+        if (!currentUserId || !ids.length) {
+            return;
+        }
+
+        const idsSet = new Set(ids);
+
+        if (idsSet.has(currentUserId)) {
             const minimalCurrentUser: MinimalUserTypes =
                 formatUserData(currentUserData);
             setFeedUsers([minimalCurrentUser]);
         }
 
         if (friendData) {
-            const users = friendData.filter((user) => ids.includes(user._id));
+            const users = friendData.filter((user) => idsSet.has(user._id));
             const formattedFriendData = users.map((user) =>
                 formatUserData(user)
             );
@@ -53,7 +67,6 @@ export default function ShowPeopleInThisFeed({
                     (user) => !prevUsers.some((u) => u._id === user._id)
                 ),
             ]);
-            setLoading(false);
         }
     };
 
@@ -78,14 +91,18 @@ export default function ShowPeopleInThisFeed({
                 setLoading(false);
             } else if (token) {
                 const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
-                if (idsOfPeopleInFeed.length > 0) {
+                if (idsOfPeopleInFeed.length > 0)
                     handleGetUserDetails(idsOfPeopleInFeed);
-                } else {
-                    setLoading(false);
-                }
             }
         }
     }, [friendIDs, minimalPosts, token]);
+
+    useEffect(() => {
+        // there are users in the feed and they are pushed to the array
+        if (!hasEmptyFeed && feedUsers.length > 0) {
+            setLoading(false);
+        }
+    }, [feedUsers]);
 
     const LoadingContent = (
         <motion.div
@@ -99,7 +116,16 @@ export default function ShowPeopleInThisFeed({
 
     const ShowPeopleInFeedContent = (
         <div className="flex md:flex-col gap-4 w-full lg:max-h-[calc(100vh_-_2rem)] p-2 lg:p-0">
-            {feedUsers.length > 0 ? (
+            {hasEmptyFeed ? (
+                <>
+                    <span className="hidden md:flex justify-center text-2xl w-full">
+                        👉
+                    </span>
+                    <span className="md:hidden flex justify-center text-2xl">
+                        👇
+                    </span>
+                </>
+            ) : (
                 <>
                     <h1 className="flex justify-center items-center text-center text-xs md:text-base">
                         People in this feed:
@@ -126,15 +152,6 @@ export default function ShowPeopleInThisFeed({
                                 </motion.div>
                             ))}
                     </div>
-                </>
-            ) : (
-                <>
-                    <span className="hidden md:flex justify-center text-2xl w-full">
-                        👉
-                    </span>
-                    <span className="md:hidden flex justify-center text-2xl">
-                        👇
-                    </span>
                 </>
             )}
         </div>
