@@ -170,7 +170,7 @@ export default function LoginPage() {
                                 handleGuestLogin={handleGuestLogin}
                                 isSubmitting={isSubmitting}
                             />
-                            <GithubLoginButton />
+                            <GithubLoginButton isSubmitting={isSubmitting} />
                             <span className="mt-8">Don't have an account?</span>
                             <RegisterButton
                                 handleRegisterClick={handleRegisterClick}
