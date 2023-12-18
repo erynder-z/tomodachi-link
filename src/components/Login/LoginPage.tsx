@@ -14,6 +14,7 @@ import GuestLoginButton from './GuestLoginButton/GuestLoginButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { displayErrorInfo } from '../UiElements/UserNotification/displayErrorInfo';
 import GithubLoginButton from './GithubLoginButton/GithubLoginButton';
+import GoogleLoginButton from './GoogleLoginButton/GoogleLoginButton';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -171,6 +172,7 @@ export default function LoginPage() {
                                 isSubmitting={isSubmitting}
                             />
                             <GithubLoginButton isSubmitting={isSubmitting} />
+                            <GoogleLoginButton isSubmitting={isSubmitting} />
                             <span className="mt-8">Don't have an account?</span>
                             <RegisterButton
                                 handleRegisterClick={handleRegisterClick}
