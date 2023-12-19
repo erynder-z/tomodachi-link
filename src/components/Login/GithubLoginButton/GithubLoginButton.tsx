@@ -7,7 +7,7 @@ export default function GithubLoginButton({
     isSubmitting,
 }: GithubLoginButtonProps) {
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
-    const githubLoginURL = `${SERVER_URL}/api/v1/login/github`;
+    const githubLoginURL = `${SERVER_URL}/api/v1/oauth/github`;
 
     const handleGithubLogin = () => {
         window.open(githubLoginURL, '_self');

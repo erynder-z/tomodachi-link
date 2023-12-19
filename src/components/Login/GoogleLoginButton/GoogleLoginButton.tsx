@@ -7,7 +7,7 @@ export default function GoogleLoginButton({
     isSubmitting,
 }: GoogleLoginButtonProps) {
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
-    const githubLoginURL = `${SERVER_URL}/api/v1/login/google`;
+    const githubLoginURL = `${SERVER_URL}/api/v1/oauth/google`;
 
     const handleGoogleLogin = () => {
         window.open(githubLoginURL, '_self');
