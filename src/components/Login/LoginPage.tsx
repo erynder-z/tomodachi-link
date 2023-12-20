@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { displayErrorInfo } from '../UiElements/UserNotification/displayErrorInfo';
 import GithubLoginButton from './GithubLoginButton/GithubLoginButton';
 import GoogleLoginButton from './GoogleLoginButton/GoogleLoginButton';
+import DiscordLoginButton from './DiscordLoginButton/DiscordLoginButton';
 
 export default function LoginPage() {
     const { setToken } = useContext(AuthContext);
@@ -171,8 +172,18 @@ export default function LoginPage() {
                                 handleGuestLogin={handleGuestLogin}
                                 isSubmitting={isSubmitting}
                             />
-                            <GithubLoginButton isSubmitting={isSubmitting} />
-                            <GoogleLoginButton isSubmitting={isSubmitting} />
+                            <span>OAuth Login</span>
+                            <div className="flex justify-between gap-2">
+                                <GithubLoginButton
+                                    isSubmitting={isSubmitting}
+                                />
+                                <GoogleLoginButton
+                                    isSubmitting={isSubmitting}
+                                />
+                                <DiscordLoginButton
+                                    isSubmitting={isSubmitting}
+                                />
+                            </div>
                             <span className="mt-8">Don't have an account?</span>
                             <RegisterButton
                                 handleRegisterClick={handleRegisterClick}

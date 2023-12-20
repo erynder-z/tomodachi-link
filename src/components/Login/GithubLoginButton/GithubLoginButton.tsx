@@ -17,11 +17,15 @@ export default function GithubLoginButton({
 
     const NormalButtonContent = (
         <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-lg text-white hover:text-white">
-            <div className="transition-all duration-300 group-hover:pr-4 flex justify-center items-center gap-2">
-                Login with GitHub <FaGithub size="1.5em" />
-                <span className="opacity-0 absolute -right-0 group-hover:right-4 md:group-hover:right-8 transition-all duration-300 group-hover:opacity-100">
-                    <FaAngleDoubleRight size="1.5em" />
-                </span>
+            <div className="flex justify-center items-center gap-2">
+                <FaGithub
+                    size="1.5em"
+                    className="group-hover:opacity-0 group-hover:translate-x-5 transition-all duration-300"
+                />
+                <FaAngleDoubleRight
+                    size="1.5em"
+                    className="opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all duration-300"
+                />
             </div>
         </span>
     );
@@ -36,7 +40,6 @@ export default function GithubLoginButton({
                     : 'bg-slate-900 hover:bg-slate-700'
             }`}
         >
-            {' '}
             {isSubmitting ? BusyButtonContent : NormalButtonContent}
         </button>
     );
