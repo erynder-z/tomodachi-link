@@ -6,9 +6,9 @@ type PostTextSectionProps = {
 
 export default function PostTextSection({ text }: PostTextSectionProps) {
     return (
-        <div className="text-justify">
+        <div className="text-justify ">
             {text && (
-                <ReactMarkdown className="prose break-words p-4">
+                <ReactMarkdown className="break-words p-4">
                     {text}
                 </ReactMarkdown>
             )}

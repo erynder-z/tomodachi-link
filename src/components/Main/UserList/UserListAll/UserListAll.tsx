@@ -157,7 +157,9 @@ export default function UserListAll({
             className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full min-h-[calc(100vh_-_5rem)] md:min-h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
             <div className="flex justify-between items-center gap-2 mb-4">
-                <h1 className="text-center font-bold">All users:</h1>
+                <h1 className="text-lg m-0 text-center font-bold">
+                    All users:
+                </h1>
                 <button
                     onClick={handleSearchButtonClick}
                     className="h-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark rounded px-4 transition-all"

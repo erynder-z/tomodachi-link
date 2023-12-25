@@ -51,7 +51,7 @@ export default function ChatOnlineUsersList({
             exit={{ opacity: 0 }}
             className="flex flex-col h-[calc(100vh_-_5rem)] md:h-full w-full p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg"
         >
-            <h1 className="text-center font-bold">Friends</h1>
+            <h1 className="text-lg m-0 text-center font-bold">Friends</h1>
             <div className="overflow-auto flex flex-col gap-2 md:gap-3 flex-1">
                 {userList}
             </div>
