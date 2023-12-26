@@ -89,7 +89,7 @@ export default function NotFriendCoverSection({
                 alt="User avatar"
             />
             <div className="flex flex-col items-start w-3/5">
-                <h1 className=" text-center font-bold h-auto truncate">
+                <h1 className="text-2xl text-center font-bold h-auto truncate m-0">
                     {firstName} {lastName}'s page
                 </h1>
             </div>

@@ -68,7 +68,7 @@ export default function LoginForm({
     return (
         <div className="w-full">
             <div>
-                <h1 className="md:text-2xl font-semibold">
+                <h1 className="text-base md:text-2xl font-semibold m-0">
                     Login to Odin-Book:
                 </h1>
             </div>

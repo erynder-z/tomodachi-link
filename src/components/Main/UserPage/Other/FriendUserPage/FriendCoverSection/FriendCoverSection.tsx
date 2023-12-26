@@ -93,7 +93,7 @@ export default function FriendCoverSection({
             />
 
             <div className="flex flex-col w-3/5">
-                <h1 className="text-2xl text-center font-bold h-auto truncate">
+                <h1 className="text-2xl text-center font-bold h-auto truncate m-0">
                     {firstName} {lastName}'s page
                 </h1>
                 <p className="text-center text-xs">

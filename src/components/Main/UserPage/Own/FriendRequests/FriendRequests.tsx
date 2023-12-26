@@ -30,9 +30,9 @@ export default function FriendRequests({
     );
 
     return (
-        <div className="flex flex-col gap-8 w-full text-sm">
-            <h1 className="font-bold underline">Pending friend requests:</h1>
-            {friendRequestItemsList}
+        <div className="flex flex-col w-full text-sm">
+            <h1 className="text-base font-bold">Pending friend requests:</h1>
+            <div className="flex flex-col gap-8">{friendRequestItemsList}</div>
         </div>
     );
 }

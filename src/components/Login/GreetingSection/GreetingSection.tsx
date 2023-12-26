@@ -46,7 +46,7 @@ export default function GreetingSection() {
 
     return (
         <section className="text-white font-bold font-mono md:text-3xl text-center bg-cBlack/75 p-4 lg:rounded-full w-5/6 mx-auto">
-            <h1>Welcome to Odin-Book!</h1>
+            <h1 className="text-xl md:text-3xl">Welcome to Odin-Book!</h1>
             Join our community of{' '}
             <motion.span className="text-cCyan">{rounded}</motion.span> users!
         </section>

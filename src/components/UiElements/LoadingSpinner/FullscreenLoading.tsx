@@ -16,7 +16,7 @@ export default function FullscreenLoading({ message }: FullscreenLoadingProps) {
                 wrapperClass="blocks-wrapper"
                 colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
             />
-            <h1>{message}</h1>
+            <h1 className="text-xl m-0">{message}</h1>
         </div>
     );
 }

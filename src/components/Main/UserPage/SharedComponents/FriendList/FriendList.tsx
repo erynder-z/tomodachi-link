@@ -41,7 +41,7 @@ function FriendList({ friendData, userId }: FriendListProps) {
 
     return (
         <div className="px-4 md:px-0">
-            <h1 className="font-bold">Friends</h1>
+            <h1 className="text-base font-bold">Friends</h1>
             <div className="animate-inAnimation grid grid-cols-3 gap-4">
                 {friendData && numberOfFriends > 0
                     ? RandomFriendList

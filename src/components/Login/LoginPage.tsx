@@ -184,7 +184,9 @@ export default function LoginPage() {
                                     isSubmitting={isSubmitting}
                                 />
                             </div>
-                            <span className="mt-8">Don't have an account?</span>
+                            <span className="mt-2 md:mt-8">
+                                Don't have an account?
+                            </span>
                             <RegisterButton
                                 handleRegisterClick={handleRegisterClick}
                             />
@@ -198,7 +200,7 @@ export default function LoginPage() {
     return (
         <div className="h-screen bg-cBlack overflow-auto">
             {AsciiBackground}
-            <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full h-full md:h-screen gap-4 relative z-10">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full md:h-screen gap-4 relative z-10 my-2 md:m-0">
                 <AnimatePresence>
                     {showSignup ? SignupContent : LoginContent}
                 </AnimatePresence>
