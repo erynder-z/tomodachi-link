@@ -23,7 +23,7 @@ export default function PollUserInfoSection({
     return (
         <Link
             to={linkTarget}
-            className="flex items-center gap-2 text-regularText dark:text-regularTextDark w-full"
+            className="flex items-center gap-2 text-regularText dark:text-regularTextDark hover:text-regularText dark:hover:text-regularTextDark w-full"
         >
             <img
                 loading="lazy"

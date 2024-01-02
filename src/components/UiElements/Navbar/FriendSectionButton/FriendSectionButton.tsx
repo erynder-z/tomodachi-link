@@ -9,8 +9,8 @@ export default function FriendSectionButton() {
                 to="/friends"
                 className={({ isActive }) =>
                     isActive
-                        ? 'text-highlight dark:text-highlightDark flex self-center cursor-pointer h-6 w-full'
-                        : 'text-regularText dark:text-regularTextDark flex self-center cursor-pointer h-6 w-full '
+                        ? 'text-highlight dark:text-highlightDark hover:text-highlight dark:hover:text-highlightDark flex self-center cursor-pointer h-6 w-full'
+                        : 'text-regularText dark:text-regularTextDark hover:text-regularText dark:hover:text-regularTextDark flex self-center cursor-pointer h-6 w-full '
                 }
             >
                 <MdOutlineDiversity3 size="1.5em" />

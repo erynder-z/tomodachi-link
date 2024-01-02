@@ -67,7 +67,7 @@ export default function EditUserDataModal({
                     onClick={handleCloseButtonClick}
                     whileTap={{ scale: 0.97 }}
                     id="non-mobile-close-button"
-                    className="absolute -top-8 -right-8 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+                    className="hidden md:block absolute -top-8 -right-8 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
                 >
                     <FaTimes size="1.25em" />
                 </motion.button>

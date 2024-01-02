@@ -17,7 +17,7 @@ export default function SearchModeSelect({
             {options.map((mode) => (
                 <li
                     key={mode}
-                    className={`w-full text-center cursor-pointer relative transition-all ${
+                    className={`list-none w-full text-center cursor-pointer relative transition-all ${
                         searchMode === mode
                             ? 'bg-highlight dark:bg-highlightDark rounded-3xl'
                             : ''

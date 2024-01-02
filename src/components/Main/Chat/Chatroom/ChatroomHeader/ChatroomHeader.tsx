@@ -15,7 +15,7 @@ export default function ChatroomHeader({
     const partnerPicSrc = partnerData?.userpic?.data || '';
 
     const CurrentUserContent = (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center gap-2">
             <img
                 loading="lazy"
                 className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"
@@ -33,7 +33,7 @@ export default function ChatroomHeader({
     );
 
     const ChatPartnerContent = (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center gap-2">
             <img
                 loading="lazy"
                 className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"

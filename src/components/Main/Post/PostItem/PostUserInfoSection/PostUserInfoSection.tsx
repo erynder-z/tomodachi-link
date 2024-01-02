@@ -22,7 +22,7 @@ export default function PostUserInfoSection({
     return (
         <Link
             to={linkTarget}
-            className="flex gap-4 text-regularText dark:text-regularTextDark"
+            className="flex gap-4 text-regularText dark:text-regularTextDark hover:text-regularText dark:hover:text-regularTextDark"
         >
             <img
                 loading="lazy"

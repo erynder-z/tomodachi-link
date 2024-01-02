@@ -74,7 +74,7 @@ export default function Sidebar({
 
     return (
         <aside
-            className={`flex flex-col w-60 h-[calc(100vh-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg z-40  ${
+            className={`flex flex-col w-60 h-[calc(100vh-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg z-40 ${
                 !showSidebar
                     ? 'transform translate-x-full lg:translate-x-0'
                     : ''

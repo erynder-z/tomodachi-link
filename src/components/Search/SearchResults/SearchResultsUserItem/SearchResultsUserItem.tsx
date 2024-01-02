@@ -20,11 +20,11 @@ export default function SearchResultsUserListItem({
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}
-            className=" w-full py-2  rounded lg:rounded-lg text-sm md:text-base "
+            className="group w-full py-2 text-sm md:text-base"
         >
             <Link
                 to={path}
-                className="flex justify-between text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
+                className="flex justify-between text-regularText dark:text-regularTextDark group-hover:text-highlight dark:group-hover:text-highlightDark duration-300"
             >
                 <div className="flex gap-4 w-5/6">
                     <img
@@ -40,7 +40,7 @@ export default function SearchResultsUserListItem({
                 <div>
                     <MdOutlineAccountBox
                         size="1.25em"
-                        className="text-sky-700 dark:text-sky-400"
+                        className="text-sky-700 dark:text-sky-400 group-hover:text-highlight group-hover:dark:hover:text-highlightDark duration-300"
                     />
                 </div>
             </Link>

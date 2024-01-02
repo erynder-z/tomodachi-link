@@ -166,7 +166,7 @@ function App() {
                     />
                 </div>
 
-                <div className="relative flex-1 max-w-3xl z-10">
+                <div className="relative flex-1 max-w-3xl">
                     <AnimatePresence>
                         <AppRoutes
                             location={location}
@@ -179,6 +179,7 @@ function App() {
                         />
                     </AnimatePresence>
                 </div>
+
                 <Sidebar
                     showSidebar={showSidebar}
                     toggleSidebar={toggleSidebar}
@@ -186,6 +187,7 @@ function App() {
                     setShouldOverlaysShow={setShouldOverlaysShow}
                     setSearchMode={setSearchMode}
                 />
+
                 <ScrollToTopButton />
             </main>
 

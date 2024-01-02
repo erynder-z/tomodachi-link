@@ -66,7 +66,7 @@ export default function NormalContent({
             viewport={{ once: true }}
             className="flex flex-col justify-center items-center gap-4 p-4"
         >
-            <h2 className="font-bold">
+            <h2 className="text-base">
                 Become friends with {firstName} {lastName} to view more!
             </h2>
             {getButton()}

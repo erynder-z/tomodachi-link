@@ -47,7 +47,7 @@ export default function SearchResults({
         }
     };
     return (
-        <ul className="w-full p-2 bg-slate-800/80 peer-focus:bg-white/70 dark:peer-focus:bg-white/20 overflow-auto max-h-[50vh] overflow-x-hidden">
+        <ul className="w-full p-2 bg-white/70 dark:bg-white/20 overflow-auto max-h-[50vh] overflow-x-hidden">
             {searchResults?.map((resultItem: SearchResultType, index) => (
                 <motion.li
                     key={resultItem.data._id}

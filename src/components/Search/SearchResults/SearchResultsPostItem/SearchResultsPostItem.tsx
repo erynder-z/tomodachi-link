@@ -18,11 +18,11 @@ export default function SearchResultsPostItem({
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}
-            className=" w-full py-2  rounded lg:rounded-lg text-sm md:text-base"
+            className="group w-full py-2  rounded lg:rounded-lg text-sm md:text-base"
         >
             <Link
                 to={`/post/${_id}`}
-                className="flex justify-between text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
+                className="flex justify-between text-regularText dark:text-regularTextDark group-hover:text-highlight dark:group-hover:text-highlightDark duration-300"
             >
                 <div className="flex justify-between gap-4 w-5/6">
                     <div className="truncate">
@@ -32,7 +32,7 @@ export default function SearchResultsPostItem({
                 <div>
                     <MdOutlineArticle
                         size="1.25em"
-                        className="text-lime-700 dark:text-lime-400"
+                        className="text-lime-700 dark:text-lime-400 group-hover:text-highlight dark:group-hover:text-highlightDark duration-300"
                     />
                 </div>
             </Link>

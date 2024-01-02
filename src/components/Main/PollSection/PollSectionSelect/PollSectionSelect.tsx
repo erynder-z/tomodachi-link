@@ -19,7 +19,7 @@ export default function PollSectionSelect() {
                 <motion.button whileTap={{ scale: 0.97 }}>
                     <Link
                         to="/polls/new"
-                        className="h-20 flex justify-center items-center gap-4 p-4 text-regularText dark:text-regularTextDark hover:bg-highlight dark:hover:bg-highlightDark rounded-t duration-300"
+                        className="h-20 flex justify-center items-center gap-4 p-4 text-regularText dark:text-regularTextDark hover:text-regularText dark:hover:text-regularTextDark hover:bg-highlight dark:hover:bg-highlightDark rounded-t duration-300"
                     >
                         <MdAddChart size="2em" />
                         Create new poll
@@ -28,7 +28,7 @@ export default function PollSectionSelect() {
                 <motion.button whileTap={{ scale: 0.97 }}>
                     <Link
                         to="/polls/list"
-                        className="h-20 flex justify-center items-center gap-4 p-4 text-regularText dark:text-regularTextDark hover:bg-highlight dark:hover:bg-highlightDark rounded-t duration-300"
+                        className="h-20 flex justify-center items-center gap-4 p-4 text-regularText dark:text-regularTextDark hover:text-regularText dark:hover:text-regularTextDark hover:bg-highlight dark:hover:bg-highlightDark rounded-t duration-300"
                     >
                         <MdInsights size="2em" /> View polls
                     </Link>

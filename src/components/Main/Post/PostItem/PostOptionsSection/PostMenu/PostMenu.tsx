@@ -40,7 +40,7 @@ export default function PostMenu({
                     exit={{ scale: 0, opacity: 0 }}
                     className="absolute top-12 right-0 z-10 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg rounded"
                 >
-                    <ul className="flex flex-col">
+                    <ul className="flex flex-col list-none">
                         <li>{EditButton}</li>
                         <li>{DeleteButton}</li>
                     </ul>
