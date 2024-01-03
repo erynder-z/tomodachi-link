@@ -222,6 +222,10 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         if (shouldFetch.current) {
             handleFetchPartnerData();
             handleFetchChatMessages('latest');
+            if (token && chatId) {
+                const typeOfOperation = 'read';
+                handleChatMessagesInDB(token, chatId, setInfo, typeOfOperation);
+            }
         }
         return () => {
             shouldFetch.current = false;

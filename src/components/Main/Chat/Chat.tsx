@@ -109,11 +109,17 @@ export default function Chat({ socket }: ChatProps) {
             getConversations();
 
             return () => {
-                setActiveChat(null);
                 shouldInitialize.current = false;
             };
         }
     }, [currentUserId]);
+
+    // set activeChat to null when component unmounts
+    useEffect(() => {
+        return () => {
+            setActiveChat(null);
+        };
+    }, []);
 
     const LoadingContent = (
         <motion.div
