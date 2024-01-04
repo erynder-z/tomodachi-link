@@ -52,11 +52,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     // When the token changes, check it with the server to verify the user's authentication status
     useEffect(() => {
-        const checkToken = async () => {
+        const getUserFromToken = async () => {
             try {
                 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
                 const response = await fetch(
-                    `${SERVER_URL}/api/v1/check-token`,
+                    `${SERVER_URL}/api/v1/token-user`,
                     {
                         method: 'GET',
                         headers: {
@@ -95,7 +95,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         };
 
         if (token) {
-            checkToken();
+            getUserFromToken();
             getTokenExpirationTime();
         } else {
             setLoading(false);
