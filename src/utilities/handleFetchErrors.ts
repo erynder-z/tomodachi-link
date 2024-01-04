@@ -1,6 +1,17 @@
 import { InfoType } from '../types/infoTypes';
 
-export const handleFetchErrors = async (
+const handlePassportAuthenticationFail = (
+    setInfo: (info: InfoType | null) => void
+) => {
+    const failedInfo = {
+        typeOfInfo: 'bad',
+        message: 'Token expired. Please log in again!',
+        icon: '👻',
+    };
+    setInfo(failedInfo as InfoType);
+};
+
+const handleFetchFail = async (
     response: Response,
     setInfo: (info: InfoType | null) => void
 ) => {
@@ -18,4 +29,14 @@ export const handleFetchErrors = async (
     setInfo(failedInfo as InfoType);
 
     throw new Error(`Error: ${response.status} ${response.statusText}`);
+};
+
+export const handleFetchErrors = async (
+    response: Response,
+    setInfo: (info: InfoType | null) => void
+) => {
+    if (response.status === 401) {
+        handlePassportAuthenticationFail(setInfo);
+    }
+    handleFetchFail(response, setInfo);
 };

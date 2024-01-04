@@ -21,6 +21,7 @@ import AppRoutes from './AppRoutes';
 import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/ScanLinesOverlay';
 import { handleChatSetup } from './utilities/handleChatSetup';
 import { SearchModeType } from './types/searchTypes';
+import { InfoType } from './types/infoTypes';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
@@ -79,7 +80,16 @@ function App() {
     useEffect(() => {
         setShowSidebar(false);
         if (shouldUpdateUserData) handleFetchUserData();
-        if (shouldLogout) logout();
+        if (shouldLogout) {
+            const FORCED_LOGOUT_INFO = {
+                typeOfInfo: 'bad',
+                message: 'Token expired. Please login again.',
+                icon: '🚪',
+            };
+
+            setInfo(FORCED_LOGOUT_INFO as InfoType);
+            logout();
+        }
 
         return () => {
             setShouldUpdateUserData(false);
