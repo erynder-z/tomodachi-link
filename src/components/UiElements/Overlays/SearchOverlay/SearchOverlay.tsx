@@ -39,7 +39,7 @@ export default function SearchOverlay({
     );
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-black/80">
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-slate-900/90">
             {CloseButton}
             <div className="h-screen w-full md:w-1/3 lg:flex mt-24 md:mt-40 justify-center">
                 <Search
