@@ -63,9 +63,7 @@ export default function UserListSome() {
             <h1 className="text-lg m-0 text-center font-bold mb-4">
                 People you may know:
             </h1>
-            <div className="overflow-auto flex flex-col gap-2 md:gap-3 flex-1">
-                {userList}
-            </div>
+            <div className="overflow-auto flex flex-col flex-1">{userList}</div>
             <button
                 onClick={handleFetchUsers}
                 className="flex items-center justify-center w-full p-2 mt-4 bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark rounded text-sm text-center transition-all"

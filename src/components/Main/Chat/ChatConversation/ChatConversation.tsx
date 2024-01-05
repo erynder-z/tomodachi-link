@@ -87,7 +87,7 @@ export default function ChatConversation({
     );
 
     const ChatConversationContent = (
-        <div className="w-20 md:w-full py-2 px-2 md:px-4 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-full">
+        <div className="w-20 md:w-full p-2 text-regularText dark:text-regularTextDark bg-background1 dark:bg-background1Dark md:bg-card md:dark:bg-cardDark hover:bg-highlight dark:hover:bg-highlightDark duration-300 rounded-full">
             <ChatConversationListItem
                 listItemData={chatPartner}
                 isConversationMuted={isConversationMuted}

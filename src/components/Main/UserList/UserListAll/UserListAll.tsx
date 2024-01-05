@@ -172,7 +172,7 @@ export default function UserListAll({
                 key={currentPage}
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className={`flex flex-col h-full w-full gap-2 overflow-y-auto ${
+                className={`flex flex-col h-full w-full overflow-y-auto ${
                     isFullLengthPage ? 'justify-between' : 'justify-start'
                 }`}
             >

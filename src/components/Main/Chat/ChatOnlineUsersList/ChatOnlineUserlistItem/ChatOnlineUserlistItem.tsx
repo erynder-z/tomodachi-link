@@ -32,7 +32,7 @@ export default function ChatOnlineUserlistItem({
                     setActiveChat
                 );
             }}
-            className="flex items-center gap-4 py-2 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 cursor-pointer"
+            className="flex items-center gap-2 py-2 text-sm text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300 cursor-pointer"
         >
             <div className="relative">
                 <img

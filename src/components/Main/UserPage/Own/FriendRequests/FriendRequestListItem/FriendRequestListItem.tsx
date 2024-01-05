@@ -108,17 +108,17 @@ export default function FriendRequestListItem({
     );
 
     const FriendRequestListContent = (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
             <div
                 onClick={handleUserClick}
                 className="flex items-center gap-2 cursor-pointer"
             >
                 <img
-                    className="w-7 h-7 aspect-square object-cover rounded-full"
+                    className="w-6 md:w-8 h-auto object-cover rounded-full"
                     src={`data:image/png;base64,${userPic}`}
                     alt="User avatar"
                 />
-                <div className="break-all">
+                <div className="break-all text-xs truncate">
                     {firstName} {lastName}
                 </div>
             </div>

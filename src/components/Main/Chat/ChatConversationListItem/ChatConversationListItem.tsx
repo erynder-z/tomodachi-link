@@ -30,13 +30,13 @@ export default function ChatConversationListItem({
     const ChatConversationListItemContent = (
         <motion.div
             whileTap={{ scale: 0.97 }}
-            className="flex justify-between items-center gap-2 w-full"
+            className="flex justify-between items-center w-full"
         >
-            <div className="flex justify-start items-center gap-2 w-4/5">
+            <div className="flex justify-start items-center gap-2 w-full">
                 <div className="relative flex">
                     <img
                         loading="lazy"
-                        className="w-8 h-8 object-cover rounded-full"
+                        className="w-6 md:w-8 h-auto object-cover rounded-full"
                         src={`data:image/png;base64,${userpic}`}
                         alt="User avatar"
                     />
@@ -47,7 +47,7 @@ export default function ChatConversationListItem({
                         </div>
                     )}
                 </div>
-                <div className="hidden md:block flex-1 truncate text-sm">
+                <div className="hidden md:block flex-1 truncate text-xs">
                     {firstName} {lastName}
                 </div>
             </div>
