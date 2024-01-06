@@ -1,5 +1,6 @@
 import { FaDiscord, FaAngleDoubleRight } from 'react-icons/fa';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
+import { Tooltip } from 'react-tooltip';
 
 type DiscordLoginButtonProps = { isSubmitting: boolean };
 
@@ -31,17 +32,26 @@ export default function DiscordLoginButton({
     );
 
     return (
-        <button
-            disabled={isSubmitting}
-            onClick={handleDiscordLogin}
-            className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
-                isSubmitting
-                    ? 'bg-gray-500 cursor-not-allowed'
-                    : 'bg-indigo-600 hover:bg-indigo-700'
-            }`}
-        >
-            {' '}
-            {isSubmitting ? BusyButtonContent : NormalButtonContent}
-        </button>
+        <>
+            <button
+                data-tooltip-id="discord-login-tooltip"
+                data-tooltip-content="Login using your Discord account"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                disabled={isSubmitting}
+                onClick={handleDiscordLogin}
+                className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
+                    isSubmitting
+                        ? 'bg-gray-500 cursor-not-allowed'
+                        : 'bg-indigo-600 hover:bg-indigo-700'
+                }`}
+            >
+                {isSubmitting ? BusyButtonContent : NormalButtonContent}
+            </button>
+            <Tooltip
+                id="discord-login-tooltip"
+                style={{ fontSize: '0.75rem' }}
+            />
+        </>
     );
 }

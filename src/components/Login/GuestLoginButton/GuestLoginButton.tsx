@@ -1,5 +1,6 @@
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
 import { FaAngleDoubleRight } from 'react-icons/fa';
+import { Tooltip } from 'react-tooltip';
 
 type GuestLoginButtonProps = {
     handleGuestLogin: () => void;
@@ -23,16 +24,23 @@ export default function GuestLoginButton({
         </span>
     );
     return (
-        <button
-            disabled={isSubmitting}
-            onClick={handleGuestLogin}
-            className={`relative overflow-hidden w-full bg-indigo-900 text-white font-bold rounded transition duration-500 ease-in-out ${
-                isSubmitting
-                    ? 'bg-gray-500 cursor-not-allowed'
-                    : 'hover:bg-indigo-700'
-            }`}
-        >
-            {isSubmitting ? BusyButtonContent : NormalButtonContent}
-        </button>
+        <>
+            <button
+                data-tooltip-id="guest-login-tooltip"
+                data-tooltip-content="Login as guest"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                disabled={isSubmitting}
+                onClick={handleGuestLogin}
+                className={` relative overflow-hidden w-full bg-indigo-900 text-white font-bold rounded transition duration-500 ease-in-out ${
+                    isSubmitting
+                        ? 'bg-gray-500 cursor-not-allowed'
+                        : 'hover:bg-indigo-700'
+                }`}
+            >
+                {isSubmitting ? BusyButtonContent : NormalButtonContent}
+            </button>
+            <Tooltip id="guest-login-tooltip" style={{ fontSize: '0.75rem' }} />
+        </>
     );
 }

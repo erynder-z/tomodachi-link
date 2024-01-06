@@ -1,5 +1,6 @@
 import { FaGithub, FaAngleDoubleRight } from 'react-icons/fa';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
+import { Tooltip } from 'react-tooltip';
 
 type GithubLoginButtonProps = { isSubmitting: boolean };
 
@@ -31,16 +32,26 @@ export default function GithubLoginButton({
     );
 
     return (
-        <button
-            disabled={isSubmitting}
-            onClick={handleGithubLogin}
-            className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
-                isSubmitting
-                    ? 'bg-gray-500 cursor-not-allowed'
-                    : 'bg-slate-900 hover:bg-slate-700'
-            }`}
-        >
-            {isSubmitting ? BusyButtonContent : NormalButtonContent}
-        </button>
+        <>
+            <button
+                data-tooltip-id="github-login-tooltip"
+                data-tooltip-content="Login with your GitHub account"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                disabled={isSubmitting}
+                onClick={handleGithubLogin}
+                className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
+                    isSubmitting
+                        ? 'bg-gray-500 cursor-not-allowed'
+                        : 'bg-slate-900 hover:bg-slate-700'
+                }`}
+            >
+                {isSubmitting ? BusyButtonContent : NormalButtonContent}
+            </button>
+            <Tooltip
+                id="github-login-tooltip"
+                style={{ fontSize: '0.75rem' }}
+            />
+        </>
     );
 }

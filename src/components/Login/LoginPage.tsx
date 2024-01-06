@@ -198,7 +198,7 @@ export default function LoginPage() {
     );
 
     return (
-        <div className="h-screen bg-cBlack overflow-auto">
+        <div className="h-screen bg-cBlack overflow-auto font-regularFont">
             {AsciiBackground}
             <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full md:h-screen gap-4 relative z-10 my-2 md:m-0">
                 <AnimatePresence>

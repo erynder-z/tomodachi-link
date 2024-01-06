@@ -1,3 +1,4 @@
+import { Tooltip } from 'react-tooltip';
 import ButtonBusy from '../UiElements/LoadingSpinner/ButtonBusy';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 
@@ -83,6 +84,10 @@ export default function LoginForm({
                     {PasswordInputContent}
                     <div className="flex w-full">
                         <button
+                            data-tooltip-id="normal-login-tooltip"
+                            data-tooltip-content="Login using username and password"
+                            data-tooltip-variant="dark"
+                            data-tooltip-delay-show={500}
                             disabled={isSubmitting}
                             className={`relative overflow-hidden w-full bg-sky-700 text-white text-lg md:text-xl font-bold rounded transition duration-500 ease-in-out ${
                                 isSubmitting
@@ -97,6 +102,10 @@ export default function LoginForm({
                     </div>
                 </div>
             </form>
+            <Tooltip
+                id="normal-login-tooltip"
+                style={{ fontSize: '0.75rem' }}
+            />
         </div>
     );
 }
