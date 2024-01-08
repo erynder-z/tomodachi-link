@@ -4,6 +4,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { Socket } from 'socket.io-client';
 import { ChatMemberType } from '../../../types/chatTypes';
 import { Link } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
 
 type ProfileCardProps = {
     socket: Socket | undefined;
@@ -58,13 +59,23 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
     const FriendNumber = <span> {numberOfFriends} Friends</span>;
 
     const LinkToChat = (
-        <Link
-            to="/chat"
-            className="text-regularText dark:text-regularTextDark text-xs"
-        >
-            {' '}
-            ( {matchedFriendsCount} Online )
-        </Link>
+        <>
+            <Link
+                data-tooltip-id="profile-friend-link-tooltip"
+                data-tooltip-content="Go to chat"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                to="/chat"
+                className="text-regularText dark:text-regularTextDark text-xs"
+            >
+                {' '}
+                ( {matchedFriendsCount} Online )
+            </Link>
+            <Tooltip
+                id="profile-friend-link-tooltip"
+                style={{ fontSize: '0.75rem', zIndex: 99 }}
+            />
+        </>
     );
 
     return (
