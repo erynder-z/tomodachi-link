@@ -27,7 +27,7 @@ export default function GuestLoginButton({
         <>
             <button
                 data-tooltip-id="guest-login-tooltip"
-                data-tooltip-content="Login as guest"
+                data-tooltip-content="Login without creating an account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
                 disabled={isSubmitting}
