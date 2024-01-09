@@ -5,6 +5,7 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
 import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
+import { Tooltip } from 'react-tooltip';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
@@ -55,21 +56,33 @@ export default function PollAnswerSection({
         const optionID = _id;
 
         return (
-            <motion.button
-                key={optionID}
-                disabled={!canAnswerPost}
-                onClick={() => {
-                    handleButtonClick(pollID, optionID);
-                }}
-                whileTap={{ scale: 0.97 }}
-                className={`${
-                    canAnswerPost
-                        ? 'p-2 w-12 min-w-max text-base bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark duration-300 rounded'
-                        : 'p-2 w-12 min-w-max text-base bg-gray-500 rounded'
-                }`}
-            >
-                {nameOfOption}
-            </motion.button>
+            <>
+                <motion.button
+                    key={optionID}
+                    data-tooltip-id="poll-answer-tooltip"
+                    data-tooltip-content="Submit answer"
+                    data-tooltip-variant="dark"
+                    data-tooltip-delay-show={500}
+                    disabled={!canAnswerPost}
+                    onClick={() => {
+                        handleButtonClick(pollID, optionID);
+                    }}
+                    whileTap={{ scale: 0.97 }}
+                    className={`${
+                        canAnswerPost
+                            ? 'p-2 w-12 min-w-max text-base bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark duration-300 rounded'
+                            : 'p-2 w-12 min-w-max text-base bg-gray-500 rounded'
+                    }`}
+                >
+                    {nameOfOption}
+                </motion.button>
+                {canAnswerPost && (
+                    <Tooltip
+                        id="poll-answer-tooltip"
+                        style={{ fontSize: '0.75rem' }}
+                    />
+                )}
+            </>
         );
     };
 
