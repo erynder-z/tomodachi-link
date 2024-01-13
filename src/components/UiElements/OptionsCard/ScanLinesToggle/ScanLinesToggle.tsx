@@ -17,6 +17,7 @@ export default function ScanLinesToggle() {
     return (
         <AnimatePresence initial={false}>
             <motion.div
+                key="scanLinesToggle"
                 data-tooltip-id="options-scanlines-tooltip"
                 data-tooltip-content="Toggle scanlines"
                 data-tooltip-variant="dark"

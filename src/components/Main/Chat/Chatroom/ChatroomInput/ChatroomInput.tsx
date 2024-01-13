@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MdSend } from 'react-icons/md';
 import { FaRegSmileBeam } from 'react-icons/fa';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
+import { Tooltip } from 'react-tooltip';
 
 type ChatroomInputProps = {
     inputMessage: string;
@@ -21,6 +22,8 @@ export default function ChatroomInput({
     setShowEmojiPicker,
 }: ChatroomInputProps) {
     const [isInputFocused, setIsInputFocused] = useState(false);
+
+    const isButtonDisabled = isSubmitting || inputMessage.trim() === '';
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputMessage(e.target.value);
@@ -62,16 +65,26 @@ export default function ChatroomInput({
     );
 
     const EmojiButtonContent = (
-        <button
-            onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setShowEmojiPicker(true);
-            }}
-            className="absolute bottom-4 right-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
-        >
-            <FaRegSmileBeam />
-        </button>
+        <>
+            <button
+                data-tooltip-id="chat-emoji-tooltip"
+                data-tooltip-content="Insert emoji"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setShowEmojiPicker(true);
+                }}
+                className="absolute bottom-4 right-4 text-regularText dark:text-regularTextDark hover:text-highlight dark:hover:text-highlightDark duration-300"
+            >
+                <FaRegSmileBeam />
+            </button>
+            <Tooltip
+                id="chat-emoji-tooltip"
+                style={{ fontSize: '0.75rem', zIndex: 99 }}
+            />
+        </>
     );
 
     const InputBottomBorder = (
@@ -87,20 +100,29 @@ export default function ChatroomInput({
     );
 
     const SendButtonContent = (
-        <button
-            disabled={isSubmitting}
-            onClick={sendMessage}
-            className={`flex items-center justify-center w-24 h-full  text-regularTextDark text-sm ${
-                !inputMessage
-                    ? 'bg-gray-500 hover:bg-gray-600'
-                    : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover duration-300'
-            }`}
-            title={
-                inputMessage ? 'Shift+Enter to send' : 'Please enter a message'
-            }
-        >
-            {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
-        </button>
+        <div className="relative">
+            <button
+                data-tooltip-id="chat-send-message-tooltip"
+                data-tooltip-content="Send message (Ctrl + Enter)"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                disabled={isButtonDisabled}
+                onClick={sendMessage}
+                className={`flex items-center justify-center w-24 h-full  text-regularTextDark text-sm ${
+                    !inputMessage
+                        ? 'bg-gray-500 hover:bg-gray-600'
+                        : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover duration-300'
+                }`}
+            >
+                {isSubmitting ? <ButtonBusy /> : <MdSend size="1.5em" />}
+            </button>
+            {!isButtonDisabled && (
+                <Tooltip
+                    id="chat-send-message-tooltip"
+                    style={{ fontSize: '0.75rem', zIndex: 99 }}
+                />
+            )}
+        </div>
     );
 
     return (

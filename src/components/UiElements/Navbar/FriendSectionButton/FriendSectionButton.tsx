@@ -10,6 +10,7 @@ export default function FriendSectionButton() {
                 data-tooltip-id="navbar-friend-tooltip"
                 data-tooltip-content="Go to friend section"
                 data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
                 whileTap={{ scale: 0.97 }}
             >
                 <NavLink

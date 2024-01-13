@@ -19,6 +19,7 @@ export default function ThemeToggle() {
     return (
         <AnimatePresence initial={false}>
             <motion.div
+                key="themeToggle"
                 data-tooltip-id="options-darkmode-tooltip"
                 data-tooltip-content="Toggle dark mode"
                 data-tooltip-variant="dark"
