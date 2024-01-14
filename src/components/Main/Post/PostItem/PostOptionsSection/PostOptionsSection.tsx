@@ -10,6 +10,7 @@ import useDelayUnmount from '../../../../../hooks/useDelayUnmount';
 import PostMenu from './PostMenu/PostMenu';
 import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
+import { Tooltip } from 'react-tooltip';
 
 type PostOptionsSectionProps = {
     postDetails: PostType | null;
@@ -92,11 +93,19 @@ export default function PostOptionsSection({
 
     const PostOptionsContent = (
         <div className="relative inline-block cursor-pointer">
-            <ToggleListButton
-                onToggleListButtonClick={handleShowPostMenu}
-                showMenu={showMenu}
-            />
-
+            <div
+                data-tooltip-id="post-options-tooltip"
+                data-tooltip-content={`${
+                    showMenu ? 'Hide options' : 'Show options'
+                }`}
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+            >
+                <ToggleListButton
+                    onToggleListButtonClick={handleShowPostMenu}
+                    showMenu={showMenu}
+                />
+            </div>
             {showMenu && (
                 <PostMenu
                     handleEditButtonClick={handleEditButtonClick}
@@ -104,7 +113,6 @@ export default function PostOptionsSection({
                     shouldMenuShow={shouldMenuShow}
                 />
             )}
-
             {showPostEdit && (
                 <EditPostInput
                     postDetails={postDetails}
@@ -114,6 +122,10 @@ export default function PostOptionsSection({
                     setShouldRefreshPictureList={setShouldRefreshPictureList}
                 />
             )}
+            <Tooltip
+                id="post-options-tooltip"
+                style={{ fontSize: '0.75rem' }}
+            />
         </div>
     );
 

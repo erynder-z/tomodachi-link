@@ -1,5 +1,6 @@
 import { MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Tooltip } from 'react-tooltip';
 
 type PostMenuProps = {
     handleEditButtonClick: () => void;
@@ -13,21 +14,35 @@ export default function PostMenu({
     shouldMenuShow,
 }: PostMenuProps) {
     const EditButton = (
-        <button
-            onClick={handleEditButtonClick}
-            className="flex justify-around items-center h-full w-full p-2 rounded-t  hover:bg-buttonHover dark:hover:bg-buttonDarkHover duration-300"
-        >
-            <MdEdit size="1.25em" />
-        </button>
+        <>
+            <button
+                data-tooltip-id="post-edit-tooltip"
+                data-tooltip-content="Edit post"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                onClick={handleEditButtonClick}
+                className="flex justify-around items-center h-full w-full p-2 rounded-t  hover:bg-buttonHover dark:hover:bg-buttonDarkHover duration-300"
+            >
+                <MdEdit size="1.25em" />
+            </button>
+            <Tooltip id="post-edit-tooltip" style={{ fontSize: '0.75rem' }} />
+        </>
     );
 
     const DeleteButton = (
-        <button
-            onClick={handleDeleteButtonClick}
-            className="flex justify-around items-center h-full w-full p-2 rounded-t  hover:bg-buttonHover dark:hover:bg-buttonDarkHover duration-300"
-        >
-            <MdOutlineDeleteForever size="1.25em" />
-        </button>
+        <>
+            <button
+                data-tooltip-id="post-delete-tooltip"
+                data-tooltip-content="Delete post"
+                data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
+                onClick={handleDeleteButtonClick}
+                className="flex justify-around items-center h-full w-full p-2 rounded-t  hover:bg-buttonHover dark:hover:bg-buttonDarkHover duration-300"
+            >
+                <MdOutlineDeleteForever size="1.25em" />
+            </button>
+            <Tooltip id="post-delete-tooltip" style={{ fontSize: '0.75rem' }} />
+        </>
     );
 
     return (

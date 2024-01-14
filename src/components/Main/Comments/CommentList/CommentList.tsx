@@ -19,10 +19,12 @@ export default function CommentList({
 
     return (
         <div className="flex flex-col gap-4">
-            <ToggleListButton
-                onToggleListButtonClick={onToggleListButtonClick}
-                showMenu={true}
-            />
+            <div className="mr-auto">
+                <ToggleListButton
+                    onToggleListButtonClick={onToggleListButtonClick}
+                    showMenu={true}
+                />
+            </div>
             {hasComments ? (
                 commentItems
             ) : (
