@@ -16,6 +16,7 @@ export default function RefreshPollButton({
                 data-tooltip-id="poll-refresh-tooltip"
                 data-tooltip-content="Refresh poll list"
                 data-tooltip-variant="dark"
+                data-tooltip-delay-show={500}
                 onClick={refreshPoll}
                 whileTap={{ scale: 0.97 }}
                 className="refresh-button"

@@ -9,6 +9,7 @@ import { backendFetch } from '../../../../utilities/backendFetch';
 import { PaginatedListDataType } from '../../../../types/miscTypes';
 import { SearchModeType } from '../../../../types/searchTypes';
 import { MdPersonSearch } from 'react-icons/md';
+import { Tooltip } from 'react-tooltip';
 
 type UserListAllProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -161,11 +162,19 @@ export default function UserListAll({
                     All users:
                 </h1>
                 <button
+                    data-tooltip-id="user-search-button-tooltip"
+                    data-tooltip-content="Search for user"
+                    data-tooltip-variant="dark"
+                    data-tooltip-delay-show={500}
                     onClick={handleSearchButtonClick}
                     className="h-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark rounded px-4 transition-all"
                 >
                     <MdPersonSearch onClick={handleSearchButtonClick} />
                 </button>
+                <Tooltip
+                    id="user-search-button-tooltip"
+                    style={{ fontSize: '0.75rem' }}
+                />
             </div>
 
             <motion.div
