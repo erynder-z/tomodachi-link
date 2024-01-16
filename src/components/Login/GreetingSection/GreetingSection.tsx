@@ -13,18 +13,6 @@ export default function GreetingSection() {
     const METHOD = 'GET';
     const ERROR_MESSAGE = 'Unable to fetch number of users!';
 
-    const getNumberOfUsers = async () => {
-        const token = undefined;
-        const response = await backendFetch(
-            token,
-            setInfo,
-            API_ENDPOINT_URL,
-            METHOD,
-            ERROR_MESSAGE
-        );
-        setNumberOfUsers(response?.numberOfUsers);
-    };
-
     const count = useMotionValue(0);
     const rounded = useTransform(count, Math.round);
 
@@ -37,6 +25,18 @@ export default function GreetingSection() {
     }, [numberOfUsers]);
 
     useEffect(() => {
+        const getNumberOfUsers = async () => {
+            const token = undefined;
+            const response = await backendFetch(
+                token,
+                setInfo,
+                API_ENDPOINT_URL,
+                METHOD,
+                ERROR_MESSAGE
+            );
+            setNumberOfUsers(response?.numberOfUsers);
+        };
+
         if (shouldGetNumberOfUsers.current) getNumberOfUsers();
 
         return () => {

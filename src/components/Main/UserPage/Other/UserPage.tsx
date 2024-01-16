@@ -34,31 +34,31 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
 
     const shouldFetchUserData = useRef(true);
 
-    const fetchUserData = async () => {
-        if (token) {
-            const apiEndpointURL = `/api/v1/users/${id}`;
-            const METHOD = 'GET';
-            const ERROR_MESSAGE = 'Unable to fetch posts!';
-
-            const response = await backendFetch(
-                token,
-                setInfo,
-                apiEndpointURL,
-                METHOD,
-                ERROR_MESSAGE
-            );
-
-            setUserPageData(response?.user ?? {});
-            setIsFriend(response?.isFriend ?? false);
-            setIsFriendRequestPending({
-                incoming: response?.isIncomingFriendRequestPending ?? false,
-                outgoing: response?.isOutgoingFriendRequestPending ?? false,
-            });
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchUserData = async () => {
+            if (token) {
+                const apiEndpointURL = `/api/v1/users/${id}`;
+                const METHOD = 'GET';
+                const ERROR_MESSAGE = 'Unable to fetch posts!';
+
+                const response = await backendFetch(
+                    token,
+                    setInfo,
+                    apiEndpointURL,
+                    METHOD,
+                    ERROR_MESSAGE
+                );
+
+                setUserPageData(response?.user ?? {});
+                setIsFriend(response?.isFriend ?? false);
+                setIsFriendRequestPending({
+                    incoming: response?.isIncomingFriendRequestPending ?? false,
+                    outgoing: response?.isOutgoingFriendRequestPending ?? false,
+                });
+                setLoading(false);
+            }
+        };
+
         if (shouldFetchUserData.current) fetchUserData();
 
         return () => {

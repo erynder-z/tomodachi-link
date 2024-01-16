@@ -23,26 +23,25 @@ export default function SinglePollPage() {
 
     const shouldGetPollData = useRef(true);
 
-    const getPollDetails = async (pollID: string) => {
-        if (token) {
-            const API_ENDPOINT_URL = `/api/v1/poll/${pollID}/single`;
-            const METHOD = 'GET';
-            const ERROR_MESSAGE = 'Unable to fetch poll!';
-            const response = await backendFetch(
-                token,
-                setInfo,
-                API_ENDPOINT_URL,
-                METHOD,
-                ERROR_MESSAGE
-            );
-
-            setPollData(response?.singlePoll);
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
         if (id) {
+            const getPollDetails = async (pollID: string) => {
+                if (token) {
+                    const API_ENDPOINT_URL = `/api/v1/poll/${pollID}/single`;
+                    const METHOD = 'GET';
+                    const ERROR_MESSAGE = 'Unable to fetch poll!';
+                    const response = await backendFetch(
+                        token,
+                        setInfo,
+                        API_ENDPOINT_URL,
+                        METHOD,
+                        ERROR_MESSAGE
+                    );
+
+                    setPollData(response?.singlePoll);
+                    setLoading(false);
+                }
+            };
             if (shouldGetPollData.current) getPollDetails(id);
 
             return () => {
