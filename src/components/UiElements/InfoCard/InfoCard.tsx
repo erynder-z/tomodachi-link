@@ -41,7 +41,7 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     }, [info]);
 
     return (
-        <div className="fixed top-full w-full z-50">
+        <div className="fixed top-full w-full z-50 font-regularFont">
             <div
                 className={`fixed top-0 w-full ${bgColorClass} text-regularTextDark rounded-b lg:rounded-b-lg text-md md:text-3xl p-4 md:py-8 md:px-16 flex items-center justify-between transform transition-transform duration-250 ease-in-out ${
                     isVisible ? '-translate-y-0' : '-translate-y-full'
@@ -54,7 +54,7 @@ const InfoCard = ({ info }: infoCardPropsType) => {
                 >
                     {info?.icon}
                 </span>
-                <h2 className="text-sm md:text-2xl font-semibold text-center">
+                <h2 className="text-sm md:text-2xl text-center m-0">
                     {info?.message}
                 </h2>
                 <motion.button
