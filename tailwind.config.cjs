@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 regularFont: ['Outfit', 'sans-serif'],
+                monospaceFont: ['Red Hat Mono', 'monospace'],
             },
 
             colors: {

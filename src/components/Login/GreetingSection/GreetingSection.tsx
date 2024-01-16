@@ -45,10 +45,17 @@ export default function GreetingSection() {
     }, []);
 
     return (
-        <section className="text-white font-bold font-mono md:text-3xl text-center bg-cBlack/75 p-4 lg:rounded-full w-5/6 mx-auto">
-            <h1 className="text-xl md:text-3xl">Welcome to Odin-Book!</h1>
+        <section className="text-white font-monospaceFont font-medium md:text-3xl text-center bg-cBlack/75 p-4 lg:rounded w-5/6 mx-auto">
+            <h1 className="text-xl md:text-3xl font-medium">
+                Welcome to{' '}
+                <span className="text-4xl font-bold text-cCyan">Odin-Book</span>
+                !
+            </h1>
             Join our community of{' '}
-            <motion.span className="text-cCyan">{rounded}</motion.span> users!
+            <motion.span className="text-4xl font-bold text-cCyan">
+                {rounded}
+            </motion.span>{' '}
+            users!
         </section>
     );
 }
