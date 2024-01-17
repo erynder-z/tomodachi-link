@@ -168,9 +168,6 @@ export default function FriendSection() {
 
     const FriendListContent = (
         <>
-            <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
-                Friends
-            </h1>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {friendProfileCardList}
                 {friendProfileCardList?.length === 0 && (
@@ -193,6 +190,12 @@ export default function FriendSection() {
         </>
     );
 
+    const Header = (
+        <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
+            Friends
+        </h1>
+    );
+
     const FriendSectionContent = (
         <motion.div
             ref={FriendSectionContentRef}
@@ -206,6 +209,7 @@ export default function FriendSection() {
                     : 'flex flex-col items-center gap-4 min-h-[calc(100vh_-_3rem)] w-full lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg'
             }`}
         >
+            {Header}
             {FriendListContent}
             {SuggestionList.length > 0 && SuggestionListContent}
         </motion.div>
