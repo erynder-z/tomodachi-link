@@ -25,7 +25,12 @@ import { InfoType } from './types/infoTypes';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
-function App() {
+/**
+ * Renders the main application component.
+ *
+ * @return {JSX.Element} The rendered application component.
+ */
+function App(): JSX.Element {
     const { isAuth, token, tokenExpiration, logout } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
@@ -55,13 +60,15 @@ function App() {
 
     // Use this to force a re-render when user data changes
     const userDataKey = `${currentUserData?._id} + ${currentUserData?.lastSeen}`;
-
     const accountType = currentUserData?.accountType;
-
     const showScanLines = scanLines !== 'none';
-
     const shouldLogout = tokenExpiration && tokenExpiration < Date.now();
 
+    /**
+     * Handles the scroll event.
+     *
+     * @param {React.UIEvent<HTMLDivElement>} e - The scroll event object.
+     */
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
@@ -70,13 +77,31 @@ function App() {
         );
     };
 
-    const toggleSidebar = () =>
+    /**
+     * Toggles the sidebar visibility.
+     *
+     * @return {void}
+     */
+    const toggleSidebar = (): void =>
         setShowSidebar((prevShowSidebar) => !prevShowSidebar);
 
+    /**
+     * Effect to reset the pagination trigger when it's no longer needed.
+     *
+     * @effect
+     * @memberof App
+     */
     useEffect(() => {
         setIsPaginationTriggered(false);
     }, [isPaginationTriggered]);
 
+    /**
+     * Effect to handle changes in the pathname and perform necessary actions.
+     *
+     * @effect
+     * @memberof App
+     * @param {string} location.pathname - The current pathname from the React Router location.
+     */
     useEffect(() => {
         setShowSidebar(false);
         if (shouldUpdateUserData) handleFetchUserData();
@@ -96,6 +121,12 @@ function App() {
         };
     }, [location.pathname]);
 
+    /**
+     * Effect to perform actions when authentication status or user data changes.
+     *
+     * @effect
+     * @memberof App
+     */
     useEffect(() => {
         if (isAuth && currentUserData) {
             if (currentUserData.accountType === 'guest') {
@@ -133,6 +164,12 @@ function App() {
         }
     }, [isAuth && currentUserData?._id]);
 
+    /**
+     * Effect to periodically trigger the update of user data.
+     *
+     * @effect
+     * @memberof App
+     */
     useEffect(() => {
         const interval = setInterval(() => {
             setShouldUpdateUserData(true);

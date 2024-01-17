@@ -17,7 +17,12 @@ import GithubLoginButton from './GithubLoginButton/GithubLoginButton';
 import GoogleLoginButton from './GoogleLoginButton/GoogleLoginButton';
 import DiscordLoginButton from './DiscordLoginButton/DiscordLoginButton';
 
-export default function LoginPage() {
+/**
+ * Renders the login page component.
+ *
+ * @returns {JSX.Element}
+ */
+export default function LoginPage(): JSX.Element {
     const { setToken } = useContext(AuthContext);
     const { isAuth } = useAuth();
     const { setInfo } = useInfoCard();
@@ -28,7 +33,14 @@ export default function LoginPage() {
 
     const shouldRenderAscii = useRef(true);
 
-    const login = async (username: string, password: string) => {
+    /**
+     * Authenticates the user with the provided username and password.
+     *
+     * @param {string} username - The username of the user.
+     * @param {string} password - The password of the user.
+     * @return {Promise<void>} - A promise that resolves once the user is authenticated.
+     */
+    const login = async (username: string, password: string): Promise<void> => {
         setIsVerifying(true);
         setInfo(null);
 
@@ -58,6 +70,11 @@ export default function LoginPage() {
         }
     };
 
+    /**
+     * Handles the submission of the login form.
+     *
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     */
     const handleLoginSubmit = async (
         event: React.FormEvent<HTMLFormElement>
     ) => {
@@ -86,6 +103,11 @@ export default function LoginPage() {
 
     const handleRegisterClick = () => setShowSignup(true);
 
+    /**
+     * Handles the guest login functionality.
+     *
+     * @return {Promise<void>} This function does not take any parameters and does not return anything.
+     */
     const handleGuestLogin = async () => {
         setIsSubmitting(true);
 
@@ -104,6 +126,12 @@ export default function LoginPage() {
         setIsSubmitting(false);
     };
 
+    /**
+     * Effect to handle the removal of cookies and setting the token.
+     *
+     * @effect
+     * @memberof LoginPage
+     */
     useEffect(() => {
         const setTokenAndDeleteCookie = () => {
             setCookie('jwtOdinBook', cookies.jwtOdinBook, {
@@ -118,10 +146,23 @@ export default function LoginPage() {
         if (cookies.jwtOdinBook) setTokenAndDeleteCookie();
     }, [cookies.jwtOdinBook, setToken, removeCookie, setInfo]);
 
+    /**
+     * Effect to update the verifying status when authentication changes.
+     *
+     * @effect
+     * @memberof LoginPage
+     * @param {boolean} isAuth - The authentication status.
+     */
     useEffect(() => {
         if (isAuth) setIsVerifying(false);
     }, [isAuth]);
 
+    /**
+     * Effect to render ASCII art background on component mount.
+     *
+     * @effect
+     * @memberof LoginPage
+     */
     useEffect(() => {
         if (shouldRenderAscii.current)
             generateAsciiImage(introBackground, 'asciiArtCanvas', 15);

@@ -1,7 +1,12 @@
 import { Blocks } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
 
-export default function VerifyingInfoBox() {
+/**
+ * Renders a component for displaying a verifying info box.
+ *
+ * @return {JSX.Element} The JSX element for the verifying info box.
+ */
+export default function VerifyingInfoBox(): JSX.Element {
     return (
         <motion.div
             key="verifyingInfoBox"

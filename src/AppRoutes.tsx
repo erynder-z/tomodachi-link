@@ -33,6 +33,19 @@ type AppRoutesProps = {
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
+/**
+ * Renders the routes for the application based on the given props.
+ *
+ * @param {Object} props - The props for the AppRoutes component.
+ * @param {Object} props.location - The location object.
+ * @param {boolean} props.isPaginationTriggered - Indicates if pagination is triggered.
+ * @param {string} props.accountType - The account type.
+ * @param {Object} props.socket - The socket object.
+ * @param {string} props.userDataKey - The user data key.
+ * @param {function} props.setShouldOverlaysShow - The function to set whether overlays should show.
+ * @param {function} props.setSearchMode - The function to set the search mode.
+ * @return {JSX.Element} The rendered Routes component.
+ */
 export default function AppRoutes({
     location,
     isPaginationTriggered,
@@ -41,7 +54,7 @@ export default function AppRoutes({
     userDataKey,
     setShouldOverlaysShow,
     setSearchMode,
-}: AppRoutesProps) {
+}: AppRoutesProps): JSX.Element {
     return (
         <Routes key={location.pathname} location={location}>
             <Route element={<RequireAuth />}>
