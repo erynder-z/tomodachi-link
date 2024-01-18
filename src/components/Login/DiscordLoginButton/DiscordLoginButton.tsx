@@ -4,19 +4,43 @@ import { Tooltip } from 'react-tooltip';
 
 type DiscordLoginButtonProps = { isSubmitting: boolean };
 
+/**
+ * Renders a button for Discord login.
+ *
+ * @component
+ * @param {DiscordLoginButtonProps} props - The props object.
+ * @param {boolean} props.isSubmitting - A flag indicating if the button is in a submitting state.
+ * @return {JSX.Element} The rendered DiscordLoginButton component.
+ */
 export default function DiscordLoginButton({
     isSubmitting,
-}: DiscordLoginButtonProps) {
+}: DiscordLoginButtonProps): JSX.Element {
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
     const githubLoginURL = `${SERVER_URL}/api/v1/oauth/discord`;
 
-    const handleDiscordLogin = () => {
+    /**
+     * Handles the Discord login action by opening the Discord login URL.
+     *
+     * @function
+     * @return {void}
+     */
+    const handleDiscordLogin = (): void => {
         window.open(githubLoginURL, '_self');
     };
 
-    const BusyButtonContent = <ButtonBusy />;
+    /**
+     * Content for the button when it's in a busy (submitting) state.
+     *
+     * @type {JSX.Element}
+     */
+    const BusyButtonContent: JSX.Element = <ButtonBusy />;
 
-    const NormalButtonContent = (
+    /**
+     * Content for the button when it's in a normal state.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalButtonContent: JSX.Element = (
         <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-lg text-white hover:text-white">
             <div className="flex justify-center items-center gap-2">
                 <FaDiscord
@@ -31,6 +55,11 @@ export default function DiscordLoginButton({
         </span>
     );
 
+    /**
+     * Renders the DiscordLoginButton component.
+     *
+     * @return {JSX.Element} The rendered DiscordLoginButton component.
+     */
     return (
         <>
             <button

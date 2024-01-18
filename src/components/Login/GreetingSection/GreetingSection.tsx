@@ -3,7 +3,13 @@ import useInfoCard from '../../../hooks/useInfoCard';
 import { backendFetch } from '../../../utilities/backendFetch';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 
-export default function GreetingSection() {
+/**
+ * Renders a greeting section with a dynamic count of users.
+ *
+ * @component
+ * @return {JSX.Element} The rendered GreetingSection component.
+ */
+export default function GreetingSection(): JSX.Element {
     const { setInfo } = useInfoCard();
     const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
 
@@ -16,6 +22,12 @@ export default function GreetingSection() {
     const count = useMotionValue(0);
     const rounded = useTransform(count, Math.round);
 
+    /**
+     * Animates the count value to the new number of users.
+     *
+     * @param {number} newCount - The new count of users.
+     * @return {void}
+     */
     useEffect(() => {
         if (numberOfUsers !== 0) {
             const animation = animate(count, numberOfUsers, { duration: 1 });
@@ -24,6 +36,11 @@ export default function GreetingSection() {
         }
     }, [numberOfUsers]);
 
+    /**
+     * Retrieves the number of users from the API.
+     *
+     * @return {Promise<void>} - A promise that resolves when the number of users is retrieved.
+     */
     useEffect(() => {
         const getNumberOfUsers = async () => {
             const token = undefined;
@@ -44,6 +61,11 @@ export default function GreetingSection() {
         };
     }, []);
 
+    /**
+     * Renders the GreetingSection component.
+     *
+     * @return {JSX.Element} The rendered GreetingSection component.
+     */
     return (
         <section className="text-white font-monospaceFont font-medium md:text-3xl text-center bg-cBlack/75 p-4 lg:rounded w-5/6 mx-auto">
             <h1 className="text-xl md:text-3xl font-medium">

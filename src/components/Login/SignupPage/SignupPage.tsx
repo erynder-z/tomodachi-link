@@ -12,22 +12,43 @@ type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SignupPage({ setShowSignup }: SignupPageProps) {
+/**
+ * Renders a signup page with a signup form.
+ *
+ * @component
+ * @param {SignupPageProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShowSignup - A state setter to control the visibility of the signup page.
+ * @return {JSX.Element} The rendered signup page component.
+ */
+export default function SignupPage({
+    setShowSignup,
+}: SignupPageProps): JSX.Element {
     const { setToken } = useAuth();
     const { setInfo } = useInfoCard();
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
 
-    const handleRequestError = async (response: Response) => {
+    /**
+     * Handles the error response from a request.
+     *
+     * @param {Response} response - The response object.
+     * @return {Promise<void>} - A promise that resolves when the error has been handled.
+     */
+    const handleRequestError = async (response: Response): Promise<void> => {
         const data = await response.json();
         const errorMessage = data.error?.message || 'Something went wrong!';
-        /*        displayErrorInfo(errorMessage); */
         displayErrorInfo(setInfo, errorMessage, '👻');
 
         throw new Error(`Error: ${response.status} ${response.statusText}`);
     };
 
+    /**
+     * Logs in the user with the provided username and password.
+     *
+     * @param {string} username - The username of the user.
+     * @param {string} password - The password of the user.
+     */
     const login = async (username: string, password: string) => {
         setInfo(null);
 
@@ -51,6 +72,17 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         }
     };
 
+    /**
+     * Sign up a new user with the provided information.
+     *
+     * @param {string} firstName - The first name of the user.
+     * @param {string} lastName - The last name of the user.
+     * @param {string} email - The email address of the user.
+     * @param {string} username - The username of the user.
+     * @param {string} password - The password of the user.
+     * @param {string} confirmPassword - The confirmation password of the user.
+     * @return {Promise<void>}
+     */
     const signup = async (
         firstName: string,
         lastName: string,
@@ -58,7 +90,7 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         username: string,
         password: string,
         confirmPassword: string
-    ) => {
+    ): Promise<void> => {
         setInfo(null);
 
         try {
@@ -94,7 +126,15 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
         }
     };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    /**
+     * Handles the form submission event.
+     *
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @return {Promise<void>} A promise that resolves once the form submission is complete.
+     */
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         event.preventDefault();
 
         setIsSubmitting(true);
@@ -147,6 +187,11 @@ export default function SignupPage({ setShowSignup }: SignupPageProps) {
 
     const handleCloseButtonClick = () => setShowSignup(false);
 
+    /**
+     * Renders the SignupPage component.
+     *
+     * @return {JSX.Element} The rendered SignupPage component.
+     */
     return (
         <motion.div
             key="signupPage"

@@ -9,11 +9,25 @@ type LoginFormProps = {
     isSubmitting: boolean;
 };
 
+/**
+ * Renders a login form with username and password inputs.
+ *
+ * @component
+ * @param {LoginFormProps} props - The props object.
+ * @param {Function} props.handleLoginSubmit - The function to handle the login form submission.
+ * @param {boolean} props.isSubmitting - A flag indicating if the form is in a submitting state.
+ * @return {JSX.Element} The rendered login form component.
+ */
 export default function LoginForm({
     handleLoginSubmit,
     isSubmitting,
-}: LoginFormProps) {
-    const UsernameInputContent = (
+}: LoginFormProps): JSX.Element {
+    /**
+     * Content for the username input field.
+     *
+     * @type {JSX.Element}
+     */
+    const UsernameInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -33,7 +47,12 @@ export default function LoginForm({
         </div>
     );
 
-    const PasswordInputContent = (
+    /**
+     * Content for the password input field.
+     *
+     * @type {JSX.Element}
+     */
+    const PasswordInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -53,9 +72,19 @@ export default function LoginForm({
         </div>
     );
 
-    const BusyButtonContent = <ButtonBusy />;
+    /**
+     * Content for the button in a busy state.
+     *
+     * @type {JSX.Element}
+     */
+    const BusyButtonContent: JSX.Element = <ButtonBusy />;
 
-    const NormalButtonContent = (
+    /**
+     * Content for the button in a normal state.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalButtonContent: JSX.Element = (
         <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-lg">
             <span className="transition-all duration-300 group-hover:pr-4">
                 Login
@@ -66,6 +95,11 @@ export default function LoginForm({
         </span>
     );
 
+    /**
+     * Renders the LoginForm component.
+     *
+     * @return {JSX.Element} The rendered LoginForm component.
+     */
     return (
         <div className="w-full">
             <div>

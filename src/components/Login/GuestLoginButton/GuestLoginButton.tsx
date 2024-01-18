@@ -7,13 +7,31 @@ type GuestLoginButtonProps = {
     isSubmitting: boolean;
 };
 
+/**
+ * Renders a button for guest login.
+ *
+ * @param {GuestLoginButtonProps} props - The props object.
+ * @param {() => void} props.handleGuestLogin - The function to handle guest login.
+ * @param {boolean} props.isSubmitting - A flag indicating if the button is in a submitting state.
+ * @return {JSX.Element} The rendered button component.
+ */
 export default function GuestLoginButton({
     handleGuestLogin,
     isSubmitting,
-}: GuestLoginButtonProps) {
-    const BusyButtonContent = <ButtonBusy />;
+}: GuestLoginButtonProps): JSX.Element {
+    /**
+     * Content for the button when it's in a busy (submitting) state.
+     *
+     * @type {JSX.Element}
+     */
+    const BusyButtonContent: JSX.Element = <ButtonBusy />;
 
-    const NormalButtonContent = (
+    /**
+     * Content for the button when it's in a normal state.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalButtonContent: JSX.Element = (
         <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-lg">
             <span className="transition-all duration-300 group-hover:pr-4">
                 Login as guest
@@ -23,6 +41,12 @@ export default function GuestLoginButton({
             </span>
         </span>
     );
+
+    /**
+     * Renders the GuestLoginButton component.
+     *
+     * @return {JSX.Element} The rendered GuestLoginButton component.
+     */
     return (
         <>
             <button

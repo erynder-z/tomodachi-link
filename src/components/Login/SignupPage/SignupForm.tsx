@@ -6,11 +6,25 @@ type SignupFormProps = {
     isSubmitting: boolean;
 };
 
+/**
+ * Renders a signup form with input fields for user registration.
+ *
+ * @component
+ * @param {SignupFormProps} props - The props object.
+ * @param {function} props.handleSubmit - The function to handle the form submission.
+ * @param {boolean} props.isSubmitting - A flag indicating if the form is in a submitting state.
+ * @return {JSX.Element} The rendered signup form component.
+ */
 export default function SignupForm({
     handleSubmit,
     isSubmitting,
-}: SignupFormProps) {
-    const FirstNameInputContent = (
+}: SignupFormProps): JSX.Element {
+    /**
+     * Input field for the user's first name.
+     *
+     * @type {JSX.Element}
+     */
+    const FirstNameInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -30,7 +44,12 @@ export default function SignupForm({
         </div>
     );
 
-    const LastNameInputContent = (
+    /**
+     * Input field for the user's last name.
+     *
+     * @type {JSX.Element}
+     */
+    const LastNameInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -50,7 +69,12 @@ export default function SignupForm({
         </div>
     );
 
-    const EmailInputContent = (
+    /**
+     * Input field for the user's email address.
+     *
+     * @type {JSX.Element}
+     */
+    const EmailInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -70,7 +94,12 @@ export default function SignupForm({
         </div>
     );
 
-    const UsernameInputContent = (
+    /**
+     * Input field for the user's username.
+     *
+     * @type {JSX.Element}
+     */
+    const UsernameInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -90,7 +119,12 @@ export default function SignupForm({
         </div>
     );
 
-    const PasswordInputContent = (
+    /**
+     * Input field for the user's password.
+     *
+     * @type {JSX.Element}
+     */
+    const PasswordInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -110,7 +144,12 @@ export default function SignupForm({
         </div>
     );
 
-    const ConfirmPasswordInputContent = (
+    /**
+     * Input field for confirming the user's password.
+     *
+     * @type {JSX.Element}
+     */
+    const ConfirmPasswordInputContent: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -130,9 +169,19 @@ export default function SignupForm({
         </div>
     );
 
-    const BusyButtonContent = <ButtonBusy />;
+    /**
+     * Content for the button when the form is in a submitting state.
+     *
+     * @type {JSX.Element}
+     */
+    const BusyButtonContent: JSX.Element = <ButtonBusy />;
 
-    const NormalButtonContent = (
+    /**
+     * Content for the button when the form is not in a submitting state.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalButtonContent: JSX.Element = (
         <span className="z-10 relative w-full flex justify-center items-center group p-2 md:p-4 text-sm md:text-xl">
             <span className="transition-all duration-300 group-hover:pr-4">
                 Register
@@ -143,6 +192,11 @@ export default function SignupForm({
         </span>
     );
 
+    /**
+     * Renders the SignupForm component.
+     *
+     * @return {JSX.Element} The rendered SignupForm component.
+     */
     return (
         <div className="w-full py-2">
             <div>

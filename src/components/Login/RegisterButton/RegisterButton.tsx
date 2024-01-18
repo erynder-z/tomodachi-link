@@ -5,9 +5,22 @@ type RegisterButtonProps = {
     handleRegisterClick: () => void;
 };
 
+/**
+ * Renders a button to trigger the registration process.
+ *
+ * @component
+ * @param {RegisterButtonProps} props - The props object.
+ * @param {Function} props.handleRegisterClick - The function to handle the click event for registration.
+ * @return {JSX.Element} The rendered RegisterButton component.
+ */
 export default function RegisterButton({
     handleRegisterClick,
-}: RegisterButtonProps) {
+}: RegisterButtonProps): JSX.Element {
+    /**
+     * Renders the RegisterButton component.
+     *
+     * @return {JSX.Element} The rendered RegisterButton component.
+     */
     return (
         <>
             <button
