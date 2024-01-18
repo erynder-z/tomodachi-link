@@ -34,17 +34,11 @@ type AppRoutesProps = {
 };
 
 /**
- * Renders the routes for the application based on the given props.
+ * Renders the routes for the application.
  *
- * @param {Object} props - The props for the AppRoutes component.
- * @param {Object} props.location - The location object.
- * @param {boolean} props.isPaginationTriggered - Indicates if pagination is triggered.
- * @param {string} props.accountType - The account type.
- * @param {Object} props.socket - The socket object.
- * @param {string} props.userDataKey - The user data key.
- * @param {function} props.setShouldOverlaysShow - The function to set whether overlays should show.
- * @param {function} props.setSearchMode - The function to set the search mode.
- * @return {JSX.Element} The rendered Routes component.
+ * @component
+ * @param {AppRoutesProps} props - The component props.
+ * @returns {JSX.Element} JSX Element representing the application routes.
  */
 export default function AppRoutes({
     location,

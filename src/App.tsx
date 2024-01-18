@@ -26,9 +26,10 @@ import { InfoType } from './types/infoTypes';
 const USERDATA_POLLING_INTERVAL = 300000;
 
 /**
- * Renders the main application component.
+ * Main component representing the application.
  *
- * @return {JSX.Element} The rendered application component.
+ * @component
+ * @returns {JSX.Element} JSX Element representing the application.
  */
 function App(): JSX.Element {
     const { isAuth, token, tokenExpiration, logout } = useAuth();
@@ -65,9 +66,9 @@ function App(): JSX.Element {
     const shouldLogout = tokenExpiration && tokenExpiration < Date.now();
 
     /**
-     * Handles the scroll event.
+     * Handles the scroll event and checks if pagination is triggered.
      *
-     * @param {React.UIEvent<HTMLDivElement>} e - The scroll event object.
+     * @param {React.UIEvent<HTMLDivElement>} e - The scroll event.
      */
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
@@ -78,29 +79,28 @@ function App(): JSX.Element {
     };
 
     /**
-     * Toggles the sidebar visibility.
+     * Toggles the sidebar display.
      *
-     * @return {void}
+     * @return {void} No return value.
      */
     const toggleSidebar = (): void =>
         setShowSidebar((prevShowSidebar) => !prevShowSidebar);
 
     /**
-     * Effect to reset the pagination trigger when it's no longer needed.
+     * Resets the pagination trigger state when it is updated.
      *
      * @effect
-     * @memberof App
+     * @return {void} No return value.
      */
     useEffect(() => {
         setIsPaginationTriggered(false);
     }, [isPaginationTriggered]);
 
     /**
-     * Effect to handle changes in the pathname and perform necessary actions.
+     * Handles various side effects based on changes in the location pathname.
      *
      * @effect
-     * @memberof App
-     * @param {string} location.pathname - The current pathname from the React Router location.
+     * @return {void} No return value.
      */
     useEffect(() => {
         setShowSidebar(false);
@@ -122,10 +122,10 @@ function App(): JSX.Element {
     }, [location.pathname]);
 
     /**
-     * Effect to perform actions when authentication status or user data changes.
+     * Handles side effects related to user authentication and data.
      *
      * @effect
-     * @memberof App
+     * @return {void} No return value.
      */
     useEffect(() => {
         if (isAuth && currentUserData) {
@@ -165,10 +165,10 @@ function App(): JSX.Element {
     }, [isAuth && currentUserData?._id]);
 
     /**
-     * Effect to periodically trigger the update of user data.
+     * Sets up a polling interval to update user data at regular intervals.
      *
      * @effect
-     * @memberof App
+     * @return {void} No return value.
      */
     useEffect(() => {
         const interval = setInterval(() => {
@@ -178,6 +178,11 @@ function App(): JSX.Element {
         return () => clearInterval(interval);
     }, []);
 
+    /**
+     * Content if the user is not authenticated.
+     *
+     * @type {JSX.Element}
+     */
     const LoginContent = (
         <>
             <LoginPage />
@@ -185,6 +190,11 @@ function App(): JSX.Element {
         </>
     );
 
+    /**
+     * Content if the user is authenticated.
+     *
+     * @type {JSX.Element}
+     */
     const AppContent = (
         <div
             key={userDataKey}
@@ -251,6 +261,11 @@ function App(): JSX.Element {
         </div>
     );
 
+    /**
+     * Renders the App component based on the users authentication state.
+     *
+     * @return {JSX.Element} The rendered App component.
+     */
     return isAuth ? AppContent : LoginContent;
 }
 
