@@ -20,7 +20,8 @@ import DiscordLoginButton from './DiscordLoginButton/DiscordLoginButton';
 /**
  * Renders the login page component.
  *
- * @returns {JSX.Element}
+ * @component
+ * @returns {JSX.Element} The rendered login page component.
  */
 export default function LoginPage(): JSX.Element {
     const { setToken } = useContext(AuthContext);
@@ -69,15 +70,16 @@ export default function LoginPage(): JSX.Element {
             setIsVerifying(false);
         }
     };
-
     /**
-     * Handles the submission of the login form.
+     * Handles the login submission.
      *
+     * @function
      * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @returns {Promise<void>}
      */
     const handleLoginSubmit = async (
         event: React.FormEvent<HTMLFormElement>
-    ) => {
+    ): Promise<void> => {
         event.preventDefault();
 
         setIsSubmitting(true);
@@ -100,15 +102,21 @@ export default function LoginPage(): JSX.Element {
         }
         setIsSubmitting(false);
     };
-
-    const handleRegisterClick = () => setShowSignup(true);
+    /**
+     * Handles the click on the register button.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleRegisterClick = (): void => setShowSignup(true);
 
     /**
-     * Handles the guest login functionality.
+     * Handles the guest login.
      *
-     * @return {Promise<void>} This function does not take any parameters and does not return anything.
+     * @function
+     * @returns {Promise<void>}
      */
-    const handleGuestLogin = async () => {
+    const handleGuestLogin = async (): Promise<void> => {
         setIsSubmitting(true);
 
         const serverURL = import.meta.env.VITE_SERVER_URL;
@@ -130,7 +138,7 @@ export default function LoginPage(): JSX.Element {
      * Effect to handle the removal of cookies and setting the token.
      *
      * @effect
-     * @memberof LoginPage
+     * @return {void} No return value.
      */
     useEffect(() => {
         const setTokenAndDeleteCookie = () => {
@@ -150,8 +158,8 @@ export default function LoginPage(): JSX.Element {
      * Effect to update the verifying status when authentication changes.
      *
      * @effect
-     * @memberof LoginPage
      * @param {boolean} isAuth - The authentication status.
+     * @return {void} No return value.
      */
     useEffect(() => {
         if (isAuth) setIsVerifying(false);
@@ -161,7 +169,8 @@ export default function LoginPage(): JSX.Element {
      * Effect to render ASCII art background on component mount.
      *
      * @effect
-     * @memberof LoginPage
+     * @param {React.MutableRefObject<boolean>} shouldRenderAscii - Ref indicating whether to render ASCII art.
+     * @return {void} No return value.
      */
     useEffect(() => {
         if (shouldRenderAscii.current)
@@ -172,9 +181,21 @@ export default function LoginPage(): JSX.Element {
         };
     }, []);
 
-    const SignupContent = <SignupPage setShowSignup={setShowSignup} />;
+    /**
+     * Content for the showSignup state.
+     *
+     * @type {JSX.Element}
+     */
+    const SignupContent: JSX.Element = (
+        <SignupPage setShowSignup={setShowSignup} />
+    );
 
-    const AsciiBackground = (
+    /**
+     * The AsciiBackground.
+     *
+     * @type {JSX.Element}
+     */
+    const AsciiBackground: JSX.Element = (
         <div className="absolute inset-0 z-0">
             <canvas
                 id="asciiArtCanvas"
@@ -183,7 +204,12 @@ export default function LoginPage(): JSX.Element {
         </div>
     );
 
-    const LoginContent = (
+    /**
+     * Content for the Login.
+     *
+     * @type {JSX.Element}
+     */
+    const LoginContent: JSX.Element = (
         <>
             <motion.div
                 key="greeting"
@@ -238,6 +264,11 @@ export default function LoginPage(): JSX.Element {
         </>
     );
 
+    /**
+     * Renders the LoginPage component.
+     *
+     * @return {JSX.Element} The rendered LoginPage component.
+     */
     return (
         <div className="h-screen bg-cBlack overflow-auto font-regularFont">
             {AsciiBackground}
