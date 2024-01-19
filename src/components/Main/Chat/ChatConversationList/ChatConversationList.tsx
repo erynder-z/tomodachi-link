@@ -9,15 +9,31 @@ type ChatConversationListProps = {
     currentUserId: string | undefined;
 };
 
+/**
+ * ChatConversationList component for displaying a list of chat conversations.
+ *
+ * @component
+ * @param {ChatConversationListProps} props - The props object.
+ * @param {ChatConversationType[]} props.conversations - List of chat conversations.
+ * @param {string[]} props.conversationsWithUnreadMessages - List of conversation IDs with unread messages.
+ * @param {(conv: ChatConversationType) => void} props.handleChatConversationClick - Callback function when a conversation is clicked.
+ * @param {string | undefined} props.currentUserId - ID of the current user.
+ * @returns {JSX.Element} The rendered ChatConversationList component.
+ */
 export default function ChatConversationList({
     conversations,
     conversationsWithUnreadMessages,
     handleChatConversationClick,
     currentUserId,
-}: ChatConversationListProps) {
+}: ChatConversationListProps): JSX.Element {
     const hasConversations = conversations?.length > 0;
 
-    const ConversationContent = (
+    /**
+     * Content for rendering individual chat conversations.
+     *
+     * @type {JSX.Element}
+     */
+    const ConversationContent: JSX.Element = (
         <div className="flex md:flex-col gap-2 p-2 md:p-0 w-full overflow-y-auto lg:overflow-hidden">
             {conversations?.map((conv, index) => {
                 const hasUnreadMessage =
@@ -45,11 +61,22 @@ export default function ChatConversationList({
         </div>
     );
 
-    const NoConversationContent = (
+    /**
+     * Content to display when no conversations are available.
+     *
+     * @type {JSX.Element}
+     */
+    const NoConversationContent: JSX.Element = (
         <span className="text-xs leading-tight p-2 flex text-center">
             Select a friend from the sidebar to initialize a conversation!
         </span>
     );
+
+    /**
+     * Renders the ChatConversationList component based on the presence of conversations.
+     *
+     * @return {JSX.Element} The rendered ChatConversationList component.
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

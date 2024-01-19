@@ -19,7 +19,15 @@ type ChatProps = {
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
-export default function Chat({ socket }: ChatProps) {
+/**
+ * Chat component for managing chat conversations.
+ *
+ * @component
+ * @param {ChatProps} props - The props object.
+ * @param {Socket | undefined} props.socket - The socket for communication.
+ * @returns {JSX.Element} The rendered Chat component.
+ */
+export default function Chat({ socket }: ChatProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -44,7 +52,14 @@ export default function Chat({ socket }: ChatProps) {
         (member) => member !== currentUserId
     );
 
-    const getConversations = async () => {
+    /**
+     * Fetches the list of conversations from the backend.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A promise that resolves once the conversations are fetched.
+     */
+    const getConversations = async (): Promise<void> => {
         const currentConversations = conversations;
         if (currentUserId && token) {
             const apiEndpointURL = '/api/v1/chat/';
@@ -81,9 +96,15 @@ export default function Chat({ socket }: ChatProps) {
         }
     };
 
+    /**
+     * Handles the click event on a chat conversation.
+     *
+     * @param {ChatConversationType} conversation - The selected conversation.
+     * @return {void} No return value.
+     */
     const handleChatConversationClick = (
         conversation: ChatConversationType
-    ) => {
+    ): void => {
         setActiveChat(conversation);
 
         const hasUnreadMessage = conversationsWithUnreadMessages.includes(
@@ -97,6 +118,12 @@ export default function Chat({ socket }: ChatProps) {
         }
     };
 
+    /**
+     * Effect to handle the initial fetching of conversations and setting the active chat.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (activeChat) {
             setActiveChat(activeChat);
@@ -104,6 +131,12 @@ export default function Chat({ socket }: ChatProps) {
         }
     }, [activeChat]);
 
+    /**
+     * Effect to initialize the component and fetch conversations on mount.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldInitialize.current) {
             getConversations();
@@ -114,14 +147,24 @@ export default function Chat({ socket }: ChatProps) {
         }
     }, [currentUserId]);
 
-    // set activeChat to null when component unmounts
+    /**
+     * Effect to set activeChat to null when the component unmounts.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         return () => {
             setActiveChat(null);
         };
     }, []);
 
-    const LoadingContent = (
+    /**
+     * Content for the loading state.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -141,7 +184,12 @@ export default function Chat({ socket }: ChatProps) {
         </motion.div>
     );
 
-    const ChatContent = (
+    /**
+     * Content for the Chat component when not in loading state.
+     *
+     * @type {JSX.Element}
+     */
+    const ChatContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -187,5 +235,10 @@ export default function Chat({ socket }: ChatProps) {
         </motion.div>
     );
 
+    /**
+     * Renders the Chat component depending on the loading state of the component.
+     *
+     * @return {JSX.Element} The rendered Chat component.
+     */
     return loading ? LoadingContent : ChatContent;
 }

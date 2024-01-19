@@ -11,11 +11,21 @@ type ChatOnlineUserlistItemProps = {
     setActiveChat: (chat: ChatConversationType) => void;
 };
 
+/**
+ * ChatOnlineUserlistItem component for displaying an item in the online user list.
+ *
+ * @component
+ * @param {ChatOnlineUserlistItemProps} props - The props object.
+ * @param {MinimalUserTypes} props.listItemData - Data for the user displayed in the online user list.
+ * @param {boolean} props.isOnline - Indicates whether the user is currently online.
+ * @param {(chat: ChatConversationType) => void} props.setActiveChat - Function to set the active chat when starting a conversation.
+ * @returns {JSX.Element} The rendered ChatOnlineUserlistItem component.
+ */
 export default function ChatOnlineUserlistItem({
     listItemData,
     isOnline,
     setActiveChat,
-}: ChatOnlineUserlistItemProps) {
+}: ChatOnlineUserlistItemProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const { _id, firstName, lastName, userpic } = listItemData || {};
@@ -23,6 +33,11 @@ export default function ChatOnlineUserlistItem({
     const indicatorColor = isOnline ? 'bg-green-500' : 'bg-neutral-500';
     const chatPartnerId = _id;
 
+    /**
+     * Renders the ChatOnlineUserlistItem based on the loading state.
+     *
+     * @return {JSX.Element} The rendered ChatOnlineUserlistItem component.
+     */
     return (
         <>
             <div

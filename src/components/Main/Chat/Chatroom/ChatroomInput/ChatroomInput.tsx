@@ -13,6 +13,19 @@ type ChatroomInputProps = {
     setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * Chatroom input component for typing and sending messages.
+ *
+ * @component
+ * @param {ChatroomInputProps} props - The props object.
+ * @param {string} props.inputMessage - The current input message.
+ * @param {React.Dispatch<React.SetStateAction<string>>} props.setInputMessage - The function to set the input message.
+ * @param {Function} props.sendMessage - The function to send a message.
+ * @param {Function} props.onTyping - The function to handle typing events.
+ * @param {boolean} props.isSubmitting - A flag indicating whether a message is being submitted.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShowEmojiPicker - The function to set the visibility of the emoji picker.
+ * @returns {JSX.Element} The rendered ChatroomInput component.
+ */
 export default function ChatroomInput({
     inputMessage,
     setInputMessage,
@@ -20,24 +33,42 @@ export default function ChatroomInput({
     onTyping,
     isSubmitting,
     setShowEmojiPicker,
-}: ChatroomInputProps) {
+}: ChatroomInputProps): JSX.Element {
     const [isInputFocused, setIsInputFocused] = useState(false);
 
     const isButtonDisabled = isSubmitting || inputMessage.trim() === '';
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    /**
+     * Handles the change in the input field.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
+     * @return {void} No return value.
+     */
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): void => {
         setInputMessage(e.target.value);
         onTyping();
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    /**
+     * Handles keydown events in the input field.
+     *
+     * @param {React.KeyboardEvent<HTMLInputElement>} e - The keydown event.
+     * @return {void} No return value.
+     */
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
         if (e.key === 'Enter' && e.shiftKey) {
             e.preventDefault();
             sendMessage();
         }
     };
 
-    const ChatInputContent = (
+    /**
+     * JSX content for the chat input field.
+     * @type {JSX.Element}
+     */
+    const ChatInputContent: JSX.Element = (
         <>
             <input
                 type="text"
@@ -64,7 +95,11 @@ export default function ChatroomInput({
         </>
     );
 
-    const EmojiButtonContent = (
+    /**
+     * JSX content for the emoji button.
+     * @type {JSX.Element}
+     */
+    const EmojiButtonContent: JSX.Element = (
         <>
             <button
                 data-tooltip-id="chat-emoji-tooltip"
@@ -87,7 +122,11 @@ export default function ChatroomInput({
         </>
     );
 
-    const InputBottomBorder = (
+    /**
+     * JSX content for the bottom border of the input field.
+     * @type {JSX.Element}
+     */
+    const InputBottomBorder: JSX.Element = (
         <div className="w-full h-1 overflow-hidden">
             <div
                 className={`h-full w-full  ${
@@ -99,7 +138,11 @@ export default function ChatroomInput({
         </div>
     );
 
-    const SendButtonContent = (
+    /**
+     * JSX content for the send button.
+     * @type {JSX.Element}
+     */
+    const SendButtonContent: JSX.Element = (
         <div className="relative">
             <button
                 data-tooltip-id="chat-send-message-tooltip"
@@ -125,6 +168,10 @@ export default function ChatroomInput({
         </div>
     );
 
+    /**
+     * The rendered ChatroomInput component.
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex sticky bottom-4 right-40 z-0 bg-card dark:bg-cardDark h-12">
             <div className="relative flex justify-end flex-col w-full ">

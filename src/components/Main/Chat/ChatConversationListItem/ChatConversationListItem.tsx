@@ -13,22 +13,43 @@ type ChatConversationListItemProps = {
     handleMuteConversation: () => void;
 };
 
+/**
+ * ChatConversationListItem component for displaying an individual chat conversation in the conversation list.
+ *
+ * @component
+ * @param {ChatConversationListItemProps} props - The props object.
+ * @param {MinimalUserTypes | null} props.listItemData - Data of the user associated with the conversation item.
+ * @param {boolean} props.isConversationMuted - Indicates whether the conversation is muted.
+ * @param {boolean} props.hasUnreadMessage - Indicates whether the conversation has unread messages.
+ * @param {() => void} props.handleMuteConversation - Callback function to handle muting/unmuting the conversation.
+ * @returns {JSX.Element} The rendered ChatConversationListItem component.
+ */
 export default function ChatConversationListItem({
     listItemData,
     isConversationMuted,
     hasUnreadMessage,
     handleMuteConversation,
-}: ChatConversationListItemProps) {
+}: ChatConversationListItemProps): JSX.Element {
     const { firstName, lastName, userpic } = listItemData || {};
 
-    const LoadingContent = (
+    /**
+     * Content to display while loading.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="w-full flex items-center gap-2">
             <div className="w-8 h-8 object-cover rounded-full bg-gray-600/50 animate-pulse"></div>
             <div className="hidden md:block bg-gray-600/50 animate-pulse h-4 w-1/2"></div>
         </div>
     );
 
-    const ChatConversationListItemContent = (
+    /**
+     * Content for the rendered ChatConversationListItem.
+     *
+     * @type {JSX.Element}
+     */
+    const ChatConversationListItemContent: JSX.Element = (
         <>
             <motion.div
                 whileTap={{ scale: 0.97 }}
@@ -93,5 +114,10 @@ export default function ChatConversationListItem({
         </>
     );
 
+    /**
+     * Renders the ChatConversationListItem based on the loading state.
+     *
+     * @return {JSX.Element} The rendered ChatConversationListItem component.
+     */
     return !listItemData ? LoadingContent : ChatConversationListItemContent;
 }

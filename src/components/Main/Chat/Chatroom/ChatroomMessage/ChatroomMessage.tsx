@@ -7,6 +7,14 @@ type ChatroomMessageProps = {
     message: DisplayChatMessageType;
 };
 
+/**
+ * Chatroom message component for displaying individual chat messages.
+ *
+ * @component
+ * @param {ChatroomMessageProps} props - The props object.
+ * @param {DisplayChatMessageType} props.message - The message object to be displayed.
+ * @returns {JSX.Element} The rendered ChatroomMessage component.
+ */
 export default function ChatroomMessage({ message }: ChatroomMessageProps) {
     const { currentUserData } = useCurrentUserData();
     const { senderId, text, createdAt } = message;
@@ -17,6 +25,10 @@ export default function ChatroomMessage({ message }: ChatroomMessageProps) {
         ? format(new Date(createdAt), 'HH:mm, dd.MMM.yyyy')
         : '';
 
+    /**
+     * JSX content for the ChatroomMessage component.
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

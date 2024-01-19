@@ -28,7 +28,21 @@ type ChatroomProps = {
     socket: Socket | undefined;
 };
 
-export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
+/**
+ * Chatroom component for displaying chat messages, input, and real-time communication.
+ *
+ * @component
+ * @param {ChatroomProps} props - The props object.
+ * @param {string | undefined} props.chatId - The ID of the chat.
+ * @param {string | undefined} props.partnerId - The ID of the chat partner.
+ * @param {Socket | undefined} props.socket - The socket for real-time communication.
+ * @returns {JSX.Element} The rendered Chatroom component.
+ */
+export default function Chatroom({
+    chatId,
+    partnerId,
+    socket,
+}: ChatroomProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -55,7 +69,14 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
     const dummy = useRef<HTMLSpanElement>(null);
     const userId = currentUserData?._id;
 
-    const handleFetchPartnerData = async () => {
+    /**
+     * Handle fetching partner data from the backend API
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A promise that resolves once the partner data is fetched.
+     */
+    const handleFetchPartnerData = async (): Promise<void> => {
         if (token && partnerId) {
             const API_ENDPOINT_URL = `/api/v1/users/${partnerId}`;
             const METHOD = 'GET';
@@ -73,9 +94,17 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
+    /**
+     * Fetches chat messages from the API.
+     *
+     * @async
+     * @function
+     * @param {string} messageScope - The scope of the messages to fetch. Defaults to 'latest'.
+     * @return {Promise<void>} - The promise that resolves once the messages are fetched.
+     */
     const handleFetchChatMessages = async (
         messageScope: 'all' | 'latest' = 'latest'
-    ) => {
+    ): Promise<void> => {
         if (token && chatId) {
             setIsSubmitting(true);
             const API_ENDPOINT_URL = `/api/v1/message/${chatId}?messageScope=${messageScope}`;
@@ -100,7 +129,14 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const handleMarkMessageUnreadInDB = async () => {
+    /**
+     * Handles marking a message as unread in the database.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>}- The promise that resolves once the messages has been marked as unread.
+     */
+    const handleMarkMessageUnreadInDB = async (): Promise<void> => {
         if (token && chatId) {
             const typeOfOperation = 'unread';
             await handleChatMessagesInDB(
@@ -112,7 +148,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const handleTyping = () => {
+    /**
+     * Handles the typing event.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleTyping = (): void => {
         const TIMEOUT = 1500;
         setIsTyping(true);
         if (typingTimeoutRef.current) {
@@ -123,7 +165,17 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }, TIMEOUT);
     };
 
-    const handlePostMessage = async (message: DatabaseChatMessageType) => {
+    /**
+     * Handle posting a message to the database chat.
+     *
+     * @async
+     * @function
+     * @param {DatabaseChatMessageType} message - the message to be posted
+     * @return {Promise<void>}
+     */
+    const handlePostMessage = async (
+        message: DatabaseChatMessageType
+    ): Promise<void> => {
         if (token && inputMessage) {
             const response = await postMessage(token, message, setInfo);
             if (response && response.ok) {
@@ -135,7 +187,14 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const sendMessage = async () => {
+    /**
+     * Sends a message if the user ID, partner ID, and input message are valid.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} - Resolves when the message is sent successfully.
+     */
+    const sendMessage = async (): Promise<void> => {
         if (userId && partnerId && inputMessage.trim() !== '') {
             setIsSubmitting(true);
 
@@ -167,18 +226,36 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     };
 
-    const emitMessage = (messageObject: SocketChatMessageType) => {
+    /**
+     * Emits a message using the provided message object.
+     *
+     * @function
+     * @param {SocketChatMessageType} messageObject - the message object to emit
+     * @return {void}
+     */
+    const emitMessage = (messageObject: SocketChatMessageType): void => {
         socket?.emit('sendMessage', messageObject);
     };
 
-    const sendTypingIndicator = () => {
+    /**
+     * Sends a typing indicator to the socket.
+     *
+     * @function
+     * @return {void}
+     */
+    const sendTypingIndicator = (): void => {
         socket?.emit('typing', {
             senderId: userId,
             receiverId: partnerId,
         });
     };
 
-    const listenForMessage = () => {
+    /**
+     * Listens for a message event from the socket and updates the received message state.
+     * @function
+     * @return {void}
+     */
+    const listenForMessage = (): void => {
         socket?.on('receiveMessage', (data: SocketChatMessageType) => {
             setReceivedMessage({
                 senderId: data.senderId,
@@ -188,7 +265,12 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         });
     };
 
-    const listenForTyping = () => {
+    /**
+     * Listens for typing events on the socket and handles them if they are from the partner.
+     * @function
+     * @return {void}
+     */
+    const listenForTyping = (): void => {
         socket?.on('typing', (data: SocketTypingIndicatorType) => {
             if (data.senderId === partnerId && data.receiverId === userId) {
                 handleTyping();
@@ -196,12 +278,25 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         });
     };
 
-    const scrollToBottom = () => {
+    /**
+     * Scroll to the bottom of the page.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const scrollToBottom = (): void => {
         dummy?.current?.scrollIntoView({
             behavior: 'smooth',
         });
     };
 
+    /**
+     * Effect to initialize the socket listeners for receiving messages and typing indicators.
+     * Cleans up the listeners on component unmount.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldInitializeSocket.current) {
             listenForMessage();
@@ -218,6 +313,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     }, [socket]);
 
+    /**
+     * Effect to fetch partner data and the latest chat messages on component mount.
+     * Also handles marking messages as read in the database.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldFetch.current) {
             handleFetchPartnerData();
@@ -232,6 +334,13 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         };
     }, []);
 
+    /**
+     * Effect to update messages when a new message is received.
+     * Also handles marking received messages as read in the database.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (receivedMessage && partnerId === receivedMessage.senderId) {
             setMessages((prevMessages) => [...prevMessages, receivedMessage]);
@@ -243,19 +352,36 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         }
     }, [receivedMessage]);
 
+    /**
+     * Effect to scroll to the bottom when new messages are added.
+     * Re-enables scrolling to the bottom after all messages have been fetched.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldScroll.current) scrollToBottom();
         // re-enable scrolling to bottom after all messages have been fetched
         if (messages.length <= totalMessages) shouldScroll.current = true;
     }, [messages]);
 
-    const LoadingContent = (
+    /**
+     * Content to display while loading.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col gap-4 h-full md:p-4 md:w-full lg:justify-around shadow-lg">
             <LoadingSpinner message="Getting conversation" />
         </div>
     );
 
-    const ChatroomContent = (
+    /**
+     * Content for the rendered Chatroom.
+     *
+     * @type {JSX.Element}
+     */
+    const ChatroomContent: JSX.Element = (
         <div className="flex flex-col min-h-[calc(100vh-_5rem)] lg:min-h-full bg-background2 dark:bg-background2Dark shadow-lg max-h-full rounded md:rounded-lg">
             <ChatroomHeader
                 currentUserData={currentUserData}
@@ -296,5 +422,10 @@ export default function Chatroom({ chatId, partnerId, socket }: ChatroomProps) {
         </div>
     );
 
+    /**
+     * Renders the ChatOnlineUsersList based on the loading state.
+     *
+     * @return {JSX.Element} The rendered ChatOnlineUsersList component.
+     */
     return loading ? LoadingContent : ChatroomContent;
 }

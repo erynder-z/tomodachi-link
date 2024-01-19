@@ -11,39 +11,75 @@ type ChatOnlineUsersListProps = {
     loading: boolean;
 };
 
+/**
+ * ChatOnlineUsersList component for displaying a list of online users.
+ *
+ * @component
+ * @param {ChatOnlineUsersListProps} props - The props object.
+ * @param {ChatMemberType[]} props.onlineUsers - Array of online users.
+ * @param {boolean} props.loading - Indicates whether the online user list is still loading.
+ * @returns {JSX.Element} The rendered ChatOnlineUsersList component.
+ */
 export default function ChatOnlineUsersList({
     onlineUsers,
     loading,
-}: ChatOnlineUsersListProps) {
+}: ChatOnlineUsersListProps): JSX.Element {
     const { friendData } = useFriendData();
     const { setActiveChat } = useNotificationBubblesContext();
 
-    const isOnline = (user: FriendDataType) => {
+    /**
+     * Checks if a user is online based on the provided user data.
+     *
+     * @param {FriendDataType} user - The user data to check for online status.
+     * @returns {boolean} Indicates whether the user is online.
+     */
+    const isOnline = (user: FriendDataType): boolean => {
         return onlineUsers?.some(
             (onlineUser) => onlineUser.userId === user._id
         );
     };
 
-    const friendsWithoutGuestUser = friendData?.filter(
-        (user) => user.accountType !== 'guest'
+    /**
+     * Filters out guest users from the list of friends.
+     *
+     * @type {FriendDataType[] | undefined}
+     */
+    const friendsWithoutGuestUser: FriendDataType[] | undefined =
+        friendData?.filter((user) => user.accountType !== 'guest');
+
+    /**
+     * Generates a list of ChatOnlineUserlistItem components based on the filtered friends.
+     *
+     * @type {JSX.Element[] | undefined}
+     */
+    const userList: JSX.Element[] | undefined = friendsWithoutGuestUser?.map(
+        (friend: FriendDataType) => (
+            <ChatOnlineUserlistItem
+                key={friend._id}
+                listItemData={friend}
+                isOnline={isOnline(friend)}
+                setActiveChat={setActiveChat}
+            />
+        )
     );
 
-    const userList = friendsWithoutGuestUser?.map((friend: FriendDataType) => (
-        <ChatOnlineUserlistItem
-            key={friend._id}
-            listItemData={friend}
-            isOnline={isOnline(friend)}
-            setActiveChat={setActiveChat}
-        />
-    ));
-
-    const LoadingContent = (
+    /**
+     * Content to display while loading.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex justify-center items-center w-full h-full py-4 ">
             <LoadingSpinner />
         </div>
     );
 
-    const OnlineUserListContent = (
+    /**
+     * Content for the rendered ChatOnlineUsersList.
+     *
+     * @type {JSX.Element}
+     */
+    const OnlineUserListContent: JSX.Element = (
         <motion.div
             key="userList"
             initial={{ y: 10, opacity: 0 }}
@@ -56,5 +92,10 @@ export default function ChatOnlineUsersList({
         </motion.div>
     );
 
+    /**
+     * Renders the ChatOnlineUsersList based on the loading state.
+     *
+     * @return {JSX.Element} The rendered ChatOnlineUsersList component.
+     */
     return loading ? LoadingContent : OnlineUserListContent;
 }

@@ -5,10 +5,23 @@ type GetOlderMessagesButtonProps = {
     isSubmitting: boolean;
 };
 
+/**
+ * GetOlderMessagesButton component for triggering the fetch of older chat messages.
+ *
+ * @component
+ * @param {GetOlderMessagesButtonProps} props - The props object.
+ * @param {Function} props.handleFetchChatMessages - The function to fetch older chat messages.
+ * @param {boolean} props.isSubmitting - Indicates if the button is in a submitting state.
+ * @returns {JSX.Element} The rendered GetOlderMessagesButton component.
+ */
 export default function GetOlderMessagesButton({
     handleFetchChatMessages,
     isSubmitting,
 }: GetOlderMessagesButtonProps) {
+    /**
+     * JSX content for the GetOlderMessagesButton component.
+     * @type {JSX.Element}
+     */
     return (
         <div className="text-regularText dark:text-regularTextDark flex justify-center items-center mb-4">
             <button
