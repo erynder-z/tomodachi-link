@@ -9,16 +9,35 @@ type SuggestionCardRandomProps = {
     userData: MinimalUserTypes;
 };
 
+/**
+ * SuggestionCardRandom component for displaying a random user suggestion card.
+ *
+ * @component
+ * @param {SuggestionCardRandomProps} props - The props object.
+ * @param {MinimalUserTypes} props.userData - The user data for the suggestion.
+ * @return {JSX.Element} The rendered SuggestionCardRandom component.
+ */
 export default function SuggestionCardRandom({
     userData,
-}: SuggestionCardRandomProps) {
+}: SuggestionCardRandomProps): JSX.Element {
     const { userpic, firstName, lastName, _id } = userData;
 
     const [showMenu, setShowMenu] = useState(false);
 
+    /**
+     * Function to toggle the menu visibility.
+     *
+     * @function
+     * @name toggleMenu
+     */
     const toggleMenu = () => setShowMenu(!showMenu);
 
-    const MenuOpenIcon = (
+    /**
+     * JSX element representing the icon for an open menu.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuOpenIcon: JSX.Element = (
         <motion.div
             initial={{
                 opacity: 0,
@@ -34,7 +53,12 @@ export default function SuggestionCardRandom({
         </motion.div>
     );
 
-    const MenuClosedIcon = (
+    /**
+     * JSX element representing the icon for a closed menu.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuClosedIcon: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -44,9 +68,19 @@ export default function SuggestionCardRandom({
         </motion.div>
     );
 
-    const MenuOpenContent = <SuggestionCardRandomMenu id={_id} />;
+    /**
+     * JSX element representing the content for an open menu.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuOpenContent: JSX.Element = <SuggestionCardRandomMenu id={_id} />;
 
-    const MenuClosedContent = (
+    /**
+     * JSX element representing the content for a closed menu.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuClosedContent: JSX.Element = (
         <SuggestionCardRandomInfo
             userpic={userpic}
             firstName={firstName}
@@ -54,6 +88,11 @@ export default function SuggestionCardRandom({
         />
     );
 
+    /**
+     * The rendered SuggestionCardRandom component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div
             className={`relative w-48 md:w-40 h-60 flex flex-col justify-between text-center p-4 gap-4 bg-card dark:bg-cardDark shadow-lg rounded md:rounded-lg overflow-hidden ${

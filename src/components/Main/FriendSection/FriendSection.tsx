@@ -16,7 +16,14 @@ import { FetchStatusType } from '../../../types/miscTypes';
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
-export default function FriendSection() {
+/**
+ * FriendSection component to display the user's friends and friend suggestions.
+ *
+ * @component
+ * @return {JSX.Element} The rendered FriendSection component.
+ */
+
+export default function FriendSection(): JSX.Element {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const { friendData } = useFriendData();
@@ -32,15 +39,14 @@ export default function FriendSection() {
     const FriendSectionContentRef = useRef(null);
     const isInView = useInView(FriendSectionContentRef, { once: true });
 
-    useEffect(() => {
-        if (shouldFetchFriendsOfFriends.current) handleFetchFriendsOfFriends();
-
-        return () => {
-            shouldFetchFriendsOfFriends.current = false;
-        };
-    }, [friendData]);
-
-    const handleFetchFriendsOfFriends = async () => {
+    /**
+     * Function to handle fetching friends of friends.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A Promise that resolves when fetching is complete.
+     */
+    const handleFetchFriendsOfFriends = async (): Promise<void> => {
         const currentFriendsOfFriends = friendsOfFriends;
         if (authUser && token) {
             const API_ENDPOINT_URL = '/api/v1/users/maybefriends';
@@ -79,7 +85,14 @@ export default function FriendSection() {
         }
     };
 
-    const handleFetchRandomUsers = async () => {
+    /**
+     * Function to handle fetching random users.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A Promise that resolves when fetching is complete.
+     */
+    const handleFetchRandomUsers = async (): Promise<void> => {
         const currentUserList = randomUsers;
         if (authUser && token) {
             const API_ENDPOINT_URL = `/api/v1/users/some`;
@@ -116,7 +129,13 @@ export default function FriendSection() {
         }
     };
 
-    const getSuggestionList = () => {
+    /**
+     * Function to generate the suggestion list.
+     *
+     * @function
+     * @return {JSX.Element[]} An array of suggestion list elements.
+     */
+    const getSuggestionList = (): JSX.Element[] => {
         const suggestionList =
             friendsOfFriends.length === 0 ? randomUsers : friendsOfFriends;
 
@@ -136,19 +155,47 @@ export default function FriendSection() {
         );
     };
 
-    const friendProfileCardList = friendData?.map(
-        (friendObject: MinimalUserTypes) => (
+    /**
+     * Effect to handle fetching friends of friends.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
+    useEffect(() => {
+        if (shouldFetchFriendsOfFriends.current) handleFetchFriendsOfFriends();
+
+        return () => {
+            shouldFetchFriendsOfFriends.current = false;
+        };
+    }, [friendData]);
+
+    /**
+     * List of friend cards.
+     *
+     * @type {JSX.Element[]}
+     */
+    const friendProfileCardList: JSX.Element[] =
+        friendData?.map((friendObject: MinimalUserTypes) => (
             <FriendCard
                 key={friendObject._id}
                 friendData={friendObject}
                 setActiveChat={setActiveChat}
             />
-        )
-    );
+        )) || [];
 
-    const SuggestionList = getSuggestionList();
+    /**
+     * Aggregated suggestion list.
+     *
+     * @type {JSX.Element[]}
+     */
+    const SuggestionList: JSX.Element[] = getSuggestionList();
 
-    const LoadingContent = (
+    /**
+     * Content to display when loading.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div
             className={`${
                 loading ? 'flex' : 'hidden'
@@ -166,7 +213,12 @@ export default function FriendSection() {
         </div>
     );
 
-    const FriendListContent = (
+    /**
+     * Content to display when friend list is should be shown.
+     *
+     * @type {JSX.Element}
+     */
+    const FriendListContent: JSX.Element = (
         <>
             <div className="flex flex-col items-center md:flex-row flex-wrap gap-4 w-full p-4">
                 {friendProfileCardList}
@@ -179,7 +231,12 @@ export default function FriendSection() {
         </>
     );
 
-    const SuggestionListContent = (
+    /**
+     * Content to display when suggestion list should me shown.
+     *
+     * @type {JSX.Element}
+     */
+    const SuggestionListContent: JSX.Element = (
         <>
             <h1 className="text-center text-xl font-bold">
                 Maybe you know these people?
@@ -190,13 +247,23 @@ export default function FriendSection() {
         </>
     );
 
-    const Header = (
+    /**
+     * Header component.
+     *
+     * @type {JSX.Element}
+     */
+    const Header: JSX.Element = (
         <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
             Friends
         </h1>
     );
 
-    const FriendSectionContent = (
+    /**
+     * Main content of the FriendSection component.
+     *
+     * @type {JSX.Element}
+     */
+    const FriendSectionContent: JSX.Element = (
         <motion.div
             ref={FriendSectionContentRef}
             initial={{ y: 10, opacity: 0 }}
@@ -215,6 +282,11 @@ export default function FriendSection() {
         </motion.div>
     );
 
+    /**
+     * Rendered FriendSection component.
+     *
+     * @type {JSX.Element[]}
+     */
     return (
         <>
             {LoadingContent}

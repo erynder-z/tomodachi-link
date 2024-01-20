@@ -9,18 +9,37 @@ type SuggestionCardFriendProps = {
     friendData: FriendsOfFriendsType;
 };
 
+/**
+ * SuggestionCardFriend component to display a suggestion card for a friend.
+ *
+ * @component
+ * @param {SuggestionCardFriendProps} props - The props object.
+ * @param {FriendsOfFriendsType} props.friendData - Data of the suggested friend.
+ * @return {JSX.Element} The rendered SuggestionCardFriend component.
+ */
 export default function SuggestionCardFriend({
     friendData,
-}: SuggestionCardFriendProps) {
+}: SuggestionCardFriendProps): JSX.Element {
     const { userpic, firstName, lastName, _id, commonFriends } = friendData;
 
     const [showMenu, setShowMenu] = useState(false);
 
-    const toggleMenu = () => {
+    /**
+     * Toggle function to switch the visibility of the friend menu.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const toggleMenu = (): void => {
         setShowMenu(!showMenu);
     };
 
-    const MenuOpenIcon = (
+    /**
+     * Icon to be displayed when the friend menu is open.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuOpenIcon: JSX.Element = (
         <motion.div
             initial={{
                 opacity: 0,
@@ -36,7 +55,12 @@ export default function SuggestionCardFriend({
         </motion.div>
     );
 
-    const MenuClosedIcon = (
+    /**
+     * Icon to be displayed when the friend menu is closed.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuClosedIcon: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -46,9 +70,19 @@ export default function SuggestionCardFriend({
         </motion.div>
     );
 
-    const MenuOpenContent = <SuggestionCardFriendMenu id={_id} />;
+    /**
+     * JSX element representing the content of the friend menu when it is open.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuOpenContent: JSX.Element = <SuggestionCardFriendMenu id={_id} />;
 
-    const MenuClosedContent = (
+    /**
+     * JSX element representing the content of the friend menu when it is closed.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuClosedContent: JSX.Element = (
         <SuggestionCardFriendInfo
             userpic={userpic}
             firstName={firstName}
@@ -57,6 +91,11 @@ export default function SuggestionCardFriend({
         />
     );
 
+    /**
+     * JSX element representing the SuggestionCardFriend component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div
             className={`relative w-48 md:w-40 h-60 flex flex-col justify-between text-center p-4 gap-4 bg-card dark:bg-cardDark shadow-lg rounded md:rounded-lg overflow-hidden ${

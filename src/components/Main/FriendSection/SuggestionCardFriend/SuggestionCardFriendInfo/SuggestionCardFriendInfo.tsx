@@ -11,22 +11,51 @@ type SuggestionCardFriendInfoProps = {
     commonFriends: CommonFriendType[];
 };
 
+/**
+ * SuggestionCardFriendInfo component for displaying detailed information about a suggested friend.
+ *
+ * @component
+ * @param {SuggestionCardFriendInfoProps} props - The props object.
+ * @param {ImageType} props.userpic - The user's profile picture.
+ * @param {string} props.firstName - The user's first name.
+ * @param {string} props.lastName - The user's last name.
+ * @param {CommonFriendType[]} props.commonFriends - An array of common friends with the suggested friend.
+ * @return {JSX.Element} The rendered SuggestionCardFriendInfo component.
+ */
 export default function SuggestionCardFriendInfo({
     userpic,
     firstName,
     lastName,
     commonFriends,
-}: SuggestionCardFriendInfoProps) {
+}: SuggestionCardFriendInfoProps): JSX.Element {
     const MAX_DISPLAY_ITEMS = 2;
-    const shuffledCommonFriends = useMemo(
+
+    /**
+     * Shuffled array of common friends for variety in display.
+     *
+     * @type {CommonFriendType[]}
+     */
+    const shuffledCommonFriends: CommonFriendType[] = useMemo(
         () => shuffleArray(commonFriends),
         [commonFriends]
     );
-    const displayedCommonFriends = useMemo(
+
+    /**
+     * Array of common friends to display, limited by MAX_DISPLAY_ITEMS.
+     *
+     * @type {CommonFriendType[]}
+     */
+    const displayedCommonFriends: CommonFriendType[] = useMemo(
         () => shuffledCommonFriends?.slice(0, MAX_DISPLAY_ITEMS),
         [shuffledCommonFriends]
     );
-    const additionalItemsCount = useMemo(
+
+    /**
+     * Number of additional common friends not displayed.
+     *
+     * @type {number}
+     */
+    const additionalItemsCount: number = useMemo(
         () =>
             commonFriends && commonFriends.length > MAX_DISPLAY_ITEMS
                 ? commonFriends.length - MAX_DISPLAY_ITEMS
@@ -34,7 +63,12 @@ export default function SuggestionCardFriendInfo({
         [commonFriends]
     );
 
-    const commonFriendsList = useMemo(
+    /**
+     * JSX elements representing the list of common friends.
+     *
+     * @type {JSX.Element[]}
+     */
+    const commonFriendsList: JSX.Element[] = useMemo(
         () =>
             displayedCommonFriends?.map(
                 (commonFriendObject: CommonFriendType) => (
@@ -50,12 +84,22 @@ export default function SuggestionCardFriendInfo({
         [displayedCommonFriends]
     );
 
-    const hasAdditionalItems = useMemo(
+    /**
+     * Whether there are additional common friends not displayed.
+     *
+     * @type {boolean}
+     */
+    const hasAdditionalItems: boolean = useMemo(
         () => additionalItemsCount > 0,
         [additionalItemsCount]
     );
 
-    const FriendData = (
+    /**
+     * JSX element representing the friend's profile data.
+     *
+     * @type {JSX.Element}
+     */
+    const FriendData: JSX.Element = (
         <>
             <img
                 className="w-20 h-20 object-cover mx-auto rounded-full border-4 border-regularText dark:border-regularTextDark"
@@ -68,7 +112,12 @@ export default function SuggestionCardFriendInfo({
         </>
     );
 
-    const CommonFriendsContent = (
+    /**
+     * JSX element representing the common friends section.
+     *
+     * @type {JSX.Element}
+     */
+    const CommonFriendsContent: JSX.Element = (
         <div className="flex flex-col">
             <h1 className="font-semibold text-xs leading-tight">
                 {`Common friend${commonFriends.length > 1 ? 's' : ''}`}
@@ -80,6 +129,11 @@ export default function SuggestionCardFriendInfo({
         </div>
     );
 
+    /**
+     * JSX element representing the SuggestionCardFriendInfo component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

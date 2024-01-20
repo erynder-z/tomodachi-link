@@ -7,11 +7,26 @@ type FriendInfoCardProps = {
     lastName: string;
 };
 
+/**
+ * FriendInfoCard component to display information about a friend.
+ *
+ * @component
+ * @param {FriendInfoCardProps} props - The props object.
+ * @param {ImageType} props.userpic - The user's profile picture.
+ * @param {string} props.firstName - The first name of the friend.
+ * @param {string} props.lastName - The last name of the friend.
+ * @return {JSX.Element} The rendered FriendInfoCard component.
+ */
 export default function FriendInfoCard({
     userpic,
     firstName,
     lastName,
 }: FriendInfoCardProps) {
+    /**
+     * JSX element representing the friend information card.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

@@ -8,16 +8,31 @@ type SuggestionCardRandomInfoProps = {
     lastName: string;
 };
 
+/**
+ * SuggestionCardRandomInfo component for displaying information about a random user in the suggestion card.
+ *
+ * @component
+ * @param {SuggestionCardRandomInfoProps} props - The props object.
+ * @param {ImageType} props.userpic - The user's profile picture.
+ * @param {string} props.firstName - The user's first name.
+ * @param {string} props.lastName - The user's last name.
+ * @return {JSX.Element} The rendered SuggestionCardRandomInfo component.
+ */
 export default function SuggestionCardRandomInfo({
     userpic,
     firstName,
     lastName,
-}: SuggestionCardRandomInfoProps) {
+}: SuggestionCardRandomInfoProps): JSX.Element {
     // Use the default userpic if no userpic is provided. (This should only apply to fake users created with faker.js)
     const userpicSrc = userpic?.data
         ? `data:image/png;base64,${userpic.data}`
         : defaultUserpic;
 
+    /**
+     * JSX element representing the SuggestionCardRandomInfo component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

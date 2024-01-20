@@ -15,12 +15,23 @@ type FriendCardMenuProps = {
     handleUnfriendButtonClick: () => void;
 };
 
+/**
+ * FriendCardMenu component to display a menu for interacting with a friend.
+ *
+ * @component
+ * @param {FriendCardMenuProps} props - The props object.
+ * @param {string} props.id - The ID of the friend.
+ * @param {string} props.firstName - The first name of the friend.
+ * @param {Function} props.setActiveChat - Function to set the active chat.
+ * @param {Function} props.handleUnfriendButtonClick - Function to handle the unfriend button click.
+ * @return {JSX.Element} The rendered FriendCardMenu component.
+ */
 export default function FriendCardMenu({
     id,
     firstName,
     setActiveChat,
     handleUnfriendButtonClick,
-}: FriendCardMenuProps) {
+}: FriendCardMenuProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const { currentUserData } = useCurrentUserData();
@@ -28,7 +39,14 @@ export default function FriendCardMenu({
 
     const currentUserId = currentUserData?._id;
 
-    const handleChatButtonClick = async () => {
+    /**
+     * Function to handle the chat button click and initialize or navigate to a conversation.
+     *
+     * @function
+     * @async
+     * @return {Promise<void>} A promise representing the completion of the function.
+     */
+    const handleChatButtonClick = async (): Promise<void> => {
         if (currentUserId && token) {
             const API_ENDPOINT_URL = '/api/v1/chat/';
             const METHOD = 'GET';
@@ -58,7 +76,12 @@ export default function FriendCardMenu({
         }
     };
 
-    const LinkToUser = (
+    /**
+     * JSX element for the "Link to User" button.
+     *
+     * @type {JSX.Element}
+     */
+    const LinkToUser: JSX.Element = (
         <motion.button whileTap={{ scale: 0.97 }} className="w-full">
             <Link
                 to={`/users/${id}`}
@@ -74,7 +97,12 @@ export default function FriendCardMenu({
         </motion.button>
     );
 
-    const ChatWithUser = (
+    /**
+     * JSX element for the "Chat with User" button.
+     *
+     * @type {JSX.Element}
+     */
+    const ChatWithUser: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
             className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
@@ -89,7 +117,12 @@ export default function FriendCardMenu({
         </motion.button>
     );
 
-    const Unfriend = (
+    /**
+     * JSX element for the "Unfriend" button.
+     *
+     * @type {JSX.Element}
+     */
+    const Unfriend: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
             className="flex justify-between items-center w-full text-left cursor-pointer group"
@@ -102,6 +135,11 @@ export default function FriendCardMenu({
         </motion.button>
     );
 
+    /**
+     * The rendered FriendCardMenu component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

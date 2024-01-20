@@ -6,9 +6,22 @@ type SuggestionCardRandomMenuProps = {
     id: string;
 };
 
+/**
+ * SuggestionCardRandomMenu component for displaying menu options related to a random user in the suggestion card.
+ *
+ * @component
+ * @param {SuggestionCardRandomMenuProps} props - The properties of the component.
+ * @param {string} props.id - The ID of the user.
+ * @return {JSX.Element} The rendered SuggestionCardRandomMenu component.
+ */
 export default function SuggestionCardRandomMenu({
     id,
 }: SuggestionCardRandomMenuProps) {
+    /**
+     * The rendered SuggestionCardRandomMenu component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

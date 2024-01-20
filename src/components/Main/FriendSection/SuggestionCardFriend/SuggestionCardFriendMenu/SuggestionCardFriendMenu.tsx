@@ -28,7 +28,15 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
 
     const otherUserId = id;
 
-    const fetchUserData = async () => {
+    /**
+     * Function to fetch user data including friend request status.
+     *
+     * @async
+     * @function
+     * @name fetchUserData
+     * @returns {Promise<void>} A Promise that resolves when user data is fetched.
+     */
+    const fetchUserData = async (): Promise<void> => {
         if (token) {
             const API_ENDPOINT_URL = `/api/v1/users/${id}`;
             const METHOD = 'GET';
@@ -55,6 +63,12 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         }
     };
 
+    /**
+     * Effect to fetch user data when the component mounts.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldFetchFriendData.current) fetchUserData();
 
@@ -63,19 +77,35 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         };
     }, []);
 
+    /**
+     * Effect to update the disableFriendRequestButton state based on request status changes.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         setDisableFriendRequestButton(
             isFriendRequestPending.outgoing || isFriendRequestPending.incoming
         );
     }, [isFriendRequestPending]);
 
-    const LoadingContent = (
+    /**
+     * JSX element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex justify-center items-center w-full h-full py-4 ">
             <LoadingSpinner message="Checking status" />
         </div>
     );
 
-    const LinkToUser = (
+    /**
+     * JSX element representing the link to the user's page.
+     *
+     * @type {JSX.Element}
+     */
+    const LinkToUser: JSX.Element = (
         <motion.button whileTap={{ scale: 0.97 }} className="w-full">
             <Link
                 to={`/users/${id}`}
@@ -91,7 +121,12 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         </motion.button>
     );
 
-    const PendingFriendRequestContent = (
+    /**
+     * JSX element representing the content for pending friend requests.
+     *
+     * @type {JSX.Element}
+     */
+    const PendingFriendRequestContent: JSX.Element = (
         <div className="flex justify-between items-center w-full text-left text-gray-400 group leading-tight">
             <span>Friend request pending</span>
 
@@ -99,7 +134,12 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         </div>
     );
 
-    const CanSendFriendRequestContent = (
+    /**
+     * JSX element representing the content for sending friend requests.
+     *
+     * @type {JSX.Element}
+     */
+    const CanSendFriendRequestContent: JSX.Element = (
         <motion.button
             onClick={() => {
                 if (token) {
@@ -125,6 +165,11 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         </motion.button>
     );
 
+    /**
+     * JSX element representing the SuggestionCardFriendMenu component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

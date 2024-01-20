@@ -18,10 +18,19 @@ type FriendCardProps = {
     setActiveChat: (chat: ChatConversationType) => void;
 };
 
+/**
+ * FriendCard component to display information and actions for a friend.
+ *
+ * @component
+ * @param {FriendCardProps} props - The props object.
+ * @param {MinimalUserTypes} props.friendData - Data of the friend.
+ * @param {Function} props.setActiveChat - Function to set the active chat.
+ * @return {JSX.Element} The rendered FriendCard component.
+ */
 export default function FriendCard({
     friendData,
     setActiveChat,
-}: FriendCardProps) {
+}: FriendCardProps): JSX.Element {
     const { userpic, firstName, lastName, _id } = friendData;
 
     const { token } = useAuth();
@@ -35,14 +44,31 @@ export default function FriendCard({
 
     const [showMenu, setShowMenu] = useState(false);
 
-    const toggleMenu = () => setShowMenu(!showMenu);
+    /**
+     * Function to toggle the display of the friend card menu.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const toggleMenu = (): void => setShowMenu(!showMenu);
 
-    const handleUnfriendButtonClick = () => {
+    /**
+     * Function to handle the unfriend button click and show the confirmation dialog.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleUnfriendButtonClick = (): void => {
         setShouldConfirmDialogShow(true);
         setShowMenu(false);
     };
 
-    const ConfirmDialog = (
+    /**
+     * Confirmation dialog component.
+     *
+     * @type {JSX.Element}
+     */
+    const ConfirmDialog: JSX.Element = (
         <ConfirmationOverlay
             shouldConfirmDialogShow={shouldConfirmDialogShow}
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
@@ -66,7 +92,12 @@ export default function FriendCard({
         />
     );
 
-    const MenuOpenIcon = (
+    /**
+     * Motion component for the open menu icon.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuOpenIcon: JSX.Element = (
         <motion.div
             initial={{
                 opacity: 0,
@@ -82,7 +113,12 @@ export default function FriendCard({
         </motion.div>
     );
 
-    const MenuClosedIcon = (
+    /**
+     * Motion component for the closed menu icon.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuClosedIcon: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -92,7 +128,12 @@ export default function FriendCard({
         </motion.div>
     );
 
-    const MenuOpenContent = (
+    /**
+     * Content to display when the menu is open.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuOpenContent: JSX.Element = (
         <FriendCardMenu
             id={_id}
             firstName={firstName}
@@ -101,7 +142,12 @@ export default function FriendCard({
         />
     );
 
-    const MenuClosedContent = (
+    /**
+     * Content to display when the menu is closed.
+     *
+     * @type {JSX.Element}
+     */
+    const MenuClosedContent: JSX.Element = (
         <FriendInfoCard
             userpic={userpic}
             firstName={firstName}
@@ -109,6 +155,11 @@ export default function FriendCard({
         />
     );
 
+    /**
+     * Rendered FriendCard component.
+     *
+     * @type {JSX.Element[]}
+     */
     return (
         <>
             {showConfirmDialog && ConfirmDialog}
