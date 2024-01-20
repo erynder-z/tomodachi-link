@@ -14,9 +14,17 @@ type ShowPeopleInThisFeedProps = {
     minimalPosts: MinimalPostType[];
 };
 
+/**
+ * ShowPeopleInThisFeed component to display users who have posts in the feed.
+ *
+ * @component
+ * @param {ShowPeopleInThisFeedProps} props - The props object.
+ * @param {MinimalPostType[]} props.minimalPosts - An array of minimal post data.
+ * @returns {JSX.Element} The rendered ShowPeopleInThisFeed component.
+ */
 export default function ShowPeopleInThisFeed({
     minimalPosts,
-}: ShowPeopleInThisFeedProps) {
+}: ShowPeopleInThisFeedProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { friendData, friendIDs } = useFriendData();
@@ -28,7 +36,13 @@ export default function ShowPeopleInThisFeed({
     const currentUserId = currentUserData?._id;
     const hasEmptyFeed = minimalPosts.length === 0;
 
-    const getIdsOfPeopleInFeed = () => {
+    /**
+     * Get the unique user IDs of people in the feed.
+     *
+     * @function
+     * @returns {string[]} An array of unique user IDs in the feed.
+     */
+    const getIdsOfPeopleInFeed = (): string[] => {
         if (!minimalPosts.length) {
             return [];
         }
@@ -43,7 +57,14 @@ export default function ShowPeopleInThisFeed({
         return [...new Set(filteredIds)];
     };
 
-    const handleGetUserDetails = (ids: string[]) => {
+    /**
+     * Get details of users in the feed based on their IDs.
+     *
+     * @function
+     * @param {string[]} ids - An array of user IDs.
+     * @return {void} No return value.
+     */
+    const handleGetUserDetails = (ids: string[]): void => {
         if (!currentUserId || !ids.length) {
             return;
         }
@@ -70,6 +91,13 @@ export default function ShowPeopleInThisFeed({
         }
     };
 
+    /**
+     * Format user data into MinimalUserTypes.
+     *
+     * @function
+     * @param {FriendDataType | CurrentUserDataType} user - User data.
+     * @return {MinimalUserTypes} Formatted minimal user data.
+     */
     const formatUserData = (
         user: FriendDataType | CurrentUserDataType
     ): MinimalUserTypes => {
@@ -81,6 +109,12 @@ export default function ShowPeopleInThisFeed({
         };
     };
 
+    /**
+     * Effect to handle user details fetching and loading states.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (isInitialLoad.current) {
             setLoading(true);
@@ -97,6 +131,12 @@ export default function ShowPeopleInThisFeed({
         }
     }, [friendIDs, minimalPosts, token]);
 
+    /**
+     * Effect to handle loading state when users are pushed to the array.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         // there are users in the feed and they are pushed to the array
         if (!hasEmptyFeed && feedUsers.length > 0) {
@@ -104,7 +144,12 @@ export default function ShowPeopleInThisFeed({
         }
     }, [feedUsers]);
 
-    const LoadingContent = (
+    /**
+     * Loading content displayed while fetching users in the feed.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -114,7 +159,12 @@ export default function ShowPeopleInThisFeed({
         </motion.div>
     );
 
-    const ShowPeopleInFeedContent = (
+    /**
+     * Content displayed when there are people in the feed.
+     *
+     * @type {JSX.Element}
+     */
+    const ShowPeopleInFeedContent: JSX.Element = (
         <div className="flex md:flex-col gap-4 w-full lg:max-h-[calc(100vh_-_2rem)] p-2 lg:p-0">
             {hasEmptyFeed ? (
                 <>
@@ -157,6 +207,11 @@ export default function ShowPeopleInThisFeed({
         </div>
     );
 
+    /**
+     * Rendered ShowPeopleInThisFeed component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="block sticky top-9 md:top-0 h-fit w-full min-w-0 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark z-10 ">
             {loading ? LoadingContent : ShowPeopleInFeedContent}

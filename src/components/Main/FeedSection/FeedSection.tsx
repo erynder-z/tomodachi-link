@@ -27,11 +27,26 @@ type FeedSectionProps = {
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
+/**
+ * FeedSection component to display the user's feed.
+ *
+ * @component
+ * @param {FeedSectionProps} props - The props object.
+ * @param {boolean} props.isPaginationTriggered - Indicates if pagination is triggered.
+ * @param {React.Dispatch<React.SetStateAction<{
+ *   searchOverlay: boolean;
+ *   editUserDataModal: boolean;
+ *   mobileOptionsModal: boolean;
+ *   guestAccountOverlay: boolean;
+ * }>>} props.setShouldOverlaysShow - Function to set overlay states.
+ * @param {React.Dispatch<React.SetStateAction<SearchModeType>>} props.setSearchMode - Function to set search mode.
+ * @returns {JSX.Element} The rendered FeedSection component.
+ */
 export default function FeedSection({
     isPaginationTriggered,
     setShouldOverlaysShow,
     setSearchMode,
-}: FeedSectionProps) {
+}: FeedSectionProps): JSX.Element {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [loading, setLoading] = useState<boolean>(true);
@@ -42,7 +57,14 @@ export default function FeedSection({
 
     const shouldInitialize = useRef(true);
 
-    const handleGetFeed = async () => {
+    /**
+     * Handles the retrieval of the user's feed.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A Promise that resolves when the feed is retrieved.
+     */
+    const handleGetFeed = async (): Promise<void> => {
         const currentFeed = minimalPosts;
         if (authUser && token) {
             const API_ENDPOINT_URL = `/api/v1/feed?skip=${skip}`;
@@ -80,7 +102,14 @@ export default function FeedSection({
         }
     };
 
-    const refreshFeed = async () => {
+    /**
+     * Refreshes the user's feed.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A Promise that resolves when the feed is refreshed.
+     */
+    const refreshFeed = async (): Promise<void> => {
         const currentFeed = minimalPosts;
         setIsFeedRefreshing(true);
         setMinimalPosts([]);
@@ -120,14 +149,36 @@ export default function FeedSection({
         }
     };
 
+    /**
+     * useEffect hook to set the skip value when pagination is triggered.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (minimalPosts) setSkip(minimalPosts.length);
     }, [isPaginationTriggered]);
 
+    /**
+     * useEffect hook to handle the initial fetch of the user's feed.
+     * Fetches the user's feed based on the skip value.
+     * Sets loading state, fetch status, and minimal posts.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (token && skip) handleGetFeed();
     }, [skip]);
 
+    /**
+     * useEffect hook to handle the initial fetch of the user's feed on component mount.
+     * Fetches the user's feed and sets loading state, fetch status, and minimal posts.
+     * Initializes the shouldInitialize ref to prevent repeated fetching on updates.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldInitialize.current) handleGetFeed();
 
@@ -136,7 +187,12 @@ export default function FeedSection({
         };
     }, []);
 
-    const LoadingContent = (
+    /**
+     * Content to display while loading.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -156,7 +212,12 @@ export default function FeedSection({
         </motion.div>
     );
 
-    const HomeContent = (
+    /**
+     * Content for the rendered feed section.
+     *
+     * @type {JSX.Element}
+     */
+    const HomeContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -182,5 +243,10 @@ export default function FeedSection({
         </motion.div>
     );
 
+    /**
+     * Renders the FeedSection based on the loading state.
+     *
+     * @return {JSX.Element} The rendered FeedSection component.
+     */
     return loading ? LoadingContent : HomeContent;
 }

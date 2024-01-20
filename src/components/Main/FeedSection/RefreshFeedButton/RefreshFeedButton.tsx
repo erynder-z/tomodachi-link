@@ -7,9 +7,22 @@ type RefreshFeedButtonProps = {
     refreshFeed: () => Promise<void>;
 };
 
+/**
+ * RefreshFeedButton component to provide a button for refreshing the feed.
+ *
+ * @component
+ * @param {RefreshFeedButtonProps} props - The props object.
+ * @param {() => Promise<void>} props.refreshFeed - Function to handle feed refresh.
+ * @returns {JSX.Element} The rendered RefreshFeedButton component.
+ */
 export default function RefreshFeedButton({
     refreshFeed,
-}: RefreshFeedButtonProps) {
+}: RefreshFeedButtonProps): JSX.Element {
+    /**
+     * The main RefreshFeedButton component.
+     *
+     * @returns {JSX.Element} The rendered RefreshFeedButton component.
+     */
     return (
         <>
             <motion.button

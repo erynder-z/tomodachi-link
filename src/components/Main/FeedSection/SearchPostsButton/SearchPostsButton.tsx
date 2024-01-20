@@ -15,10 +15,24 @@ type SearchPostsButtonProps = {
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
+/**
+ * SearchPostsButton component to provide a button for initiating post search.
+ *
+ * @component
+ * @param {SearchPostsButtonProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<{ searchOverlay: boolean; editUserDataModal: boolean; mobileOptionsModal: boolean; guestAccountOverlay: boolean; }>>} props.setShouldOverlaysShow - Function to control overlay visibility.
+ * @param {React.Dispatch<React.SetStateAction<SearchModeType>>} props.setSearchMode - Function to set the search mode.
+ * @returns {JSX.Element} The rendered SearchPostsButton component.
+ */
 export default function SearchPostsButton({
     setShouldOverlaysShow,
     setSearchMode,
-}: SearchPostsButtonProps) {
+}: SearchPostsButtonProps): JSX.Element {
+    /**
+     * The main SearchPostsButton component.
+     *
+     * @returns {JSX.Element} The rendered SearchPostsButton component.
+     */
     return (
         <>
             <motion.button

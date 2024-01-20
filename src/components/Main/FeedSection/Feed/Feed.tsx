@@ -13,13 +13,30 @@ type FreedProps = {
     fetchStatus: FetchStatusType;
 };
 
+/**
+ * Feed component to display the user's feed.
+ *
+ * @component
+ * @param {FreedProps} props - The props object.
+ * @param {MinimalPostType[]} props.minimalPosts - The array of minimal post data.
+ * @param {() => Promise<void>} props.refreshFeed - Function to refresh the user's feed.
+ * @param {boolean} props.isFeedRefreshing - Indicates if the feed is currently refreshing.
+ * @param {FetchStatusType} props.fetchStatus - The fetch status of the feed.
+ * @returns {JSX.Element} The rendered Feed component.
+ */
 export default function Feed({
     minimalPosts,
     refreshFeed,
     isFeedRefreshing,
     fetchStatus,
-}: FreedProps) {
-    const LoadingContent = (
+}: FreedProps): JSX.Element {
+    /**
+     * Loading content to be displayed while fetching the feed.
+     *
+     * @constant
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -35,7 +52,13 @@ export default function Feed({
         </motion.div>
     );
 
-    const FeedContent = (
+    /**
+     * Feed content to be displayed when the feed is loaded.
+     *
+     * @constant
+     * @type {JSX.Element}
+     */
+    const FeedContent: JSX.Element = (
         <div className="flex flex-col md:grid grid-cols-[2fr,5fr] gap-4 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
             <ShowPeopleInThisFeed minimalPosts={minimalPosts} />
             <div className="flex flex-col gap-4 pb-4 z-10">
@@ -45,13 +68,17 @@ export default function Feed({
         </div>
     );
 
+    /**
+     * The main Feed component.
+     *
+     * @returns {JSX.Element} The rendered Feed component.
+     */
     return (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className=" h-1/4 md:h-auto w-full gap-8 "
         >
-            {/*   <NewPostInput handleRefreshPosts={refreshFeed} /> */}
             {isFeedRefreshing ? LoadingContent : FeedContent}
         </motion.div>
     );
