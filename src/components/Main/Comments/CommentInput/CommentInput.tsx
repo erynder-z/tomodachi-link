@@ -15,11 +15,21 @@ type CommentInputProps = {
     handleRefreshPollData?: () => Promise<void>;
 };
 
+/**
+ * CommentInput component for creating comments on a post or poll.
+ *
+ * @component
+ * @param {CommentInputProps} props - The props object.
+ * @param {string} props.parentItemID - The ID of the parent post or item.
+ * @param {Function} [props.getPostDetails] - A function to get details of the post after commenting.
+ * @param {Function} [props.handleRefreshPollData] - A function to refresh poll data after commenting.
+ * @returns {JSX.Element} The rendered CommentInput component.
+ */
 export default function CommentInput({
     parentItemID,
     getPostDetails,
     handleRefreshPollData,
-}: CommentInputProps) {
+}: CommentInputProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [commentText, setCommentText] = useState<string>('');
@@ -27,10 +37,28 @@ export default function CommentInput({
     const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-        setCommentText(event.target.value);
+    /**
+     * Handles input change in the comment textarea.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLTextAreaElement>} event - The change event.
+     * @returns {void} No return value.
+     */
+    const handleInputChange = (
+        event: React.ChangeEvent<HTMLTextAreaElement>
+    ): void => setCommentText(event.target.value);
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    /**
+     * Handles form submission to create a new comment.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @returns {Promise<void>} A promise that resolves after handling the form submission.
+     */
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         event.preventDefault();
 
         if (token) {
@@ -85,7 +113,12 @@ export default function CommentInput({
         }
     };
 
-    const CommentTextArea = (
+    /**
+     * Content for the text area.
+     *
+     * @type {JSX.Element}
+     */
+    const CommentTextArea: JSX.Element = (
         <textarea
             className="w-full p-2 mb-2 bg-gray-200 dark:bg-gray-600 text-sm focus:outline-none focus:shadow-outline"
             placeholder="Write a comment..."
@@ -94,7 +127,12 @@ export default function CommentInput({
         />
     );
 
-    const EmojiInputButton = (
+    /**
+     * Content for the emoji button.
+     *
+     * @type {JSX.Element}
+     */
+    const EmojiInputButton: JSX.Element = (
         <motion.button
             onClick={(e) => {
                 e.preventDefault();
@@ -108,7 +146,12 @@ export default function CommentInput({
         </motion.button>
     );
 
-    const SubmitButton = (
+    /**
+     * Content for the submit button.
+     *
+     * @type {JSX.Element}
+     */
+    const SubmitButton: JSX.Element = (
         <motion.button
             disabled={isSubmitting || !commentText}
             whileTap={{ scale: 0.97 }}
@@ -123,6 +166,11 @@ export default function CommentInput({
         </motion.button>
     );
 
+    /**
+     * Renders the CommentInput component.
+     *
+     * @return {JSX.Element} The rendered CommentInput component.
+     */
     return (
         <>
             <form onSubmit={handleSubmit}>

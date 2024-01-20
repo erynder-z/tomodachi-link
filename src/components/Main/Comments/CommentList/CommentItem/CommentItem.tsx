@@ -5,7 +5,17 @@ type CommentItemProps = {
     commentDetails: CommentType;
 };
 
-export default function CommentItem({ commentDetails }: CommentItemProps) {
+/**
+ * CommentItem component to display an individual comment.
+ *
+ * @component
+ * @param {CommentItemProps} props - The props object.
+ * @param {CommentType} props.commentDetails - Details of the comment.
+ * @returns {JSX.Element} The rendered CommentItem component.
+ */
+export default function CommentItem({
+    commentDetails,
+}: CommentItemProps): JSX.Element {
     const { owner, createdAt, text } = commentDetails;
     const { firstName, lastName, userpic } = owner;
 
@@ -16,6 +26,10 @@ export default function CommentItem({ commentDetails }: CommentItemProps) {
         ? `${formatDistanceToNow(new Date(createdAt), { addSuffix: true })}`
         : '';
 
+    /**
+     * The rendered content of the CommentItem component.
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex gap-4">
             <img
