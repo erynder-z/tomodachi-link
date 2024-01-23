@@ -5,21 +5,41 @@ type PollRestrictionsProps = {
     setPollData: React.Dispatch<React.SetStateAction<CreatedPollDataType>>;
 };
 
+/**
+ * CommentsCheckbox component for toggling the option to allow comments on the poll.
+ *
+ * @component
+ * @param {PollRestrictionsProps} props - The props object.
+ * @param {CreatedPollDataType} props.pollData - The poll data.
+ * @param {React.Dispatch<React.SetStateAction<CreatedPollDataType>>} props.setPollData - The function to set the poll data.
+ * @returns {JSX.Element} The rendered CommentsCheckbox component.
+ */
 export default function CommentsCheckbox({
     pollData,
     setPollData,
-}: PollRestrictionsProps) {
+}: PollRestrictionsProps): JSX.Element {
     const { allowComments } = pollData;
 
+    /**
+     * Handles the change event of the checkbox to toggle the "allowComments" option in the poll data.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+     * @returns {void}
+     */
     const handleCheckboxChange = (
         event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    ): void => {
         setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             allowComments: event.target.checked,
         }));
     };
 
+    /**
+     * The rendered CommentsCheckbox component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div className="relative z-0">
             <label

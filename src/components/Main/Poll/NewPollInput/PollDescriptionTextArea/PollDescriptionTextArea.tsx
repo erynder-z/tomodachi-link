@@ -6,23 +6,46 @@ type PollDescriptionTextAreaProps = {
     setPollData: React.Dispatch<React.SetStateAction<CreatedPollDataType>>;
 };
 
+/**
+ * PollDescriptionTextArea component for entering a poll description.
+ *
+ * @component
+ * @param {PollDescriptionTextAreaProps} props - The props object.
+ * @param {CreatedPollDataType} props.pollData - The poll data.
+ * @param {React.Dispatch<React.SetStateAction<CreatedPollDataType>>} props.setPollData - The function to update poll data state.
+ * @returns {JSX.Element} The rendered PollDescriptionTextArea component.
+ */
 export default function PollDescriptionTextArea({
     pollData,
     setPollData,
-}: PollDescriptionTextAreaProps) {
+}: PollDescriptionTextAreaProps): JSX.Element {
     const { description } = pollData;
 
     const [textareaRows, setTextareaRows] = useState(1);
 
-    const autoResizeTextarea = (textarea: HTMLTextAreaElement) => {
+    /**
+     * Automatically resizes the textarea based on its content.
+     *
+     * @function
+     * @param {HTMLTextAreaElement} textarea - The textarea element.
+     * @returns {void} No return value.
+     */
+    const autoResizeTextarea = (textarea: HTMLTextAreaElement): void => {
         textarea.style.height = 'auto';
         textarea.style.height = `${textarea.scrollHeight}px`;
         setTextareaRows(textarea.rows);
     };
 
+    /**
+     * Handles the change event when the description textarea value is updated.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLTextAreaElement>} event - The change event.
+     * @returns {void} No return value.
+     */
     const handleDescriptionChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
+    ): void => {
         setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             description: event.target.value,
@@ -31,6 +54,11 @@ export default function PollDescriptionTextArea({
         autoResizeTextarea(event.target);
     };
 
+    /**
+     * The rendered PollDescriptionTextArea component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div className="relative z-0">
             <textarea

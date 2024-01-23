@@ -7,22 +7,43 @@ type PollCommentButtonProps = {
     numberOfComments: number | undefined;
 };
 
+/**
+ * React component for rendering a button to show the comment section of a poll.
+ *
+ * @component
+ * @param {PollCommentButton} props - The component props.
+ * @param {Function} props.handleShowCommentsClick - Callback function to handle the click event for showing comments.
+ * @param {number|undefined} props.numberOfComments - The number of comments, or undefined if not available.
+ * @returns {JSX.Element} - Rendered PollCommentButton component.
+ */
 export default function PollCommentButton({
     handleShowCommentsClick,
     numberOfComments,
-}: PollCommentButtonProps) {
+}: PollCommentButtonProps): JSX.Element {
     const [animateReaction, setAnimateReaction] = useState('');
 
+    /**
+     * Handles the click event for a reaction button.
+     *
+     * @param {string} reactionType - The type of reaction (e.g., 'comments').
+     * @param {Function} callback - The callback function to execute after setting the animation state.
+     * @returns {void}
+     */
     const handleReactionClick = (
         reactionType: string,
         callback: () => void
-    ) => {
+    ): void => {
         setAnimateReaction(reactionType);
         callback();
     };
 
     const handleAnimationEnd = () => setAnimateReaction('');
 
+    /**
+     * The rendered PollCommentButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <button

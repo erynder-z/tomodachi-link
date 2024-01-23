@@ -13,16 +13,37 @@ type PollAnswerSectionProps = {
     handleRefreshPollData: () => Promise<void>;
 };
 
+/**
+ * React component for rendering a poll answer section.
+ *
+ * @component
+ * @param {PollAnswerSectionProps} props - The props object.
+ * @param {RetrievedPollDataType} props.pollData - The poll data to display.
+ * @param {boolean} props.canAnswerPost - Indicates whether the user can answer the poll.
+ * @param {Function} props.handleRefreshPollData - Callback function to refresh poll data.
+ * @returns {JSX.Element} - Rendered PollAnswerSection component.
+ */
 export default function PollAnswerSection({
     pollData,
     canAnswerPost,
     handleRefreshPollData,
-}: PollAnswerSectionProps) {
+}: PollAnswerSectionProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const { options } = pollData;
 
-    const handleButtonClick = async (pollID: string, optionID: string) => {
+    /**
+     * Handles button click to submit an answer to the poll.
+     *
+     * @async
+     * @param {string} pollID - The ID of the poll.
+     * @param {string} optionID - The ID of the selected option.
+     * @returns {Promise<void>} - A promise that resolves after the answer submission.
+     */
+    const handleButtonClick = async (
+        pollID: string,
+        optionID: string
+    ): Promise<void> => {
         try {
             const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
@@ -46,11 +67,20 @@ export default function PollAnswerSection({
         }
     };
 
+    /**
+     * Button component for a poll option.
+     *
+     * @param {Object} option - The poll option.
+     * @param {string} option._id - The ID of the option.
+     * @param {string} option.nameOfOption - The name of the option.
+     * @param {number} option.selectionCount - The count of selections for the option.
+     * @returns {JSX.Element} - Rendered OptionButton component.
+     */
     const OptionButton = (option: {
         _id: string;
         nameOfOption: string;
         selectionCount: number;
-    }) => {
+    }): JSX.Element => {
         const { _id, nameOfOption } = option;
         const pollID = pollData._id;
         const optionID = _id;
@@ -86,6 +116,11 @@ export default function PollAnswerSection({
         );
     };
 
+    /**
+     * The rendered PollAnswerSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col gap-4 text-xs">
             {canAnswerPost ? (

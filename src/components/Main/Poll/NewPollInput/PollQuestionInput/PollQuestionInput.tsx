@@ -7,12 +7,26 @@ type PollQuestionInputProps = {
     ) => void;
 };
 
+/**
+ * PollQuestionInput component for entering the poll question.
+ *
+ * @component
+ * @param {PollQuestionInputProps} props - The props object.
+ * @param {CreatedPollDataType} props.pollData - The poll data.
+ * @param {(event: React.ChangeEvent<HTMLInputElement>) => void} props.handleQuestionInputChange - The function to handle changes in the poll question input.
+ * @returns {JSX.Element} The rendered PollQuestionInput component.
+ */
 export default function PollQuestionInput({
     pollData,
     handleQuestionInputChange,
-}: PollQuestionInputProps) {
+}: PollQuestionInputProps): JSX.Element {
     const { question } = pollData;
 
+    /**
+     * The rendered PollQuestionInput component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div className="relative z-0">
             <input

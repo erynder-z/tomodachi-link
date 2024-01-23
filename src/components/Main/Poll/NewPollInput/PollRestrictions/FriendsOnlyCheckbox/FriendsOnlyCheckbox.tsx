@@ -5,21 +5,41 @@ type PollRestrictionsProps = {
     setPollData: React.Dispatch<React.SetStateAction<CreatedPollDataType>>;
 };
 
+/**
+ * FriendsOnlyCheckbox component for toggling the option to make the poll visible to friends only.
+ *
+ * @component
+ * @param {PollRestrictionsProps} props - The props object.
+ * @param {CreatedPollDataType} props.pollData - The poll data.
+ * @param {React.Dispatch<React.SetStateAction<CreatedPollDataType>>} props.setPollData - The function to set the poll data.
+ * @returns {JSX.Element} The rendered FriendsOnlyCheckbox component.
+ */
 export default function FriendsOnlyCheckbox({
     pollData,
     setPollData,
-}: PollRestrictionsProps) {
+}: PollRestrictionsProps): JSX.Element {
     const { isFriendOnly } = pollData;
 
+    /**
+     * Handles the change event of the checkbox to toggle the "isFriendOnly" option in the poll data.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+     * @returns {void}
+     */
     const handleCheckboxChange = (
         event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    ): void => {
         setPollData((prevData: CreatedPollDataType) => ({
             ...prevData,
             isFriendOnly: event.target.checked,
         }));
     };
 
+    /**
+     * The rendered FriendsOnlyCheckbox component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div className="relative z-0">
             <label

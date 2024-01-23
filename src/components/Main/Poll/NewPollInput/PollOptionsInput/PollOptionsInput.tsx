@@ -6,12 +6,26 @@ type PollOptionsInputProps = {
     handlePollOptionInputChange: (index: number, value: string) => void;
 };
 
+/**
+ * PollOptionsInput component for entering poll options.
+ *
+ * @component
+ * @param {PollOptionsInputProps} props - The props object.
+ * @param {CreatedPollDataType} props.pollData - The poll data.
+ * @param {(index: number, value: string) => void} props.handlePollOptionInputChange - The function to handle poll option changes.
+ * @returns {JSX.Element} The rendered PollOptionsInput component.
+ */
 export default function PollOptionsInput({
     pollData,
     handlePollOptionInputChange,
-}: PollOptionsInputProps) {
+}: PollOptionsInputProps): JSX.Element {
     const { options } = pollData;
 
+    /**
+     * The rendered PollOptionsInput component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div className="flex flex-col gap-4">
             <AnimatePresence>

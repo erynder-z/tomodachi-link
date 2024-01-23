@@ -19,7 +19,18 @@ const FALLBACK_WIDTH = 640;
 
 const colorScale = d3.scaleOrdinal<string>().range(d3.schemeTableau10);
 
-export const BarChart = ({ dimensions, data }: BarChartProps) => {
+/**
+ * BarChart component for displaying a bar chart based on poll data.
+ *
+ * @component
+ * @param {BarChartProps} props - The props object.
+ * @param {object} props.dimensions - The dimensions of the chart.
+ * @param {number} props.dimensions.width - The width of the chart.
+ * @param {number} props.dimensions.height - The height of the chart.
+ * @param {PollDataItemType[]} props.data - The data for creating the chart.
+ * @return {JSX.Element} The rendered BarChart component.
+ */
+export const BarChart = ({ dimensions, data }: BarChartProps): JSX.Element => {
     // Create references for the SVG and the wrapper div.
     const svgRef = useRef<SVGGElement | null>(null);
 
@@ -39,8 +50,12 @@ export const BarChart = ({ dimensions, data }: BarChartProps) => {
         .sort((a, b) => b.selectionCount - a.selectionCount)
         .map((d) => d.nameOfOption);
 
-    // Y axis
-    const yScale = useMemo(() => {
+    /**
+     * Y-axis scale for the bar chart.
+     *
+     * @type {import('d3').ScaleBand<string>}
+     */
+    const yScale: import('d3').ScaleBand<string> = useMemo(() => {
         return d3
             .scaleBand()
             .domain(groups)
@@ -48,8 +63,12 @@ export const BarChart = ({ dimensions, data }: BarChartProps) => {
             .padding(BAR_PADDING);
     }, [data, FALLBACK_HEIGHT]);
 
-    // X axis
-    const xScale = useMemo(() => {
+    /**
+     * X-axis scale for the bar chart.
+     *
+     * @type {import('d3').ScaleLinear<number, number>}
+     */
+    const xScale: import('d3').ScaleLinear<number, number> = useMemo(() => {
         const [min, max] = d3.extent(data.map((d) => d.selectionCount));
         return d3
             .scaleLinear()
@@ -57,8 +76,12 @@ export const BarChart = ({ dimensions, data }: BarChartProps) => {
             .range([0, boundsWidth]);
     }, [data, FALLBACK_WIDTH]);
 
-    // Build the shapes (bars, labels, and grid lines).
-    const allShapes = data.map((d, i) => {
+    /**
+     * Build the shapes (bars, labels, and grid lines).
+     *
+     * @type {JSX.Element[]}
+     */
+    const allShapes: JSX.Element[] = data.map((d, i) => {
         const y = yScale(d.nameOfOption);
         if (y === undefined) {
             return null;
@@ -110,8 +133,12 @@ export const BarChart = ({ dimensions, data }: BarChartProps) => {
         );
     });
 
-    // Create grid lines for the x-axis.
-    const grid = xScale
+    /**
+     * Create grid lines for the x-axis.
+     *
+     * @type {JSX.Element[]}
+     */
+    const grid: JSX.Element[] = xScale
         .ticks(5)
         .filter((value) => Number.isInteger(value)) // Filter to include only whole numbers
         .map((value, i) => (
@@ -137,6 +164,11 @@ export const BarChart = ({ dimensions, data }: BarChartProps) => {
             </g>
         ));
 
+    /**
+     * The rendered BarChart component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div>
             <svg

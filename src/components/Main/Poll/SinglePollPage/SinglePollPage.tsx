@@ -9,7 +9,13 @@ import { backendFetch } from '../../../../utilities/backendFetch';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 
-export default function SinglePollPage() {
+/**
+ * React component for displaying details of a single poll on its dedicated page.
+ *
+ * @component
+ * @returns {JSX.Element} - Rendered SinglePollPage component.
+ */
+export default function SinglePollPage(): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
 
@@ -23,6 +29,11 @@ export default function SinglePollPage() {
 
     const shouldGetPollData = useRef(true);
 
+    /**
+     * Effect hook to fetch poll details when the component mounts.
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (id) {
             const getPollDetails = async (pollID: string) => {
@@ -50,13 +61,21 @@ export default function SinglePollPage() {
         }
     }, []);
 
-    const LoadingContent = (
+    /**
+     * Loading content displayed while poll data is being fetched.
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col gap-4 h-[400px] md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
             <LoadingSpinner message="Getting poll data" />
         </div>
     );
 
-    const SinglePollPageContent = (
+    /**
+     * Content displayed when poll data is loaded.
+     * @type {JSX.Element}
+     */
+    const SinglePollPageContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -86,5 +105,10 @@ export default function SinglePollPage() {
         </motion.div>
     );
 
+    /**
+     * Render either loading content or the main content based on loading state
+     *
+     * @type {JSX.Element}
+     */
     return loading ? LoadingContent : SinglePollPageContent;
 }

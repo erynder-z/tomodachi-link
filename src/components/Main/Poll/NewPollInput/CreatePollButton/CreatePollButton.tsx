@@ -9,10 +9,19 @@ type CreatePollButtonProps = {
     isSubmitting: boolean;
 };
 
+/**
+ * CreatePollButton component for submitting a new poll.
+ *
+ * @component
+ * @param {CreatePollButtonProps} props - The props object.
+ * @param {CreatedPollDataType} props.pollData - The poll data.
+ * @param {boolean} props.isSubmitting - Indicates whether the form is currently submitting.
+ * @returns {JSX.Element} The rendered CreatePollButton component.
+ */
 export default function CreatePollButton({
     pollData,
     isSubmitting,
-}: CreatePollButtonProps) {
+}: CreatePollButtonProps): JSX.Element {
     const { question, options } = pollData;
 
     const isButtonDisabled =
@@ -20,6 +29,11 @@ export default function CreatePollButton({
         isSubmitting ||
         options.some((option) => option.trim() === '');
 
+    /**
+     * The rendered CreatePollButton component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <>
             <motion.button

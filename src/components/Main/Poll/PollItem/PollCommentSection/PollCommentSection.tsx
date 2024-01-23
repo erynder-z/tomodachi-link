@@ -15,12 +15,23 @@ type PollCommentSectionProps = {
 
 const UNMOUNT_TIMEOUT = 150;
 
+/**
+ * React component for rendering the comment section of a poll, including comment button, list, and input.
+ *
+ * @component
+ * @param {PollCommentSectionProps} props - The component props.
+ * @param {boolean} props.areCommentsAllowed - Indicates whether comments are allowed for the poll.
+ * @param {CommentType[]|undefined} props.comments - The array of comments or undefined if not available.
+ * @param {string} props.parentItemID - The ID of the parent item (e.g., poll).
+ * @param {Function} props.handleRefreshPollData - Callback function to refresh poll data.
+ * @returns {JSX.Element} - Rendered PollCommentSection component.
+ */
 export default function PollCommentSection({
     areCommentsAllowed,
     comments,
     parentItemID,
     handleRefreshPollData,
-}: PollCommentSectionProps) {
+}: PollCommentSectionProps): JSX.Element {
     const [shouldCommentsShow, setShouldCommentsShow] =
         useState<boolean>(false);
     const isCommentSectionMounted = shouldCommentsShow;
@@ -30,18 +41,30 @@ export default function PollCommentSection({
     );
     const numberOfComments = comments?.length;
 
-    const handleShowCommentsClick = () => {
+    /**
+     * Handles the click event to show/hide the comment section.
+     * @returns {void}
+     */
+    const handleShowCommentsClick = (): void => {
         setShouldCommentsShow(!shouldCommentsShow);
     };
 
-    const NoCommentsAllowedContent = (
+    /**
+     * Content to display when comments are not allowed for the poll.
+     * @type {JSX.Element}
+     */
+    const NoCommentsAllowedContent: JSX.Element = (
         <div className="flex items-center gap-2">
             <MdOutlineCommentsDisabled size="1.5em" />
             <span className="text-xs">Comments disabled</span>
         </div>
     );
 
-    const CommentsAllowedContent = (
+    /**
+     * Content to display when comments are allowed for the poll.
+     * @type {JSX.Element}
+     */
+    const CommentsAllowedContent: JSX.Element = (
         <div className="flex flex-col w-full">
             <PollCommentButton
                 handleShowCommentsClick={handleShowCommentsClick}
@@ -70,6 +93,11 @@ export default function PollCommentSection({
         </div>
     );
 
+    /**
+     * Render based on whether comments are allowed or not
+     *
+     * @type {JSX.Element}
+     */
     return areCommentsAllowed
         ? CommentsAllowedContent
         : NoCommentsAllowedContent;

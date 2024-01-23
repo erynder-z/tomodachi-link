@@ -6,13 +6,31 @@ type TypeOfChartSwitcherProps = {
     typeOfChart: 'PIE' | 'BAR';
     setTypeOfChart: React.Dispatch<React.SetStateAction<'PIE' | 'BAR'>>;
 };
+
+/**
+ * React component for rendering a chart type switcher button, allowing toggling between pie and bar charts.
+ *
+ * @component
+ * @param {TypeOfChartSwitcherProps} props - The component props.
+ * @param {('PIE' | 'BAR')} props.typeOfChart - The currently selected type of chart ('PIE' or 'BAR').
+ * @param {React.Dispatch<React.SetStateAction<'PIE' | 'BAR'>>} props.setTypeOfChart - State setter function for updating the type of chart.
+ * @returns {JSX.Element} - Rendered TypeOfChartSwitcher component.
+ */
 export default function TypeOfChartSwitcher({
     typeOfChart,
     setTypeOfChart,
 }: TypeOfChartSwitcherProps) {
-    const toggleChart = () => {
+    /**
+     * Toggles between pie and bar chart types when the button is clicked.
+     * @returns {void}
+     */ const toggleChart = () => {
         typeOfChart === 'PIE' ? setTypeOfChart('BAR') : setTypeOfChart('PIE');
     };
+
+    /**
+     * Renders the chart type switcher button with motion effects and tooltips.
+     * @returns {JSX.Element} - Rendered chart type switcher button.
+     */
     return (
         <motion.button
             onClick={toggleChart}

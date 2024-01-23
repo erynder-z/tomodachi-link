@@ -2,11 +2,24 @@ type NumberDropdownProps = {
     handleOptionsNumberSelect: (selectedNumber: number) => void;
 };
 
+/**
+ * PollOptionsNumberDropdown component for selecting the number of poll options.
+ *
+ * @component
+ * @param {NumberDropdownProps} props - The props object.
+ * @param {(selectedNumber: number) => void} props.handleOptionsNumberSelect - The function to handle the selection of the number of options.
+ * @returns {JSX.Element} The rendered PollOptionsNumberDropdown component.
+ */
 export default function PollOptionsNumberDropdown({
     handleOptionsNumberSelect,
-}: NumberDropdownProps) {
+}: NumberDropdownProps): JSX.Element {
     const NUMBERS = [2, 3, 4, 5, 6];
 
+    /**
+     * The rendered PollOptionsNumberDropdown component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div className="relative z-0">
             <select

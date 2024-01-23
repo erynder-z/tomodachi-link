@@ -14,7 +14,17 @@ type GalleryProps = {
     isPaginationTriggered: boolean;
 };
 
-export default function Gallery({ isPaginationTriggered }: GalleryProps) {
+/**
+ * Gallery component for displaying a user's pictures in a gallery format.
+ *
+ * @component
+ * @param {GalleryProps} props - The props object.
+ * @param {boolean} props.isPaginationTriggered - Indicates whether pagination is triggered.
+ * @return {JSX.Element} The rendered Gallery component.
+ */
+export default function Gallery({
+    isPaginationTriggered,
+}: GalleryProps): JSX.Element {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
@@ -28,7 +38,14 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
 
     const shouldInitialize = useRef(true);
 
-    const handleFetchUserPics = async () => {
+    /**
+     * Fetches user pictures from the backend.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A promise that resolves once pictures are fetched.
+     */
+    const handleFetchUserPics = async (): Promise<void> => {
         if (!token || !id) return;
 
         const API_ENDPOINT_URL_LIST = `/api/v1/users/${id}/picture?skip=${skip}`;
@@ -67,14 +84,32 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
 
     const handleImageClick = (image: ImageType) => setSelectedImage(image);
 
+    /**
+     * Effect hook to update the skip value based on pagination triggers.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (pictures) setSkip(pictures.length);
     }, [isPaginationTriggered, numberOfPictures]);
 
+    /**
+     * Effect hook to fetch user pictures when skip value changes.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (skip) handleFetchUserPics();
     }, [skip]);
 
+    /**
+     * Effect hook to initialize the component and fetch pictures on mount.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldInitialize.current) {
             handleFetchUserPics();
@@ -84,7 +119,12 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
         };
     }, []);
 
-    const pictureList = pictures?.map((picture) => (
+    /**
+     * Maps over the pictures to create an array of pictures items components.
+     *
+     * @type {JSX.Element[]}
+     */
+    const pictureList: JSX.Element[] = pictures?.map((picture) => (
         <motion.div
             key={picture.id}
             whileTap={{ scale: 0.97 }}
@@ -107,14 +147,24 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
         </motion.div>
     ));
 
-    const LoadingContent = (
+    /**
+     * Content for the loading state.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col justify-center items-center h-screen w-full py-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark ">
             <span>Getting pictures</span>
             <LoadingSpinner />
         </div>
     );
 
-    const GalleryContent = (
+    /**
+     * Content for the Gallery component when not in loading state.
+     *
+     * @type {JSX.Element}
+     */
+    const GalleryContent: JSX.Element = (
         <div className="flex flex-col min-h-[calc(100vh_-_5rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg">
             <h1 className="font-bold">{numberOfPictures} Pictures</h1>
             <div className="flex flex-col md:grid grid-cols-3 gap-4">
@@ -123,6 +173,11 @@ export default function Gallery({ isPaginationTriggered }: GalleryProps) {
         </div>
     );
 
+    /**
+     * The rendered Gallery component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col justify-center items-center w-full">
             {loading ? LoadingContent : GalleryContent}

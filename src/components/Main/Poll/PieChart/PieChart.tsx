@@ -20,6 +20,17 @@ const FALLBACK_WIDTH = 640;
 
 const colorScale = d3.scaleOrdinal<string>().range(d3.schemeTableau10);
 
+/**
+ * PieChart component for rendering a pie chart based on provided data.
+ *
+ * @component
+ * @param {PieChartProps} props - The props object.
+ * @param {Object} props.dimensions - The dimensions of the chart.
+ * @param {number} props.dimensions.width - The width of the chart.
+ * @param {number} props.dimensions.height - The height of the chart.
+ * @param {PollDataItemType[]} props.data - The data for the pie chart.
+ * @returns {JSX.Element} The rendered PieChart component.
+ */
 export const PieChart = ({ dimensions, data }: PieChartProps) => {
     const svgRef = useRef<SVGGElement | null>(null);
 
@@ -30,6 +41,10 @@ export const PieChart = ({ dimensions, data }: PieChartProps) => {
         Math.min(chartWidth - 2 * MARGIN_X, chartHeight - 2 * MARGIN_Y) / 2;
     const innerRadius = 0;
 
+    /**
+     * Memoized pie data using the d3 pie generator.
+     * @type {Object[]}
+     */
     const pieData = useMemo(() => {
         const pieGenerator = d3
             .pie<PollDataItemType>()
@@ -39,6 +54,10 @@ export const PieChart = ({ dimensions, data }: PieChartProps) => {
 
     const arcGenerator = d3.arc();
 
+    /**
+     * Rendered pie slices based on the provided data.
+     * @type {JSX.Element[]}
+     */
     const pieSlices = pieData.map((slice, index) => {
         const sliceInfo = {
             innerRadius,
@@ -114,6 +133,12 @@ export const PieChart = ({ dimensions, data }: PieChartProps) => {
             return null;
         }
     });
+
+    /**
+     * The rendered PieChart component.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <div>
             <svg width={chartWidth} height={chartHeight}>

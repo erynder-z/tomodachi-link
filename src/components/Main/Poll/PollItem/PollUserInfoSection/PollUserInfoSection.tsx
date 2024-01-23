@@ -8,11 +8,21 @@ type PollUserInfoSectionProps = {
     displayName: string;
 };
 
+/**
+ * React component for rendering the user information section of a poll, including user avatar, display name, and a link to the user's profile page.
+ *
+ * @component
+ * @param {PollUserInfoSectionProps} props - The component props.
+ * @param {string} props.pollOwnerID - The ID of the poll owner.
+ * @param {ImageType|string|null} props.userPic - The user's profile picture or a placeholder string or null.
+ * @param {string} props.displayName - The display name of the poll owner.
+ * @returns {JSX.Element} - Rendered PollUserInfoSection component.
+ */
 export default function PollUserInfoSection({
     pollOwnerID,
     userPic,
     displayName,
-}: PollUserInfoSectionProps) {
+}: PollUserInfoSectionProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
 
     const linkTarget =
@@ -20,6 +30,10 @@ export default function PollUserInfoSection({
             ? `/mypage`
             : `/users/${pollOwnerID}`;
 
+    /**
+     * Renders the user information section of the poll.
+     * @returns {JSX.Element} - Rendered user information section.
+     */
     return (
         <Link
             to={linkTarget}

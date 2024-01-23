@@ -28,7 +28,16 @@ type PollItemProps = {
     pollData: RetrievedPollDataType;
 };
 
-export default function PollItem({ pollData }: PollItemProps) {
+/**
+ * PollItem component for displaying a poll's details, including user information,
+ * question, answer options, charts, and comments.
+ *
+ * @component
+ * @param {PollItemProps} props - The props object.
+ * @param {RetrievedPollDataType} props.pollData - The poll data.
+ * @returns {JSX.Element} The rendered PollItem component.
+ */
+export default function PollItem({ pollData }: PollItemProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [canAnswerPost, setCanAnswerPost] = useState<boolean>(false);
@@ -56,10 +65,16 @@ export default function PollItem({ pollData }: PollItemProps) {
     const wrapperDivRef = useRef<HTMLDivElement | null>(null);
     // Get the dimensions of the wrapper div.
     const dimensions = useDimensions(wrapperDivRef);
-
     const shouldInitialize = useRef(true);
 
-    const checkAnswerStatus = async () => {
+    /**
+     * Checks the answer status for the current user.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A promise that resolves once the answer status is checked.
+     */
+    const checkAnswerStatus = async (): Promise<void> => {
         try {
             const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(
@@ -79,7 +94,14 @@ export default function PollItem({ pollData }: PollItemProps) {
         }
     };
 
-    const handleRefreshPollData = async () => {
+    /**
+     * Handles the refresh of poll data, including fetching updated details.
+     *
+     * @async
+     * @function
+     * @return {Promise<void>} A promise that resolves once poll data is refreshed.
+     */
+    const handleRefreshPollData = async (): Promise<void> => {
         setLoading(true);
         checkAnswerStatus();
         try {
@@ -109,6 +131,12 @@ export default function PollItem({ pollData }: PollItemProps) {
         }
     };
 
+    /**
+     * Effect hook to check if the user can answer the poll on mount.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldInitialize.current) checkAnswerStatus();
 
@@ -117,6 +145,11 @@ export default function PollItem({ pollData }: PollItemProps) {
         };
     }, []);
 
+    /**
+     * Represents the data for the PieChart component.
+     *
+     * @property {Array<{ nameOfOption: string, selectionCount: number }>} data - The array of data for the PieChart.
+     */
     const pieChartData = {
         data: pollOptionsData.map(({ nameOfOption, selectionCount }) => ({
             nameOfOption,
@@ -124,6 +157,12 @@ export default function PollItem({ pollData }: PollItemProps) {
         })),
     };
 
+    /**
+     * Represents the data for the BarChart component.
+     *
+
+     * @property {Array<{ nameOfOption: string, selectionCount: number }>} data - The array of data for the BarChart.
+     */
     const barChartData = {
         data: pollOptionsData.map(({ nameOfOption, selectionCount }) => ({
             nameOfOption,
@@ -131,18 +170,33 @@ export default function PollItem({ pollData }: PollItemProps) {
         })),
     };
 
-    const totalVotes = pollOptionsData.reduce(
+    /**
+     * Calculates the total votes from the poll options data.
+     *
+     * @type {number}
+     */
+    const totalVotes: number = pollOptionsData.reduce(
         (total, option) => total + option.selectionCount,
         0
     );
 
-    const LoadingContent = (
+    /**
+     * Content for the loading state.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col gap-4 h-[400px] md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
             <LoadingSpinner message="Updating poll data" />
         </div>
     );
 
-    const ChartContent = loading ? (
+    /**
+     * Represents the content for the chart display in the PollItem component.
+     *
+     * @type {JSX.Element}
+     */
+    const ChartContent: JSX.Element = loading ? (
         LoadingContent
     ) : (
         <AnimatePresence mode="wait">
@@ -169,12 +223,22 @@ export default function PollItem({ pollData }: PollItemProps) {
         </AnimatePresence>
     );
 
-    const HasNoPollContent = loading ? (
+    /**
+     * Represents the content when the poll has no data.
+     *
+     * @type {JSX.Element}
+     */
+    const HasNoPollContent: JSX.Element = loading ? (
         LoadingContent
     ) : (
         <p>No poll data available ☹️</p>
     );
 
+    /**
+     * The rendered PollItem component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}
