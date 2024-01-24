@@ -1,7 +1,18 @@
 import NewPollInput from '../../Poll/NewPollInput/NewPollInput';
 import { motion } from 'framer-motion';
 
-export default function NewPollSection() {
+/**
+ * Functional component for rendering the section to create a new poll.
+ *
+ * @component
+ * @return {JSX.Element} The rendered NewPollSection component.
+ */
+export default function NewPollSection(): JSX.Element {
+    /**
+     * The rendered NewPollSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ y: 10, opacity: 0 }}

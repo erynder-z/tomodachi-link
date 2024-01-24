@@ -2,7 +2,18 @@ import { motion } from 'framer-motion';
 import { MdAddChart, MdInsights } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-export default function PollSectionSelect() {
+/**
+ * Component representing the selection of poll-related actions.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered PollSectionSelect component.
+ */
+export default function PollSectionSelect(): JSX.Element {
+    /**
+     * The rendered PollSectionSelect component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ y: 10, opacity: 0 }}

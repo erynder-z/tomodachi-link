@@ -27,6 +27,13 @@ type PollListProps = {
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
+/**
+ * React component representing a list of polls.
+ *
+ * @component
+ * @param {PollListProps} props - The props object.
+ * @returns {JSX.Element} The rendered React element.
+ */
 export default function PollList({
     isPaginationTriggered,
     setShouldOverlaysShow,
@@ -41,6 +48,13 @@ export default function PollList({
 
     const shouldInitialize = useRef(true);
 
+    /**
+     * Handles fetching polls from the backend and updating state accordingly.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A Promise that resolves when the poll fetching is complete.
+     */
     const handleGetPolls = async () => {
         const currentPolls = polls;
         if (authUser && token) {
@@ -78,6 +92,13 @@ export default function PollList({
         }
     };
 
+    /**
+     * Refreshes the list of polls by fetching from the backend and updating state accordingly.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A Promise that resolves when the poll list is refreshed.
+     */
     const refreshPoll = async () => {
         const currentPolls = polls;
         setLoading(true);
@@ -117,14 +138,32 @@ export default function PollList({
         }
     };
 
+    /**
+     * Effect to update the skip state when pagination is triggered.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (polls) setSkip(polls.length);
     }, [isPaginationTriggered]);
 
+    /**
+     * Effect to fetch polls when skip state is updated.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (token && skip) handleGetPolls();
     }, [skip]);
 
+    /**
+     * Effect to initialize the component and fetch polls on mount.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldInitialize.current) handleGetPolls();
 
@@ -133,17 +172,32 @@ export default function PollList({
         };
     }, []);
 
+    /**
+     * JSX elements representing individual poll items based on the fetched data.
+     *
+     * @type {JSX.Element[]}
+     */
     const HasPollContent = polls.map((poll) => (
         <PollItem key={poll._id} pollData={poll} />
     ));
 
+    /**
+     * JSX element representing a message for an empty poll list.
+     *
+     * @type {JSX.Element}
+     */
     const EmptyListContent = (
         <span className="text-sm font-medium text-center">
             No polls yet! Why not create one?
         </span>
     );
 
-    const LoadingContent = (
+    /**
+     * Content for the loading state.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -163,6 +217,11 @@ export default function PollList({
         </motion.div>
     );
 
+    /**
+     * Content for the PollList component when not in loading state.
+     *
+     * @type {JSX.Element}
+     */
     const PollListContent = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
@@ -185,5 +244,10 @@ export default function PollList({
         </motion.div>
     );
 
+    /**
+     * Renders PollList Chat component depending on the loading state of the component.
+     *
+     * @return {JSX.Element} The rendered PollList component.
+     */
     return loading ? LoadingContent : PollListContent;
 }

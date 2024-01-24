@@ -15,10 +15,24 @@ type SearchPollsButtonProps = {
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
+/**
+ * Component for a button to initiate searching polls.
+ *
+ * @component
+ * @param {SearchPollsButtonProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<{ searchOverlay: boolean; editUserDataModal: boolean; mobileOptionsModal: boolean; guestAccountOverlay: boolean; }>>} props.setShouldOverlaysShow - Function to set overlay visibility.
+ * @param {React.Dispatch<React.SetStateAction<SearchModeType>>} props.setSearchMode - Function to set the search mode.
+ * @returns {JSX.Element} The rendered SearchPollsButton component.
+ */
 export default function SearchPollsButton({
     setShouldOverlaysShow,
     setSearchMode,
-}: SearchPollsButtonProps) {
+}: SearchPollsButtonProps): JSX.Element {
+    /**
+     * The rendered SearchPollsButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.button

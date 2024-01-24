@@ -7,9 +7,21 @@ type RefreshPollButtonProps = {
     refreshPoll: () => Promise<void>;
 };
 
+/**
+ * Button to refresh the poll list.
+ *
+ * @component
+ * @param {RefreshPollButtonProps} props - The component props.
+ * @returns {JSX.Element} The rendered React element.
+ */
 export default function RefreshPollButton({
     refreshPoll,
-}: RefreshPollButtonProps) {
+}: RefreshPollButtonProps): JSX.Element {
+    /**
+     * The rendered RefreshPollButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.button
