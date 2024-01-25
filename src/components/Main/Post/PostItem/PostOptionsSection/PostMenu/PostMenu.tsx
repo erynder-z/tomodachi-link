@@ -8,12 +8,23 @@ type PostMenuProps = {
     shouldMenuShow: boolean;
 };
 
+/**
+ * Represents a component for displaying a menu with options for editing and deleting a post.
+ *
+ * @component
+ * @param {PostMenuProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostMenu component.
+ */
 export default function PostMenu({
     handleEditButtonClick,
     handleDeleteButtonClick,
     shouldMenuShow,
-}: PostMenuProps) {
-    const EditButton = (
+}: PostMenuProps): JSX.Element {
+    /**
+     * JSX Element representing the Edit button.
+     * @type {JSX.Element}
+     */
+    const EditButton: JSX.Element = (
         <>
             <button
                 data-tooltip-id="post-edit-tooltip"
@@ -29,7 +40,11 @@ export default function PostMenu({
         </>
     );
 
-    const DeleteButton = (
+    /**
+     * JSX Element representing the Delete button.
+     * @type {JSX.Element}
+     */
+    const DeleteButton: JSX.Element = (
         <>
             <button
                 data-tooltip-id="post-delete-tooltip"
@@ -45,6 +60,11 @@ export default function PostMenu({
         </>
     );
 
+    /**
+     * The rendered PostMenu component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <AnimatePresence>
             {shouldMenuShow && (

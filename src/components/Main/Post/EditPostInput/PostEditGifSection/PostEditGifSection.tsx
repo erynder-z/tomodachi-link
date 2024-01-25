@@ -6,16 +6,37 @@ type PostEditGifSectionProps = {
     handleGifDelete: () => void;
 };
 
+/**
+ * Component for displaying and editing a GIF in a post.
+ *
+ * @component
+ * @param {PostEditGifSectionProps} props - The props object.
+ * @param {string} props.dbGif - The URL or data of the GIF stored in the database.
+ * @param {() => void} props.handleGifDelete - Function to handle the deletion of the GIF.
+ * @returns {JSX.Element} The rendered PostEditGifSection component.
+ */
 export default function PostEditGifSection({
     dbGif,
     handleGifDelete,
-}: PostEditGifSectionProps) {
+}: PostEditGifSectionProps): JSX.Element {
+    /**
+     * Handles the click event on the remove button to delete the GIF.
+     *
+     * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e - The click event.
+     * @return {void} No return value.
+     */
     const handleRemoveButtonClick = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    ): void => {
         e.preventDefault();
         handleGifDelete();
     };
+
+    /**
+     * The rendered PostEditGifSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative flex justify-center w-full">
             <img

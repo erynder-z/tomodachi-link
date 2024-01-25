@@ -4,7 +4,21 @@ type PostTextSectionProps = {
     text: string | undefined;
 };
 
-export default function PostTextSection({ text }: PostTextSectionProps) {
+/**
+ * Represents a component for rendering the text section of a post.
+ *
+ * @component
+ * @param {PostTextSectionProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostTextSection component.
+ */
+export default function PostTextSection({
+    text,
+}: PostTextSectionProps): JSX.Element {
+    /**
+     * The rendered PostTextSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="text-justify ">
             {text && (

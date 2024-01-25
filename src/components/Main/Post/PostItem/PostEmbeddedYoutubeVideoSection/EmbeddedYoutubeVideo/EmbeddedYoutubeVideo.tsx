@@ -4,9 +4,21 @@ type EmbeddedYoutubeVideoProps = {
     videoID: string;
 };
 
+/**
+ * Represents a component for embedding YouTube videos.
+ *
+ * @component
+ * @param {EmbeddedYoutubeVideoProps} props - The component properties.
+ * @returns {JSX.Element} The rendered EmbeddedYoutubeVideo component.
+ */
 export const EmbeddedYoutubeVideo = ({
     videoID,
-}: EmbeddedYoutubeVideoProps) => {
+}: EmbeddedYoutubeVideoProps): JSX.Element => {
+    /**
+     * The rendered EmbeddedYoutubeVideo component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative h-0 overflow-hidden w-3/4 pb-youtube mx-auto">
             <iframe

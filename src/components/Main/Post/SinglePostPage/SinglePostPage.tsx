@@ -6,7 +6,13 @@ import LightBox from '../../../UiElements/LightBox/LightBox';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MdOutlineArrowBack } from 'react-icons/md';
 
-export default function SinglePostPage() {
+/**
+ * React component for rendering a single post page.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered SinglePostPage component.
+ */
+export default function SinglePostPage(): JSX.Element {
     const navigate = useNavigate();
     const { id } = useParams();
     const [clickedImage, setClickedImage] = useState<ImageType | null>(null);
@@ -15,13 +21,23 @@ export default function SinglePostPage() {
 
     const showImageLightbox = !!clickedImage;
     const showGifLightbox = !!clickedGif;
-
     const postID = id || '';
 
-    const refreshPost = () => {
+    /**
+     * Refreshes the post by incrementing the post key modifier.
+     *
+     * @function
+     * @returns {void}
+     */
+    const refreshPost = (): void => {
         setPostKeyModifier(postKeyModifier + 1);
     };
 
+    /**
+     * The rendered SinglePostPage component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ y: 10, opacity: 0 }}

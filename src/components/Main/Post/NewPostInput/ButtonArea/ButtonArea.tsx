@@ -14,16 +14,33 @@ type ButtonAreaProps = {
     isSubmitting: boolean;
 };
 
+/**
+ * Component for rendering buttons in the post input area.
+ *
+ * @component
+ * @param {ButtonAreaProps} props - The props object.
+ * @param {Function} props.handleImageSelect - Function to handle the selection of an image.
+ * @param {ViewMode} props.viewMode - The current view mode.
+ * @param {Function} props.setViewMode - Function to set the view mode.
+ * @param {string} props.postText - The text content of the post.
+ * @param {boolean} props.isSubmitting - Flag indicating whether the post is being submitted.
+ * @returns {JSX.Element} The rendered ButtonArea component.
+ */
 export default function ButtonArea({
     handleImageSelect,
     viewMode,
     setViewMode,
     postText,
     isSubmitting,
-}: ButtonAreaProps) {
+}: ButtonAreaProps): JSX.Element {
     const isButtonDisabled = isSubmitting || postText.trim() === '';
 
-    const YoutubeButton = (
+    /**
+     * Button for uploading and inserting images.
+     *
+     * @type {JSX.Element}
+     */
+    const YoutubeButton: JSX.Element = (
         <>
             <label
                 data-tooltip-id="post-image-tooltip"
@@ -71,7 +88,12 @@ export default function ButtonArea({
         </>
     );
 
-    const GifButton = (
+    /**
+     * Button for inserting GIFs.
+     *
+     * @type {JSX.Element}
+     */
+    const GifButton: JSX.Element = (
         <>
             <motion.button
                 data-tooltip-id="post-gif-tooltip"
@@ -96,7 +118,12 @@ export default function ButtonArea({
         </>
     );
 
-    const EmojiButton = (
+    /**
+     * Button for inserting emojis.
+     *
+     * @type {JSX.Element}
+     */
+    const EmojiButton: JSX.Element = (
         <>
             <motion.button
                 data-tooltip-id="post-emoji-tooltip"
@@ -121,7 +148,12 @@ export default function ButtonArea({
         </>
     );
 
-    const SendButton = (
+    /**
+     * Button for sending the post.
+     *
+     * @type {JSX.Element}
+     */
+    const SendButton: JSX.Element = (
         <>
             <motion.button
                 data-tooltip-id="post-send-tooltip"
@@ -148,6 +180,11 @@ export default function ButtonArea({
         </>
     );
 
+    /**
+     * The rendered ButtonArea component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex w-full gap-4">
             {YoutubeButton}

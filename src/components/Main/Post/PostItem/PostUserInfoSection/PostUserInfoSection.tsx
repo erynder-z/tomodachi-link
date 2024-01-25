@@ -7,11 +7,18 @@ type PostUserInfoSectionProps = {
     displayName: string;
 };
 
+/**
+ * Represents a component for rendering the user information section of a post.
+ *
+ * @component
+ * @param {PostUserInfoSectionProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostUserInfoSection component.
+ */
 export default function PostUserInfoSection({
     postOwnerID,
     userPic,
     displayName,
-}: PostUserInfoSectionProps) {
+}: PostUserInfoSectionProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
 
     const linkTarget =
@@ -19,6 +26,11 @@ export default function PostUserInfoSection({
             ? `/mypage`
             : `/users/${postOwnerID}`;
 
+    /**
+     * The rendered PostUserInfoSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <Link
             to={linkTarget}

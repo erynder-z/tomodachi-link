@@ -30,13 +30,25 @@ type EditPostInputProps = {
     setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * Component for editing a post.
+ *
+ * @component
+ * @param {EditPostInputProps} props - The props object.
+ * @param {PostType | null} props.postDetails - Details of the post being edited.
+ * @param {boolean} props.shouldPostEditShow - Determines if the edit post input is visible.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShouldPostEditShow - Function to control the visibility of the edit post input.
+ * @param {() => void} [props.onPostChange] - Callback function triggered when the post is changed.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} [props.setShouldRefreshPictureList] - Function to control the refresh of the picture list.
+ * @returns {JSX.Element} The rendered EditPostInput component.
+ */
 export default function EditPostInput({
     postDetails,
     shouldPostEditShow,
     setShouldPostEditShow,
     onPostChange,
     setShouldRefreshPictureList,
-}: EditPostInputProps) {
+}: EditPostInputProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -67,7 +79,15 @@ export default function EditPostInput({
 
     const { firstName } = currentUserData || {};
 
-    const submitEditFormData = async (formData: FormData) => {
+    /**
+     * Submits the edit form data to update the post.
+     *
+     * @async
+     * @function
+     * @param {FormData} formData - The form data to be submitted.
+     * @return {Promise<void>} A promise that resolves once the post is updated.
+     */
+    const submitEditFormData = async (formData: FormData): Promise<void> => {
         const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const id = postDetails?._id;
         const response = await fetch(`${SERVER_URL}/api/v1/post/${id}`, {
@@ -106,9 +126,17 @@ export default function EditPostInput({
         }
     };
 
+    /**
+     * Handles the form submission for editing a post.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @return {Promise<void>} A promise that resolves once the form is submitted.
+     */
     const handleFormSubmit = async (
         event: React.FormEvent<HTMLFormElement>
-    ) => {
+    ): Promise<void> => {
         event.preventDefault();
 
         if (token) {
@@ -149,17 +177,49 @@ export default function EditPostInput({
         }
     };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    /**
+     * Handles the form submission for editing a post.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @return {Promise<void>} A promise that resolves once the form is submitted.
+     */
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         handleFormSubmit(event);
     };
 
-    const handleComponentClose = () => setShouldPostEditShow(false);
+    /**
+     * Closes the edit post input component.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleComponentClose = (): void => setShouldPostEditShow(false);
 
+    /**
+     * Handles the new post text change.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLTextAreaElement>} event - The change event.
+     * @return {void} No return value.
+     */
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => setPostText(event.target.value);
+    ): void => setPostText(event.target.value);
 
-    const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    /**
+     * Handles the selection of an image for the post.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event for the input field.
+     * @return {void} No return value.
+     */
+    const handleImageSelect = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ): void => {
         if (event.target.files && event.target.files.length > 0) {
             setSelectedImage(event.target.files[0]);
             setHasImage(true);
@@ -171,22 +231,45 @@ export default function EditPostInput({
         setShouldImageBeDeleted(false);
     };
 
-    const handleImageDelete = () => {
+    /**
+     * Handles the deletion of the selected image for the post.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleImageDelete = (): void => {
         setShouldImageBeDeleted(true);
         setDbImage(undefined);
     };
 
-    const handleVideoDelete = () => {
+    /**
+     * Handles the deletion of the selected video for the post.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleVideoDelete = (): void => {
         setShouldVideoBeDeleted(true);
         setDbEmbeddedVideoID(undefined);
     };
 
-    const handleGifDelete = () => {
+    /**
+     * Handles the deletion of the selected GIF for the post.
+     *
+     * @function
+     * @return {void} No return value.
+     */
+    const handleGifDelete = (): void => {
         setShouldGIfBeDeleted(true);
         setDbGif(undefined);
     };
 
-    const CloseButton = (
+    /**
+     * Renders a close button element.
+     *
+     * @type {JSX.Element}
+     */
+    const CloseButton: JSX.Element = (
         <motion.button
             onClick={handleComponentClose}
             whileTap={{ scale: 0.97 }}
@@ -196,7 +279,12 @@ export default function EditPostInput({
         </motion.button>
     );
 
-    const PostEditForm = (
+    /**
+     * Renders the main edit post form.
+     *
+     * @type {JSX.Element}
+     */
+    const PostEditForm: JSX.Element = (
         <form
             action=""
             method="PATCH"
@@ -261,7 +349,12 @@ export default function EditPostInput({
         </form>
     );
 
-    const EmojiSelectorModal = (
+    /**
+     * Renders the EmojiSelector modal.
+     *
+     * @type {JSX.Element}
+     */
+    const EmojiSelectorModal: JSX.Element = (
         <motion.div
             key="emojiSelector"
             initial={{ opacity: 0 }}
@@ -275,7 +368,12 @@ export default function EditPostInput({
         </motion.div>
     );
 
-    const GifSelectorModal = (
+    /**
+     * Renders the GifSelector modal.
+     *
+     * @type {JSX.Element}
+     */
+    const GifSelectorModal: JSX.Element = (
         <motion.div
             key="gifSelector"
             initial={{ opacity: 0 }}
@@ -289,7 +387,12 @@ export default function EditPostInput({
         </motion.div>
     );
 
-    const YoutubeSelectModal = (
+    /**
+     * Renders the YoutubeSelect modal.
+     *
+     * @type {JSX.Element}
+     */
+    const YoutubeSelectModal: JSX.Element = (
         <motion.div
             key="youtubeSelector"
             initial={{ opacity: 0 }}
@@ -303,6 +406,11 @@ export default function EditPostInput({
         </motion.div>
     );
 
+    /**
+     * The rendered EditPostInput component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <AnimatePresence>
             {shouldPostEditShow && (

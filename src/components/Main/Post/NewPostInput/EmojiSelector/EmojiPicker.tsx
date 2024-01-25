@@ -8,19 +8,47 @@ type EmojiSelectorProps = {
     setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * Component for selecting emojis from an emoji picker.
+ *
+ * @component
+ * @param {EmojiSelectorProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<string>>} props.setText - Function to set the text with the selected emoji.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShowEmojiPicker - Function to set the visibility of the emoji picker.
+ * @returns {JSX.Element} The rendered EmojiSelector component.
+ */
 export default function EmojiSelector({
     setText,
     setShowEmojiPicker,
-}: EmojiSelectorProps) {
+}: EmojiSelectorProps): JSX.Element {
     const { colorScheme } = useTheme();
-    const handleComponentClose = () => {
+
+    /**
+     * Function to close the emoji picker component.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleComponentClose = (): void => {
         setShowEmojiPicker(false);
     };
 
-    const getThemeVariable = () =>
+    /**
+     * Function to get the emoji picker theme based on the color scheme.
+     *
+     * @function
+     * @returns {Theme} The emoji picker theme (Theme.DARK or Theme.LIGHT).
+     */
+    const getThemeVariable = (): Theme =>
         colorScheme === 'dark' ? Theme.DARK : Theme.LIGHT;
 
-    const CloseButton = (
+    /**
+     * Emoji picker close button component.
+     *
+     * @constant
+     * @type {JSX.Element}
+     */
+    const CloseButton: JSX.Element = (
         <motion.button
             onClick={handleComponentClose}
             whileTap={{ scale: 0.97 }}
@@ -30,6 +58,11 @@ export default function EmojiSelector({
         </motion.button>
     );
 
+    /**
+     * The rendered EmojiSelector component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
             <div className="relative">

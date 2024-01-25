@@ -15,6 +15,13 @@ type PostReactionSectionProps = {
     numberOfNegativeReactions: number | undefined;
 };
 
+/**
+ * Represents a component for displaying reaction buttons (like, dislike, comment) for a post.
+ *
+ * @component
+ * @param {PostReactionSectionProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostReactionSection component.
+ */
 export default function PostReactionSection({
     handleShowCommentsClick,
     numberOfComments,
@@ -22,20 +29,37 @@ export default function PostReactionSection({
     numberOfPositiveReactions,
     handleNegativeReactionClick,
     numberOfNegativeReactions,
-}: PostReactionSectionProps) {
+}: PostReactionSectionProps): JSX.Element {
     const [animateReaction, setAnimateReaction] = useState('');
 
+    /**
+     * Handles a reaction button click.
+     *
+     * @function
+     * @param {string} reactionType - The type of reaction ('comments', 'positive', 'negative').
+     * @param {() => void} callback - The callback function to be executed on button click.
+     * @returns {void}
+     */
     const handleReactionClick = (
         reactionType: string,
         callback: () => void
-    ) => {
+    ): void => {
         setAnimateReaction(reactionType);
         callback();
     };
 
+    /**
+     * Handles the end of the reaction animation by resetting the animation state.
+     *
+     * @function
+     */
     const handleAnimationEnd = () => setAnimateReaction('');
 
-    const CommentButton = (
+    /**
+     * JSX Element representing the comment button.
+     * @type {JSX.Element}
+     */
+    const CommentButton: JSX.Element = (
         <>
             <button
                 data-tooltip-id="post-comment-tooltip"
@@ -61,7 +85,11 @@ export default function PostReactionSection({
         </>
     );
 
-    const PositiveReactionButton = (
+    /**
+     * JSX Element representing the positive reaction (like) button.
+     * @type {JSX.Element}
+     */
+    const PositiveReactionButton: JSX.Element = (
         <>
             <button
                 data-tooltip-id="post-like-tooltip"
@@ -84,7 +112,11 @@ export default function PostReactionSection({
         </>
     );
 
-    const NegativeReactionButton = (
+    /**
+     * JSX Element representing the negative reaction (dislike) button.
+     * @type {JSX.Element}
+     */
+    const NegativeReactionButton: JSX.Element = (
         <>
             <button
                 data-tooltip-id="post-dislike-tooltip"
@@ -110,6 +142,11 @@ export default function PostReactionSection({
         </>
     );
 
+    /**
+     * The rendered PostReactionSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex justify-around items-center">
             {CommentButton}

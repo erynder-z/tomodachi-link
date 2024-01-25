@@ -7,8 +7,23 @@ type GifAreaProps = {
     gif: TenorImage;
 };
 
-export default function GifArea({ setGif, gif }: GifAreaProps) {
-    const CloseButton = (
+/**
+ * Component for displaying a preview of a selected GIF.
+ *
+ * @component
+ * @param {GifAreaProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<TenorImage | undefined>>} props.setGif - Function to set the selected GIF.
+ * @param {TenorImage} props.gif - The selected GIF object.
+ * @returns {JSX.Element} The rendered GifArea component.
+ */
+export default function GifArea({ setGif, gif }: GifAreaProps): JSX.Element {
+    /**
+     * Close button component for the GIF area.
+     *
+     * @constant
+     * @type {JSX.Element}
+     */
+    const CloseButton: JSX.Element = (
         <motion.button
             onClick={() => {
                 setGif(undefined);
@@ -19,6 +34,12 @@ export default function GifArea({ setGif, gif }: GifAreaProps) {
             <FaTimes size="1.5em" />
         </motion.button>
     );
+
+    /**
+     * The rendered GifArea component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col text-xs">
             <span>Gif preview: </span>

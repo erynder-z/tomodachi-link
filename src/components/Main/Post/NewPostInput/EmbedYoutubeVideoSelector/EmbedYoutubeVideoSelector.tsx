@@ -9,24 +9,53 @@ type EmbedYoutubeVideoSelectorProps = {
     setYoutubeID: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
+/**
+ * Component for selecting and embedding a YouTube video by providing its URL.
+ *
+ * @component
+ * @param {EmbedYoutubeVideoSelectorProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShowYoutubeEmbed - Function to set the visibility of the YouTube video selector.
+ * @param {React.Dispatch<React.SetStateAction<string | undefined>>} props.setYoutubeID - Function to set the YouTube video ID.
+ * @returns {JSX.Element} The rendered EmbedYoutubeVideoSelector component.
+ */
 export default function EmbedYoutubeVideoSelector({
     setShowYoutubeEmbed,
     setYoutubeID,
-}: EmbedYoutubeVideoSelectorProps) {
+}: EmbedYoutubeVideoSelectorProps): JSX.Element {
     const { setInfo } = useInfoCard();
     const [selectedURL, setSelectedURL] = useState<string>('');
     const [videoID, setVideoID] = useState<string | null>(null);
 
-    const handleComponentClose = () => setShowYoutubeEmbed(false);
+    /**
+     * Function to close the YouTube video selector component.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleComponentClose = (): void => setShowYoutubeEmbed(false);
 
-    const getYoutubeID = (url: string) => {
+    /**
+     * Function to extract the YouTube video ID from the provided URL.
+     *
+     * @function
+     * @param {string} url - The YouTube video URL.
+     * @returns {string | null} The extracted YouTube video ID, or null if not found.
+     */
+    const getYoutubeID = (url: string): string | null => {
         const URLcopy = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/);
         return URLcopy[2] !== undefined
             ? URLcopy[2].split(/[^0-9a-z_-]/i)[0]
             : null;
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    /**
+     * Function to handle form submission, set the YouTube video ID, and close the selector.
+     *
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @returns {void}
+     */
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         if (videoID) {
             setYoutubeID(videoID);
@@ -36,11 +65,20 @@ export default function EmbedYoutubeVideoSelector({
         }
     };
 
+    /**
+     * @effect
+     * Effect hook to update the videoID state when the selectedURL changes.
+     */
     useEffect(() => {
         if (selectedURL) setVideoID(getYoutubeID(selectedURL));
     }, [selectedURL]);
 
-    const CloseButton = (
+    /**
+     * Renders a close button element.
+     *
+     * @type {JSX.Element}
+     */
+    const CloseButton: JSX.Element = (
         <motion.button
             onClick={handleComponentClose}
             whileTap={{ scale: 0.97 }}
@@ -50,7 +88,12 @@ export default function EmbedYoutubeVideoSelector({
         </motion.button>
     );
 
-    const InputField = (
+    /**
+     * Renders a input field for the URL string.
+     *
+     * @type {JSX.Element}
+     */
+    const InputField: JSX.Element = (
         <>
             <input
                 required
@@ -73,7 +116,12 @@ export default function EmbedYoutubeVideoSelector({
         </>
     );
 
-    const AddButton = (
+    /**
+     * Renders a button for submitting the form.
+     *
+     * @type {JSX.Element}
+     */
+    const AddButton: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
             className="w-full bg-blue-500 text-white px-2 py-1"
@@ -82,6 +130,11 @@ export default function EmbedYoutubeVideoSelector({
         </motion.button>
     );
 
+    /**
+     * The rendered EmbedYoutubeVideoSelector component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
             <form

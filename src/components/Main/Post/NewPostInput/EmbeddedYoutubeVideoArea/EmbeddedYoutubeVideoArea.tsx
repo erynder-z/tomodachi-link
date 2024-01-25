@@ -7,10 +7,24 @@ type EmbeddedYoutubeVideoAreaProps = {
     youtubeID: string;
 };
 
+/**
+ * Component for rendering an area to preview and remove an embedded YouTube video.
+ *
+ * @component
+ * @param {EmbeddedYoutubeVideoAreaProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<string | undefined>>} props.setYoutubeID - Function to set the YouTube video ID.
+ * @param {string} props.youtubeID - The YouTube video ID to be previewed.
+ * @returns {JSX.Element} The rendered EmbeddedYoutubeVideoArea component.
+ */
 export default function EmbeddedYoutubeVideoArea({
     setYoutubeID,
     youtubeID,
-}: EmbeddedYoutubeVideoAreaProps) {
+}: EmbeddedYoutubeVideoAreaProps): JSX.Element {
+    /**
+     * The rendered EmbeddedYoutubeVideoArea component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative flex flex-col justify-center items-center text-xs h-auto w-full">
             <span>embedded youtube video preview: </span>

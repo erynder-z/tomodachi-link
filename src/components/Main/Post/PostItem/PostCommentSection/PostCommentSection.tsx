@@ -10,15 +10,32 @@ type PostCommentSectionProps = {
     shouldCommentSectionShow: boolean;
 };
 
+/**
+ * Represents a component for displaying the comment section of a post.
+ *
+ * @component
+ * @param {PostCommentSectionProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostCommentSection component.
+ */
 export default function PostCommentSection({
     comments,
     parentItemID,
     getPostDetails,
     handleShowCommentsClick,
     shouldCommentSectionShow,
-}: PostCommentSectionProps) {
+}: PostCommentSectionProps): JSX.Element {
+    /**
+     * Handles the click event for toggling the comment list visibility.
+     *
+     * @function
+     */
     const onToggleListButtonClick = () => handleShowCommentsClick();
 
+    /**
+     * The rendered PostCommentSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div
             className={`${

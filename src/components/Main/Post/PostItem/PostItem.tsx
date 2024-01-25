@@ -57,7 +57,15 @@ export default React.memo(function PostItem({
 
     const shouldGetPostDetails = useRef(true);
 
-    const getPostDetails = async (postID: string) => {
+    /**
+     * Fetches the details of the post from the server.
+     *
+     * @async
+     * @function
+     * @param {string} postID - The ID of the post.
+     * @returns {Promise<void>} A promise that resolves when the post details are fetched.
+     */
+    const getPostDetails = async (postID: string): Promise<void> => {
         if (token) {
             const apiEndpointURL = `/api/v1/post/${postID}`;
             const METHOD = 'GET';
@@ -75,27 +83,67 @@ export default React.memo(function PostItem({
         }
     };
 
-    const handlePositiveReactionClick = async () => {
+    /**
+     * Handles the click event for the positive reaction button.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A promise that resolves when the positive reaction is handled.
+     */
+    const handlePositiveReactionClick = async (): Promise<void> => {
         if (token) {
             await handlePostReaction(token, setInfo, postID, 'positive');
             getPostDetails(postID);
         }
     };
 
-    const handleNegativeReactionClick = async () => {
+    /**
+     * Handles the click event for the negative reaction button.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A promise that resolves when the negative reaction is handled.
+     */
+    const handleNegativeReactionClick = async (): Promise<void> => {
         if (token) {
             await handlePostReaction(token, setInfo, postID, 'negative');
             getPostDetails(postID);
         }
     };
 
-    const handleShowCommentsClick = () =>
+    /**
+     * Handles the click event to toggle the comment section visibility.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleShowCommentsClick = (): void =>
         setShouldCommentSectionShow(!shouldCommentSectionShow);
 
-    const handleImageClick = (image: ImageType) => setClickedImage(image);
+    /**
+     * Handles the click event for the image.
+     *
+     * @function
+     * @param {ImageType} image - The clicked image.
+     * @returns {void}
+     */
+    const handleImageClick = (image: ImageType): void => setClickedImage(image);
 
-    const handleGifClick = (gifURL: string) => setClickedGif(gifURL);
+    /**
+     * Handles the click event for the GIF.
+     *
+     * @function
+     * @param {string} gifURL - The URL of the clicked GIF.
+     * @returns {void}
+     */
+    const handleGifClick = (gifURL: string): void => setClickedGif(gifURL);
 
+    /**
+     * Effect hook to fetch the post details on mount.
+     *
+     * @effect
+     * @return {void} No return value.
+     */
     useEffect(() => {
         if (shouldGetPostDetails.current) getPostDetails(postID);
 
@@ -104,13 +152,21 @@ export default React.memo(function PostItem({
         };
     }, []);
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
             <LoadingSpinner />
         </div>
     );
 
-    const PostItemContent = (
+    /**
+     * JSX Element representing the content of the post item.
+     * @type {JSX.Element}
+     */
+    const PostItemContent: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -188,5 +244,10 @@ export default React.memo(function PostItem({
         </motion.div>
     );
 
+    /**
+     * Render the content based on the loading state.
+     *
+     * @type {JSX.Element}
+     */
     return loading ? LoadingContent : PostItemContent;
 });

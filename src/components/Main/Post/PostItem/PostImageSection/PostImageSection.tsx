@@ -6,11 +6,23 @@ type PostImageSectionProps = {
     convertedImage: string;
 };
 
+/**
+ * Represents a component for displaying an image within a post section.
+ *
+ * @component
+ * @param {PostImageSectionProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostImageSection component.
+ */
 export default function PostImageSection({
     handleImageClick,
     databaseImage,
     convertedImage,
-}: PostImageSectionProps) {
+}: PostImageSectionProps): JSX.Element {
+    /**
+     * The rendered PostImageSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex justify-center">
             <img

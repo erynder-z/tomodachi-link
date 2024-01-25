@@ -6,16 +6,37 @@ type PostEditImageSectionProps = {
     handleImageDelete: () => void;
 };
 
+/**
+ * Component for displaying and editing an image in a post.
+ *
+ * @component
+ * @param {PostEditImageSectionProps} props - The props object.
+ * @param {string} props.dbImage - The base64-encoded image data stored in the database.
+ * @param {() => void} props.handleImageDelete - Function to handle the deletion of the image.
+ * @returns {JSX.Element} The rendered PostEditImageSection component.
+ */
 export default function PostEditImageSection({
     dbImage,
     handleImageDelete,
-}: PostEditImageSectionProps) {
+}: PostEditImageSectionProps): JSX.Element {
+    /**
+     * Handles the click event on the remove button to delete the image.
+     * @function
+     * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e - The click event.
+     * @return {void} No return value.
+     */
     const handleRemoveButtonClick = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    ): void => {
         e.preventDefault();
         handleImageDelete();
     };
+
+    /**
+     * The rendered PostEditImageSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative flex justify-center">
             <img

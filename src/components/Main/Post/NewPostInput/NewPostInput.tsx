@@ -22,10 +22,19 @@ type NewPostInputProps = {
     handleRefreshPics?: () => void;
 };
 
+/**
+ * Component for creating a new post with text, images, embedded YouTube videos, gifs, and emojis.
+ *
+ * @component
+ * @param {NewPostInputProps} props - The props object.
+ * @param {() => void} props.handleRefreshPosts - The callback function to refresh the list of posts.
+ * @param {() => void} props.handleRefreshPics - The callback function to refresh the list of pictures.
+ * @returns {JSX.Element} The rendered NewPostInput component.
+ */
 export default function NewPostInput({
     handleRefreshPosts,
     handleRefreshPics,
-}: NewPostInputProps) {
+}: NewPostInputProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const { currentUserData } = useCurrentUserData();
@@ -41,11 +50,27 @@ export default function NewPostInput({
     const [hasImage, setHasImage] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+    /**
+     * Handles the change event for the new post textarea.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLTextAreaElement>} event - The change event.
+     * @returns {void}
+     */
     const handleNewPostChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => setPostText(event.target.value);
+    ): void => setPostText(event.target.value);
 
-    const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    /**
+     * Handles the selection of an image file.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the file input.
+     * @returns {void}
+     */
+    const handleImageSelect = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ): void => {
         if (event.target.files && event.target.files.length > 0) {
             setSelectedImage(event.target.files[0]);
             setHasImage(true);
@@ -55,7 +80,15 @@ export default function NewPostInput({
         }
     };
 
-    const submitFormData = async (formData: FormData) => {
+    /**
+     * Submits the form data to create a new post.
+     *
+     * @async
+     * @function
+     * @param {FormData} formData - The form data to be submitted.
+     * @returns {Promise<void>} A Promise that resolves when the submission is complete.
+     */
+    const submitFormData = async (formData: FormData): Promise<void> => {
         const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(`${SERVER_URL}/api/v1/post`, {
             method: 'POST',
@@ -91,9 +124,17 @@ export default function NewPostInput({
         }
     };
 
+    /**
+     * Handles the form submission event.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @returns {Promise<void>} A Promise that resolves when the submission is complete.
+     */
     const handleFormSubmit = async (
         event: React.FormEvent<HTMLFormElement>
-    ) => {
+    ): Promise<void> => {
         event.preventDefault();
 
         if (token) {
@@ -122,11 +163,26 @@ export default function NewPostInput({
         }
     };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    /**
+     * Handles the form submission event and calls handleFormSubmit.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @returns {Promise<void>} A Promise that resolves when the submission is complete.
+     */
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         handleFormSubmit(event);
     };
 
-    const FormContent = (
+    /**
+     * Form for creating a new post.
+     *
+     * @type {JSX.Element}
+     */
+    const FormContent: JSX.Element = (
         <form
             action=""
             method="POST"
@@ -165,7 +221,12 @@ export default function NewPostInput({
         </form>
     );
 
-    const EmojiSelectorModal = (
+    /**
+     * Modal for selecting emojis.
+     *
+     * @type {JSX.Element}
+     */
+    const EmojiSelectorModal: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -179,7 +240,12 @@ export default function NewPostInput({
         </motion.div>
     );
 
-    const GifSelectorModal = (
+    /**
+     * Modal for selecting gifs.
+     *
+     * @type {JSX.Element}
+     */
+    const GifSelectorModal: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -193,7 +259,12 @@ export default function NewPostInput({
         </motion.div>
     );
 
-    const YoutubeSelectorModal = (
+    /**
+     * Modal for selecting embedded YouTube videos.
+     *
+     * @type {JSX.Element}
+     */
+    const YoutubeSelectorModal: JSX.Element = (
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -207,8 +278,13 @@ export default function NewPostInput({
         </motion.div>
     );
 
+    /**
+     * The rendered NewPostInput component.
+     *
+     * @type {JSX.Element}
+     */
     return (
-        <div className="font-roboto flex gap-4 p-2 md:p-4 lg:w-full lg:flex-row lg:justify-around rounded lg:shadow-lg bg-card dark:bg-cardDark">
+        <div className="flex gap-4 p-2 md:p-4 lg:w-full lg:flex-row lg:justify-around rounded lg:shadow-lg bg-card dark:bg-cardDark">
             {FormContent}
             <AnimatePresence>
                 <div className="absolute z-50">

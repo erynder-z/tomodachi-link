@@ -6,10 +6,24 @@ type SelectedImageAreaProps = {
     selectedImage: File;
 };
 
+/**
+ * Component for rendering a preview of the selected image.
+ *
+ * @component
+ * @param {SelectedImageAreaProps} props - The props object.
+ * @param {React.Dispatch<React.SetStateAction<File | undefined>>} props.setSelectedImage - The callback function to set the selected image state.
+ * @param {File} props.selectedImage - The selected image file.
+ * @returns {JSX.Element} The rendered SelectedImageArea component.
+ */
 export default function SelectedImageArea({
     setSelectedImage,
     selectedImage,
-}: SelectedImageAreaProps) {
+}: SelectedImageAreaProps): JSX.Element {
+    /**
+     * The rendered SelectedImageArea component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col justify-center items-center text-xs">
             <span>image preview: </span>

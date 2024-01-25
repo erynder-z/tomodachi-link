@@ -9,35 +9,71 @@ type PostInputTextareaProps = {
     isPostEdit?: boolean;
 };
 
+/**
+ * Component for rendering a text area for user input, with dynamic resizing based on content.
+ *
+ * @component
+ * @param {PostInputTextareaProps} props - The props object.
+ * @param {string} props.postText - The text content of the text area.
+ * @param {(event: React.ChangeEvent<HTMLTextAreaElement>) => void} props.handleNewPostChange - The callback function to handle changes in the text area.
+ * @param {string | undefined} props.firstName - The first name of the user (or undefined if not available).
+ * @param {boolean} [props.isPostEdit] - A flag indicating whether the text area is used for post editing.
+ * @returns {JSX.Element} The rendered PostInputTextarea component.
+ */
 export default function PostInputTextarea({
     postText,
     handleNewPostChange,
     firstName,
     isPostEdit,
-}: PostInputTextareaProps) {
+}: PostInputTextareaProps): JSX.Element {
     const [textareaRows, setTextareaRows] = useState(1);
     const [isTextareaFocused, setIsTextareaFocused] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+    /**
+     * Function to handle changes in the text area content.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLTextAreaElement>} event - The change event object.
+     * @returns {void}
+     */
+    const handleTextareaChange = (
+        event: React.ChangeEvent<HTMLTextAreaElement>
+    ): void => {
+        handleNewPostChange(event);
+        autoResizeTextarea(event.target);
+    };
+
+    /**
+     * Function to auto-resize the text area based on its content.
+     *
+     * @function
+     * @param {HTMLTextAreaElement} textarea - The HTMLTextAreaElement to resize.
+     * @returns {void}
+     */
+    const autoResizeTextarea = (textarea: HTMLTextAreaElement): void => {
+        textarea.style.height = 'auto';
+        textarea.style.height = `${textarea.scrollHeight}px`;
+        setTextareaRows(textarea.rows);
+    };
+
+    /**
+     * Effect to auto-resize the text area on mount (specific to post editing).
+     *
+     * @function
+     * @returns {void}
+     */
     useEffect(() => {
         if (textareaRef.current && isPostEdit) {
             autoResizeTextarea(textareaRef.current);
         }
     }, []);
 
-    const handleTextareaChange = (
-        event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
-        handleNewPostChange(event);
-        autoResizeTextarea(event.target);
-    };
-
-    const autoResizeTextarea = (textarea: HTMLTextAreaElement) => {
-        textarea.style.height = 'auto';
-        textarea.style.height = `${textarea.scrollHeight}px`;
-        setTextareaRows(textarea.rows);
-    };
-
+    /**
+     * The rendered PostInputTextarea component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative z-0">
             <textarea
