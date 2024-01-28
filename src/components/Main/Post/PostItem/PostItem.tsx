@@ -27,6 +27,13 @@ type PostItemProps = {
     setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * Represents a component for rendering a post.
+ *
+ * @component
+ * @param {PostItemProps} props - The component properties.
+ * @returns {JSX.Element} The rendered PostUserInfoSection component.
+ */
 export default React.memo(function PostItem({
     postID,
     setClickedImage,
