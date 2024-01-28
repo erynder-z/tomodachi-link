@@ -7,6 +7,14 @@ type UserListItemProps = {
     listItemData: MinimalUserTypes;
 };
 
+/**
+ * React component representing a single user item in the list.
+ *
+ * @component
+ * @param {UserListItemProps} props - The component props.
+ * @param {MinimalUserTypes} props.listItemData - Data of the user item.
+ * @returns {JSX.Element} The rendered UserListItem component.
+ */
 export default function UserListItem({ listItemData }: UserListItemProps) {
     const { _id, firstName, lastName, userpic } = listItemData || {};
 
@@ -15,6 +23,11 @@ export default function UserListItem({ listItemData }: UserListItemProps) {
         ? `data:image/png;base64,${userpic.data}`
         : defaultUserpic;
 
+    /**
+     * Renders a clickable button with a link to the user's profile.
+     *
+     * @returns {JSX.Element} The rendered button/link.
+     */
     return (
         <motion.button whileTap={{ scale: 0.97 }} className="flex-1 max-h-12">
             <Link

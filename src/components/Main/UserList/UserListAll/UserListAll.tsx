@@ -23,10 +23,19 @@ type UserListAllProps = {
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
+/**
+ * Represents a component for rendering a list of all users.
+ *
+ * @component
+ * @param {UserListAllProps} props - The component props.
+ * @param {React.Dispatch} props.setShouldOverlaysShow - Function to set overlay visibility.
+ * @param {React.Dispatch} props.setSearchMode - Function to set the search mode.
+ * @returns {JSX.Element} The rendered UserListAll component.
+ */
 export default function UserListAll({
     setShouldOverlaysShow,
     setSearchMode,
-}: UserListAllProps) {
+}: UserListAllProps): JSX.Element {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
@@ -47,7 +56,14 @@ export default function UserListAll({
         paginatedData.find((data) => data.page === currentPage)?.pageUserData
             ?.length === ITEMS_PER_PAGE;
 
-    const handleFetchAllUsers = async () => {
+    /**
+     * Handles fetching all users based on the current page.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A promise that resolves when the data is fetched.
+     */
+    const handleFetchAllUsers = async (): Promise<void> => {
         if (authUser && token) {
             setLoading(true);
             const apiEndpointURL = `/api/v1/users/all?skip=${
@@ -82,7 +98,14 @@ export default function UserListAll({
         }
     };
 
-    const handleFetchNumberOfUsers = async () => {
+    /**
+     * Handles fetching the total number of users in the database.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>} A promise that resolves when the data is fetched.
+     */
+    const handleFetchNumberOfUsers = async (): Promise<void> => {
         if (authUser && token) {
             const API_ENDPOINT_URL = '/api/v1/users/count';
             const METHOD = 'GET';
@@ -99,15 +122,32 @@ export default function UserListAll({
         }
     };
 
-    const handlePreviousPage = () => {
+    /**
+     * Updates the current page to the previous page, ensuring it doesn't go below 1.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handlePreviousPage = (): void => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
     };
 
-    const handleNextPage = () => {
+    /**
+     * Function to handle the next page.
+     * @function
+     * @returns {void}
+     */
+    const handleNextPage = (): void => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
     };
 
-    const handleSearchButtonClick = () => {
+    /**
+     * Function to handle the search button click.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleSearchButtonClick = (): void => {
         setSearchMode('users');
         setShouldOverlaysShow({
             searchOverlay: true,
@@ -117,6 +157,13 @@ export default function UserListAll({
         });
     };
 
+    /**
+     * Effect hook that runs when the currentPage changes.
+     * Fetches all users based on the current page.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (currentPage === 1) return;
         handleFetchAllUsers();
@@ -132,6 +179,13 @@ export default function UserListAll({
         ));
     }, [paginatedData, currentPage]);
 
+    /**
+     * Effect hook that runs when the component mounts.
+     * Fetches the total number of users and all users for the initial render.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (shouldInitialize.current) {
             handleFetchNumberOfUsers();
@@ -143,13 +197,23 @@ export default function UserListAll({
         };
     }, []);
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex justify-center items-center w-full h-full py-4">
             <LoadingSpinner />
         </div>
     );
 
-    const UserListContent = (
+    /**
+     * Feed content to be displayed when the user list is loaded.
+     *
+     * @constant
+     * @type {JSX.Element}
+     */
+    const UserListContent: JSX.Element = (
         <motion.div
             key="userList"
             initial={{ y: 10, opacity: 0 }}
@@ -219,6 +283,11 @@ export default function UserListAll({
         </motion.div>
     );
 
+    /**
+     * The user list capable of displaying all users.
+     *
+     * @returns {JSX.Element}
+     */
     return (
         <AnimatePresence mode="wait">
             {loading ? LoadingContent : UserListContent}
