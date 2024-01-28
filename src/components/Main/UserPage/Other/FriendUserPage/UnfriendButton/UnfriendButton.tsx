@@ -13,9 +13,17 @@ type UnfriendButtonProps = {
     unfriendUserId: string;
 };
 
+/**
+ * React component for an Unfriend button.
+ *
+ * @component
+ * @param {UnfriendButtonProps} props - The component props.
+ * @param {string} props.unfriendUserId - The user ID to unfriend.
+ * @returns {JSX.Element} The rendered UnfriendButton component.
+ */
 export default function UnfriendButton({
     unfriendUserId,
-}: UnfriendButtonProps) {
+}: UnfriendButtonProps): JSX.Element {
     const { token } = useAuth();
     const { handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
@@ -25,11 +33,22 @@ export default function UnfriendButton({
     const isConfirmDialogMounted = shouldConfirmDialogShow;
     const showConfirmDialog = useDelayUnmount(isConfirmDialogMounted, 150);
 
-    const handleUnfriendButtonClick = () => {
+    /**
+     * Event handler for the Unfriend button click.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleUnfriendButtonClick = (): void => {
         setShouldConfirmDialogShow(true);
     };
 
-    const ConfirmationModal = (
+    /**
+     * JSX Element representing the Confirmation Overlay for unfriending.
+     *
+     * @type {JSX.Element}
+     */
+    const ConfirmationModal: JSX.Element = (
         <ConfirmationOverlay
             shouldConfirmDialogShow={shouldConfirmDialogShow}
             setShouldConfirmDialogShow={setShouldConfirmDialogShow}
@@ -53,7 +72,12 @@ export default function UnfriendButton({
         />
     );
 
-    const Button = (
+    /**
+     * JSX Element representing the Unfriend button.
+     *
+     * @type {JSX.Element}
+     */
+    const Button: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
             className="flex justify-center items-center gap-2 bg-red-500 text-regularTextDark px-2 py-1 w-fit m-auto md:ml-auto hover:bg-red-600 rounded"
@@ -63,6 +87,11 @@ export default function UnfriendButton({
         </motion.button>
     );
 
+    /**
+     * The rendered UnfriendButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             {showConfirmDialog && ConfirmationModal}

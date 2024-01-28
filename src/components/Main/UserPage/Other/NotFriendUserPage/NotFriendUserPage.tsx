@@ -16,10 +16,19 @@ type NotFriendUserPageProps = {
     };
 };
 
+/**
+ * React component for displaying the user page when the viewed user is not a friend.
+ *
+ * @component
+ * @param {NotFriendUserPageProps} props - The component props.
+ * @param {OtherUserPageDataTypes | Record<string, never>} props.userPageData - Data of the viewed user.
+ * @param {{ incoming: boolean; outgoing: boolean; }} props.isFriendRequestPending - Object indicating whether there is an incoming or outgoing friend request.
+ * @returns {JSX.Element} - JSX element representing the not friend user page.
+ */
 export default function NotFriendUserPage({
     userPageData,
     isFriendRequestPending,
-}: NotFriendUserPageProps) {
+}: NotFriendUserPageProps): JSX.Element {
     const { firstName, lastName, userpic, cover } = userPageData || {};
 
     const [loading, setLoading] = useState(true);
@@ -34,7 +43,12 @@ export default function NotFriendUserPage({
 
     const userPicture = userpic.data;
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div
             className={`${
                 loading ? 'flex' : 'hidden'
@@ -44,7 +58,12 @@ export default function NotFriendUserPage({
         </div>
     );
 
-    const UserPageContent = (
+    /**
+     * JSX Element representing the user page content.
+     *
+     * @type {JSX.Element}
+     */
+    const UserPageContent: JSX.Element = (
         <motion.div
             ref={NotFriendPageContentRef}
             initial={{ y: 10, opacity: 0 }}
@@ -82,6 +101,11 @@ export default function NotFriendUserPage({
         </motion.div>
     );
 
+    /**
+     * The rendered FrieNotFriendUserPagendUserPage component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             {LoadingContent}

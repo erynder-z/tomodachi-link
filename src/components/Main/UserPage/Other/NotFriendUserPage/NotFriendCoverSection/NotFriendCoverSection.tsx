@@ -15,6 +15,21 @@ type NotFriendCoverSectionProps = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * React component for displaying the cover section when viewing the page of a non-friend user.
+ *
+ * @component
+ * @param {NotFriendCoverSectionProps} props - The component props.
+ * @param {string} props.firstName - The first name of the user.
+ * @param {string} props.lastName - The last name of the user.
+ * @param {string} props.userPicture - The base64-encoded user picture.
+ * @param {string} [props.cover] - The selected cover option.
+ * @param {string} props.backgroundColor - The background color for the header section.
+ * @param {string} props.textColor - The text color for the header section.
+ * @param {React.Dispatch<React.SetStateAction<FinalColor[]>>} props.setColorPalette - State updater for the color palette.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setLoading - State updater for the loading state.
+ * @returns {JSX.Element} - JSX element representing the cover section for non-friend users.
+ */
 export default function NotFriendCoverSection({
     firstName,
     lastName,
@@ -24,7 +39,7 @@ export default function NotFriendCoverSection({
     textColor,
     setColorPalette,
     setLoading,
-}: NotFriendCoverSectionProps) {
+}: NotFriendCoverSectionProps): JSX.Element {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
 
     // Use the default userpic if no userpic is provided. (This should only apply to fake users created with faker.js)
@@ -34,6 +49,12 @@ export default function NotFriendCoverSection({
 
     const shouldInitialize = useRef(true);
 
+    /**
+     * useEffect hook to get a color palette for the cover section based on the selected cover image on component mount.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (shouldInitialize.current) {
             const displayCover = COVER_OPTIONS.find(
@@ -61,7 +82,12 @@ export default function NotFriendCoverSection({
         };
     }, []);
 
-    const CoverImageSection = (
+    /**
+     * JSX Element representing the cover image.
+     *
+     * @type {JSX.Element}
+     */
+    const CoverImageSection: JSX.Element = (
         <div className="relative row-span-3 flex">
             <img
                 src={coverImageSrc}
@@ -71,7 +97,12 @@ export default function NotFriendCoverSection({
         </div>
     );
 
-    const ColoredHeaderSection = (
+    /**
+     * JSX Element representing the colored header.
+     *
+     * @type {JSX.Element}
+     */
+    const ColoredHeaderSection: JSX.Element = (
         <div
             className="relative row-span-1 flex flex-col md:flex-row gap-4 lg:p-4 bg-slate-300 rounded-b"
             style={
@@ -96,6 +127,11 @@ export default function NotFriendCoverSection({
         </div>
     );
 
+    /**
+     * The rendered NotFriendCoverSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
             {CoverImageSection}

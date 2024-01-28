@@ -13,7 +13,17 @@ type UserPageProps = {
     isPaginationTriggered: boolean;
 };
 
-export default function UserPage({ isPaginationTriggered }: UserPageProps) {
+/**
+ * React component for rendering the user page.
+ *
+ * @component
+ * @param {UserPageProps} props - The component props.
+ * @param {boolean} props.isPaginationTriggered - Indicates whether pagination is triggered.
+ * @returns {JSX.Element} The rendered UserPage component.
+ */
+export default function UserPage({
+    isPaginationTriggered,
+}: UserPageProps): JSX.Element {
     const params = useParams();
     const id: string | undefined = params.id;
     const { token } = useAuth();
@@ -34,6 +44,12 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
 
     const shouldFetchUserData = useRef(true);
 
+    /**
+     * useEffect hook to fetch (other)user data when the component mounts and when the current user accepts a friend request.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         const fetchUserData = async () => {
             if (token) {
@@ -66,26 +82,46 @@ export default function UserPage({ isPaginationTriggered }: UserPageProps) {
         };
     }, [id, currentUserData?.pendingFriendRequests]);
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col justify-center items-center w-full h-full py-4 bg-background2 dark:bg-background2Dark">
             <LoadingSpinner message="Getting user data" />
         </div>
     );
 
-    const NorFriendContent = (
+    /**
+     * JSX Element representing the content for a non-friend user.
+     *
+     * @type {JSX.Element}
+     */
+    const NorFriendContent: JSX.Element = (
         <NotFriendUserPage
             userPageData={userPageData}
             isFriendRequestPending={isFriendRequestPending}
         />
     );
 
-    const FriendContent = (
+    /**
+     * JSX Element representing the content for a friend user.
+     *
+     * @type {JSX.Element}
+     */
+    const FriendContent: JSX.Element = (
         <FriendUserPage
             userPageData={userPageData}
             isPaginationTriggered={isPaginationTriggered}
         />
     );
 
+    /**
+     * Render the content based on the loading state.
+     *
+     * @type {JSX.Element}
+     */
     return loading
         ? LoadingContent
         : isFriend

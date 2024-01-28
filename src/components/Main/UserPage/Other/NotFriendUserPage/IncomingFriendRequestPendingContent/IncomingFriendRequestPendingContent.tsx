@@ -10,9 +10,17 @@ type IncomingFriendRequestPendingContentProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
 };
 
+/**
+ * React component for displaying content when there is an incoming friend request pending.
+ *
+ * @component
+ * @param {IncomingFriendRequestPendingContentProps} props - The component props.
+ * @param {OtherUserPageDataTypes} props.userPageData - Data of the user who sent the friend request.
+ * @returns {JSX.Element} - JSX element representing the incoming friend request pending content.
+ */
 export default function IncomingFriendRequestPendingContent({
     userPageData,
-}: IncomingFriendRequestPendingContentProps) {
+}: IncomingFriendRequestPendingContentProps): JSX.Element {
     const { token } = useAuth();
     const { handleFetchUserData } = useCurrentUserData();
     const { handleFetchFriendData } = useFriendData();
@@ -22,7 +30,13 @@ export default function IncomingFriendRequestPendingContent({
 
     const otherUserId = _id;
 
-    const handleAcceptFriendRequest = () => {
+    /**
+     * Handles the acceptance of a friend request.
+     *
+     * @function
+     * @return {void}
+     */
+    const handleAcceptFriendRequest = (): void => {
         if (token) {
             const typeOfRequest = 'accept';
             handleFriendRequest(
@@ -36,7 +50,13 @@ export default function IncomingFriendRequestPendingContent({
         }
     };
 
-    const handleDeclineFriendRequest = () => {
+    /**
+     * Handles declining a friend request.
+     *
+     * @function
+     * @return {void}
+     */
+    const handleDeclineFriendRequest = (): void => {
         if (token) {
             const typeOfRequest = 'decline';
             handleFriendRequest(
@@ -50,13 +70,23 @@ export default function IncomingFriendRequestPendingContent({
         }
     };
 
-    const UserNameSection = (
+    /**
+     * JSX Element representing the user name section.
+     *
+     * @type {JSX.Element}
+     */
+    const UserNameSection: JSX.Element = (
         <>
             {firstName} {lastName} already sent you a friend request!
         </>
     );
 
-    const AcceptButton = (
+    /**
+     * JSX Element representing the accept button.
+     *
+     * @type {JSX.Element}
+     */
+    const AcceptButton: JSX.Element = (
         <motion.button
             onClick={handleAcceptFriendRequest}
             whileTap={{ scale: 0.97 }}
@@ -66,7 +96,12 @@ export default function IncomingFriendRequestPendingContent({
         </motion.button>
     );
 
-    const DeclineButton = (
+    /**
+     * JSX Element representing the decline button.
+     *
+     * @type {JSX.Element}
+     */
+    const DeclineButton: JSX.Element = (
         <motion.button
             onClick={handleDeclineFriendRequest}
             whileTap={{ scale: 0.97 }}
@@ -76,6 +111,11 @@ export default function IncomingFriendRequestPendingContent({
         </motion.button>
     );
 
+    /**
+     * The rendered IncomingFriendRequestPendingContent component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

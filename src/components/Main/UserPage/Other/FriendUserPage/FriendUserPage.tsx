@@ -15,10 +15,19 @@ type FriendUserPageProps = {
     isPaginationTriggered: boolean;
 };
 
+/**
+ * React component for displaying the user page of a friend.
+ *
+ * @component
+ * @param {FriendUserPageProps} props - The component props.
+ * @param {OtherUserPageDataTypes} props.userPageData - Data of the user page.
+ * @param {boolean} props.isPaginationTriggered - Flag for pagination trigger.
+ * @returns {JSX.Element} The rendered FriendUserPage component.
+ */
 export default function FriendUserPage({
     userPageData,
     isPaginationTriggered,
-}: FriendUserPageProps) {
+}: FriendUserPageProps): JSX.Element {
     const {
         _id,
         firstName,
@@ -49,6 +58,11 @@ export default function FriendUserPage({
         ? `${formatDistanceToNow(new Date(lastSeen), { addSuffix: true })} `
         : '';
 
+    /**
+     * Callback function to handle the completion of fetching data in sub-components.
+     *
+     * @param {string} nameOfComponent - Name of the completed component.
+     */
     const onFetchComplete = (nameOfComponent: string) => {
         setComponentLoading((prevLoading) => ({
             ...prevLoading,
@@ -56,12 +70,23 @@ export default function FriendUserPage({
         }));
     };
 
+    /**
+     * UseEffect to check if all sub-components have finished loading.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (Object.values(componentLoading).every((v) => v === false))
             setLoading(false);
     }, [componentLoading]);
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div
             className={`${
                 loading ? 'flex' : 'hidden'
@@ -71,7 +96,12 @@ export default function FriendUserPage({
         </div>
     );
 
-    const UserPageContent = (
+    /**
+     * JSX Element representing the user page content.
+     *
+     * @type {JSX.Element}
+     */
+    const UserPageContent: JSX.Element = (
         <motion.div
             ref={FriendPageContentRef}
             initial={{ y: 10, opacity: 0 }}
@@ -121,6 +151,11 @@ export default function FriendUserPage({
         </motion.div>
     );
 
+    /**
+     * The rendered FriendUserPage component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             {LoadingContent}

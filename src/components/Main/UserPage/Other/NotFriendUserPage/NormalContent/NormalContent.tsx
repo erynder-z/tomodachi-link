@@ -13,10 +13,21 @@ type NormalContentProps = {
     };
 };
 
+/**
+ * Content of the user page when the user is not a friend and no friend request is pending.
+ *
+ * @component
+ * @param {NormalContentProps} props - The component props.
+ * @param {OtherUserPageDataTypes} props.userPageData - Data of the user whose page is being viewed.
+ * @param {Object} props.isFriendRequestPending - Object indicating if there are pending friend requests.
+ * @param {boolean} props.isFriendRequestPending.incoming - Indicates if there is an incoming friend request.
+ * @param {boolean} props.isFriendRequestPending.outgoing - Indicates if there is an outgoing friend request.
+ * @returns {JSX.Element} - JSX element representing the normal content of the user page.
+ */
 export default function NormalContent({
     userPageData,
     isFriendRequestPending,
-}: NormalContentProps) {
+}: NormalContentProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [disableButton, setDisableButton] = useState<boolean>(
@@ -25,7 +36,13 @@ export default function NormalContent({
     const { firstName, lastName } = userPageData || {};
     const otherUserId = userPageData._id;
 
-    const getButton = () => {
+    /**
+     * Returns a button element based on the state of disableButton.
+     *
+     * @function
+     * @return {JSX.Element} The button element based on disableButton state
+     */
+    const getButton = (): JSX.Element => {
         if (disableButton) {
             return (
                 <motion.button
@@ -59,6 +76,12 @@ export default function NormalContent({
             );
         }
     };
+
+    /**
+     * The rendered NormalContent component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

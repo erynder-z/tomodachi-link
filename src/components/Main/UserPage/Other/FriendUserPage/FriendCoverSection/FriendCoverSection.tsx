@@ -19,6 +19,13 @@ type FriendCoverSectionProps = {
     onFetchComplete: (nameOfComponent: string) => void;
 };
 
+/**
+ * React component for the friend's cover section.
+ *
+ * @component
+ * @param {FriendCoverSectionProps} props - The component props.
+ * @returns {JSX.Element} The rendered FriendCoverSection component.
+ */
 export default function FriendCoverSection({
     _id,
     firstName,
@@ -32,11 +39,17 @@ export default function FriendCoverSection({
     lastSeenFormatted,
     mutualFriends,
     onFetchComplete,
-}: FriendCoverSectionProps) {
+}: FriendCoverSectionProps): JSX.Element {
     const [coverImageSrc, setCoverImageSrc] = useState<string>('');
 
     const shouldInitialize = useRef(true);
 
+    /**
+     * useEffect hook to get a color palette for the cover section based on the selected cover image on component mount.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (shouldInitialize.current) {
             setColorPalette([]);
@@ -64,7 +77,12 @@ export default function FriendCoverSection({
         };
     }, []);
 
-    const CoverImage = (
+    /**
+     * JSX Element representing the cover image.
+     *
+     * @type {JSX.Element}
+     */
+    const CoverImage: JSX.Element = (
         <div className="relative row-span-3 flex rounded-t">
             <img
                 src={coverImageSrc}
@@ -74,7 +92,12 @@ export default function FriendCoverSection({
         </div>
     );
 
-    const ColoredHeader = (
+    /**
+     * JSX Element representing the colored header.
+     *
+     * @type {JSX.Element}
+     */
+    const ColoredHeader: JSX.Element = (
         <div
             className="relative row-span-1 flex flex-col md:flex-row gap-4 h-full lg:p-4 bg-slate-300 rounded-b"
             style={
@@ -112,6 +135,11 @@ export default function FriendCoverSection({
         </div>
     );
 
+    /**
+     * The rendered FriendCoverSection component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
             {CoverImage}
