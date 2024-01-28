@@ -16,16 +16,30 @@ type AvatarCreatorProps = {
     handleAvatarCreatorClose: () => void;
 };
 
+/**
+ * React component for creating and editing avatars.
+ *
+ * @component
+ * @param {AvatarCreatorProps} props - The component props.
+ * @returns {JSX.Element} The rendered AvatarCreator component.
+ */
 function AvatarCreator({
     image,
     setImage,
     handleConfirmImage,
     handleAvatarCreatorClose,
-}: AvatarCreatorProps) {
+}: AvatarCreatorProps): JSX.Element {
     const editor = useRef<AvatarEditor | null>(null);
     const [scale, setScale] = useState(1);
 
-    const handleConfirmButtonClick = async () => {
+    /**
+     * Handles the click event of the confirm button.
+     *
+     * @function
+     * @async
+     * @returns {Promise<void>} A promise that resolves after handling the event.
+     */
+    const handleConfirmButtonClick = async (): Promise<void> => {
         if (editor.current != null) {
             const canvasDataUrl = editor.current
                 ?.getImageScaledToCanvas()
@@ -43,6 +57,15 @@ function AvatarCreator({
         }
     };
 
+    /**
+     * Creates a file from a data URL.
+     *
+     * @function
+     * @async
+     * @param {string} dataurl - The data URL.
+     * @param {string} filename - The filename for the created file.
+     * @returns {Promise<File>} A promise that resolves with the created file.
+     */
     async function createFileFromDataURL(
         dataurl: string,
         filename: string
@@ -52,12 +75,30 @@ function AvatarCreator({
         return new File([blob], filename, { type: blob.type });
     }
 
-    const handleCloseButtonClick = () => handleAvatarCreatorClose();
+    /**
+     * Handles the click event of the close button.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleCloseButtonClick = (): void => handleAvatarCreatorClose();
 
-    const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    /**
+     * Handles the change event of the scale input.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
+     * @returns {void}
+     */
+    const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
         setScale(parseFloat(e.target.value));
 
-    const CloseButton = (
+    /**
+     * JSX element for the close button.
+     *
+     * @type {JSX.Element}
+     */
+    const CloseButton: JSX.Element = (
         <motion.button
             onClick={handleCloseButtonClick}
             whileTap={{ scale: 0.97 }}
@@ -67,7 +108,12 @@ function AvatarCreator({
         </motion.button>
     );
 
-    const ScaleInput = (
+    /**
+     * JSX element for the scale input.
+     *
+     * @type {JSX.Element}
+     */
+    const ScaleInput: JSX.Element = (
         <div className="flex flex-col">
             <label htmlFor="scale" className="text-white">
                 Adjust scale:
@@ -84,7 +130,12 @@ function AvatarCreator({
         </div>
     );
 
-    const ConfirmButton = (
+    /**
+     * JSX element for the confirm button.
+     *
+     * @type {JSX.Element}
+     */
+    const ConfirmButton: JSX.Element = (
         <motion.button
             onClick={handleConfirmButtonClick}
             whileTap={{ scale: 0.97 }}
@@ -94,6 +145,11 @@ function AvatarCreator({
         </motion.button>
     );
 
+    /**
+     * JSX element for the AvatarCreator component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 bg-black">
             {CloseButton}

@@ -18,10 +18,17 @@ type UpdatePasswordFormProps = {
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * React component for updating the user's password.
+ *
+ * @component
+ * @param {UpdatePasswordFormProps} props - The component props.
+ * @returns {JSX.Element} The rendered UpdatePasswordForm component.
+ */
 export default function UpdatePasswordForm({
     setShouldOverlaysShow,
     setShowOptions,
-}: UpdatePasswordFormProps) {
+}: UpdatePasswordFormProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -34,7 +41,17 @@ export default function UpdatePasswordForm({
         handleConfirmPasswordChange,
     } = usePasswordComparison({ password: '', confirmPassword: '' });
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    /**
+     * Handles the form submission to update the user's password.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+     * @returns {Promise<void>} A promise that resolves when the password is updated.
+     */
+    const handleSubmit = async (
+        event: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         event.preventDefault();
         if (token) {
             const form = event.target as HTMLFormElement;
@@ -83,7 +100,12 @@ export default function UpdatePasswordForm({
         }
     };
 
-    const CurrentPasswordInput = (
+    /**
+     * JSX for the current password input.
+     *
+     * @type {JSX.Element}
+     */
+    const CurrentPasswordInput: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -103,7 +125,12 @@ export default function UpdatePasswordForm({
         </div>
     );
 
-    const NewPasswordInput = (
+    /**
+     * JSX for the new password input.
+     *
+     * @type {JSX.Element}
+     */
+    const NewPasswordInput: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -124,7 +151,12 @@ export default function UpdatePasswordForm({
         </div>
     );
 
-    const ConfirmNewPasswordInput = (
+    /**
+     * JSX for the confirm new password input.
+     *
+     * @type {JSX.Element}
+     */
+    const ConfirmNewPasswordInput: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -147,7 +179,12 @@ export default function UpdatePasswordForm({
         </div>
     );
 
-    const GuestButton = (
+    /**
+     * JSX for the button to update password for a guest account.
+     *
+     * @type {JSX.Element}
+     */
+    const GuestButton: JSX.Element = (
         <motion.button
             disabled
             whileTap={{ scale: 0.97 }}
@@ -157,7 +194,12 @@ export default function UpdatePasswordForm({
         </motion.button>
     );
 
-    const NormalUserButton = (
+    /**
+     * JSX for the button to update password for a normal user.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalUserButton: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
             className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded"
@@ -166,6 +208,11 @@ export default function UpdatePasswordForm({
         </motion.button>
     );
 
+    /**
+     * The rendered UpdatePasswordForm component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col justify-center items-center">
             <div>

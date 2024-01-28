@@ -5,12 +5,31 @@ type UpdatePasswordButtonProps = {
     setCurrentMenu: React.Dispatch<React.SetStateAction<string>>;
 };
 
+/**
+ * React component for the "Change Password" button.
+ *
+ * @component
+ * @param {UpdatePasswordButtonProps} props - The component props.
+ * @returns {JSX.Element} The rendered UpdatePasswordButton component.
+ */
 export default function UpdatePasswordButton({
     setCurrentMenu,
-}: UpdatePasswordButtonProps) {
-    const handleUpdatePasswordButtonClick = () => {
+}: UpdatePasswordButtonProps): JSX.Element {
+    /**
+     * Handles the click event on the "Change Password" button.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleUpdatePasswordButtonClick = (): void => {
         setCurrentMenu('changePassword');
     };
+
+    /**
+     * The rendered UpdatePasswordButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex w-full">
             <motion.button

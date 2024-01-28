@@ -18,13 +18,26 @@ type EditUserDataModalProps = {
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * React component for the modal to edit user data.
+ *
+ * @component
+ * @param {EditUserDataModalProps} props - The component props.
+ * @returns {JSX.Element} The rendered EditUserDataModal component.
+ */
 export default function EditUserDataModal({
     setShouldOverlaysShow,
     setShowOptions,
 }: EditUserDataModalProps): JSX.Element {
     const [currentMenu, setCurrentMenu] = useState<string>('Profile');
 
-    const handleCloseButtonClick = () => {
+    /**
+     * Handles the close button click, hiding the modal.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleCloseButtonClick = (): void => {
         setShouldOverlaysShow({
             searchOverlay: false,
             editUserDataModal: false,
@@ -34,6 +47,12 @@ export default function EditUserDataModal({
         setShowOptions?.(false);
     };
 
+    /**
+     * Renders the current menu based on the state. Shows form to edit the user data or form to change the password.
+     *
+     * @function
+     * @returns {JSX.Element} The rendered current menu.
+     */
     const renderCurrentMenu = (): JSX.Element => {
         const changeProfileMenu = (
             <>
@@ -60,6 +79,11 @@ export default function EditUserDataModal({
         }
     };
 
+    /**
+     * The rendered EditUserDataModal component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-slate-900/90">
             <div className="relative w-11/12 lg:w-1/5 flex flex-col justify-around shadow-lg p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark  rounded lg:rounded-lg">

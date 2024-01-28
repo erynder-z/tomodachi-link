@@ -20,10 +20,17 @@ type EditUserDataModalFormProps = {
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * React component for editing user data.
+ *
+ * @component
+ * @param {EditUserDataModalFormProps} props - The component props.
+ * @returns {JSX.Element} The rendered EditUserDataModalForm component.
+ */
 export default function EditUserDataModalForm({
     setShouldOverlaysShow,
     setShowOptions,
-}: EditUserDataModalFormProps) {
+}: EditUserDataModalFormProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -55,6 +62,14 @@ export default function EditUserDataModalForm({
         ? URL.createObjectURL(image.selectedFile)
         : `data:image/png;base64,${image.preview}`;
 
+    /**
+     * Handles the form submission.
+     *
+     * @async
+     * @function
+     * @param {React.FormEvent<HTMLFormElement>} event - The form event.
+     * @returns {Promise<void>} A promise that resolves after handling the submission.
+     */
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
@@ -91,11 +106,28 @@ export default function EditUserDataModalForm({
         }
     };
 
-    const handleConfirmImage = () => setShowCropper(false);
+    /**
+     * Handles the confirmation of the image in the AvatarCreator.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleConfirmImage = (): void => setShowCropper(false);
 
-    const handleAvatarCreatorClose = () => setImage(originalImage);
+    /**
+     * Handles the closing of the AvatarCreator.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleAvatarCreatorClose = (): void => setImage(originalImage);
 
-    const UserImageSection = (
+    /**
+     * JSX element for the user image section.
+     *
+     * @type {JSX.Element}
+     */
+    const UserImageSection: JSX.Element = (
         <div className="flex flex-col ml-auto">
             <img
                 className="w-16 h-16 object-cover rounded-full mx-auto "
@@ -124,7 +156,12 @@ export default function EditUserDataModalForm({
         </div>
     );
 
-    const FirstNameInput = (
+    /**
+     * JSX element for the first name input.
+     *
+     * @type {JSX.Element}
+     */
+    const FirstNameInput: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -144,8 +181,12 @@ export default function EditUserDataModalForm({
             </label>
         </div>
     );
-
-    const LastNameInput = (
+    /**
+     * JSX element for the last name input.
+     *
+     * @type {JSX.Element}
+     */
+    const LastNameInput: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -166,7 +207,12 @@ export default function EditUserDataModalForm({
         </div>
     );
 
-    const EmailInput = (
+    /**
+     * JSX element for the email input.
+     *
+     * @type {JSX.Element}
+     */
+    const EmailInput: JSX.Element = (
         <div className="relative z-0">
             <input
                 required
@@ -187,7 +233,12 @@ export default function EditUserDataModalForm({
         </div>
     );
 
-    const GuestButton = (
+    /**
+     * Button to display instead of the update button if the user is a guest.
+     *
+     * @type {JSX.Element}
+     */
+    const GuestButton: JSX.Element = (
         <motion.button
             disabled
             whileTap={{ scale: 0.97 }}
@@ -197,7 +248,12 @@ export default function EditUserDataModalForm({
         </motion.button>
     );
 
-    const NormalUserButton = (
+    /**
+     * Profile update button.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalUserButton: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
             className="w-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark px-2 py-1 rounded"
@@ -206,6 +262,11 @@ export default function EditUserDataModalForm({
         </motion.button>
     );
 
+    /**
+     * The rendered EditUserDataModalForm component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <div>
@@ -222,7 +283,6 @@ export default function EditUserDataModalForm({
                     {FirstNameInput}
                     {LastNameInput}
                     {EmailInput}
-                    {/*      {PasswordInput} */}
 
                     <div className="flex w-full">
                         {isGuest ? GuestButton : NormalUserButton}
