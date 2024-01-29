@@ -15,10 +15,19 @@ type FriendRequestListItemProps = {
     handleFetchComplete: () => void;
 };
 
+/**
+ * React component for rendering a friend request list item.
+ *
+ * @component
+ * @param {FriendRequestListItemProps} props - The component props.
+ * @param {string} props.friendRequestUserId - The user ID associated with the friend request.
+ * @param {Function} props.handleFetchComplete - Callback function to handle fetch completion.
+ * @returns {JSX.Element} The rendered FriendRequestListItem component.
+ */
 export default function FriendRequestListItem({
     friendRequestUserId,
     handleFetchComplete,
-}: FriendRequestListItemProps) {
+}: FriendRequestListItemProps): JSX.Element {
     const navigate = useNavigate();
     const { token } = useAuth();
     const { handleFetchUserData } = useCurrentUserData();
@@ -35,7 +44,13 @@ export default function FriendRequestListItem({
 
     const userPic = friendRequestData?.userpic?.data || '';
 
-    const handleAcceptFriendRequest = () => {
+    /**
+     * Handles the acceptance of a friend request.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleAcceptFriendRequest = (): void => {
         if (token) {
             const otherUserId = friendRequestData._id;
             const typeOfRequest = 'accept';
@@ -51,7 +66,13 @@ export default function FriendRequestListItem({
         }
     };
 
-    const handleDeclineFriendRequest = () => {
+    /**
+     * Handles the decline of a friend request.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleDeclineFriendRequest = (): void => {
         if (token) {
             const otherUserId = friendRequestData._id;
             const TYPE_OF_REQUEST = 'decline';
@@ -67,7 +88,21 @@ export default function FriendRequestListItem({
         }
     };
 
-    const handleUserClick = () => navigate(`/users/${friendRequestUserId}`);
+    /**
+     * Handles user click, navigating to the user's profile.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleUserClick = (): void =>
+        navigate(`/users/${friendRequestUserId}`);
+
+    /**
+     * useEffect hook to fetch user data when the component mounts.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         const fetchUserData = async () => {
             if (token) {
@@ -101,13 +136,23 @@ export default function FriendRequestListItem({
         };
     }, []);
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex justify-center items-center w-full py-4 ">
             <LoadingSpinner />
         </div>
     );
 
-    const FriendRequestListContent = (
+    /**
+     * JSX Element representing the content for a friend request list item.
+     *
+     * @type {JSX.Element}
+     */
+    const FriendRequestListContent: JSX.Element = (
         <div className="flex flex-col gap-2">
             <div
                 onClick={handleUserClick}
@@ -141,5 +186,10 @@ export default function FriendRequestListItem({
         </div>
     );
 
+    /**
+     * Render the content based on the loading state.
+     *
+     * @type {JSX.Element}
+     */
     return loading ? LoadingContent : FriendRequestListContent;
 }

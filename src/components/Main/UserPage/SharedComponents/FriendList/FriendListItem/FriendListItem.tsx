@@ -8,6 +8,14 @@ type FriendListItemProps = {
     friendData: FriendDataType;
 };
 
+/**
+ * React component for rendering a friend item in a list.
+ *
+ * @component
+ * @param {FriendListItemProps} props - The component props.
+ * @param {FriendDataType} props.friendData - Data of the friend.
+ * @returns {JSX.Element} The rendered FriendListItem component.
+ */
 export default function FriendListItem({ friendData }: FriendListItemProps) {
     const { currentUserData } = useCurrentUserData();
     const { _id, firstName, lastName, userpic } = friendData ?? {};
@@ -15,6 +23,11 @@ export default function FriendListItem({ friendData }: FriendListItemProps) {
     const isCurrentUser = currentUserData?._id === _id;
     const path = isCurrentUser ? '/mypage' : `/users/${_id}`;
 
+    /**
+     * JSX Element representing the friend item.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.button whileTap={{ scale: 0.97 }} className="w-full h-full">
             <Link

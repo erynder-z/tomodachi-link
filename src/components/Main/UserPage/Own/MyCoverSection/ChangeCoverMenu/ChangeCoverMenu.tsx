@@ -9,11 +9,21 @@ type ChangeCoverMenuProps = {
     handleCoverOptionClick: (coverImage: CoverOption) => void;
 };
 
+/**
+ * React component for rendering a menu to change the cover image.
+ *
+ * @component
+ * @param {ChangeCoverMenuProps} props - The component props.
+ * @param {boolean} props.showMenu - Indicates whether the menu is visible.
+ * @param {() => void} props.handleCloseButtonCLick - Callback function to handle the close button click.
+ * @param {(coverImage: CoverOption) => void} props.handleCoverOptionClick - Callback function to handle cover option click.
+ * @returns {JSX.Element} The rendered ChangeCoverMenu component.
+ */
 export default function ChangeCoverMenu({
     showMenu,
     handleCloseButtonCLick,
     handleCoverOptionClick,
-}: ChangeCoverMenuProps) {
+}: ChangeCoverMenuProps): JSX.Element {
     const CloseButton = (
         <button
             onClick={handleCloseButtonCLick}
@@ -32,7 +42,12 @@ export default function ChangeCoverMenu({
         closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
     };
 
-    const MenuList = COVER_OPTIONS.map((coverImage, index) => (
+    /**
+     * JSX Element representing the menu list.
+     *
+     * @type {JSX.Element[]}
+     */
+    const MenuList: JSX.Element[] = COVER_OPTIONS.map((coverImage, index) => (
         <motion.li
             key={index}
             variants={itemVariants}
@@ -47,6 +62,11 @@ export default function ChangeCoverMenu({
         </motion.li>
     ));
 
+    /**
+     * JSX Element representing the entire ChangeCoverMenu.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             key="coverMenu"

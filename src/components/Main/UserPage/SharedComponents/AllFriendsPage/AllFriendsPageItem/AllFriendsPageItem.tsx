@@ -8,20 +8,39 @@ type AllFiendsPageItemProps = {
     friendData: FriendDataType;
 };
 
+/**
+ * React component for rendering an item in the All Friends page.
+ *
+ * @component
+ * @param {AllFiendsPageItemProps} props - The component props.
+ * @param {FriendDataType} props.friendData - Data of the friend to be displayed.
+ * @returns {JSX.Element} The rendered AllFiendsPageItem component.
+ */
 export default function AllFiendsPageItem({
     friendData,
-}: AllFiendsPageItemProps) {
+}: AllFiendsPageItemProps): JSX.Element {
     const navigate = useNavigate();
     const { currentUserData } = useCurrentUserData();
     const { _id, firstName, lastName, userpic } = friendData ?? {};
 
-    const handleUserClick = () => {
+    /**
+     * Handles user click and navigates to the user's page.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleUserClick = (): void => {
         if (!currentUserData) return;
 
         const path = currentUserData?._id === _id ? '/mypage' : `/users/${_id}`;
         navigate(path);
     };
 
+    /**
+     * JSX Element representing the All Friends page item.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col">
             <motion.div

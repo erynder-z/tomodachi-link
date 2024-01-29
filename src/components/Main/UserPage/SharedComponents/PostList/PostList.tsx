@@ -16,12 +16,23 @@ type MyPostListProps = {
     setShouldRefreshPictureList?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/**
+ * React component for rendering a list of posts.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {string | undefined} props.userId - The ID of the user for whom the posts are being displayed.
+ * @param {boolean} props.isPaginationTriggered - Indicates whether pagination is triggered.
+ * @param {Function} [props.onPostChange] - Callback function triggered on post change.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} [props.setShouldRefreshPictureList] - State setter for refreshing the picture list.
+ * @returns {JSX.Element} The rendered PostList component.
+ */
 export default function PostList({
     userId,
     isPaginationTriggered,
     onPostChange,
     setShouldRefreshPictureList,
-}: MyPostListProps) {
+}: MyPostListProps): JSX.Element {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [posts, setPosts] = useState<PostType[]>([]);
@@ -35,7 +46,14 @@ export default function PostList({
 
     const shouldInitialize = useRef(true);
 
-    const handleFetchPosts = async () => {
+    /**
+     * Function to fetch posts from the backend.
+     *
+     * @function
+     * @async
+     * @returns {Promise<void>} A Promise that resolves once the posts are fetched.
+     */
+    const handleFetchPosts = async (): Promise<void> => {
         if (authUser && token && userId) {
             const apiEndpointURL = `/api/v1/users/${userId}/post?skip=${skip}`;
             const method = 'GET';
@@ -52,14 +70,32 @@ export default function PostList({
         }
     };
 
+    /**
+     * useEffect hook to update skip when isPaginationTriggered changes.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (posts) setSkip(posts.length);
     }, [isPaginationTriggered]);
 
+    /**
+     * useEffect hook to fetch posts when skip or userId changes.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (skip && userId) handleFetchPosts();
     }, [skip, userId]);
 
+    /**
+     * useEffect hook to initialize the component and fetch posts on mount.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (userId && shouldInitialize.current) {
             handleFetchPosts();
@@ -67,7 +103,12 @@ export default function PostList({
         }
     }, [userId]);
 
-    const postItemsList = posts?.map((post) => (
+    /**
+     * Map posts to PostItem components.
+     *
+     * @type {JSX.Element[]}
+     */
+    const postItemsList: JSX.Element[] = posts?.map((post) => (
         <PostItem
             key={post._id}
             postID={post._id}
@@ -78,7 +119,12 @@ export default function PostList({
         />
     ));
 
-    const PostListContent =
+    /**
+     * JSX Element representing the content of the PostList component.
+     *
+     * @type {JSX.Element[] | JSX.Element | string}
+     */
+    const PostListContent: JSX.Element[] | JSX.Element | string =
         postItemsList.length > 0 ? (
             postItemsList
         ) : loading ? (
@@ -89,7 +135,12 @@ export default function PostList({
             </span>
         );
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <motion.div
             key="loading"
             initial={{ opacity: 0 }}
@@ -101,6 +152,11 @@ export default function PostList({
         </motion.div>
     );
 
+    /**
+     * Render the PostList component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col gap-4 pb-4 ">
             {PostListContent}

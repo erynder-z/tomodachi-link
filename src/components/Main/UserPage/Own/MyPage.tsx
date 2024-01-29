@@ -19,7 +19,17 @@ type MyPageProps = {
 const TEXT_DARK_COLOR = '#020202';
 const TEXT_LIGHT_COLOR = '#e4e6ea';
 
-export default function MyPage({ isPaginationTriggered }: MyPageProps) {
+/**
+ * React component for rendering the user's page.
+ *
+ * @component
+ * @param {MyPageProps} props - The component props.
+ * @param {boolean} props.isPaginationTriggered - Indicates whether pagination is triggered.
+ * @returns {JSX.Element} The rendered MyPage component.
+ */
+export default function MyPage({
+    isPaginationTriggered,
+}: MyPageProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
     const { friendData } = useFriendData();
     const { pendingFriendRequests } = currentUserData || {};
@@ -45,17 +55,44 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
     const userId = currentUserData?._id;
 
-    const handleRefreshPosts = () => setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
+    /**
+     * Handles refreshing posts by updating the state variable to force remount.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleRefreshPosts = (): void =>
+        setMyPostsKey((prevKey) => prevKey + 1); // update state variable to force remount
 
-    const handleRefreshPics = () => setMyPicsKey((prevKey) => prevKey + 1); // update state variable to force remount
+    /**
+     * Handles refreshing pictures by updating the state variable to force remount.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleRefreshPics = (): void =>
+        setMyPicsKey((prevKey) => prevKey + 1); // update state variable to force remount
 
-    const onFetchComplete = (nameOfComponent: string) => {
+    /**
+     * Callback function to handle fetch completion of components.
+     *
+     * @function
+     * @param {string} nameOfComponent - The name of the completed component.
+     * @returns {void}
+     */
+    const onFetchComplete = (nameOfComponent: string): void => {
         setComponentLoading((prevLoading) => ({
             ...prevLoading,
             [nameOfComponent]: false,
         }));
     };
 
+    /**
+     * useEffect hook to check if the picture list should be refreshed.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (shouldRefreshPictureList === true) handleRefreshPics();
 
@@ -64,11 +101,23 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
         };
     }, [shouldRefreshPictureList]);
 
+    /**
+     * useEffect hook to check if all components are loaded and set the loading status.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (Object.values(componentLoading).every((v) => v === false))
             setLoading(false);
     }, [componentLoading]);
 
+    /**
+     * useEffect hook to check if there are pending friend requests and set the loading status.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (
             numberOfPendingFriendRequests !== undefined &&
@@ -81,13 +130,23 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
         }
     }, [numberOfPendingFriendRequests]);
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex flex-col justify-center items-center w-full h-[calc(100vh_-_2rem)] py-4 bg-background2 dark:bg-background2Dark ">
             <LoadingSpinner message="Setting up your page" />
         </div>
     );
 
-    const MyPageContent = (
+    /**
+     * JSX Element representing the content of the user's page.
+     *
+     * @type {JSX.Element}
+     */
+    const MyPageContent: JSX.Element = (
         <motion.div
             ref={MyPageContentRef}
             initial={{ y: 10, opacity: 0 }}
@@ -140,6 +199,11 @@ export default function MyPage({ isPaginationTriggered }: MyPageProps) {
         </motion.div>
     );
 
+    /**
+     * JSX Element representing the entire MyPage component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex flex-col min-h-[calc(100vh_-_3rem)] lg:min-h-full  bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg">
             {loading && LoadingContent}

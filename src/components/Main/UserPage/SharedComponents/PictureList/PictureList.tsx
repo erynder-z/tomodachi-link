@@ -15,10 +15,19 @@ type PictureListProps = {
     userId: string | undefined;
 };
 
+/**
+ * React component for displaying a list of user pictures.
+ *
+ * @component
+ * @param {PictureListProps} props - The component props.
+ * @param {(nameOfComponent: string) => void} props.onFetchComplete - Callback function invoked when the fetch operation is complete.
+ * @param {string | undefined} props.userId - The user ID for whom the pictures are being fetched.
+ * @returns {JSX.Element} The rendered PictureList component.
+ */
 export default function PictureList({
     onFetchComplete,
     userId,
-}: PictureListProps) {
+}: PictureListProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
     const [pictures, setPictures] = useState<ImageType[]>([]);
@@ -30,7 +39,14 @@ export default function PictureList({
 
     const MAX_NUMBER_OF_PICTURES_TO_SHOW = 9;
 
-    const handleFetchUserPics = async () => {
+    /**
+     * Handles fetching user pictures from the backend.
+     *
+     * @function
+     * @async
+     * @returns {Promise<void>} A Promise that resolves once the pictures are fetched.
+     */
+    const handleFetchUserPics = async (): Promise<void> => {
         if (token && userId) {
             const skip = 0;
             const apiEndpointURLList = `/api/v1/users/${userId}/picture?skip=${skip}`;
@@ -68,13 +84,26 @@ export default function PictureList({
         }
     };
 
-    const handleImageClick = (image: ImageType) => setSelectedImage(image);
+    /**
+     * Handles the click event on an image, opening it in the lightbox.
+     *
+     * @function
+     * @param {ImageType} image - The selected image.
+     * @returns {void}
+     */
+    const handleImageClick = (image: ImageType): void =>
+        setSelectedImage(image);
 
     useEffect(() => {
         if (shouldInitialize.current === true) handleFetchUserPics();
     }, [userId]);
 
-    const pictureList = pictures?.map((picture) => (
+    /**
+     * JSX Element representing a list of individual picture.
+     *
+     * @type {JSX.Element[]}
+     */
+    const pictureList: JSX.Element[] = pictures?.map((picture) => (
         <div
             key={picture.id}
             className="relative flex rounded outline-highlight dark:outline-highlightDark hover:outline"
@@ -95,13 +124,23 @@ export default function PictureList({
         </div>
     ));
 
-    const LoadingContent = (
+    /**
+     * JSX Element representing the loading content.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="flex justify-center items-center w-full py-4">
             <LoadingSpinner />
         </div>
     );
 
-    const PictureListContent =
+    /**
+     * JSX Element representing the content of the PictureList component.
+     *
+     * @type {JSX.Element[] | JSX.Element}
+     */
+    const PictureListContent: JSX.Element[] | JSX.Element =
         pictureList.length > 0 ? (
             pictureList
         ) : (
@@ -110,7 +149,12 @@ export default function PictureList({
             </span>
         );
 
-    const SeeAllPicturesButton = (
+    /**
+     * JSX Element representing the "See All Pictures" button.
+     *
+     * @type {JSX.Element}
+     */
+    const SeeAllPicturesButton: JSX.Element = (
         <motion.button whileTap={{ scale: 0.97 }}>
             <Link
                 to={`/users/${userId}/gallery`}
@@ -121,6 +165,11 @@ export default function PictureList({
         </motion.button>
     );
 
+    /**
+     * JSX Element representing the complete PictureList component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="px-4 md:px-0">
             <h1 className="text-base font-bold">Pictures</h1>
