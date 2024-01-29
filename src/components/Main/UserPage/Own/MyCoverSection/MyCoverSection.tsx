@@ -18,12 +18,23 @@ type MyCoverSectionProps = {
     setColorPalette: React.Dispatch<React.SetStateAction<FinalColor[]>>;
 };
 
+/**
+ * React component for rendering the cover section of the user's page.
+ *
+ * @component
+ * @param {MyCoverSectionProps} props - The component props.
+ * @param {(nameOfComponent: string) => void} props.onFetchComplete - Callback function to handle fetch completion.
+ * @param {string} props.backgroundColor - Background color of the cover section.
+ * @param {string} props.textColor - Text color of the cover section.
+ * @param {React.Dispatch<React.SetStateAction<FinalColor[]>>} props.setColorPalette - State setter for the color palette.
+ * @returns {JSX.Element} The rendered MyCoverSection component.
+ */
 export default function MyCoverSection({
     onFetchComplete,
     backgroundColor,
     textColor,
     setColorPalette,
-}: MyCoverSectionProps) {
+}: MyCoverSectionProps): JSX.Element {
     const { token } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { setInfo } = useInfoCard();
@@ -36,14 +47,33 @@ export default function MyCoverSection({
 
     const shouldSendFetchCompleteInfo = useRef(true);
 
-    const handleChangeCoverImage = () => setShowMenu(!showMenu);
+    /**
+     * Toggles the display of the cover image change menu.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleChangeCoverImage = (): void => setShowMenu(!showMenu);
 
-    const handleCoverOptionClick = (coverImage: CoverOption) => {
+    /**
+     * Handles cover option click and sets the selected cover image.
+     *
+     * @function
+     * @param {CoverOption} coverImage - The selected cover option.
+     * @returns {void}
+     */
+    const handleCoverOptionClick = (coverImage: CoverOption): void => {
         setSelectedCover(coverImage);
         setShowMenu(false);
     };
 
-    const handleSaveCoverImage = () => {
+    /**
+     * Handles saving the selected cover image.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleSaveCoverImage = (): void => {
         const coverImageName = selectedCover?.name;
         if (token && coverImageName) {
             saveCoverImage(token, coverImageName, handleFetchUserData, setInfo);
@@ -52,15 +82,30 @@ export default function MyCoverSection({
         }
     };
 
-    function getUserCoverImage() {
-        return currentUserData
+    /**
+     * Gets the cover image associated with the current user.
+     *
+     * @function
+     * @returns {CoverOption | null} The cover image option.
+     */
+    const getUserCoverImage = (): CoverOption | null => {
+        const foundCover = currentUserData
             ? COVER_OPTIONS.find(
                   (coverImage) => coverImage.name === currentUserData.cover
               )
-            : null;
-    }
+            : undefined;
 
-    const getColorPalette = async () => {
+        return foundCover !== undefined ? foundCover : null;
+    };
+
+    /**
+     * Fetches and sets the color palette for the selected cover image.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>}
+     */
+    const getColorPalette = async (): Promise<void> => {
         setColorPalette([]);
         if (selectedCover) {
             try {
@@ -74,13 +119,31 @@ export default function MyCoverSection({
         }
     };
 
-    const checkSaveButton = () =>
+    /**
+     * Checks whether the Save button should be shown based on changes.
+     *
+     * @function
+     * @returns {void}
+     */
+    const checkSaveButton = (): void =>
         selectedCover !== initialCover
             ? setIsSaveButtonShown(true)
             : setIsSaveButtonShown(false);
 
-    const handleCloseButtonCLick = () => setShowMenu(false);
+    /**
+     * Closes the cover change menu.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleCloseButtonCLick = (): void => setShowMenu(false);
 
+    /**
+     * useEffect hook to initialize selected and initial covers on user data changes.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (currentUserData) {
             const userCoverImage = getUserCoverImage();
@@ -91,6 +154,12 @@ export default function MyCoverSection({
         }
     }, [currentUserData?.cover]);
 
+    /**
+     * useEffect hook to handle color palette and fetch completion on selectedCover changes.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (selectedCover) {
             getColorPalette();
@@ -104,7 +173,12 @@ export default function MyCoverSection({
         }
     }, [selectedCover, initialCover]);
 
-    const CoverImage = (
+    /**
+     * JSX Element representing the cover image.
+     *
+     * @type {JSX.Element}
+     */
+    const CoverImage: JSX.Element = (
         <img
             src={selectedCover?.image}
             alt="cover image"
@@ -112,7 +186,12 @@ export default function MyCoverSection({
         />
     );
 
-    const ChangeCoverButton = (
+    /**
+     * JSX Element representing the Change Cover Image button.
+     *
+     * @type {JSX.Element}
+     */
+    const ChangeCoverButton: JSX.Element = (
         <motion.button
             onClick={handleChangeCoverImage}
             whileTap={{ scale: 0.97 }}
@@ -122,7 +201,12 @@ export default function MyCoverSection({
         </motion.button>
     );
 
-    const SaveButton = (
+    /**
+     * JSX Element representing the Save button.
+     *
+     * @type {JSX.Element}
+     */
+    const SaveButton: JSX.Element = (
         <button
             className="absolute bottom-4 right-4  py-2 px-4 border-2  rounded lg:rounded-lg"
             style={{
@@ -135,7 +219,12 @@ export default function MyCoverSection({
         </button>
     );
 
-    const ColoredHeaderSection = (
+    /**
+     * JSX Element representing the colored header section.
+     *
+     * @type {JSX.Element}
+     */
+    const ColoredHeaderSection: JSX.Element = (
         <div
             className="relative row-span-1 flex h-full gap-4 px-4 bg-card dark:bg-cardDark rounded-b"
             style={
@@ -155,6 +244,11 @@ export default function MyCoverSection({
         </div>
     );
 
+    /**
+     * JSX Element representing the entire MyCoverSection.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="h-[calc(100vh_-_5rem)] md:h-96 col-span-2 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex">
