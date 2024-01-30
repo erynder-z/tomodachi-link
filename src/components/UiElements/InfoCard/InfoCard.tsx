@@ -7,10 +7,25 @@ type infoCardPropsType = {
     info: InfoType | null;
 };
 
-const InfoCard = ({ info }: infoCardPropsType) => {
+/**
+ * React component for displaying informational messages.
+ *
+ * @component
+ * @param {InfoCardPropsType} props - The component props.
+ * @param {InfoType | null} props.info - Information data to be displayed in the InfoCard.
+ * @returns {JSX.Element} The rendered InfoCard component.
+ */
+const InfoCard = ({ info }: infoCardPropsType): JSX.Element => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
-    const getBgColorClass = (typeOfInfo: string | undefined) => {
+    /**
+     * Get the background color class based on the type of information.
+     *
+     * @function
+     * @param {string | undefined} typeOfInfo - The type of information.
+     * @returns {string} The background color class.
+     */
+    const getBgColorClass = (typeOfInfo: string | undefined): string => {
         switch (typeOfInfo) {
             case 'good':
                 return 'bg-green-700/90';
@@ -28,6 +43,12 @@ const InfoCard = ({ info }: infoCardPropsType) => {
     const typeOfInfo = info?.typeOfInfo;
     const bgColorClass = getBgColorClass(typeOfInfo);
 
+    /**
+     * Effect to control the visibility of the InfoCard and set a timer to hide it after 3000 milliseconds.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (info) {
             setIsVisible(true);
@@ -40,6 +61,11 @@ const InfoCard = ({ info }: infoCardPropsType) => {
         }
     }, [info]);
 
+    /**
+     * Render the InfoCard component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-full w-full z-50 font-regularFont">
             <div
