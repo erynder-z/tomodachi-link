@@ -1,6 +1,17 @@
 import { RotatingLines } from 'react-loader-spinner';
 
-export default function ButtonBusy() {
+/**
+ * React component for rendering a button in a busy/loading state.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ButtonBusy component.
+ */
+export default function ButtonBusy(): JSX.Element {
+    /**
+     * Render the ButtonBusy component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex justify-center items-center p-2 md:p-4">
             <RotatingLines

@@ -4,7 +4,22 @@ type FullscreenLoadingProps = {
     message: string;
 };
 
-export default function FullscreenLoading({ message }: FullscreenLoadingProps) {
+/**
+ * React component for displaying a fullscreen loading spinner with a message.
+ *
+ * @component
+ * @param {FullscreenLoadingProps} props - The component props.
+ * @param {string} props.message - The message to display alongside the loading spinner.
+ * @returns {JSX.Element} The rendered FullscreenLoading component.
+ */
+export default function FullscreenLoading({
+    message,
+}: FullscreenLoadingProps): JSX.Element {
+    /**
+     * Render the FullscreenLoading component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="w-screen h-screen flex flex-col justify-center items-center">
             <ColorRing

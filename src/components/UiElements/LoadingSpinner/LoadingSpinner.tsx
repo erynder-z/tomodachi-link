@@ -6,7 +6,17 @@ type LoadingSpinnerProps = {
     message?: string;
 };
 
-export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
+/**
+ * React component for rendering a loading spinner with an optional message.
+ *
+ * @component
+ * @param {LoadingSpinnerProps} props - The component props.
+ * @param {string} [props.message] - Optional message to display alongside the loading spinner.
+ * @returns {JSX.Element} The rendered LoadingSpinner component.
+ */
+export default function LoadingSpinner({
+    message,
+}: LoadingSpinnerProps): JSX.Element {
     const { colorScheme } = useTheme();
 
     const brightThemeColor = 'rgba(0,0,0,0.4)';
@@ -18,6 +28,11 @@ export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
     const secondColor =
         colorScheme === 'bright' ? brightThemeColor : darkThemeColor;
 
+    /**
+     * Render the LoadingSpinner component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-4">
             <AnimatePresence>
