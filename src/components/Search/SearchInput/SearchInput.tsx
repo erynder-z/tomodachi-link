@@ -7,16 +7,41 @@ type SearchInputProps = {
     searchMode: SearchModeType;
 };
 
+/**
+ * React component for rendering a search input in the search interface.
+ *
+ * @component
+ * @param {SearchInputProps} props - The component props.
+ * @param {string} props.searchText - The current search text.
+ * @param {React.Dispatch<React.SetStateAction<string>>} props.setSearchText - Function to update the search text.
+ * @param {SearchModeType} props.searchMode - The current search mode.
+ * @returns {JSX.Element} The rendered SearchInput component.
+ */
 export default function SearchInput({
     searchText,
     setSearchText,
     searchMode,
-}: SearchInputProps) {
+}: SearchInputProps): JSX.Element {
     const [isInputFocused, setIsInputFocused] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
-    const handleTextareaChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-        setSearchText(event.target.value);
 
+    /**
+     * Event handler for input change.
+     *
+     * @function
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+     * @returns {void}
+     */
+    const handleTextareaChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ): void => setSearchText(event.target.value);
+
+    /**
+     * Generates the input placeholder message based on the search mode.
+     *
+     * @function
+     * @returns {string} The input placeholder message.
+     */
     const inputMessage = (() => {
         switch (searchMode) {
             case 'all':
@@ -32,6 +57,11 @@ export default function SearchInput({
         }
     })();
 
+    /**
+     * Render the SearchInput component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative">
             <input

@@ -6,12 +6,28 @@ type SearchModeSelectProps = {
     clearSearch: () => void;
 };
 
+/**
+ * React component for rendering a selection menu for search modes in the search interface.
+ *
+ * @component
+ * @param {SearchModeSelectProps} props - The component props.
+ * @param {SearchModeType} props.searchMode - The current search mode.
+ * @param {React.Dispatch<React.SetStateAction<SearchModeType>>} props.setSearchMode - Function to update the search mode.
+ * @param {() => void} props.clearSearch - Callback function to clear the search.
+ * @returns {JSX.Element} The rendered SearchModeSelect component.
+ */
 export default function SearchModeSelect({
     searchMode,
     setSearchMode,
     clearSearch,
-}: SearchModeSelectProps) {
+}: SearchModeSelectProps): JSX.Element {
     const options: SearchModeType[] = ['all', 'users', 'posts', 'polls'];
+
+    /**
+     * Render the SearchModeSelect component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <ol className="flex w-full justify-between text-regularTextDark">
             {options.map((mode) => (

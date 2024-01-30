@@ -9,13 +9,27 @@ type SearchResultsPollItemType = {
     queryString: string;
 };
 
+/**
+ * React component for rendering a search result item for polls.
+ *
+ * @component
+ * @param {SearchResultsPollItemType} props - The component props.
+ * @param {SearchResultPollType} props.itemData - Data for the search result poll item.
+ * @param {string} props.queryString - The search query string for highlighting.
+ * @returns {JSX.Element} The rendered SearchResultsPollItem component.
+ */
 export default function SearchResultsPollItem({
     itemData,
     queryString,
-}: SearchResultsPollItemType) {
+}: SearchResultsPollItemType): JSX.Element {
     const { _id, question, description } = itemData;
     const pollText = `${question} ${description}`;
 
+    /**
+     * Render the SearchResultsPollItem component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}

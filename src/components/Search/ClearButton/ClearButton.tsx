@@ -4,7 +4,22 @@ type ClearButtonProps = {
     clearSearch: () => void;
 };
 
-export default function ClearButton({ clearSearch }: ClearButtonProps) {
+/**
+ * React component for rendering a clear button in the search interface.
+ *
+ * @component
+ * @param {ClearButtonProps} props - The component props.
+ * @param {() => void} props.clearSearch - Callback function to clear the search.
+ * @returns {JSX.Element} The rendered ClearButton component.
+ */
+export default function ClearButton({
+    clearSearch,
+}: ClearButtonProps): JSX.Element {
+    /**
+     * Render the search clear button.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}

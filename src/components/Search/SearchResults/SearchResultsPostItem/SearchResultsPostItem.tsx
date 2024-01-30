@@ -9,12 +9,26 @@ type SearchResultsPostItemType = {
     queryString: string;
 };
 
+/**
+ * React component for rendering a search result item for posts.
+ *
+ * @component
+ * @param {SearchResultsPostItemType} props - The component props.
+ * @param {SearchResultPostType} props.itemData - Data for the search result post item.
+ * @param {string} props.queryString - The search query string for highlighting.
+ * @returns {JSX.Element} The rendered SearchResultsPostItem component.
+ */
 export default function SearchResultsPostItem({
     itemData,
     queryString,
-}: SearchResultsPostItemType) {
+}: SearchResultsPostItemType): JSX.Element {
     const { _id, text } = itemData;
 
+    /**
+     * Render the SearchResultsPostItem component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}

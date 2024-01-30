@@ -8,15 +8,28 @@ type SearchResultsUserListItem = {
     itemData: SearchResultUserType;
 };
 
+/**
+ * React component for rendering a search result item for users.
+ *
+ * @component
+ * @param {SearchResultsUserListItem} props - The component props.
+ * @param {SearchResultUserType} props.itemData - Data for the search result user item.
+ * @returns {JSX.Element} The rendered SearchResultsUserListItem component.
+ */
 export default function SearchResultsUserListItem({
     itemData,
-}: SearchResultsUserListItem) {
+}: SearchResultsUserListItem): JSX.Element {
     const { currentUserData } = useCurrentUserData();
     const { _id, firstName, lastName, userpic } = itemData || {};
 
     const isCurrentUser = currentUserData?._id === _id;
     const path = isCurrentUser ? '/mypage' : `/users/${_id}`;
 
+    /**
+     * Render the SearchResultsUserListItem component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.button
             whileTap={{ scale: 0.97 }}

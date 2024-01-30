@@ -1,5 +1,17 @@
 import { motion } from 'framer-motion';
-export default function NoResultsFound() {
+
+/**
+ * React component for rendering a message when no search results are found.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered NoResultsFound component.
+ */
+export default function NoResultsFound(): JSX.Element {
+    /**
+     * Render the NoResultsFound component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}

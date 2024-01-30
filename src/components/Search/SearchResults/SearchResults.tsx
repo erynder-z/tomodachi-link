@@ -15,11 +15,21 @@ type SearchResultsProps = {
     handleCloseButtonClick: () => void;
 };
 
+/**
+ * React component for rendering the search results list.
+ *
+ * @component
+ * @param {SearchResultsProps} props - The component props.
+ * @param {string} props.searchText - The search text used for highlighting.
+ * @param {SearchResultType[]} props.searchResults - The array of search results.
+ * @param {() => void} props.handleCloseButtonClick - Callback function to handle the close button click.
+ * @returns {JSX.Element} The rendered SearchResults component.
+ */
 export default function SearchResults({
     searchText,
     searchResults,
     handleCloseButtonClick,
-}: SearchResultsProps) {
+}: SearchResultsProps): JSX.Element {
     const getSearchResultComponent = (resultItem: SearchResultType) => {
         switch (resultItem.type) {
             case 'user':
@@ -46,6 +56,12 @@ export default function SearchResults({
                 return null;
         }
     };
+
+    /**
+     * Render the getSearchResultComponent component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <ul className="w-full p-2 bg-white/70 dark:bg-white/20 overflow-auto max-h-[50vh] overflow-x-hidden">
             {searchResults?.map((resultItem: SearchResultType, index) => (

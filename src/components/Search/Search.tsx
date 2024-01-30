@@ -20,6 +20,15 @@ const DEBOUNCE_TIMEOUT = 500;
 const USER_NOTIFICATION_TIMEOUT = 3000;
 const USER_ERROR_NOTIFICATION_TIMEOUT = 15000;
 
+/**
+ * React component for rendering a search interface.
+ *
+ * @component
+ * @param {SearchPropsType} props - The component props.
+ * @param {() => void} props.handleCloseButtonClick - Callback function for closing the search interface.
+ * @param {SearchModeType} [props.defaultSearchMode] - Default search mode.
+ * @returns {JSX.Element} The rendered Search component.
+ */
 export default function Search({
     handleCloseButtonClick,
     defaultSearchMode,
@@ -36,11 +45,23 @@ export default function Search({
     const dropdownRef = useRef<HTMLDivElement>(null);
     const debounce = useRef<NodeJS.Timeout | null>(null);
 
+    /**
+     * Clears the search input and results.
+     *
+     * @function
+     * @returns {void}
+     */
     const clearSearch = () => {
         setSearchText('');
         setSearchResults([]);
     };
 
+    /**
+     * useEffect hook to fetch search results when the search text changes.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         const fetchSearchResults = async () => {
             const delayedNotificationTimeout = setTimeout(() => {
@@ -92,6 +113,11 @@ export default function Search({
         }, DEBOUNCE_TIMEOUT);
     }, [searchText]);
 
+    /**
+     * JSX Element representing the loading spinner.
+     *
+     * @type {JSX.Element}
+     */
     const Loading = (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <LoadingSpinner
@@ -106,6 +132,11 @@ export default function Search({
         </div>
     );
 
+    /**
+     * Render the search interface based on the search and loading states.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="relative z-0 px-4 w-full" ref={dropdownRef}>
             <div className="flex flex-col gap-8">

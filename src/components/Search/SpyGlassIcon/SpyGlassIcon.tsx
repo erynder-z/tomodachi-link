@@ -1,5 +1,17 @@
 import { motion } from 'framer-motion';
-export default function SpyGlassIcon() {
+
+/**
+ * React component for rendering a spyglass icon animation.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered SpyGlassIcon component.
+ */
+export default function SpyGlassIcon(): JSX.Element {
+    /**
+     * Render the SpyGlassIcon component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             initial={{ opacity: 0 }}
