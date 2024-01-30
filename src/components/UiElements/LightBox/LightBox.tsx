@@ -7,7 +7,19 @@ type LightBoxProps = {
     onClose: () => void;
 };
 
-export default function LightBox({ image, onClose }: LightBoxProps) {
+/**
+ * React component for displaying an image in a lightbox.
+ *
+ * @component
+ * @param {LightBoxProps} props - The component props.
+ * @param {ImageType | string | null} props.image - The image to display in the lightbox. It can be a URL or an image object.
+ * @param {() => void} props.onClose - Callback function to handle the lightbox close event.
+ * @returns {JSX.Element} The rendered LightBox component.
+ */
+export default function LightBox({
+    image,
+    onClose,
+}: LightBoxProps): JSX.Element {
     let src;
     // image is a URL to the image
     if (typeof image === 'string') {
@@ -17,6 +29,11 @@ export default function LightBox({ image, onClose }: LightBoxProps) {
         src = `data:${image?.contentType};base64,${image?.data}`;
     }
 
+    /**
+     * Render the LightBox component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.div
             key="lightBox"
