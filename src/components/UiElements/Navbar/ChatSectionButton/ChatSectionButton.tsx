@@ -7,10 +7,23 @@ type ChatSectionButtonProps = {
     isChatDisabled: boolean;
 };
 
+/**
+ * React component for rendering a chat section button.
+ *
+ * @component
+ * @param {ChatSectionButtonProps} props - The component props.
+ * @param {boolean} props.isChatDisabled - Indicates whether the chat button is disabled.
+ * @returns {JSX.Element} The rendered ChatSectionButton component.
+ */
 export default function ChatSectionButton({
     isChatDisabled,
-}: ChatSectionButtonProps) {
-    const DisabledButton = (
+}: ChatSectionButtonProps): JSX.Element {
+    /**
+     * JSX Element representing a disabled chat button.
+     *
+     * @type {JSX.Element}
+     */
+    const DisabledButton: JSX.Element = (
         <button
             type="button"
             disabled
@@ -20,7 +33,12 @@ export default function ChatSectionButton({
         </button>
     );
 
-    const NormalButton = (
+    /**
+     * JSX Element representing a normal chat button.
+     *
+     * @type {JSX.Element}
+     */
+    const NormalButton: JSX.Element = (
         <>
             <motion.button
                 data-tooltip-id="navbar-chat-tooltip"
@@ -43,5 +61,11 @@ export default function ChatSectionButton({
             <Tooltip id="navbar-chat-tooltip" style={{ fontSize: '0.75rem' }} />
         </>
     );
+
+    /**
+     * Render the chat button based on the provided props.
+     *
+     * @type {JSX.Element}
+     */
     return isChatDisabled ? DisabledButton : NormalButton;
 }

@@ -3,7 +3,18 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
-export default function FriendSectionButton() {
+/**
+ * React component for rendering a friend section button.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered FriendSectionButton component.
+ */
+export default function FriendSectionButton(): JSX.Element {
+    /**
+     * Render the FriendSectionButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.button

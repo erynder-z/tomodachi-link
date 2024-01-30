@@ -1,18 +1,35 @@
 import { Tooltip } from 'react-tooltip';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 
-export default function NavbarUserOptionsButton() {
+/**
+ * React component for rendering the user options button in the navbar.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered NavbarUserOptionsButton component.
+ */
+export default function NavbarUserOptionsButton(): JSX.Element {
     const { currentUserData } = useCurrentUserData();
     const { userpic, pendingFriendRequests } = currentUserData || {};
     const userImage = userpic ? userpic.data : undefined;
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
-    const LoadingContent = (
+    /**
+     * Loading content for the user options button while user data is being fetched.
+     *
+     * @type {JSX.Element}
+     */
+    const LoadingContent: JSX.Element = (
         <div className="w-8 h-8 object-cover rounded-full mx-auto bg-gray-600/50 animate-pulse"></div>
     );
 
-    const NavbarUserOptionsButton = (
+    /**
+     * The main content of the NavbarUserOptionsButton component, displaying the user's avatar and
+     * a notification badge for pending friend requests (if any).
+     *
+     * @type {JSX.Element}
+     */
+    const NavbarUserOptionsButton: JSX.Element = (
         <>
             <div
                 data-tooltip-id="navbar-user-options-tooltip"
@@ -37,5 +54,10 @@ export default function NavbarUserOptionsButton() {
         </>
     );
 
+    /**
+     * Render the button based on the loading state.
+     *
+     * @type {JSX.Element}
+     */
     return !userImage ? LoadingContent : NavbarUserOptionsButton;
 }

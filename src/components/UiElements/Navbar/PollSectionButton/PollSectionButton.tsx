@@ -3,7 +3,18 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
-export default function PollSectionButton() {
+/**
+ * React component for rendering the button to navigate to the poll section in the navbar.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered PollSectionButton component.
+ */
+export default function PollSectionButton(): JSX.Element {
+    /**
+     * Render the PollSectionButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.button

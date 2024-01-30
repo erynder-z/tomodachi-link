@@ -3,7 +3,18 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
-export default function FeedSectionButton() {
+/**
+ * React component for rendering a feed section button.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered FeedSectionButton component.
+ */
+export default function FeedSectionButton(): JSX.Element {
+    /**
+     * Render the FeedSectionButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <motion.button
             data-tooltip-id="navbar-feed-tooltip"
