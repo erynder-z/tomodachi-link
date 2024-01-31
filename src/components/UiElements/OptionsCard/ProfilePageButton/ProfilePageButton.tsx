@@ -16,14 +16,28 @@ type ProfilePageButtonProps = {
     >;
 };
 
+/**
+ * React component for rendering a button that links to the user's profile page.
+ *
+ * @function
+ * @param {ProfilePageButtonProps} props - The component props.
+ * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @returns {JSX.Element} The rendered ProfilePageButton component.
+ */
 export default function ProfilePageButton({
     setShouldOverlaysShow,
-}: ProfilePageButtonProps) {
+}: ProfilePageButtonProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
     const { pendingFriendRequests } = currentUserData || {};
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
-    const handleCloseOptions = () => {
+    /**
+     * Closes all overlay options when the profile page button is clicked.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleCloseOptions = (): void => {
         setShouldOverlaysShow({
             searchOverlay: false,
             editUserDataModal: false,
@@ -32,6 +46,11 @@ export default function ProfilePageButton({
         });
     };
 
+    /**
+     * Rendered JSX for the ProfilePageButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.div

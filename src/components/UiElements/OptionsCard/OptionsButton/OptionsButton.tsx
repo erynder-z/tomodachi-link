@@ -18,11 +18,31 @@ type OptionsButtonProps = {
         }>
     >;
 };
+
+/**
+ * React component for rendering an options button.
+ *
+ * @function
+ * @param {OptionsButtonProps} props - The component props.
+ * @param {Object} props.shouldOverlaysShow - Object indicating the visibility of different overlays.
+ * @param {boolean} props.shouldOverlaysShow.searchOverlay - Indicates whether the search overlay is visible.
+ * @param {boolean} props.shouldOverlaysShow.editUserDataModal - Indicates whether the edit user data modal is visible.
+ * @param {boolean} props.shouldOverlaysShow.mobileOptionsModal - Indicates whether the mobile options modal is visible.
+ * @param {boolean} props.shouldOverlaysShow.guestAccountOverlay - Indicates whether the guest account overlay is visible.
+ * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @returns {JSX.Element} The rendered OptionsButton component.
+ */
 export default function OptionsButton({
     shouldOverlaysShow,
     setShouldOverlaysShow,
-}: OptionsButtonProps) {
-    const handleButtonClick = () => {
+}: OptionsButtonProps): JSX.Element {
+    /**
+     * Handles the click event for the options button.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleButtonClick = (): void => {
         setShouldOverlaysShow({
             searchOverlay: false,
             editUserDataModal: !shouldOverlaysShow.editUserDataModal,
@@ -31,6 +51,11 @@ export default function OptionsButton({
         });
     };
 
+    /**
+     * Rendered JSX for the OptionsButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.button

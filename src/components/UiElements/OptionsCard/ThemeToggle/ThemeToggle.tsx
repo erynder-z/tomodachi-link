@@ -4,18 +4,35 @@ import { ThemeType } from '../../../../types/miscTypes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
-export default function ThemeToggle() {
+/**
+ * React component for rendering a toggle button for changing the theme (dark/bright mode).
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ThemeToggle component.
+ */
+export default function ThemeToggle(): JSX.Element {
     const { colorScheme, setColorScheme } = useTheme();
 
-    const toggleTheme = () => {
+    const iconRotation = colorScheme === 'dark' ? 180 : 0;
+
+    /**
+     * Toggles the color scheme between 'bright' and 'dark', and updates local storage.
+     *
+     * @function
+     * @returns {void}
+     */
+    const toggleTheme = (): void => {
         const newTheme: ThemeType =
             colorScheme === 'bright' ? 'dark' : 'bright';
         setColorScheme(newTheme);
         localStorage.setItem('colorSchemeOdinBook', newTheme);
     };
 
-    const iconRotation = colorScheme === 'dark' ? 180 : 0;
-
+    /**
+     * Rendered JSX for the ThemeToggle component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <AnimatePresence initial={false}>
             <motion.div

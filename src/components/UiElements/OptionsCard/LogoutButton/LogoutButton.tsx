@@ -6,12 +6,24 @@ import { motion } from 'framer-motion';
 import { InfoType } from '../../../../types/infoTypes';
 import { Tooltip } from 'react-tooltip';
 
-export default function LogoutButton() {
+/**
+ * React component for rendering a logout button.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered LogoutButton component.
+ */
+export default function LogoutButton(): JSX.Element {
     const { logout } = useAuth();
     const { setInfo } = useInfoCard();
     const navigate = useNavigate();
 
-    const handleLogoutClick = () => {
+    /**
+     * Handles the click event for the logout button.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleLogoutClick = (): void => {
         navigate('/');
         const SUCCESS_INFO = {
             typeOfInfo: 'good',
@@ -22,6 +34,11 @@ export default function LogoutButton() {
         logout();
     };
 
+    /**
+     * Rendered JSX for the LogoutButton component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <motion.button

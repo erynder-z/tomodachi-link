@@ -4,16 +4,33 @@ import { ScanLinesType } from '../../../../types/miscTypes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
-export default function ScanLinesToggle() {
+/**
+ * React component for rendering a toggle button for scanlines.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ScanLinesToggle component.
+ */
+export default function ScanLinesToggle(): JSX.Element {
     const { scanLines, setScanLines } = useTheme();
 
-    const toggleScanLines = () => {
+    /**
+     * Toggles the scanlines between 'none' and 'horizontal', and updates local storage.
+     *
+     * @function
+     * @returns {void}
+     */
+    const toggleScanLines = (): void => {
         const newScanLineType: ScanLinesType =
             scanLines === 'none' ? 'horizontal' : 'none';
         setScanLines(newScanLineType);
         localStorage.setItem('scanLinesOdinBook', newScanLineType);
     };
 
+    /**
+     * Rendered JSX for the ScanLinesToggle component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <AnimatePresence initial={false}>
             <motion.div
