@@ -9,10 +9,24 @@ type GuestAccountOverlayProps = {
     >;
 };
 
+/**
+ * React component for rendering an overlay explaining the limitations of the guest account.
+ *
+ * @function
+ * @param {GuestAccountOverlayProps} props - The component props.
+ * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @returns {JSX.Element} The rendered GuestAccountOverlay component.
+ */
 export default function GuestAccountOverlay({
     setShouldOverlaysShow,
-}: GuestAccountOverlayProps) {
-    const handleCloseButtonClick = () => {
+}: GuestAccountOverlayProps): JSX.Element {
+    /**
+     * Handles the click event when the "Got it" button is clicked, closing the overlay.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleCloseButtonClick = (): void => {
         setShouldOverlaysShow({
             searchOverlay: false,
             editUserDataModal: false,
@@ -21,6 +35,11 @@ export default function GuestAccountOverlay({
         });
     };
 
+    /**
+     * Rendered JSX for the GuestAccountOverlay component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen p-8 z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-slate-900/90">
             <div className="flex  flex-col text-regularText dark:text-regularTextDark">

@@ -15,11 +15,26 @@ type SearchOverlayProps = {
     searchMode: SearchModeType;
 };
 
+/**
+ * React component for rendering a search overlay with a close button.
+ *
+ * @function
+ * @param {SearchOverlayProps} props - The component props.
+ * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @param {SearchModeType} props.searchMode - The current search mode type.
+ * @returns {JSX.Element} The rendered SearchOverlay component.
+ */
 export default function SearchOverlay({
     setShouldOverlaysShow,
     searchMode,
-}: SearchOverlayProps) {
-    const handleCloseButtonClick = () => {
+}: SearchOverlayProps): JSX.Element {
+    /**
+     * Handles the click event when the close button is clicked, closing the search overlay.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleCloseButtonClick = (): void => {
         setShouldOverlaysShow({
             searchOverlay: false,
             editUserDataModal: false,
@@ -28,7 +43,12 @@ export default function SearchOverlay({
         });
     };
 
-    const CloseButton = (
+    /**
+     * JSX element representing the close button with a motion effect.
+     *
+     * @type {JSX.Element}
+     */
+    const CloseButton: JSX.Element = (
         <motion.button
             onClick={handleCloseButtonClick}
             whileTap={{ scale: 0.97 }}
@@ -38,6 +58,11 @@ export default function SearchOverlay({
         </motion.button>
     );
 
+    /**
+     * Rendered JSX for the SearchOverlay component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-slate-900/90">
             {CloseButton}

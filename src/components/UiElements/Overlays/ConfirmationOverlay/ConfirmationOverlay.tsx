@@ -8,19 +8,48 @@ type ConfirmationOverlayProps = {
     dialogInfo?: InfoType | null;
 };
 
+/**
+ * React component for rendering a confirmation overlay with Yes/No buttons.
+ *
+ * @function
+ * @param {ConfirmationOverlayProps} props - The component props.
+ * @param {boolean} props.shouldConfirmDialogShow - Indicates whether the confirmation dialog should be displayed.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShouldConfirmDialogShow - React state dispatch function to control the visibility of the confirmation dialog.
+ * @param {Function} props.onConfirm - Callback function to execute when the user confirms the action.
+ * @param {InfoType | null} [props.dialogInfo] - Information about the confirmation dialog (message and icon).
+ * @returns {JSX.Element} The rendered ConfirmationOverlay component.
+ */
 const ConfirmationOverlay = ({
     shouldConfirmDialogShow,
     setShouldConfirmDialogShow,
     onConfirm,
     dialogInfo = null,
-}: ConfirmationOverlayProps) => {
-    const handleYesButtonClick = () => {
+}: ConfirmationOverlayProps): JSX.Element => {
+    /**
+     * Handles the click event when the "Yes" button is clicked.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleYesButtonClick = (): void => {
         onConfirm();
         setShouldConfirmDialogShow(false);
     };
 
-    const handleNoButtonClick = () => setShouldConfirmDialogShow(false);
-    const Dialog = (
+    /**
+     * Handles the click event when the "No" button is clicked.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleNoButtonClick = (): void => setShouldConfirmDialogShow(false);
+
+    /**
+     * JSX element representing the content of the confirmation dialog.
+     *
+     * @type {JSX.Element}
+     */
+    const Dialog: JSX.Element = (
         <div className="flex flex-col items-center gap-4 text-white text-2xl font-semibold">
             <span className="text-5xl">
                 {dialogInfo?.icon && dialogInfo?.icon}
@@ -29,7 +58,12 @@ const ConfirmationOverlay = ({
         </div>
     );
 
-    const YesButton = (
+    /**
+     * JSX element representing the "Yes" button.
+     *
+     * @type {JSX.Element}
+     */
+    const YesButton: JSX.Element = (
         <button
             className=" w-16 bg-green-500 text-white px-2 py-1 hover:bg-green-600"
             onClick={handleYesButtonClick}
@@ -38,7 +72,12 @@ const ConfirmationOverlay = ({
         </button>
     );
 
-    const NoButton = (
+    /**
+     * JSX element representing the "No" button.
+     *
+     * @type {JSX.Element}
+     */
+    const NoButton: JSX.Element = (
         <button
             className="w-16 bg-red-500 text-white px-2 py-1 hover:bg-red-600"
             onClick={handleNoButtonClick}
@@ -47,6 +86,11 @@ const ConfirmationOverlay = ({
         </button>
     );
 
+    /**
+     * Rendered JSX for the ConfirmationOverlay component.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <AnimatePresence>
             {shouldConfirmDialogShow && (
