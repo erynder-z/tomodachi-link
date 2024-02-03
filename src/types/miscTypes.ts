@@ -47,3 +47,15 @@ export type PaginatedListDataType = {
     page: number;
     pageUserData: MinimalUserTypes[];
 };
+
+export type PasswordForm = {
+    password: string;
+    confirmPassword: string;
+};
+
+export type ThemeContextProps = {
+    colorScheme: ThemeType;
+    setColorScheme: (colorScheme: ThemeType) => void;
+    scanLines: ScanLinesType;
+    setScanLines: (scanLines: ScanLinesType) => void;
+};

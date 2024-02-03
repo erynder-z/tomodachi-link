@@ -6,7 +6,20 @@ import {
     useState,
 } from 'react';
 
-export const useDimensions = (targetRef: React.RefObject<HTMLDivElement>) => {
+type Dimensions = {
+    width: number;
+    height: number;
+};
+
+/**
+ * Custom hook that provides the dimensions of a target DOM element and updates them when the window is resized.
+ *
+ * @param {React.RefObject<HTMLDivElement>} targetRef - reference to the target DOM element
+ * @return {Dimensions} object containing the width and height of the target DOM element
+ */
+export const useDimensions = (
+    targetRef: React.RefObject<HTMLDivElement>
+): Dimensions => {
     const shouldInitialize = useRef(true);
 
     const getDimensions = useCallback(() => {

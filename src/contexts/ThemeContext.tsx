@@ -1,15 +1,12 @@
 import { createContext, useState } from 'react';
-import { ScanLinesType, ThemeType } from '../types/miscTypes';
+import {
+    ScanLinesType,
+    ThemeContextProps,
+    ThemeType,
+} from '../types/miscTypes';
 
 type ThemeContextProviderProps = {
     children: React.ReactElement;
-};
-
-type ThemeContextProps = {
-    colorScheme: ThemeType;
-    setColorScheme: (colorScheme: ThemeType) => void;
-    scanLines: ScanLinesType;
-    setScanLines: (scanLines: ScanLinesType) => void;
 };
 
 /**

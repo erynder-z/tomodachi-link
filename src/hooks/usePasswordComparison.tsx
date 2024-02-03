@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import { PasswordForm } from '../types/miscTypes';
 
-type PasswordForm = {
-    password: string;
-    confirmPassword: string;
-};
-
-export function usePasswordComparison(initialState: PasswordForm) {
+/**
+ * Custom hook for comparing passwords and handling password changes.
+ *
+ * @param {PasswordForm} initialState - the initial state for the password form
+ * @return {Object} an object containing passwords, isMatchingPassword, handlePasswordChange, and handleConfirmPasswordChange
+ */
+export function usePasswordComparison(initialState: PasswordForm): object {
     const [passwords, setPasswords] = useState<PasswordForm>(initialState);
     const [isMatchingPassword, setIsMatchingPassword] =
         useState<boolean>(false);

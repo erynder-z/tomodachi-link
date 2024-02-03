@@ -1,18 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { ChatConversationType } from '../types/chatTypes';
-
-type NotificationBubblesContextProps = {
-    conversationsWithUnreadMessages: string[];
-    setConversationsWithUnreadMessages: (
-        conversations: string[] | ((prev: string[]) => string[])
-    ) => void;
-    mutedConversations: string[];
-    setMutedConversations: (
-        conversations: string[] | ((prev: string[]) => string[])
-    ) => void;
-    activeChat: ChatConversationType | null;
-    setActiveChat: (chat: ChatConversationType | null) => void;
-};
+import { NotificationBubblesContextProps } from '../types/infoTypes';
 
 /**
  * React context for managing and providing notification bubbles data.
