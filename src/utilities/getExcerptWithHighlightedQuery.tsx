@@ -1,3 +1,11 @@
+/**
+ * Generates an excerpt with highlighted query from a given text.
+ *
+ * @param {string} text - The text from which to generate the excerpt.
+ * @param {string} query - The query string to highlight in the excerpt.
+ * @param {number} [maxLength=35] - The maximum length of the generated excerpt.
+ * @returns {React.ReactNode|string} - The excerpt with highlighted query, formatted as a React node.
+ */
 export const getExcerptWithHighlightedQuery = (
     text: string,
     query: string,

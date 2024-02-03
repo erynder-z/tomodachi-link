@@ -1,12 +1,21 @@
 import { InfoType } from '../types/infoTypes';
 import { handleFetchErrors } from './handleFetchErrors';
 
+/**
+ * Handles the asynchronous process of posting a reaction to a specific post.
+ *
+ * @param {string} token - User authentication token.
+ * @param {(info: InfoType | null) => void} setInfo - Function to set information card state.
+ * @param {string} _id - The ID of the post to react to.
+ * @param {string} reaction - The type of reaction to post (e.g., 'like', 'love').
+ * @returns {Promise<void>} - A promise that resolves when the operation is complete.
+ */
 export const handlePostReaction = async (
     token: string,
     setInfo: (info: InfoType | null) => void,
     _id: string,
     reaction: string
-) => {
+): Promise<void> => {
     try {
         const SERVER_URL = import.meta.env.VITE_SERVER_URL;
         const response = await fetch(

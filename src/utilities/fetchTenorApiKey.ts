@@ -1,3 +1,12 @@
+/**
+ * Asynchronous function to fetch the Tenor API key from the server.
+ *
+ * @async
+ * @function
+ * @param {string | null} token - The authentication token for the request.
+ * @param {(key: string) => void} [setApiKey] - Optional function to set the API key in the component state.
+ * @returns {Promise<void>} A promise that resolves after fetching and setting the API key.
+ */
 export const fetchTenorApiKey = async (
     token: string | null,
     setApiKey?: (key: string) => void

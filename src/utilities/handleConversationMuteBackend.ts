@@ -1,11 +1,20 @@
 import { InfoType } from '../types/infoTypes';
 import { handleFetchErrors } from './handleFetchErrors';
 
+/**
+ * Handles muting a conversation on the backend by sending a PATCH request.
+ *
+ * @param {string} token - User authentication token.
+ * @param {string} conversationId - Unique identifier for the conversation to be muted.
+ * @param {(info: InfoType | null) => void} setInfo - Function to set information card state.
+ *
+ * @returns {Promise<any>} - A promise representing the response from the backend.
+ */
 export const handleConversationMuteBackend = async (
     token: string,
     conversationId: string,
     setInfo: (info: InfoType | null) => void
-) => {
+): Promise<any> => {
     try {
         const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 

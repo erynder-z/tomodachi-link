@@ -1,5 +1,10 @@
 import { InfoType } from '../types/infoTypes';
 
+/**
+ * Gets a time of day greeting message based on the current hour.
+ *
+ * @returns {InfoType} - Information object containing a greeting message, type, and icon.
+ */
 export const getTimeOfDayMessage = (): InfoType => {
     const date = new Date();
     const hour = date.getHours();

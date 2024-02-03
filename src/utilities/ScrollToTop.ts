@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 
-// Scroll to the "container-main"-anchor when the URL changes to reset the current scroll position when Linking inside the Router
-const ScrollToTop = () => {
+/**
+ * Scroll the main container to the top when the pathname changes.
+ *
+ * @return {null} The function does not return any value
+ */
+const ScrollToTop = (): null => {
     const { pathname } = useLocation();
 
     useEffect(() => {

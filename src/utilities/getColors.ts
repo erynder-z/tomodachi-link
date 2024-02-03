@@ -1,6 +1,15 @@
 import extractColors from 'extract-colors';
 import tinycolor from 'tinycolor2';
 
+/**
+ * Retrieves color information from an image using the extract-colors library.
+ * If the image has only one color, it returns a lighter version of that color;
+ * otherwise, it returns a desaturated version of each color in the palette.
+ *
+ * @param {string} image - The URL or data URI of the image.
+ * @returns {Promise<Array<{ hex: string }>>} - A promise that resolves to an array of color objects with hexadecimal values.
+ * @throws {Error} - If there is an error during color extraction.
+ */
 export const getColors = (image: string) => {
     return extractColors(image)
         .then((colors) => {
