@@ -9,19 +9,31 @@ import useCurrentUserData from '../hooks/useCurrentUserData';
 import FullscreenLoading from '../components/UiElements/LoadingSpinner/FullscreenLoading';
 import { encryptStorage } from '../utilities/encryptedStorage';
 
-// Create an empty context object with default values for authentication state
-const AuthContext = createContext<AuthContextProps>({
-    token: null,
-    authUser: null,
-    isAuth: false,
-    tokenExpiration: null,
-    setToken: () => null,
-    setAuthUser: () => null,
-    setIsAuth: () => false,
-    logout: () => null,
-});
+/**
+ * React context for managing authentication state and providing authentication-related functionalities.
+ *
+ * @context
+ * @type {React.Context<AuthContextProps>}
+ */
+const AuthContext: React.Context<AuthContextProps> =
+    createContext<AuthContextProps>({
+        token: null,
+        authUser: null,
+        isAuth: false,
+        tokenExpiration: null,
+        setToken: () => null,
+        setAuthUser: () => null,
+        setIsAuth: () => false,
+        logout: () => null,
+    });
 
-const retrieveTokenFromEncryptedStorage = () => {
+/**
+ * Function to retrieve the authentication token from encrypted storage.
+ *
+ * @function
+ * @returns {string | null} The retrieved authentication token.
+ */
+const retrieveTokenFromEncryptedStorage = (): string | null => {
     try {
         return encryptStorage.getItem('jwtOdinBook') || null;
     } catch (error) {
@@ -30,7 +42,17 @@ const retrieveTokenFromEncryptedStorage = () => {
     }
 };
 
-export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
+/**
+ * Component for providing the AuthContext to the application.
+ *
+ * @component
+ * @param {AuthContextProviderProps} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to be wrapped by the context provider.
+ * @returns {JSX.Element} The rendered AuthContextProvider component.
+ */
+export const AuthContextProvider = ({
+    children,
+}: AuthContextProviderProps): JSX.Element => {
     const [token, setToken] = useState<string | null>(
         retrieveTokenFromEncryptedStorage()
     );
@@ -41,7 +63,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const { setCurrentUserData } = useCurrentUserData();
     const [loading, setLoading] = useState<boolean>(true);
 
-    // When the token changes, store it in local storage
+    /**
+     * useEffect hook to store the token in local storage when it changes.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (token) {
             encryptStorage.setItem('jwtOdinBook', token);
@@ -50,7 +77,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     }, [token]);
 
-    // When the token changes, check it with the server to verify the user's authentication status
+    /**
+     * useEffect hook to check the token with the server to verify the user's authentication status.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         const getUserFromToken = async () => {
             try {
@@ -86,7 +118,13 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
             }
         };
 
-        const getTokenExpirationTime = () => {
+        /**
+         * Function to get the expiration time from the decoded token and set it in the state.
+         *
+         * @function
+         * @returns {void}
+         */
+        const getTokenExpirationTime = (): void => {
             if (token) {
                 const decodedToken = JSON.parse(atob(token.split('.')[1]));
                 const expirationTime = decodedToken.exp * 1000;
@@ -102,7 +140,13 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         }
     }, [token]);
 
-    const logout = () => {
+    /**
+     * Function to handle user logout.
+     *
+     * @function
+     * @returns {void}
+     */
+    const logout = (): void => {
         setToken(null);
         setAuthUser(null);
         setIsAuth(false);
@@ -112,6 +156,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         encryptStorage.removeItem('jwtOdinBook');
     };
 
+    /**
+     * JSX Element representing the AuthContextProvider with loading spinner.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <AuthContext.Provider
             value={{
