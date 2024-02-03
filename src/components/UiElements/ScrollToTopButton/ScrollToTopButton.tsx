@@ -3,10 +3,22 @@ import { MdKeyboardDoubleArrowUp } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
-export function ScrollToTopButton() {
+/**
+ * React component for rendering a button that scrolls to the top of a specified container.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ScrollToTopButton component.
+ */
+export function ScrollToTopButton(): JSX.Element {
     const [showButton, setShowButton] = useState(false);
 
-    const handleClick = () => {
+    /**
+     * Handles the click event to scroll to the top of the container.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleClick = (): void => {
         const el = document.getElementById('container-main');
         el?.scrollTo({
             top: 0,
@@ -14,7 +26,13 @@ export function ScrollToTopButton() {
         });
     };
 
-    const handleScroll = () => {
+    /**
+     * Handles the scroll event to determine whether to show the scroll-to-top button.
+     *
+     * @function
+     * @returns {void}
+     */
+    const handleScroll = (): void => {
         const el = document.getElementById('container-main');
         if (el) {
             const { scrollTop, clientHeight } = el;
@@ -22,6 +40,12 @@ export function ScrollToTopButton() {
         }
     };
 
+    /**
+     * useEffect hook to add and remove the scroll event listener.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         const el = document.getElementById('container-main');
         if (el) {
@@ -32,6 +56,11 @@ export function ScrollToTopButton() {
         }
     }, []);
 
+    /**
+     * JSX Element representing the scroll-to-top button.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <>
             <button

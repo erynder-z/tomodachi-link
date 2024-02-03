@@ -23,13 +23,25 @@ type SidebarProps = {
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
 };
 
+/**
+ * React component for rendering the sidebar with dynamic content based on the route.
+ *
+ * @component
+ * @param {SidebarProps} props - The component props.
+ * @param {boolean} props.showSidebar - Indicates whether the sidebar should be visible.
+ * @param {Function} [props.toggleSidebar] - Function to toggle the visibility of the sidebar.
+ * @param {Socket} props.socket - The socket for real-time communication.
+ * @param {Function} props.setShouldOverlaysShow - Setter function for controlling overlay visibility.
+ * @param {Function} props.setSearchMode - Setter function for controlling search mode.
+ * @returns {JSX.Element} The rendered Sidebar component.
+ */
 export default function Sidebar({
     showSidebar,
     toggleSidebar,
     socket,
     setShouldOverlaysShow,
     setSearchMode,
-}: SidebarProps) {
+}: SidebarProps): JSX.Element {
     const [onlineUsers, setOnlineUsers] = useState<ChatMemberType[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -39,17 +51,34 @@ export default function Sidebar({
 
     let content = null;
 
-    const getOnlineUsers = () => {
+    /**
+     * Function to get online users from the server using the socket.
+     *
+     * @function
+     * @returns {void}
+     */
+    const getOnlineUsers = (): void => {
         socket?.on('getUsers', (users: ChatMemberType[]) => {
             setOnlineUsers(users);
             setLoading(false);
         });
     };
 
+    /**
+     * useEffect hook to get online users once the socket has been initialized.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         getOnlineUsers();
     }, [socket]);
 
+    /**
+     * Switch statement to determine the content based on the route name.
+     *
+     * @type {JSX.Element}
+     */
     switch (routeName) {
         case 'friends':
             content = (
@@ -72,6 +101,11 @@ export default function Sidebar({
             break;
     }
 
+    /**
+     * JSX Element representing the sidebar with dynamic content.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <aside
             className={`flex flex-col w-60 h-[calc(100vh-_3rem)] lg:h-full fixed lg:sticky top-0 right-0 transition-transform duration-300 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg z-50 md:z-auto ${

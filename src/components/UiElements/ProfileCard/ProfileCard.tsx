@@ -10,7 +10,15 @@ type ProfileCardProps = {
     socket: Socket | undefined;
 };
 
-export default function ProfileCard({ socket }: ProfileCardProps) {
+/**
+ * React component for rendering the user profile card.
+ *
+ * @component
+ * @param {ProfileCardProps} props - The component props.
+ * @param {Socket} props.socket - The socket for real-time communication.
+ * @returns {JSX.Element} The rendered ProfileCard component.
+ */
+export default function ProfileCard({ socket }: ProfileCardProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
@@ -18,6 +26,12 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
 
     const [matchedFriendsCount, setMatchedFriendsCount] = useState<number>(0);
 
+    /**
+     * useEffect hook to listen for user updates and calculate the number of matched friends.
+     *
+     * @effect
+     * @returns {void}
+     */
     useEffect(() => {
         if (socket) {
             socket.on('getUsers', (users: ChatMemberType[]) => {
@@ -34,15 +48,12 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
         }
     }, [socket, friends]);
 
-    if (!userImage) {
-        return (
-            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
-                <LoadingSpinner />
-            </div>
-        );
-    }
-
-    const UserImage = (
+    /**
+     * JSX Element representing the user image.
+     *
+     * @type {JSX.Element}
+     */
+    const UserImage: JSX.Element = (
         <img
             className="w-20 h-20 object-cover rounded-full mx-auto shadow-lg"
             src={`data:image/png;base64,${userImage}`}
@@ -50,15 +61,30 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
         />
     );
 
-    const UserName = (
+    /**
+     * JSX Element representing the user name.
+     *
+     * @type {JSX.Element}
+     */
+    const UserName: JSX.Element = (
         <p className="font-semibold text-xl my-5 break-all">
             {firstName} {lastName}
         </p>
     );
 
-    const FriendNumber = <span> {numberOfFriends} Friends</span>;
+    /**
+     * JSX Element representing the number of friends.
+     *
+     * @type {JSX.Element}
+     */
+    const FriendNumber: JSX.Element = <span> {numberOfFriends} Friends</span>;
 
-    const LinkToChat = (
+    /**
+     * JSX Element representing the link to the chat with online friends.
+     *
+     * @type {JSX.Element}
+     */
+    const LinkToChat: JSX.Element = (
         <>
             <Link
                 data-tooltip-id="profile-friend-link-tooltip"
@@ -78,6 +104,24 @@ export default function ProfileCard({ socket }: ProfileCardProps) {
         </>
     );
 
+    /**
+     * JSX Element representing the loading content when user image is not available.
+     *
+     * @type {JSX.Element}
+     */
+    if (!userImage) {
+        return (
+            <div className="flex flex-col gap-4 h-44 md:p-4 lg:w-full lg:justify-around shadow-lg bg-card dark:bg-cardDark">
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
+    /**
+     * JSX Element representing the overall profile card.
+     *
+     * @type {JSX.Element}
+     */
     return (
         <div className="flex w-full md:shadow-md">
             <div className="w-full text-center p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark rounded lg:rounded-lg">
