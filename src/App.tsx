@@ -8,7 +8,6 @@ import useInfoCard from './hooks/useInfoCard';
 import OptionsCard from './components/UiElements/OptionsCard/OptionsCard';
 import useCurrentUserData from './hooks/useCurrentUserData';
 import InfoCard from './components/UiElements/InfoCard/InfoCard';
-import ScrollToTop from './utilities/ScrollToTop';
 import { ScrollToTopButton } from './components/UiElements/ScrollToTopButton/ScrollToTopButton';
 import OverlayHandler from './components/UiElements/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
@@ -22,6 +21,7 @@ import ScanLinesOverlay from './components/UiElements/Overlays/ScanLinesOverlay/
 import { handleChatSetup } from './utilities/handleChatSetup';
 import { SearchModeType } from './types/searchTypes';
 import { InfoType } from './types/infoTypes';
+import useScrollToTop from './hooks/useScrollToTop';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
@@ -58,6 +58,12 @@ function App(): JSX.Element {
 
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
+
+    /**
+     * Start at the top of the page when navigating to a new page
+     *
+     */
+    useScrollToTop();
 
     // Use this to force a re-render when user data changes
     const userDataKey = `${currentUserData?._id} + ${currentUserData?.lastSeen}`;
@@ -214,7 +220,6 @@ function App(): JSX.Element {
                 className="relative block md:flex h-[calc(100vh_-_3rem)] lg:h-screen w-screen gap-4 lg:p-4 bg-background1 dark:bg-background1Dark overflow-y-auto"
                 onScroll={handleScroll}
             >
-                <ScrollToTop />
                 <div className="hidden lg:flex flex-col gap-4 w-1/6 lg:sticky lg:top-0">
                     <ProfileCard socket={socket.current} />
                     <OptionsCard
