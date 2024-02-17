@@ -25,7 +25,7 @@
 }
 
 * {
-    scrollbar-width: thin;
+    scrollbar-width: auto;
     scrollbar-color: cRed background1;
 }
 

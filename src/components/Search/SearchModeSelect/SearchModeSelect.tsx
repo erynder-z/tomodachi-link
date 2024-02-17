@@ -29,7 +29,7 @@ export default function SearchModeSelect({
      * @type {JSX.Element}
      */
     return (
-        <ol className="flex w-full justify-between text-regularTextDark">
+        <ul className="flex w-full justify-between text-regularTextDark px-0">
             {options.map((mode) => (
                 <li
                     key={mode}
@@ -46,6 +46,6 @@ export default function SearchModeSelect({
                     <span>{mode.charAt(0).toUpperCase() + mode.slice(1)}</span>
                 </li>
             ))}
-        </ol>
+        </ul>
     );
 }

@@ -86,9 +86,8 @@ export default function PollAnswerSection({
         const optionID = _id;
 
         return (
-            <>
+            <div key={optionID}>
                 <motion.button
-                    key={optionID}
                     data-tooltip-id="poll-answer-tooltip"
                     data-tooltip-content="Submit answer"
                     data-tooltip-variant="dark"
@@ -112,7 +111,7 @@ export default function PollAnswerSection({
                         style={{ fontSize: '0.75rem' }}
                     />
                 )}
-            </>
+            </div>
         );
     };
 

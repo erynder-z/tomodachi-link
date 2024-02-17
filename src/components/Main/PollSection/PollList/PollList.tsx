@@ -38,7 +38,7 @@ export default function PollList({
     isPaginationTriggered,
     setShouldOverlaysShow,
     setSearchMode,
-}: PollListProps) {
+}: PollListProps): JSX.Element {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
     const [skip, setSkip] = useState<number | null>(null);
@@ -55,7 +55,7 @@ export default function PollList({
      * @function
      * @returns {Promise<void>} A Promise that resolves when the poll fetching is complete.
      */
-    const handleGetPolls = async () => {
+    const handleGetPolls = async (): Promise<void> => {
         const currentPolls = polls;
         if (authUser && token) {
             const API_ENDPOINT_URL = `/api/v1/poll/collection?skip=${skip}`;
@@ -99,7 +99,7 @@ export default function PollList({
      * @function
      * @returns {Promise<void>} A Promise that resolves when the poll list is refreshed.
      */
-    const refreshPoll = async () => {
+    const refreshPoll = async (): Promise<void> => {
         const currentPolls = polls;
         setLoading(true);
         setPolls([]);
@@ -177,7 +177,7 @@ export default function PollList({
      *
      * @type {JSX.Element[]}
      */
-    const HasPollContent = polls.map((poll) => (
+    const HasPollContent: JSX.Element[] = polls.map((poll) => (
         <PollItem key={poll._id} pollData={poll} />
     ));
 
@@ -186,7 +186,7 @@ export default function PollList({
      *
      * @type {JSX.Element}
      */
-    const EmptyListContent = (
+    const EmptyListContent: JSX.Element = (
         <span className="text-sm font-medium text-center">
             No polls yet! Why not create one?
         </span>
@@ -222,7 +222,7 @@ export default function PollList({
      *
      * @type {JSX.Element}
      */
-    const PollListContent = (
+    const PollListContent: JSX.Element = (
         <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

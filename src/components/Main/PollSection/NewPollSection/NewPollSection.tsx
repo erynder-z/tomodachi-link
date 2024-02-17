@@ -26,9 +26,7 @@ export default function NewPollSection(): JSX.Element {
             </h1>
             <NewPollInput />
             <div className="mt-4 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero
-                doloremque repudiandae eligendi unde earum error tenetur
-                adipisci autem eaque repellat?
+                Create multiple-choice polls to get feedback from other users!
             </div>
         </motion.div>
     );

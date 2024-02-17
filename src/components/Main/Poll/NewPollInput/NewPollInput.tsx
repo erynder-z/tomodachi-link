@@ -197,7 +197,7 @@ export default function NewPollInput(): JSX.Element {
      * @returns {JSX.Element}
      */
     return (
-        <div className="font-roboto flex gap-4 p-2 md:p-4 lg:w-full lg:flex-row lg:justify-around rounded lg:shadow-lg bg-card dark:bg-cardDark">
+        <div className="font-roboto flex gap-4 p-2 md:p-4 w-11/12 lg:w-full lg:flex-row lg:justify-around rounded lg:shadow-lg bg-card dark:bg-cardDark">
             {FormContent}
         </div>
     );

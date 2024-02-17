@@ -26,7 +26,7 @@ export default function PollSectionSelect(): JSX.Element {
                 Polls
             </h1>
 
-            <div className="flex flex-col w-5/6 md:w-full bg-card dark:bg-cardDark rounded md:shadow-md">
+            <div className="flex flex-col w-11/12 md:w-full bg-card dark:bg-cardDark rounded md:shadow-md">
                 <motion.button whileTap={{ scale: 0.97 }}>
                     <Link
                         to="/polls/new"
