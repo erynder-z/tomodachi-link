@@ -21,6 +21,7 @@ import EmbeddedYoutubeVideoArea from '../NewPostInput/EmbeddedYoutubeVideoArea/E
 import { motion, AnimatePresence } from 'framer-motion';
 import { displaySuccessInfo } from '../../../UiElements/UserNotification/displaySuccessInfo';
 import { displayErrorInfo } from '../../../UiElements/UserNotification/displayErrorInfo';
+import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 
 type EditPostInputProps = {
     postDetails: PostType | null;
@@ -198,6 +199,12 @@ export default function EditPostInput({
      * @return {void} No return value.
      */
     const handleComponentClose = (): void => setShouldPostEditShow(false);
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleComponentClose);
 
     /**
      * Handles the new post text change.

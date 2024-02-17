@@ -4,6 +4,7 @@ import EditUserDataModalForm from './EditUserDataModalForm/EditUserDataModalForm
 import UpdatePasswordButton from './UpdatePasswordButton/UpdatePasswordButton';
 import UpdatePasswordForm from './UpdatePasswordForm/UpdatePasswordForm';
 import { motion } from 'framer-motion';
+import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 
 type EditUserDataModalProps = {
     shouldEditUserDataModalShow: boolean;
@@ -46,6 +47,12 @@ export default function EditUserDataModal({
         });
         setShowOptions?.(false);
     };
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleCloseButtonClick);
 
     /**
      * Renders the current menu based on the state. Shows form to edit the user data or form to change the password.

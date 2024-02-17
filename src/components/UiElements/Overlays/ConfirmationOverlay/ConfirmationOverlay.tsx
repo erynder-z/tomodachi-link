@@ -1,3 +1,4 @@
+import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 import { InfoType } from '../../../../types/infoTypes';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -43,6 +44,12 @@ const ConfirmationOverlay = ({
      * @returns {void}
      */
     const handleNoButtonClick = (): void => setShouldConfirmDialogShow(false);
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleNoButtonClick);
 
     /**
      * JSX element representing the content of the confirmation dialog.

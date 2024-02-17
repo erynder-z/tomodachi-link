@@ -2,6 +2,7 @@ import { FaTimes } from 'react-icons/fa';
 import EmojiPicker, { EmojiClickData, Theme } from 'emoji-picker-react';
 import useTheme from '../../../../../hooks/useTheme';
 import { motion } from 'framer-motion';
+import useEscapeKey from '../../../../../hooks/useEscapeKeyToHandleAction';
 
 type EmojiSelectorProps = {
     setText: React.Dispatch<React.SetStateAction<string>>;
@@ -32,6 +33,12 @@ export default function EmojiSelector({
     const handleComponentClose = (): void => {
         setShowEmojiPicker(false);
     };
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleComponentClose);
 
     /**
      * Function to get the emoji picker theme based on the color scheme.

@@ -2,6 +2,8 @@ import { FaTimes } from 'react-icons/fa';
 import Search from '../../../Search/Search';
 import { motion } from 'framer-motion';
 import { SearchModeType } from '../../../../types/searchTypes';
+import React from 'react';
+import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 
 type SearchOverlayProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -42,6 +44,12 @@ export default function SearchOverlay({
             guestAccountOverlay: false,
         });
     };
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleCloseButtonClick);
 
     /**
      * JSX element representing the close button with a motion effect.

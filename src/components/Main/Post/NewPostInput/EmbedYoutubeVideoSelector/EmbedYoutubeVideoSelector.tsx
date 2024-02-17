@@ -3,6 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 import useInfoCard from '../../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
 import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
+import useEscapeKey from '../../../../../hooks/useEscapeKeyToHandleAction';
 
 type EmbedYoutubeVideoSelectorProps = {
     setShowYoutubeEmbed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,6 +34,12 @@ export default function EmbedYoutubeVideoSelector({
      * @returns {void}
      */
     const handleComponentClose = (): void => setShowYoutubeEmbed(false);
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleComponentClose);
 
     /**
      * Function to extract the YouTube video ID from the provided URL.

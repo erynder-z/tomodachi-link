@@ -5,6 +5,7 @@ import useAuth from '../../../../../hooks/useAuth';
 import { fetchTenorApiKey } from '../../../../../utilities/fetchTenorApiKey';
 import useTheme from '../../../../../hooks/useTheme';
 import { motion } from 'framer-motion';
+import useEscapeKey from '../../../../../hooks/useEscapeKeyToHandleAction';
 
 type GifSelectorProps = {
     setShowGifSelector: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,6 +38,12 @@ export default function GifSelector({
      * @returns {void}
      */
     const handleComponentClose = (): void => setShowGifSelector(false);
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleComponentClose);
 
     /**
      * Function to get the theme variable for the GifPicker library based on the color scheme.

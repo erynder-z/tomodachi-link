@@ -1,3 +1,5 @@
+import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
+
 type GuestAccountOverlayProps = {
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
@@ -34,6 +36,12 @@ export default function GuestAccountOverlay({
             guestAccountOverlay: false,
         });
     };
+
+    /**
+     * Custom hook to close the overlay when pressing ESC
+     *
+     */
+    useEscapeKey(handleCloseButtonClick);
 
     /**
      * Rendered JSX for the GuestAccountOverlay component.
