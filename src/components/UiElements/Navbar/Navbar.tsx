@@ -8,6 +8,7 @@ import useCurrentUserData from '../../../hooks/useCurrentUserData';
 import useNotificationBubblesContext from '../../../hooks/useNotificationBubblesContext';
 import PollSectionButton from './PollSectionButton/PollSectionButton';
 import { SearchModeType } from '../../../types/searchTypes';
+import HelpSectionButton from './HelpSectionButton/HelpSectionButton';
 
 type NavbarProps = {
     shouldOverlaysShow: {
@@ -142,7 +143,7 @@ export default function Navbar({
      */
     return (
         <div className="h-12 lg:h-full w-screen md:w-full flex justify-between items-center lg:items-start px-2 py-1 lg:py-2 bg-navbar dark:bg-navbarDark text-regularText dark:text-regularTextDark">
-            <div className="flex lg:flex-col justify-center items-center gap-4">
+            <div className="flex lg:flex-col h-full justify-center items-center gap-4">
                 <FeedSectionButton />
                 <FriendSectionButton />
                 <PollSectionButton />
@@ -158,6 +159,9 @@ export default function Navbar({
                 <SearchButton
                     handleSearchButtonClick={handleSearchButtonClick}
                 />
+                <div className="flex justify-center items-center lg:mt-auto">
+                    <HelpSectionButton />
+                </div>
             </div>
             <div className="relative lg:hidden flex" ref={menuRef}>
                 {MobileOptionsButton}

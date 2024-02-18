@@ -15,6 +15,7 @@ import PollList from './components/Main/PollSection/PollList/PollList';
 import SinglePostPage from './components/Main/Post/SinglePostPage/SinglePostPage';
 import SinglePollPage from './components/Main/Poll/SinglePollPage/SinglePollPage';
 import { SearchModeType } from './types/searchTypes';
+import HelpPage from './components/Main/Help/HelpPage';
 
 type AppRoutesProps = {
     location: ReturnType<typeof useLocation>;
@@ -114,6 +115,7 @@ export default function AppRoutes({
                     path="/users/:id/friends/list"
                     element={<AllFriendsPage />}
                 />
+                <Route path="/help" element={<HelpPage />} />
                 <Route path="/post/:id" element={<SinglePostPage />} />
                 <Route path="/poll/:id" element={<SinglePollPage />} />
             </Route>
