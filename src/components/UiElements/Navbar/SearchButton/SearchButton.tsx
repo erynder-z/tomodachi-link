@@ -32,7 +32,7 @@ export default function SearchButton({
                 whileTap={{ scale: 0.97 }}
                 type="button"
                 onClick={handleSearchButtonClick}
-                className="flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-full w-full"
+                className="flex self-center cursor-pointer text-regularText dark:text-regularTextDark h-6 w-full"
             >
                 <MdSearch size="1.5em" />
             </motion.button>
