@@ -45,7 +45,7 @@
 }
 
 a {
-    @apply text-teal-600 hover:text-teal-400;
+    @apply text-teal-500 hover:text-teal-400;
 }
 
 h1 {
