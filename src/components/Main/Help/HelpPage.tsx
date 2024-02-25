@@ -29,11 +29,11 @@ export default function HelpPage() {
     return (
         <div className="p-4 text-regularText dark:text-regularTextDark">
             <h1 className="text-center text-3xl ">
-                Thank you very much for using Odin-Book!
+                Thank you very much for using Tomodachi-Link!
             </h1>
             <p>
                 Below, you will find some help regarding the features of
-                Odin-Book.
+                Tomodachi-Link.
             </p>
             <ul className="mb-8">
                 <li

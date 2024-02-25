@@ -65,7 +65,7 @@ export default function SignupPage({
             }
 
             const data = await response.json();
-            localStorage.setItem('jwtOdinBook', data.token);
+            localStorage.setItem('jwtTomodachiLink', data.token);
             setToken(data.token);
         } catch (error: unknown) {
             console.error(error);

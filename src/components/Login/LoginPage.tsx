@@ -27,7 +27,7 @@ export default function LoginPage(): JSX.Element {
     const { setToken } = useContext(AuthContext);
     const { isAuth } = useAuth();
     const { setInfo } = useInfoCard();
-    const [cookies, setCookie, removeCookie] = useCookies(['jwtOdinBook']);
+    const [cookies, setCookie, removeCookie] = useCookies(['jwtTomodachiLink']);
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -142,17 +142,17 @@ export default function LoginPage(): JSX.Element {
      */
     useEffect(() => {
         const setTokenAndDeleteCookie = () => {
-            setCookie('jwtOdinBook', cookies.jwtOdinBook, {
+            setCookie('jwtTomodachiLink', cookies.jwtTomodachiLink, {
                 secure: true,
                 sameSite: 'strict',
             });
-            const token = cookies.jwtOdinBook;
+            const token = cookies.jwtTomodachiLink;
 
             setToken(token);
-            removeCookie('jwtOdinBook');
+            removeCookie('jwtTomodachiLink');
         };
-        if (cookies.jwtOdinBook) setTokenAndDeleteCookie();
-    }, [cookies.jwtOdinBook, setToken, removeCookie, setInfo]);
+        if (cookies.jwtTomodachiLink) setTokenAndDeleteCookie();
+    }, [cookies.jwtTomodachiLink, setToken, removeCookie, setInfo]);
 
     /**
      * Effect to update the verifying status when authentication changes.

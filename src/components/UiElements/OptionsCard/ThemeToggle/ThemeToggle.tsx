@@ -25,7 +25,7 @@ export default function ThemeToggle(): JSX.Element {
         const newTheme: ThemeType =
             colorScheme === 'bright' ? 'dark' : 'bright';
         setColorScheme(newTheme);
-        localStorage.setItem('colorSchemeOdinBook', newTheme);
+        localStorage.setItem('colorSchemeTomodachiLink', newTheme);
     };
 
     /**

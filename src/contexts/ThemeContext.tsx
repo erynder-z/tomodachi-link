@@ -37,10 +37,12 @@ export function ThemeContextProvider({
     children,
 }: ThemeContextProviderProps): JSX.Element {
     const [colorScheme, setColorScheme] = useState<ThemeType>(
-        (localStorage.getItem('colorSchemeOdinBook') as ThemeType) || 'bright'
+        (localStorage.getItem('colorSchemeTomodachiLink') as ThemeType) ||
+            'bright'
     );
     const [scanLines, setScanLines] = useState<ScanLinesType>(
-        (localStorage.getItem('scanLinesOdinBook') as ScanLinesType) || 'none'
+        (localStorage.getItem('scanLinesTomodachiLink') as ScanLinesType) ||
+            'none'
     );
 
     /**

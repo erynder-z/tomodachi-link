@@ -26,7 +26,7 @@ export default function SearchButton({
         <>
             <motion.button
                 data-tooltip-id="navbar-search-tooltip"
-                data-tooltip-content="Search Odin-Book"
+                data-tooltip-content="Search Tomodachi-Link"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
                 whileTap={{ scale: 0.97 }}

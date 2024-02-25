@@ -104,7 +104,7 @@ export default function LoginForm({
         <div className="w-full">
             <div>
                 <h1 className="text-base md:text-2xl font-semibold m-0">
-                    Login to Odin-Book:
+                    Login to Tomodachi-Link:
                 </h1>
             </div>
             <form

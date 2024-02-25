@@ -35,7 +35,7 @@ const AuthContext: React.Context<AuthContextProps> =
  */
 const retrieveTokenFromEncryptedStorage = (): string | null => {
     try {
-        return encryptStorage.getItem('jwtOdinBook') || null;
+        return encryptStorage.getItem('jwtTomodachiLink') || null;
     } catch (error) {
         console.error('Error retrieving token:', error);
         return null;
@@ -71,9 +71,9 @@ export const AuthContextProvider = ({
      */
     useEffect(() => {
         if (token) {
-            encryptStorage.setItem('jwtOdinBook', token);
+            encryptStorage.setItem('jwtTomodachiLink', token);
         } else {
-            encryptStorage.removeItem('jwtOdinBook');
+            encryptStorage.removeItem('jwtTomodachiLink');
         }
     }, [token]);
 
@@ -152,8 +152,7 @@ export const AuthContextProvider = ({
         setIsAuth(false);
         setInfo(null);
         setCurrentUserData(null);
-        localStorage.removeItem('currentViewOdinBook');
-        encryptStorage.removeItem('jwtOdinBook');
+        encryptStorage.removeItem('jwtTomodachiLink');
     };
 
     /**

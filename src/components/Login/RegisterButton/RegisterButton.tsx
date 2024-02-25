@@ -25,7 +25,7 @@ export default function RegisterButton({
         <>
             <button
                 data-tooltip-id="register-button-tooltip"
-                data-tooltip-content="Create a new Odin-Book account"
+                data-tooltip-content="Create a new Tomodachi-Link account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
                 onClick={handleRegisterClick}

@@ -23,7 +23,7 @@ export default function ScanLinesToggle(): JSX.Element {
         const newScanLineType: ScanLinesType =
             scanLines === 'none' ? 'horizontal' : 'none';
         setScanLines(newScanLineType);
-        localStorage.setItem('scanLinesOdinBook', newScanLineType);
+        localStorage.setItem('scanLinesTomodachiLink', newScanLineType);
     };
 
     /**
