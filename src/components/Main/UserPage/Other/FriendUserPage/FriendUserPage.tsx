@@ -9,6 +9,7 @@ import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
 import { motion, useInView } from 'framer-motion';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
+import AboutMeSection from '../../SharedComponents/AboutMeSection/AboutMeSection';
 
 type FriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -32,6 +33,7 @@ export default function FriendUserPage({
         _id,
         firstName,
         lastName,
+        about,
         userpic,
         cover,
         friends,
@@ -131,6 +133,10 @@ export default function FriendUserPage({
                 />
                 <div className="flex flex-col md:grid grid-cols-[1fr,2fr] gap-8">
                     <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
+                        <AboutMeSection
+                            aboutName={firstName}
+                            aboutText={about}
+                        />
                         <PictureList
                             onFetchComplete={onFetchComplete}
                             userId={userPageData._id}

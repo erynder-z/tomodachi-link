@@ -38,6 +38,7 @@ export default function EditUserDataModalForm({
         firstName = '',
         lastName = '',
         email = '',
+        about = '',
         userpic = '',
     } = currentUserData || {};
 
@@ -82,6 +83,7 @@ export default function EditUserDataModalForm({
             formData.append('firstName', event.currentTarget.firstName.value);
             formData.append('lastName', event.currentTarget.lastName.value);
             formData.append('email', event.currentTarget.email.value);
+            formData.append('about', event.currentTarget.about.value);
 
             const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(`${SERVER_URL}/api/v1/userdata`, {
@@ -234,6 +236,31 @@ export default function EditUserDataModalForm({
     );
 
     /**
+     * JSX element for the about-field input.
+     *
+     * @type {JSX.Element}
+     */
+    const AboutInput: JSX.Element = (
+        <div className="relative z-0">
+            <textarea
+                rows={3}
+                autoComplete="off"
+                id="about"
+                name="about"
+                className="block p-2 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
+                placeholder=" "
+                defaultValue={about}
+            />
+            <label
+                htmlFor="about"
+                className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-4 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark"
+            >
+                About me (max. 100 characters)
+            </label>
+        </div>
+    );
+
+    /**
      * Button to display instead of the update button if the user is a guest.
      *
      * @type {JSX.Element}
@@ -283,7 +310,7 @@ export default function EditUserDataModalForm({
                     {FirstNameInput}
                     {LastNameInput}
                     {EmailInput}
-
+                    {AboutInput}
                     <div className="flex w-full">
                         {isGuest ? GuestButton : NormalUserButton}
                     </div>

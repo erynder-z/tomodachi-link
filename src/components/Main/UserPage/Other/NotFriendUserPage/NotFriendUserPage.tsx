@@ -7,6 +7,7 @@ import { FinalColor } from 'extract-colors';
 import tinycolor from 'tinycolor2';
 import { motion, useInView } from 'framer-motion';
 import LoadingSpinner from '../../../../UiElements/LoadingSpinner/LoadingSpinner';
+import AboutMeSection from '../../SharedComponents/AboutMeSection/AboutMeSection';
 
 type NotFriendUserPageProps = {
     userPageData: OtherUserPageDataTypes | Record<string, never>;
@@ -42,6 +43,7 @@ export default function NotFriendUserPage({
     const isInView = useInView(NotFriendPageContentRef, { once: true });
 
     const userPicture = userpic.data;
+    const about = userPageData?.about;
 
     /**
      * JSX Element representing the loading content.
@@ -86,17 +88,22 @@ export default function NotFriendUserPage({
                 setColorPalette={setColorPalette}
                 setLoading={setLoading}
             />
-            <div className="animate-popInAnimation my-auto">
-                {isFriendRequestPending.incoming ? (
-                    <IncomingFriendRequestPendingContent
-                        userPageData={userPageData}
-                    />
-                ) : (
-                    <NormalContent
-                        userPageData={userPageData}
-                        isFriendRequestPending={isFriendRequestPending}
-                    />
-                )}
+            <div className="animate-popInAnimation flex-grow flex flex-col">
+                <div className="p-4">
+                    <AboutMeSection aboutName={firstName} aboutText={about} />
+                </div>
+                <div className="flex-grow flex justify-center items-center">
+                    {isFriendRequestPending.incoming ? (
+                        <IncomingFriendRequestPendingContent
+                            userPageData={userPageData}
+                        />
+                    ) : (
+                        <NormalContent
+                            userPageData={userPageData}
+                            isFriendRequestPending={isFriendRequestPending}
+                        />
+                    )}
+                </div>
             </div>
         </motion.div>
     );

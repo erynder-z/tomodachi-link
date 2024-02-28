@@ -6,6 +6,7 @@ export type CurrentUserDataType = {
     lastName: string;
     username: string;
     email: string;
+    about?: string;
     friends: string[];
     posts: string[];
     bookmarks: string[];

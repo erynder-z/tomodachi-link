@@ -11,6 +11,7 @@ import PostList from '../SharedComponents/PostList/PostList';
 import tinycolor from 'tinycolor2';
 import { FinalColor } from 'extract-colors';
 import { motion, useInView } from 'framer-motion';
+import AboutMeSection from '../SharedComponents/AboutMeSection/AboutMeSection';
 
 type MyPageProps = {
     isPaginationTriggered: boolean;
@@ -54,6 +55,7 @@ export default function MyPage({
 
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
     const userId = currentUserData?._id;
+    const aboutText = currentUserData?.about;
 
     /**
      * Handles refreshing posts by updating the state variable to force remount.
@@ -173,6 +175,7 @@ export default function MyPage({
                     </div>
                 ) : null}
                 <div className="flex flex-col h-1/4 md:h-auto w-full md:p-4 gap-8 md:mr-auto">
+                    <AboutMeSection aboutText={aboutText} />
                     <PictureList
                         key={myPicsKey}
                         onFetchComplete={onFetchComplete}

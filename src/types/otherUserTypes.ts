@@ -5,6 +5,7 @@ export type OtherUserPageDataTypes = {
     _id: string;
     firstName: string;
     lastName: string;
+    about?: string;
     userpic: ImageType;
     cover?: string;
     joined: Date;
@@ -18,5 +19,6 @@ export type MinimalUserTypes = {
     _id: string;
     firstName: string;
     lastName: string;
+    about: string;
     userpic: ImageType;
 };
