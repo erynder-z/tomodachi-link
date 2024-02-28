@@ -1,5 +1,5 @@
 type AboutMeSectionProps = {
-    aboutName: string | undefined;
+    aboutName?: string;
     aboutText: string | undefined;
 };
 
