@@ -1,20 +1,20 @@
 export default function ChatHelp() {
     return (
         <article className="block">
-            <h2 className="text-xl">The Chat</h2>
+            <h2 className="text-xl">Chat</h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-                facilis odio iusto quas blanditiis vero quo cupiditate
-                voluptatibus dolor, nam incidunt, nesciunt nemo alias laboriosam
-                consectetur repudiandae est doloribus assumenda? Dolorum ratione
-                magni nostrum aspernatur sunt minima, magnam culpa! Consectetur
-                fuga, quo minima accusamus, omnis temporibus laudantium
-                molestias aut sunt doloribus fugiat esse, ipsa odio. Dolorem,
-                corporis! Sed vero ducimus quo porro qui? Eaque beatae totam,
-                eum a rem, iste unde eveniet quae ut molestias quidem accusamus
-                neque dolorem in quasi tenetur reiciendis sapiente? Nemo fugit
-                omnis reiciendis a? Adipisci culpa, voluptate fugiat obcaecati
-                nisi quibusdam! Corrupti, aperiam? Magni, amet?
+                The chat allows you to engage in real-time conversations with
+                your friends. Never miss a beat with our notification system.
+                Your friends' online status will be displayed in the sidebar.
+            </p>
+            <p>
+                If you receive a chat message while away from the chat, you'll
+                ensuring that you're always aware of new messages and can
+                respond promptly to keep the conversation flowing.
+            </p>
+            <p>
+                You can also mute a chat by clicking on the bell-icon in the
+                conversation-list.
             </p>
         </article>
     );
