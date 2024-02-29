@@ -3,18 +3,30 @@ export default function PostsHelp() {
         <article className="block">
             <h2 className="text-xl">Posts</h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-                facilis odio iusto quas blanditiis vero quo cupiditate
-                voluptatibus dolor, nam incidunt, nesciunt nemo alias laboriosam
-                consectetur repudiandae est doloribus assumenda? Dolorum ratione
-                magni nostrum aspernatur sunt minima, magnam culpa! Consectetur
-                fuga, quo minima accusamus, omnis temporibus laudantium
-                molestias aut sunt doloribus fugiat esse, ipsa odio. Dolorem,
-                corporis! Sed vero ducimus quo porro qui? Eaque beatae totam,
-                eum a rem, iste unde eveniet quae ut molestias quidem accusamus
-                neque dolorem in quasi tenetur reiciendis sapiente? Nemo fugit
-                omnis reiciendis a? Adipisci culpa, voluptate fugiat obcaecati
-                nisi quibusdam! Corrupti, aperiam? Magni, amet?
+                From the top of your feed or your personal page, you can create
+                posts to share with your friends. Express yourself freely by
+                writing text posts, styled using Markdown formatting, to add
+                emphasis, headers, links, and more.
+            </p>
+            <p>
+                Upload images or add GIFs to accompany your text. Want to share
+                a video? Embed YouTube videos directly into your posts to
+                provide your audience with dynamic content.
+            </p>
+            <p>
+                Invite interaction and engagement with your posts. Friends can
+                react to your posts with likes and dislikes, allowing them to
+                express their feelings towards your content. Additionally, each
+                post has a dedicated comment section where friends can share
+                their thoughts and engage in discussions related to the post's
+                content.
+            </p>
+            <p>
+                Made a typo in your post or want to make some adjustments? No
+                problem! You can edit your own posts even after publishing them,
+                ensuring that your content is always accurate and up-to-date. If
+                you decide that a post is no longer relevant or wish to remove
+                it for any reason, you have the option to delete it at any time.
             </p>
         </article>
     );
