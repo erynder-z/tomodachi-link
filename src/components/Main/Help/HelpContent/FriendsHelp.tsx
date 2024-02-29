@@ -3,18 +3,18 @@ export default function FriendsHelp() {
         <article className="block">
             <h2 className="text-xl">Friends</h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-                facilis odio iusto quas blanditiis vero quo cupiditate
-                voluptatibus dolor, nam incidunt, nesciunt nemo alias laboriosam
-                consectetur repudiandae est doloribus assumenda? Dolorum ratione
-                magni nostrum aspernatur sunt minima, magnam culpa! Consectetur
-                fuga, quo minima accusamus, omnis temporibus laudantium
-                molestias aut sunt doloribus fugiat esse, ipsa odio. Dolorem,
-                corporis! Sed vero ducimus quo porro qui? Eaque beatae totam,
-                eum a rem, iste unde eveniet quae ut molestias quidem accusamus
-                neque dolorem in quasi tenetur reiciendis sapiente? Nemo fugit
-                omnis reiciendis a? Adipisci culpa, voluptate fugiat obcaecati
-                nisi quibusdam! Corrupti, aperiam? Magni, amet?
+                The Friend Page lists all of your current friends on
+                Tomodachi-Link. Easily see who you're connected with and stay
+                up-to-date with their latest posts and activities. From sharing
+                memories to engaging in conversations, your friends are just a
+                click away.
+            </p>
+            <p>
+                Expand your social circle by discovering new connections through
+                the "People You Might Know" section. We suggest users who have a
+                friend-connection to you, making it easy for you to find and
+                connect with like-minded individuals. Who knows? Your next best
+                friend might just be a click away.
             </p>
         </article>
     );
