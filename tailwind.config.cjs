@@ -4,7 +4,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                regularFont: ['Outfit', 'sans-serif'],
+                /*   regularFont: ['Outfit', 'sans-serif'], */
+                regularFont: ['Cabin', 'sans-serif'],
                 monospaceFont: ['Red Hat Mono', 'monospace'],
             },
 
