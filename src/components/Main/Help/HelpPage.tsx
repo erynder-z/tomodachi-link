@@ -8,6 +8,7 @@ import SearchHelp from './HelpContent/SearchHelp';
 import SettingsHelp from './HelpContent/SettingsHelp';
 import UserPageHelp from './HelpContent/UserPageHelp';
 import SourceCodeHelp from './HelpContent/SourceCodeHelp';
+import MarkdownHelp from './HelpContent/Markdown';
 
 export default function HelpPage() {
     const feedRef = useRef(null);
@@ -18,6 +19,7 @@ export default function HelpPage() {
     const searchRef = useRef(null);
     const userPageRef = useRef(null);
     const settingsRef = useRef(null);
+    const markdownRef = useRef(null);
     const sourceCodeRef = useRef(null);
 
     const scrollToRef = (ref: RefObject<HTMLDivElement>) => {
@@ -85,6 +87,12 @@ export default function HelpPage() {
                     Settings
                 </li>
                 <li
+                    onClick={() => scrollToRef(markdownRef)}
+                    className="text-teal-500 hover:text-teal-400 cursor-pointer"
+                >
+                    Markdown
+                </li>
+                <li
                     onClick={() => scrollToRef(sourceCodeRef)}
                     className="text-teal-500 hover:text-teal-400 cursor-pointer"
                 >
@@ -115,6 +123,9 @@ export default function HelpPage() {
                 </div>
                 <div ref={settingsRef}>
                     <SettingsHelp />
+                </div>
+                <div ref={markdownRef}>
+                    <MarkdownHelp />
                 </div>
                 <div ref={sourceCodeRef}>
                     <SourceCodeHelp />
