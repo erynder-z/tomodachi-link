@@ -11,6 +11,7 @@ import { backendFetch } from '../../../../../utilities/backendFetch';
 type FriendCardMenuProps = {
     id: string;
     firstName: string;
+    accountType: 'guest' | 'regularUser';
     setActiveChat: (chat: ChatConversationType) => void;
     handleUnfriendButtonClick: () => void;
 };
@@ -29,6 +30,7 @@ type FriendCardMenuProps = {
 export default function FriendCardMenu({
     id,
     firstName,
+    accountType,
     setActiveChat,
     handleUnfriendButtonClick,
 }: FriendCardMenuProps): JSX.Element {
@@ -147,7 +149,7 @@ export default function FriendCardMenu({
             className="flex flex-col gap-2 justify-around items-center"
         >
             {LinkToUser}
-            {ChatWithUser}
+            {accountType !== 'guest' && ChatWithUser}
             {Unfriend}
         </motion.div>
     );

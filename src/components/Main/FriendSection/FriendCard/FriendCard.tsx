@@ -31,7 +31,7 @@ export default function FriendCard({
     friendData,
     setActiveChat,
 }: FriendCardProps): JSX.Element {
-    const { userpic, firstName, lastName, _id } = friendData;
+    const { userpic, firstName, lastName, _id, accountType } = friendData;
 
     const { token } = useAuth();
     const { handleFetchUserData } = useCurrentUserData();
@@ -137,6 +137,7 @@ export default function FriendCard({
         <FriendCardMenu
             id={_id}
             firstName={firstName}
+            accountType={accountType}
             setActiveChat={setActiveChat}
             handleUnfriendButtonClick={handleUnfriendButtonClick}
         />

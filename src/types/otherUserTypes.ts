@@ -19,6 +19,7 @@ export type MinimalUserTypes = {
     _id: string;
     firstName: string;
     lastName: string;
-    about: string;
+    about?: string;
     userpic: ImageType;
+    accountType: 'guest' | 'regularUser';
 };
