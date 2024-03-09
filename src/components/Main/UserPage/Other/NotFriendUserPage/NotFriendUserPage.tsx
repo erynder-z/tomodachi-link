@@ -88,7 +88,7 @@ export default function NotFriendUserPage({
                 setColorPalette={setColorPalette}
                 setLoading={setLoading}
             />
-            <div className="animate-popInAnimation flex-grow flex flex-col">
+            <div className="flex-grow flex flex-col">
                 <div className="p-4">
                     <AboutMeSection aboutName={firstName} aboutText={about} />
                 </div>

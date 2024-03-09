@@ -55,7 +55,7 @@ export default function FriendRequests({
      * @type {JSX.Element}
      */
     return (
-        <div className="flex flex-col w-full text-sm">
+        <div className="flex flex-col w-full text-sm p-4">
             <h1 className="text-base font-bold">Pending friend requests:</h1>
             <div className="flex flex-col gap-6">{friendRequestItemsList}</div>
         </div>

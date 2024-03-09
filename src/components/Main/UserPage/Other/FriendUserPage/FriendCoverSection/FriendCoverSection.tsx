@@ -83,11 +83,11 @@ export default function FriendCoverSection({
      * @type {JSX.Element}
      */
     const CoverImage: JSX.Element = (
-        <div className="relative row-span-3 flex rounded-t">
+        <div className="relative flex rounded-t">
             <img
                 src={coverImageSrc}
                 alt="cover image"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
             />
         </div>
     );
@@ -99,7 +99,7 @@ export default function FriendCoverSection({
      */
     const ColoredHeader: JSX.Element = (
         <div
-            className="relative row-span-1 flex flex-col md:flex-row gap-4 h-full lg:p-4 bg-slate-300 rounded-b"
+            className="relative flex flex-col justify-around md:flex-row gap-4 h-full lg:p-4 bg-slate-300 rounded-b p-4"
             style={
                 backgroundColor && textColor
                     ? {
@@ -110,13 +110,13 @@ export default function FriendCoverSection({
             }
         >
             <img
-                className="absolute md:relative w-20 h-fit rounded-full bottom-36 md:bottom-10 border-white border-2"
+                className="absolute -top-24 md:-top-14 left-1/2 md:left-auto transform -translate-x-1/2 md:translate-x-4 lg:translate-x-0 md:relative w-20 h-fit rounded-full bottom-36 md:bottom-10 border-white border-2"
                 src={`data:image/png;base64,${userPicture}`}
                 alt="User avatar"
             />
 
-            <div className="flex flex-col w-3/5">
-                <h1 className="text-2xl text-center font-bold h-auto truncate m-0">
+            <div className="flex flex-col justify-center max-w-sm flex-shrink">
+                <h1 className="text-2xl text-center font-bold h-auto truncate">
                     {firstName} {lastName}'s page
                 </h1>
                 <p className="text-center text-xs">
@@ -126,7 +126,7 @@ export default function FriendCoverSection({
                     {mutualFriends > 1 ? 's' : ''}
                 </p>
             </div>
-            <div className="flex flex-col justify-between gap-4 md:ml-auto ">
+            <div className="flex flex-col justify-center items-center gap-4">
                 <div className="text-xs text-center">
                     last seen: {lastSeenFormatted}
                 </div>
@@ -141,7 +141,7 @@ export default function FriendCoverSection({
      * @type {JSX.Element}
      */
     return (
-        <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
+        <div className="h-[calc(100vh-_5rem)] md:max-h-96 flex flex-col rounded-t">
             {CoverImage}
             {ColoredHeader}
         </div>
