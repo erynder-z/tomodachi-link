@@ -83,12 +83,37 @@ export default function NotFriendCoverSection({
     }, []);
 
     /**
+     * JSX Element header layout for mobile devices
+     *
+     * @type {JSX.Element}
+     */
+    const mobileLayout: JSX.Element = (
+        <h1 className="md:hidden text-2xl text-center font-bold h-auto flex flex-col">
+            <span className="truncate">{firstName}</span>
+            <span className="truncate ">{lastName}</span>
+        </h1>
+    );
+
+    /**
+     * JSX Element header layout for non-mobile devices
+     *
+     * @type {JSX.Element}
+     */
+    const normalLayout: JSX.Element = (
+        <h1 className="hidden md:flex flex-row justify-center items-center text-2xl font-bold h-full m-0">
+            <span className="truncate">
+                {firstName} {lastName}
+            </span>
+        </h1>
+    );
+
+    /**
      * JSX Element representing the cover image.
      *
      * @type {JSX.Element}
      */
     const CoverImageSection: JSX.Element = (
-        <div className="relative row-span-3 flex">
+        <div className="relative flex">
             <img
                 src={coverImageSrc}
                 alt="cover image"
@@ -104,7 +129,7 @@ export default function NotFriendCoverSection({
      */
     const ColoredHeaderSection: JSX.Element = (
         <div
-            className="relative row-span-1 flex flex-col md:flex-row gap-4 lg:p-4 bg-slate-300 rounded-b"
+            className="relative flex flex-col justify-around items-center md:flex-row gap-4 h-full lg:p-4 bg-slate-300 rounded-b p-4"
             style={
                 backgroundColor && textColor
                     ? {
@@ -114,15 +139,16 @@ export default function NotFriendCoverSection({
                     : {}
             }
         >
-            <img
-                className="w-20 h-fit object-cover rounded-full relative bottom-10 border-white border-2"
-                src={userpicSrc}
-                alt="User avatar"
-            />
-            <div className="flex flex-col items-start w-3/5">
-                <h1 className="text-2xl text-center font-bold h-auto truncate m-0">
-                    {firstName} {lastName}'s page
-                </h1>
+            <div className="w-1/3">
+                <img
+                    className="max-h-20 rounded-full border-white border-2 m-auto"
+                    src={userpicSrc}
+                    alt="User avatar"
+                />
+            </div>
+            <div className="flex flex-col items-center md:items-start justify-center w-2/3">
+                {mobileLayout}
+                {normalLayout}
             </div>
         </div>
     );
@@ -133,7 +159,7 @@ export default function NotFriendCoverSection({
      * @type {JSX.Element}
      */
     return (
-        <div className="h-[calc(100vh-_5rem)] md:h-96 grid grid-rows-4 rounded-t">
+        <div className="flex flex-col rounded-t">
             {CoverImageSection}
             {ColoredHeaderSection}
         </div>

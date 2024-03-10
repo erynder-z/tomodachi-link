@@ -99,7 +99,7 @@ export default function PollAnswerSection({
                     whileTap={{ scale: 0.97 }}
                     className={`${
                         canAnswerPost
-                            ? 'p-2 w-12 min-w-max text-base bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark duration-300 rounded'
+                            ? 'p-2 w-12 min-w-max text-base bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark dark:text-regularTextDark duration-300 rounded'
                             : 'p-2 w-12 min-w-max text-base bg-gray-500 rounded'
                     }`}
                 >

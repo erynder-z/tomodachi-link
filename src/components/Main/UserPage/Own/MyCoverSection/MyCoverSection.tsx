@@ -226,7 +226,7 @@ export default function MyCoverSection({
      */
     const ColoredHeaderSection: JSX.Element = (
         <div
-            className="relative row-span-1 flex h-full gap-4 px-4 bg-card dark:bg-cardDark rounded-b"
+            className="relative row-span-1 flex h-full gap-4 px-4 bg-card dark:bg-cardDark rounded-b p-4"
             style={
                 backgroundColor && textColor
                     ? {
@@ -237,7 +237,7 @@ export default function MyCoverSection({
             }
         >
             <div className="flex flex-col justify-center w-full">
-                <h1 className="text-2xl text-center font-bold h-auto">
+                <h1 className="text-2xl text-center font-bold h-auto m-0">
                     My Page
                 </h1>
             </div>
@@ -250,7 +250,7 @@ export default function MyCoverSection({
      * @type {JSX.Element}
      */
     return (
-        <div className="h-[calc(100vh_-_5rem)] md:h-96 col-span-2 grid grid-rows-4 rounded-t">
+        <div className="col-span-2 grid grid-rows-4 rounded-t">
             <div className="relative row-span-3 flex">
                 {CoverImage}
                 {!showMenu && ChangeCoverButton}

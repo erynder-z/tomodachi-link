@@ -231,7 +231,7 @@ export default function UserListAll({
                     data-tooltip-variant="dark"
                     data-tooltip-delay-show={500}
                     onClick={handleSearchButtonClick}
-                    className="h-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularText dark:text-regularTextDark rounded px-4 transition-all"
+                    className="h-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark dark:text-regularTextDark rounded px-4 transition-all"
                 >
                     <MdPersonSearch onClick={handleSearchButtonClick} />
                 </button>

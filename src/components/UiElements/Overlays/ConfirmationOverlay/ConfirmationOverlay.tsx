@@ -72,7 +72,7 @@ const ConfirmationOverlay = ({
      */
     const YesButton: JSX.Element = (
         <button
-            className=" w-16 bg-green-500 text-white px-2 py-1 hover:bg-green-600"
+            className=" w-16 bg-green-500 text-white px-2 py-1 hover:bg-green-600 rounded"
             onClick={handleYesButtonClick}
         >
             Yes
@@ -86,7 +86,7 @@ const ConfirmationOverlay = ({
      */
     const NoButton: JSX.Element = (
         <button
-            className="w-16 bg-red-500 text-white px-2 py-1 hover:bg-red-600"
+            className="w-16 bg-red-500 text-white px-2 py-1 hover:bg-red-600 rounded"
             onClick={handleNoButtonClick}
         >
             No

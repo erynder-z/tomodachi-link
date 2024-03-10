@@ -78,6 +78,31 @@ export default function FriendCoverSection({
     }, []);
 
     /**
+     * JSX Element header layout for mobile devices
+     *
+     * @type {JSX.Element}
+     */
+    const mobileLayout: JSX.Element = (
+        <h1 className="md:hidden text-2xl text-center font-bold h-auto flex flex-col md:flex-row">
+            <span className="truncate">{firstName}</span>
+            <span className="truncate ">{lastName}</span>
+        </h1>
+    );
+
+    /**
+     * JSX Element header layout for non-mobile devices
+     *
+     * @type {JSX.Element}
+     */
+    const normalLayout: JSX.Element = (
+        <h1 className="hidden md:flex flex-row justify-center text-2xl font-bold h-auto">
+            <span className="truncate">
+                {firstName} {lastName}
+            </span>
+        </h1>
+    );
+
+    /**
      * JSX Element representing the cover image.
      *
      * @type {JSX.Element}
@@ -109,16 +134,16 @@ export default function FriendCoverSection({
                     : {}
             }
         >
-            <img
-                className="absolute -top-24 md:-top-14 left-1/2 md:left-auto transform -translate-x-1/2 md:translate-x-4 lg:translate-x-0 md:relative w-20 h-fit rounded-full bottom-36 md:bottom-10 border-white border-2"
-                src={`data:image/png;base64,${userPicture}`}
-                alt="User avatar"
-            />
-
-            <div className="flex flex-col justify-center max-w-sm flex-shrink">
-                <h1 className="text-2xl text-center font-bold h-auto truncate">
-                    {firstName} {lastName}'s page
-                </h1>
+            <div className="h-full md:max-w-1/6">
+                <img
+                    className="max-h-20 rounded-full border-white border-2 m-auto"
+                    src={`data:image/png;base64,${userPicture}`}
+                    alt="User avatar"
+                />
+            </div>
+            <div className="flex flex-col justify-center md:max-w-sm md:max-w-4/6">
+                {mobileLayout}
+                {normalLayout}
                 <p className="text-center text-xs">
                     {numberOfFriends} friend
                     {numberOfFriends > 1 ? 's' : ''} • {mutualFriends} mutual
@@ -126,7 +151,7 @@ export default function FriendCoverSection({
                     {mutualFriends > 1 ? 's' : ''}
                 </p>
             </div>
-            <div className="flex flex-col justify-center items-center gap-4">
+            <div className="flex flex-col justify-center items-center gap-4 md:max-w-1/6">
                 <div className="text-xs text-center">
                     last seen: {lastSeenFormatted}
                 </div>
@@ -141,7 +166,7 @@ export default function FriendCoverSection({
      * @type {JSX.Element}
      */
     return (
-        <div className="h-[calc(100vh-_5rem)] md:max-h-96 flex flex-col rounded-t">
+        <div className="flex flex-col rounded-t">
             {CoverImage}
             {ColoredHeader}
         </div>

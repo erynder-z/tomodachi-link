@@ -154,7 +154,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
                 }
             }}
             whileTap={{ scale: 0.97 }}
-            className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group leading-tight"
+            className="flex justify-between items-center w-full text-left group leading-tight"
         >
             <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                 Send friend request
@@ -174,7 +174,7 @@ const SuggestionCardFriendMenu: React.FC<SuggestionCardFriendMenuProps> = ({
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex flex-col gap-2 justify-around items-center"
+            className="flex flex-col gap-2 justify-around items-center text-regularText dark:text-regularTextDark"
         >
             {LinkToUser}
             {loading

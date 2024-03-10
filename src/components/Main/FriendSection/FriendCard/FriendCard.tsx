@@ -166,16 +166,16 @@ export default function FriendCard({
             {showConfirmDialog && ConfirmDialog}
 
             <div
-                className={`relative w-48 md:w-40 h-60 flex flex-col justify-between text-center p-4 gap-4 bg-card dark:bg-cardDark shadow-lg rounded md:rounded-lg overflow-hidden ${
+                className={`relative w-48 md:w-40 h-60 flex flex-col justify-between text-center p-4 gap-4 bg-card dark:bg-cardDark text-cardDark shadow-lg rounded md:rounded-lg overflow-hidden ${
                     showMenu
-                        ? 'bg-friendCardHighlight dark:bg-friendCardHighlight'
+                        ? 'bg-friendCardHighlight dark:bg-friendCardHighlightDark'
                         : ''
                 } `}
             >
                 <div className="group">
                     <button
                         onClick={toggleMenu}
-                        className="cursor-pointer absolute top-0 right-0 h-12 w-12 rounded bg-friendCardHighlight dark:bg-friendCardHighlight rounded-es-full transform transition-all duration-300 hover:w-72 hover:h-72 group-hover:w-72 group-hover:h-72"
+                        className="cursor-pointer absolute top-0 right-0 h-12 w-12 rounded text-regularText dark:text-regularTextDark bg-friendCardHighlight dark:bg-friendCardHighlightDark rounded-es-full transform transition-all duration-300 hover:w-72 hover:h-72 group-hover:w-72 group-hover:h-72"
                     >
                         <div className="absolute top-3 right-3 z-10 group-hover:scale-110 transform transition-all duration-300">
                             {showMenu ? MenuOpenIcon : MenuClosedIcon}

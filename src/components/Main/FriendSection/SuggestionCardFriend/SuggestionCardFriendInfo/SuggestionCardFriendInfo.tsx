@@ -118,7 +118,7 @@ export default function SuggestionCardFriendInfo({
      * @type {JSX.Element}
      */
     const CommonFriendsContent: JSX.Element = (
-        <div className="flex flex-col">
+        <div className="flex flex-col text-regularText dark:text-regularTextDark">
             <h1 className="font-semibold text-xs leading-tight">
                 {`Common friend${commonFriends.length > 1 ? 's' : ''}`}
             </h1>

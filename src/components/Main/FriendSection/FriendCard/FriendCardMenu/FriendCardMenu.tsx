@@ -87,12 +87,12 @@ export default function FriendCardMenu({
         <motion.button whileTap={{ scale: 0.97 }} className="w-full">
             <Link
                 to={`/users/${id}`}
-                className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
+                className="flex justify-between items-center w-full text-left group text-regularText dark:text-regularTextDark"
             >
                 <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                     Visit page
                 </span>
-                <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+                <div className="flex items-center h-8 gap-4 py-2 text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                     <TbLink />
                 </div>
             </Link>
@@ -107,13 +107,13 @@ export default function FriendCardMenu({
     const ChatWithUser: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
-            className="flex justify-between items-center w-full text-left text-regularText dark:text-regularTextDark group"
+            className="flex justify-between items-center w-full text-left group"
             onClick={handleChatButtonClick}
         >
             <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all leading-tight">
                 Chat with {firstName}
             </span>
-            <div className="flex items-center h-8 gap-4 py-2 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+            <div className="flex items-center h-8 gap-4 py-2  text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                 <TbMessage />
             </div>
         </motion.button>
@@ -133,7 +133,7 @@ export default function FriendCardMenu({
             <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
                 Unfriend
             </span>
-            <TbUserMinus className="h-8 text-regularText dark:text-regularTextDark text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all" />
+            <TbUserMinus className="h-8  text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all" />
         </motion.button>
     );
 
@@ -146,7 +146,7 @@ export default function FriendCardMenu({
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex flex-col gap-2 justify-around items-center"
+            className="flex flex-col gap-2 justify-around items-center text-regularText dark:text-regularTextDark"
         >
             {LinkToUser}
             {accountType !== 'guest' && ChatWithUser}
