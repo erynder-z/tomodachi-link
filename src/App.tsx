@@ -22,6 +22,7 @@ import { handleChatSetup } from './utilities/handleChatSetup';
 import { SearchModeType } from './types/searchTypes';
 import { InfoType } from './types/infoTypes';
 import useScrollToTop from './hooks/useScrollToTop';
+import IntroOverlay from './components/UiElements/Overlays/IntroOverlay/IntroOverlay';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
@@ -55,6 +56,7 @@ function App(): JSX.Element {
     const [searchMode, setSearchMode] = useState<SearchModeType>('all');
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
+    const [showIntroOverlay, setShowIntroOverlay] = useState<boolean>(false);
 
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
@@ -66,7 +68,7 @@ function App(): JSX.Element {
     useScrollToTop();
 
     // Use this to force a re-render when user data changes
-    const userDataKey = `${currentUserData?._id} + ${currentUserData?.lastSeen}`;
+    const userDataKey = `${currentUserData?._id} + ${currentUserData?.lastSeen} `;
     const accountType = currentUserData?.accountType;
     const showScanLines = scanLines !== 'none';
     const shouldLogout = tokenExpiration && tokenExpiration < Date.now();
@@ -91,6 +93,17 @@ function App(): JSX.Element {
      */
     const toggleSidebar = (): void =>
         setShowSidebar((prevShowSidebar) => !prevShowSidebar);
+
+    const displayGreeting = () => {
+        const timeOfDayMessage = getTimeOfDayMessage();
+        const username = currentUserData?.username;
+
+        setInfo({
+            typeOfInfo: timeOfDayMessage.typeOfInfo,
+            message: `${timeOfDayMessage.message}  ${username} !`,
+            icon: timeOfDayMessage.icon,
+        });
+    };
 
     /**
      * Resets the pagination trigger state when it is updated.
@@ -143,14 +156,14 @@ function App(): JSX.Element {
                     guestAccountOverlay: true,
                 });
             }
-            const timeOfDayMessage = getTimeOfDayMessage();
-            const username = currentUserData.firstName;
 
-            setInfo({
-                typeOfInfo: timeOfDayMessage.typeOfInfo,
-                message: `${timeOfDayMessage.message}  ${username} !`,
-                icon: timeOfDayMessage.icon,
-            });
+            const showIntroOverlay =
+                currentUserData.hasAcceptedTOS === false ||
+                currentUserData.hasAcceptedTOS === undefined;
+
+            showIntroOverlay
+                ? setShowIntroOverlay(showIntroOverlay)
+                : displayGreeting();
 
             if (currentUserData.accountType !== 'guest') {
                 const cleanupSocket = handleChatSetup(
@@ -263,6 +276,12 @@ function App(): JSX.Element {
 
             <InfoCard info={info} />
             {showScanLines && <ScanLinesOverlay />}
+            {showIntroOverlay && (
+                <IntroOverlay
+                    setShowIntroOverlay={setShowIntroOverlay}
+                    displayGreeting={displayGreeting}
+                />
+            )}
         </div>
     );
 

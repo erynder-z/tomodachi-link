@@ -16,6 +16,7 @@ export type CurrentUserDataType = {
     userpic: ImageType;
     cover: CoverType;
     accountType: 'regularUser' | 'guest';
+    hasAcceptedTOS: boolean;
 };
 
 export type CurrentUserDataContextProviderProps = {
