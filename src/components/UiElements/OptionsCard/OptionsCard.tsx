@@ -14,6 +14,7 @@ type OptionsCardProps = {
         editUserDataModal: boolean;
         mobileOptionsModal: boolean;
         guestAccountOverlay: boolean;
+        introOverlay: boolean;
     };
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
@@ -21,8 +22,10 @@ type OptionsCardProps = {
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
             guestAccountOverlay: boolean;
+            introOverlay: boolean;
         }>
     >;
+    resetOverlays: () => void;
     showSidebar?: boolean;
     toggleSidebar?: () => void;
 };
@@ -38,6 +41,7 @@ type OptionsCardProps = {
  * @param {boolean} props.shouldOverlaysShow.mobileOptionsModal - Indicates whether the mobile options modal is visible.
  * @param {boolean} props.shouldOverlaysShow.guestAccountOverlay - Indicates whether the guest account overlay is visible.
  * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @param {() => void} props.resetOverlays - Function to reset overlays.
  * @param {boolean} [props.showSidebar] - Indicates whether the sidebar is visible.
  * @param {Function} [props.toggleSidebar] - Function to toggle the visibility of the sidebar.
  * @returns {JSX.Element} The rendered OptionsCard component.
@@ -45,6 +49,7 @@ type OptionsCardProps = {
 export default function OptionsCard({
     shouldOverlaysShow,
     setShouldOverlaysShow,
+    resetOverlays,
     showSidebar,
     toggleSidebar,
 }: OptionsCardProps) {
@@ -64,7 +69,7 @@ export default function OptionsCard({
                     )}
                 </div>
             )}
-            <ProfilePageButton setShouldOverlaysShow={setShouldOverlaysShow} />
+            <ProfilePageButton resetOverlays={resetOverlays} />
             <OptionsButton
                 shouldOverlaysShow={shouldOverlaysShow}
                 setShouldOverlaysShow={setShouldOverlaysShow}

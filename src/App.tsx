@@ -22,7 +22,6 @@ import { handleChatSetup } from './utilities/handleChatSetup';
 import { SearchModeType } from './types/searchTypes';
 import { InfoType } from './types/infoTypes';
 import useScrollToTop from './hooks/useScrollToTop';
-import IntroOverlay from './components/UiElements/Overlays/IntroOverlay/IntroOverlay';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
@@ -52,11 +51,11 @@ function App(): JSX.Element {
         editUserDataModal: false,
         mobileOptionsModal: false,
         guestAccountOverlay: false,
+        introOverlay: false,
     });
     const [searchMode, setSearchMode] = useState<SearchModeType>('all');
     const [isPaginationTriggered, setIsPaginationTriggered] =
         useState<boolean>(false);
-    const [showIntroOverlay, setShowIntroOverlay] = useState<boolean>(false);
 
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
@@ -102,6 +101,19 @@ function App(): JSX.Element {
             typeOfInfo: timeOfDayMessage.typeOfInfo,
             message: `${timeOfDayMessage.message}  ${username} !`,
             icon: timeOfDayMessage.icon,
+        });
+    };
+
+    /**
+     * Closes all open overlays
+     */
+    const resetOverlays = () => {
+        setShouldOverlaysShow({
+            searchOverlay: false,
+            editUserDataModal: false,
+            mobileOptionsModal: false,
+            guestAccountOverlay: false,
+            introOverlay: false,
         });
     };
 
@@ -154,6 +166,7 @@ function App(): JSX.Element {
                     editUserDataModal: false,
                     mobileOptionsModal: false,
                     guestAccountOverlay: true,
+                    introOverlay: false,
                 });
             }
 
@@ -162,7 +175,10 @@ function App(): JSX.Element {
                 currentUserData.hasAcceptedTOS === undefined;
 
             showIntroOverlay
-                ? setShowIntroOverlay(showIntroOverlay)
+                ? setShouldOverlaysShow((prev) => ({
+                      ...prev,
+                      introOverlay: showIntroOverlay,
+                  }))
                 : displayGreeting();
 
             if (currentUserData.accountType !== 'guest') {
@@ -238,6 +254,7 @@ function App(): JSX.Element {
                     <OptionsCard
                         shouldOverlaysShow={shouldOverlaysShow}
                         setShouldOverlaysShow={setShouldOverlaysShow}
+                        resetOverlays={resetOverlays}
                     />
                 </div>
 
@@ -267,21 +284,17 @@ function App(): JSX.Element {
             </main>
 
             <OverlayHandler
+                resetOverlays={resetOverlays}
                 shouldOverlaysShow={shouldOverlaysShow}
                 setShouldOverlaysShow={setShouldOverlaysShow}
                 showSidebar={showSidebar}
                 toggleSidebar={toggleSidebar}
                 searchMode={searchMode}
+                displayGreeting={displayGreeting}
             />
 
             <InfoCard info={info} />
             {showScanLines && <ScanLinesOverlay />}
-            {showIntroOverlay && (
-                <IntroOverlay
-                    setShowIntroOverlay={setShowIntroOverlay}
-                    displayGreeting={displayGreeting}
-                />
-            )}
         </div>
     );
 

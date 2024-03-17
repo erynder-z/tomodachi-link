@@ -19,6 +19,7 @@ type PollListProps = {
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
             guestAccountOverlay: boolean;
+            introOverlay: boolean;
         }>
     >;
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;

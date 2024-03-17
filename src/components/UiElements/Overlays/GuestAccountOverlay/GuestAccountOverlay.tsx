@@ -1,14 +1,7 @@
 import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 
 type GuestAccountOverlayProps = {
-    setShouldOverlaysShow: React.Dispatch<
-        React.SetStateAction<{
-            searchOverlay: boolean;
-            editUserDataModal: boolean;
-            mobileOptionsModal: boolean;
-            guestAccountOverlay: boolean;
-        }>
-    >;
+    resetOverlays: () => void;
 };
 
 /**
@@ -16,11 +9,11 @@ type GuestAccountOverlayProps = {
  *
  * @function
  * @param {GuestAccountOverlayProps} props - The component props.
- * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @param {() => void} props.resetOverlays - Function to reset overlays.
  * @returns {JSX.Element} The rendered GuestAccountOverlay component.
  */
 export default function GuestAccountOverlay({
-    setShouldOverlaysShow,
+    resetOverlays,
 }: GuestAccountOverlayProps): JSX.Element {
     /**
      * Handles the click event when the "Got it" button is clicked, closing the overlay.
@@ -29,12 +22,7 @@ export default function GuestAccountOverlay({
      * @returns {void}
      */
     const handleCloseButtonClick = (): void => {
-        setShouldOverlaysShow({
-            searchOverlay: false,
-            editUserDataModal: false,
-            mobileOptionsModal: false,
-            guestAccountOverlay: false,
-        });
+        resetOverlays();
     };
 
     /**

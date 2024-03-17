@@ -6,14 +6,7 @@ import React from 'react';
 import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 
 type SearchOverlayProps = {
-    setShouldOverlaysShow: React.Dispatch<
-        React.SetStateAction<{
-            searchOverlay: boolean;
-            editUserDataModal: boolean;
-            mobileOptionsModal: boolean;
-            guestAccountOverlay: boolean;
-        }>
-    >;
+    resetOverlays: () => void;
     searchMode: SearchModeType;
 };
 
@@ -22,12 +15,12 @@ type SearchOverlayProps = {
  *
  * @function
  * @param {SearchOverlayProps} props - The component props.
- * @param {React.Dispatch<React.SetStateAction<Object>>} props.setShouldOverlaysShow - React state dispatch function to update overlay visibility.
+ * @param {() => void} props.resetOverlays - Function to reset overlays.
  * @param {SearchModeType} props.searchMode - The current search mode type.
  * @returns {JSX.Element} The rendered SearchOverlay component.
  */
 export default function SearchOverlay({
-    setShouldOverlaysShow,
+    resetOverlays,
     searchMode,
 }: SearchOverlayProps): JSX.Element {
     /**
@@ -37,12 +30,7 @@ export default function SearchOverlay({
      * @returns {void}
      */
     const handleCloseButtonClick = (): void => {
-        setShouldOverlaysShow({
-            searchOverlay: false,
-            editUserDataModal: false,
-            mobileOptionsModal: false,
-            guestAccountOverlay: false,
-        });
+        resetOverlays();
     };
 
     /**

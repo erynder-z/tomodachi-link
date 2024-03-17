@@ -16,6 +16,7 @@ type NavbarProps = {
         editUserDataModal: boolean;
         mobileOptionsModal: boolean;
         guestAccountOverlay: boolean;
+        introOverlay: boolean;
     };
     setShouldOverlaysShow: React.Dispatch<
         React.SetStateAction<{
@@ -23,6 +24,7 @@ type NavbarProps = {
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
             guestAccountOverlay: boolean;
+            introOverlay: boolean;
         }>
     >;
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
@@ -70,6 +72,7 @@ export default function Navbar({
             editUserDataModal: false,
             mobileOptionsModal: false,
             guestAccountOverlay: false,
+            introOverlay: false,
         });
         setSearchMode('all');
     };
@@ -86,6 +89,7 @@ export default function Navbar({
             editUserDataModal: false,
             mobileOptionsModal: false,
             guestAccountOverlay: false,
+            introOverlay: false,
         });
     };
 
@@ -129,6 +133,7 @@ export default function Navbar({
                     editUserDataModal: false,
                     mobileOptionsModal: !shouldOverlaysShow.mobileOptionsModal,
                     guestAccountOverlay: false,
+                    introOverlay: false,
                 });
             }}
         >

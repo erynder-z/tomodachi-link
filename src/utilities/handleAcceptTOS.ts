@@ -9,6 +9,6 @@ export const handleAcceptTOS = async (token: string): Promise<void> => {
             },
         });
     } catch (err: unknown) {
-        console.error;
+        console.error(err);
     }
 };

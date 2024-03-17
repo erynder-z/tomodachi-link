@@ -6,14 +6,7 @@ import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
 
 type ProfilePageButtonProps = {
-    setShouldOverlaysShow: React.Dispatch<
-        React.SetStateAction<{
-            searchOverlay: boolean;
-            editUserDataModal: boolean;
-            mobileOptionsModal: boolean;
-            guestAccountOverlay: boolean;
-        }>
-    >;
+    resetOverlays: () => void;
 };
 
 /**
@@ -25,7 +18,7 @@ type ProfilePageButtonProps = {
  * @returns {JSX.Element} The rendered ProfilePageButton component.
  */
 export default function ProfilePageButton({
-    setShouldOverlaysShow,
+    resetOverlays,
 }: ProfilePageButtonProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
     const { pendingFriendRequests } = currentUserData || {};
@@ -38,12 +31,7 @@ export default function ProfilePageButton({
      * @returns {void}
      */
     const handleCloseOptions = (): void => {
-        setShouldOverlaysShow({
-            searchOverlay: false,
-            editUserDataModal: false,
-            mobileOptionsModal: false,
-            guestAccountOverlay: false,
-        });
+        resetOverlays();
     };
 
     /**

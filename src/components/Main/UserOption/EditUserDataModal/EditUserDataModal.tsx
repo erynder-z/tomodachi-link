@@ -8,14 +8,7 @@ import useEscapeKey from '../../../../hooks/useEscapeKeyToHandleAction';
 
 type EditUserDataModalProps = {
     shouldEditUserDataModalShow: boolean;
-    setShouldOverlaysShow: React.Dispatch<
-        React.SetStateAction<{
-            searchOverlay: boolean;
-            editUserDataModal: boolean;
-            mobileOptionsModal: boolean;
-            guestAccountOverlay: boolean;
-        }>
-    >;
+    resetOverlays: () => void;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -27,7 +20,7 @@ type EditUserDataModalProps = {
  * @returns {JSX.Element} The rendered EditUserDataModal component.
  */
 export default function EditUserDataModal({
-    setShouldOverlaysShow,
+    resetOverlays,
     setShowOptions,
 }: EditUserDataModalProps): JSX.Element {
     const [currentMenu, setCurrentMenu] = useState<string>('Profile');
@@ -39,12 +32,7 @@ export default function EditUserDataModal({
      * @returns {void}
      */
     const handleCloseButtonClick = (): void => {
-        setShouldOverlaysShow({
-            searchOverlay: false,
-            editUserDataModal: false,
-            mobileOptionsModal: false,
-            guestAccountOverlay: false,
-        });
+        resetOverlays();
         setShowOptions?.(false);
     };
 
@@ -64,7 +52,7 @@ export default function EditUserDataModal({
         const changeProfileMenu = (
             <>
                 <EditUserDataModalForm
-                    setShouldOverlaysShow={setShouldOverlaysShow}
+                    resetOverlays={resetOverlays}
                     setShowOptions={setShowOptions}
                 />
                 <UpdatePasswordButton setCurrentMenu={setCurrentMenu} />
@@ -73,7 +61,7 @@ export default function EditUserDataModal({
 
         const changePasswordMenu = (
             <UpdatePasswordForm
-                setShouldOverlaysShow={setShouldOverlaysShow}
+                resetOverlays={resetOverlays}
                 setShowOptions={setShowOptions}
             />
         );

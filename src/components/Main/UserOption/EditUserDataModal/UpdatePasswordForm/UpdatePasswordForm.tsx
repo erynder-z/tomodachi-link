@@ -7,14 +7,7 @@ import { displayErrorInfo } from '../../../../UiElements/UserNotification/displa
 import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 
 type UpdatePasswordFormProps = {
-    setShouldOverlaysShow: React.Dispatch<
-        React.SetStateAction<{
-            searchOverlay: boolean;
-            editUserDataModal: boolean;
-            mobileOptionsModal: boolean;
-            guestAccountOverlay: boolean;
-        }>
-    >;
+    resetOverlays: () => void;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -26,7 +19,7 @@ type UpdatePasswordFormProps = {
  * @returns {JSX.Element} The rendered UpdatePasswordForm component.
  */
 export default function UpdatePasswordForm({
-    setShouldOverlaysShow,
+    resetOverlays,
     setShowOptions,
 }: UpdatePasswordFormProps): JSX.Element {
     const { token } = useAuth();
@@ -88,12 +81,7 @@ export default function UpdatePasswordForm({
             }
 
             displaySuccessInfo(setInfo, 'Password updated successfully!', '👍');
-            setShouldOverlaysShow({
-                searchOverlay: false,
-                editUserDataModal: false,
-                mobileOptionsModal: false,
-                guestAccountOverlay: false,
-            });
+            resetOverlays();
             if (setShowOptions) {
                 setShowOptions(false);
             }

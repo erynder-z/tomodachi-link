@@ -18,6 +18,7 @@ type UserListAllProps = {
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
             guestAccountOverlay: boolean;
+            introOverlay: boolean;
         }>
     >;
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
@@ -154,6 +155,7 @@ export default function UserListAll({
             editUserDataModal: false,
             mobileOptionsModal: false,
             guestAccountOverlay: false,
+            introOverlay: false,
         });
     };
 

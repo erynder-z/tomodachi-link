@@ -3,9 +3,18 @@ import useAuth from '../../../../hooks/useAuth';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { handleAcceptTOS } from '../../../../utilities/handleAcceptTOS';
 import ButtonBusy from '../../LoadingSpinner/ButtonBusy';
+import { motion } from 'framer-motion';
 
 type IntroOverlayProps = {
-    setShowIntroOverlay: Dispatch<SetStateAction<boolean>>;
+    setShouldOverlaysShow: Dispatch<
+        SetStateAction<{
+            searchOverlay: boolean;
+            editUserDataModal: boolean;
+            mobileOptionsModal: boolean;
+            guestAccountOverlay: boolean;
+            introOverlay: boolean;
+        }>
+    >;
     displayGreeting: () => void;
 };
 
@@ -15,7 +24,7 @@ type IntroOverlayProps = {
  * @type {JSX.Element}
  */
 export default function IntroOverlay({
-    setShowIntroOverlay,
+    setShouldOverlaysShow,
     displayGreeting,
 }: IntroOverlayProps): JSX.Element {
     const { token } = useAuth();
@@ -31,7 +40,10 @@ export default function IntroOverlay({
             setIsSubmitting(true);
             try {
                 await handleAcceptTOS(token);
-                setShowIntroOverlay(false);
+                setShouldOverlaysShow((prev) => ({
+                    ...prev,
+                    introOverlay: false,
+                }));
             } catch (error) {
                 console.error('Error accepting TOS:', error);
             } finally {
@@ -47,7 +59,12 @@ export default function IntroOverlay({
      * @type {JSX.Element}
      */
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen p-8 z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-slate-900/90">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen p-8 z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-slate-900/90"
+        >
             <div className="flex  flex-col text-regularTextDark">
                 <h1 className="text-2xl font-bold mb-4">
                     Welcome to Tomodachi-Link!
@@ -84,6 +101,6 @@ export default function IntroOverlay({
                     </span>
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 }

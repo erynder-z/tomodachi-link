@@ -9,14 +9,7 @@ import { motion } from 'framer-motion';
 import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 
 type EditUserDataModalFormProps = {
-    setShouldOverlaysShow: React.Dispatch<
-        React.SetStateAction<{
-            searchOverlay: boolean;
-            editUserDataModal: boolean;
-            mobileOptionsModal: boolean;
-            guestAccountOverlay: boolean;
-        }>
-    >;
+    resetOverlays: () => void;
     setShowOptions?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -28,7 +21,7 @@ type EditUserDataModalFormProps = {
  * @returns {JSX.Element} The rendered EditUserDataModalForm component.
  */
 export default function EditUserDataModalForm({
-    setShouldOverlaysShow,
+    resetOverlays,
     setShowOptions,
 }: EditUserDataModalFormProps): JSX.Element {
     const { token } = useAuth();
@@ -98,12 +91,7 @@ export default function EditUserDataModalForm({
 
             displaySuccessInfo(setInfo, 'Profile updated successfully!', '👍');
             handleFetchUserData();
-            setShouldOverlaysShow({
-                searchOverlay: false,
-                editUserDataModal: false,
-                mobileOptionsModal: false,
-                guestAccountOverlay: false,
-            });
+            resetOverlays();
             setShowOptions && setShowOptions(false);
         }
     };

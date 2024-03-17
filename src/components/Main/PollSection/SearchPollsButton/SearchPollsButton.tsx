@@ -10,6 +10,7 @@ type SearchPollsButtonProps = {
             editUserDataModal: boolean;
             mobileOptionsModal: boolean;
             guestAccountOverlay: boolean;
+            introOverlay: boolean;
         }>
     >;
     setSearchMode: React.Dispatch<React.SetStateAction<SearchModeType>>;
@@ -46,6 +47,7 @@ export default function SearchPollsButton({
                         editUserDataModal: false,
                         mobileOptionsModal: false,
                         guestAccountOverlay: false,
+                        introOverlay: false,
                     });
                     setSearchMode('polls');
                 }}
