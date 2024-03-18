@@ -235,7 +235,7 @@ function App(): JSX.Element {
             key={userDataKey}
             className={`font-regularFont subpixel-antialiased text-regularText dark:text-regularTextDark flex flex-col lg:flex-row h-full pb-12 lg:pb-0 ${colorScheme}`}
         >
-            <div className="relative z-50">
+            <div className="relative">
                 <nav className="flex-none fixed bottom-0 w-full h-12 lg:sticky lg:top-0 lg:bottom-auto lg:w-auto lg:h-screen bg-background1 dark:bg-background1Dark">
                     <Navbar
                         shouldOverlaysShow={shouldOverlaysShow}

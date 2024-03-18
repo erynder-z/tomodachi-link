@@ -226,7 +226,7 @@ export default function FeedSection({
             transition={{ duration: 0.2 }}
             className="flex flex-col items-center min-h-[calc(100vh_-_3rem)] lg:min-h-full lg:p-4 md:p-0 pb-4 bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark shadow-lg rounded lg:rounded-lg"
         >
-            <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-50 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
+            <h1 className="flex justify-center gap-2 text-xl font-bold sticky z-20 top-0 md:top-4 md:mb-4 py-1 px-4 w-full md:w-fit md:rounded-full bg-background2 dark:bg-background2Dark md:bg-gray-300/80 md:dark:bg-gray-500/80">
                 Your feed
                 <RefreshFeedButton refreshFeed={refreshFeed} />
                 <SearchPostsButton

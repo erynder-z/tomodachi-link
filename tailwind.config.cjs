@@ -68,10 +68,6 @@ module.exports = {
                         transform: 'scale(0)',
                         opacity: '0',
                     },
-                    '70%': {
-                        transform: 'scale(1.1)',
-                        opacity: '1',
-                    },
                     '100%': {
                         transform: 'scale(1)',
                         opacity: '1',

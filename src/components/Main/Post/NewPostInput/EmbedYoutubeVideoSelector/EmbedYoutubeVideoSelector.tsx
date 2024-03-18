@@ -118,7 +118,7 @@ export default function EmbedYoutubeVideoSelector({
                 htmlFor="embedVideoURL"
                 className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-                Enter URL
+                Enter YouTube URL
             </label>
         </>
     );
@@ -131,7 +131,7 @@ export default function EmbedYoutubeVideoSelector({
     const AddButton: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
-            className="w-full bg-blue-500 text-white px-2 py-1"
+            className="w-full bg-blue-500 text-white px-2 py-1 rounded"
         >
             Add
         </motion.button>
@@ -148,7 +148,7 @@ export default function EmbedYoutubeVideoSelector({
                 action=""
                 method="POST"
                 onSubmit={handleSubmit}
-                className="divide-y divide-gray-200 py-8 text-base flex flex-col gap-4 bg-card dark:bg-cardDark rounded-md text-gray-700 dark:text-gray-400 sm:text-lg sm:leading-7 p-4"
+                className="w-3/4 md:w-1/2 lg:w-1/5 py-8 text-base flex flex-col gap-4 bg-card dark:bg-cardDark rounded-md text-gray-700 dark:text-gray-400 sm:text-lg sm:leading-7 p-4"
             >
                 <div className="relative z-0">
                     {CloseButton}
