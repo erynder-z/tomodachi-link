@@ -80,7 +80,7 @@ export default function EditUserDataModalForm({
 
             const SERVER_URL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(`${SERVER_URL}/api/v1/userdata`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
