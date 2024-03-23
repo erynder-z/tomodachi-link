@@ -280,7 +280,7 @@ export default function EditPostInput({
         <motion.button
             onClick={handleComponentClose}
             whileTap={{ scale: 0.97 }}
-            className="absolute -top-8 -right-0 md:-right-10 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
+            className="absolute top-2 right-2 bg-card dark:bg-cardDark hover:bg-red-500 text-red-500 hover:text-card rounded-full p-1 transition-colors duration-200"
         >
             <FaTimes size="1.5em" />
         </motion.button>
@@ -428,7 +428,7 @@ export default function EditPostInput({
                     exit={{ opacity: 0 }}
                     className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-700/90 px-4 py-8"
                 >
-                    <div className="relative flex gap-4 px-4 py-8 w-full lg:w-2/6 lg:flex-row lg:justify-around lg:shadow-lg bg-card dark:bg-cardDark">
+                    <div className="relative flex gap-4 px-4 py-8 w-full lg:w-2/6 lg:flex-row lg:justify-around lg:shadow-lg bg-card dark:bg-cardDark overflow-auto">
                         {CloseButton}
                         {PostEditForm}
                         <AnimatePresence>

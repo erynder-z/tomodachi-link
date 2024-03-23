@@ -92,7 +92,7 @@ export default function PostOptionsSection({
     );
 
     const PostOptionsContent = (
-        <div className="relative inline-block cursor-pointer">
+        <div className="relative flex cursor-pointer">
             <div
                 data-tooltip-id="post-options-tooltip"
                 data-tooltip-content={`${

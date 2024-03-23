@@ -83,7 +83,7 @@ export default function PostInputTextarea({
                 autoComplete="off"
                 id="newPost"
                 name="newPost"
-                className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-gray-300 appearance-none focus:outline-none focus:ring-0  peer overflow-hidden resize-none"
+                className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer overflow-hidden resize-none"
                 placeholder=" "
                 value={postText}
                 onChange={handleTextareaChange}
