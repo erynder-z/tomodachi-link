@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { ChatConversationType } from '../types/chatTypes';
 import { NotificationBubblesContextProps } from '../types/infoTypes';
+import useAuth from '../hooks/useAuth';
 
 /**
  * React context for managing and providing notification bubbles data.
@@ -34,6 +35,7 @@ export function NotificationBubblesContextProvider({
 }: {
     children: React.ReactNode;
 }): JSX.Element {
+    const { isAuth } = useAuth();
     const [
         conversationsWithUnreadMessages,
         setConversationsWithUnreadMessages,
@@ -54,6 +56,20 @@ export function NotificationBubblesContextProvider({
             prevUnreadMessages?.filter((id) => id !== activeChat?._id)
         );
     }, [conversationsWithUnreadMessages?.length]);
+
+    /**
+     * useEffect hook to set chat notification parameters to initial state when user is not authenticated.
+     *
+     * @effect
+     * @returns {void}
+     */
+    useEffect(() => {
+        if (!isAuth) {
+            setConversationsWithUnreadMessages([]);
+            setMutedConversations([]);
+            setActiveChat(null);
+        }
+    }, [isAuth]);
 
     /**
      * Context value representing the state and functions for managing notification bubbles.
