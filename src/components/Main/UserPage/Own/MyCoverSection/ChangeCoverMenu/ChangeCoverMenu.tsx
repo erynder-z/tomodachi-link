@@ -98,7 +98,7 @@ export default function ChangeCoverMenu({
                 className="absolute right-0 md:right-8 top-4 z-10 flex flex-col w-full md:w-fit bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark  border-regularText dark:border-regularTextDark text-xs rounded"
             >
                 {CloseButton}
-                <ul>{MenuList}</ul>
+                <ul className="p-0">{MenuList}</ul>
             </motion.div>
         </motion.div>
     );
