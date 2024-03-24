@@ -82,8 +82,8 @@ export default function IntroOverlay({
      */
     useEffect(() => {
         const getDefaultFriend = async (): Promise<void> => {
-            if (token) {
-                const id = import.meta.env.VITE_DEFAULT_FRIEND_ID;
+            const id = import.meta.env.VITE_DEFAULT_FRIEND_ID;
+            if (token && id) {
                 const apiEndpointURL = `/api/v1/users/${id}`;
                 const METHOD = 'GET';
                 const ERROR_MESSAGE = 'Unable to fetch user!';
