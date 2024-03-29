@@ -9,6 +9,9 @@ import cover6 from '../../../../assets/cover06.webp';
 import cover7 from '../../../../assets/cover07.webp';
 import cover8 from '../../../../assets/cover08.webp';
 import cover9 from '../../../../assets/cover09.webp';
+import cover10 from '../../../../assets/cover10.webp';
+import cover11 from '../../../../assets/cover11.webp';
+import cover12 from '../../../../assets/cover12.webp';
 
 const NONE_COVER_OPTION: CoverOption = {
     image: defaultCover,
@@ -26,4 +29,7 @@ export const COVER_OPTIONS: CoverOption[] = [
     { image: cover7, name: 'cover7' },
     { image: cover8, name: 'cover8' },
     { image: cover9, name: 'cover9' },
+    { image: cover10, name: 'cover10' },
+    { image: cover11, name: 'cover11' },
+    { image: cover12, name: 'cover12' },
 ];
