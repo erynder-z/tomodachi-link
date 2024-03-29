@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { FaPencil } from 'react-icons/fa6';
 
 type PostInputTextareaProps = {
     postText: string;
@@ -94,7 +95,15 @@ export default function PostInputTextarea({
                 htmlFor="newPost"
                 className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:bg-highlight peer-focus:dark:bg-highlightDark peer-focus:rounded peer-focus:px-2 peer-focus:text-regularTextDark"
             >
-                What's on your mind,&nbsp;{firstName}?
+                <span className="flex justify-center items-center gap-2">
+                    What's on your mind,&nbsp;
+                    {firstName}?
+                    <FaPencil
+                        className={` ${
+                            !isTextareaFocused ? 'animate-bounce ' : ''
+                        } `}
+                    />
+                </span>
             </label>
             <div className="absolute left-0 bottom-0 w-full h-1 rounded-full overflow-hidden">
                 <div
