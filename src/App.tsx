@@ -12,7 +12,7 @@ import { ScrollToTopButton } from './components/UiElements/ScrollToTopButton/Scr
 import OverlayHandler from './components/UiElements/Overlays/OverlayHandler';
 import { getTimeOfDayMessage } from './utilities/getTimeOfDayMessage';
 import { Socket } from 'socket.io-client';
-import { useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import useTheme from './hooks/useTheme';
 import useNotificationBubblesContext from './hooks/useNotificationBubblesContext';
 import { AnimatePresence } from 'framer-motion';
@@ -22,6 +22,9 @@ import { handleChatSetup } from './utilities/handleChatSetup';
 import { SearchModeType } from './types/searchTypes';
 import { InfoType } from './types/infoTypes';
 import useScrollToTop from './hooks/useScrollToTop';
+import OAuthCallbackHandler from './components/Login/OAuthCallbackHandler/OAuthCallbackHandler';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import { displayErrorInfo } from './components/UiElements/UserNotification/displayErrorInfo';
 
 const USERDATA_POLLING_INTERVAL = 300000;
 
@@ -32,7 +35,7 @@ const USERDATA_POLLING_INTERVAL = 300000;
  * @returns {JSX.Element} JSX Element representing the application.
  */
 function App(): JSX.Element {
-    const { isAuth, token, tokenExpiration, logout } = useAuth();
+    const { isAuth, token, tokenExpiration, logout, setToken } = useAuth();
     const { currentUserData, handleFetchUserData } = useCurrentUserData();
     const { info, setInfo } = useInfoCard();
 
@@ -59,6 +62,11 @@ function App(): JSX.Element {
 
     const socket = useRef<Socket | undefined>(undefined);
     const location = useLocation();
+
+    const params = new URLSearchParams(location.search);
+
+    const provider = params.get('provider');
+    const code = params.get('code');
 
     /**
      * Start at the top of the page when navigating to a new page
@@ -103,6 +111,40 @@ function App(): JSX.Element {
             icon: timeOfDayMessage.icon,
         });
     };
+
+    const handleOAuthCallback = async () => {
+        if (provider && code) {
+            try {
+                const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
+                const response = await fetch(
+                    `${SERVER_URL}/api/v1/oauth/redirect?provider=${provider}&code=${code}`,
+                    {
+                        method: 'GET',
+                    }
+                );
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    const errorMessage = data.error.message;
+                    displayErrorInfo(setInfo, errorMessage, '👻');
+
+                    throw new Error(
+                        `Error: ${response.status} ${response.statusText}`
+                    );
+                }
+
+                const data = await response.json();
+                setToken(data.token);
+            } catch (error: unknown) {
+                console.error(error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        handleOAuthCallback();
+    }, [code]);
 
     /**
      * Closes all open overlays
@@ -220,7 +262,11 @@ function App(): JSX.Element {
      */
     const LoginContent = (
         <>
-            <LoginPage />
+            <Routes>
+                <Route path="*" element={<NotFoundPage />} />
+                <Route path="/" element={<LoginPage />} />
+                {/*   <Route path="/oauth" element={<OAuthCallbackHandler />} /> */}
+            </Routes>
             <InfoCard info={info} />
         </>
     );

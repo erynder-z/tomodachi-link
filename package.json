@@ -1,6 +1,7 @@
 {
     "name": "tomodachi-link-frontend",
     "private": true,
+    "homepage": "https://erynder-z.github.io/tomodachi-link/",
     "version": "0.0.0",
     "type": "module",
     "scripts": {
@@ -20,7 +21,6 @@
         "gif-picker-react": "^1.1.0",
         "react": "^18.2.0",
         "react-avatar-editor": "^13.0.0",
-        "react-cookie": "^6.1.1",
         "react-dom": "^18.2.0",
         "react-icons": "^4.8.0",
         "react-image-file-resizer": "^0.4.8",

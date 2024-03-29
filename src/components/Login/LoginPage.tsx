@@ -1,6 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import AuthContext from '../../contexts/AuthContext';
+import { useEffect, useRef, useState } from 'react';
 import LoginForm from './LoginForm';
 import SignupPage from './SignupPage/SignupPage';
 import useInfoCard from '../../hooks/useInfoCard';
@@ -24,10 +22,9 @@ import DiscordLoginButton from './DiscordLoginButton/DiscordLoginButton';
  * @returns {JSX.Element} The rendered login page component.
  */
 export default function LoginPage(): JSX.Element {
-    const { setToken } = useContext(AuthContext);
+    const { setToken } = useAuth();
     const { isAuth } = useAuth();
     const { setInfo } = useInfoCard();
-    const [cookies, setCookie, removeCookie] = useCookies(['jwtTomodachiLink']);
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [showSignup, setShowSignup] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -133,26 +130,6 @@ export default function LoginPage(): JSX.Element {
         }
         setIsSubmitting(false);
     };
-
-    /**
-     * Effect to handle the removal of cookies and setting the token.
-     *
-     * @effect
-     * @return {void} No return value.
-     */
-    useEffect(() => {
-        const setTokenAndDeleteCookie = () => {
-            setCookie('jwtTomodachiLink', cookies.jwtTomodachiLink, {
-                secure: true,
-                sameSite: 'strict',
-            });
-            const token = cookies.jwtTomodachiLink;
-
-            setToken(token);
-            removeCookie('jwtTomodachiLink');
-        };
-        if (cookies.jwtTomodachiLink) setTokenAndDeleteCookie();
-    }, [cookies.jwtTomodachiLink, setToken, removeCookie, setInfo]);
 
     /**
      * Effect to update the verifying status when authentication changes.

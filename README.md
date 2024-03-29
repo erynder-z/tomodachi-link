@@ -4,7 +4,7 @@ A social network built with React and TypeScript powered by a RESTful API backen
 
 ## Live
 
-[https://erynder-z.github.io/tomodachi-link-fronentd/](https://erynder-z.github.io/tomodachi-link-frontend/).
+[https://erynder-z.github.io/tomodachi-link/](https://erynder-z.github.io/tomodachi-link/).
 
 ## Features
 
@@ -56,7 +56,6 @@ The backend for Tomodachi-Link is a separate repo, so you need to install and ru
 -   [gif-picker-react](https://www.npmjs.com/package/gif-picker-react) - React component for picking GIFs.
 -   [react](https://reactjs.org/) - A JavaScript library for building user interfaces.
 -   [react-avatar-editor](https://github.com/mosch/react-avatar-editor) - React component for editing avatars.
--   [react-cookie](https://www.npmjs.com/package/react-cookie) - React component for handling browser cookies.
 -   [react-icons](https://react-icons.github.io/react-icons/) - Library for icons in React.
 -   [react-image-file-resizer](https://www.npmjs.com/package/react-image-file-resizer) - React component to resize image files.
 -   [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner) - Loader spinner component for React.

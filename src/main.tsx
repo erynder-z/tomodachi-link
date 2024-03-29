@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { InfoCardContextProvider } from './contexts/InfoCardContext';
@@ -12,7 +12,7 @@ import { NotificationBubblesContextProvider } from './contexts/NotificationBubbl
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <HashRouter>
+        <BrowserRouter>
             <AuthContextProvider>
                 <CurrentUserDataContextProvider>
                     <FriendDataContextProvider>
@@ -26,6 +26,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                     </FriendDataContextProvider>
                 </CurrentUserDataContextProvider>
             </AuthContextProvider>
-        </HashRouter>
+        </BrowserRouter>
     </React.StrictMode>
 );
