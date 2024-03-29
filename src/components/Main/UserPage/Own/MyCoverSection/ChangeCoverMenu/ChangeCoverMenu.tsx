@@ -1,4 +1,4 @@
-import { MdKeyboardArrowUp } from 'react-icons/md';
+import { FaTimes } from 'react-icons/fa';
 import { COVER_OPTIONS } from '../../../SharedComponents/CoverOptions';
 import { CoverOption } from '../../../../../../types/miscTypes';
 import { motion, Variants } from 'framer-motion';
@@ -27,9 +27,9 @@ export default function ChangeCoverMenu({
     const CloseButton = (
         <button
             onClick={handleCloseButtonCLick}
-            className="flex justify-center w-full cursor-pointer hover:bg-highlight dark:hover:bg-highlightDark"
+            className="flex justify-center cursor-pointer w-fit hover:bg-highlight dark:hover:bg-highlightDark p-1 ml-auto"
         >
-            <MdKeyboardArrowUp size="2em" />
+            <FaTimes size="1.5em" />
         </button>
     );
 
@@ -95,10 +95,12 @@ export default function ChangeCoverMenu({
                     },
                 }}
                 style={{ pointerEvents: showMenu ? 'auto' : 'none' }}
-                className="absolute right-0 md:right-8 top-4 z-10 flex flex-col w-full md:w-fit bg-background1/80 dark:bg-background1Dark/80 text-regularText  dark:text-regularTextDark  border-regularText dark:border-regularTextDark text-xs rounded"
+                className="absolute right-0 md:right-8 top-4 z-10 flex flex-col w-full md:w-fit bg-background1/90 dark:bg-background1Dark/90 text-regularText  dark:text-regularTextDark  border-regularText dark:border-regularTextDark text-xs rounded"
             >
                 {CloseButton}
-                <ul className="p-0">{MenuList}</ul>
+                <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {MenuList}
+                </ul>
             </motion.div>
         </motion.div>
     );
