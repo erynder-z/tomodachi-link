@@ -106,6 +106,7 @@ export default function ShowPeopleInThisFeed({
             firstName: user.firstName,
             lastName: user.lastName,
             userpic: user.userpic,
+            accountType: user.accountType,
         };
     };
 

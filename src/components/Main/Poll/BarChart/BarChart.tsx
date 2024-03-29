@@ -81,7 +81,7 @@ export const BarChart = ({ dimensions, data }: BarChartProps): JSX.Element => {
      *
      * @type {JSX.Element[]}
      */
-    const allShapes: JSX.Element[] = data.map((d, i) => {
+    const allShapes: (JSX.Element | null)[] = data.map((d, i) => {
         const y = yScale(d.nameOfOption);
         if (y === undefined) {
             return null;
