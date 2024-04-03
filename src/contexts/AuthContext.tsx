@@ -109,12 +109,13 @@ export const AuthContextProvider = ({
                 const data = await response.json();
                 setAuthUser(data);
                 setIsAuth(true);
-                setLoading(false);
             } catch (error: unknown) {
                 setAuthUser(null);
                 setIsAuth(false);
-                setLoading(false);
+
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
 
