@@ -61,7 +61,7 @@ export const AuthContextProvider = ({
     const [tokenExpiration, setTokenExpiration] = useState<number | null>(null);
     const { setInfo } = useInfoCard();
     const { setCurrentUserData } = useCurrentUserData();
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
 
     /**
      * useEffect hook to store the token in local storage when it changes.
