@@ -40,9 +40,9 @@ export default function ShowPeopleInThisFeed({
      * Get the unique user IDs of people in the feed.
      *
      * @function
-     * @returns {string[]} An array of unique user IDs in the feed.
+     * @returns {Promise<string[]>} A promise resolving to an array of unique user IDs in the feed.
      */
-    const getIdsOfPeopleInFeed = (): string[] => {
+    const getIdsOfPeopleInFeed = async (): Promise<string[]> => {
         if (!minimalPosts.length) {
             return [];
         }
@@ -121,13 +121,16 @@ export default function ShowPeopleInThisFeed({
             setLoading(true);
             isInitialLoad.current = false;
         } else {
-            if (minimalPosts.length === 0) {
+            if (hasEmptyFeed) {
                 setFeedUsers([]);
                 setLoading(false);
-            } else if (token) {
-                const idsOfPeopleInFeed = getIdsOfPeopleInFeed();
-                if (idsOfPeopleInFeed.length > 0)
-                    handleGetUserDetails(idsOfPeopleInFeed);
+            } else {
+                const fetchData = async () => {
+                    const idsOfPeopleInFeed = await getIdsOfPeopleInFeed();
+                    if (idsOfPeopleInFeed.length > 0)
+                        handleGetUserDetails(idsOfPeopleInFeed);
+                };
+                fetchData();
             }
         }
     }, [friendIDs, minimalPosts, token]);
