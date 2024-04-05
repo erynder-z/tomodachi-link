@@ -4,7 +4,7 @@ A social network built with React and TypeScript powered by a RESTful API backen
 
 ## Live
 
-[https://erynder-z.github.io/tomodachi-link/](https://erynder-z.github.io/tomodachi-link/).
+[https://tomodachi-link.netlify.app/](https://tomodachi-link.netlify.app/).
 
 ## Features
 
