@@ -25,13 +25,10 @@ type ShowPeopleInThisFeedProps = {
 export default function ShowPeopleInThisFeed({
     minimalPosts,
 }: ShowPeopleInThisFeedProps): JSX.Element {
-    const { token } = useAuth();
     const { currentUserData } = useCurrentUserData();
     const { friendData, friendIDs } = useFriendData();
     const [feedUsers, setFeedUsers] = useState<MinimalUserTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-
-    const isInitialLoad = useRef(true);
 
     const currentUserId = currentUserData?._id;
     const hasEmptyFeed = minimalPosts.length === 0;
@@ -117,36 +114,19 @@ export default function ShowPeopleInThisFeed({
      * @return {void} No return value.
      */
     useEffect(() => {
-        if (isInitialLoad.current) {
-            setLoading(true);
-            isInitialLoad.current = false;
-        } else {
-            if (hasEmptyFeed) {
-                setFeedUsers([]);
-                setLoading(false);
-            } else {
-                const fetchData = async () => {
-                    const idsOfPeopleInFeed = await getIdsOfPeopleInFeed();
-                    if (idsOfPeopleInFeed.length > 0)
-                        handleGetUserDetails(idsOfPeopleInFeed);
-                };
-                fetchData();
-            }
-        }
-    }, [friendIDs, minimalPosts, token]);
-
-    /**
-     * Effect to handle loading state when users are pushed to the array.
-     *
-     * @effect
-     * @return {void} No return value.
-     */
-    useEffect(() => {
-        // there are users in the feed and they are pushed to the array
-        if (!hasEmptyFeed && feedUsers.length > 0) {
+        if (hasEmptyFeed) {
+            setFeedUsers([]);
             setLoading(false);
+        } else {
+            const fetchData = async () => {
+                const idsOfPeopleInFeed = await getIdsOfPeopleInFeed();
+                if (idsOfPeopleInFeed.length > 0)
+                    handleGetUserDetails(idsOfPeopleInFeed);
+            };
+
+            fetchData().then(() => setLoading(false));
         }
-    }, [feedUsers]);
+    }, [friendIDs, minimalPosts]);
 
     /**
      * Loading content displayed while fetching users in the feed.
