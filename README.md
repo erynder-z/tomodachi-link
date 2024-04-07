@@ -13,7 +13,7 @@ A social network built with React and TypeScript powered by a RESTful API backen
 -   Create and visualize polls
 -   Realtime chat messenger
 -   Easy-to-use type-ahead search
--   Fully responsible layout
+-   Fully responsive layout
 
 ## Backend API
 
