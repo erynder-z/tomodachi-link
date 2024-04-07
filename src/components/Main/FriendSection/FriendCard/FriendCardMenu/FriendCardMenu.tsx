@@ -109,6 +109,7 @@ export default function FriendCardMenu({
             whileTap={{ scale: 0.97 }}
             className="flex justify-between items-center w-full text-left group"
             onClick={handleChatButtonClick}
+            disabled={accountType === 'guest'}
         >
             <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all leading-tight">
                 Chat with {firstName}
