@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../../UiElements/LoadingSpinner/LoadingSpinner';
-import useAuth from '../../../../hooks/useAuth';
 import { MinimalUserTypes } from '../../../../types/otherUserTypes';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import FeedUserListItem from './FeedUserListItem/FeedUserListItem';
