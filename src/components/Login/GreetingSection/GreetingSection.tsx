@@ -70,13 +70,13 @@ export default function GreetingSection(): JSX.Element {
         <section className="text-white font-monospaceFont font-medium md:text-3xl text-center bg-cBlack/75 p-4 lg:rounded w-5/6 mx-auto">
             <h1 className="text-xl md:text-3xl font-medium">
                 Welcome to{' '}
-                <span className="text-4xl font-bold text-cCyan">
+                <span className="text-2xl md:text-4xl font-bold text-cCyan">
                     Tomodachi-Link
                 </span>
                 !
             </h1>
             Join our community of{' '}
-            <motion.span className="text-4xl font-bold text-cCyan">
+            <motion.span className="text-2xl md:text-4xl font-bold text-cCyan">
                 {rounded}
             </motion.span>{' '}
             users!

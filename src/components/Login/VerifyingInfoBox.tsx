@@ -1,4 +1,4 @@
-import { Blocks } from 'react-loader-spinner';
+import { Hourglass } from 'react-loader-spinner';
 import { motion } from 'framer-motion';
 
 /**
@@ -15,13 +15,14 @@ export default function VerifyingInfoBox(): JSX.Element {
             exit={{ opacity: 0 }}
             className="flex flex-col justify-center items-center h-full"
         >
-            <Blocks
+            <Hourglass
                 visible={true}
                 height="80"
                 width="80"
-                ariaLabel="blocks-loading"
+                ariaLabel="hourglass-loading"
                 wrapperStyle={{}}
-                wrapperClass="blocks-wrapper"
+                wrapperClass=""
+                colors={['#ffffff', '#0598BC']}
             />
             Verifying...
         </motion.div>

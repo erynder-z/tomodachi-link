@@ -123,3 +123,9 @@ pre code {
     padding: 1rem;
     overflow-x: auto;
 }
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 1rem;
+}
