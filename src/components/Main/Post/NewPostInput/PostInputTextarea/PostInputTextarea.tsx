@@ -71,6 +71,18 @@ export default function PostInputTextarea({
     }, []);
 
     /**
+     * Decode HTML entities in a given text string to unescape sanitized strings.
+     *
+     * @param {string} text - the text containing HTML entities to be decoded
+     * @return {string} the text with HTML entities decoded
+     */
+    const decodeHtmlEntities = (text: string) => {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = text;
+        return textarea.value;
+    };
+
+    /**
      * The rendered PostInputTextarea component.
      *
      * @type {JSX.Element}
@@ -86,7 +98,7 @@ export default function PostInputTextarea({
                 name="newPost"
                 className="block py-2.5 px-0 w-full text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer overflow-hidden resize-none"
                 placeholder=" "
-                value={postText}
+                value={decodeHtmlEntities(postText)}
                 onChange={handleTextareaChange}
                 onFocus={() => setIsTextareaFocused(true)}
                 onBlur={() => setIsTextareaFocused(false)}
