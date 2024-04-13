@@ -163,8 +163,6 @@ export default function FriendCard({
      */
     return (
         <>
-            {showConfirmDialog && ConfirmDialog}
-
             <div
                 className={`relative w-48 md:w-40 h-60 flex flex-col justify-between text-center p-4 gap-4 bg-card dark:bg-cardDark text-cardDark shadow-lg rounded md:rounded-lg overflow-hidden ${
                     showMenu
@@ -186,6 +184,7 @@ export default function FriendCard({
                     {showMenu ? MenuOpenContent : MenuClosedContent}
                 </div>
             </div>
+            {showConfirmDialog && ConfirmDialog}
         </>
     );
 }

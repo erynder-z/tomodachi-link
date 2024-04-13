@@ -426,7 +426,7 @@ export default function EditPostInput({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-700/90 px-4 py-8"
+                    className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden flex flex-col items-center justify-center gap-4 bg-gray-700/90 px-4 py-8"
                 >
                     <div className="relative flex gap-4 px-4 py-8 w-full lg:w-2/6 lg:flex-row lg:justify-around lg:shadow-lg bg-card dark:bg-cardDark overflow-auto">
                         {CloseButton}

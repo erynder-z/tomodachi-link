@@ -131,8 +131,8 @@ export default function PostOptionsSection({
 
     return (
         <>
-            {showConfirmDialog && ConfirmModal}
             {PostOptionsContent}
+            {showConfirmDialog && ConfirmModal}
         </>
     );
 }
