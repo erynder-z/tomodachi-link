@@ -2,6 +2,7 @@ import { MdManageSearch } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { SearchModeType } from '../../../../types/searchTypes';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 type SearchPostsButtonProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -29,6 +30,7 @@ export default function SearchPostsButton({
     setShouldOverlaysShow,
     setSearchMode,
 }: SearchPostsButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * The main SearchPostsButton component.
      *
@@ -41,6 +43,7 @@ export default function SearchPostsButton({
                 data-tooltip-content="Search posts"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={() => {
                     setShouldOverlaysShow({
                         searchOverlay: true,

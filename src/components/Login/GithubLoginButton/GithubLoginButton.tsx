@@ -1,6 +1,7 @@
 import { FaGithub, FaAngleDoubleRight } from 'react-icons/fa';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 type GithubLoginButtonProps = { isSubmitting: boolean };
 
@@ -16,6 +17,7 @@ type GithubLoginButtonProps = { isSubmitting: boolean };
 export default function GithubLoginButton({
     isSubmitting,
 }: GithubLoginButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
     const githubLoginURL = `${SERVER_URL}/api/v1/oauth/github`;
 
@@ -68,6 +70,7 @@ export default function GithubLoginButton({
                 data-tooltip-content="Login with your GitHub account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleGithubLogin}
                 className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${

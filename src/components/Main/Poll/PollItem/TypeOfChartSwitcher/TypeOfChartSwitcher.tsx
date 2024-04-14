@@ -1,6 +1,7 @@
 import { MdPieChartOutline, MdBarChart } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type TypeOfChartSwitcherProps = {
     typeOfChart: 'PIE' | 'BAR';
@@ -20,6 +21,7 @@ export default function TypeOfChartSwitcher({
     typeOfChart,
     setTypeOfChart,
 }: TypeOfChartSwitcherProps) {
+    const { isMobileDevice } = useTheme();
     /**
      * Toggles between pie and bar chart types when the button is clicked.
      * @returns {void}
@@ -44,6 +46,7 @@ export default function TypeOfChartSwitcher({
                         data-tooltip-content="Show bar chart"
                         data-tooltip-variant="dark"
                         data-tooltip-delay-show={500}
+                        data-tooltip-hidden={isMobileDevice}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         className="flex items-center gap-4"
@@ -65,6 +68,7 @@ export default function TypeOfChartSwitcher({
                         data-tooltip-content="Show pie chart"
                         data-tooltip-variant="dark"
                         data-tooltip-delay-show={500}
+                        data-tooltip-hidden={isMobileDevice}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         className="flex items-center gap-4"

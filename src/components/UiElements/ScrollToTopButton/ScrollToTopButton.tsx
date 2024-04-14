@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { MdKeyboardDoubleArrowUp } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 /**
  * React component for rendering a button that scrolls to the top of a specified container.
@@ -10,6 +11,7 @@ import { Tooltip } from 'react-tooltip';
  * @returns {JSX.Element} The rendered ScrollToTopButton component.
  */
 export function ScrollToTopButton(): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const [showButton, setShowButton] = useState(false);
 
     /**
@@ -68,6 +70,7 @@ export function ScrollToTopButton(): JSX.Element {
                 data-tooltip-content="Scroll to top"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 className={`fixed bottom-14 right-2 lg:bottom-4 lg:right-4 p-2 z-50 rounded-full bg-gray-800/50 dark:bg-gray-300/50 text-regularTextDark transition-transform duration-300 ${
                     showButton ? 'scale-100' : 'scale-0'
                 }`}

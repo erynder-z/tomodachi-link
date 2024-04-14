@@ -1,5 +1,6 @@
 import { FaUserPlus } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 type RegisterButtonProps = {
     handleRegisterClick: () => void;
@@ -16,6 +17,7 @@ type RegisterButtonProps = {
 export default function RegisterButton({
     handleRegisterClick,
 }: RegisterButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * Renders the RegisterButton component.
      *
@@ -28,6 +30,7 @@ export default function RegisterButton({
                 data-tooltip-content="Create a new Tomodachi-Link account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={!isMobileDevice}
                 onClick={handleRegisterClick}
                 className="relative overflow-hidden w-full bg-green-600 hover:bg-green-500 text-white text-xl font-bold rounded transition duration-500 ease-in-out"
             >

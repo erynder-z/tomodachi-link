@@ -2,6 +2,7 @@ import { MdSync } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import './RefreshPollButton.css';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type RefreshPollButtonProps = {
     refreshPoll: () => Promise<void>;
@@ -17,6 +18,7 @@ type RefreshPollButtonProps = {
 export default function RefreshPollButton({
     refreshPoll,
 }: RefreshPollButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * The rendered RefreshPollButton component.
      *
@@ -29,6 +31,7 @@ export default function RefreshPollButton({
                 data-tooltip-content="Refresh poll list"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={refreshPoll}
                 whileTap={{ scale: 0.97 }}
                 className="refresh-button"

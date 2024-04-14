@@ -11,6 +11,7 @@ import PostMenu from './PostMenu/PostMenu';
 import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type PostOptionsSectionProps = {
     postDetails: PostType | null;
@@ -27,6 +28,7 @@ export default function PostOptionsSection({
 }: PostOptionsSectionProps) {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const { isMobileDevice } = useTheme();
     const [shouldMenuShow, setShouldMenuShow] = useState(false);
     const [shouldPostEditShow, setShouldPostEditShow] = useState(false);
     const [shouldConfirmDialogShow, setShouldConfirmDialogShow] =
@@ -100,6 +102,7 @@ export default function PostOptionsSection({
                 }`}
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
             >
                 <ToggleListButton
                     onToggleListButtonClick={handleShowPostMenu}

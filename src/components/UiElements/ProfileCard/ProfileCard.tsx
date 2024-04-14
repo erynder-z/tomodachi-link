@@ -5,6 +5,7 @@ import { Socket } from 'socket.io-client';
 import { ChatMemberType } from '../../../types/chatTypes';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 type ProfileCardProps = {
     socket: Socket | undefined;
@@ -20,6 +21,7 @@ type ProfileCardProps = {
  */
 export default function ProfileCard({ socket }: ProfileCardProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
+    const { isMobileDevice } = useTheme();
     const { firstName, lastName, userpic, friends } = currentUserData || {};
     const numberOfFriends = friends?.length;
     const userImage = userpic ? userpic?.data : undefined;
@@ -91,6 +93,7 @@ export default function ProfileCard({ socket }: ProfileCardProps): JSX.Element {
                 data-tooltip-content="Go to chat"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 to="/chat"
                 className="text-regularText dark:text-regularTextDark text-xs"
             >

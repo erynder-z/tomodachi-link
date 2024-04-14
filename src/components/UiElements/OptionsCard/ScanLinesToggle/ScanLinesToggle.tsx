@@ -11,7 +11,7 @@ import { Tooltip } from 'react-tooltip';
  * @returns {JSX.Element} The rendered ScanLinesToggle component.
  */
 export default function ScanLinesToggle(): JSX.Element {
-    const { scanLines, setScanLines } = useTheme();
+    const { scanLines, setScanLines, isMobileDevice } = useTheme();
 
     /**
      * Toggles the scanlines between 'none' and 'horizontal', and updates local storage.
@@ -39,6 +39,7 @@ export default function ScanLinesToggle(): JSX.Element {
                 data-tooltip-content="Toggle scanlines"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={toggleScanLines}
                 whileTap={{ scale: 0.97 }}
                 className="cursor-pointer hover:text-highlight dark:hover:text-highlightDark duration-300"

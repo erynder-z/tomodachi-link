@@ -1,5 +1,6 @@
 import { Tooltip } from 'react-tooltip';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
+import useTheme from '../../../../hooks/useTheme';
 
 /**
  * React component for rendering the user options button in the navbar.
@@ -9,6 +10,7 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
  */
 export default function NavbarUserOptionsButton(): JSX.Element {
     const { currentUserData } = useCurrentUserData();
+    const { isMobileDevice } = useTheme();
     const { userpic, pendingFriendRequests } = currentUserData || {};
     const userImage = userpic ? userpic.data : undefined;
 
@@ -36,6 +38,7 @@ export default function NavbarUserOptionsButton(): JSX.Element {
                 data-tooltip-content="View options"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 className="relative"
             >
                 <img

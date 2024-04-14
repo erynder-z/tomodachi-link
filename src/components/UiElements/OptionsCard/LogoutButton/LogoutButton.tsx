@@ -5,6 +5,7 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import { motion } from 'framer-motion';
 import { InfoType } from '../../../../types/infoTypes';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 /**
  * React component for rendering a logout button.
@@ -15,6 +16,7 @@ import { Tooltip } from 'react-tooltip';
 export default function LogoutButton(): JSX.Element {
     const { logout } = useAuth();
     const { setInfo } = useInfoCard();
+    const { isMobileDevice } = useTheme();
     const navigate = useNavigate();
 
     /**
@@ -46,6 +48,7 @@ export default function LogoutButton(): JSX.Element {
                 data-tooltip-content="Logout"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 type="button"
                 onClick={handleLogoutClick}
                 whileTap={{ scale: 0.97 }}

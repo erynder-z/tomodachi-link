@@ -1,6 +1,7 @@
 import { TbSettings } from 'react-icons/tb';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 type OptionsButtonProps = {
     shouldOverlaysShow: {
@@ -38,6 +39,7 @@ export default function OptionsButton({
     shouldOverlaysShow,
     setShouldOverlaysShow,
 }: OptionsButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * Handles the click event for the options button.
      *
@@ -66,6 +68,7 @@ export default function OptionsButton({
                 data-tooltip-content="Show profile options"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 type="button"
                 onClick={handleButtonClick}
                 whileTap={{ scale: 0.97 }}

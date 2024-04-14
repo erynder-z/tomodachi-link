@@ -1,6 +1,7 @@
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 type GuestLoginButtonProps = {
     handleGuestLogin: () => void;
@@ -19,6 +20,7 @@ export default function GuestLoginButton({
     handleGuestLogin,
     isSubmitting,
 }: GuestLoginButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * Content for the button when it's in a busy (submitting) state.
      *
@@ -54,6 +56,7 @@ export default function GuestLoginButton({
                 data-tooltip-content="Login without creating an account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleGuestLogin}
                 className={` relative overflow-hidden w-full bg-indigo-900 text-white font-bold rounded transition duration-500 ease-in-out ${

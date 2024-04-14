@@ -11,7 +11,7 @@ import { Tooltip } from 'react-tooltip';
  * @returns {JSX.Element} The rendered ThemeToggle component.
  */
 export default function ThemeToggle(): JSX.Element {
-    const { colorScheme, setColorScheme } = useTheme();
+    const { colorScheme, setColorScheme, isMobileDevice } = useTheme();
 
     const iconRotation = colorScheme === 'dark' ? 180 : 0;
 
@@ -41,6 +41,7 @@ export default function ThemeToggle(): JSX.Element {
                 data-tooltip-content="Toggle dark mode"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={toggleTheme}
                 whileTap={{ scale: 0.97 }}
                 className="cursor-pointer hover:text-highlight dark:hover:text-highlightDark duration-300"

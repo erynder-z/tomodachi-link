@@ -5,6 +5,7 @@ import { ViewMode } from '../../../../../types/miscTypes';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type ButtonAreaProps = {
     handleImageSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -33,6 +34,7 @@ export default function ButtonArea({
     postText,
     isSubmitting,
 }: ButtonAreaProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const isButtonDisabled = isSubmitting || postText.trim() === '';
 
     /**
@@ -47,6 +49,7 @@ export default function ButtonArea({
                 data-tooltip-content="Upload and insert image"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 className="flex items-center cursor-pointer"
             >
                 <input
@@ -67,6 +70,7 @@ export default function ButtonArea({
                 data-tooltip-content="Insert YouTube video"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -100,6 +104,7 @@ export default function ButtonArea({
                 data-tooltip-content="Insert gif"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -130,6 +135,7 @@ export default function ButtonArea({
                 data-tooltip-content="Insert emoji"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -160,6 +166,7 @@ export default function ButtonArea({
                 data-tooltip-content="Upload post"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 whileTap={{ scale: 0.97 }}
                 className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm duration-300 ${

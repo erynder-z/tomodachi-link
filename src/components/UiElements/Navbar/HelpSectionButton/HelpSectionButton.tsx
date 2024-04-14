@@ -2,6 +2,7 @@ import { MdOutlineHelpOutline } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 /**
  * React component for rendering a help section button.
@@ -10,6 +11,7 @@ import { Tooltip } from 'react-tooltip';
  * @returns {JSX.Element} The rendered HelpSectionButton component.
  */
 export default function HelpSectionButton(): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * Render the HelpSectionButton component.
      *
@@ -22,6 +24,7 @@ export default function HelpSectionButton(): JSX.Element {
                 data-tooltip-content="Go to help section"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 whileTap={{ scale: 0.97 }}
             >
                 <NavLink

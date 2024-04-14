@@ -1,6 +1,7 @@
 import { Tooltip } from 'react-tooltip';
 import ButtonBusy from '../UiElements/LoadingSpinner/ButtonBusy';
 import { FaAngleDoubleRight } from 'react-icons/fa';
+import useTheme from '../../hooks/useTheme';
 
 type LoginFormProps = {
     handleLoginSubmit: (
@@ -22,6 +23,7 @@ export default function LoginForm({
     handleLoginSubmit,
     isSubmitting,
 }: LoginFormProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * Content for the username input field.
      *
@@ -122,6 +124,7 @@ export default function LoginForm({
                             data-tooltip-content="Login using username and password"
                             data-tooltip-variant="dark"
                             data-tooltip-delay-show={500}
+                            data-tooltip-hidden={isMobileDevice}
                             disabled={isSubmitting}
                             className={`relative overflow-hidden w-full bg-sky-700 text-white text-lg md:text-xl font-bold rounded transition duration-500 ease-in-out ${
                                 isSubmitting

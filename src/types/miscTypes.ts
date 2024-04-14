@@ -61,4 +61,5 @@ export type ThemeContextProps = {
     setColorScheme: (colorScheme: ThemeType) => void;
     scanLines: ScanLinesType;
     setScanLines: (scanLines: ScanLinesType) => void;
+    isMobileDevice: boolean;
 };

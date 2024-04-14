@@ -5,6 +5,7 @@ import {
     MdOutlineModeComment,
 } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type PostReactionSectionProps = {
     handleShowCommentsClick: () => void;
@@ -30,6 +31,7 @@ export default function PostReactionSection({
     handleNegativeReactionClick,
     numberOfNegativeReactions,
 }: PostReactionSectionProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const [animateReaction, setAnimateReaction] = useState('');
 
     /**
@@ -66,6 +68,7 @@ export default function PostReactionSection({
                 data-tooltip-content="Toggle comment section"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={() =>
                     handleReactionClick('comments', handleShowCommentsClick)
                 }
@@ -96,6 +99,7 @@ export default function PostReactionSection({
                 data-tooltip-content="Like"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={() =>
                     handleReactionClick('positive', handlePositiveReactionClick)
                 }
@@ -123,6 +127,7 @@ export default function PostReactionSection({
                 data-tooltip-content="Dislike"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={() =>
                     handleReactionClick('negative', handleNegativeReactionClick)
                 }

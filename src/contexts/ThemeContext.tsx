@@ -23,6 +23,7 @@ const ThemeContext: React.Context<ThemeContextProps> =
         scanLines: 'none',
         // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
         setScanLines: (scanLines: ScanLinesType) => {},
+        isMobileDevice: false,
     });
 
 /**
@@ -44,6 +45,7 @@ export function ThemeContextProvider({
         (localStorage.getItem('scanLinesTomodachiLink') as ScanLinesType) ||
             'none'
     );
+    const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
 
     /**
      * JSX Element representing the ThemeContextProvider with children components.
@@ -52,7 +54,13 @@ export function ThemeContextProvider({
      */
     return (
         <ThemeContext.Provider
-            value={{ colorScheme, setColorScheme, scanLines, setScanLines }}
+            value={{
+                colorScheme,
+                setColorScheme,
+                scanLines,
+                setScanLines,
+                isMobileDevice,
+            }}
         >
             {children}
         </ThemeContext.Provider>

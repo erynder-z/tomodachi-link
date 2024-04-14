@@ -1,6 +1,7 @@
 import { FaGoogle, FaAngleDoubleRight } from 'react-icons/fa';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 type GoogleLoginButtonProps = { isSubmitting: boolean };
 
@@ -15,6 +16,7 @@ type GoogleLoginButtonProps = { isSubmitting: boolean };
 export default function GoogleLoginButton({
     isSubmitting,
 }: GoogleLoginButtonProps) {
+    const { isMobileDevice } = useTheme();
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
     const githubLoginURL = `${SERVER_URL}/api/v1/oauth/google`;
 
@@ -67,6 +69,7 @@ export default function GoogleLoginButton({
                 data-tooltip-content="Login with your Google account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleGoogleLogin}
                 className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${

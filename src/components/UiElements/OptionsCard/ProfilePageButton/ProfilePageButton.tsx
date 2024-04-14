@@ -4,6 +4,7 @@ import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import Badge from '../Badge/Badge';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 type ProfilePageButtonProps = {
     resetOverlays: () => void;
@@ -21,6 +22,7 @@ export default function ProfilePageButton({
     resetOverlays,
 }: ProfilePageButtonProps): JSX.Element {
     const { currentUserData } = useCurrentUserData();
+    const { isMobileDevice } = useTheme();
     const { pendingFriendRequests } = currentUserData || {};
     const numberOfPendingFriendRequests = pendingFriendRequests?.length;
 
@@ -46,6 +48,7 @@ export default function ProfilePageButton({
                 data-tooltip-content="View your profile page"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 whileTap={{ scale: 0.97 }}
             >
                 <Link

@@ -1,6 +1,7 @@
 import { MdSearch } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 type SearchButtonProps = {
     handleSearchButtonClick: () => void;
@@ -17,6 +18,7 @@ type SearchButtonProps = {
 export default function SearchButton({
     handleSearchButtonClick,
 }: SearchButtonProps) {
+    const { isMobileDevice } = useTheme();
     /**
      * Render the SearchButton component.
      *
@@ -29,6 +31,7 @@ export default function SearchButton({
                 data-tooltip-content="Search Tomodachi-Link"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 whileTap={{ scale: 0.97 }}
                 type="button"
                 onClick={handleSearchButtonClick}

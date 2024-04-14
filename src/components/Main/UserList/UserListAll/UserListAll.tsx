@@ -10,6 +10,7 @@ import { PaginatedListDataType } from '../../../../types/miscTypes';
 import { SearchModeType } from '../../../../types/searchTypes';
 import { MdPersonSearch } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 type UserListAllProps = {
     setShouldOverlaysShow: React.Dispatch<
@@ -39,6 +40,7 @@ export default function UserListAll({
 }: UserListAllProps): JSX.Element {
     const { token, authUser } = useAuth();
     const { setInfo } = useInfoCard();
+    const { isMobileDevice } = useTheme();
     const [numberOfUsers, setNumberOfUsers] = useState<number | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(true);
@@ -232,6 +234,7 @@ export default function UserListAll({
                     data-tooltip-content="Search for user"
                     data-tooltip-variant="dark"
                     data-tooltip-delay-show={500}
+                    data-tooltip-hidden={isMobileDevice}
                     onClick={handleSearchButtonClick}
                     className="h-full bg-button dark:bg-buttonDark hover:bg-buttonHover dark:hover:bg-buttonDarkHover text-regularTextDark dark:text-regularTextDark rounded px-4 transition-all"
                 >

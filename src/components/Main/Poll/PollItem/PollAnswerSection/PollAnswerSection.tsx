@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { displaySuccessInfo } from '../../../../UiElements/UserNotification/displaySuccessInfo';
 import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
@@ -30,6 +31,7 @@ export default function PollAnswerSection({
 }: PollAnswerSectionProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const { isMobileDevice } = useTheme();
     const { options } = pollData;
 
     /**
@@ -92,6 +94,7 @@ export default function PollAnswerSection({
                     data-tooltip-content="Submit answer"
                     data-tooltip-variant="dark"
                     data-tooltip-delay-show={500}
+                    data-tooltip-hidden={isMobileDevice}
                     disabled={!canAnswerPost}
                     onClick={() => {
                         handleButtonClick(pollID, optionID);

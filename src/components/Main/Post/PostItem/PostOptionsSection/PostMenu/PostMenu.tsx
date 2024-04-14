@@ -1,6 +1,7 @@
 import { MdEdit, MdOutlineDeleteForever } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../../hooks/useTheme';
 
 type PostMenuProps = {
     handleEditButtonClick: () => void;
@@ -20,6 +21,7 @@ export default function PostMenu({
     handleDeleteButtonClick,
     shouldMenuShow,
 }: PostMenuProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * JSX Element representing the Edit button.
      * @type {JSX.Element}
@@ -31,6 +33,7 @@ export default function PostMenu({
                 data-tooltip-content="Edit post"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={handleEditButtonClick}
                 className="flex justify-around items-center h-full w-full p-2 rounded-t  hover:bg-buttonHover dark:hover:bg-buttonDarkHover duration-300"
             >
@@ -51,6 +54,7 @@ export default function PostMenu({
                 data-tooltip-content="Delete post"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={handleDeleteButtonClick}
                 className="flex justify-around items-center h-full w-full p-2 rounded-t  hover:bg-buttonHover dark:hover:bg-buttonDarkHover duration-300"
             >

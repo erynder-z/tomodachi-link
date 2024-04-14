@@ -2,6 +2,7 @@ import { MdPieChartOutlined } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 /**
  * React component for rendering the button to navigate to the poll section in the navbar.
@@ -10,6 +11,7 @@ import { Tooltip } from 'react-tooltip';
  * @returns {JSX.Element} The rendered PollSectionButton component.
  */
 export default function PollSectionButton(): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * Render the PollSectionButton component.
      *
@@ -22,6 +24,7 @@ export default function PollSectionButton(): JSX.Element {
                 data-tooltip-content="Go to poll section"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 whileTap={{ scale: 0.97 }}
             >
                 <NavLink

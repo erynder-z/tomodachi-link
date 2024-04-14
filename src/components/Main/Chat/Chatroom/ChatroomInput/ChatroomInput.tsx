@@ -3,6 +3,7 @@ import { MdSend } from 'react-icons/md';
 import { FaRegSmileBeam } from 'react-icons/fa';
 import ButtonBusy from '../../../../UiElements/LoadingSpinner/ButtonBusy';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type ChatroomInputProps = {
     inputMessage: string;
@@ -34,6 +35,7 @@ export default function ChatroomInput({
     isSubmitting,
     setShowEmojiPicker,
 }: ChatroomInputProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const [isInputFocused, setIsInputFocused] = useState(false);
 
     const isButtonDisabled = isSubmitting || inputMessage.trim() === '';
@@ -106,6 +108,7 @@ export default function ChatroomInput({
                 data-tooltip-content="Insert emoji"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -149,6 +152,7 @@ export default function ChatroomInput({
                 data-tooltip-content="Send message (Ctrl + Enter)"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={!isMobileDevice}
                 disabled={isButtonDisabled}
                 onClick={sendMessage}
                 className={`flex items-center justify-center w-24 h-full  text-regularTextDark text-sm ${

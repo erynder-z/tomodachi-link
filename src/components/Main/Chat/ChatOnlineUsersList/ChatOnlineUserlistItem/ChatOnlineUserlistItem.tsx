@@ -4,6 +4,7 @@ import useInfoCard from '../../../../../hooks/useInfoCard';
 import { ChatConversationType } from '../../../../../types/chatTypes';
 import { handleInitializeChat } from '../../../../../utilities/handleInitializeChat';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type ChatOnlineUserlistItemProps = {
     listItemData: MinimalUserTypes;
@@ -28,6 +29,7 @@ export default function ChatOnlineUserlistItem({
 }: ChatOnlineUserlistItemProps): JSX.Element {
     const { token } = useAuth();
     const { setInfo } = useInfoCard();
+    const { isMobileDevice } = useTheme();
     const { _id, firstName, lastName, userpic } = listItemData || {};
 
     const indicatorColor = isOnline ? 'bg-green-500' : 'bg-neutral-500';
@@ -45,6 +47,7 @@ export default function ChatOnlineUserlistItem({
                 data-tooltip-content="Start chat"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={() => {
                     handleInitializeChat(
                         token,

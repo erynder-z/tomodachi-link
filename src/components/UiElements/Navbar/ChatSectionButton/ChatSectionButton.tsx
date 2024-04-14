@@ -2,6 +2,7 @@ import { MdOutlineChatBubbleOutline } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../hooks/useTheme';
 
 type ChatSectionButtonProps = {
     isChatDisabled: boolean;
@@ -18,6 +19,7 @@ type ChatSectionButtonProps = {
 export default function ChatSectionButton({
     isChatDisabled,
 }: ChatSectionButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     /**
      * JSX Element representing a disabled chat button.
      *
@@ -45,6 +47,7 @@ export default function ChatSectionButton({
                 data-tooltip-content="Go to chat"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 whileTap={{ scale: 0.97 }}
             >
                 <NavLink

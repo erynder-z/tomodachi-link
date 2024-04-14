@@ -3,6 +3,7 @@ import { MdOutlineStart } from 'react-icons/md';
 import { CreatedPollDataType } from '../../../../../types/pollTypes';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../hooks/useTheme';
 
 type CreatePollButtonProps = {
     pollData: CreatedPollDataType;
@@ -22,6 +23,7 @@ export default function CreatePollButton({
     pollData,
     isSubmitting,
 }: CreatePollButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const { question, options } = pollData;
 
     const isButtonDisabled =
@@ -41,6 +43,7 @@ export default function CreatePollButton({
                 data-tooltip-content="Upload poll"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 disabled={isButtonDisabled}
                 whileTap={{ scale: 0.97 }}
                 className={`flex items-center justify-center h-8 w-20 rounded-full text-regularTextDark ml-auto text-sm ${

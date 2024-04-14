@@ -1,6 +1,7 @@
 import { FaDiscord, FaAngleDoubleRight } from 'react-icons/fa';
 import ButtonBusy from '../../UiElements/LoadingSpinner/ButtonBusy';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../hooks/useTheme';
 
 type DiscordLoginButtonProps = { isSubmitting: boolean };
 
@@ -15,6 +16,7 @@ type DiscordLoginButtonProps = { isSubmitting: boolean };
 export default function DiscordLoginButton({
     isSubmitting,
 }: DiscordLoginButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const SERVER_URL = import.meta.env.VITE_SERVER_URL;
     const githubLoginURL = `${SERVER_URL}/api/v1/oauth/discord`;
 
@@ -67,6 +69,7 @@ export default function DiscordLoginButton({
                 data-tooltip-content="Login using your Discord account"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleDiscordLogin}
                 className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${

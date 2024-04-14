@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MdOutlineModeComment } from 'react-icons/md';
 import { Tooltip } from 'react-tooltip';
+import useTheme from '../../../../../../hooks/useTheme';
 
 type PollCommentButtonProps = {
     handleShowCommentsClick: () => void;
@@ -20,6 +21,7 @@ export default function PollCommentButton({
     handleShowCommentsClick,
     numberOfComments,
 }: PollCommentButtonProps): JSX.Element {
+    const { isMobileDevice } = useTheme();
     const [animateReaction, setAnimateReaction] = useState('');
 
     /**
@@ -51,6 +53,7 @@ export default function PollCommentButton({
                 data-tooltip-content="Show comment section"
                 data-tooltip-variant="dark"
                 data-tooltip-delay-show={500}
+                data-tooltip-hidden={isMobileDevice}
                 onClick={() =>
                     handleReactionClick('comments', handleShowCommentsClick)
                 }
