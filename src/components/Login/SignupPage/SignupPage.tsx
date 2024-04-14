@@ -7,6 +7,7 @@ import useAuth from '../../../hooks/useAuth';
 import LoggingInInfo from './LoggingInInfo/LoggingInInfo';
 import { displayErrorInfo } from '../../UiElements/UserNotification/displayErrorInfo';
 import { displaySuccessInfo } from '../../UiElements/UserNotification/displaySuccessInfo';
+import { handleFetchErrors } from '../../../utilities/handleFetchErrors';
 
 type SignupPageProps = {
     setShowSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,20 +31,6 @@ export default function SignupPage({
     const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
 
     /**
-     * Handles the error response from a request.
-     *
-     * @param {Response} response - The response object.
-     * @return {Promise<void>} - A promise that resolves when the error has been handled.
-     */
-    const handleRequestError = async (response: Response): Promise<void> => {
-        const data = await response.json();
-        const errorMessage = data.error?.message || 'Something went wrong!';
-        displayErrorInfo(setInfo, errorMessage, '👻');
-
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-    };
-
-    /**
      * Logs in the user with the provided username and password.
      *
      * @param {string} username - The username of the user.
@@ -61,7 +48,8 @@ export default function SignupPage({
             });
 
             if (!response.ok) {
-                await handleRequestError(response);
+                await handleFetchErrors(response, setInfo);
+                return;
             }
 
             const data = await response.json();
@@ -109,7 +97,8 @@ export default function SignupPage({
             });
 
             if (!response.ok) {
-                await handleRequestError(response);
+                await handleFetchErrors(response, setInfo);
+                return;
             }
 
             displaySuccessInfo(
