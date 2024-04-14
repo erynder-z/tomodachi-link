@@ -78,7 +78,7 @@ export default function ChatroomInput({
                 value={inputMessage}
                 autoComplete="off"
                 onChange={handleInputChange}
-                className={`py-2.5 px-4 pr-12 text-sm   bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer ${
+                className={`py-2.5 px-4 text-sm bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer ${
                     isSubmitting
                         ? 'text-gray-500'
                         : 'text-regularText dark:text-regularTextDark'

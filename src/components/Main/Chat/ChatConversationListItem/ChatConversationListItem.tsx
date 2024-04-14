@@ -62,7 +62,7 @@ export default function ChatConversationListItem({
                     data-tooltip-content="Show conversation"
                     data-tooltip-variant="dark"
                     data-tooltip-delay-show={500}
-                    data-tooltip-hidden={!isMobileDevice}
+                    data-tooltip-hidden={isMobileDevice}
                     className="flex justify-start items-center gap-2 w-full"
                 >
                     <div className="relative flex">
@@ -96,7 +96,7 @@ export default function ChatConversationListItem({
                     }
                     data-tooltip-variant="dark"
                     data-tooltip-delay-show={500}
-                    data-tooltip-hidden={!isMobileDevice}
+                    data-tooltip-hidden={isMobileDevice}
                     whileTap={{ scale: 0.97 }}
                     className="flex flex-col md:flex-row justify-end md:gap-4 md:w-1/5"
                     onClick={(e) => {
