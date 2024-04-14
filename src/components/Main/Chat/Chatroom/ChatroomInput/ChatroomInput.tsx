@@ -155,7 +155,7 @@ export default function ChatroomInput({
                 data-tooltip-hidden={!isMobileDevice}
                 disabled={isButtonDisabled}
                 onClick={sendMessage}
-                className={`flex items-center justify-center w-24 h-full  text-regularTextDark text-sm ${
+                className={`flex items-center justify-center px-4 md:px-8 h-full  text-regularTextDark text-sm ${
                     !inputMessage
                         ? 'bg-gray-500 hover:bg-gray-600'
                         : 'bg-highlight dark:bg-highlightDark hover:bg-highlightHover dark:hover:bg-highlightDarkHover duration-300'
