@@ -1,4 +1,5 @@
 import { RetrievedPollDataType } from '../../../../../types/pollTypes';
+import { unescapeString } from '../../../../../utilities/unescapeString';
 
 type PollQuestionSectionProps = {
     pollData: RetrievedPollDataType;
@@ -20,5 +21,5 @@ export default function PollQuestionSection({
      * Renders the question section of the poll.
      * @returns {JSX.Element} - Rendered question section.
      */
-    return <h1 className="text-xl font-bold">{question}</h1>;
+    return <h1 className="text-xl font-bold">{unescapeString(question)}</h1>;
 }

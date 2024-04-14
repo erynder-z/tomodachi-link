@@ -7,6 +7,7 @@ import { displaySuccessInfo } from '../../../../UiElements/UserNotification/disp
 import { displayErrorInfo } from '../../../../UiElements/UserNotification/displayErrorInfo';
 import { Tooltip } from 'react-tooltip';
 import useTheme from '../../../../../hooks/useTheme';
+import { unescapeString } from '../../../../../utilities/unescapeString';
 
 type PollAnswerSectionProps = {
     pollData: RetrievedPollDataType;
@@ -106,7 +107,7 @@ export default function PollAnswerSection({
                             : 'p-2 w-12 min-w-max text-base bg-gray-500 rounded text-regularTextDark '
                     }`}
                 >
-                    {nameOfOption}
+                    {unescapeString(nameOfOption)}
                 </motion.button>
                 {canAnswerPost && (
                     <Tooltip

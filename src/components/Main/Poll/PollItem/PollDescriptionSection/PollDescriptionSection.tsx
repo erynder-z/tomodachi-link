@@ -1,4 +1,5 @@
 import { RetrievedPollDataType } from '../../../../../types/pollTypes';
+import { unescapeString } from '../../../../../utilities/unescapeString';
 
 type PollDescriptionSectionProps = {
     pollData: RetrievedPollDataType;
@@ -20,5 +21,9 @@ export default function PollDescriptionSection({
      * Renders the description section of the poll.
      * @returns {JSX.Element} - Rendered description section.
      */
-    return <div className="text-base">{description}</div>;
+    return (
+        <div className="text-base">
+            {description && unescapeString(description)}
+        </div>
+    );
 }
