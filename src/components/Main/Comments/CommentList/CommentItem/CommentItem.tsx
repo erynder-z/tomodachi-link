@@ -1,5 +1,6 @@
 import { CommentType } from '../../../../../types/commentTypes';
 import { formatDistanceToNow } from 'date-fns';
+import { unescapeString } from '../../../../../utilities/unescapeString';
 
 type CommentItemProps = {
     commentDetails: CommentType;
@@ -43,7 +44,7 @@ export default function CommentItem({
                     <span className="text-sm font-bold">{displayName}</span> (
                     {time})
                 </div>
-                <div className="text-sm">{text}</div>
+                <div className="text-sm">{unescapeString(text)}</div>
                 <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 w-0 h-0 border-l-8 border-transparent border-solid border-l-gray-200"></div>
             </div>
         </div>
