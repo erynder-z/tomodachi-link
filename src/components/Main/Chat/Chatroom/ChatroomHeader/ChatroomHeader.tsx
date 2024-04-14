@@ -72,7 +72,7 @@ export default function ChatroomHeader({
      * @type {JSX.Element}
      */
     return (
-        <div className="w-full sticky top-[5.75rem] md:-top-4 bg-background2 dark:bg-background2Dark z-10">
+        <div className="w-full sticky top-[6.75rem] md:-top-4 bg-background2 dark:bg-background2Dark z-10">
             <header className="flex justify-around p-2 md:p-4 bg-card dark:bg-cardDark text-regularText dark:text-regularTextDark shadow-lg rounded md:rounded-lg">
                 {CurrentUserContent}
                 {ChatLogoContent}
