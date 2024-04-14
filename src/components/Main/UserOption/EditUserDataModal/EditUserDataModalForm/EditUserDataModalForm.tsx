@@ -57,6 +57,17 @@ export default function EditUserDataModalForm({
         : `data:image/png;base64,${image.preview}`;
 
     /**
+     * Decode HTML entities in a given text string to unescape sanitized strings.
+     *
+     * @param {string} text - the text containing HTML entities to be decoded
+     * @return {string} the text with HTML entities decoded
+     */
+    const decodeHtmlEntities = (text: string) => {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = text;
+        return textarea.value;
+    };
+    /**
      * Handles the form submission.
      *
      * @async
@@ -237,7 +248,7 @@ export default function EditUserDataModalForm({
                 name="about"
                 className="block p-2 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-highlight focus:dark:border-highlightDark peer"
                 placeholder=" "
-                defaultValue={about}
+                defaultValue={decodeHtmlEntities(about)}
             />
             <label
                 htmlFor="about"

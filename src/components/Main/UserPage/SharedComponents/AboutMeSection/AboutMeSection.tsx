@@ -1,3 +1,5 @@
+import { unescapeString } from '../../../../../utilities/unescapeString';
+
 type AboutMeSectionProps = {
     aboutName?: string;
     aboutText: string | undefined;
@@ -13,7 +15,7 @@ export default function AboutMeSection({
     return (
         <div className="px-4 md:px-0">
             <h1 className="text-base font-bold">About {name}</h1>
-            <p className="text-sm text-start">{text}</p>
+            <p className="text-sm text-start">{unescapeString(text)}</p>
         </div>
     );
 }
