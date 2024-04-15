@@ -28,15 +28,15 @@ const InfoCard = ({ info }: infoCardPropsType): JSX.Element => {
     const getBgColorClass = (typeOfInfo: string | undefined): string => {
         switch (typeOfInfo) {
             case 'good':
-                return 'bg-green-700/90';
+                return 'bg-emerald-800/80';
             case 'bad':
-                return 'bg-rose-900/90';
+                return 'bg-rose-800/80';
             case 'neutral':
-                return 'bg-fuchsia-900/90';
+                return 'bg-fuchsia-900/80';
             case 'greeting':
-                return 'bg-slate-600/90';
+                return 'bg-purple-900/80';
             default:
-                return 'bg-slate-600/90';
+                return 'bg-slate-600/80';
         }
     };
 
