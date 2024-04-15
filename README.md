@@ -17,7 +17,7 @@ A social network built with React and TypeScript powered by a RESTful API backen
 
 ## Backend API
 
-The source code for the backend API can be found at [https://erynder-z.github.io/tomodachi-link-backend/](https://erynder-z.github.io/tomodachi-link-backend/).
+The source code for the backend API can be found at [https://github.com/erynder-z/tomodachi-link-backend](https://github.com/erynder-z/tomodachi-link-backend).
 
 ## Installation
 
