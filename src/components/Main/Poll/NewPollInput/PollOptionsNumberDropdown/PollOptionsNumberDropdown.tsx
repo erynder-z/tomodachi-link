@@ -23,7 +23,7 @@ export default function PollOptionsNumberDropdown({
     return (
         <div className="relative z-0">
             <select
-                className="block py-2.5 px-0 text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 cursor-pointer"
+                className="block py-2.5 px-2 text-sm text-regularText dark:text-regularTextDark bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 cursor-pointer"
                 onChange={(e) =>
                     handleOptionsNumberSelect(Number(e.target.value))
                 }
@@ -41,7 +41,7 @@ export default function PollOptionsNumberDropdown({
 
             <label
                 htmlFor="numberDropdown"
-                className="absolute text-sm text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] "
+                className="absolute text-sm px-2 text-regularText dark:text-regularTextDark duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] "
             >
                 Select number of options
             </label>

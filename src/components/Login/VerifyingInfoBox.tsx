@@ -22,7 +22,7 @@ export default function VerifyingInfoBox(): JSX.Element {
                 ariaLabel="hourglass-loading"
                 wrapperStyle={{}}
                 wrapperClass=""
-                colors={['#ffffff', '#0598BC']}
+                colors={['#ffffff', '#cc69c8']}
             />
             Verifying...
         </motion.div>
