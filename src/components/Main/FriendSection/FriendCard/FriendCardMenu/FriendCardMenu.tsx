@@ -40,6 +40,7 @@ export default function FriendCardMenu({
     const navigate = useNavigate();
 
     const currentUserId = currentUserData?._id;
+    const isGuestAccount = currentUserData?.accountType === 'guest';
 
     /**
      * Function to handle the chat button click and initialize or navigate to a conversation.
@@ -107,14 +108,19 @@ export default function FriendCardMenu({
     const ChatWithUser: JSX.Element = (
         <motion.button
             whileTap={{ scale: 0.97 }}
-            className="flex justify-between items-center w-full text-left group"
+            className={`flex justify-between items-center w-full text-left group ${
+                isGuestAccount
+                    ? 'cursor-not-allowed text-gray-400'
+                    : 'group-hover:text-yellow-300 group-hover:dark:text-yellow-300'
+            }`}
             onClick={handleChatButtonClick}
-            disabled={accountType === 'guest'}
+            disabled={accountType === 'guest' || isGuestAccount}
         >
-            <span className="group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all leading-tight">
+            <span className="transition-all leading-tight">
                 Chat with {firstName}
             </span>
-            <div className="flex items-center h-8 gap-4 py-2  text-xl group-hover:text-yellow-300 group-hover:dark:text-yellow-300 transition-all">
+
+            <div className="flex items-center h-8 gap-4 py-2  text-xl transition-all">
                 <TbMessage />
             </div>
         </motion.button>
