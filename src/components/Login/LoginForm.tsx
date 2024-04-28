@@ -42,7 +42,7 @@ export default function LoginForm({
             />
             <label
                 htmlFor="username"
-                className="absolute text-sm px-2 text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                className="absolute text-sm px-2 text-gray-900 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7"
             >
                 Username
             </label>
@@ -67,7 +67,7 @@ export default function LoginForm({
             />
             <label
                 htmlFor="password"
-                className="absolute text-sm px-2 text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                className="absolute text-sm px-2 text-gray-900 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cPink peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7"
             >
                 Password
             </label>
@@ -115,9 +115,10 @@ export default function LoginForm({
                 onSubmit={handleLoginSubmit}
                 className="divide-y divide-gray-200"
             >
-                <div className="py-2 md:py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     {UsernameInputContent}
                     {PasswordInputContent}
+
                     <div className="flex w-full">
                         <button
                             data-tooltip-id="normal-login-tooltip"
