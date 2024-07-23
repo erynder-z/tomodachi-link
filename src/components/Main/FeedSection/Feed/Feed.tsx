@@ -59,7 +59,7 @@ export default function Feed({
      * @type {JSX.Element}
      */
     const FeedContent: JSX.Element = (
-        <div className="flex flex-col md:grid grid-cols-[2fr,5fr] gap-4 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
+        <div className="flex flex-col md:grid grid-cols-[25%,75%] gap-4 justify-center min-h-[calc(100vh_-_18rem)] bg-background2 dark:bg-background2Dark text-regularText dark:text-regularTextDark">
             <ShowPeopleInThisFeed minimalPosts={minimalPosts} />
             <div className="flex flex-col gap-4 pb-4">
                 <NewPostInput handleRefreshPosts={refreshFeed} />

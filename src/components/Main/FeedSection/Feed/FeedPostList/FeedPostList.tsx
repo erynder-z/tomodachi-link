@@ -70,7 +70,7 @@ export default function FeedPostList({
      * @returns {JSX.Element} The rendered FeedPostList component.
      */
     return (
-        <div className="flex flex-col gap-4 pb-4">
+        <div className="flex flex-col gap-4 pb-4 max-w-xl">
             {FeedPostListContents}
             <AnimatePresence>
                 {showImageLightbox && (
