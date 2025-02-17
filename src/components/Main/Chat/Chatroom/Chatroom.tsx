@@ -279,14 +279,16 @@ export default function Chatroom({
     };
 
     /**
-     * Scroll to the bottom of the page.
+     * Scroll to an referenced element.
      *
      * @function
      * @return {void} No return value.
      */
-    const scrollToBottom = (): void => {
+    const scrollToElement = (): void => {
         dummy?.current?.scrollIntoView({
             behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
         });
     };
 
@@ -353,14 +355,14 @@ export default function Chatroom({
     }, [receivedMessage]);
 
     /**
-     * Effect to scroll to the bottom when new messages are added.
+     * Effect to scroll to a referenced when new messages are added.
      * Re-enables scrolling to the bottom after all messages have been fetched.
      *
      * @effect
      * @return {void} No return value.
      */
     useEffect(() => {
-        if (shouldScroll.current) scrollToBottom();
+        if (shouldScroll.current) scrollToElement();
         // re-enable scrolling to bottom after all messages have been fetched
         if (messages.length <= totalMessages) shouldScroll.current = true;
     }, [messages]);
@@ -394,16 +396,21 @@ export default function Chatroom({
                         isSubmitting={isSubmitting}
                     />
                 )}
-                {messages.map((message, index) => (
-                    <ChatroomMessage key={index} message={message} />
-                ))}
+                {messages.map((message, index) => {
+                    const isLastMessage = index === messages.length - 1;
+                    return (
+                        <>
+                            {isLastMessage && <span ref={dummy} />}
+                            <ChatroomMessage key={index} message={message} />
+                        </>
+                    );
+                })}
                 {messages.length === 0 && (
                     <div className="flex flex-col justify-center items-center px-4 text-xl font-bold text-gray-400 text-center h-[calc(100vh_-_24rem)]">
                         <span>Chat message will appear here.</span>
                     </div>
                 )}
                 <TypingIndicator isTyping={isTyping} />
-                <span ref={dummy} />
             </div>
             <ChatroomInput
                 inputMessage={inputMessage}
