@@ -59,10 +59,10 @@ export default function GuestLoginButton({
                 data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleGuestLogin}
-                className={` relative overflow-hidden w-full bg-indigo-900 text-white font-bold rounded transition duration-500 ease-in-out ${
+                className={` relative overflow-hidden h-16 w-full  text-white font-bold rounded transition duration-500 ease-in-out ${
                     isSubmitting
                         ? 'bg-gray-500 cursor-not-allowed'
-                        : 'hover:bg-indigo-700'
+                        : 'bg-indigo-900 hover:bg-indigo-700'
                 }`}
             >
                 {isSubmitting ? BusyButtonContent : NormalButtonContent}

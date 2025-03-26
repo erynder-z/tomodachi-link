@@ -32,7 +32,7 @@ export default function SignupForm({
                 id="firstName"
                 name="firstName"
                 type="text"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -57,7 +57,7 @@ export default function SignupForm({
                 id="lastName"
                 name="lastName"
                 type="text"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -82,7 +82,7 @@ export default function SignupForm({
                 id="email"
                 name="email"
                 type="email"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -107,7 +107,7 @@ export default function SignupForm({
                 id="username"
                 name="username"
                 type="text"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -132,7 +132,7 @@ export default function SignupForm({
                 id="password"
                 name="password"
                 type="password"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -157,7 +157,7 @@ export default function SignupForm({
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label

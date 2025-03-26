@@ -37,7 +37,7 @@ export default function LoginForm({
                 id="username"
                 name="username"
                 type="text"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -62,7 +62,7 @@ export default function LoginForm({
                 id="password"
                 name="password"
                 type="password"
-                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
+                className="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-sky-700 appearance-none focus:outline-none focus:ring-0 focus:border-cPink peer"
                 placeholder=" "
             />
             <label
@@ -127,10 +127,10 @@ export default function LoginForm({
                             data-tooltip-delay-show={500}
                             data-tooltip-hidden={isMobileDevice}
                             disabled={isSubmitting}
-                            className={`relative overflow-hidden w-full bg-sky-700 text-white text-lg md:text-xl font-bold rounded transition duration-500 ease-in-out ${
+                            className={`relative overflow-hidden w-full h-16 text-white text-lg md:text-xl font-bold rounded transition duration-500 ease-in-out ${
                                 isSubmitting
                                     ? 'bg-gray-500 cursor-not-allowed'
-                                    : 'hover:bg-sky-600'
+                                    : 'bg-sky-700 hover:bg-sky-600'
                             }`}
                         >
                             {isSubmitting

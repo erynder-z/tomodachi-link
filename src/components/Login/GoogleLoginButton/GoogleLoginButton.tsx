@@ -72,7 +72,7 @@ export default function GoogleLoginButton({
                 data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleGoogleLogin}
-                className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
+                className={` relative overflow-hidden h-16 w-full text-white font-bold rounded transition duration-500 ease-in-out ${
                     isSubmitting
                         ? 'bg-gray-500 cursor-not-allowed'
                         : 'bg-red-600 hover:bg-red-700'

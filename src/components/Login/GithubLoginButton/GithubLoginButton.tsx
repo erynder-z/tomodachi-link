@@ -73,7 +73,7 @@ export default function GithubLoginButton({
                 data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleGithubLogin}
-                className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
+                className={` relative overflow-hidden h-16 w-full text-white font-bold rounded transition duration-500 ease-in-out ${
                     isSubmitting
                         ? 'bg-gray-500 cursor-not-allowed'
                         : 'bg-slate-900 hover:bg-slate-700'

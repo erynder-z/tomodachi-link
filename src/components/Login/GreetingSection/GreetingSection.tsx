@@ -67,7 +67,7 @@ export default function GreetingSection(): JSX.Element {
      * @return {JSX.Element} The rendered GreetingSection component.
      */
     return (
-        <section className="text-white font-monospaceFont font-medium md:text-3xl text-center bg-cBlack/75 p-4 lg:rounded w-5/6 mx-auto">
+        <section className="flex flex-col justify-center text-zinc-300 font-monospaceFont font-medium md:text-3xl text-center rounded mx-auto lg:min-h-screen">
             <h1 className="text-xl md:text-3xl font-medium">
                 Welcome to{' '}
                 <span className="text-2xl md:text-4xl font-bold text-cCyan">

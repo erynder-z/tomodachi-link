@@ -72,7 +72,7 @@ export default function DiscordLoginButton({
                 data-tooltip-hidden={isMobileDevice}
                 disabled={isSubmitting}
                 onClick={handleDiscordLogin}
-                className={` relative overflow-hidden w-full text-white font-bold rounded transition duration-500 ease-in-out ${
+                className={` relative overflow-hidden h-16 w-full text-white font-bold rounded transition duration-500 ease-in-out ${
                     isSubmitting
                         ? 'bg-gray-500 cursor-not-allowed'
                         : 'bg-indigo-600 hover:bg-indigo-700'

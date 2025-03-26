@@ -193,7 +193,7 @@ export default function SignupPage({
                 {isLoggingIn ? (
                     <LoggingInInfo />
                 ) : (
-                    <div className="relative w-5/6 sm:w-2/3 lg:w-1/4 px-4  bg-white shadow-lg p-4 md:p-8 rounded lg:rounded-lg">
+                    <div className="relative w-5/6 sm:w-2/3 lg:w-1/4 px-4 bg-zinc-300 shadow-lg p-4 md:p-8 rounded lg:rounded-lg">
                         <motion.button
                             onClick={handleCloseButtonClick}
                             whileTap={{ scale: 0.97 }}

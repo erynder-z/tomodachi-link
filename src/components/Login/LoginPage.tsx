@@ -193,6 +193,7 @@ export default function LoginPage(): JSX.Element {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                className="w-5/6 md:w-auto"
             >
                 <GreetingSection />
             </motion.div>
@@ -206,7 +207,7 @@ export default function LoginPage(): JSX.Element {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="w-3/4 2xl:w-1/2 mx-auto h-90 md:h-6/8 bg-white shadow-lg p-4 lg:p-8 rounded lg:rounded-lg"
+                        className="w-5/6 md:w-3/5 2xl:w-1/2 mx-auto bg-zinc-300 shadow-lg p-4 rounded lg:rounded-lg"
                     >
                         <LoginForm
                             handleLoginSubmit={handleLoginSubmit}
@@ -234,6 +235,7 @@ export default function LoginPage(): JSX.Element {
                             </span>
                             <RegisterButton
                                 handleRegisterClick={handleRegisterClick}
+                                isSubmitting={isSubmitting}
                             />
                         </div>
                     </motion.div>
@@ -250,7 +252,7 @@ export default function LoginPage(): JSX.Element {
     return (
         <div className="h-screen bg-cBlack overflow-auto font-regularFont subpixel-antialiased">
             {AsciiBackground}
-            <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full md:h-screen gap-4 relative z-10 my-2 md:m-0">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 justify-center items-center w-full md:min-h-screen gap-4 relative z-10 py-2 md:py-0 bg-cBlack/60">
                 <AnimatePresence>
                     {showSignup ? SignupContent : LoginContent}
                 </AnimatePresence>
