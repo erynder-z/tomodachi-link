@@ -5,14 +5,13 @@ import useInfoCard from '../../../../hooks/useInfoCard';
 import resizeFile from '../../../../utilities/ImageResizer';
 import EmbedYoutubeVideoSelector from './EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
 import GifSelector from './GifSelector/GifSelector';
-import { TenorImage } from 'gif-picker-react';
 import PostInputTextarea from './PostInputTextarea/PostInputTextarea';
 import EmbeddedYoutubeVideoArea from './EmbeddedYoutubeVideoArea/EmbeddedYoutubeVideoArea';
 import SelectedImageArea from './SelectedImageArea/SelectedImageArea';
 import GifArea from './GifArea/GifArea';
 import ButtonArea from './ButtonArea/ButtonArea';
 import EmojiSelector from './EmojiSelector/EmojiPicker';
-import { ViewMode } from '../../../../types/miscTypes';
+import { GiphyGif, ViewMode } from '../../../../types/miscTypes';
 import { motion, AnimatePresence } from 'framer-motion';
 import { displaySuccessInfo } from '../../../UiElements/UserNotification/displaySuccessInfo';
 import { displayErrorInfo } from '../../../UiElements/UserNotification/displayErrorInfo';
@@ -46,7 +45,7 @@ export default function NewPostInput({
         undefined
     );
     const [youtubeID, setYoutubeID] = useState<string | undefined>(undefined);
-    const [gif, setGif] = useState<TenorImage | undefined>(undefined);
+    const [gif, setGif] = useState<GiphyGif | undefined>(undefined);
     const [hasImage, setHasImage] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -150,8 +149,13 @@ export default function NewPostInput({
                 if (youtubeID) {
                     formData.append('embeddedVideoID', youtubeID);
                 }
-                if (gif) {
-                    formData.append('gifUrl', gif.url);
+                if (
+                    gif &&
+                    gif.images &&
+                    gif.images.fixed_width &&
+                    gif.images.fixed_width.url
+                ) {
+                    formData.append('gifUrl', gif.images.fixed_width.url);
                 }
 
                 await submitFormData(formData);

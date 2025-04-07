@@ -5,7 +5,6 @@ import SelectedImageArea from '../NewPostInput/SelectedImageArea/SelectedImageAr
 import ButtonArea from '../NewPostInput/ButtonArea/ButtonArea';
 import GifSelector from '../NewPostInput/GifSelector/GifSelector';
 import EmbedYoutubeVideoSelector from '../NewPostInput/EmbedYoutubeVideoSelector/EmbedYoutubeVideoSelector';
-import { TenorImage } from 'gif-picker-react';
 import GifArea from '../NewPostInput/GifArea/GifArea';
 import useCurrentUserData from '../../../../hooks/useCurrentUserData';
 import { PostType } from '../../../../types/postTypes';
@@ -13,7 +12,7 @@ import EmojiSelector from '../NewPostInput/EmojiSelector/EmojiPicker';
 import PostEditImageSection from './PostEditImageSection/PostEditImageSection';
 import PostEditGifSection from './PostEditGifSection/PostEditGifSection';
 import PostEditEmbeddedYoutubeVideo from './PostEditEmbeddedYoutubeVideo/PostEditEmbeddedYoutubeVideo';
-import { ImageType, ViewMode } from '../../../../types/miscTypes';
+import { GiphyGif, ImageType, ViewMode } from '../../../../types/miscTypes';
 import useAuth from '../../../../hooks/useAuth';
 import useInfoCard from '../../../../hooks/useInfoCard';
 import resizeFile from '../../../../utilities/ImageResizer';
@@ -59,7 +58,7 @@ export default function EditPostInput({
         undefined
     );
     const [youtubeID, setYoutubeID] = useState<string | undefined>(undefined);
-    const [gif, setGif] = useState<TenorImage | undefined>(undefined);
+    const [gif, setGif] = useState<GiphyGif | undefined>(undefined);
     const [hasImage, setHasImage] = useState(false);
     const [dbImage, setDbImage] = useState<ImageType | undefined>(
         postDetails?.image
@@ -150,10 +149,15 @@ export default function EditPostInput({
                     'shouldImageBeDeleted',
                     shouldImageBeDeleted.toString()
                 );
-                formData.append(
-                    'shouldGifBeDeleted',
-                    shouldGifBeDeleted.toString()
-                );
+                if (shouldGifBeDeleted && !gif) {
+                    formData.append(
+                        'shouldGifBeDeleted',
+                        shouldGifBeDeleted.toString()
+                    );
+                } else {
+                    formData.append('shouldGifBeDeleted', false.toString());
+                }
+
                 formData.append(
                     'shouldVideoBeDeleted',
                     shouldVideoBeDeleted.toString()
@@ -165,10 +169,14 @@ export default function EditPostInput({
                 if (youtubeID) {
                     formData.append('embeddedVideoID', youtubeID);
                 }
-                if (gif) {
-                    formData.append('gifUrl', gif.url);
+                if (
+                    gif &&
+                    gif.images &&
+                    gif.images.fixed_width &&
+                    gif.images.fixed_width.url
+                ) {
+                    formData.append('gifUrl', gif.images.fixed_width.url);
                 }
-
                 await submitEditFormData(formData);
             } catch (error) {
                 displayErrorInfo(setInfo, 'An error occurred', '👻');

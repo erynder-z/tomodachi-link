@@ -1,15 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import GifPicker, { TenorImage, Theme } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
-import useAuth from '../../../../../hooks/useAuth';
-import { fetchTenorApiKey } from '../../../../../utilities/fetchTenorApiKey';
-import useTheme from '../../../../../hooks/useTheme';
 import { motion } from 'framer-motion';
 import useEscapeKey from '../../../../../hooks/useEscapeKeyToHandleAction';
+import GiphySearch from './GiphySearch/GiphySearch';
+import { GiphyGif } from '../../../../../types/miscTypes';
 
 type GifSelectorProps = {
     setShowGifSelector: React.Dispatch<React.SetStateAction<boolean>>;
-    setGif: React.Dispatch<React.SetStateAction<TenorImage | undefined>>;
+    setGif: React.Dispatch<React.SetStateAction<GiphyGif | undefined>>;
 };
 
 /**
@@ -18,19 +15,13 @@ type GifSelectorProps = {
  * @component
  * @param {GifSelectorProps} props - The props object.
  * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setShowGifSelector - Function to control the visibility of the GIF selector.
- * @param {React.Dispatch<React.SetStateAction<TenorImage | undefined>>} props.setGif - Function to set the selected GIF.
+ * @param {React.Dispatch<React.SetStateAction<GiphyGif | undefined>>} props.setGif - Function to set the selected GIF.
  * @returns {JSX.Element} The rendered GifSelector component.
  */
 export default function GifSelector({
     setShowGifSelector,
     setGif,
 }: GifSelectorProps): JSX.Element {
-    const { token } = useAuth();
-    const { colorScheme } = useTheme();
-    const [apiKey, setApiKey] = useState<string | undefined>(undefined);
-
-    const shouldFetchAPIKey = useRef(true);
-
     /**
      * Function to close the GIF selector component.
      *
@@ -44,27 +35,6 @@ export default function GifSelector({
      *
      */
     useEscapeKey(handleComponentClose);
-
-    /**
-     * Function to get the theme variable for the GifPicker library based on the color scheme.
-     *
-     * @function
-     * @returns {Theme} The theme variable (Theme.DARK or Theme.LIGHT).
-     */
-    const getThemeVariable = (): Theme =>
-        colorScheme === 'dark' ? Theme.DARK : Theme.LIGHT;
-
-    /**
-     * Effect that fetches the API key from the server.
-     *
-     * @effect
-     */
-    useEffect(() => {
-        if (shouldFetchAPIKey.current) fetchTenorApiKey(token, setApiKey);
-        return () => {
-            shouldFetchAPIKey.current = false;
-        };
-    }, []);
 
     /**
      * Close button component for the GIF selector.
@@ -91,16 +61,14 @@ export default function GifSelector({
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden  flex flex-col items-center justify-center gap-4 transition-opacity bg-gray-800/80">
             <div className="relative">
                 {CloseButton}
-                {apiKey && (
-                    <GifPicker
-                        tenorApiKey={`${apiKey}`}
-                        theme={getThemeVariable()}
-                        onGifClick={(gif: TenorImage) => {
-                            setGif(gif);
-                            setShowGifSelector(false);
-                        }}
-                    />
-                )}
+
+                <GiphySearch
+                    onGifClick={(gif: GiphyGif) => {
+                        setGif(gif);
+                        setShowGifSelector(false);
+                    }}
+                    gridHeight="450px"
+                />
             </div>
             ;
         </div>

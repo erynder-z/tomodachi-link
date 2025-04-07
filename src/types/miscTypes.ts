@@ -63,3 +63,42 @@ export type ThemeContextProps = {
     setScanLines: (scanLines: ScanLinesType) => void;
     isMobileDevice: boolean;
 };
+
+export type GiphyImageDetail = {
+    url: string;
+    width?: string;
+    height?: string;
+};
+
+export type GiphyImages = {
+    fixed_width?: GiphyImageDetail;
+    original?: GiphyImageDetail;
+    downsized?: GiphyImageDetail;
+};
+
+export type GiphyGif = {
+    id: string;
+    title?: string;
+    images?: GiphyImages;
+    url?: string;
+};
+
+export type GiphyApiResponse = {
+    data: GiphyGif[];
+    pagination?: {
+        total_count?: number;
+        count?: number;
+        offset?: number;
+    };
+    meta?: {
+        status?: number;
+        msg?: string;
+        response_id?: string;
+    };
+};
+
+export type GiphySearchProps = {
+    onGifClick: (gif: GiphyGif) => void;
+    theme?: ThemeType;
+    gridHeight?: string;
+};

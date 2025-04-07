@@ -1,10 +1,10 @@
-import { TenorImage } from 'gif-picker-react';
 import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { GiphyGif } from '../../../../../types/miscTypes';
 
 type GifAreaProps = {
-    setGif: React.Dispatch<React.SetStateAction<TenorImage | undefined>>;
-    gif: TenorImage;
+    setGif: React.Dispatch<React.SetStateAction<GiphyGif | undefined>>;
+    gif: GiphyGif;
 };
 
 /**
@@ -12,8 +12,8 @@ type GifAreaProps = {
  *
  * @component
  * @param {GifAreaProps} props - The props object.
- * @param {React.Dispatch<React.SetStateAction<TenorImage | undefined>>} props.setGif - Function to set the selected GIF.
- * @param {TenorImage} props.gif - The selected GIF object.
+ * @param {React.Dispatch<React.SetStateAction<GiphyGif | undefined>>} props.setGif - Function to set the selected GIF.
+ * @param {GiphyGif} props.gif - The selected GIF object.
  * @returns {JSX.Element} The rendered GifArea component.
  */
 export default function GifArea({ setGif, gif }: GifAreaProps): JSX.Element {
@@ -47,7 +47,7 @@ export default function GifArea({ setGif, gif }: GifAreaProps): JSX.Element {
                 {CloseButton}
                 <img
                     className="max-h-20 md:max-h-60 object-cover shadow-lg"
-                    src={gif.url}
+                    src={gif.images?.fixed_width?.url}
                     alt="User uploaded gif"
                 />
             </div>
