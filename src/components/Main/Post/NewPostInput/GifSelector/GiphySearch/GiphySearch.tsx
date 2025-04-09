@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 import useAuth from '../../../../../../hooks/useAuth';
 import {
@@ -157,8 +158,8 @@ export default function GiphySearch({
      * @type {JSX.Element}
      */
     return (
-        <div
-            className={`bg-background1 dark:bg-background1Dark text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 border rounded-lg p-4 flex flex-col overflow-hidden max-w-screen`}
+        <motion.div
+            className={`bg-background1 dark:bg-background1Dark text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 border rounded-lg p-4 flex flex-col overflow-hidden`}
         >
             <div className="h-full flex flex-col">
                 <SearchBar
@@ -177,6 +178,6 @@ export default function GiphySearch({
                 />
             </div>
             <span>Powered by Giphy</span>
-        </div>
+        </motion.div>
     );
 }

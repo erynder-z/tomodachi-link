@@ -60,7 +60,7 @@ export default function GridArea({
                             key={gif.id}
                             onClick={() => handleGifItemClick(gif)}
                             aria-label={gif.title || 'Select GIF'}
-                            className="w-20 aspect-square overflow-hidden rounded bg-gray-200 dark:bg-gray-700 flex justify-center items-center cursor-pointer transition-all duration-150 ease-in-out hover:border-4 hover:border-highlight dark:hover:border-highlightDark justify-self-center"
+                            className="max-w-20 aspect-square overflow-hidden rounded bg-gray-200 dark:bg-gray-700 flex justify-center items-center cursor-pointer transition-all duration-150 ease-in-out hover:border-4 hover:border-highlight dark:hover:border-highlightDark justify-self-center"
                         >
                             <img
                                 src={gif.images?.fixed_width?.url}
