@@ -67,10 +67,9 @@ export default function GifSelector({
                         setGif(gif);
                         setShowGifSelector(false);
                     }}
-                    gridHeight="450px"
+                    gridHeight="35ch"
                 />
             </div>
-            ;
         </div>
     );
 }

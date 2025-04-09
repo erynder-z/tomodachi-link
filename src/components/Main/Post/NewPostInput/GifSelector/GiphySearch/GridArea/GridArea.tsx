@@ -1,4 +1,5 @@
 import { GiphyGif } from '../../../../../../../types/miscTypes';
+import LoadingSpinner from '../../../../../../UiElements/LoadingSpinner/LoadingSpinner';
 
 type GridAreaProps = {
     gridHeight: string;
@@ -21,39 +22,45 @@ export default function GridArea({
      */
     return (
         <div
-            className="flex-grow overflow-y-auto"
+            className="flex-grow overflow-y-auto relative"
             style={{ height: gridHeight }}
         >
             {/* Loading State */}
-            {isLoading && gifs.length === 0 && (
-                <p className="text-center py-5 text-gray-500 dark:text-gray-400">
-                    Loading...
-                </p>
+            {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center w-60">
+                    <LoadingSpinner />
+                </div>
             )}
 
             {/* Error State */}
             {error && (
-                <p className="text-center py-5 text-red-600 dark:text-red-400">
-                    Error: {error}
-                </p>
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <p className="text-center py-5 text-red-600 dark:text-red-400">
+                        Error: {error}
+                    </p>
+                </div>
             )}
 
             {/* No Results State */}
             {!isLoading && !error && gifs.length === 0 && (
-                <p className="text-center py-5 text-gray-500 dark:text-gray-400">
-                    No results found.
-                </p>
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <p className="text-center py-5 text-gray-500 dark:text-gray-400">
+                        No results found.
+                    </p>
+                </div>
             )}
 
             {/* GIF Grid */}
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-1.5">
+            <div
+                className={isLoading ? 'invisible' : 'grid grid-cols-3 gap-1.5'}
+            >
                 {!isLoading &&
                     gifs.map((gif) => (
                         <button
                             key={gif.id}
                             onClick={() => handleGifItemClick(gif)}
                             aria-label={gif.title || 'Select GIF'}
-                            className="w-full aspect-square overflow-hidden rounded bg-gray-200 dark:bg-gray-700 flex justify-center items-center curs or-pointer transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-sky-500 dark:focus:ring-offset-gray-800 hover:ring-2 hover:ring-offset-1 hover:ring-blue-500 dark:hover:ring-sky-400"
+                            className="w-20 aspect-square overflow-hidden rounded bg-gray-200 dark:bg-gray-700 flex justify-center items-center cursor-pointer transition-all duration-150 ease-in-out hover:border-4 hover:border-highlight dark:hover:border-highlightDark justify-self-center"
                         >
                             <img
                                 src={gif.images?.fixed_width?.url}
